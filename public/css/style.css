@@ -83,6 +83,11 @@ header .header-basket {
     margin-bottom: 10px;
 }
 
+figure.col {
+    padding-left: 5px;
+    padding-right: 5px;
+}
+
 footer {
     font-size: 12px;
     padding-top: 10px;
