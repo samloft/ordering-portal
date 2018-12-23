@@ -22,6 +22,33 @@ body {
   border: none;
 }
 
+.cookie-consent {
+  text-align: center;
+  padding: 10px;
+  background-color: rgba(130, 206, 202, 1.0);
+  font-weight: 900;
+}
+
+.cookie-consent__agree {
+  cursor: pointer;
+  border: 1px solid rgb(200, 220, 105);
+  background-color: #c8dc69;
+  color: #050602;
+  display: inline-block;
+  font-weight: 400;
+  text-align: center;
+  vertical-align: middle;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+  padding: 0.375rem 0.75rem;
+  font-size: 0.9rem;
+  line-height: 1.6;
+  border-radius: 0.25rem;
+  transition: color 0.15s ease-in-out, background-color 0.15s ease-in-out, border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
+}
+
 @import 'theme/header';
 @import 'theme/login';
 @import 'theme/navigation';

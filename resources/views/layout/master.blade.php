@@ -21,6 +21,8 @@
 </head>
 <body class="d-flex flex-column">
 
+@include('cookieConsent::index')
+
 @include('layout.header')
 
 @include('layout.navigation')
