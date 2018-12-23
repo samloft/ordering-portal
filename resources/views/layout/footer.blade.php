@@ -16,10 +16,10 @@
                     Tel: 01827 63454 | Fax: 01827 63362 | Email: <a href="MAILTO:sales@scolmore.com">sales@scolmore.com</a>
                 </div>
             </div>
-            <div class="col">
+            <div class="col footer-links">
                 Social
             </div>
-            <div class="col">
+            <div class="col footer-links">
                 App Stuff
             </div>
         </div>

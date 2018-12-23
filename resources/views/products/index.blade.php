@@ -3,20 +3,18 @@
 @section('page.title', 'Products')
 
 @section('content')
-    <div class="row">
-        <div class="col-md-3">
+    <div class="row product-sidebar">
+        <div class="col-lg-3">
             @if (Auth::user()->admin)
                 <div class="row">
                     <div class="col">
                         <form class="w-100" action="">
                             <div class="form-group">
-                                <label>Change Customer</label>
+                                <label>{{ __('Change Customer') }}</label>
                                 <div class="input-group">
-                                    <input type="text" class="form-control" placeholder="Enter Customer Code"
-                                           aria-label="Customer Code" aria-describedby="basic-addon">
+                                    <input type="text" class="form-control">
                                     <div class="input-group-append">
-                                        <button class="input-group-text" id="basic-addon"><i class="fas fa-user"></i>
-                                        </button>
+                                        <button class="input-group-text"><i class="fas fa-user"></i></button>
                                     </div>
                                 </div>
                             </div>
@@ -29,13 +27,11 @@
                 <div class="col">
                     <form class="w-100" action="">
                         <div class="form-group">
-                            <label>Search</label>
+                            <label>{{ __('Search') }}</label>
                             <div class="input-group">
-                                <input type="text" class="form-control" placeholder="Enter Product Code"
-                                       aria-label="Product Code" aria-describedby="basic-addon">
+                                <input type="text" class="form-control">
                                 <div class="input-group-append">
-                                    <button class="input-group-text" id="basic-addon"><i class="fas fa-search"></i>
-                                    </button>
+                                    <button class="input-group-text"><i class="fas fa-search"></i></button>
                                 </div>
                             </div>
                         </div>
@@ -47,15 +43,18 @@
                 <div class="col">
                     <form action="">
                         <div class="form-group mb-1">
-                            <label>Quick Buy</label>
-                            <input class="form-control" placeholder="Enter Product Code">
+                            <label>{{ __('Quick Buy') }}</label>
+                            <input class="form-control" placeholder="{{ __('Enter Product Code') }}">
                         </div>
 
                         <div class="input-group">
-                            <input class="form-control mr-2" value="1">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text">{{ __('Qty:') }}</span>
+                            </div>
+                            <input class="form-control mr-2" value="{{ __('1') }}">
                             <span class="input-group-btn">
-                            <button class="btn btn-primary" type="button">Add To Basket</button>
-                        </span>
+                                <button class="btn btn-primary" type="button">{{ __('Add To Basket') }}</button>
+                            </span>
                         </div>
                     </form>
                 </div>
@@ -63,14 +62,14 @@
 
             <div class="row">
                 <div class="col">
-                    <label>Categories</label>
+                    <label>{{ __('Categories') }}</label>
 
                     <ul class="list-group w-100">
-                        <li class="list-group-item">Cat 1</li>
-                        <li class="list-group-item">Cat 2</li>
-                        <li class="list-group-item">Cat 3</li>
-                        <li class="list-group-item">Cat 4</li>
-                        <li class="list-group-item">Cat 5</li>
+                        <li class="list-group-item" style="background-color: rgba(254, 245, 108, 1.0)">Electrical Accessories</li>
+                        <li class="list-group-item" style="background-color: rgba(229, 235, 139, 1.0)">Ovia Lighting</li>
+                        <li class="list-group-item" style="background-color: rgba(198, 224, 159, 1.0)">Inceptor</li>
+                        <li class="list-group-item" style="background-color: rgba(167, 216, 184, 1.0)">FlameGuard</li>
+                        <li class="list-group-item" style="background-color: rgba(130, 206, 202, 1.0)">Click Smart</li>
                     </ul>
                 </div>
             </div>

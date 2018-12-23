@@ -1,35 +1,35 @@
-<div class="login-header">
+<div class="nav-header">
     <div class="container">
         <div class="row">
             @if (!Auth::user())
                 <div class="col d-flex">
-                    <h4 class="align-self-center">Welcome to online ordering</h4>
+                    <h4 class="align-self-center">{{ __('Welcome to ' . ucfirst(env('APP_NAME')) . ' online ordering') }}</h4>
                 </div>
             @else
                 <div class="col navigation">
                     <nav class="navbar navbar-expand-lg">
                         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-                            <span class="navbar-toggler-icon"></span>
+                            <i class="fas fa-bars"></i>
                         </button>
                         <div class="collapse navbar-collapse" id="navbarNav">
                             <ul class="navbar-nav">
                                 <li class="nav-item text-center active">
-                                    <a class="nav-link" href="{{ route('home') }}">{{ __('Home') }}</a>
+                                    <a class="nav-link {{ setActive('home') }}" href="{{ route('home') }}">{{ __('Home') }}</a>
                                 </li>
                                 <li class="nav-item text-center">
-                                    <a class="nav-link" href="{{ route('products') }}">{{ __('Products') }}</a>
+                                    <a class="nav-link {{ setActive('products') }}" href="{{ route('products') }}">{{ __('Products') }}</a>
                                 </li>
                                 <li class="nav-item text-center">
-                                    <a class="nav-link" href="{{ route('order-tracking') }}">{{ __('Order Tracking') }}</a>
+                                    <a class="nav-link {{ setActive('order-tracking') }}" href="{{ route('order-tracking') }}">{{ __('Order Tracking') }}</a>
                                 </li>
                                 <li class="nav-item text-center">
-                                    <a class="nav-link" href="{{ route('upload') }}">{{ __('Upload Orders') }}</a>
+                                    <a class="nav-link {{ setActive('upload') }}" href="{{ route('upload') }}">{{ __('Upload Orders') }}</a>
                                 </li>
                                 <li class="nav-item text-center">
-                                    <a class="nav-link" href="{{ route('saved-baskets') }}">{{ __('Saved Baskets') }}</a>
+                                    <a class="nav-link {{ setActive('saved-basket') }}" href="{{ route('saved-baskets') }}">{{ __('Saved Baskets') }}</a>
                                 </li>
                                 <li class="nav-item text-center">
-                                    <a class="nav-link" href="{{ route('reports') }}">{{ __('Reports') }}</a>
+                                    <a class="nav-link {{ setActive('reports') }}" href="{{ route('reports') }}">{{ __('Reports') }}</a>
                                 </li>
                             </ul>
                         </div>
@@ -48,7 +48,7 @@
                                 <input type="password" class="form-control" name="password" placeholder="Password">
                             </div>
                             <div class="col">
-                                <button type="submit" class="btn btn-primary">Submit</button>
+                                <button type="submit" class="btn btn-primary">{{ __('Submit') }}</button>
                             </div>
                         </div>
                         <div class="row login-extra">
@@ -56,21 +56,21 @@
                                 <div class="form-check">
                                     <input class="form-check-input" name="remember" type="checkbox">
                                     <label class="form-check-label">
-                                        Remember me
+                                        {{ __('Remember Me') }}
                                     </label>
                                 </div>
                             </div>
-                            <div class="col text-right">
-                                <a href="{{ route('password.request') }}">Forgot Password?</a>
+                            <div class="col text-right login-links">
+                                <a href="{{ route('password.request') }}">{{ __('Forgot Password?') }}</a>
                             </div>
                         </div>
                     </form>
                 </div>
             @else
-                <div class="col">
-                    <div class="user-details text-right">
+                <div class="col user-details">
+                    <div class="text-right">
                         <span>
-                            <strong>Welcome {{ Auth::user()->first_name . ' ' . Auth::user()->last_name }}</strong>, COMPANY NAME
+                            <strong>{{ __('Welcome') . ' ' . Auth::user()->first_name . ' ' . Auth::user()->last_name }}</strong>, COMPANY NAME
                         </span>
                         <span>
                             <a href="">{{ __('Your Account') }}</a> |

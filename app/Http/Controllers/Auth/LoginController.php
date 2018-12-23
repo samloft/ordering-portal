@@ -39,6 +39,27 @@ class LoginController extends Controller
     }
 
     /**
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     */
+    public function showLoginForm()
+    {
+        return view('auth.login', compact('external_url'));
+    }
+
+    /**
+     * @return bool|string
+     */
+    public function loginContent()
+    {
+        $external_url = curl_init('https://scolmore.com/newproducts.php');
+
+        curl_setopt($external_url, CURLOPT_RETURNTRANSFER, 1);
+        $external_content = curl_exec($external_url);
+
+        return $external_content;
+    }
+
+    /**
      * @param Request $request
      * @return array
      */

@@ -1,0 +1,23 @@
+@import 'variables';
+
+header {
+  background-color: $bg-header;
+  padding-top: 10px;
+  padding-bottom: 10px;
+}
+
+header .brand img {
+  max-height: 55px;
+  margin-top: 5px;
+}
+
+header .header-basket {
+  background-color: $bg-navigation;
+  color: rgb(255, 255, 255);
+  width: 360px;
+  padding-top: 10px;
+  padding-bottom: 10px;
+  padding-right: 5px;
+  box-shadow: $default-shadow;
+  border-radius: 0.25rem;
+}
