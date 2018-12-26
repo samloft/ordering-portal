@@ -30,6 +30,7 @@ body {
 }
 
 .cookie-consent__agree {
+  margin-left: 10px;
   cursor: pointer;
   border: 1px solid rgb(200, 220, 105);
   background-color: #c8dc69;
@@ -49,6 +50,24 @@ body {
   transition: color 0.15s ease-in-out, background-color 0.15s ease-in-out, border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
 }
 
+.address span {
+  display: block;
+}
+
+a.btn-link {
+  text-decoration: none !important;
+}
+
+.page-link {
+  color: rgb(0, 0, 0);
+}
+
+.page-item.active .page-link {
+  color: rgb(0, 0, 0);
+  background-color: rgba(200, 220, 105, 1.0);
+  border-color: rgba(200, 220, 105, 1.0);
+}
+
 @import 'theme/header';
 @import 'theme/login';
 @import 'theme/navigation';
@@ -57,3 +76,4 @@ body {
 @import 'theme/buttons';
 @import 'theme/forms';
 @import 'theme/alerts';
+@import 'theme/text';

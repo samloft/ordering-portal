@@ -54,6 +54,22 @@ Route::group(['middleware' => 'auth'], function () {
     Route::group(['prefix' => 'support'], function () {
 
     });
+
+    /*
+     * User Account
+    */
+    Route::group(['prefix' => 'account'], function() {
+        Route::get('/', 'AccountController@index')->name('account');
+        Route::post('store', 'AccountController@store')->name('account.store');
+
+        Route::get('password', 'AccountController@password')->name('account.password');
+        Route::post('password-change', 'AccountController@storePassword')->name('account.password.store');
+
+        Route::get('addresses', 'AccountController@addresses')->name('account.addresses');
+        Route::get('address/{id?}', 'AccountController@showAddress')->name('account.address.show');
+        Route::post('address/store', 'AccountController@storeAddress')->name('account.address.store');
+        Route::post('address/default/', 'AccountController@setDefault')->name('account.address.default');
+    });
 });
 
 /* Contact Page */

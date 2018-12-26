@@ -3,6 +3,8 @@
 @section('page.title', 'Order Tracking')
 
 @section('content')
+    <h1 class="page-title">{{ __('Order Tracking') }}</h1>
+
     <div class="row">
         <div class="col-lg-4">
             <div class="card card-body">

@@ -1,3 +1,5 @@
+$border-hover: rgba(255, 242, 0, 1.0);
+
 .nav-header a {
   color: rgb(255, 255, 255);
 }
@@ -12,12 +14,16 @@
   margin-right: 2px;
 }
 
-.nav-item .active {
-  border-bottom-color: rgba(255, 242, 0, 1.0);
+.nav-item a:hover {
+  border-bottom-color: $border-hover;
 }
 
-.nav-item a:hover {
-  border-bottom-color: rgba(255, 242, 0, 1.0);
+.nav-item .active {
+  border-bottom-color: $border-hover;
+}
+
+.nav-item .active:hover {
+  border-bottom-color: $border-hover;
 }
 
 .nav-item .nav-link {

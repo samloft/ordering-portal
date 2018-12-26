@@ -70,10 +70,10 @@
                 <div class="col user-details">
                     <div class="text-right">
                         <span>
-                            <strong>{{ __('Welcome') . ' ' . Auth::user()->first_name . ' ' . Auth::user()->last_name }}</strong>, COMPANY NAME
+                            <strong>{{ __('Welcome') . ' ' . Auth::user()->first_name . ' ' . Auth::user()->last_name }}</strong>, {{ Auth::user()->customer->customer_name ? Auth::user()->customer->customer_name : 'No customer allocated' }}
                         </span>
                         <span>
-                            <a href="">{{ __('Your Account') }}</a> |
+                            <a href="{{ route('account') }}">{{ __('Your Account') }}</a> |
                             <a href="{{ route('logout') }}" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">{{ __('Logout') }}</a>
                         </span>
 
