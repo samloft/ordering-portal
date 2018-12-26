@@ -27,16 +27,7 @@ class AccountController extends Controller
      */
     public function store(Request $request)
     {
-        $account = [
-            'first_name' => $request->first_name,
-            'last_name' => $request->last_name,
-            'telephone' => $request->telephone,
-            'evening_telephone' => $request->evening_telephone,
-            'fax' => $request->fax,
-            'mobile' => $request->mobile
-        ];
-
-        $store_account = User::store($account);
+        $store_account = User::store($request);
 
         return $store_account ? back()->with('success', 'User account has been updated') : back()->with('error', 'Unable to update account, please try again');
     }

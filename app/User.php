@@ -48,14 +48,23 @@ class User extends Authenticatable
     }
 
     /**
-     * @param $details
+     * @param $request
      * @return mixed
      */
-    public static function store($details)
+    public static function store($request)
     {
         $user_id = Auth::id();
 
-        return (new User)->where('id', $user_id)->update($details);
+        $account = [
+            'first_name' => $request->first_name,
+            'last_name' => $request->last_name,
+            'telephone' => $request->telephone,
+            'evening_telephone' => $request->evening_telephone,
+            'fax' => $request->fax,
+            'mobile' => $request->mobile
+        ];
+
+        return (new User)->where('id', $user_id)->update($account);
     }
 
     /**
