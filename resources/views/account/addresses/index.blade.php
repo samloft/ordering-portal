@@ -23,21 +23,21 @@
                     </div>
                     <div class="col-lg-3 text-right">
                         @if ($address->default)
-                            <h3 class="text-center">Default Address</h3>
+                            <h3 class="text-center">{{ __('Default Address') }}</h3>
                         @else
                             <form method="post" action="{{ route('account.address.default') }}" class="mb-1">
                                 <button class="btn btn-block btn-sm btn-blue" name="id" value="{{ $address->id }}">
-                                    Set As Default
+                                    {{ __('Set As Default') }}
                                 </button>
                             </form>
                         @endif
 
                         <a href="{{ route('account.address.show', [$address->id]) }}" class="btn-link">
-                            <button class="btn btn-block btn-sm btn-blue">Edit Address</button>
+                            <button class="btn btn-block btn-sm btn-blue">{{ __('Edit Address') }}</button>
                         </a>
 
                         <button id="delete-address" class="btn btn-block btn-sm btn-blue mt-1"
-                                value="{{ $address->id }}">Remove Address
+                                value="{{ $address->id }}">{{ __('Remove Address') }}
                         </button>
                     </div>
                 </div>

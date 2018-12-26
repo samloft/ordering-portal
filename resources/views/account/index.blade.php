@@ -41,7 +41,7 @@
                 </div>
 
                 <h2 class="section-title mt-3">{{ __('Change Password') }}</h2>
-                Click below to change your password.
+                {{ __('Click below to change your password.') }}
                 <div class="text-right mt-2">
                     <a href="{{ route('account.password') }}" class="btn-link">
                         <button class="btn btn-blue">{{ __('Change Password') }}</button>

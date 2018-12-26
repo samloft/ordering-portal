@@ -76,7 +76,7 @@
 
                     <div class="form-check form-check-inline mb-3">
                         <input class="form-check-input" type="checkbox" name="default" {{ old('postcode') ? 'checked' : ($address_details ? ($address_details->default == 1 ? 'checked' : '') : '') }}>
-                        <label class="form-check-label">Default Address</label>
+                        <label class="form-check-label">{{ __('Default Address') }}</label>
                     </div>
 
                     <div class="row">
