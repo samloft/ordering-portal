@@ -100,4 +100,13 @@ class Addresses extends Model
     {
         return (new Addresses)->where('customer_code', Auth::user()->customer_code)->where('id', $address_id)->first();
     }
+
+    /**
+     * @param array|\Illuminate\Support\Collection|int $address_id
+     * @return int
+     */
+    public static function destroy($address_id)
+    {
+        return (new Addresses)->where('id', $address_id)->delete();
+    }
 }

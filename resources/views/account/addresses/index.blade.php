@@ -66,3 +66,24 @@
         </div>
     </div>
 @endsection
+
+@section('scripts')
+    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+
+    <script>
+        $('button[id="delete-address"]').on('click', function () {
+            swal({
+                title: "Are you sure?",
+                text: "Once deleted, you will not be able to recover this address.",
+                icon: "warning",
+                buttons: true,
+                dangerMode: true,
+            })
+                .then((willDelete) => {
+                    if (willDelete) {
+                        location.href = '/account/address/delete/' + $(this).val();
+                    }
+                });
+        });
+    </script>
+@endsection

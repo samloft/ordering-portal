@@ -69,6 +69,7 @@ Route::group(['middleware' => ['auth', 'has.customer']], function () {
         Route::get('address/{id?}', 'AccountController@showAddress')->name('account.address.show');
         Route::post('address/store', 'AccountController@storeAddress')->name('account.address.store');
         Route::post('address/default/', 'AccountController@setDefault')->name('account.address.default');
+        Route::get('address/delete/{id}', 'AccountController@deleteAddress')->name('account.address.destroy');
     });
 });
 

@@ -122,4 +122,21 @@ class AccountController extends Controller
 
         return Addresses::setDefault($request->id) ? redirect(route('account.addresses'))->with('success', 'New address set as default') : back()->with('error', 'Unable to set new address to default, please try again');
     }
+
+    /**
+     * @param $address_id
+     * @return \Illuminate\Http\RedirectResponse
+     */
+    public function deleteAddress($address_id)
+    {
+        $permission = Addresses::canEdit($address_id);
+
+        if (!$permission) {
+            return back()->with('error', 'You do not have permission to delete this address');
+        }
+
+        $deleted = Addresses::destroy($address_id);
+
+        return $deleted ? redirect(route('account.addresses'))->with('success', 'Address has been deleted') : back()->with('error', 'Unable to delete address, please try again later');
+    }
 }
