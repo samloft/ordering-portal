@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
+use App\User;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
 use Illuminate\Http\Request;
 
@@ -44,6 +45,17 @@ class LoginController extends Controller
     public function showLoginForm()
     {
         return view('auth.login', compact('external_url'));
+    }
+
+    protected function authenticated(Request $request, User $user)
+    {
+        if (!$user->customer) {
+            \Auth::logout();
+
+            return back()->with('errors', ['no_customer' => 'This account does not have a customer assigned, please contact the sales office reporting this error.']);
+        }
+
+        return redirect()->intended($this->redirectPath());
     }
 
     /**
