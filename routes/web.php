@@ -49,6 +49,13 @@ Route::group(['middleware' => ['auth', 'has.customer']], function () {
     });
 
     /*
+     * Basket
+     */
+    Route::group(['prefix' => 'basket'], function () {
+        Route::get('/', 'BasketController@index')->name('basket');
+    });
+
+    /*
      * Support pages
      */
     Route::group(['prefix' => 'support'], function () {

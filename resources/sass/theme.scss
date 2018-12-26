@@ -68,12 +68,65 @@ a.btn-link {
   border-color: rgba(200, 220, 105, 1.0);
 }
 
+hr {
+  border-bottom: 2px solid rgba(130, 202, 156, 1.0);
+  margin-top: 0.5rem;
+  margin-bottom: 0.5rem;
+}
+
+.basket-total {
+  margin-top: 0.5rem;
+  margin-bottom: 0.5rem;
+  font-weight: 900;
+  font-size: 14px;
+}
+
+.small-print {
+  font-size: 10px;
+  margin-top: 10px;
+}
+
+.card-body.quick-buy-basket {
+  padding: 5px;
+}
+
+.quick-buy-basket .form-group {
+  margin: 0;
+}
+
+.quick-buy-basket label {
+  margin: 0;
+}
+
+.quick-buy-basket .row {
+  margin: 0;
+}
+
+.quick-buy-basket .col {
+  padding: 2px;
+}
+.quick-buy-basket .col-2 {
+  padding: 2px;
+}
+.quick-buy-basket .col-4 {
+  padding: 2px;
+}
+//
+//.quick-buy-basket input {
+//  font-size: 12px;
+//}
+//
+//.quick-buy-basket .btn {
+//  font-size: 12px;
+//}
+
 @import 'theme/header';
 @import 'theme/login';
 @import 'theme/navigation';
 @import 'theme/footer';
 
 @import 'theme/buttons';
+@import 'theme/tables';
 @import 'theme/forms';
 @import 'theme/alerts';
 @import 'theme/text';

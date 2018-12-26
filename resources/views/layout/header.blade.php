@@ -31,7 +31,9 @@
                                 0 Lines - £0.00
                             </div>
                             <div class="col basket-buttons my-auto">
-                                <button class="btn btn-secondary">Basket</button>
+                                <a href="{{ route('basket') }}" class="btn-link">
+                                    <button class="btn btn-secondary">Basket</button>
+                                </a>
                                 <button class="btn btn-primary">Checkout</button>
                             </div>
                         </div>
