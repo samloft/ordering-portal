@@ -102,3 +102,7 @@ Route::group(['prefix' => 'contact'], function () {
 Auth::routes();
 
 Route::get('new-products', 'Auth\LoginController@loginContent')->name('login.content');
+
+Route::fallback(function() {
+    return view('errors.404');
+});

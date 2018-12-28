@@ -6,7 +6,7 @@
     <h1 class="page-title">{{ __('Order Tracking') }}</h1>
 
     <div class="row">
-        <div class="col-lg-4">
+        <div class="col-lg-4 d-flex align-items-stretch">
             <div class="card card-body">
                 <h2 class="section-title">{{ __('Search Orders') }}</h2>
 
@@ -32,7 +32,7 @@
                 <button class="btn btn-blue btn-block">{{ __('Search Orders') }}</button>
             </div>
         </div>
-        <div class="col-lg-8">
+        <div class="col-lg-8 d-flex align-items-stretch">
             <div class="card card-body">
                 <h2 class="section-title">{{ __('Search Results') }}</h2>
             </div>

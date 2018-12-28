@@ -111,14 +111,30 @@ hr {
 .quick-buy-basket .col-4 {
   padding: 2px;
 }
-//
-//.quick-buy-basket input {
-//  font-size: 12px;
-//}
-//
-//.quick-buy-basket .btn {
-//  font-size: 12px;
-//}
+
+.w-20 {
+  -webkit-box-flex: 0;
+  -ms-flex: 0 0 20%;
+  flex: 0 0 20%;
+  max-width: 20%;
+  margin-bottom: 20px;
+}
+
+@media screen and (max-width: 1231px) {
+  .w-20 {
+    -ms-flex: 0 0 25%;
+    flex: 0 0 25%;
+    max-width: 25%;
+  }
+}
+
+@media screen and (max-width: 1220px) {
+  .w-20 {
+    -ms-flex: 0 0 30%;
+    flex: 0 0 30%;
+    max-width: 30%;
+  }
+}
 
 @import 'theme/header';
 @import 'theme/login';

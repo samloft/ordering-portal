@@ -112,6 +112,26 @@ hr {
   padding: 2px;
 }
 
+.w-20 {
+  flex: 0 0 20%;
+  max-width: 20%;
+  margin-bottom: 20px;
+}
+
+@media screen and (max-width: 1231px) {
+  .w-20 {
+    flex: 0 0 25%;
+    max-width: 25%;
+  }
+}
+
+@media screen and (max-width: 1220px) {
+  .w-20 {
+    flex: 0 0 30%;
+    max-width: 30%;
+  }
+}
+
 header {
   background-color: #313131;
   padding-top: 10px;

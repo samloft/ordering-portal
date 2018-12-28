@@ -65,8 +65,11 @@
                     <label>{{ __('Categories') }}</label>
 
                     <ul class="list-group w-100">
-                        <li class="list-group-item" style="background-color: rgba(254, 245, 108, 1.0)">Electrical Accessories</li>
-                        <li class="list-group-item" style="background-color: rgba(229, 235, 139, 1.0)">Ovia Lighting</li>
+                        <li class="list-group-item" style="background-color: rgba(254, 245, 108, 1.0)">Electrical
+                            Accessories
+                        </li>
+                        <li class="list-group-item" style="background-color: rgba(229, 235, 139, 1.0)">Ovia Lighting
+                        </li>
                         <li class="list-group-item" style="background-color: rgba(198, 224, 159, 1.0)">Inceptor</li>
                         <li class="list-group-item" style="background-color: rgba(167, 216, 184, 1.0)">FlameGuard</li>
                         <li class="list-group-item" style="background-color: rgba(130, 206, 202, 1.0)">Click Smart</li>
@@ -74,8 +77,31 @@
                 </div>
             </div>
         </div>
-        <div class="col-md-8">
-            {!! \App\Models\Pages::show('products')->contents !!}
+        <div class="col">
+            {{--            {!! \App\Models\Pages::show('products')->contents !!}--}}
+            <div class="d-flex flex-wrap">
+                <div class="w-20">
+                    <img class="img-fluid" src="https://scolmoreonline.com/assets/images/deco-plus.jpg">
+                </div>
+                <div class="w-20">
+                    <img class="img-fluid" src="https://scolmoreonline.com/assets/images/deco-plus.jpg">
+                </div>
+                <div class="w-20">
+                    <img class="img-fluid" src="https://scolmoreonline.com/assets/images/deco-plus.jpg">
+                </div>
+                <div class="w-20">
+                    <img class="img-fluid" src="https://scolmoreonline.com/assets/images/deco-plus.jpg">
+                </div>
+                <div class="w-20">
+                    <img class="img-fluid" src="https://scolmoreonline.com/assets/images/deco-plus.jpg">
+                </div>
+                <div class="w-20">
+                    <img class="img-fluid" src="https://scolmoreonline.com/assets/images/deco-plus.jpg">
+                </div>
+                <div class="w-20">
+                    <img class="img-fluid" src="https://scolmoreonline.com/assets/images/deco-plus.jpg">
+                </div>
+            </div>
         </div>
     </div>
 @endsection
