@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Addresses;
 use App\Models\Countries;
-use App\User;
+use App\Models\User;
 use Auth;
 use Illuminate\Http\Request;
 use Hash;

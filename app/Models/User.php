@@ -1,14 +1,17 @@
 <?php
 
-namespace App;
+namespace App\Models;
 
-use App\Models\Addresses;
-use App\Models\Customer;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 
+/**
+ * App\User
+ *
+ * @mixin \Eloquent
+ */
 class User extends Authenticatable
 {
     use Notifiable;

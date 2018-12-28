@@ -49,13 +49,6 @@ Route::group(['middleware' => ['auth', 'has.customer']], function () {
     });
 
     /*
-     * Basket
-     */
-    Route::group(['prefix' => 'basket'], function () {
-        Route::get('/', 'BasketController@index')->name('basket');
-    });
-
-    /*
      * Support pages
      */
     Route::group(['prefix' => 'support'], function () {
@@ -83,6 +76,20 @@ Route::group(['middleware' => ['auth', 'has.customer']], function () {
             Route::post('default', 'Account\AddressController@default')->name('account.address.default');
             Route::get('{id}/delete', 'Account\AddressController@destroy')->name('account.address.destroy');
         });
+    });
+
+    /*
+     * Basket
+     */
+    Route::group(['prefix' => 'basket'], function () {
+        Route::get('/', 'BasketController@index')->name('basket');
+    });
+
+    /*
+     * Checkout
+     */
+    Route::group(['prefix' => 'checkout'], function() {
+        Route::get('/', 'CheckoutController@index')->name('checkout');
     });
 });
 

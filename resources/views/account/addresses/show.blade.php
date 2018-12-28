@@ -88,7 +88,6 @@
                             </a>
                         </div>
                         <div class="col-lg-6 text-right">
-                            {{--<input name="id" value="{{ $address ? $address->id : '' }}" hidden>--}}
                             <button type="submit" class="btn btn-primary">{{ isset($address) ? 'Update' : 'Create' }}</button>
                         </div>
                     </div>

@@ -27,14 +27,16 @@
                     <div class="header-basket float-right">
                         <div class="row">
                             <div class="col text-center basket-info">
-                                <strong>Your Basket</strong><br>
+                                <strong>{{ __('Your Basket') }}</strong><br>
                                 0 Lines - £0.00
                             </div>
                             <div class="col basket-buttons my-auto">
                                 <a href="{{ route('basket') }}" class="btn-link">
-                                    <button class="btn btn-secondary">Basket</button>
+                                    <button class="btn btn-secondary">{{ __('Basket') }}</button>
                                 </a>
-                                <button class="btn btn-primary">Checkout</button>
+                                <a href="{{ route('checkout') }}" class="btn-link">
+                                    <button class="btn btn-primary">{{ __('Checkout') }}</button>
+                                </a>
                             </div>
                         </div>
                     </div>

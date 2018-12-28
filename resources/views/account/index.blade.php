@@ -73,15 +73,19 @@
 
                     @include('layout.alerts')
 
+                    <div class="mb-3">
+                        <span class="required"></span> <span class="text-muted">{{ __('Denotes a required field') }}</span>
+                    </div>
+
                     <div class="form-group row">
-                        <label class="col-sm-4 col-form-label">{{ __('First Name') }}</label>
+                        <label class="col-sm-4 col-form-label">{{ __('First Name') }}<span class="required"></span></label>
                         <div class="col-sm-8">
                             <input class="form-control" name="first_name" value="{{ Auth::user()->first_name }}">
                         </div>
                     </div>
 
                     <div class="form-group row">
-                        <label class="col-sm-4 col-form-label">{{ __('Surname') }}</label>
+                        <label class="col-sm-4 col-form-label">{{ __('Surname') }}<span class="required"></span></label>
                         <div class="col-sm-8">
                             <input class="form-control" name="last_name" value="{{ Auth::user()->last_name }}">
                         </div>

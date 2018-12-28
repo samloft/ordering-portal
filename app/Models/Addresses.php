@@ -5,6 +5,11 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\Auth;
 
+/**
+ * App\Models\Addresses
+ *
+ * @mixin \Eloquent
+ */
 class Addresses extends Model
 {
     protected $guarded = [];
@@ -101,6 +106,7 @@ class Addresses extends Model
     /**
      * @param array|\Illuminate\Support\Collection|int $address_id
      * @return int
+     * @throws \Exception
      */
     public static function destroy($address_id)
     {
