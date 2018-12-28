@@ -11,7 +11,7 @@
             @if (!Auth::user() && count($errors) > 0)
                 <div class="col text-right mt-auto">
                     <div class="text-left alert alert-danger">
-                        @if ($errors['no_customer'])
+                        @if (is_array($errors))
                             <strong>Error!</strong> {{ $errors['no_customer'] }}
                         @else
                             <strong>Error!</strong> The credentials you supplied do not match our records. If you have

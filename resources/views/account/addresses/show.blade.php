@@ -25,43 +25,45 @@
                     <span class="required"></span> <span class="text-muted">{{ __('Denotes a required field') }}</span>
                 </div>
 
-                <form method="post" action="{{ route('account.address.store') }}">
+                <form method="post" action="{{ isset($address) ? route('account.address.edit', [$address->id]) : route('account.address.store') }}">
+                    @method('PATCH')
+
                     <div class="form-group">
                         <label>{{ __('Company Name') }}<span class="required"></span></label>
                         <input class="form-control" placeholder="{{ __('Company Name') }}"
-                               value="{{ isset($address_details->address_line_1) ? $address_details->address_line_1 : (old('company_name') ? old('company_name') : Auth::user()->customer->customer_name) }}"
+                               value="{{ isset($address->company_name) ? $address->company_name : (old('company_name') ? old('company_name') : Auth::user()->customer->customer_name) }}"
                                name="company_name">
                     </div>
 
                     <div class="form-group">
                         <label>{{ __('Address Line 2') }}<span class="required"></span></label>
                         <input class="form-control" placeholder="{{ __('Address Line 2') }}" name="address_line_2"
-                               value="{{ old('address_line_2') ? old('address_line_2') : ($address_details ? $address_details->address_line_2 : null) }}">
+                               value="{{ old('address_line_2') ? old('address_line_2') : (isset($address) ? $address->address_line_2 : null) }}">
                     </div>
 
                     <div class="form-group">
                         <label>{{ __('Address Line 3') }}<span class="required"></span></label>
                         <input class="form-control" placeholder="{{ __('Address Line 3') }}" name="address_line_3"
-                               value="{{ old('address_line_3') ? old('address_line_3') : ($address_details ? $address_details->address_line_3 : null) }}">
+                               value="{{ old('address_line_3') ? old('address_line_3') : (isset($address) ? $address->address_line_3 : null) }}">
                     </div>
 
                     <div class="form-group">
                         <label>{{ __('Address Line 4') }}</label>
                         <input class="form-control" placeholder="{{ __('Address Line 4') }}" name="address_line_4"
-                               value="{{ old('address_line_4') ? old('address_line_4') : ($address_details ? $address_details->address_line_4 : null) }}">
+                               value="{{ old('address_line_4') ? old('address_line_4') : (isset($address) ? $address->address_line_4 : null) }}">
                     </div>
 
                     <div class="form-group">
                         <label>{{ __('Address Line 5') }}</label>
                         <input class="form-control" placeholder="{{ __('Address Line 5') }}" name="address_line_5"
-                               value="{{ old('address_line_5') ? old('address_line_5') : ($address_details ? $address_details->address_line_5 : null) }}">
+                               value="{{ old('address_line_5') ? old('address_line_5') : (isset($address) ? $address->address_line_5 : null) }}">
                     </div>
 
                     <div class="form-group">
                         <label>{{ __('Country') }}<span class="required"></span></label>
                         <select class="form-control" name="country_id" autocomplete="off">
                             @foreach ($countries as $country)
-                                <option value="{{ $country->id }}" {{ old('country_id') ? ($country->id == old('country_id') ? 'selected' : '') : ($address_details ? ($country->id == $address_details->country_id ? 'selected' : '') : '') }}>
+                                <option value="{{ $country->id }}" {{ old('country_id') ? ($country->id == old('country_id') ? 'selected' : '') : (isset($address) ? ($country->id == $address->country_id ? 'selected' : '') : '') }}>
                                     {{ $country->name }}
                                 </option>
                             @endforeach
@@ -70,12 +72,12 @@
 
                     <div class="form-group">
                         <label>{{ __('Postcode') }}<span class="required"></span></label>
-                        <input class="form-control" placeholder="{{ __('Postcode') }}" name="postcode"
-                               value="{{ old('postcode') ? old('postcode') : ($address_details ? $address_details->post_code : null) }}">
+                        <input class="form-control" placeholder="{{ __('Postcode') }}" name="post_code"
+                               value="{{ old('post_code') ? old('post_code') : (isset($address) ? $address->post_code : null) }}">
                     </div>
 
                     <div class="form-check form-check-inline mb-3">
-                        <input class="form-check-input" type="checkbox" name="default" {{ old('postcode') ? 'checked' : ($address_details ? ($address_details->default == 1 ? 'checked' : '') : '') }}>
+                        <input class="form-check-input" type="checkbox" name="default" {{ old('postcode') ? 'checked' : (isset($address) ? ($address->default == 1 ? 'checked' : '') : '') }}>
                         <label class="form-check-label">{{ __('Default Address') }}</label>
                     </div>
 
@@ -86,8 +88,8 @@
                             </a>
                         </div>
                         <div class="col-lg-6 text-right">
-                            <input name="id" value="{{ $address_details ? $address_details->id : '' }}" hidden>
-                            <button type="submit" class="btn btn-primary">{{ isset($address_details->id) ? 'Update' : 'Create' }}</button>
+                            {{--<input name="id" value="{{ $address ? $address->id : '' }}" hidden>--}}
+                            <button type="submit" class="btn btn-primary">{{ isset($address) ? 'Update' : 'Create' }}</button>
                         </div>
                     </div>
                 </form>
@@ -105,7 +107,7 @@
             let postcode = $('input[name="postcode_lookup"]').val();
 
             $.get('https://api.postcodes.io/postcodes/' + postcode).done(function (response) {
-                $('input[name="postcode"]').val(response.result.postcode);
+                $('input[name="post_code"]').val(response.result.postcode);
                 $('input[name="address_line_3"]').val(response.result.parish.replace(', unparished area', ''));
                 $('input[name="address_line_4"]').val(response.result.admin_county);
                 $('input[name="address_line_5"]').val(response.result.region);

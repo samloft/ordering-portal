@@ -7,6 +7,8 @@ use Illuminate\Support\Facades\Auth;
 
 class Addresses extends Model
 {
+    protected $guarded = [];
+
     /**
      * @return mixed
      */
@@ -25,44 +27,39 @@ class Addresses extends Model
     }
 
     /**
-     * @param $request
+     * @param $address
      * @return mixed
      */
-    public static function store($request)
+    public static function store($address)
     {
-        $address_details = [
-            'customer_code' => Auth::user()->customer_code,
-            'address_line_1' => $request->company_name,
-            'address_line_2' => $request->address_line_2,
-            'address_line_3' => $request->address_line_3,
-            'address_line_4' => $request->address_line_4,
-            'address_line_5' => $request->address_line_5,
-            'country_id' => $request->country_id,
-            'post_code' => $request->postcode,
-            'default' => 0
-        ];
+        $address['customer_code'] = Auth::user()->customer_code;
+        $address['created_at'] = date('Y-m-d H:i:s');
 
-        if ($request->id) {
-            $address_details['updated_at'] = date('Y-m-d H:i:s');
+        $create_address = (new Addresses)->insertGetId($address);
 
-            $update_address = (new Addresses)->where('id', $request->id)->update($address_details);
-
-            if ($update_address && $request->default) {
-                static::setDefault($request->id);
-            }
-
-            return $update_address;
-        }
-
-        $address_details['created_at'] = date('Y-m-d H:i:s');
-
-        $create_address = (new Addresses)->insertGetId($address_details);
-
-        if ($create_address && $request->default) {
+        if ($create_address && $address['default']) {
             static::setDefault($create_address);
         }
 
         return $create_address;
+    }
+
+    /**
+     * @param $id
+     * @param $address
+     * @return mixed
+     */
+    public static function edit($id, $address)
+    {
+        $address['updated_at'] = date('Y-m-d H:i:s');
+
+        $updated = (new Addresses)->where('id', $id)->update($address);
+
+        if ($updated && $address['default']) {
+            static::setDefault($id);
+        }
+
+        return $updated;
     }
 
     /**

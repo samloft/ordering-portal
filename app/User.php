@@ -19,7 +19,7 @@ class User extends Authenticatable
      * @var array
      */
     protected $fillable = [
-        'name', 'email', 'password',
+        'first_name', 'last_name', 'telephone', 'evening_telephone', 'fax', 'mobile'
     ];
 
     /**
@@ -48,23 +48,15 @@ class User extends Authenticatable
     }
 
     /**
-     * @param $request
+     * @param $user_details
      * @return mixed
      */
-    public static function store($request)
+    public static function store($user_details)
     {
-        $user_id = Auth::id();
+        $user = User::find(Auth::id());
+        $user->update($user_details);
 
-        $account = [
-            'first_name' => $request->first_name,
-            'last_name' => $request->last_name,
-            'telephone' => $request->telephone,
-            'evening_telephone' => $request->evening_telephone,
-            'fax' => $request->fax,
-            'mobile' => $request->mobile
-        ];
-
-        return (new User)->where('id', $user_id)->update($account);
+        return $user->wasChanged();
     }
 
     /**
@@ -73,13 +65,12 @@ class User extends Authenticatable
      */
     public static function changePassword($password)
     {
-        $user_id = Auth::id();
+        $user = User::find(Auth::id());
 
-        $new_password = [
-            'password' => Hash::make($password),
-            'password_updated' => date('Y-m-d H:i:s')
-        ];
+        $user->password = Hash::make($password);
+        $user->password_updated = date('Y-m-d H:i:s');
+        $user->save();
 
-        return (new User)->where('id', $user_id)->update($new_password);
+        return $user->wasChanged();
     }
 }

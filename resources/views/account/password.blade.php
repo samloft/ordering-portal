@@ -11,7 +11,7 @@
                 @include('layout.alerts')
 
                 <form action="{{ route('account.password.store') }}" method="post">
-                    {{ method_field('PATCH') }}
+                    @method('PATCH')
 
                     <div class="form-group row">
                         <label class="col-sm-4 col-form-label">{{ __('Current Password') }}</label>
@@ -28,7 +28,7 @@
                     <div class="form-group row">
                         <label class="col-sm-4 col-form-label">{{ __('Confirm Password') }}</label>
                         <div class="col-sm-8">
-                            <input type="password" class="form-control" name="confirm_new_password">
+                            <input type="password" class="form-control" name="new_password_confirmation">
                         </div>
                     </div>
 

@@ -28,9 +28,9 @@ class PasswordController extends Controller
             return back()->with('error', 'Current password is not correct, please try again');
         }
 
-        if ($request->new_password <> $request->confirm_new_password) {
-            return back()->with('error', 'New password and confirm must match');
-        }
+        $request->validate([
+            'new_password' => 'required|confirmed'
+        ]);
 
         $password_updated = User::changePassword($request->new_password);
 

@@ -88,6 +88,14 @@
                     </div>
 
                     <div class="form-group row">
+                        <label class="col-sm-4 col-form-label">{{ __('Telephone') }}</label>
+                        <div class="col-sm-8">
+                            <input class="form-control" name="telephone"
+                                   value="{{ Auth::user()->telephone }}">
+                        </div>
+                    </div>
+
+                    <div class="form-group row">
                         <label class="col-sm-4 col-form-label">{{ __('Evening Telephone') }}</label>
                         <div class="col-sm-8">
                             <input class="form-control" name="evening_telephone"
