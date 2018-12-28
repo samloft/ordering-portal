@@ -65,18 +65,23 @@ Route::group(['middleware' => ['auth', 'has.customer']], function () {
     /*
      * User Account
     */
-    Route::group(['prefix' => 'account'], function() {
+    Route::group(['prefix' => 'account'], function () {
         Route::get('/', 'AccountController@index')->name('account');
         Route::post('store', 'AccountController@store')->name('account.store');
 
-        Route::get('password', 'AccountController@password')->name('account.password');
-        Route::post('password-change', 'AccountController@storePassword')->name('account.password.store');
+        Route::group(['prefix' => 'password'], function () {
+            Route::get('/', 'Account\PasswordController@index')->name('account.password');
+            Route::patch('store', 'Account\PasswordController@store')->name('account.password.store');
+        });
 
         Route::get('addresses', 'AccountController@addresses')->name('account.addresses');
-        Route::get('address/{id?}', 'AccountController@showAddress')->name('account.address.show');
-        Route::post('address/store', 'AccountController@storeAddress')->name('account.address.store');
-        Route::post('address/default/', 'AccountController@setDefault')->name('account.address.default');
-        Route::get('address/delete/{id}', 'AccountController@deleteAddress')->name('account.address.destroy');
+
+        Route::group(['prefix' => 'address'], function () {
+            Route::get('{id?}', 'AccountController@showAddress')->name('account.address.show');
+            Route::post('store', 'AccountController@storeAddress')->name('account.address.store');
+            Route::post('default', 'AccountController@setDefault')->name('account.address.default');
+            Route::get('delete/{id}', 'AccountController@deleteAddress')->name('account.address.destroy');
+        });
     });
 });
 

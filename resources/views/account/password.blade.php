@@ -11,6 +11,8 @@
                 @include('layout.alerts')
 
                 <form action="{{ route('account.password.store') }}" method="post">
+                    {{ method_field('PATCH') }}
+
                     <div class="form-group row">
                         <label class="col-sm-4 col-form-label">{{ __('Current Password') }}</label>
                         <div class="col-sm-8">
