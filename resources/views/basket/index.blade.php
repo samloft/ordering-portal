@@ -94,4 +94,15 @@
             </div>
         </div>
     </div>
+
+    <div class="row mt-3">
+        <div class="col">
+            <button class="btn btn-blue">{{ __('Continue Shopping') }}</button>
+            <button class="btn btn-blue">{{ __('Empty basket') }}</button>
+        </div>
+        <div class="col text-right">
+            <button class="btn btn-primary">{{ __('Save Basket') }}</button>
+            <button class="btn btn-primary">{{ __('Checkout') }}</button>
+        </div>
+    </div>
 @endsection
