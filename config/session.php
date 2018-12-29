@@ -72,7 +72,7 @@ return [
     |
     */
 
-    'connection' => env('SESSION_CONNECTION', null),
+    'connection' => env('SESSION_CONNECTION', 'mysql'),
 
     /*
     |--------------------------------------------------------------------------
@@ -153,6 +153,7 @@ return [
     |
     */
 
+//    'domain' => env('SESSION_DOMAIN', null),
     'domain' => env('SESSION_DOMAIN', null),
 
     /*
