@@ -32,12 +32,15 @@
                             </div>
                             <div class="col basket-buttons my-auto">
                                 <a href="{{ route('basket') }}" class="btn-link">
-                                    <button class="btn btn-secondary">{{ __('Basket') }}</button>
+                                    <button id="header-basket" class="btn btn-secondary">{{ __('Basket') }}</button>
                                 </a>
                                 <a href="{{ route('checkout') }}" class="btn-link">
                                     <button class="btn btn-primary">{{ __('Checkout') }}</button>
                                 </a>
                             </div>
+                        </div>
+                        <div class="basket-dropdown text-right" style="display: none;">
+                            <div class="text-left">Here would be some basket stuffs.</div>
                         </div>
                     </div>
                 </div>

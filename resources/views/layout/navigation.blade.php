@@ -68,6 +68,7 @@
                 </div>
             @else
                 <div class="col user-details">
+
                     <div class="text-right">
                         <span>
                             <strong>{{ __('Welcome') . ' ' . Auth::user()->first_name . ' ' . Auth::user()->last_name }}</strong>, {{ Auth::user()->customer->customer_name ? Auth::user()->customer->customer_name : 'No customer allocated' }}

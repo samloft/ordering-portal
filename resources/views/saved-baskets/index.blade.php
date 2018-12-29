@@ -23,6 +23,23 @@
         <div class="col-lg-8 d-flex align-items-stretch">
             <div class="card card-body">
                 <h2 class="section-title">{{ __('Search Results') }}</h2>
+
+                <table class="table table-striped table-hover table-support">
+                    <thead class="thead-dark">
+                    <tr>
+                        <th scope="col">Template Reference</th>
+                        <th scope="col">Saved Date</th>
+                        <th scope="col" class="text-right">Delete Template</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr>
+                        <td>Something</td>
+                        <td>20/12/2018</td>
+                        <td class="text-right">Delete Template</td>
+                    </tr>
+                    </tbody>
+                </table>
             </div>
         </div>
     </div>

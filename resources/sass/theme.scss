@@ -142,6 +142,41 @@ hr {
   }
 }
 
+.table-support th, .table-support td {
+  padding: 0.30rem;
+}
+
+.basket-dropdown {
+  margin-top: 20px;
+  position: absolute;
+  height: 200px;
+  width: 360px;
+  z-index: 20;
+  border-radius: 0.25rem;
+  box-shadow: $default-shadow;
+  background-color: rgb(255, 255, 255);
+  color: rgb(0, 0, 0);
+}
+
+.basket-dropdown::after {
+  bottom: 100%;
+  left: 89%;
+  border: solid transparent;
+  border-top-width: medium;
+  border-right-width: medium;
+  border-bottom-color: transparent;
+  border-bottom-width: medium;
+  border-left-width: medium;
+  content: " ";
+  height: 0;
+  width: 0;
+  position: absolute;
+  pointer-events: none;
+  border-bottom-color: white;
+  border-width: 8px;
+  margin-left: -100px;
+}
+
 @import 'theme/header';
 @import 'theme/login';
 @import 'theme/navigation';
