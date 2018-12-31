@@ -222,6 +222,10 @@ hr {
   margin-bottom: 0.1rem;
 }
 
+.product-list img {
+  width: 90px;
+}
+
 .product-list .product-pricing {
   line-height: 1.2rem;
   font-size: 13px;

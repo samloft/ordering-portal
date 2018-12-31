@@ -7,6 +7,8 @@
         @include('products.sidebar')
 
         <div class="col">
+            @include('products.breadcrumbs')
+
             @if (count($products) > 0)
                 @foreach($products as $product)
                     <div class="card card-body product-list mb-2">
@@ -18,9 +20,9 @@
 
                                 <div class="row product-details">
                                     <div class="col-sm-auto">
-                                        <img src="https://via.placeholder.com/90">
+                                        <img src="https://scolmoreonline.com/product_images/DPBN024BK.png">
                                     </div>
-                                    <div class="col-lg">
+                                    <div class="col-lg pt-2 pl-0">
                                         <h5>Product Code: <span class="primary-font">{{ $product->product }}</span></h5>
                                         <h5>Unit Type: <span class="primary-font">{{ $product->uom }}</span></h5>
                                         <h5>{{ $product->description }}</h5>

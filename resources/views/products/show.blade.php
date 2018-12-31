@@ -8,11 +8,7 @@
 
         <div class="col">
             @if ($product)
-                <div class="breadcrumbs">
-                    {{ $categories['level_1'] ? $categories['level_1'] : '' }}
-                    {!! $categories['level_2'] ? ' <i class="fas fa-caret-right mx-2"></i> ' . $categories['level_2'] : '' !!}
-                    {!! $categories['level_3'] ? ' <i class="fas fa-caret-right mx-2"></i> ' . $categories['level_3'] : '' !!}
-                </div>
+                @include('products.breadcrumbs')
 
                 <div class="card card-body">
                     Product yay!
