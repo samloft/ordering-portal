@@ -21,9 +21,58 @@ body {
   height: 100%;
 }
 
-.list-group-item {
+.categories .list-group-item {
   padding: 0.5rem 0.75rem;
   border: none;
+  color: #313131;
+}
+
+.categories .cat-0 {
+  background-color: #fef56c;
+}
+
+.categories .cat-1 {
+  background-color: #e5eb8b;
+}
+
+.categories .cat-2 {
+  background-color: #c6e09f;
+}
+
+.categories .cat-3 {
+  background-color: #a7d8b8;
+}
+
+.categories .cat-4 {
+  background-color: #82ceca;
+}
+
+.categories .cat-5 {
+  background-color: #00bac6;
+}
+
+.categories .dropdown-menu {
+  width: 100%;
+}
+
+.categories .list-group-item a {
+  color: #313131;
+  display: block;
+  width: 100%;
+  height: 100%;
+}
+
+.list-group .sub-category {
+  background-color: white;
+  padding: 0.1rem 0.75rem;
+  border: none;
+  border-radius: 0;
+  color: #313131;
+}
+
+.list-group .sub-category .list-group-item {
+  padding: 0.1rem 0.75rem;
+  font-size: 12px;
 }
 
 .cookie-consent {
@@ -158,20 +207,62 @@ hr {
 .basket-dropdown::after {
   bottom: 100%;
   left: 89%;
-  border: solid transparent;
-  border-top-width: medium;
-  border-right-width: medium;
-  border-bottom-color: transparent;
-  border-bottom-width: medium;
-  border-left-width: medium;
   content: " ";
   height: 0;
   width: 0;
   position: absolute;
   pointer-events: none;
+  border: 8px solid transparent;
   border-bottom-color: white;
-  border-width: 8px;
   margin-left: -100px;
+}
+
+.product-list hr {
+  margin-top: 0.1rem;
+  margin-bottom: 0.1rem;
+}
+
+.product-list .product-pricing {
+  line-height: 1.2rem;
+  font-size: 13px;
+}
+
+.product-list .product-details h5 {
+  font-weight: 300;
+  font-size: 14px;
+}
+
+.product-list .product-details h5 span.primary-font {
+  font-weight: 900;
+  color: #80d0d8;
+}
+
+.product-list .product-pricing .product-basket {
+  margin-top: 10px;
+}
+
+.product-list .stock-levels .input-group-text {
+  background-color: #86888b;
+  border-color: #86888b;
+  color: white;
+  cursor: default;
+}
+
+.product-list .stock-levels input {
+  background-color: #eceded;
+  border-color: #eceded;
+  text-align: center;
+  border-bottom-right-radius: 0.25rem !important;
+  border-top-right-radius: 0.25rem !important;
+  cursor: default;
+}
+
+.no-product {
+  margin-top: 1.9rem;
+}
+
+.breadcrumbs {
+  padding-bottom: 0.5rem;
 }
 
 header {
@@ -377,5 +468,9 @@ h2.section-title {
   color: #80d0d8;
   font-size: 18px;
   font-weight: 700;
+}
+
+h2.section-title a {
+  color: inherit;
 }
 

@@ -21,7 +21,8 @@ Route::group(['middleware' => ['auth', 'has.customer']], function () {
      *  Product Pages
      */
     Route::group(['prefix' => 'products'], function () {
-        Route::get('/', 'ProductController@index')->name('products');
+        Route::get('view/{product}', 'ProductController@show')->name('products.show');
+        Route::get('/{cat1?}/{cat2?}/{cat3?}', 'ProductController@index')->name('products');
     });
 
     /*
