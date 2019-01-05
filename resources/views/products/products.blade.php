@@ -68,7 +68,7 @@
                                     <div class="input-group-prepend">
                                         <span class="input-group-text">Qty:</span>
                                     </div>
-                                    <input class="form-control form-control-sm mr-1" value="1">
+                                    <input class="form-control form-control-sm mr-1" value="{{ $product->order_multiples }}">
                                     <span class="input-group-btn">
                                 <button class="btn btn-sm btn-primary" type="button">Add To Basket</button>
                             </span>
@@ -85,7 +85,7 @@
                                     <div class="input-group-prepend">
                                         <span class="input-group-text">Stock Level</span>
                                     </div>
-                                    <input class="form-control form-control-sm" value="1" readonly>
+                                    <input class="form-control form-control-sm" value="{{ $product->stock->quantity ? $product->stock->quantity : 0 }}" readonly>
                                     <span class="input-group-btn">
                             </span>
                                 </div>

@@ -22,9 +22,20 @@ class Products extends Model
         return $this->belongsTo(Prices::class, 'product', 'product')->where('customer_code', Auth::user()->customer_code);
     }
 
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     */
     public function categories()
     {
         return $this->belongsTo(Categories::class, 'product', 'product');
+    }
+
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     */
+    public function stock()
+    {
+        return $this->belongsTo(Stock::class, 'product', 'product');
     }
 
     /**
