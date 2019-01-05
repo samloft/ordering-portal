@@ -19,11 +19,11 @@
 
     <div class="row">
         <div class="col">
-            <form class="w-100" action="">
+            <form class="w-100" action="{{ route('products.search') }}" method="get">
                 <div class="form-group">
                     <label>{{ __('Search') }}</label>
                     <div class="input-group">
-                        <input type="text" class="form-control">
+                        <input type="text" class="form-control" name="query">
                         <div class="input-group-append">
                             <button class="input-group-text"><i class="fas fa-search"></i></button>
                         </div>

@@ -22,7 +22,8 @@ Route::group(['middleware' => ['auth', 'has.customer']], function () {
      */
     Route::group(['prefix' => 'products'], function () {
         Route::get('view/{product}', 'ProductController@show')->name('products.show');
-        Route::get('/{cat1?}/{cat2?}/{cat3?}', 'ProductController@index')->name('products');
+        Route::get('search', 'ProductController@search')->name('products.search');
+        Route::get('{cat1?}/{cat2?}/{cat3?}', 'ProductController@index')->name('products');
     });
 
     /*

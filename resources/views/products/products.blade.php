@@ -95,7 +95,7 @@
                 @endforeach
 
                 <div class="mb-2">
-                    {{ $products->links('layout.pagination') }}
+                    {{ $products->appends($_GET)->links('layout.pagination') }}
                 </div>
             @else
                 Categories

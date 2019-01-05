@@ -5,6 +5,11 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Model;
 use Auth;
 
+/**
+ * App\Models\Products
+ *
+ * @mixin \Eloquent
+ */
 class Products extends Model
 {
     protected $table = 'products';
@@ -28,13 +33,12 @@ class Products extends Model
      */
     public static function list($categories)
     {
-        $products = (new Products)->whereHas('prices', function ($query) {
-            $query->where('customer_code', Auth::user()->customer_code);
-        })->whereHas('categories', function ($query) use ($categories) {
-            $query->where('cat1_level1', $categories['level_1'])
-                ->where('cat1_level2', $categories['level_2'])
-                ->where('cat1_level3', $categories['level_3']);
-        })->paginate(10);
+        $products = (new Products)->whereHas('prices')
+            ->whereHas('categories', function ($query) use ($categories) {
+                $query->where('cat1_level1', $categories['level_1'])
+                    ->where('cat1_level2', $categories['level_2'])
+                    ->where('cat1_level3', $categories['level_3']);
+            })->paginate(10);
 
         return $products;
     }
@@ -45,8 +49,20 @@ class Products extends Model
      */
     public static function show($product_code)
     {
-        return (new Products)->whereHas('prices', function ($query) {
-            $query->where('customer_code', Auth::user()->customer_code);
-        })->where('product', $product_code)->first();
+        return (new Products)->whereHas('prices')->where('product', $product_code)->first();
+    }
+
+    /**
+     * @param $search_term
+     * @return mixed
+     */
+    public static function search($search_term)
+    {
+        return (new Products)->whereHas('prices')
+            ->where(function ($query) use ($search_term) {
+                $query->whereRaw('upper(product) LIKE \'%' . strtoupper($search_term) . '%\'')
+                    ->orWhereRaw('upper(name) LIKE \'%' . strtoupper($search_term) . '%\'')
+                    ->orWhereRaw('upper(description) LIKE \'%' . strtoupper($search_term) . '%\'');
+            })->paginate(10);
     }
 }
