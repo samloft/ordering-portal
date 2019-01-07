@@ -23,7 +23,7 @@
                                         <img src="https://scolmoreonline.com/product_images/DPBN024BK.png">
                                     </div>
                                     <div class="col-lg pt-2 pl-0">
-                                        <h5>Product Code: <span class="primary-font">{{ $product->product }}</span></h5>
+                                        <h5>Product Code: <span id="product-code" class="primary-font">{{ $product->product }}</span></h5>
                                         <h5>Unit Type: <span class="primary-font">{{ $product->uom }}</span></h5>
                                         <h5>{{ $product->description }}</h5>
                                     </div>
@@ -68,7 +68,8 @@
                                     <div class="input-group-prepend">
                                         <span class="input-group-text">Qty:</span>
                                     </div>
-                                    <input class="form-control form-control-sm mr-1" value="{{ $product->order_multiples }}">
+                                    <input class="form-control form-control-sm mr-1"
+                                           value="{{ $product->order_multiples }}">
                                     <span class="input-group-btn">
                                 <button class="btn btn-sm btn-primary" type="button">Add To Basket</button>
                             </span>
@@ -77,15 +78,19 @@
                         </div>
                         <div class="row mt-2">
                             <div class="col">
-                                <button class="btn btn-sm btn-blue">Enlarge Image</button>
-                                <button class="btn btn-sm btn-blue">View Details & Availability</button>
+                                <button id="enlarge-image" class="btn btn-sm btn-blue" value="https://scolmoreonline.com/product_images/DPBN024BK.png">Enlarge Image</button>
+                                <a href="{{ route('products.show', $product->product) }}">
+                                    <button class="btn btn-sm btn-blue">View Details & Availability</button>
+                                </a>
                             </div>
                             <div class="col-lg-3 text-right">
                                 <div class="input-group input-group-sm stock-levels">
                                     <div class="input-group-prepend">
                                         <span class="input-group-text">Stock Level</span>
                                     </div>
-                                    <input class="form-control form-control-sm" value="{{ $product->stock->quantity ? $product->stock->quantity : 0 }}" readonly>
+                                    <input class="form-control form-control-sm"
+                                           value="{{ $product->stock->quantity ? $product->stock->quantity : 0 }}"
+                                           readonly>
                                     <span class="input-group-btn">
                             </span>
                                 </div>
@@ -102,5 +107,11 @@
             @endif
         </div>
 
+    </div>
+
+    <div id="img-modal" class="img-modal">
+        <span class="close">&times;</span>
+        <img class="img-modal-content" id="product-image" alt="Product Image">
+        <div id="caption"></div>
     </div>
 @endsection

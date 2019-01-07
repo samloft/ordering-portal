@@ -12,15 +12,26 @@
                 </div>
 
                 <div class="footer-address">
-                    <strong>Scolmore International Limited</strong> Scolmore Park, Landsberg, Lichfield Road Ind. Est., Tamworth B79 7XB.<br/>
-                    Tel: 01827 63454 | Fax: 01827 63362 | Email: <a href="MAILTO:sales@scolmore.com">sales@scolmore.com</a>
+                    <strong>Scolmore International Limited</strong> Scolmore Park, Landsberg, Lichfield Road Ind. Est.,
+                    Tamworth B79 7XB.<br/>
+                    Tel: 01827 63454 | Fax: 01827 63362 | Email: <a
+                            href="MAILTO:sales@scolmore.com">sales@scolmore.com</a>
                 </div>
             </div>
-            <div class="col footer-links">
-                Social
-            </div>
-            <div class="col footer-links">
-                App Stuff
+            <div class="col">
+                <div class="row">
+                    <div class="col footer-links">
+                        Social
+                    </div>
+                    <div class="col footer-links">
+                        App Stuff
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col text-right footer-links">
+                        Developed By <a href="https://devloft.co.uk">{ devloft logo }</a>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
