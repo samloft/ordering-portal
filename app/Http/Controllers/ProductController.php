@@ -3,7 +3,6 @@
 namespace App\Http\Controllers;
 
 use App\Models\Products;
-use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Input;
 
 class ProductController extends Controller
@@ -16,7 +15,6 @@ class ProductController extends Controller
      */
     public function index($category_one = '', $category_two = '', $category_three = '')
     {
-        Blahh::hiya();
         $categories = [
             'level_1' => urldecode($category_one),
             'level_2' => urldecode($category_two),

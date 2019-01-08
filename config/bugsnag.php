@@ -36,7 +36,7 @@ return [
     |
     */
 
-    'app_version' => app(\PragmaRX\Version\Package\Version::class)->format(),
+    'app_version' => '',
 
     /*
     |--------------------------------------------------------------------------
