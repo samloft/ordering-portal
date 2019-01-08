@@ -15,6 +15,7 @@
         "fideloper/proxy": "^4.0",
         "laravel/framework": "5.7.*",
         "laravel/tinker": "^1.0",
+        "pragmarx/version": "^0.2.8",
         "spatie/laravel-cookie-consent": "^2.5"
     },
     "require-dev": {

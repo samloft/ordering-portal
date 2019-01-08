@@ -3,7 +3,7 @@
 
 /**
  * A helper file for Laravel 5, to provide autocomplete information to your IDE
- * Generated for Laravel 5.7.19 on 2019-01-08 09:10:03.
+ * Generated for Laravel 5.7.19 on 2019-01-08 11:31:03.
  *
  * This file should not be included in your code, only analyzed by your IDE!
  *
@@ -14148,6 +14148,180 @@ namespace Barryvdh\Debugbar {
  
 }
 
+namespace PragmaRX\Version\Package { 
+
+    /**
+     * 
+     *
+     */ 
+    class Facade {
+        
+        /**
+         * Get the current version.
+         *
+         * @return string 
+         * @static 
+         */ 
+        public static function current()
+        {
+            return \PragmaRX\Version\Package\Version::current();
+        }
+        
+        /**
+         * Get the current build.
+         *
+         * @return mixed 
+         * @static 
+         */ 
+        public static function getBuild()
+        {
+            return \PragmaRX\Version\Package\Version::getBuild();
+        }
+        
+        /**
+         * Get the current object instance.
+         *
+         * @return $this 
+         * @static 
+         */ 
+        public static function instance()
+        {
+            return \PragmaRX\Version\Package\Version::instance();
+        }
+        
+        /**
+         * Get a properly formatted version.
+         *
+         * @param $type
+         * @return mixed|null 
+         * @static 
+         */ 
+        public static function format($type = null)
+        {
+            return \PragmaRX\Version\Package\Version::format($type);
+        }
+        
+        /**
+         * Get a properly formatted version.
+         *
+         * @param $type
+         * @return bool 
+         * @static 
+         */ 
+        public static function isInAbsorbMode($type)
+        {
+            return \PragmaRX\Version\Package\Version::isInAbsorbMode($type);
+        }
+        
+        /**
+         * Set the config file stub.
+         *
+         * @param string $configFileStub
+         * @static 
+         */ 
+        public static function setConfigFileStub($configFileStub)
+        {
+            return \PragmaRX\Version\Package\Version::setConfigFileStub($configFileStub);
+        }
+        
+        /**
+         * Load package YAML configuration.
+         *
+         * @param $path
+         * @return \Illuminate\Support\Collection 
+         * @static 
+         */ 
+        public static function loadConfig($path = null)
+        {
+            return \PragmaRX\Version\Package\Version::loadConfig($path);
+        }
+        
+        /**
+         * Refresh cache.
+         *
+         * @static 
+         */ 
+        public static function refresh()
+        {
+            return \PragmaRX\Version\Package\Version::refresh();
+        }
+         
+    }
+ 
+}
+
+namespace PragmaRX\Yaml\Package { 
+
+    /**
+     * 
+     *
+     */ 
+    class Facade {
+        
+        /**
+         * Load yaml files from directory and add to Laravel config.
+         *
+         * @param string $path
+         * @param string $configKey
+         * @return \PragmaRX\Yaml\Package\Collection 
+         * @static 
+         */ 
+        public static function loadToConfig($path, $configKey)
+        {
+            return \PragmaRX\Yaml\Package\Yaml::loadToConfig($path, $configKey);
+        }
+        
+        /**
+         * Load all yaml files from a directory.
+         *
+         * @param $path
+         * @return \Illuminate\Support\Collection 
+         * @static 
+         */ 
+        public static function loadFromDirectory($path)
+        {
+            return \PragmaRX\Yaml\Package\Yaml::loadFromDirectory($path);
+        }
+        
+        /**
+         * Load yaml file.
+         *
+         * @param $file
+         * @return mixed|string 
+         * @static 
+         */ 
+        public static function loadFile($file)
+        {
+            return \PragmaRX\Yaml\Package\Yaml::loadFile($file);
+        }
+        
+        /**
+         * Remove extension from file name.
+         *
+         * @param $dirty
+         * @return \Illuminate\Support\Collection|mixed 
+         * @static 
+         */ 
+        public static function cleanArrayKeysRecursive($dirty)
+        {
+            return \PragmaRX\Yaml\Package\Yaml::cleanArrayKeysRecursive($dirty);
+        }
+        
+        /**
+         * Get this object instance.
+         *
+         * @return $this 
+         * @static 
+         */ 
+        public static function instance()
+        {
+            return \PragmaRX\Yaml\Package\Yaml::instance();
+        }
+         
+    }
+ 
+}
+
 
 namespace  { 
 
@@ -16581,6 +16755,10 @@ namespace  {
     class Bugsnag extends \Bugsnag\BugsnagLaravel\Facades\Bugsnag {}
 
     class Debugbar extends \Barryvdh\Debugbar\Facade {}
+
+    class Version extends \PragmaRX\Version\Package\Facade {}
+
+    class Yaml extends \PragmaRX\Yaml\Package\Facade {}
  
 }
 
