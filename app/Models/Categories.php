@@ -34,7 +34,9 @@ class Categories extends Model
         $array = [];
 
         foreach ($category_results as $category) {
-            $array[$category->cat1_level1][$category->cat1_level2][$category->cat1_level3] = [];
+            if (trim($category->cat1_level1) <> '') {
+                $array[$category->cat1_level1][$category->cat1_level2][$category->cat1_level3] = [];
+            }
         }
 
         $categories = [];
