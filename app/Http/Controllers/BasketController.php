@@ -17,4 +17,17 @@ class BasketController extends Controller
 
         return view('basket.index', compact('basket'));
     }
+
+    /**
+     * Remove all items from customers basket.
+     *
+     * @return \Illuminate\Http\RedirectResponse
+     * @throws \Exception
+     */
+    public function clear()
+    {
+        $cleared = Basket::clear();
+
+        return $cleared ? back() : back()->with('error', 'Unable to clear basket, please try again');
+    }
 }

@@ -89,6 +89,7 @@ Route::group(['middleware' => ['auth', 'has.customer']], function () {
      */
     Route::group(['prefix' => 'basket'], function () {
         Route::get('/', 'BasketController@index')->name('basket');
+        Route::get('empty', 'BasketController@clear')->name('basket.empty');
     });
 
     /*

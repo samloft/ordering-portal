@@ -35,6 +35,7 @@
 
 <script type="text/javascript" src="{{ mix('js/app.js') }}"></script>
 <script type="text/javascript" src="{{ mix('js/main.js') }}"></script>
+<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 @yield('scripts')
 
 </body>

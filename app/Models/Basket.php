@@ -83,4 +83,15 @@ class Basket extends Model
     {
         return (new Basket)->insert($order_lines);
     }
+
+    /**
+     * Remove all items from the basket for the logged in customer.
+     *
+     * @return bool|int|null
+     * @throws \Exception
+     */
+    public static function clear()
+    {
+        return (new Basket)->where('customer_code', Auth::user()->customer_code)->delete();
+    }
 }

@@ -68,8 +68,6 @@
 @endsection
 
 @section('scripts')
-    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
-
     <script>
         $('button[id="delete-address"]').on('click', function () {
             swal({

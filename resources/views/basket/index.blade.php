@@ -59,14 +59,17 @@
                     <td class="text-right">{{ $line->productDetails->stock->quantity }}</td>
                     <td class="text-right">£{{ number_format($line->productDetails->prices->price, 4) }}</td>
                     <td class="text-right">{{ $line->quantity }}</td>
-                    <td class="text-right">£{{ number_format(number_format($line->productDetails->prices->price, 4) * $line->quantity, 2, '.', ',') }}</td>
+                    <td class="text-right">
+                        £{{ number_format(number_format($line->productDetails->prices->price, 4) * $line->quantity, 2, '.', ',') }}</td>
                 </tr>
             @endforeach
             </tbody>
-        @else
-            <div class="text-center mb-5"><h2>No items are in your basket</h2></div>
         @endif
     </table>
+
+    @if (count($basket['lines']) == 0)
+        <div class="text-center mb-5"><h2>No items are in your basket</h2></div>
+    @endif
 
     <div class="row">
         <div class="col-lg-7"></div>
@@ -116,12 +119,35 @@
 
     <div class="row mt-3">
         <div class="col">
-            <button class="btn btn-blue">{{ __('Continue Shopping') }}</button>
-            <button class="btn btn-blue">{{ __('Empty basket') }}</button>
+            <a href="{{ route('products') }}">
+                <button class="btn btn-blue">{{ __('Continue Shopping') }}</button>
+            </a>
+            <button id="empty-basket" class="btn btn-blue">{{ __('Empty basket') }}</button>
         </div>
         <div class="col text-right">
             <button class="btn btn-primary">{{ __('Save Basket') }}</button>
-            <button class="btn btn-primary">{{ __('Checkout') }}</button>
+            <a href="{{ route('checkout') }}">
+                <button class="btn btn-primary">{{ __('Checkout') }}</button>
+            </a>
         </div>
     </div>
+@endsection
+
+@section('scripts')
+    <script>
+        $('#empty-basket').on('click', function () {
+            swal({
+                title: "Empty Basket?",
+                text: "Are you sure? This cannot be un-done.",
+                icon: "warning",
+                buttons: true,
+                dangerMode: true,
+            })
+                .then((willDelete) => {
+                    if (willDelete) {
+                        location.href = '{{ route('basket.empty') }}';
+                    }
+                });
+        });
+    </script>
 @endsection
