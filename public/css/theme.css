@@ -187,11 +187,6 @@ hr {
   }
 }
 
-.table-support th,
-.table-support td {
-  padding: 0.3rem;
-}
-
 .basket-dropdown {
   margin-top: 20px;
   position: absolute;
@@ -410,6 +405,11 @@ footer .footer-links {
   background-color: rgba(128, 208, 216, 0.8);
 }
 
+.table th,
+.table td {
+  padding: 0.3rem;
+}
+
 .table-basket {
   margin-top: 20px;
 }
@@ -423,12 +423,34 @@ footer .footer-links {
   font-weight: 300;
 }
 
+table .bg-danger {
+  background-color: #f9d6d5 !important;
+  color: #761b18 !important;
+}
+
+table .bg-warning {
+  background-color: #fffbdb !important;
+  color: #867d29 !important;
+}
+
 form button {
   cursor: pointer;
 }
 
 .product-sidebar label {
   font-weight: 900;
+}
+
+.custom-file-input {
+  text-indent: -999px;
+}
+
+.custom-file-input:hover {
+  cursor: pointer;
+}
+
+.custom-file-label {
+  padding: 0.375rem 5.75rem;
 }
 
 .custom-file-label::after {

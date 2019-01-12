@@ -34,7 +34,11 @@ Route::group(['middleware' => ['auth', 'has.customer']], function () {
     /*
      * Order Upload
      */
-    Route::get('upload', 'UploadController@index')->name('upload');
+    Route::group(['prefix' => 'upload'], function () {
+        Route::get('/', 'UploadController@index')->name('upload');
+
+        Route::post('validation', 'UploadController@validation')->name('upload-validate');
+    });
 
     /*
      * Saved Baskets
@@ -90,7 +94,7 @@ Route::group(['middleware' => ['auth', 'has.customer']], function () {
     /*
      * Checkout
      */
-    Route::group(['prefix' => 'checkout'], function() {
+    Route::group(['prefix' => 'checkout'], function () {
         Route::get('/', 'CheckoutController@index')->name('checkout');
     });
 });
@@ -105,6 +109,6 @@ Auth::routes();
 
 Route::get('new-products', 'Auth\LoginController@loginContent')->name('login.content');
 
-Route::fallback(function() {
+Route::fallback(function () {
     return view('errors.404');
 });

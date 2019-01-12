@@ -10,13 +10,14 @@
     "require": {
         "php": "^7.1.3",
         "ext-curl": "*",
+        "barryvdh/laravel-debugbar": "^3.2",
         "barryvdh/laravel-ide-helper": "^2.5",
         "bugsnag/bugsnag-laravel": "^2.0",
         "fideloper/proxy": "^4.0",
         "laravel/framework": "5.7.*",
         "laravel/tinker": "^1.0",
+        "maatwebsite/excel": "^3.1",
         "pragmarx/version": "^0.2.8",
-        "barryvdh/laravel-debugbar": "^3.2",
         "spatie/laravel-cookie-consent": "^2.5"
     },
     "require-dev": {

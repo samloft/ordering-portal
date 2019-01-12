@@ -36,7 +36,7 @@
             <div class="card card-body">
                 <h2 class="section-title">{{ __('Search Results') }}</h2>
 
-                <table class="table table-striped table-hover table-support">
+                <table class="table table-striped table-hover">
                     <thead class="thead-dark">
                     <tr>
                         <th scope="col">Order Number</th>

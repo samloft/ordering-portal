@@ -6,6 +6,10 @@ $(".basket-dropdown").mouseleave(function () {
     $(".basket-dropdown").fadeToggle('fast');
 });
 
+$('input[type="file"]').change(function (file) {
+    $('.custom-file-label').html(file.target.files[0].name);
+});
+
 $(".sidebar-dropdown > a").click(function () {
     $(".sidebar-submenu").slideUp(200);
     if (
@@ -43,7 +47,7 @@ var img = document.getElementById('enlarge-image');
 var modalImg = document.getElementById("product-image");
 var captionText = document.getElementById("caption");
 
-$('button[id="enlarge-image"]').on('click', function() {
+$('button[id="enlarge-image"]').on('click', function () {
     // modal.style.display = "block";
     $('#img-modal').show();
     modalImg.src = $(this).val();
@@ -52,7 +56,7 @@ $('button[id="enlarge-image"]').on('click', function() {
     console.log($(this).closest('#product-code').text());
 });
 
-$('#img-modal').on('click', function() {
+$('#img-modal').on('click', function () {
     $(this).hide();
 });
 
@@ -60,6 +64,6 @@ $('#img-modal').on('click', function() {
 var span = document.getElementsByClassName("close")[0];
 
 // When the user clicks on <span> (x), close the modal
-span.onclick = function() {
+span.onclick = function () {
     modal.style.display = "none";
 };

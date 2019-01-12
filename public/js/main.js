@@ -99,6 +99,9 @@ $("#header-basket").mouseenter(function () {
 $(".basket-dropdown").mouseleave(function () {
   $(".basket-dropdown").fadeToggle('fast');
 });
+$('input[type="file"]').change(function (file) {
+  $('.custom-file-label').html(file.target.files[0].name);
+});
 $(".sidebar-dropdown > a").click(function () {
   $(".sidebar-submenu").slideUp(200);
 
