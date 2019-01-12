@@ -6,6 +6,10 @@
     <h1 class="page-title">{{ __('Upload An Order (Validation)') }}</h1>
 
     <div class="card card-body">
+        @include('layout.alerts')
+
+        <p>{{ __('Your order has been validated, please check it over and click the "Add order to basket" button below to finish.') }}</p>
+
         @if ($order['errors'] > 0)
             <div class="alert alert-danger">
                 <strong>{{ $order['errors'] }} Errors Found!</strong> Lines in red will not be added to your basket.
@@ -19,7 +23,7 @@
             </div>
         @endif
 
-        <table class="table table-striped">
+        <table class="table table-striped table-bordered">
             <thead class="thead-dark">
             <tr>
                 <th>Product</th>
@@ -28,18 +32,25 @@
             </tr>
             </thead>
             <tbody>
-            @foreach ($order['products'] as $line)
-                <tr class="{{ $line['validation'] }}">
-                    <td>{{ $line['product']['code'] }}</td>
-                    <td>{{ $line['quantity']['amount'] }}</td>
-                    <td class="text-right">
-                        @if (!$line['product']['valid'])
-                            {!! $line['product']['message'] !!}
-                        @elseif ($line['quantity']['message'])
-                            {!! $line['quantity']['message'] !!}
-                        @endif
-                    </td>
-                </tr>
+            @foreach ($order as $line)
+                @if ($line['product'])
+                    <tr class="{{ $line['validation']['error'] ? 'bg-danger' : ($line['validation']['warning'] ? 'bg-warning' : '') }}">
+
+                        <td>{{ $line['product'] }}</td>
+
+                        <td class="text-right">{{ $line['quantity'] }}</td>
+
+                        <td class="text-right">
+                            @if ($line['validation']['error'])
+                                {{ $line['validation']['error'] }} <i class="fas fa-times-circle"></i>
+                            @elseif ($line['validation']['warning'])
+                                {{ $line['validation']['warning'] }} <i class="fas fa-exclamation-triangle"></i>
+                            @else
+                                Valid <i class="text-success fas fa-check-circle"></i>
+                            @endif
+                        </td>
+                    </tr>
+                @endif
             @endforeach
             </tbody>
         </table>
@@ -47,10 +58,14 @@
 
     <div class="row mt-3">
         <div class="col">
-            <button class="btn btn-primary">Back</button>
+            <a href="{{ route('upload') }}">
+                <button class="btn btn-primary">Back</button>
+            </a>
         </div>
         <div class="col text-right">
-            <button class="btn btn-blue">Add Order To Basket</button>
+            <a href="{{ route('upload-completed') }}">
+                <button class="btn btn-blue">Add Order To Basket</button>
+            </a>
         </div>
     </div>
 @endsection

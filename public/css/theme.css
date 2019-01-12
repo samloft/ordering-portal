@@ -264,6 +264,18 @@ hr {
   padding-bottom: 0.5rem;
 }
 
+.table-basket tbody tr {
+  background-color: white;
+}
+
+.table-basket td:not(:first-child) {
+  padding-top: 13px !important;
+}
+
+img.basket-image {
+  max-height: 40px;
+}
+
 header {
   background-color: #313131;
   padding-top: 10px;
@@ -500,6 +512,10 @@ h2.section-title a {
   color: inherit;
 }
 
+#enlarge-image:hover {
+  cursor: pointer;
+}
+
 .img-modal {
   display: none;
   /* Hidden by default */
@@ -523,14 +539,14 @@ h2.section-title a {
 
 /* Modal Content (image) */
 
-.img-modal-content {
+.img-modal .img-modal-content {
   margin: auto;
   display: block;
   width: 80%;
   max-width: 700px;
 }
 
-#caption {
+.img-modal #caption {
   margin: auto;
   display: block;
   width: 80%;
@@ -573,7 +589,7 @@ h2.section-title a {
   }
 }
 
-.close {
+.img-modal .close {
   position: absolute;
   top: 15px;
   right: 35px;
@@ -583,8 +599,8 @@ h2.section-title a {
   transition: 0.3s;
 }
 
-.close:hover,
-.close:focus {
+.img-modal .close:hover,
+.img-modal .close:focus {
   color: #bbb;
   text-decoration: none;
   cursor: pointer;
@@ -594,5 +610,51 @@ h2.section-title a {
   .img-modal-content {
     width: 100%;
   }
+}
+
+#loader .loader {
+  position: relative;
+  text-align: center;
+  margin: 15px auto 35px auto;
+  z-index: 9999;
+  display: block;
+  width: 80px;
+  height: 80px;
+  border: 10px solid rgba(0, 0, 0, 0.3);
+  border-radius: 50%;
+  border-top-color: #000;
+  animation: spin 1s ease-in-out infinite;
+  -webkit-animation: spin 1s ease-in-out infinite;
+}
+
+@keyframes spin {
+  to {
+    -webkit-transform: rotate(360deg);
+  }
+}
+
+@-webkit-keyframes spin {
+  to {
+    -webkit-transform: rotate(360deg);
+  }
+}
+
+#loader .modal-content {
+  border-radius: 0px;
+  box-shadow: 0 0 20px 8px rgba(0, 0, 0, 0.7);
+}
+
+#loader .modal-backdrop.show {
+  opacity: 0.75;
+}
+
+#loader .loader-txt p {
+  font-size: 13px;
+  color: #666;
+}
+
+#loader .loader-txt p small {
+  font-size: 11.5px;
+  color: #999;
 }
 

@@ -272,6 +272,18 @@ hr {
   padding-bottom: 0.5rem;
 }
 
+.table-basket tbody tr {
+  background-color: rgb(255, 255, 255);
+}
+
+.table-basket td:not(:first-child) {
+  padding-top: 13px !important;
+}
+
+img.basket-image {
+  max-height: 40px;
+}
+
 
 @import 'theme/header';
 @import 'theme/login';

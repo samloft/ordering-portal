@@ -40,22 +40,41 @@
             <th>Product</th>
             <th>Code</th>
             <th>Unit</th>
-            <th>Stock (†)</th>
-            <th>Net Price</th>
-            <th>Total Price</th>
+            <th class="text-right">Stock (†)</th>
+            <th class="text-right">Net Price</th>
+            <th class="text-right">Quantity</th>
+            <th class="text-right">Total Price</th>
         </tr>
         </thead>
+        @if (count($basket['lines']) > 0)
+            <tbody>
+            @foreach($basket['lines'] as $line)
+                <tr>
+                    <td>
+                        <img class="basket-image" src="https://scolmoreonline.com/product_images/DPBN024BK.png">
+                        <h2 class="section-title d-inline-block">{{ $line->productDetails->name }}</h2>
+                    </td>
+                    <td>{{ $line->product }}</td>
+                    <td>{{ $line->productDetails->uom }}</td>
+                    <td class="text-right">{{ $line->productDetails->stock->quantity }}</td>
+                    <td class="text-right">£{{ number_format($line->productDetails->prices->price, 4) }}</td>
+                    <td class="text-right">{{ $line->quantity }}</td>
+                    <td class="text-right">£{{ number_format(number_format($line->productDetails->prices->price, 4) * $line->quantity, 2, '.', ',') }}</td>
+                </tr>
+            @endforeach
+            </tbody>
+        @else
+            <div class="text-center mb-5"><h2>No items are in your basket</h2></div>
+        @endif
     </table>
 
-    <div class="text-center"><h2>No items are in your basket</h2></div>
-
-    <div class="row mt-5">
+    <div class="row">
         <div class="col-lg-7"></div>
         <div class="col-lg-5 justify-content-end">
             <div class="card card-body basket-summary">
                 <div class="row">
                     <div class="col">Goods Total</div>
-                    <div class="col text-right">£0.00</div>
+                    <div class="col text-right">£{{ $basket['summary']['goods_total'] }}</div>
                 </div>
                 <div class="row">
                     <div class="col">Shipping</div>

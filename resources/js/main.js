@@ -10,6 +10,10 @@ $('input[type="file"]').change(function (file) {
     $('.custom-file-label').html(file.target.files[0].name);
 });
 
+$('button[id="upload-order"]').on('click', function () {
+    $('#loader').modal('show');
+});
+
 $(".sidebar-dropdown > a").click(function () {
     $(".sidebar-submenu").slideUp(200);
     if (
@@ -47,10 +51,9 @@ var img = document.getElementById('enlarge-image');
 var modalImg = document.getElementById("product-image");
 var captionText = document.getElementById("caption");
 
-$('button[id="enlarge-image"]').on('click', function () {
-    // modal.style.display = "block";
+$('img[id="enlarge-image"]').on('click', function () {
     $('#img-modal').show();
-    modalImg.src = $(this).val();
+    modalImg.src = $(this).attr('src');
     captionText.innerHTML = $(this).closest('.product-list').find('#product-code').text();
 
     console.log($(this).closest('#product-code').text());

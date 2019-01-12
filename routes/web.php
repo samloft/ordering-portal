@@ -36,8 +36,8 @@ Route::group(['middleware' => ['auth', 'has.customer']], function () {
      */
     Route::group(['prefix' => 'upload'], function () {
         Route::get('/', 'UploadController@index')->name('upload');
-
         Route::post('validation', 'UploadController@validation')->name('upload-validate');
+        Route::get('completed', 'UploadController@store')->name('upload-completed');
     });
 
     /*

@@ -20,10 +20,12 @@
 
                                 <div class="row product-details">
                                     <div class="col-sm-auto">
-                                        <img src="https://scolmoreonline.com/product_images/DPBN024BK.png">
+                                        <img id="enlarge-image"
+                                             src="https://scolmoreonline.com/product_images/DPBN024BK.png">
                                     </div>
                                     <div class="col-lg pt-2 pl-0">
-                                        <h5>Product Code: <span id="product-code" class="primary-font">{{ $product->product }}</span></h5>
+                                        <h5>Product Code: <span id="product-code"
+                                                                class="primary-font">{{ $product->product }}</span></h5>
                                         <h5>Unit Type: <span class="primary-font">{{ $product->uom }}</span></h5>
                                         <h5>{{ $product->description }}</h5>
                                     </div>
@@ -78,7 +80,7 @@
                         </div>
                         <div class="row mt-2">
                             <div class="col">
-                                <button id="enlarge-image" class="btn btn-sm btn-blue" value="https://scolmoreonline.com/product_images/DPBN024BK.png">Enlarge Image</button>
+                                {{--<button id="enlarge-image" class="btn btn-sm btn-blue" value="https://scolmoreonline.com/product_images/DPBN024BK.png">Enlarge Image</button>--}}
                                 <a href="{{ route('products.show', $product->product) }}">
                                     <button class="btn btn-sm btn-blue">View Details & Availability</button>
                                 </a>

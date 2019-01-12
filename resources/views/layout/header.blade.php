@@ -23,12 +23,13 @@
             @endif
 
             @if (Auth::user())
+                @php($basket = \App\Models\Basket::show())
                 <div class="col mt-auto mb-auto">
                     <div class="header-basket float-right">
                         <div class="row">
                             <div class="col text-center basket-info">
                                 <strong>{{ __('Your Basket') }}</strong><br>
-                                0 Lines - £0.00
+                                {{ $basket['summary']['line_count'] }} Lines - £{{ $basket['summary']['goods_total'] }}
                             </div>
                             <div class="col basket-buttons my-auto">
                                 <a href="{{ route('basket') }}" class="btn-link">

@@ -2,80 +2,64 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Basket;
+use App\Models\OrderImport;
 use App\Models\Products;
 use Illuminate\Http\Request;
-use Maatwebsite\Excel\Facades\Excel;
+use Illuminate\Support\Facades\Auth;
 
 class UploadController extends Controller
 {
+    /**
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     */
     public function index()
     {
         return view('upload.index');
     }
 
+    /**
+     * @param Request $request
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\Http\RedirectResponse|\Illuminate\View\View
+     * @throws \Exception
+     */
     public function validation(Request $request)
     {
+        OrderImport::clearDown();
+
         $request->validate([
-            'input_file' => 'required|mimes:xlsx,xls,csv,txt'
+            'input_file' => 'required|mimes:csv,txt'
         ]);
 
-        $order_lines = Excel::toArray(null, $request->file('input_file'));
+        $order_lines = array_map('str_getcsv', file($request->file('input_file')));
 
         $order = [];
+        $upload = [];
         $errors = 0;
         $warnings = 0;
 
-        foreach ($order_lines[0] as $key => $value) {
-            if ($value[0]) {
+        foreach ($order_lines as $key => $value) {
+            $product_code = $value[0];
+            $product_qty = (int)$value[1];
+            $error_message = null;
+            $warning_message = null;
+
+            if ($product_code && $product_qty > 0) {
                 $product = Products::show($value[0]);
 
-                if (isset($value[1])) {
-                    if (is_numeric($value[1])) {
-                        $multiple = (int)$value[1] % $product->order_multiples != 0 ? false : true;
-
-                        if ($multiple) {
-                            $quantity = (int)$value[1];
-                            $quantity_valid = true;
-                            $quantity_message = null;
-                        } else {
-                            $quantity = (int)ceil($value[1] / $product->order_multiples) * $product->order_multiples;
-                            $quantity_valid = true;
-                            $quantity_message = 'Quantity not in multiples of ' . $product->order_multiples . '. Increased to ' . $quantity . ' <i class="fas fa-exclamation-triangle"></i>';
-                        }
-                    } else {
-                        $quantity = $value[1];
-                        $quantity_valid = false;
-                        $quantity_message = 'Quantity is not valid <i class="fas fa-times-circle"></i>';
-                    }
-                } else {
-                    $quantity = 'blank';
-                    $quantity_valid = true;
-                    $quantity_message = 'Quantity has not been set <i class="fas fa-times-circle"></i>';
-                }
-
-                if (!$product || !$quantity_valid) {
-                    $validation = 'bg-danger';
+                if (!$product || $product->not_sold == 'Y') {
                     $errors++;
-                } else {
-                    if ($quantity_message) {
-                        $validation = 'bg-warning';
-                        $warnings++;
-                    } else {
-                        $validation = '';
-                    }
+                    $error_message = 'Product not found';
                 }
 
-                $order['products'][] = [
-                    'validation' => $validation,
-                    'product' => [
-                        'code' => $value[0],
-                        'valid' => $product ? true : false,
-                        'message' => $product ? null : 'Product Not Found <i class="fas fa-times-circle"></i>'
-                    ],
-                    'quantity' => [
-                        'amount' => $quantity,
-                        'valid' => $quantity_valid,
-                        'message' => $quantity_message
+                $order[] = [
+                    'product' => $product_code,
+                    'quantity' => $product_qty,
+                    'old_quantity' => $product_qty,
+                    'multiples' => isset($product->order_multiples) ? $product->order_multiples : 1,
+                    'validation' => [
+                        'error' => $error_message,
+                        'warning' => $warning_message
                     ]
                 ];
             }
@@ -85,9 +69,78 @@ class UploadController extends Controller
             return back()->with('error', 'No products found, please check your file is formatted correctly...');
         }
 
+        $merged = [];
+
+        foreach ($order as $product) {
+            $key = $product['product'];
+            if (!array_key_exists($key, $merged)) {
+                $merged[$key] = $product;
+            } else {
+                $merged[$key]['quantity'] += (int)$product['quantity'];
+                $merged[$key]['old_quantity'] += (int)$product['quantity'];
+            }
+        }
+
+        $product_lines = [];
+
+        foreach ($merged as $product) {
+            if ($product['quantity'] % $product['multiples'] !== 0) {
+                $quantity = (int)ceil((int)$product['quantity'] / $product['multiples']) * $product['multiples'];
+                $warning = 'Quantity not in multiples of ' . $product['multiples'] . '. Increased from ' . $product['quantity'] . ' to ' . $quantity;
+                $warnings++;
+            } else {
+                $quantity = $product['quantity'];
+                $warning = null;
+            }
+
+            $product_lines[] = [
+                'product' => $product['product'],
+                'quantity' => $quantity,
+                'old_quantity' => $product['old_quantity'],
+                'multiples' => $product['multiples'],
+                'validation' => [
+                    'error' => $product['validation']['error'],
+                    'warning' => $warning
+                ]
+            ];
+
+            if (!$product['validation']['error']) {
+                $upload[] = [
+                    'user_id' => Auth::user()->id,
+                    'customer_code' => Auth::user()->customer_code,
+                    'product' => $product['product'],
+                    'quantity' => $quantity,
+                ];
+            }
+        }
+
+        $order = $product_lines;
+
+        if (!OrderImport::store($upload)) {
+            return back()->with('error', 'An unknown error occurred, please try uploading again.');
+        }
+
         $order['errors'] = $errors;
         $order['warnings'] = $warnings;
 
         return view('upload.validated', compact('order'));
+    }
+
+    /**
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\Http\RedirectResponse|\Illuminate\View\View
+     * @throws \Exception
+     */
+    public function store()
+    {
+        $order_lines = OrderImport::show();
+        $added_to_basket = Basket::store($order_lines);
+
+        if ($added_to_basket) {
+            OrderImport::clearDown();
+
+            return view('upload.completed');
+        }
+
+        return back()->with('error', 'An error occurred when adding your order to the basket, please try again');
     }
 }
