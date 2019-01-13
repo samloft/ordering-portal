@@ -1,7 +1,7 @@
 <footer>
     <div class="container">
         <div class="row">
-            <div class="col-lg-8">
+            <div class="col-lg-7">
                 <div class="footer-links">
                     <a href="{{ route('support.contact') }}">{{ __('Contact Us') }}</a>
                     @if (Auth::user())
@@ -24,12 +24,18 @@
                         Social
                     </div>
                     <div class="col footer-links">
-                        App Stuff
+                        Download our app
+                        <div class="d-inline-block">
+                            <img src="{{ asset('images/appstore.png') }}">
+                            <img src="{{ asset('images/googleplay.png') }}">
+                        </div>
                     </div>
                 </div>
-                <div class="row">
+                <div class="row mt-1 mr-3">
                     <div class="col text-right footer-links">
-                        Developed By <a href="https://devloft.co.uk">{ devloft logo }</a>
+                        {{--Developed By --}}
+                        <a href="https://devloft.co.uk" target="_blank"><img style="height: 30px" src="{{ asset('images/devloft.png') }}"
+                                                                          alt="devloft"></a>
                     </div>
                 </div>
             </div>

@@ -276,6 +276,10 @@ img.basket-image {
   max-height: 40px;
 }
 
+a img:hover {
+  opacity: 0.8;
+}
+
 header {
   background-color: #313131;
   padding-top: 10px;

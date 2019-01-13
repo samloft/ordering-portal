@@ -284,6 +284,10 @@ img.basket-image {
   max-height: 40px;
 }
 
+a img:hover {
+  opacity: 0.8;
+}
+
 
 @import 'theme/header';
 @import 'theme/login';
