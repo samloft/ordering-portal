@@ -8,7 +8,7 @@ use Auth;
 class SiteAdmin
 {
     /**
-     * Checks if the user is a site admin.
+     * Checks if the user is a site admin. Meaning that can change customer on the fly.
      *
      * @param  \Illuminate\Http\Request  $request
      * @param  \Closure  $next

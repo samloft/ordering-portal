@@ -10,7 +10,7 @@ use App\Http\Controllers\Controller;
 class AddressController extends Controller
 {
     /**
-     * Display a listing of the resource.
+     * Display a listing of the addresses.
      *
      * @return \Illuminate\Http\Response
      */
@@ -22,7 +22,7 @@ class AddressController extends Controller
     }
 
     /**
-     * Show the form for creating a new resource.
+     * Show the form for creating a new addresses.
      *
      * @return \Illuminate\Http\Response
      */
@@ -34,7 +34,7 @@ class AddressController extends Controller
     }
 
     /**
-     * Store a newly created resource in storage.
+     * Store a newly created address in storage.
      *
      * @return \Illuminate\Http\Response
      */
@@ -51,7 +51,7 @@ class AddressController extends Controller
     }
 
     /**
-     * Show the form for editing the specified resource.
+     * Show the form for editing the specified address.
      *
      * @param  int $id
      * @return \Illuminate\Http\Response
@@ -65,7 +65,7 @@ class AddressController extends Controller
     }
 
     /**
-     * Update the specified resource in storage.
+     * Update the specified address in storage.
      *
      * @param $id
      * @return \Illuminate\Http\Response
@@ -82,7 +82,7 @@ class AddressController extends Controller
     }
 
     /**
-     * Remove the specified resource from storage.
+     * Remove the specified address from storage.
      *
      * @param  int $id
      * @return \Illuminate\Http\Response
@@ -102,6 +102,8 @@ class AddressController extends Controller
     }
 
     /**
+     * Set the address as the default for the customer
+     *
      * @return \Illuminate\Http\RedirectResponse
      */
     public function default()
@@ -116,7 +118,9 @@ class AddressController extends Controller
     }
 
     /**
-     * Perform validation on the resource
+     * Perform validation on the address
+     *
+     * @return mixed
      */
     public function validation()
     {

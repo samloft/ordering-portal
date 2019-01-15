@@ -11,6 +11,8 @@ use Illuminate\Support\Facades\Auth;
 class UploadController extends Controller
 {
     /**
+     * Display the CSV upload page.
+     *
      * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
      */
     public function index()
@@ -19,6 +21,9 @@ class UploadController extends Controller
     }
 
     /**
+     * Take a CSV file and validate each line, validating products and qty and merging duplicated products. Then looping over the new array
+     * and check the merged lines for order multiple quantity and increasing as needed.
+     *
      * @param Request $request
      * @return \Illuminate\Contracts\View\Factory|\Illuminate\Http\RedirectResponse|\Illuminate\View\View
      * @throws \Exception
@@ -127,6 +132,8 @@ class UploadController extends Controller
     }
 
     /**
+     * When the user clicks "Add to basket" after validation has finished, copy the temp lines in the upload table to the users basket.
+     *
      * @return \Illuminate\Contracts\View\Factory|\Illuminate\Http\RedirectResponse|\Illuminate\View\View
      * @throws \Exception
      */

@@ -31,6 +31,8 @@ class ProductController extends Controller
     }
 
     /**
+     * Product details page.
+     *
      * @param $product_code
      * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
      */
@@ -49,6 +51,8 @@ class ProductController extends Controller
     }
 
     /**
+     * Product search based on code, name, description.
+     *
      * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
      */
     public function search()

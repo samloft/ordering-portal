@@ -11,6 +11,8 @@ use App\Http\Controllers\Controller;
 class PasswordController extends Controller
 {
     /**
+     * Show the change password page.
+     *
      * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
      */
     public function index()
@@ -19,6 +21,8 @@ class PasswordController extends Controller
     }
 
     /**
+     * Update a users password.
+     *
      * @param Request $request
      * @return \Illuminate\Http\RedirectResponse
      */

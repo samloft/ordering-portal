@@ -12,6 +12,8 @@ use Hash;
 class AccountController extends Controller
 {
     /**
+     * Displays the account page.
+     *
      * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
      */
     public function index()
@@ -22,6 +24,8 @@ class AccountController extends Controller
     }
 
     /**
+     * Update user details from the contact page.
+     *
      * @return \Illuminate\Http\RedirectResponse
      */
     public function store()
@@ -33,6 +37,11 @@ class AccountController extends Controller
         return $store_account ? back()->with('success', 'User account has been updated') : back()->with('error', 'Unable to update account, please try again');
     }
 
+    /**
+     * Validation for the inputs before the user details are saved.
+     *
+     * @return mixed
+     */
     public function validation()
     {
         return request()->validate([
