@@ -315,6 +315,7 @@ header .header-basket .basket-dropdown::after {
 header .header-basket .basket-dropdown .basket-dropdown-content {
   max-height: 500px;
   overflow-y: scroll;
+  overflow-x: hidden;
 }
 
 header .header-basket .basket-dropdown .col-auto {
