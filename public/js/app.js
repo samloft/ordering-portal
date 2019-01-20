@@ -36540,7 +36540,8 @@ function basketAddedDropdown(productDetails) {
     basketDropdown.hide();
   }
 
-  basketDropdownContent.html("<div class=\"row\"><div class=\"col-auto\"><img src=\"".concat(productDetails.image, "\"></div><div class=\"col details\"><h3>").concat(productDetails.product, "</h3><span>").concat(productDetails.name, "</span><span>Qty: ").concat(productDetails.quantity, "</span><span>Price: ").concat(productDetails.price, "</span></div></div><div class=\"basket-dropdown-message\">Has been added to your basket.</div>")).fadeIn(100);
+  basketDropdownContent.html("<div class=\"row\"><div class=\"col-auto\"><img src=\"".concat(productDetails.image, "\"></div><div class=\"col details\"><h3>").concat(productDetails.product, "</h3><span>").concat(productDetails.name, "</span><span>Qty: ").concat(productDetails.quantity, "</span><span>Price: ").concat(productDetails.price, "</span></div></div><div class=\"basket-dropdown-message\">Has been added to your basket.</div>"));
+  basketDropdown.fadeIn(100);
 }
 
 function basketSummary() {
