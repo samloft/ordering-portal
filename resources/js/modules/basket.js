@@ -10,7 +10,7 @@ basketDropdown.mouseleave(function () {
     $(".basket-dropdown").fadeToggle('fast');
 });
 
-$('form[id="product-add-basket"]').on('submit', function (e) {
+$('form[id="product-add-basket-quickbuy"]').on('submit', function (e) {
     e.preventDefault();
 
     let product = $(this).find('input[name="product"]'),
@@ -32,6 +32,15 @@ $('form[id="product-add-basket-checkout"]').on('submit', function (e) {
 
     product.val('');
     quantity.val(1);
+});
+
+$('form[id="product-add-basket-products"]').on('submit', function (e) {
+    e.preventDefault();
+
+    let product = $(this).find('input[name="product"]'),
+        quantity = $(this).find('input[name="quantity"]');
+
+    addProductToBasket(product.val(), quantity.val(), true);
 });
 
 function addProductToBasket(product, quantity, displayDropdown = false) {

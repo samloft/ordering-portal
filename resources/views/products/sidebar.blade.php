@@ -35,7 +35,7 @@
 
     <div class="row">
         <div class="col">
-            <form method="post" id="product-add-basket">
+            <form method="post" id="product-add-basket-quickbuy">
                 <div class="form-group mb-1">
                     <label>{{ __('Quick Buy') }}</label>
                     <input class="form-control" name="product" placeholder="{{ __('Enter Product Code') }}">

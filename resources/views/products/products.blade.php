@@ -66,15 +66,15 @@
                                     </div>
                                 </div>
                                 <hr>
-                                <form id="product-add-basket" class="m-0" method="post">
+                                <form id="product-add-basket-products" class="m-0" method="post">
                                     <div class="input-group input-group-sm product-basket">
                                         <div class="input-group-prepend">
                                             <span class="input-group-text">Qty:</span>
                                         </div>
                                         <input class="form-control form-control-sm mr-1" name="quantity"
-                                               value="{{ $product->order_multiples }}">
+                                               value="{{ $product->order_multiples }}" autocomplete="off">
                                         <span class="input-group-btn">
-                                            <input name="product" value="{{ $product->product }}" hidden>
+                                            <input name="product" value="{{ $product->product }}" autocomplete="off" hidden>
                                 <button class="btn btn-sm btn-primary" type="submit">Add To Basket</button>
                             </span>
                                     </div>
