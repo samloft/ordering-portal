@@ -109,12 +109,12 @@
                     {{ $products->appends($_GET)->links('layout.pagination') }}
                 </div>
             @else
-                <div class="d-flex flex-wrap">
+                <div class="d-flex flex-wrap product-category-images">
                     @foreach($category_list as $category)
-                        <div class="w-20 text-center">
+                        <div class="category w-20">
                             <a href="/products/{{ ($categories['level_1'] <> '' ? $categories['level_1'] . '/' : '') . ($categories['level_2'] <> '' ? $categories['level_2'] . '/' : '') . $category->name }}">
                                 <img src="https://via.placeholder.com/145">
-                                {{ $category->name }}
+                                <span class="text-center">{{ $category->name }}</span>
                             </a>
                         </div>
                     @endforeach

@@ -262,6 +262,18 @@ a img:hover {
   opacity: 0.8;
 }
 
+.product-category-images a {
+  font-size: 12px;
+  color: rgb(0, 0, 0);
+}
+
+.product-category-images span {
+  display: block;
+  padding-left: auto;
+  padding-right: auto;
+  max-width: 145px;
+}
+
 
 @import 'theme/header';
 @import 'theme/login';
