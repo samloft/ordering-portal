@@ -23,6 +23,8 @@ class Categories extends Model
     }
 
     /**
+     * Create an array of all possible categories from the customers price list.
+     *
      * @return array
      */
     public static function list()
@@ -73,5 +75,21 @@ class Categories extends Model
         }
 
         return $categories;
+    }
+
+    public static function showLevel1($level1)
+    {
+        return (new Categories)->selectRaw('cat1_level2 as name')->where('cat1_level1', $level1)
+            ->whereHas('prices', function ($query) {
+                $query->where('customer_code', Auth::user()->customer_code);
+            })->groupBy('cat1_level2')->get();
+    }
+
+    public static function showLevel2($level2)
+    {
+        return (new Categories)->selectRaw('cat1_level3 as name')->where('cat1_level2', $level2)
+            ->whereHas('prices', function ($query) {
+                $query->where('customer_code', Auth::user()->customer_code);
+            })->groupBy('cat1_level3')->get();
     }
 }

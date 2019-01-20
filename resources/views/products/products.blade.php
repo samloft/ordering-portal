@@ -74,7 +74,8 @@
                                         <input class="form-control form-control-sm mr-1" name="quantity"
                                                value="{{ $product->order_multiples }}" autocomplete="off">
                                         <span class="input-group-btn">
-                                            <input name="product" value="{{ $product->product }}" autocomplete="off" hidden>
+                                            <input name="product" value="{{ $product->product }}" autocomplete="off"
+                                                   hidden>
                                 <button class="btn btn-sm btn-primary" type="submit">Add To Basket</button>
                             </span>
                                     </div>
@@ -108,7 +109,16 @@
                     {{ $products->appends($_GET)->links('layout.pagination') }}
                 </div>
             @else
-                Categories
+                <div class="d-flex flex-wrap">
+                    @foreach($category_list as $category)
+                        <div class="w-20 text-center">
+                            <a href="/products/{{ ($categories['level_1'] <> '' ? $categories['level_1'] . '/' : '') . ($categories['level_2'] <> '' ? $categories['level_2'] . '/' : '') . $category->name }}">
+                                <img src="https://via.placeholder.com/145">
+                                {{ $category->name }}
+                            </a>
+                        </div>
+                    @endforeach
+                </div>
             @endif
         </div>
 

@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Categories;
 use App\Models\Products;
 use Illuminate\Support\Facades\Input;
 
@@ -13,7 +14,7 @@ class ProductController extends Controller
      * @param string $category_three
      * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
      */
-    public function index($category_one = '', $category_two = '', $category_three = '')
+    public function index($category_one = null, $category_two = null, $category_three = null)
     {
         $categories = [
             'level_1' => urldecode($category_one),
@@ -22,9 +23,18 @@ class ProductController extends Controller
         ];
 
         if ($category_one) {
+            $category_list = [];
             $products = Products::list($categories);
 
-            return view('products.products', compact('categories', 'products'));
+            if (count($products) == 0) {
+                if ($categories['level_1'] <> '' && $categories['level_2'] == '') {
+                    $category_list = Categories::showLevel1($categories['level_1']);
+                } elseif ($categories['level_1'] <> '' && $categories['level_2'] <> '' && $categories['level_3'] == '') {
+                    $category_list = Categories::showLevel2($categories['level_2']);
+                }
+            }
+
+            return view('products.products', compact('categories', 'products', 'category_list'));
         }
 
         return view('products.index', compact('categories'));
