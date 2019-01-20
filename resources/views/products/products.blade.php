@@ -66,16 +66,19 @@
                                     </div>
                                 </div>
                                 <hr>
-                                <div class="input-group input-group-sm product-basket">
-                                    <div class="input-group-prepend">
-                                        <span class="input-group-text">Qty:</span>
-                                    </div>
-                                    <input class="form-control form-control-sm mr-1"
-                                           value="{{ $product->order_multiples }}">
-                                    <span class="input-group-btn">
-                                <button class="btn btn-sm btn-primary" type="button">Add To Basket</button>
+                                <form id="product-add-basket" class="m-0" method="post">
+                                    <div class="input-group input-group-sm product-basket">
+                                        <div class="input-group-prepend">
+                                            <span class="input-group-text">Qty:</span>
+                                        </div>
+                                        <input class="form-control form-control-sm mr-1" name="quantity"
+                                               value="{{ $product->order_multiples }}">
+                                        <span class="input-group-btn">
+                                            <input name="product" value="{{ $product->product }}" hidden>
+                                <button class="btn btn-sm btn-primary" type="submit">Add To Basket</button>
                             </span>
-                                </div>
+                                    </div>
+                                </form>
                             </div>
                         </div>
                         <div class="row mt-2">

@@ -1,11 +1,3 @@
-$("#header-basket").mouseenter(function () {
-    $(".basket-dropdown").fadeToggle('fast');
-});
-
-$(".basket-dropdown").mouseleave(function () {
-    $(".basket-dropdown").fadeToggle('fast');
-});
-
 $('input[type="file"]').change(function (file) {
     $('.custom-file-label').html(file.target.files[0].name);
 });

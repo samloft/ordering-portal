@@ -35,19 +35,19 @@
 
     <div class="row">
         <div class="col">
-            <form action="">
+            <form method="post" id="product-add-basket">
                 <div class="form-group mb-1">
                     <label>{{ __('Quick Buy') }}</label>
-                    <input class="form-control" placeholder="{{ __('Enter Product Code') }}">
+                    <input class="form-control" name="product" placeholder="{{ __('Enter Product Code') }}">
                 </div>
 
                 <div class="input-group">
                     <div class="input-group-prepend">
                         <span class="input-group-text">{{ __('Qty:') }}</span>
                     </div>
-                    <input class="form-control mr-2" value="{{ __('1') }}">
+                    <input class="form-control mr-2" name="quantity" value="{{ __('1') }}">
                     <span class="input-group-btn">
-                                <button class="btn btn-primary" type="button">{{ __('Add To Basket') }}</button>
+                                <button class="btn btn-primary" name="quick_buy_submit" type="submit">{{ __('Add To Basket') }}</button>
                             </span>
                 </div>
             </form>

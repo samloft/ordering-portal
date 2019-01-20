@@ -47,7 +47,8 @@
             "database/factories"
         ],
         "files": [
-            "app/Helpers/ActiveMenu.php"
+            "app/Helpers/ActiveMenu.php",
+            "app/Helpers/Currency.php"
         ]
     },
     "autoload-dev": {

@@ -186,31 +186,6 @@ hr {
   }
 }
 
-.basket-dropdown {
-  margin-top: 20px;
-  position: absolute;
-  height: 200px;
-  width: 360px;
-  z-index: 20;
-  border-radius: 0.25rem;
-  box-shadow: 4px 4px 5px 0 rgba(50, 50, 50, 0.75);
-  background-color: white;
-  color: black;
-}
-
-.basket-dropdown::after {
-  bottom: 100%;
-  left: 89%;
-  content: " ";
-  height: 0;
-  width: 0;
-  position: absolute;
-  pointer-events: none;
-  border: 8px solid transparent;
-  border-bottom-color: white;
-  margin-left: -100px;
-}
-
 .product-list hr {
   margin-top: 0.1rem;
   margin-bottom: 0.1rem;
@@ -299,6 +274,61 @@ header .header-basket {
   padding-right: 5px;
   box-shadow: 4px 4px 5px 0 rgba(50, 50, 50, 0.75);
   border-radius: 0.25rem;
+}
+
+header .header-basket .basket-dropdown {
+  margin-top: 20px;
+  position: absolute;
+  max-height: 200px;
+  width: 360px;
+  z-index: 20;
+  border-radius: 0.25rem;
+  box-shadow: 4px 4px 5px 0 rgba(50, 50, 50, 0.75);
+  background-color: white;
+  color: black;
+}
+
+header .header-basket .basket-dropdown::after {
+  bottom: 100%;
+  left: 89%;
+  content: " ";
+  height: 0;
+  width: 0;
+  position: absolute;
+  pointer-events: none;
+  border: 8px solid transparent;
+  border-bottom-color: white;
+  margin-left: -100px;
+}
+
+header .header-basket .basket-dropdown .col-auto {
+  padding-right: 0;
+}
+
+header .header-basket .basket-dropdown img {
+  width: 80px;
+  margin: 10px 0 10px 10px;
+}
+
+header .header-basket .basket-dropdown .details {
+  margin-top: 10px;
+}
+
+header .header-basket .basket-dropdown .details h3 {
+  font-weight: 900;
+  font-size: 1rem;
+  color: #80d0d8;
+  margin-bottom: 0.2rem;
+}
+
+header .header-basket .basket-dropdown .details span {
+  display: block;
+  font-size: 0.75rem;
+}
+
+header .header-basket .basket-dropdown .basket-dropdown-message {
+  background-color: #7DA0B1;
+  text-align: center;
 }
 
 .nav-header {

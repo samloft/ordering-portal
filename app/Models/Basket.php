@@ -13,6 +13,7 @@ use Illuminate\Support\Facades\Auth;
 class Basket extends Model
 {
     protected $table = 'basket';
+    public $timestamps = false;
 
     /**
      * Return product relationship on product code from basket.
@@ -31,7 +32,7 @@ class Basket extends Model
      */
     public static function show()
     {
-        $lines = (new Basket)->where('customer_code', Auth::user()->customer_code)->get();
+        $lines = (new Basket)->where('customer_code', Auth::user()->customer_code)->with('productDetails')->get();
 
         $line_count = 0;
         $goods_total = 0;
@@ -59,17 +60,9 @@ class Basket extends Model
     {
         $lines = static::show();
 
-        $line_count = 0;
-        $goods_total = 0;
-
-        foreach ($lines as $line) {
-            $line_count++;
-            $goods_total = $goods_total + ($line->productDetails->prices->price * $line->quantity);
-        }
-
         return [
-            'lines' => $line_count,
-            'goods_total' => number_format($goods_total, 2, '.', ',')
+            'lines' => $lines['summary']['line_count'],
+            'goods_total' => currency() . $lines['summary']['goods_total']
         ];
     }
 
@@ -81,7 +74,30 @@ class Basket extends Model
      */
     public static function store($order_lines)
     {
-        return (new Basket)->insert($order_lines);
+        foreach ($order_lines as $line) {
+            $product = static::exists($line['product']);
+
+            if ($product) {
+                $basket_quantity = $product->quantity;
+
+                (new basket)->where('product', $line['product'])->update(['quantity' => $basket_quantity + $line['quantity']]);
+            } else {
+                (new Basket)->insert($line);
+            }
+        }
+
+        return true;
+    }
+
+    /**
+     * Checks if a product already exists in the customers basket.
+     *
+     * @param $product_code
+     * @return Basket|Model|object|null
+     */
+    public static function exists($product_code)
+    {
+        return (new Basket)->where('customer_code', Auth::user()->customer_code)->where('product', $product_code)->first();
     }
 
     /**

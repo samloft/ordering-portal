@@ -90,6 +90,11 @@ Route::group(['middleware' => ['auth', 'has.customer']], function () {
     Route::group(['prefix' => 'basket'], function () {
         Route::get('/', 'BasketController@index')->name('basket');
         Route::get('empty', 'BasketController@clear')->name('basket.empty');
+
+        Route::post('add-product', 'BasketController@addProduct')->name('basket.add-product');
+        Route::get('summary', function() {
+            return \App\Models\Basket::summary();
+        })->name('basket.summary');
     });
 
     /*

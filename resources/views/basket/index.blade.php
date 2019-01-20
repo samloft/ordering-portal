@@ -16,20 +16,22 @@
         <div class="col-lg-7"></div>
         <div class="col-lg-5 justify-content-end">
             <div class="card card-body quick-buy-basket">
-                <div class="form-group">
-                    <label><strong>{{ __('Quick Buy') }}</strong></label>
-                    <div class="row">
-                        <div class="col">
-                            <input type="text" class="form-control" placeholder="Enter Product Code">
-                        </div>
-                        <div class="col-2">
-                            <input type="text" class="form-control text-center" value="1">
-                        </div>
-                        <div class="col-4">
-                            <button class="btn btn-block btn-primary">Add To Basket</button>
+                <form id="product-add-basket-checkout" method="post">
+                    <div class="form-group">
+                        <label><strong>{{ __('Quick Buy') }}</strong></label>
+                        <div class="row">
+                            <div class="col">
+                                <input type="text" class="form-control" name="product" placeholder="Enter Product Code">
+                            </div>
+                            <div class="col-2">
+                                <input type="text" class="form-control text-center" name="quantity" value="1">
+                            </div>
+                            <div class="col-4">
+                                <button class="btn btn-block btn-primary" type="submit">Add To Basket</button>
+                            </div>
                         </div>
                     </div>
-                </div>
+                </form>
             </div>
         </div>
     </div>

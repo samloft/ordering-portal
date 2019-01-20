@@ -194,31 +194,6 @@ hr {
   }
 }
 
-.basket-dropdown {
-  margin-top: 20px;
-  position: absolute;
-  height: 200px;
-  width: 360px;
-  z-index: 20;
-  border-radius: 0.25rem;
-  box-shadow: $default-shadow;
-  background-color: rgb(255, 255, 255);
-  color: rgb(0, 0, 0);
-}
-
-.basket-dropdown::after {
-  bottom: 100%;
-  left: 89%;
-  content: " ";
-  height: 0;
-  width: 0;
-  position: absolute;
-  pointer-events: none;
-  border: 8px solid transparent;
-  border-bottom-color: white;
-  margin-left: -100px;
-}
-
 .product-list hr {
   margin-top: 0.1rem;
   margin-bottom: 0.1rem;
