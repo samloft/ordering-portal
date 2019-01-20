@@ -36460,10 +36460,23 @@ window.axios.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest';
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-var basketDropdown = $('.basket-dropdown');
+var basketDropdown = $('.basket-dropdown'),
+    basketDropdownContent = $('.basket-dropdown-content');
 $("#header-basket").mouseenter(function () {
-  basketDropdown.html('Hi');
-  basketDropdown.fadeToggle('fast');
+  basketDropdownContent.html('');
+  $.get('/basket/dropdown').done(function (response) {
+    if (response.lines.length > 0) {
+      $.each(response.lines, function (key, item) {
+        basketDropdownContent.append("<div class=\"row\"><div class=\"col-auto\"><img src=\"".concat(item.image, "\"></div><div class=\"col details\"><h3>").concat(item.product, "</h3><span>").concat(item.product_details.name, "</span><span>Qty: ").concat(item.quantity, "</span><span>Price: ").concat(item.price, "</span></div></div>"));
+      });
+    } else {
+      basketDropdownContent.html('<h4 class="text-center mt-2">You have no items in your basket.</h4>');
+    }
+
+    basketDropdown.fadeToggle('fast');
+  }).fail(function () {
+    basketDropdownContent.html('<h4 class="text-center mt-2">Unable to get basket details.</h4>');
+  });
 });
 basketDropdown.mouseleave(function () {
   $(".basket-dropdown").fadeToggle('fast');
@@ -36527,7 +36540,7 @@ function basketAddedDropdown(productDetails) {
     basketDropdown.hide();
   }
 
-  basketDropdown.html("<div class=\"row\"><div class=\"col-auto\"><img src=\"".concat(productDetails.image, "\"></div><div class=\"col details\"><h3>").concat(productDetails.product, "</h3><span>").concat(productDetails.name, "</span><span>Qty: ").concat(productDetails.quantity, "</span><span>Price: ").concat(productDetails.price, "</span></div></div><div class=\"basket-dropdown-message\">Has been added to your basket.</div>")).fadeIn(100);
+  basketDropdownContent.html("<div class=\"row\"><div class=\"col-auto\"><img src=\"".concat(productDetails.image, "\"></div><div class=\"col details\"><h3>").concat(productDetails.product, "</h3><span>").concat(productDetails.name, "</span><span>Qty: ").concat(productDetails.quantity, "</span><span>Price: ").concat(productDetails.price, "</span></div></div><div class=\"basket-dropdown-message\">Has been added to your basket.</div>")).fadeIn(100);
 }
 
 function basketSummary() {

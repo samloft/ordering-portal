@@ -95,6 +95,9 @@ Route::group(['middleware' => ['auth', 'has.customer']], function () {
         Route::get('summary', function() {
             return \App\Models\Basket::summary();
         })->name('basket.summary');
+        Route::get('dropdown', function() {
+            return \App\Models\Basket::show();
+        })->name('basket.dropdown');
     });
 
     /*

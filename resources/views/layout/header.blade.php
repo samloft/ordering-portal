@@ -41,7 +41,7 @@
                             </div>
                         </div>
                         <div class="basket-dropdown" style="display: none;">
-                            <div class="text-left">Here would be some basket stuffs.</div>
+                            <div class="basket-dropdown-content"></div>
                         </div>
                     </div>
                 </div>
