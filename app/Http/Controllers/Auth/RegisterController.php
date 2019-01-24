@@ -41,32 +41,20 @@ class RegisterController extends Controller
     }
 
     /**
-     * Get a validator for an incoming registration request.
+     * Redirect users to the login page if they attempt to access a registration page.
      *
-     * @param  array  $data
-     * @return \Illuminate\Contracts\Validation\Validator
+     * @return \Illuminate\Http\RedirectResponse|\Illuminate\Routing\Redirector
      */
-    protected function validator(array $data)
+    public function showRegistrationForm()
     {
-        return Validator::make($data, [
-            'name' => ['required', 'string', 'max:255'],
-            'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
-            'password' => ['required', 'string', 'min:6', 'confirmed'],
-        ]);
+        return redirect('/login');
     }
 
     /**
-     * Create a new user instance after a valid registration.
-     *
-     * @param  array $data
-     * @return User|\Illuminate\Database\Eloquent\Model
+     * Stop any type of registration happening.
      */
-    protected function create(array $data)
+    public function register()
     {
-        return User::create([
-            'name' => $data['name'],
-            'email' => $data['email'],
-            'password' => Hash::make($data['password']),
-        ]);
+        abort(404);
     }
 }
