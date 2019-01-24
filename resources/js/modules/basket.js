@@ -7,15 +7,15 @@ $("#header-basket").mouseenter(function () {
     $.get('/basket/dropdown').done(function (response) {
         if (response.lines.length > 0) {
             $.each(response.lines, function (key, item) {
-                basketDropdownContent.append(`<div class="row"><div class="col-auto"><img src="${item.image}"></div><div class="col details"><h3>${item.product}</h3><span>${item.product_details.name}</span><span>Qty: ${item.quantity}</span><span>Price: ${item.price}</span></div></div>`)
+                basketDropdownContent.append(`<div class="row"><div class="col-auto"><img src="${item.image}"></div><div class="col details"><h3>${item.product}</h3><span>${item.product_details.name}</span><span>Qty: ${item.quantity}</span><span>Price: ${item.price}</span></div></div>`);
             });
         } else {
-            basketDropdownContent.html('<h4 class="text-center mt-2">You have no items in your basket.</h4>')
+            basketDropdownContent.html('<h4 class="text-center mt-2">You have no items in your basket.</h4>');
         }
 
         basketDropdown.fadeToggle('fast');
     }).fail(function () {
-        basketDropdownContent.html('<h4 class="text-center mt-2">Unable to get basket details.</h4>')
+        basketDropdownContent.html('<h4 class="text-center mt-2">Unable to get basket details.</h4>');
     });
 });
 
