@@ -10,6 +10,7 @@
 |
 */
 
-Route::get('/', function() {
-    return 'Just a route test';
-});
+Route::get('/', 'Cms\HomeController@index')->name('cms.index');
+Route::get('login', 'Auth\AdminController@showLoginForm')->name('cms.login');
+Route::post('login', 'Auth\AdminController@login')->name('cms.login.submit');
+Route::post('logout', 'Auth\AdminController@logout')->name('cms.logout');
