@@ -84,7 +84,7 @@ class BasketController extends Controller
                     'image' => 'https://scolmoreonline.com/product_images/' . $product_details->product . '.png',
                     'product' => $product_details->product,
                     'quantity' => $quantity,
-                    'price' => currency() . number_format($product_details->prices->price * $quantity, 4),
+                    'price' => currency($product_details->prices->price * $quantity, 4),
                     'name' => $product_details->name
                 ]
             ]);
