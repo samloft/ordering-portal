@@ -110,7 +110,7 @@ class Categories extends Model
         foreach ($subs as $sub) {
             $cat_level = 'cat1_level' . ($level + 1);
 
-            if (isset($sub->$cat_level) && $sub->$cat_level <> '') {
+            if (isset($sub->$cat_level) && trim($sub->$cat_level) <> '') {
                 $products[] = [
                     'category' => trim($sub->$cat_level),
                     'product' => trim(str_replace('/', '^', $sub->product))
