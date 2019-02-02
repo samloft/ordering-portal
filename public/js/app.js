@@ -36467,7 +36467,7 @@ $("#header-basket").mouseenter(function () {
   $.get('/basket/dropdown').done(function (response) {
     if (response.lines.length > 0) {
       $.each(response.lines, function (key, item) {
-        basketDropdownContent.append("<div class=\"row\"><div class=\"col-auto\"><img src=\"".concat(item.image, "\"></div><div class=\"col details\"><h3>").concat(item.product, "</h3><span>").concat(item.product_details.name, "</span><span>Qty: ").concat(item.quantity, "</span><span>Price: ").concat(item.price, "</span></div></div>"));
+        basketDropdownContent.append("<div class=\"row\"><div class=\"col-auto\"><img src=\"".concat(item.image, "\"></div><div class=\"col details\"><h3>").concat(item.product, "</h3><span>").concat(item.name, "</span><span>Qty: ").concat(item.quantity, "</span><span>Price: ").concat(item.price, "</span></div></div>"));
       });
     } else {
       basketDropdownContent.html('<h4 class="text-center mt-2">You have no items in your basket.</h4>');

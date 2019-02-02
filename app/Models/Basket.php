@@ -37,9 +37,19 @@ class Basket extends Model
         $line_count = 0;
         $goods_total = 0;
 
+        $product_lines = [];
+
         foreach ($lines as $line) {
             $line_count++;
             $goods_total = $goods_total + ($line->productDetails->prices->price * $line->quantity);
+
+            $product_lines[] = [
+                'product' => $line->productDetails->product,
+                'name' => $line->productDetails->name,
+                'image' => 'https://scolmoreonline.com/product_images/' . $line->productDetails->product . '.png',
+                'quantity' => $line->quantity,
+                'price' => currency($line->productDetails->prices->price * $line->quantity)
+            ];
         }
 
         return [
@@ -47,7 +57,7 @@ class Basket extends Model
                 'line_count' => $line_count,
                 'goods_total' => number_format($goods_total, 2, '.', ',')
             ],
-            'lines' => $lines
+            'lines' => $product_lines
         ];
     }
 
