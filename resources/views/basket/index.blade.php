@@ -53,16 +53,16 @@
             @foreach($basket['lines'] as $line)
                 <tr>
                     <td>
-                        <img class="basket-image" src="https://scolmoreonline.com/product_images/DPBN024BK.png">
-                        <h2 class="section-title d-inline-block">{{ $line->productDetails->name }}</h2>
+                        <img class="basket-image" src="{{ $line['image'] }}">
+                        <h2 class="section-title d-inline-block">{{ $line['name'] }}</h2>
                     </td>
-                    <td>{{ $line->product }}</td>
-                    <td>{{ $line->productDetails->uom }}</td>
-                    <td class="text-right">{{ $line->productDetails->stock->quantity }}</td>
-                    <td class="text-right">£{{ number_format($line->productDetails->prices->price, 4) }}</td>
-                    <td class="text-right">{{ $line->quantity }}</td>
+                    <td>{{ $line['product'] }}</td>
+                    <td>{{ $line['product_details']->uom }}</td>
+                    <td class="text-right">{{ $line['quantity'] }}</td>
+                    <td class="text-right">{{ $line['unit_price'] }}</td>
+                    <td class="text-right">{{ $line['quantity'] }}</td>
                     <td class="text-right">
-                        £{{ number_format(number_format($line->productDetails->prices->price, 4) * $line->quantity, 2, '.', ',') }}</td>
+                        {{ $line['price'] }}</td>
                 </tr>
             @endforeach
             </tbody>

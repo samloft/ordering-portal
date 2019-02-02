@@ -48,7 +48,9 @@ class Basket extends Model
                 'name' => $line->productDetails->name,
                 'image' => 'https://scolmoreonline.com/product_images/' . $line->productDetails->product . '.png',
                 'quantity' => $line->quantity,
-                'price' => currency($line->productDetails->prices->price * $line->quantity)
+                'price' => currency($line->productDetails->prices->price * $line->quantity, 2),
+                'unit_price' => currency($line->productDetails->prices->price, 4),
+                'product_details' => $line->productDetails
             ];
         }
 

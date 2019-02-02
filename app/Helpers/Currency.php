@@ -28,7 +28,7 @@ function currency($value = null, $decimals = 4)
             $currency_code = '£';
     }
 
-    $value_output = $value ? number_format($value, $decimals) : '';
+    $value_output = $value ? number_format($value, $decimals, '.', ',') : '';
 
     return $currency_code . $value_output;
 }
