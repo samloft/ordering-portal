@@ -81,7 +81,7 @@ class BasketController extends Controller
                 'error' => false,
                 'message' => isset($warning) ? $warning : null,
                 'product' => [
-                    'image' => 'https://scolmoreonline.com/product_images/DPBN024BK.png',
+                    'image' => 'https://scolmoreonline.com/product_images/' . $product_details->product . '.png',
                     'product' => $product_details->product,
                     'quantity' => $quantity,
                     'price' => currency() . number_format($product_details->prices->price * $quantity, 4),
