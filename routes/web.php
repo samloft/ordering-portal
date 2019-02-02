@@ -29,7 +29,10 @@ Route::group(['middleware' => ['auth', 'has.customer']], function () {
     /*
      * Order Tracking
      */
-    Route::get('order-tracking', 'OrderTrackingController@index')->name('order-tracking');
+    Route::group(['prefix' => 'order-tracking'], function () {
+        Route::get('/', 'OrderTrackingController@index')->name('order-tracking');
+        Route::get('order/{order}', 'OrderTrackingController@show')->name('order-tracking.show');
+    });
 
     /*
      * Order Upload
@@ -92,10 +95,10 @@ Route::group(['middleware' => ['auth', 'has.customer']], function () {
         Route::get('empty', 'BasketController@clear')->name('basket.empty');
 
         Route::post('add-product', 'BasketController@addProduct')->name('basket.add-product');
-        Route::get('summary', function() {
+        Route::get('summary', function () {
             return \App\Models\Basket::summary();
         })->name('basket.summary');
-        Route::get('dropdown', function() {
+        Route::get('dropdown', function () {
             return \App\Models\Basket::show();
         })->name('basket.dropdown');
     });

@@ -39,37 +39,26 @@
                 <table class="table table-striped table-hover">
                     <thead class="thead-dark">
                     <tr>
-                        <th scope="col">Order Number</th>
-                        <th scope="col">Order Reference</th>
-                        <th scope="col">Order Status</th>
-                        <th scope="col">Order Date</th>
-                        <th scope="col" class="text-right">Order Total</th>
+                        <th scope="col">{{ __('Order Number') }}</th>
+                        <th scope="col">{{ __('Order Reference') }}</th>
+                        <th scope="col">{{ __('Order Status') }}</th>
+                        <th scope="col">{{ __('Order Date') }}</th>
+                        <th scope="col" class="text-right">{{ __('Order Total') }}</th>
                     </tr>
                     </thead>
                     <tbody>
-                    <tr>
-                        <td>B091679</td>
-                        <td>TEST DO NOT PROCESS</td>
-                        <td>Cancelled</td>
-                        <td>20/12/2018</td>
-                        <td class="text-right">£0.00</td>
-                    </tr>
-                    <tr>
-                        <td>B091679</td>
-                        <td>TEST DO NOT PROCESS</td>
-                        <td>Cancelled</td>
-                        <td>20/12/2018</td>
-                        <td class="text-right">£0.00</td>
-                    </tr>
-                    <tr>
-                        <td>B091679</td>
-                        <td>TEST DO NOT PROCESS</td>
-                        <td>Cancelled</td>
-                        <td>20/12/2018</td>
-                        <td class="text-right">£0.00</td>
-                    </tr>
+                    @foreach($orders as $order)
+                        <tr class="clickable" onclick="window.location = '{{ route('order-tracking.show', [trim($order->order_no)]) }}';">
+                            <td>{{ $order->order_no }}</td>
+                            <td>{{ $order->customer_order_no }}</td>
+                            <td>{{ $order->status }}</td>
+                            <td>{{ \Carbon\Carbon::parse($order->date_received)->format('d/m/Y') }}</td>
+                            <td class="text-right">{{ currency($order->value, 2) }}</td>
+                        </tr>
+                    @endforeach
                     </tbody>
                 </table>
+                {{ $orders->appends($_GET)->links('layout.pagination') }}
             </div>
         </div>
     </div>
