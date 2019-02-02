@@ -5,39 +5,53 @@ namespace App\Http\Controllers;
 use App\Models\Categories;
 use App\Models\Products;
 use Illuminate\Support\Facades\Input;
+use PhpParser\Node\Expr\Cast\Object_;
 
 class ProductController extends Controller
 {
     /**
+     * Products index, if categories are given, gets the sub categories.
+     * If no sub categories for that level, display the products.
+     *
      * @param string $category_one
      * @param string $category_two
      * @param string $category_three
+     * @param string $category_four
+     * @param string $category_five
      * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
      */
-    public function index($category_one = null, $category_two = null, $category_three = null)
+    public function index($category_one = null, $category_two = null, $category_three = null, $category_four = null, $category_five = null)
     {
+        $category_list = Categories::list();
+        $sub_category_list = [];
+
         $categories = [
             'level_1' => urldecode($category_one),
             'level_2' => urldecode($category_two),
-            'level_3' => urldecode($category_three)
+            'level_3' => urldecode($category_three),
+            'level_4' => urldecode($category_four),
+            'level_5' => urldecode($category_five),
         ];
 
-        if ($category_one) {
-            $category_list = [];
-            $products = Products::list($categories);
+        $current_level = 0;
 
-            if (count($products) == 0) {
-                if ($categories['level_1'] <> '' && $categories['level_2'] == '') {
-                    $category_list = Categories::showLevel1($categories['level_1']);
-                } elseif ($categories['level_1'] <> '' && $categories['level_2'] <> '' && $categories['level_3'] == '') {
-                    $category_list = Categories::showLevel2($categories['level_2']);
-                }
+        foreach ($categories as $level) {
+            if ($level != null) {
+                $current_level++;
             }
-
-            return view('products.products', compact('categories', 'products', 'category_list'));
         }
 
-        return view('products.index', compact('categories'));
+        if ($categories['level_1'] <> null) {
+            $sub_category_list = Categories::subCategories($current_level, $categories['level_' . $current_level]);
+
+            if (count($sub_category_list) == 0) {
+                $products = Products::list($categories);
+
+                return view('products.products', compact('categories', 'category_list', 'products'));
+            }
+        }
+
+        return view('products.index', compact('categories', 'category_list', 'sub_category_list'));
     }
 
     /**

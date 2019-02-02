@@ -59,7 +59,7 @@
             <label>{{ __('Categories') }}</label>
 
             <ul class="categories list-group w-100">
-                @foreach(\App\Models\Categories::list() as $key => $category)
+                @foreach($category_list as $key => $category)
                     <li class="list-group-item cat-{{ $key }}">
                         <a href="{{ route('products', $category['url']) }}">
                             {{ $category['name'] }}
