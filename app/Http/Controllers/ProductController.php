@@ -62,16 +62,29 @@ class ProductController extends Controller
      */
     public function show($product_code)
     {
+        $previous_categories = str_replace(url('/'), '', url()->previous());
+        $category_array = array_values(array_filter(explode('/', $previous_categories)));
+
+        $category_list = Categories::list();
         $product_code = urldecode($product_code);
         $product = Products::show($product_code);
 
         $categories = [
-            'level_1' => isset($product->categories) ? $product->categories->cat1_level1 : '',
-            'level_2' => isset($product->categories) ? $product->categories->cat1_level2 : '',
-            'level_3' => isset($product->categories) ? $product->categories->cat1_level3 : ''
+            'level_1' => isset($category_array[1]) ? trim(urldecode($category_array[1])) : '',
+            'level_2' => isset($category_array[2]) ? trim(urldecode($category_array[2])) : '',
+            'level_3' => isset($category_array[3]) ? trim(urldecode($category_array[3])) : ''
         ];
 
-        return view('products.show', compact('categories', 'product'));
+        if (isset($category_array[1]) && substr($category_array[1], 0, 6) == 'search') {
+            $categories = [
+                'level_1' => 'search',
+                'level_2' => null,
+                'level_3' => null,
+                'query' => substr($category_array[1], 13)
+            ];
+        }
+
+        return view('products.show', compact('categories', 'category_list', 'product'));
     }
 
     /**
@@ -81,11 +94,12 @@ class ProductController extends Controller
      */
     public function search()
     {
+        $category_list = Categories::list();
         $search_term = Input::get('query');
         $products = Products::search($search_term);
 
         $categories = ['level_1' => 'search', 'level_2' => null, 'level_3' => null, 'query' => $search_term];
 
-        return view('products.products', compact('products', 'categories'));
+        return view('products.products', compact('products', 'categories', 'category_list'));
     }
 }
