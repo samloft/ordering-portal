@@ -274,12 +274,29 @@ a img:hover {
   max-width: 145px;
 }
 
+.sub-category-image {
+  padding: 10px;
+  width: 145px;
+  height: 145px;
+  background-color: rgb(255, 255, 255);
+  display:flex;
+  align-items:center;
+}
+
+.sub-category-image img {
+  max-width: 100%;
+  max-height: 100%;
+  margin: auto;
+  display: block;
+}
+
 
 @import 'theme/header';
 @import 'theme/login';
 @import 'theme/navigation';
 @import 'theme/footer';
 
+@import 'theme/cards';
 @import 'theme/buttons';
 @import 'theme/tables';
 @import 'theme/forms';

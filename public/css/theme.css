@@ -266,6 +266,22 @@ a img:hover {
   max-width: 145px;
 }
 
+.sub-category-image {
+  padding: 10px;
+  width: 145px;
+  height: 145px;
+  background-color: white;
+  display: flex;
+  align-items: center;
+}
+
+.sub-category-image img {
+  max-width: 100%;
+  max-height: 100%;
+  margin: auto;
+  display: block;
+}
+
 header {
   background-color: #313131;
   padding-top: 10px;
@@ -435,6 +451,10 @@ footer .footer-links {
   font-size: 16px;
 }
 
+.card {
+  box-shadow: 0 10px 25px 0 rgba(50, 50, 93, 0.07), 0 5px 15px 0 rgba(0, 0, 0, 0.07);
+}
+
 .btn-primary {
   background-color: #c8dc69;
   border-color: #c8dc69;
@@ -493,6 +513,10 @@ table .bg-danger {
 table .bg-warning {
   background-color: #fffbdb !important;
   color: #867d29 !important;
+}
+
+table tr.clickable {
+  cursor: pointer;
 }
 
 form button {

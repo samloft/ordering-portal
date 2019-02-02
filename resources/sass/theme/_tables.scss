@@ -24,3 +24,7 @@ table .bg-warning {
   background-color: rgba(255, 251, 219, 1.0) !important;
   color: rgba(134, 125, 41, 1.0) !important;
 }
+
+table tr.clickable {
+  cursor: pointer;
+}
