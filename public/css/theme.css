@@ -191,10 +191,6 @@ hr {
   margin-bottom: 0.1rem;
 }
 
-.product-list img {
-  width: 90px;
-}
-
 .product-list .product-pricing {
   line-height: 1.2rem;
   font-size: 13px;
@@ -276,6 +272,21 @@ a img:hover {
 }
 
 .sub-category-image img {
+  max-width: 100%;
+  max-height: 100%;
+  margin: auto;
+  display: block;
+}
+
+.product-list-image {
+  width: 90px;
+  height: 90px;
+  background-color: white;
+  display: flex;
+  align-items: center;
+}
+
+.product-list-image img {
   max-width: 100%;
   max-height: 100%;
   margin: auto;

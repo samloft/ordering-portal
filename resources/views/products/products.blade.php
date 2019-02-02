@@ -20,8 +20,11 @@
 
                                 <div class="row product-details">
                                     <div class="col-sm-auto">
-                                        <img id="enlarge-image"
-                                             src="https://scolmoreonline.com/product_images/DPBN024BK.png">
+                                        <div class="product-list-image">
+                                            <img id="enlarge-image"
+                                                 {{--src="https://scolmoreonline.com/product_images/DPBN024BK.png">--}}
+                                                 src="{{ @getimagesize('https://scolmoreonline.com/product_images/' . $product->product . '.png') ? 'https://scolmoreonline.com/product_images/' . $product->product . '.png' : 'https://scolmoreonline.com/assets/images/no-image.png' }}">
+                                        </div>
                                     </div>
                                     <div class="col-lg pt-2 pl-0">
                                         <h5>Product Code: <span id="product-code"
