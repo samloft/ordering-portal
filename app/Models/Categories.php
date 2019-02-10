@@ -103,7 +103,7 @@ class Categories extends Model
             ->where('cat1_level' . $level, $category)
             ->whereHas('prices', function ($query) {
                 $query->where('customer_code', Auth::user()->customer_code);
-            })->get();
+            })->orderBy('cat1_level' . $level, 'product')->get();
 
         $products = [];
 
@@ -113,7 +113,8 @@ class Categories extends Model
             if (isset($sub->$cat_level) && trim($sub->$cat_level) <> '') {
                 $products[] = [
                     'category' => trim($sub->$cat_level),
-                    'product' => trim(str_replace('/', '^', $sub->product))
+                    'product' => trim(str_replace('/', '^', $sub->product)),
+                    'product_list' => [],
                 ];
 
                 $sub_categories[trim($sub->$cat_level)] = [
@@ -124,20 +125,26 @@ class Categories extends Model
 
         foreach ($sub_categories as $key => $value) {
             $count = 0;
-            $image = false;
+//            $image = false;
+            $product_list = null;
 
             foreach ($products as $product) {
-                if ($product['category'] == $key && $count <= 5) {
-                    $image = static::categoryImage($product['product']);
+                if ($product['category'] == $key && $count <= 4) {
+//                    $image = static::categoryImage($product['product']);
+                    $sub_categories[$key]['product_list'][] = $product['product'];
                     $count++;
 
-                    if ($image) {
-                        break;
-                    }
+//                    if ($image) {
+//                        break;
+//                    }
                 }
             }
 
-            $sub_categories[$key]['image'] = $image;
+//            if ($product_list) {
+//                array_push($sub_categories[$key]['product_list'], $product_list);
+//            }
+
+//            $sub_categories[$key]['image'] = $image;
         }
 
         ksort($sub_categories);
@@ -145,21 +152,28 @@ class Categories extends Model
         return $sub_categories;
     }
 
-    public static function categoryImage($product)
+    public static function categoryImage($products)
     {
-        // TODO: Check if override from CMS exists first...
-//        $products = (new Categories)->select('product')
-//            ->where('cat1_level' . $level, $name)
-//            ->whereHas('prices', function ($query) {
-//                $query->where('customer_code', Auth::user()->customer_code);
-//            })->groupBy('product')
-//            ->limit(5);
-        $external_link = 'https://scolmoreonline.com/product_images/' . $product . '.png';
+        $products = explode(',', $products);
 
-        if (@getimagesize($external_link)) {
-            return $external_link;
+        foreach ($products as $product) {
+            $external_link = 'https://scolmoreonline.com/product_images/' . $product . '.png';
+
+            if (@getimagesize($external_link)) {
+                return $external_link;
+            }
         }
 
-        return false;
+        return 'https://scolmoreonline.com/assets/images/no-image.png';
+
+
+//        // TODO: Check if override from CMS exists first...
+//        $external_link = 'https://scolmoreonline.com/product_images/' . $product . '.png';
+//
+//        if (@getimagesize($external_link)) {
+//            return $external_link;
+//        }
+//
+//        return false;
     }
 }

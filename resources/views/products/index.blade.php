@@ -13,9 +13,20 @@
                         <div class="category w-20">
                             <a href="/products/{{ ($categories['level_1'] <> '' ? $categories['level_1'] . '/' : '') . ($categories['level_2'] <> '' ? $categories['level_2'] . '/' : '') . $category['slug'] }}">
                                 {{--<img src="https://via.placeholder.com/145">--}}
-                                <div class="sub-category-image">
-                                    <img src="{{ $category['image'] ? $category['image'] : 'https://scolmoreonline.com/assets/images/no-image.png' }}">
-                                </div>
+                                @if (isset($category['category_image']))
+                                    <div class="sub-category-image">
+                                        <img src="{{ isset($category['image']) ? $category['image'] : 'https://scolmoreonline.com/assets/images/no-image.png' }}">
+                                    </div>
+                                @else
+                                    <div class="sub-category-image" data-products=@json($category['product_list'])>
+                                        <div class="spinner">
+                                            <div class="bounce1"></div>
+                                            <div class="bounce2"></div>
+                                            <div class="bounce3"></div>
+                                        </div>
+{{--                                        <img src="{{ isset($category['image']) ? $category['image'] : 'https://scolmoreonline.com/assets/images/no-image.png' }}">--}}
+                                    </div>
+                                @endif
                                 <span class="text-center">{{ $key }}</span>
                             </a>
                         </div>

@@ -26,6 +26,12 @@ Route::group(['middleware' => ['auth', 'has.customer']], function () {
         Route::get('{cat1?}/{cat2?}/{cat3?}', 'ProductController@index')->name('products');
     });
 
+    Route::group(['prefix' => 'category'], function() {
+        Route::get('image/{products}', function($products) {
+            return App\Models\Categories::categoryImage($products);
+        });
+    });
+
     /*
      * Order Tracking
      */

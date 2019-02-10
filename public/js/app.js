@@ -36393,6 +36393,8 @@ __webpack_require__(/*! ./bootstrap */ "./resources/js/bootstrap.js");
 
 __webpack_require__(/*! ./modules/basket */ "./resources/js/modules/basket.js");
 
+__webpack_require__(/*! ./modules/categories */ "./resources/js/modules/categories.js");
+
 /***/ }),
 
 /***/ "./resources/js/bootstrap.js":
@@ -36550,6 +36552,25 @@ function basketSummary() {
     $('.basket-info .order-total').html(response.goods_total);
   });
 }
+
+/***/ }),
+
+/***/ "./resources/js/modules/categories.js":
+/*!********************************************!*\
+  !*** ./resources/js/modules/categories.js ***!
+  \********************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+$(function () {
+  $('.sub-category-image[data-products]').each(function (index, item) {
+    var products = $(item).data('products');
+    $.get('/category/image/' + products, {}).done(function (response) {
+      $(item).find('.spinner').remove();
+      $(item).append('<img src="' + response + '">');
+    });
+  });
+});
 
 /***/ }),
 
