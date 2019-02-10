@@ -23,13 +23,18 @@ Route::group(['middleware' => ['auth', 'has.customer']], function () {
     Route::group(['prefix' => 'products'], function () {
         Route::get('view/{product}', 'ProductController@show')->name('products.show');
         Route::get('search', 'ProductController@search')->name('products.search');
+
+        Route::get('autocomplete/{search}', function($search) {
+            return App\Models\Products::autocomplete($search);
+        });
+
         Route::get('{cat1?}/{cat2?}/{cat3?}', 'ProductController@index')->name('products');
     });
 
     Route::group(['prefix' => 'category'], function() {
         Route::get('image/{products}', function($products) {
-            return App\Models\Categories::categoryImage($products);
-        });
+            return App\Models\Products::checkImage($products);
+        })->name('products.check-image');
     });
 
     /*

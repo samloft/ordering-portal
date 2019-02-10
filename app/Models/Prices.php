@@ -4,22 +4,23 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 
+/**
+ * App\Models\Customer
+ *
+ * @mixin \Eloquent
+ */
 class Prices extends Model
 {
     protected $primaryKey = 'product';
-    /**
-     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
-     */
-//    public function product()
-//    {
-//        return $this->belongsTo(Products::class, 'product', 'product');
-//    }
+    public $incrementing = false;
 
     /**
-     * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany
+     * Return a list of all products that have a price list.
+     *
+     * @return Prices[]|\Illuminate\Database\Eloquent\Collection
      */
-//    public function categories()
-//    {
-//        return $this->belongsToMany(Categories::class, 'product', 'product');
-//    }
+    public static function productList()
+    {
+        return (new Prices)->select('product')->groupBy('product')->orderBy('product', 'asc')->get();
+    }
 }

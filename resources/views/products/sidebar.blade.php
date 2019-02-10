@@ -6,7 +6,7 @@
                     <div class="form-group">
                         <label>{{ __('Change Customer') }}</label>
                         <div class="input-group">
-                            <input type="text" class="form-control">
+                            <input type="text" class="form-control" autocomplete="off">
                             <div class="input-group-append">
                                 <button class="input-group-text"><i class="fas fa-user"></i></button>
                             </div>
@@ -23,7 +23,7 @@
                 <div class="form-group">
                     <label>{{ __('Search') }}</label>
                     <div class="input-group">
-                        <input type="text" class="form-control" name="query">
+                        <input type="text" class="form-control" name="query" autocomplete="off">
                         <div class="input-group-append">
                             <button class="input-group-text"><i class="fas fa-search"></i></button>
                         </div>
@@ -38,7 +38,7 @@
             <form method="post" id="product-add-basket-quickbuy">
                 <div class="form-group mb-1">
                     <label>{{ __('Quick Buy') }}</label>
-                    <input class="form-control" name="product" placeholder="{{ __('Enter Product Code') }}">
+                    <input id="quick-buy" class="form-control" name="product" placeholder="{{ __('Enter Product Code') }}" autocomplete="off">
                 </div>
 
                 <div class="input-group">

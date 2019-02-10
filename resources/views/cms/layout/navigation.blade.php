@@ -52,7 +52,7 @@
                     </li>
 
                     <li class="sidebar-menu-item">
-                        <a class="sidebar-menu-button" href="#">
+                        <a class="sidebar-menu-button" href="{{ route('cms.product-images') }}">
                             <i class="sidebar-menu-icon sidebar-menu-icon--left material-icons">image</i>
                             <span class="sidebar-menu-text">{{ __('Product Images') }}</span>
                         </a>

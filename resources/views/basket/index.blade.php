@@ -21,7 +21,7 @@
                         <label><strong>{{ __('Quick Buy') }}</strong></label>
                         <div class="row">
                             <div class="col">
-                                <input type="text" class="form-control" name="product" placeholder="Enter Product Code">
+                                <input id="quick-buy" class="form-control" name="product" placeholder="Enter Product Code" autocomplete="off">
                             </div>
                             <div class="col-2">
                                 <input type="text" class="form-control text-center" name="quantity" value="1">

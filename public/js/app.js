@@ -36395,6 +36395,8 @@ __webpack_require__(/*! ./modules/basket */ "./resources/js/modules/basket.js");
 
 __webpack_require__(/*! ./modules/categories */ "./resources/js/modules/categories.js");
 
+__webpack_require__(/*! ./modules/products */ "./resources/js/modules/products.js");
+
 /***/ }),
 
 /***/ "./resources/js/bootstrap.js":
@@ -36567,8 +36569,38 @@ $(function () {
     var products = $(item).data('products');
     $.get('/category/image/' + products).done(function (response) {
       $(item).find('.spinner').remove();
-      $(item).append('<img src="' + response + '">');
+      $(item).append('<img src="' + response.image + '">');
     });
+  });
+});
+
+/***/ }),
+
+/***/ "./resources/js/modules/products.js":
+/*!******************************************!*\
+  !*** ./resources/js/modules/products.js ***!
+  \******************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+$(function () {
+  $('input[id="quick-buy"]').autocomplete({
+    minLength: 2,
+    autoFocus: true,
+    source: function source(request, response) {
+      $.ajax({
+        url: '/products/autocomplete/' + $('input[id="quick-buy"]').val().toUpperCase(),
+        type: 'GET',
+        success: function success(data) {
+          response($.map(data, function (value) {
+            return {
+              label: value.product.trim(),
+              value: value.product.trim()
+            };
+          }));
+        }
+      });
+    }
   });
 });
 

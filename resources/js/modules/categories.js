@@ -4,7 +4,7 @@ $(function () {
 
         $.get('/category/image/' + products).done(function (response) {
             $(item).find('.spinner').remove();
-            $(item).append('<img src="' + response + '">');
+            $(item).append('<img src="' + response.image + '">');
         });
     });
 });

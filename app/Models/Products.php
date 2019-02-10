@@ -76,4 +76,44 @@ class Products extends Model
                     ->orWhereRaw('upper(description) LIKE \'%' . strtoupper($search_term) . '%\'');
             })->paginate(10);
     }
+
+    /**
+     * @param $search
+     * @return Products
+     */
+    public static function autocomplete($search)
+    {
+        return (new Products)->select('product')
+            ->whereHas('prices')
+            ->whereRaw('UPPER(product) like \'' .  $search . '%\'')
+            ->limit(10)
+            ->get();
+    }
+
+    /**
+     * Take a list of products and return the first image that exists.
+     *
+     * @param $products
+     * @return array
+     */
+    public static function checkImage($products)
+    {
+        $products = explode(',', $products);
+
+        foreach ($products as $product) {
+            $external_link = 'https://scolmoreonline.com/product_images/' . $product . '.png';
+
+            if (@getimagesize($external_link)) {
+                return [
+                    'found' => true,
+                    'image' => $external_link
+                ];
+            }
+        }
+
+        return [
+            'found' => false,
+            'image' => 'https://scolmoreonline.com/assets/images/no-image.png'
+        ];
+    }
 }

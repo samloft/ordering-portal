@@ -141,25 +141,4 @@ class Categories extends Model
 
         return $sub_categories;
     }
-
-    /**
-     * Take a list of products and return the first image that exists.
-     *
-     * @param $products
-     * @return string
-     */
-    public static function categoryImage($products)
-    {
-        $products = explode(',', $products);
-
-        foreach ($products as $product) {
-            $external_link = 'https://scolmoreonline.com/product_images/' . $product . '.png';
-
-            if (@getimagesize($external_link)) {
-                return $external_link;
-            }
-        }
-
-        return 'https://scolmoreonline.com/assets/images/no-image.png';
-    }
 }
