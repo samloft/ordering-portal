@@ -36495,7 +36495,7 @@ $('form[id="product-add-basket-quickbuy"]').on('submit', function (e) {
 });
 $('form[id="product-add-basket-checkout"]').on('submit', function (e) {
   e.preventDefault();
-  var product = $(this).find('input[name="product"]'),
+  var product = $(this).find('input[name="product"]').toUpper(),
       quantity = $(this).find('input[name="quantity"]');
   addProductToBasket(product.val(), quantity.val(), false);
   product.val('');
@@ -36511,7 +36511,7 @@ $('form[id="product-add-basket-products"]').on('submit', function (e) {
 function addProductToBasket(product, quantity) {
   var displayDropdown = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : false;
   $.post('/basket/add-product', {
-    product: product,
+    product: product.trim().toUpperCase(),
     quantity: quantity
   }).done(function (response) {
     if (response.error) {
@@ -36586,7 +36586,11 @@ $(function () {
 $(function () {
   $('input[id="quick-buy"]').autocomplete({
     minLength: 2,
-    autoFocus: true,
+    // autoFocus: true,
+    // select: function( event, ui ) {
+    //     $(this).val( ui.item.id );
+    //     $(this).closest('form').submit();
+    // },
     source: function source(request, response) {
       $.ajax({
         url: '/products/autocomplete/' + $('input[id="quick-buy"]').val().toUpperCase(),

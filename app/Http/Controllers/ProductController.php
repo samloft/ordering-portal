@@ -42,7 +42,7 @@ class ProductController extends Controller
         }
 
         if ($categories['level_1'] <> null) {
-            $sub_category_list = Categories::subCategories($current_level, $categories['level_' . $current_level]);
+            $sub_category_list = Categories::subCategories($current_level, $categories['level_1'], $categories['level_' . $current_level]);
 
             if (count($sub_category_list) == 0) {
                 $products = Products::list($categories);

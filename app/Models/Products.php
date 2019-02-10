@@ -46,7 +46,7 @@ class Products extends Model
     {
         $products = (new Products)->whereHas('prices')
             ->whereHas('categories', function ($query) use ($categories) {
-                $query->where('cat1_level1', $categories['level_1'])
+                $query->where('cat1_level1', ($categories['level_1']))
                     ->where('cat1_level2', $categories['level_2'])
                     ->where('cat1_level3', $categories['level_3']);
             })->paginate(10);

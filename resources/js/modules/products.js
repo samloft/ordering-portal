@@ -1,7 +1,11 @@
 $(function () {
     $('input[id="quick-buy"]').autocomplete({
         minLength: 2,
-        autoFocus: true,
+        // autoFocus: true,
+        // select: function( event, ui ) {
+        //     $(this).val( ui.item.id );
+        //     $(this).closest('form').submit();
+        // },
         source: function (request, response) {
             $.ajax({
                 url: '/products/autocomplete/' + $('input[id="quick-buy"]').val().toUpperCase(),

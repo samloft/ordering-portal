@@ -38,7 +38,7 @@ $('form[id="product-add-basket-quickbuy"]').on('submit', function (e) {
 $('form[id="product-add-basket-checkout"]').on('submit', function (e) {
     e.preventDefault();
 
-    let product = $(this).find('input[name="product"]'),
+    let product = $(this).find('input[name="product"]').toUpper(),
         quantity = $(this).find('input[name="quantity"]');
 
     addProductToBasket(product.val(), quantity.val(), false);
@@ -58,7 +58,7 @@ $('form[id="product-add-basket-products"]').on('submit', function (e) {
 
 function addProductToBasket(product, quantity, displayDropdown = false) {
     $.post('/basket/add-product', {
-        product: product,
+        product: product.trim().toUpperCase(),
         quantity: quantity
     }).done(function (response) {
         if (response.error) {

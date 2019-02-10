@@ -95,11 +95,12 @@ class Categories extends Model
      * @param $category
      * @return array
      */
-    public static function subCategories($level, $category)
+    public static function subCategories($level, $main, $category)
     {
         $sub_categories = [];
 
         $subs = (new Categories)
+            ->where('cat1_level1', $main)
             ->where('cat1_level' . $level, $category)
             ->whereHas('prices', function ($query) {
                 $query->where('customer_code', Auth::user()->customer_code);
