@@ -112,8 +112,8 @@ class Categories extends Model
 
             if (isset($sub->$cat_level) && trim($sub->$cat_level) <> '') {
                 $products[] = [
+                    'product' => str_replace(' ', '%20', trim(str_replace('/', '^', $sub->product))),
                     'category' => trim($sub->$cat_level),
-                    'product' => trim(str_replace('/', '^', $sub->product)),
                     'product_list' => [],
                 ];
 
@@ -123,28 +123,18 @@ class Categories extends Model
             }
         }
 
+        ksort($products);
+
         foreach ($sub_categories as $key => $value) {
             $count = 0;
-//            $image = false;
             $product_list = null;
 
             foreach ($products as $product) {
                 if ($product['category'] == $key && $count <= 4) {
-//                    $image = static::categoryImage($product['product']);
                     $sub_categories[$key]['product_list'][] = $product['product'];
                     $count++;
-
-//                    if ($image) {
-//                        break;
-//                    }
                 }
             }
-
-//            if ($product_list) {
-//                array_push($sub_categories[$key]['product_list'], $product_list);
-//            }
-
-//            $sub_categories[$key]['image'] = $image;
         }
 
         ksort($sub_categories);
