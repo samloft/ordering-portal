@@ -31,13 +31,6 @@
                         </div>
                     </div>
                 </div>
-                <div class="row mt-1 mr-3">
-                    <div class="col text-right footer-links">
-                        {{--Developed By --}}
-                        <a href="https://devloft.co.uk" target="_blank"><img style="height: 30px" src="{{ asset('images/devloft.png') }}"
-                                                                          alt="devloft"></a>
-                    </div>
-                </div>
             </div>
         </div>
     </div>
