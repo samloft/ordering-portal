@@ -91,7 +91,7 @@
                 </div>
                 <div class="row">
                     <div class="col">Small Order Charge*</div>
-                    <div class="col text-right">£0.00</div>
+                    <div class="col text-right">{{ $basket['summary']['small_order_charge'] }}</div>
                 </div>
                 <div class="row">
                     <div class="col">VAT</div>

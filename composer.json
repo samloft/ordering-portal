@@ -49,7 +49,9 @@
         ],
         "files": [
             "app/Helpers/ActiveMenu.php",
-            "app/Helpers/Currency.php"
+            "app/Helpers/Currency.php",
+            "app/Helpers/OnlineDiscount.php",
+            "app/Helpers/Vat.php"
         ]
     },
     "autoload-dev": {

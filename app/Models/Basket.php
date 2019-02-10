@@ -47,7 +47,7 @@ class Basket extends Model
         $product_lines = [];
 
         foreach ($lines as $line) {
-            $goods_total = $goods_total + ($line->price * $line->quantity);
+            $goods_total = $goods_total + (discount($line->price) * $line->quantity);
 
             $product_lines[] = [
                 'product' => $line->product,
@@ -55,18 +55,21 @@ class Basket extends Model
                 'uom' => $line->uom,
                 'image' => 'https://scolmoreonline.com/product_images/' . $line->product . '.png',
                 'quantity' => $line->quantity,
-                'price' => currency($line->price * $line->quantity, 2),
-                'unit_price' => currency($line->price, 4),
+                'price' => currency(discount($line->price) * $line->quantity, 2),
+                'unit_price' => currency(discount($line->price), 4),
             ];
         }
+
+        $small_order_charge = static::smallOrderCharge($goods_total);
 
         return [
             'summary' => [
                 'goods_total' => currency($goods_total, 2),
                 'shipping' => currency(0, 2),
                 'sub_total' => currency($goods_total, 2),
-                'vat' => currency((20 / 100) * $goods_total, 2),
-                'total' => currency($goods_total * (1 + 20 / 100), 2)
+                'small_order_charge' => currency($small_order_charge, 2),
+                'vat' => currency(vatAmount($goods_total + $small_order_charge), 2),
+                'total' => currency(vatIncluded($goods_total + $small_order_charge), 2)
             ],
             'lines' => $product_lines
         ];
@@ -134,5 +137,20 @@ class Basket extends Model
     public static function clear()
     {
         return (new Basket)->where('customer_code', Auth::user()->customer_code)->delete();
+    }
+
+    /**
+     * Check if the value of the order reaches the limit of the small
+     * order charge, if not return the charge else return 0.
+     *
+     * @param $value
+     * @return int
+     */
+    public static function smallOrderCharge($value)
+    {
+        $small_order_limit = 200;
+        $small_order_charge = 10;
+
+        return $value > $small_order_limit ? 0 : $small_order_charge;
     }
 }
