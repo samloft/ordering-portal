@@ -25,6 +25,11 @@ class Basket extends Model
         return $this->belongsTo(Products::class, 'product', 'product');
     }
 
+    public function prices()
+    {
+        return $this->belongsTo(Prices::class, 'product', 'product')->where('prices.customer_code', Auth::user()->customer_code);
+    }
+
     /**
      * Return all basket lines based on customer code
      *
@@ -32,32 +37,34 @@ class Basket extends Model
      */
     public static function show()
     {
-        $lines = (new Basket)->where('customer_code', Auth::user()->customer_code)->with('productDetails')->get();
+        $lines = (new Basket)->where('basket.customer_code', Auth::user()->customer_code)
+            ->join('prices', 'basket.product', '=', 'prices.product')
+            ->where('prices.customer_code', Auth::user()->customer_code)
+            ->join('products', 'basket.product', '=', 'products.product')
+            ->get();
 
-        $line_count = 0;
         $goods_total = 0;
-
         $product_lines = [];
 
         foreach ($lines as $line) {
-            $line_count++;
-            $goods_total = $goods_total + ($line->productDetails->prices->price * $line->quantity);
+            $goods_total = $goods_total + ($line->price * $line->quantity);
 
             $product_lines[] = [
-                'product' => $line->productDetails->product,
-                'name' => $line->productDetails->name,
-                'image' => 'https://scolmoreonline.com/product_images/' . $line->productDetails->product . '.png',
+                'product' => $line->product,
+                'name' => $line->name,
+                'uom' => $line->uom,
+                'image' => 'https://scolmoreonline.com/product_images/' . $line->product . '.png',
                 'quantity' => $line->quantity,
-                'price' => currency($line->productDetails->prices->price * $line->quantity, 2),
-                'unit_price' => currency($line->productDetails->prices->price, 4),
-                'product_details' => $line->productDetails
+                'price' => currency($line->price * $line->quantity, 2),
+                'unit_price' => currency($line->price, 4),
             ];
         }
 
         return [
             'summary' => [
-                'line_count' => $line_count,
-                'goods_total' => number_format($goods_total, 2, '.', ',')
+                'goods_total' => currency($goods_total, 2),
+                'vat' => currency((20 / 100) * $goods_total, 2),
+                'total' => currency($goods_total * (1 + 20 / 100), 2)
             ],
             'lines' => $product_lines
         ];

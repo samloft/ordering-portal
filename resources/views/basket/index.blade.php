@@ -57,7 +57,7 @@
                         <h2 class="section-title d-inline-block">{{ $line['name'] }}</h2>
                     </td>
                     <td>{{ $line['product'] }}</td>
-                    <td>{{ $line['product_details']->uom }}</td>
+                    <td>{{ $line['uom'] }}</td>
                     <td class="text-right">{{ $line['quantity'] }}</td>
                     <td class="text-right">{{ $line['unit_price'] }}</td>
                     <td class="text-right">{{ $line['quantity'] }}</td>
@@ -79,7 +79,7 @@
             <div class="card card-body basket-summary">
                 <div class="row">
                     <div class="col">Goods Total</div>
-                    <div class="col text-right">£{{ $basket['summary']['goods_total'] }}</div>
+                    <div class="col text-right">{{ $basket['summary']['goods_total'] }}</div>
                 </div>
                 <div class="row">
                     <div class="col">Shipping</div>
@@ -95,12 +95,12 @@
                 </div>
                 <div class="row">
                     <div class="col">VAT</div>
-                    <div class="col text-right">£0.00</div>
+                    <div class="col text-right">{{ $basket['summary']['vat'] }}</div>
                 </div>
                 <hr>
                 <div class="row basket-total">
                     <div class="col">Order Total</div>
-                    <div class="col text-right">£0.00</div>
+                    <div class="col text-right">{{ $basket['summary']['total'] }}</div>
                 </div>
                 <hr>
                 <div class="small-print">
