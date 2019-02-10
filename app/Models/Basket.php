@@ -37,10 +37,14 @@ class Basket extends Model
      */
     public static function show()
     {
-        $lines = (new Basket)->where('basket.customer_code', Auth::user()->customer_code)
+        $lines = (new Basket)->selectRaw('basket.product as product, basket.customer_code as customer_code, 
+                                                    basket.quantity as quantity, price, break1, price1, break2, price2, 
+                                                    break3, price3, name, uom, not_sold, stock_levels.quantity as stock_level')
+            ->where('basket.customer_code', Auth::user()->customer_code)
             ->join('prices', 'basket.product', '=', 'prices.product')
             ->where('prices.customer_code', Auth::user()->customer_code)
             ->join('products', 'basket.product', '=', 'products.product')
+            ->join('stock_levels', 'basket.product', '=', 'stock_levels.product')
             ->get();
 
         $goods_total = 0;
@@ -53,6 +57,7 @@ class Basket extends Model
                 'product' => $line->product,
                 'name' => $line->name,
                 'uom' => $line->uom,
+                'stock' => $line->stock_level,
                 'image' => 'https://scolmoreonline.com/product_images/' . $line->product . '.png',
                 'quantity' => $line->quantity,
                 'price' => currency(discount($line->price) * $line->quantity, 2),

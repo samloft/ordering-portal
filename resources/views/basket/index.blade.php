@@ -58,7 +58,7 @@
                     </td>
                     <td>{{ $line['product'] }}</td>
                     <td>{{ $line['uom'] }}</td>
-                    <td class="text-right">{{ $line['quantity'] }}</td>
+                    <td class="text-right">{{ $line['stock'] }}</td>
                     <td class="text-right">{{ $line['unit_price'] }}</td>
                     <td class="text-right">{{ $line['quantity'] }}</td>
                     <td class="text-right">
