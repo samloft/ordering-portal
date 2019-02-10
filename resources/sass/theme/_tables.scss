@@ -28,3 +28,10 @@ table .bg-warning {
 table tr.clickable {
   cursor: pointer;
 }
+.table-expected {
+  border: 1px solid rgb(222, 226, 230);
+}
+
+.table-expected thead {
+  background-color: rgba(205, 209, 212, 1.0);
+}

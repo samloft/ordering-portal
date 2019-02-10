@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Categories;
+use App\Models\ExpectedStock;
 use App\Models\Products;
 use Illuminate\Support\Facades\Input;
 use PhpParser\Node\Expr\Cast\Object_;
@@ -66,8 +67,9 @@ class ProductController extends Controller
         $category_array = array_values(array_filter(explode('/', $previous_categories)));
 
         $category_list = Categories::list();
-        $product_code = urldecode($product_code);
+        $product_code = trim(urldecode($product_code));
         $product = Products::show($product_code);
+        $expected_stock = ExpectedStock::show($product_code);
 
         $categories = [
             'level_1' => isset($category_array[1]) ? trim(urldecode($category_array[1])) : '',
@@ -84,7 +86,7 @@ class ProductController extends Controller
             ];
         }
 
-        return view('products.show', compact('categories', 'category_list', 'product'));
+        return view('products.show', compact('categories', 'category_list', 'product', 'expected_stock'));
     }
 
     /**

@@ -530,6 +530,14 @@ table tr.clickable {
   cursor: pointer;
 }
 
+.table-expected {
+  border: 1px solid #dee2e6;
+}
+
+.table-expected thead {
+  background-color: #cdd1d4;
+}
+
 form button {
   cursor: pointer;
 }
