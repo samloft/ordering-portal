@@ -70,11 +70,15 @@ class Basket extends Model
      */
     public static function summary()
     {
-        $lines = static::show();
+        $summary = (new Basket)->selectRaw('SUM(prices.price * basket.quantity) as goods_total, COUNT(basket.product) as line_count')
+            ->join('prices', 'basket.product', '=', 'prices.product')
+            ->where('prices.customer_code', Auth::user()->customer_code)
+            ->where('basket.customer_code', Auth::user()->customer_code)
+            ->first();
 
         return [
-            'lines' => $lines['summary']['line_count'],
-            'goods_total' => currency() . $lines['summary']['goods_total']
+            'lines' => $summary->line_count,
+            'goods_total' => currency($summary->goods_total, 2)
         ];
     }
 
