@@ -86,6 +86,7 @@ class Products extends Model
         return (new Products)->select('product')
             ->whereHas('prices')
             ->whereRaw('UPPER(product) like \'' .  $search . '%\'')
+            ->orderBy('product', 'asc')
             ->limit(10)
             ->get();
     }
