@@ -63,6 +63,8 @@ class Basket extends Model
         return [
             'summary' => [
                 'goods_total' => currency($goods_total, 2),
+                'shipping' => currency(0, 2),
+                'sub_total' => currency($goods_total, 2),
                 'vat' => currency((20 / 100) * $goods_total, 2),
                 'total' => currency($goods_total * (1 + 20 / 100), 2)
             ],

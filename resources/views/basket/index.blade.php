@@ -83,11 +83,11 @@
                 </div>
                 <div class="row">
                     <div class="col">Shipping</div>
-                    <div class="col text-right">£0.00</div>
+                    <div class="col text-right">{{ $basket['summary']['shipping'] }}</div>
                 </div>
                 <div class="row">
                     <div class="col">Sub Total</div>
-                    <div class="col text-right">£0.00</div>
+                    <div class="col text-right">{{ $basket['summary']['sub_total'] }}</div>
                 </div>
                 <div class="row">
                     <div class="col">Small Order Charge*</div>
