@@ -65,6 +65,7 @@ function addProductToBasket(product, quantity, displayDropdown = false) {
             return swal('Error', response.message, 'error');
         }
 
+        $('#header-checkout').removeClass('d-none');
         basketSummary();
 
         if (displayDropdown) {

@@ -25,17 +25,18 @@
             @if (Auth::user())
                 @php($basket = \App\Models\Basket::summary())
                 <div class="col mt-auto mb-auto">
-                    <div class="header-basket float-right">
+                    <div class="header-basket float-right text-center">
                         <div class="row">
                             <div class="col text-center basket-info">
                                 <strong>{{ __('Your Basket') }}</strong><br>
-                                <span class="order-lines">{{ $basket['lines'] }}</span> Lines - <span class="order-total">{{ $basket['goods_total'] }}</span>
+                                <span class="order-lines">{{ $basket['lines'] }}</span> Lines - <span
+                                        class="order-total">{{ $basket['goods_total'] }}</span>
                             </div>
                             <div class="col basket-buttons my-auto">
                                 <a href="{{ route('basket') }}" class="btn-link">
                                     <button id="header-basket" class="btn btn-secondary">{{ __('Basket') }}</button>
                                 </a>
-                                <a href="{{ route('checkout') }}" class="btn-link">
+                                <a href="{{ route('checkout') }}" id="header-checkout" class="btn-link @if ($basket['lines'] == 0) d-none @endif">
                                     <button class="btn btn-primary">{{ __('Checkout') }}</button>
                                 </a>
                             </div>
