@@ -1,4 +1,5 @@
 @import 'theme/variables';
+@import 'variables';
 
 $primary-color: rgba(128, 208, 216, 1.0);
 
@@ -277,6 +278,7 @@ a img:hover {
   background-color: rgb(255, 255, 255);
   display:flex;
   align-items:center;
+  box-shadow: $box-shadow;
 }
 
 .sub-category-image img {
