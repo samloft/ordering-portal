@@ -35,25 +35,25 @@
             {{--@else--}}
                 <div class="d-flex flex-wrap">
                     <div class="w-20">
-                        <img class="img-fluid" src="https://scolmoreonline.com/assets/images/deco-plus.jpg">
+                        <img class="img-fluid" src="https://scolmoreonline.com/assets/images/deco-plus.jpg" alt="Deco Plus">
                     </div>
                     <div class="w-20">
-                        <img class="img-fluid" src="https://scolmoreonline.com/assets/images/deco-plus.jpg">
+                        <img class="img-fluid" src="https://scolmoreonline.com/assets/images/deco-plus.jpg" alt="Deco Plus">
                     </div>
                     <div class="w-20">
-                        <img class="img-fluid" src="https://scolmoreonline.com/assets/images/deco-plus.jpg">
+                        <img class="img-fluid" src="https://scolmoreonline.com/assets/images/deco-plus.jpg" alt="Deco Plus">
                     </div>
                     <div class="w-20">
-                        <img class="img-fluid" src="https://scolmoreonline.com/assets/images/deco-plus.jpg">
+                        <img class="img-fluid" src="https://scolmoreonline.com/assets/images/deco-plus.jpg" alt="Deco Plus">
                     </div>
                     <div class="w-20">
-                        <img class="img-fluid" src="https://scolmoreonline.com/assets/images/deco-plus.jpg">
+                        <img class="img-fluid" src="https://scolmoreonline.com/assets/images/deco-plus.jpg" alt="Deco Plus">
                     </div>
                     <div class="w-20">
-                        <img class="img-fluid" src="https://scolmoreonline.com/assets/images/deco-plus.jpg">
+                        <img class="img-fluid" src="https://scolmoreonline.com/assets/images/deco-plus.jpg" alt="Deco Plus">
                     </div>
                     <div class="w-20">
-                        <img class="img-fluid" src="https://scolmoreonline.com/assets/images/deco-plus.jpg">
+                        <img class="img-fluid" src="https://scolmoreonline.com/assets/images/deco-plus.jpg" alt="Deco Plus">
                     </div>
                 </div>
             {{--@endif--}}
