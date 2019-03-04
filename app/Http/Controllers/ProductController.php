@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Categories;
 use App\Models\ExpectedStock;
+use App\Models\HomeLinks;
 use App\Models\Products;
 use Illuminate\Support\Facades\Input;
 use PhpParser\Node\Expr\Cast\Object_;
@@ -44,16 +45,21 @@ class ProductController extends Controller
 
         if ($categories['level_1'] <> null) {
             $sub_category_list = Categories::subCategories($current_level, $categories['level_1'], $categories['level_' . $current_level]);
-        }
-
-//            if (count($sub_category_list) == 0) {
-                $products = Products::list($categories);
-
-                return view('products.products', compact('categories', 'category_list', 'products', 'sub_category_list'));
-//            }
 //        }
 
-//        return view('products.index', compact('categories', 'category_list', 'sub_category_list'));
+//            if (count($sub_category_list) == 0) {
+            $products = Products::list($categories);
+
+            return view('products.products', compact('categories', 'category_list', 'products', 'sub_category_list'));
+//            }
+        }
+
+        $links = [
+            'categories' => HomeLinks::categories(),
+//            'adverts' => HomeLinks::adverts(),
+        ];
+
+        return view('products.index', compact('links', 'categories', 'category_list', 'sub_category_list'));
     }
 
     /**

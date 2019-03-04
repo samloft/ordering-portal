@@ -25,7 +25,8 @@
                                                  alt="{{ $key }}">
                                         </div>
                                     @else
-                                        <div class="sub-category-image" data-products=@json($sub_category_list[$key]['product_list'])>
+                                        <div class="sub-category-image"
+                                             data-products=@json($sub_category_list[$key]['product_list'])>
                                             <div class="spinner">
                                                 <div class="bounce1"></div>
                                                 <div class="bounce2"></div>

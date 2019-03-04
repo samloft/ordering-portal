@@ -632,6 +632,10 @@ span.required:after {
   background-image: none;
 }
 
+.ui-helper-hidden-accessible {
+  display: none;
+}
+
 header .alert {
   margin-bottom: 0;
 }
