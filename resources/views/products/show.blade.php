@@ -13,16 +13,13 @@
                 <div class="card card-body">
                     <div class="row">
                         <div class="col">
-                            <h2 class="section-title">
-                                <a href="{{ route('products.show', $product->product) }}">{{ $product->name }}</a>
-                            </h2>
+                            <h2 class="section-title">{{ $product->name }}</h2>
 
                             <div class="row product-details">
                                 <div class="col-sm-auto">
                                     <div class="product-list-image">
                                         <img id="enlarge-image"
-                                             {{--src="https://scolmoreonline.com/product_images/DPBN024BK.png">--}}
-                                             src="{{ @getimagesize('https://scolmoreonline.com/product_images/' . $product->product . '.png') ? 'https://scolmoreonline.com/product_images/' . $product->product . '.png' : 'https://scolmoreonline.com/assets/images/no-image.png' }}">
+                                             src="{{ @getimagesize('https://scolmoreonline.com/product_images/' . encodeUrl($product->product) . '.png') ? 'https://scolmoreonline.com/product_images/' . encodeUrl($product->product) . '.png' : 'https://scolmoreonline.com/assets/images/no-image.png' }}">
                                     </div>
                                 </div>
                                 <div class="col-lg pt-2 pl-0">
@@ -39,7 +36,7 @@
                                     Trade Price:
                                 </div>
                                 <div class="col text-right">
-                                    £{{ number_format($product->trade_price, 4) }}
+                                    {{ currency($product->trade_price, 4) }}
                                 </div>
                             </div>
                             <div class="row">
@@ -47,7 +44,7 @@
                                     Unit Price:
                                 </div>
                                 <div class="col text-right">
-                                    £{{ number_format($product->prices->price, 4) }}
+                                    {{ currency($product->prices->price, 4) }}
                                 </div>
                             </div>
                             <div class="row">
@@ -64,7 +61,7 @@
                                     <strong>Net Price:</strong>
                                 </div>
                                 <div class="col text-right">
-                                    <strong>£{{ number_format(($product->prices->price * ((100-2) / 100)), 4) }}</strong>
+                                    <strong>{{ currency(($product->prices->price * ((100-2) / 100)), 4) }}</strong>
                                 </div>
                             </div>
                             <hr>
@@ -94,23 +91,9 @@
                             </span>
                             </div>
                         </div>
-                        {{--<div class="row mt-2">--}}
-                        {{--<div class="col-lg-3 text-right">--}}
-                        {{--<div class="input-group input-group-sm stock-levels">--}}
-                        {{--<div class="input-group-prepend">--}}
-                        {{--<span class="input-group-text">Stock Level</span>--}}
-                        {{--</div>--}}
-                        {{--<input class="form-control form-control-sm"--}}
-                        {{--value="{{ $product->stock->quantity ? $product->stock->quantity : 0 }}"--}}
-                        {{--readonly>--}}
-                        {{--<span class="input-group-btn">--}}
-                        {{--</span>--}}
-                        {{--</div>--}}
-                        {{--</div>--}}
-                        {{--</div>--}}
                     </div>
                 </div>
-                @if ($expected_stock)
+                @if (count($expected_stock) > 0)
                     <div class="card card-body mt-3">
                         <h5 class="mb-3">Expected Stock</h5>
                         <table class="table table-expected">

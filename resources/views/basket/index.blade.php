@@ -12,6 +12,8 @@
         </div>
     </div>
 
+    @include('layout.alerts')
+
     <div class="row">
         <div class="col-lg-7"></div>
         <div class="col-lg-5 justify-content-end">

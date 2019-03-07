@@ -48,7 +48,7 @@
                     </thead>
                     <tbody>
                     @foreach($orders as $order)
-                        <tr class="clickable" onclick="window.location = '{{ route('order-tracking.show', [trim($order->order_no)]) }}';">
+                        <tr class="clickable" onclick="window.location = '{{ route('order-tracking.show', [encodeUrl(trim($order->order_no))]) }}';">
                             <td>{{ $order->order_no }}</td>
                             <td>{{ $order->customer_order_no }}</td>
                             <td>{{ $order->status }}</td>

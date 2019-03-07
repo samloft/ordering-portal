@@ -52,7 +52,8 @@
             "app/Helpers/ActiveMenu.php",
             "app/Helpers/Currency.php",
             "app/Helpers/OnlineDiscount.php",
-            "app/Helpers/Vat.php"
+            "app/Helpers/Vat.php",
+            "app/Helpers/Url.php"
         ]
     },
     "autoload-dev": {

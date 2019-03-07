@@ -53,7 +53,7 @@ class Categories extends Model
             $categories[] = [
                 'level' => 1,
                 'name' => $key,
-                'url' => urlencode(str_replace('/', '%2F', $key)),
+                'url' => encodeUrl($key),
                 'sub' => []
             ];
 
@@ -65,7 +65,7 @@ class Categories extends Model
                     $categories[$level_1]['sub'][] = [
                         'level' => 2,
                         'name' => $key1,
-                        'url' => urlencode(str_replace('/', '%2F', $key1)),
+                        'url' => encodeUrl($key1),
                         'sub' => []
                     ];
                 }
@@ -78,7 +78,7 @@ class Categories extends Model
                         $categories[$level_1]['sub'][$level_2]['sub'][] = [
                             'level' => 3,
                             'name' => $key2,
-                            'url' => urlencode(str_replace('/', '%2F', $key2))
+                            'url' => encodeUrl($key2)
                         ];
                     }
                 }
@@ -92,6 +92,7 @@ class Categories extends Model
      * Get sub categories for the given category level.
      *
      * @param $level
+     * @param $main
      * @param $category
      * @return array
      */
@@ -104,7 +105,7 @@ class Categories extends Model
             ->where('cat1_level' . $level, $category)
             ->whereHas('prices', function ($query) {
                 $query->where('customer_code', Auth::user()->customer_code);
-            })->orderBy('cat1_level' . $level, 'product')->get();
+            })->orderBy('cat1_level' . $level)->orderBy('product')->get();
 
         $products = [];
 
@@ -113,18 +114,18 @@ class Categories extends Model
 
             if (isset($sub->$cat_level) && trim($sub->$cat_level) <> '') {
                 $products[] = [
-                    'product' => str_replace(' ', '%20', trim(str_replace('/', '^', $sub->product))),
+                    'product' => encodeUrl($sub->product),
                     'category' => trim($sub->$cat_level),
                     'product_list' => [],
                 ];
 
                 $sub_categories[trim($sub->$cat_level)] = [
-                    'slug' => urlencode(trim($sub->$cat_level)),
+                    'slug' => encodeUrl($sub->$cat_level),
                 ];
             }
         }
 
-        ksort($products);
+        ksort($sub_categories);
 
         foreach ($sub_categories as $key => $value) {
             $count = 0;
@@ -132,13 +133,12 @@ class Categories extends Model
 
             foreach ($products as $product) {
                 if ($product['category'] == $key && $count <= 4) {
-                    $sub_categories[$key]['product_list'][] = $product['product'];
+                    // Grab the first 4 products and add them to the array (For category images).
+                    $sub_categories[$key]['product_list'][] = encodeUrl($product['product']);
                     $count++;
                 }
             }
         }
-
-        ksort($sub_categories);
 
         return $sub_categories;
     }

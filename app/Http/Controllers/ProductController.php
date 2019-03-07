@@ -15,11 +15,11 @@ class ProductController extends Controller
      * Products index, if categories are given, gets the sub categories.
      * If no sub categories for that level, display the products.
      *
-     * @param string $category_one
-     * @param string $category_two
-     * @param string $category_three
-     * @param string $category_four
-     * @param string $category_five
+     * @param string $category_one [Optional]
+     * @param string $category_two [Optional]
+     * @param string $category_three [Optional]
+     * @param string $category_four [Optional]
+     * @param string $category_five [Optional]
      * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
      */
     public function index($category_one = null, $category_two = null, $category_three = null, $category_four = null, $category_five = null)
@@ -28,11 +28,11 @@ class ProductController extends Controller
         $sub_category_list = [];
 
         $categories = [
-            'level_1' => urldecode($category_one),
-            'level_2' => urldecode($category_two),
-            'level_3' => urldecode($category_three),
-            'level_4' => urldecode($category_four),
-            'level_5' => urldecode($category_five),
+            'level_1' => decodeUrl($category_one),
+            'level_2' => decodeUrl($category_two),
+            'level_3' => decodeUrl($category_three),
+            'level_4' => decodeUrl($category_four),
+            'level_5' => decodeUrl($category_five),
         ];
 
         $current_level = 0;
@@ -45,19 +45,12 @@ class ProductController extends Controller
 
         if ($categories['level_1'] <> null) {
             $sub_category_list = Categories::subCategories($current_level, $categories['level_1'], $categories['level_' . $current_level]);
-//        }
-
-//            if (count($sub_category_list) == 0) {
             $products = Products::list($categories);
 
             return view('products.products', compact('categories', 'category_list', 'products', 'sub_category_list'));
-//            }
         }
 
-        $links = [
-            'categories' => HomeLinks::categories(),
-//            'adverts' => HomeLinks::adverts(),
-        ];
+        $links['categories'] = HomeLinks::categories();
 
         return view('products.index', compact('links', 'categories', 'category_list', 'sub_category_list'));
     }
@@ -74,14 +67,16 @@ class ProductController extends Controller
         $category_array = array_values(array_filter(explode('/', $previous_categories)));
 
         $category_list = Categories::list();
-        $product_code = trim(urldecode($product_code));
+        $product_code = decodeUrl($product_code);
         $product = Products::show($product_code);
         $expected_stock = ExpectedStock::show($product_code);
 
         $categories = [
-            'level_1' => isset($category_array[1]) ? trim(urldecode($category_array[1])) : '',
-            'level_2' => isset($category_array[2]) ? trim(urldecode($category_array[2])) : '',
-            'level_3' => isset($category_array[3]) ? trim(urldecode($category_array[3])) : ''
+            'level_1' => isset($category_array[1]) ? decodeUrl($category_array[1]) : '',
+            'level_2' => isset($category_array[2]) ? decodeUrl($category_array[2]) : '',
+            'level_3' => isset($category_array[3]) ? decodeUrl($category_array[3]) : '',
+            'level_4' => isset($category_array[4]) ? decodeUrl($category_array[4]) : '',
+            'level_5' => isset($category_array[5]) ? decodeUrl($category_array[5]) : '',
         ];
 
         if (isset($category_array[1]) && substr($category_array[1], 0, 6) == 'search') {
@@ -89,7 +84,9 @@ class ProductController extends Controller
                 'level_1' => 'search',
                 'level_2' => null,
                 'level_3' => null,
-                'query' => substr($category_array[1], 13)
+                'level_4' => null,
+                'level_5' => null,
+                'query' => substr(decodeUrl($category_array[1]), 13)
             ];
         }
 
@@ -104,10 +101,17 @@ class ProductController extends Controller
     public function search()
     {
         $category_list = Categories::list();
-        $search_term = Input::get('query');
-        $products = Products::search($search_term);
+        $search_term = trim(Input::get('query'));
+        $products = Products::search(urldecode($search_term));
 
-        $categories = ['level_1' => 'search', 'level_2' => null, 'level_3' => null, 'query' => $search_term];
+        $categories = [
+            'level_1' => 'search',
+            'level_2' => null,
+            'level_3' => null,
+            'level_4' => null,
+            'level_5' => null,
+            'query' => $search_term
+        ];
 
         return view('products.products', compact('products', 'categories', 'category_list'));
     }

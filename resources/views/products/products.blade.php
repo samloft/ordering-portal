@@ -47,14 +47,14 @@
                             <div class="row">
                                 <div class="col">
                                     <h2 class="section-title">
-                                        <a href="{{ route('products.show', $product->product) }}">{{ $product->name }}</a>
+                                        <a href="/products/view/{{ encodeUrl($product->product) }}">{{ $product->name }}</a>
                                     </h2>
 
                                     <div class="row product-details">
                                         <div class="col-sm-auto">
                                             <div class="product-list-image">
                                                 <img id="enlarge-image" alt="{{ $product->product }}"
-                                                     src="{{ @getimagesize('https://scolmoreonline.com/product_images/' . $product->product . '.png') ? 'https://scolmoreonline.com/product_images/' . $product->product . '.png' : 'https://scolmoreonline.com/assets/images/no-image.png' }}">
+                                                     src="{{ @getimagesize('https://scolmoreonline.com/product_images/' . encodeUrl($product->product) . '.png') ? 'https://scolmoreonline.com/product_images/' . encodeUrl($product->product) . '.png' : 'https://scolmoreonline.com/assets/images/no-image.png' }}">
                                             </div>
                                         </div>
                                         <div class="col-lg pt-2 pl-0">

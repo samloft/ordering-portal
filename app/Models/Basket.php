@@ -107,15 +107,25 @@ class Basket extends Model
      */
     public static function store($order_lines)
     {
+        $user_id = Auth::user()->id;
+        $customer_code = Auth::user()->customer_code;
+
         foreach ($order_lines as $line) {
-            $product = static::exists($line['product']);
+            // Check that the customer can buy the product.
+            $customer_can_buy = Products::show($line['product']);
 
-            if ($product) {
-                $basket_quantity = $product->quantity;
+            if ($customer_can_buy) {
+                $product = static::exists($line['product']);
+                $line['user_id'] = $user_id;
+                $line['customer_code'] = $customer_code;
 
-                (new basket)->where('product', $line['product'])->update(['quantity' => $basket_quantity + $line['quantity']]);
-            } else {
-                (new Basket)->insert($line);
+                if ($product) {
+                    $basket_quantity = $product->quantity;
+
+                    (new basket)->where('product', $line['product'])->update(['quantity' => $basket_quantity + $line['quantity']]);
+                } else {
+                    (new Basket)->insert($line);
+                }
             }
         }
 

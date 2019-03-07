@@ -5,6 +5,8 @@
 @section('content')
     <h1 class="page-title">{{ __('Review Order') }}</h1>
 
+    @include('layout.alerts')
+
     <div class="row">
         <div class="col d-flex align-items-stretch">
             <div class="card card-body">
@@ -87,7 +89,13 @@
             <button class="btn btn-blue" onclick="window.history.back();">{{ __('Back') }}</button>
         </div>
         <div class="col text-right">
-            <button class="btn btn-primary">{{ __('Copy Order To Basket') }}</button>
+            <a class="btn-link"
+               href="{{ route('order-tracking.copy-to-basket', ['order_number' => urlencode(trim($order->order_no))]) }}">
+                <button class="btn btn-primary">{{ __('Copy Order To Basket') }}</button>
+            </a>
+            <a id="invoice-download" class="btn-link d-none">
+                <button class="btn btn-primary">{{ __('Download Copy Invoice') }}</button>
+            </a>
             <button class="btn btn-primary">{{ __('Print Order Details') }}</button>
         </div>
     </div>
@@ -103,15 +111,37 @@
         </tr>
         </thead>
         <tbody>
-        @foreach($order->lines as $line)
-            <tr>
-                <td>{{ $line->product }}</td>
-                <td>{{ $line->long_description }}</td>
-                <td class="text-right">{{ $line->line_qty }}</td>
-                <td class="text-right">{{ currency($line->net_price, 4) }}</td>
-                <td class="text-right">{{ currency($line->line_val, 2) }}</td>
+        @foreach($lines as $line)
+            <tr class="{{ $line['purchasable'] ? '' : 'text-danger' }}">
+                <td>{{ $line['product'] }}</td>
+                <td>{{ $line['long_description'] }}</td>
+                <td class="text-right">{{ $line['line_qty'] }}</td>
+                <td class="text-right">{{ $line['net_price'] }}</td>
+                <td class="text-right">{{ $line['line_val'] }}</td>
             </tr>
         @endforeach
         </tbody>
     </table>
+
+    <div class="text-right">
+        <small class="text-danger">* Products marked in red are no longer available for purchase.</small>
+    </div>
+
+    @if(count($lines) == 0)
+        <h3 class="text-center">No order lines to display.</h3>
+    @endif
+@endsection
+
+@section('scripts')
+    <script>
+        $.get('/order-tracking/invoice/{{ urlencode(trim($order->order_no)) }}/{{ urlencode(trim($order->customer_order_no)) }}/').done(function (response) {
+            if (response.pdf_exists) {
+                $('#invoice-download')
+                    .attr('href', '/order-tracking/invoice/{{ urlencode(trim($order->order_no)) }}/{{ urlencode(trim($order->customer_order_no)) }}/true')
+                    .removeClass('d-none');
+            }
+        }).fail(function (response) {
+            return console.log(response);
+        });
+    </script>
 @endsection
