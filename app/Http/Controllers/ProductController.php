@@ -101,8 +101,8 @@ class ProductController extends Controller
     public function search()
     {
         $category_list = Categories::list();
-        $search_term = trim(Input::get('query'));
-        $products = Products::search(urldecode($search_term));
+        $search_term = urldecode(Input::get('query'));
+        $products = Products::search($search_term);
 
         $categories = [
             'level_1' => 'search',
