@@ -44,7 +44,8 @@ class LoginController extends Controller
      */
     public function showLoginForm()
     {
-        return view('auth.login', compact('external_url'));
+//        return view('auth.login', compact('external_url'));
+        return view('auth.login');
     }
 
     protected function authenticated(Request $request, User $user)
