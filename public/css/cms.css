@@ -1,0 +1,153 @@
+@charset "UTF-8";
+
+.sortable-list__container {
+  padding: 20px;
+}
+
+.sortable-list__footer {
+  padding-right: 30px;
+  text-align: right;
+  margin-bottom: 20px;
+}
+
+ul.ui-sortable {
+  list-style: none;
+  padding: 0;
+}
+
+ul.ui-sortable {
+  margin-top: 10px;
+  margin-left: 10px;
+  margin-right: 10px;
+}
+
+ul.ui-sortable li {
+  width: 100%;
+  padding: 10px;
+  background-color: #ebf1f6;
+  border: 1px solid #efefef;
+  border-radius: 0.25rem;
+  margin-bottom: 4px;
+  cursor: pointer;
+}
+
+ul.ui-sortable button {
+  padding: 0 10px !important;
+}
+
+.jconfirm.jconfirm-white .jconfirm-bg,
+.jconfirm.jconfirm-light .jconfirm-bg {
+  background-color: #364c66;
+  opacity: 1;
+}
+
+.overhang,
+.overhang-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+}
+
+.overhang-close,
+.overhang-message strong {
+  font-weight: 700;
+}
+
+.overhang {
+  display: none;
+  width: 100%;
+  z-index: 9999;
+  padding: 15px 2px;
+  text-align: center;
+  box-sizing: border-box;
+}
+
+.overhang-message {
+  color: #FFF;
+  font-size: 20px;
+}
+
+.overhang-message a {
+  color: inherit;
+}
+
+.overhang-message a:hover {
+  text-decoration: none;
+}
+
+.overhang-overlay {
+  display: block;
+  background-color: #000;
+  opacity: 0.6;
+  bottom: 0;
+  z-index: 9998;
+}
+
+.overhang-prompt-field {
+  height: 30px;
+  width: 250px;
+  border-radius: 5px;
+  border: none;
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  margin-top: 15px;
+  bottom: 7px;
+  position: relative;
+  padding-left: 3px;
+  padding-right: 3px;
+  outline: 0;
+  font-size: 15px;
+}
+
+.overhang-no-option,
+.overhang-yes-option {
+  min-width: 50px;
+  height: 30px;
+  border: none;
+  outline: 0;
+  border-radius: 4px;
+  font-size: 20px;
+  color: #FFF;
+  cursor: pointer;
+  margin: 0 6px;
+}
+
+.overhang-yes-option {
+  margin-left: 15px;
+}
+
+.overhang-close {
+  vertical-align: middle;
+  cursor: pointer;
+  margin-top: -4px;
+  padding-left: 13px;
+  font-size: 2.5em;
+  display: inline-block;
+  line-height: 20px;
+}
+
+.overhang-close:after {
+  content: "\D7";
+}
+
+@media (max-width: 720px) {
+  .overhang-close {
+    font-size: 2em;
+    line-height: 14px;
+  }
+
+  .overhang-message {
+    font-size: 15px;
+  }
+}
+
+.custom-file:hover input {
+  cursor: pointer;
+}
+
+.custom-file:hover label {
+  cursor: pointer;
+}
+

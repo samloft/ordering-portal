@@ -4,7 +4,7 @@
             <div class="row">
                 <div class="col">
                     <a href="{{ $advert->link }}" target="_blank">
-                        <img class="img-fluid" src="{{ $advert->image }}" alt="{{ $advert->name }}">
+                        <img class="img-fluid" src="{{ asset('images/home-links/' . $advert->image) }}" alt="{{ $advert->name }}">
                     </a>
                 </div>
             </div>

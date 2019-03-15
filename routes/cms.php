@@ -1,5 +1,7 @@
 <?php
 
+use Illuminate\Http\Request;
+
 /*
 |--------------------------------------------------------------------------
 | CMS Routes
@@ -16,11 +18,19 @@ Route::post('logout', 'Auth\AdminController@logout')->name('cms.logout');
 
 Route::get('/', 'Cms\HomeController@index')->name('cms.index');
 
-//Route::group(['middleware' => 'admin'], function() {
-//    Route::get('/', 'Cms\HomeController@index')->name('cms.index');
+Route::group(['prefix' => 'home-links'], function () {
+    Route::get('/', 'Cms\HomeLinksController@index')->name('cms.home-links');
+    Route::post('store', 'Cms\HomeLinksController@store')->name('cms.home-links.store');
+    Route::post('update', 'Cms\HomeLinksController@updatePositions')->name('cms.home-links.update');
+    Route::get('delete/{id}', 'Cms\HomeLinksController@destroy')->name('cms.home-links.delete');
 
-    /* Product images */
-    Route::group(['prefix' => 'product-images'], function() {
-        Route::get('/', 'Cms\ProductImages@index')->name('cms.product-images');
-    });
+    Route::post('show', function(Request $request) {
+        return \App\Models\HomeLinks::show($request->id);
+    })->name('cms.home-links.show');
+});
+
+/* Product images */
+Route::group(['prefix' => 'product-images'], function () {
+    Route::get('/', 'Cms\ProductImages@index')->name('cms.product-images');
+});
 //});

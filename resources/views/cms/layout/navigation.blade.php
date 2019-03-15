@@ -31,6 +31,13 @@
             <div class="sidebar-block p-0">
                 <ul class="sidebar-menu">
                     <li class="sidebar-menu-item">
+                        <a class="sidebar-menu-button" href="{{ route('cms.home-links') }}">
+                            <i class="sidebar-menu-icon sidebar-menu-icon--left material-icons">insert_link</i>
+                            <span class="sidebar-menu-text">{{ __('Home Links') }}</span>
+                        </a>
+                    </li>
+
+                    <li class="sidebar-menu-item">
                         <a class="sidebar-menu-button" href="#">
                             <i class="sidebar-menu-icon sidebar-menu-icon--left material-icons">money_off</i>
                             <span class="sidebar-menu-text">{{ __('Discounts') }}</span>

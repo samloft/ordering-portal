@@ -1,0 +1,34 @@
+.sortable-list__container {
+  padding: 20px;
+}
+
+.sortable-list__footer {
+  padding-right: 30px;
+  text-align: right;
+  margin-bottom: 20px;
+}
+
+ul.ui-sortable {
+  list-style: none;
+  padding: 0;
+}
+
+ul.ui-sortable {
+  margin-top: 10px;
+  margin-left: 10px;
+  margin-right: 10px;
+}
+
+ul.ui-sortable li {
+  width: 100%;
+  padding: 10px;
+  background-color: rgba(235, 241, 246, 1.0);
+  border: 1px solid #efefef;
+  border-radius: .25rem;
+  margin-bottom: 4px;
+  cursor: pointer;
+}
+
+ul.ui-sortable button {
+  padding: 0 10px !important;
+}

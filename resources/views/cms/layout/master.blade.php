@@ -9,6 +9,9 @@
 
     <link href="{{ asset('css/cms/app.css') }}" rel="stylesheet">
     <link href="{{ asset('css/cms/vendor/material-icons.css') }}" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jquery-confirm/3.3.2/jquery-confirm.min.css">
+
+    <link href="{{ mix('css/cms.css') }}" rel="stylesheet">
 
     @yield ('styles')
 </head>
@@ -35,8 +38,11 @@
 </div>
 
 <script type="text/javascript" src="{{ mix('js/app.js') }}"></script>
+<script type="text/javascript" src="{{ mix('js/cms.js') }}"></script>
 <script type="text/javascript" src="{{ asset('js/cms/vendor/dom-factory.js') }}"></script>
 <script type="text/javascript" src="{{ asset('js/cms/vendor/material-design-kit.js') }}"></script>
+<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-confirm/3.3.2/jquery-confirm.min.js"></script>
 
 <script>
     (function () {
