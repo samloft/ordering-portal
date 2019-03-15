@@ -49,7 +49,10 @@ class Products extends Model
                 $query->where('cat1_level1', ($categories['level_1']))
                     ->where('cat1_level2', $categories['level_2'])
                     ->where('cat1_level3', $categories['level_3']);
-            })->paginate(10);
+            })
+            ->join('prices', 'products.product', '=', 'prices.product')
+            ->join('stock_levels', 'products.product', '=', 'stock_levels.product')
+            ->paginate(10);
 
         return $products;
     }

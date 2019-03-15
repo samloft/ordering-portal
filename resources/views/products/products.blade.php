@@ -58,11 +58,15 @@
                                             </div>
                                         </div>
                                         <div class="col-lg pt-2 pl-0">
-                                            <h5>{{ __('Product Code: ') }}<span id="product-code"
-                                                                                class="primary-font">{{ $product->product }}</span>
+                                            <h5>
+                                                {{ __('Product Code: ') }}
+                                                <span id="product-code" class="primary-font">{{ $product->product }}</span>
                                             </h5>
-                                            <h5>{{ __('Unit Type: ') }}<span
-                                                        class="primary-font">{{ $product->uom }}</span></h5>
+                                            <h5>
+                                                {{ __('Unit Type: ') }}
+                                                <span class="primary-font">{{ $product->uom }}</span>
+                                            </h5>
+
                                             <h5>{{ $product->description }}</h5>
                                         </div>
                                     </div>
@@ -81,7 +85,7 @@
                                             {{ __('Unit Price:') }}
                                         </div>
                                         <div class="col text-right">
-                                            {{ currency($product->prices->price, 4) }}
+                                            {{ currency($product->price, 4) }}
                                         </div>
                                     </div>
                                     <div class="row">
@@ -98,7 +102,7 @@
                                             <strong>{{ __('Net Price:') }}</strong>
                                         </div>
                                         <div class="col text-right">
-                                            <strong>{{ currency(($product->prices->price * ((100 - 2) / 100)), 4) }}</strong>
+                                            <strong>{{ currency(($product->price * ((100 - 2) / 100)), 4) }}</strong>
                                         </div>
                                     </div>
                                     <hr>
@@ -130,7 +134,8 @@
                                             <span class="input-group-text">{{ __('Stock Level') }}</span>
                                         </div>
                                         <input class="form-control form-control-sm"
-                                               value="{{ $product->stock->quantity ? $product->stock->quantity : 0 }}"
+{{--                                               value="{{ $product->stock->quantity ? $product->stock->quantity : 0 }}"--}}
+                                               value="{{ $product->quantity ? $product->quantity : 0 }}"
                                                readonly>
                                         <span class="input-group-btn">
                             </span>
