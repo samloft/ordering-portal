@@ -16,7 +16,7 @@ class CreateOrderTrackingLinesTable extends Migration
         Schema::create('order_tracking_lines', function (Blueprint $table) {
             $table->string('order_no', 10);
             $table->integer('order_line_no');
-            $table->string('product', 10);
+            $table->string('product', 20);
             $table->string('long_description', 40);
             $table->integer('line_qty');
             $table->float('net_price');
