@@ -22,7 +22,7 @@ class CreateOrderTrackingHeaderTable extends Migration
             $table->string('customer_code', 10);
             $table->string('invoice_customer', 10);
             $table->date('date_received');
-            $table->date('date_required');
+            $table->date('date_required')->nullable();
             $table->date('date_despatched')->nullable();
             $table->date('date_invoiced')->nullable();
             $table->string('invoice_no')->nullable();

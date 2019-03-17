@@ -36570,7 +36570,7 @@ $(function () {
     var products = $(item).data('products');
     $.get('/category/image/' + products).done(function (response) {
       $(item).find('.spinner').remove();
-      $(item).append('<img src="' + response.image + '">');
+      $(item).append('<img src="' + response.image + '" alt="' + response.image + '">');
     });
   });
 });

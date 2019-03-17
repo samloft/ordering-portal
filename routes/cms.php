@@ -31,6 +31,8 @@ Route::group(['prefix' => 'home-links'], function () {
 
 /* Product images */
 Route::group(['prefix' => 'product-images'], function () {
-    Route::get('/', 'Cms\ProductImages@index')->name('cms.product-images');
+    Route::get('/', 'Cms\ProductImageController@index')->name('cms.product-images');
+    Route::post('check', 'Cms\ProductImageController@missingImages')->name('cms.product-images.check');
+    Route::post('store', 'Cms\ProductImageController@store')->name('cms.product-images.store');
 });
 //});

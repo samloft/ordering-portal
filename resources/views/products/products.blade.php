@@ -21,7 +21,7 @@
                                 <a href="/products/{{ ($categories['level_1'] <> '' ? $categories['level_1'] . '/' : '') . ($categories['level_2'] <> '' ? $categories['level_2'] . '/' : '') . $sub_category_list[$key]['slug'] }}">
                                     @if (isset($sub_category_list[$key]['category_image']))
                                         <div class="sub-category-image">
-                                            <img src="{{ isset($sub_category_list[$key]['image']) ? $sub_category_list[$key]['image'] : 'https://scolmoreonline.com/assets/images/no-image.png' }}"
+                                            <img src="{{ isset($sub_category_list[$key]['image']) ? asset('product_images/' . $sub_category_list[$key]['image']) : 'https://scolmoreonline.com/assets/images/no-image.png' }}"
                                                  alt="{{ $key }}">
                                         </div>
                                     @else
@@ -54,7 +54,7 @@
                                         <div class="col-sm-auto">
                                             <div class="product-list-image">
                                                 <img id="enlarge-image" alt="{{ $product->product }}"
-                                                     src="{{ @getimagesize('https://scolmoreonline.com/product_images/' . encodeUrl($product->product) . '.png') ? 'https://scolmoreonline.com/product_images/' . encodeUrl($product->product) . '.png' : 'https://scolmoreonline.com/assets/images/no-image.png' }}">
+                                                     src="{{ \Storage::disk('public')->exists(encodeUrl($product->product) . '.png') ? asset('product_images/' . encodeUrl($product->product) . '.png') : 'https://scolmoreonline.com/assets/images/no-image.png' }}">
                                             </div>
                                         </div>
                                         <div class="col-lg pt-2 pl-0">

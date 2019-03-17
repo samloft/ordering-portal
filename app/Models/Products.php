@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 use Auth;
+use Illuminate\Support\Facades\Storage;
 
 /**
  * App\Models\Products
@@ -88,7 +89,7 @@ class Products extends Model
     {
         return (new Products)->select('product')
             ->whereHas('prices')
-            ->whereRaw('UPPER(product) like \'' .  $search . '%\'')
+            ->whereRaw('UPPER(product) like \'' . $search . '%\'')
             ->orderBy('product', 'asc')
             ->limit(10)
             ->get();
@@ -105,19 +106,30 @@ class Products extends Model
         $products = explode(',', $products);
 
         foreach ($products as $product) {
-            $external_link = 'https://scolmoreonline.com/product_images/' . $product . '.png';
+            $product = encodeUrl($product) . '.png';
 
-            if (@getimagesize($external_link)) {
+            $exists = $exists = Storage::disk('public')->exists('product_images/' . $product);
+
+            if ($exists) {
                 return [
                     'found' => true,
-                    'image' => $external_link
+                    'image' => '/product_images/' . $product
                 ];
             }
+
+//            $external_link = 'https://scolmoreonline.com/product_images/' . $product . '.png';
+//
+//            if (@getimagesize($external_link)) {
+//                return [
+//                    'found' => true,
+//                    'image' => $external_link
+//                ];
+//            }
         }
 
         return [
             'found' => false,
-            'image' => 'https://scolmoreonline.com/assets/images/no-image.png'
+            'image' => '/images/no-image.png'
         ];
     }
 }
