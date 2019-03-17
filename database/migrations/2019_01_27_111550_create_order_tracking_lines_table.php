@@ -21,6 +21,9 @@ class CreateOrderTrackingLinesTable extends Migration
             $table->integer('line_qty');
             $table->float('net_price');
             $table->float('line_val');
+
+            $table->primary(['order_no', 'product']);
+            $table->index(['order_no', 'product']);
         });
     }
 

@@ -39,6 +39,9 @@ class CreateOrderTrackingHeaderTable extends Migration
             $table->string('consignment');
             $table->float('vat_value');
             $table->string('delivery_service');
+
+            $table->primary(['order_no', 'base_order']);
+            $table->index(['order_no', 'base_order']);
         });
     }
 

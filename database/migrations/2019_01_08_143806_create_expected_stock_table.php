@@ -17,6 +17,9 @@ class CreateExpectedStockTable extends Migration
             $table->char('product');
             $table->integer('quantity');
             $table->date('due_date');
+
+            $table->primary('product');
+            $table->index('product');
         });
     }
 

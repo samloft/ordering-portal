@@ -29,6 +29,9 @@ class CreateCustomersTable extends Migration
             $table->string('invoice_customer_address_line_5')->limit(64);
             $table->string('vat_flag')->limit(2)->nullable();
             $table->string('currency')->limit(3);
+
+            $table->primary('customer_code');
+            $table->index('customer_code');
         });
     }
 

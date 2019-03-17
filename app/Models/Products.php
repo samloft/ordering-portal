@@ -53,6 +53,7 @@ class Products extends Model
             })
             ->join('prices', 'products.product', '=', 'prices.product')
             ->join('stock_levels', 'products.product', '=', 'stock_levels.product')
+            ->where('prices.customer_code', Auth::user()->customer_code)
             ->paginate(10);
 
         return $products;

@@ -31,6 +31,9 @@ class CreateProductsTable extends Migration
             $table->char('vat_flag')->limit(1)->default('');
             $table->char('discount_code')->limit(8);
             $table->char('packaging')->limit(11);
+
+            $table->primary('product');
+            $table->index('product');
         });
     }
 
