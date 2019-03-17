@@ -19,7 +19,7 @@
                                 <div class="col-sm-auto">
                                     <div class="product-list-image">
                                         <img id="enlarge-image"
-                                             src="{{ @getimagesize('https://scolmoreonline.com/product_images/' . encodeUrl($product->product) . '.png') ? 'https://scolmoreonline.com/product_images/' . encodeUrl($product->product) . '.png' : 'https://scolmoreonline.com/assets/images/no-image.png' }}">
+                                             src="{{ \Storage::disk('public')->exists('product_images/' . encodeUrl($product->product) . '.png') ? asset('/product_images/' . encodeUrl($product->product) . '.png') : asset('images/no-image.png') }}">
                                     </div>
                                 </div>
                                 <div class="col-lg pt-2 pl-0">

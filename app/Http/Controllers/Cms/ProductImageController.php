@@ -23,7 +23,7 @@ class ProductImageController extends Controller
 //            $products[] = encodeUrl($product->product);
 //        }
 
-        return view('cms.product-images.index', compact('products'));
+        return view('cms.product-images.index');
     }
 
     /**
@@ -37,10 +37,8 @@ class ProductImageController extends Controller
         $missing_images = [];
 
         foreach ($product_list as $product) {
-//            $exists = Storage::disk('public')->exists(encodeUrl($product->product));
             $image = Products::checkImage(encodeUrl($product->product));
 
-//            if (!$exists) {
             if (!$image['found']) {
                 $missing_images[] = [
                     'product' => $product->product,

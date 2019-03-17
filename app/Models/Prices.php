@@ -22,7 +22,8 @@ class Prices extends Model
      */
     public static function productList()
     {
-        return (new Prices)->select('product')->groupBy('product')->orderBy('product', 'asc')->get();
+//        return (new Prices)->select('product')->groupBy('product')->orderBy('product', 'asc')->get();
+        return (new Prices)->select('product')->distinct()->orderBy('product', 'asc')->get();
     }
 
     /**
