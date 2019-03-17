@@ -16,12 +16,12 @@ class ProductImageController extends Controller
      */
     public function index()
     {
-        $product_list = Prices::productList();
-        $products = [];
-
-        foreach ($product_list as $product) {
-            $products[] = encodeUrl($product->product);
-        }
+//        $product_list = Prices::productList();
+//        $products = [];
+//
+//        foreach ($product_list as $product) {
+//            $products[] = encodeUrl($product->product);
+//        }
 
         return view('cms.product-images.index', compact('products'));
     }

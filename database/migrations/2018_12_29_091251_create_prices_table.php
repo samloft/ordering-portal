@@ -25,6 +25,7 @@ class CreatePricesTable extends Migration
             $table->float('price3');
 
             $table->primary(['customer_code', 'product']);
+            $table->index(['product', 'customer_code']);
         });
     }
 
