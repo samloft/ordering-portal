@@ -42,7 +42,7 @@
                     </div>
 
                     <div class="product-images__success alert alert-success text-center p-4 d-none" role="alert">
-                        No product images have been found to be missing
+                        {{ __('No product images have been found to be missing') }}
                     </div>
 
                     <div class="card card-form product-images__results d-none">
@@ -106,7 +106,8 @@
                     $('.product-images__success').removeClass('d-none');
                 }
             }).fail(function () {
-                return console.log('Error');
+                $('.product-images__checking').addClass('d-none');
+                alert('Error getting missing images');
             });
         }
     </script>

@@ -40,6 +40,8 @@ class Products extends Model
     }
 
     /**
+     * Return all products for the given categories.
+     *
      * @param $categories
      * @return mixed
      */
@@ -60,6 +62,8 @@ class Products extends Model
     }
 
     /**
+     * Get data for the given product code.
+     *
      * @param $product_code
      * @return mixed
      */
@@ -69,6 +73,8 @@ class Products extends Model
     }
 
     /**
+     * Take the search parameter and search on multiple columns.
+     *
      * @param $search_term
      * @return mixed
      */
@@ -83,6 +89,8 @@ class Products extends Model
     }
 
     /**
+     * Autocomplete for quickbuy input.
+     *
      * @param $search
      * @return Products
      */
@@ -107,7 +115,7 @@ class Products extends Model
         $products = explode(',', $products);
 
         foreach ($products as $product) {
-            $product = encodeUrl($product) . '.png';
+            $product = str_replace(['%2B', '+'], ' ', encodeUrl($product)) . '.png';
 
             $exists = $exists = Storage::disk('public')->exists('product_images/' . $product);
 
@@ -117,15 +125,6 @@ class Products extends Model
                     'image' => '/product_images/' . $product
                 ];
             }
-
-//            $external_link = 'https://scolmoreonline.com/product_images/' . $product . '.png';
-//
-//            if (@getimagesize($external_link)) {
-//                return [
-//                    'found' => true,
-//                    'image' => $external_link
-//                ];
-//            }
         }
 
         return [

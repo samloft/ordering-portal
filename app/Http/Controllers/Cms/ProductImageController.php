@@ -42,7 +42,7 @@ class ProductImageController extends Controller
             if (!$image['found']) {
                 $missing_images[] = [
                     'product' => $product->product,
-                    'file_name' => encodeUrl($product->product) . '.png'
+                    'file_name' => str_replace('%2B', ' ', encodeUrl($product->product)) . '.png'
                 ];
             }
         }

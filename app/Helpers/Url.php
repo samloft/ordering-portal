@@ -11,7 +11,7 @@ function urlCharacters()
     return [
         '/' => '_',
         ' ' => '+',
-        '%2' => '+',
+        '%2B' => '+',
     ];
 }
 
