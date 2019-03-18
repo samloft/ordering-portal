@@ -14,7 +14,7 @@ class CreateCategoriesTable extends Migration
     public function up()
     {
         Schema::create('categories', function (Blueprint $table) {
-            $table->string('product')->primary();
+            $table->string('product')->limit(20);
             $table->string('cat1_level1')->nullable()->default(NULL);
             $table->string('cat1_level2')->nullable()->default(NULL);
             $table->string('cat1_level3')->nullable()->default(NULL);
