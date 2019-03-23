@@ -52,38 +52,37 @@
             <th class="text-right">{{ __('Total Price') }}</th>
         </tr>
         </thead>
-        @if (count($basket['lines']) > 0)
-            <tbody>
-            @foreach($basket['lines'] as $line)
-                <tr {{ $line['stock'] < $line['quantity'] ? 'class=bg-warning' : '' }} id="{{ $line['product'] }}">
-                    <td>
-                        <div class="basket-image__container d-inline-block">
-                            <img class="basket-image" src="{{ $line['image'] }}" alt="{{ $line['name'] }}">
-                        </div>
-                        <h2 class="section-title d-inline-block">
-                            <a href="{{ route('products.show', ['product' => $line['product']]) }}">{{ $line['name'] }}</a>
-                        </h2>
-                    </td>
-                    <td id="basket__product">{{ $line['product'] }}</td>
-                    <td>{{ $line['uom'] }}</td>
-                    <td class="text-right">{{ $line['stock'] }}</td>
-                    <td class="text-right">{{ $line['unit_price'] }}</td>
-                    <td class="quantity-column">
-                        <input name="line_qty" class="form-control form-quantity" value="{{ $line['quantity'] }}" autocomplete="off">
-                        <span class="quantity-options">
+        <tbody>
+        @foreach($basket['lines'] as $line)
+            <tr {{ $line['stock'] < $line['quantity'] ? 'class=bg-warning' : '' }} id="{{ $line['product'] }}">
+                <td>
+                    <div class="basket-image__container d-inline-block">
+                        <img class="basket-image" src="{{ $line['image'] }}" alt="{{ $line['name'] }}">
+                    </div>
+                    <h2 class="section-title d-inline-block">
+                        <a href="{{ route('products.show', ['product' => $line['product']]) }}">{{ $line['name'] }}</a>
+                    </h2>
+                </td>
+                <td id="basket__product">{{ $line['product'] }}</td>
+                <td>{{ $line['uom'] }}</td>
+                <td class="text-right">{{ $line['stock'] }}</td>
+                <td class="text-right">{{ $line['unit_price'] }}</td>
+                <td class="quantity-column">
+                    <input name="line_qty" class="form-control form-quantity" value="{{ $line['quantity'] }}"
+                           autocomplete="off">
+                    <span class="quantity-options">
                             <span id="basket_line__update" class="quantity-update">Update</span> <span
-                                    id="basket-line__remove" class="quantity-remove">Remove</span>
+                                id="basket-line__remove" class="quantity-remove">Remove</span>
                         </span>
-                    </td>
-                    <td class="text-right">{{ $line['price'] }}</td>
-                </tr>
-            @endforeach
-            </tbody>
-        @endif
+                </td>
+                <td class="text-right">{{ $line['price'] }}</td>
+            </tr>
+        @endforeach
+        </tbody>
     </table>
 
     @if (count($basket['lines']) == 0)
-        <div class="text-center mb-5">
+        <div id="basket-message" class="text-center mb-5">
             <h2>{{ __('No items are in your basket') }}</h2>
         </div>
     @endif
@@ -110,7 +109,8 @@
                 </div>
                 <div class="row">
                     <div class="col">{{ __('Small Order Charge*') }}</div>
-                    <div id="basket__small-order-charge" class="col text-right">{{ $basket['summary']['small_order_charge'] }}</div>
+                    <div id="basket__small-order-charge"
+                         class="col text-right">{{ $basket['summary']['small_order_charge'] }}</div>
                 </div>
                 <div class="row">
                     <div class="col">{{ __('VAT') }}</div>

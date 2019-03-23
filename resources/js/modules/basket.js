@@ -159,6 +159,12 @@ function basketSummary(isBasket = false) {
         $('.basket-info .order-total').html(response.summary.goods_total);
 
         if (isBasket) {
+            if (response.line_count === 0) {
+                $('#basket-message').show();
+            } else {
+                $('#basket-message').hide();
+            }
+
             $('#basket__goods-total').text(response.summary.goods_total);
             $('#basket__shipping').text(response.summary.shipping);
             $('#basket__sub-total').text(response.summary.sub_total);
