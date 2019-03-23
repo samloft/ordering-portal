@@ -58,9 +58,7 @@
                 <tr {{ $line['stock'] < $line['quantity'] ? 'class=bg-warning' : '' }}>
                     <td>
                         <div class="basket-image__container d-inline-block">
-                            <img class="basket-image"
-                                 src="{{ \Storage::disk('public')->exists('product_images/' . $line['image']) ? asset('product_images/' . $line['image']) : asset('images/no-image.png')  }}"
-                                 alt="{{ $line['name'] }}">
+                            <img class="basket-image" src="{{ $line['image'] }}" alt="{{ $line['name'] }}">
                         </div>
                         <h2 class="section-title d-inline-block">
                             <a href="{{ route('products.show', ['product' => $line['product']]) }}">{{ $line['name'] }}</a>

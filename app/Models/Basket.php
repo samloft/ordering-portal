@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Storage;
 
 /**
  * App\Models\Basket
@@ -53,12 +54,18 @@ class Basket extends Model
         foreach ($lines as $line) {
             $goods_total = $goods_total + (discount($line->price) * $line->quantity);
 
+            if (Storage::disk('public')->exists('product_images/' . $line->product . '.png')) {
+                $image = asset('product_images/' . $line->product . '.png');
+            } else {
+                $image = asset('images/no-image.png');
+            }
+
             $product_lines[] = [
                 'product' => $line->product,
                 'name' => $line->name,
                 'uom' => $line->uom,
                 'stock' => $line->stock_level,
-                'image' => $line->product . '.png',
+                'image' => $image,
                 'quantity' => $line->quantity,
                 'price' => currency(discount($line->price) * $line->quantity, 2),
                 'unit_price' => currency(discount($line->price), 4),
