@@ -69,7 +69,12 @@ class Products extends Model
      */
     public static function show($product_code)
     {
-        return (new Products)->whereHas('prices')->where('product', $product_code)->first();
+        return (new Products)->select('products.product', 'name', 'uom', 'price', 'quantity', 'order_multiples')
+            ->whereHas('prices')
+            ->where('products.product', $product_code)
+            ->leftJoin('prices', 'prices.product', 'products.product')
+            ->leftJoin('stock_levels', 'stock_levels.product', 'products.product')
+            ->first();
     }
 
     /**

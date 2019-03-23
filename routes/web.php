@@ -112,10 +112,13 @@ Route::group(['middleware' => ['auth', 'has.customer']], function () {
         Route::get('empty', 'BasketController@clear')->name('basket.empty');
 
         Route::post('add-product', 'BasketController@addProduct')->name('basket.add-product');
+        Route::post('delete-product', 'BasketController@removeProduct')->name('basket.delete-line');
+        Route::post('update-product', 'BasketController@updateProductQuantity')->name('basket.update-line');
 
         Route::get('summary', function () {
-            return \App\Models\Basket::summary();
+            return \App\Models\Basket::show();
         })->name('basket.summary');
+
         Route::get('dropdown', function () {
             return \App\Models\Basket::show();
         })->name('basket.dropdown');

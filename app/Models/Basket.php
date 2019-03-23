@@ -83,28 +83,29 @@ class Basket extends Model
                 'vat' => currency(vatAmount($goods_total + $small_order_charge), 2),
                 'total' => currency(vatIncluded($goods_total + $small_order_charge), 2)
             ],
-            'lines' => $product_lines
+            'line_count' => count($product_lines),
+            'lines' => $product_lines,
         ];
     }
 
-    /**
-     * Return summary details based on users current basket.
-     *
-     * @return array
-     */
-    public static function summary()
-    {
-        $summary = (new Basket)->selectRaw('SUM(prices.price * basket.quantity) as goods_total, COUNT(basket.product) as line_count')
-            ->join('prices', 'basket.product', '=', 'prices.product')
-            ->where('prices.customer_code', Auth::user()->customer_code)
-            ->where('basket.customer_code', Auth::user()->customer_code)
-            ->first();
-
-        return [
-            'lines' => $summary->line_count,
-            'goods_total' => currency($summary->goods_total, 2)
-        ];
-    }
+//    /**
+//     * Return summary details based on users current basket.
+//     *
+//     * @return array
+//     */
+//    public static function summary()
+//    {
+//        $summary = (new Basket)->selectRaw('SUM(prices.price * basket.quantity) as goods_total, COUNT(basket.product) as line_count')
+//            ->join('prices', 'basket.product', '=', 'prices.product')
+//            ->where('prices.customer_code', Auth::user()->customer_code)
+//            ->where('basket.customer_code', Auth::user()->customer_code)
+//            ->first();
+//
+//        return [
+//            'lines' => $summary->line_count,
+//            'goods_total' => currency($summary->goods_total, 2)
+//        ];
+//    }
 
     /**
      * Add array of order lines into customers basket.
@@ -136,7 +137,7 @@ class Basket extends Model
             }
         }
 
-        return true;
+        return ['basket_updated' => isset($product) ? true : false];
     }
 
     /**
@@ -159,6 +160,28 @@ class Basket extends Model
     public static function clear()
     {
         return (new Basket)->where('customer_code', Auth::user()->customer_code)->delete();
+    }
+
+    /**
+     * Delete an individual product line from the basket.
+     *
+     * @param $product
+     * @return \Illuminate\Contracts\Routing\ResponseFactory|\Illuminate\Http\Response
+     */
+    public static function destroyLine($product)
+    {
+        return (new Basket)->where('customer_code', Auth::user()->customer_code)
+            ->where('user_id', Auth::user()->id)
+            ->where('product', $product)
+            ->delete();
+    }
+
+    public static function updateLine($product, $quantity)
+    {
+        return (new Basket)->where('customer_code', Auth::user()->customer_code)
+            ->where('user_id', Auth::user()->id)
+            ->where('product', $product)
+            ->update(['quantity' => $quantity]);
     }
 
     /**

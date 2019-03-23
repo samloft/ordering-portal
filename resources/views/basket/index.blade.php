@@ -55,7 +55,7 @@
         @if (count($basket['lines']) > 0)
             <tbody>
             @foreach($basket['lines'] as $line)
-                <tr {{ $line['stock'] < $line['quantity'] ? 'class=bg-warning' : '' }}>
+                <tr {{ $line['stock'] < $line['quantity'] ? 'class=bg-warning' : '' }} id="{{ $line['product'] }}">
                     <td>
                         <div class="basket-image__container d-inline-block">
                             <img class="basket-image" src="{{ $line['image'] }}" alt="{{ $line['name'] }}">
@@ -64,14 +64,15 @@
                             <a href="{{ route('products.show', ['product' => $line['product']]) }}">{{ $line['name'] }}</a>
                         </h2>
                     </td>
-                    <td>{{ $line['product'] }}</td>
+                    <td id="basket__product">{{ $line['product'] }}</td>
                     <td>{{ $line['uom'] }}</td>
                     <td class="text-right">{{ $line['stock'] }}</td>
                     <td class="text-right">{{ $line['unit_price'] }}</td>
                     <td class="quantity-column">
-                        <input name="line_qty" class="form-control form-quantity" value="{{ $line['quantity'] }}">
+                        <input name="line_qty" class="form-control form-quantity" value="{{ $line['quantity'] }}" autocomplete="off">
                         <span class="quantity-options">
-                            <span class="quantity-update">Update</span> <span class="quantity-remove">Remove</span>
+                            <span id="basket_line__update" class="quantity-update">Update</span> <span
+                                    id="basket-line__remove" class="quantity-remove">Remove</span>
                         </span>
                     </td>
                     <td class="text-right">{{ $line['price'] }}</td>
@@ -97,28 +98,28 @@
             <div class="card card-body basket-summary">
                 <div class="row">
                     <div class="col">{{ __('Goods Total') }}</div>
-                    <div class="col text-right">{{ $basket['summary']['goods_total'] }}</div>
+                    <div id="basket__goods-total" class="col text-right">{{ $basket['summary']['goods_total'] }}</div>
                 </div>
                 <div class="row">
                     <div class="col">{{ __('Shipping') }}</div>
-                    <div class="col text-right">{{ $basket['summary']['shipping'] }}</div>
+                    <div id="basket__shipping" class="col text-right">{{ $basket['summary']['shipping'] }}</div>
                 </div>
                 <div class="row">
                     <div class="col">{{ __('Sub Total') }}</div>
-                    <div class="col text-right">{{ $basket['summary']['sub_total'] }}</div>
+                    <div id="basket__sub-total" class="col text-right">{{ $basket['summary']['sub_total'] }}</div>
                 </div>
                 <div class="row">
                     <div class="col">{{ __('Small Order Charge*') }}</div>
-                    <div class="col text-right">{{ $basket['summary']['small_order_charge'] }}</div>
+                    <div id="basket__small-order-charge" class="col text-right">{{ $basket['summary']['small_order_charge'] }}</div>
                 </div>
                 <div class="row">
                     <div class="col">{{ __('VAT') }}</div>
-                    <div class="col text-right">{{ $basket['summary']['vat'] }}</div>
+                    <div id="basket__vat" class="col text-right">{{ $basket['summary']['vat'] }}</div>
                 </div>
                 <hr>
                 <div class="row basket-total">
                     <div class="col">{{ __('Order Total') }}</div>
-                    <div class="col text-right">{{ $basket['summary']['total'] }}</div>
+                    <div id="basket__total" class="col text-right">{{ $basket['summary']['total'] }}</div>
                 </div>
                 <hr>
                 <div class="small-print">
@@ -156,7 +157,7 @@
 @section('scripts')
     <script>
         $('#empty-basket').on('click', function () {
-            swal({
+            Swal.fire({
                 title: "Empty Basket?",
                 text: "Are you sure? This cannot be un-done.",
                 icon: "warning",
