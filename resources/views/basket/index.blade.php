@@ -53,7 +53,7 @@
         @if (count($basket['lines']) > 0)
             <tbody>
             @foreach($basket['lines'] as $line)
-                <tr>
+                <tr {{ $line['stock'] < $line['quantity'] ? 'class=bg-warning' : '' }}>
                     <td>
                         <div class="basket-image__container d-inline-block">
                             <img class="basket-image" src="{{ \Storage::disk('public')->exists('product_images/' . $line['image']) ? asset('product_images/' . $line['image']) : asset('images/no-image.png')  }}" alt="{{ $line['name'] }}">
@@ -65,8 +65,7 @@
                     <td class="text-right">{{ $line['stock'] }}</td>
                     <td class="text-right">{{ $line['unit_price'] }}</td>
                     <td class="text-right">{{ $line['quantity'] }}</td>
-                    <td class="text-right">
-                        {{ $line['price'] }}</td>
+                    <td class="text-right">{{ $line['price'] }}</td>
                 </tr>
             @endforeach
             </tbody>
@@ -80,7 +79,11 @@
     @endif
 
     <div class="row">
-        <div class="col-lg-7"></div>
+        <div class="col-lg-7">
+            <div class="alert alert-warning p-1">
+                {{ __('Please Note: Lines marked in this colour have a chance of going onto backorder.') }}
+            </div>
+        </div>
         <div class="col-lg-5 justify-content-end">
             <div class="card card-body basket-summary">
                 <div class="row">
@@ -105,7 +108,7 @@
                 </div>
                 <hr>
                 <div class="row basket-total">
-                    <div class="col">{{ __('Order Total')) }}</div>
+                    <div class="col">{{ __('Order Total') }}</div>
                     <div class="col text-right">{{ $basket['summary']['total'] }}</div>
                 </div>
                 <hr>
