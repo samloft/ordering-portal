@@ -158,11 +158,19 @@ function basketSummary(isBasket = false) {
         $('.basket-info .order-lines').html(response.line_count);
         $('.basket-info .order-total').html(response.summary.goods_total);
 
+        if (response.line_count === 0) {
+            $('#header-checkout').hide();
+        } else {
+            $('#header-checkout').show();
+        }
+
         if (isBasket) {
             if (response.line_count === 0) {
                 $('#basket-message').show();
+                $('#basket-checkout__buttons').hide();
             } else {
                 $('#basket-message').hide();
+                $('#basket-checkout__buttons').show();
             }
 
             $('#basket__goods-total').text(response.summary.goods_total);

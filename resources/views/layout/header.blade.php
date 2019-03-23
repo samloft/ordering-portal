@@ -36,7 +36,7 @@
                                 <a href="{{ route('basket') }}" class="btn-link">
                                     <button id="header-basket" class="btn btn-secondary">{{ __('Basket') }}</button>
                                 </a>
-                                <a href="{{ route('checkout') }}" id="header-checkout" class="btn-link @if ($basket['lines'] == 0) d-none @endif">
+                                <a href="{{ route('checkout') }}" id="header-checkout" class="btn-link" @if($basket['line_count'] == 0) style="display:none;" @endif>
                                     <button class="btn btn-primary">{{ __('Checkout') }}</button>
                                 </a>
                             </div>

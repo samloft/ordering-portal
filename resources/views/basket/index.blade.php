@@ -74,11 +74,9 @@
         </tbody>
     </table>
 
-    @if (count($basket['lines']) == 0)
-        <div id="basket-message" class="text-center mb-5">
-            <h2>{{ __('No items are in your basket') }}</h2>
-        </div>
-    @endif
+    <div id="basket-message" class="text-center mb-5" {{ count($basket['lines']) <> 0 ? 'style=display:none' : '' }}>
+        <h2>{{ __('No items are in your basket') }}</h2>
+    </div>
 
     <div class="row">
         <div class="col-lg-7">
@@ -138,7 +136,7 @@
             </a>
             <button id="empty-basket" class="btn btn-blue">{{ __('Empty basket') }}</button>
         </div>
-        <div class="col text-right">
+        <div class="col text-right" id="basket-checkout__buttons" {{ count($basket['lines']) == 0 ? 'style=display:none;' : '' }}>
             <button id="save-basket" class="btn btn-primary">{{ __('Save Basket') }}</button>
             <a href="{{ route('checkout') }}">
                 <button class="btn btn-primary">{{ __('Checkout') }}</button>
