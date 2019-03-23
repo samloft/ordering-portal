@@ -5,6 +5,8 @@
 @section('content')
     <h1 class="page-title">{{ __('Saved Basket Templates') }}</h1>
 
+    @include('layout.alerts')
+
     <div class="row">
         <div class="col-lg-4 d-flex align-items-stretch">
             <div class="card card-body">
@@ -33,11 +35,20 @@
                     </tr>
                     </thead>
                     <tbody>
-                    <tr>
-                        <td>Something</td>
-                        <td>20/12/2018</td>
-                        <td class="text-right">Delete Template</td>
-                    </tr>
+                    @foreach($saved_baskets as $basket)
+                        <tr class="clickable"
+                            onclick="window.location = '{{ route('saved-baskets.show', ['id' => $basket->id]) }}';">
+                            <td class="align-middle">{{ $basket->reference }}</td>
+                            <td class="align-middle">{{ date('d/m/Y', strtotime($basket->created_at)) }}</td>
+                            <td class="text-right">
+                                <a href="{{ route('saved-baskets.destroy', ['id' => $basket->id]) }}">
+                                    <button id="saved_basket__delete" class="btn btn-outline-danger btn-sm">
+                                        {{ __('Delete Template') }}
+                                    </button>
+                                </a>
+                            </td>
+                        </tr>
+                    @endforeach
                     </tbody>
                 </table>
             </div>

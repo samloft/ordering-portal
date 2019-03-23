@@ -35,7 +35,8 @@
 
 <script type="text/javascript" src="{{ mix('js/app.js') }}"></script>
 <script type="text/javascript" src="{{ mix('js/main.js') }}"></script>
-<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+{{--<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>--}}
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@8"></script>
 <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.min.js"></script>
 @yield('scripts')
 

@@ -62,6 +62,9 @@ Route::group(['middleware' => ['auth', 'has.customer']], function () {
      */
     Route::group(['prefix' => 'saved-baskets'], function () {
         Route::get('/', 'SavedBasketController@index')->name('saved-baskets');
+        Route::get('view', 'SavedBasketController@show')->name('saved-baskets.show');
+        Route::post('store', 'SavedBasketController@store')->name('saved-baskets.store');
+        Route::get('delete', 'SavedBasketController@destroy')->name('saved-baskets.destroy');
     });
 
     /*

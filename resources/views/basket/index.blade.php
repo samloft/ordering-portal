@@ -23,13 +23,15 @@
                         <label class="font-weight-bold">{{ __('Quick Buy') }}</label>
                         <div class="row">
                             <div class="col">
-                                <input id="quick-buy" class="form-control" name="product" placeholder="Enter Product Code" autocomplete="off">
+                                <input id="quick-buy" class="form-control" name="product"
+                                       placeholder="Enter Product Code" autocomplete="off">
                             </div>
                             <div class="col-2">
                                 <input type="text" class="form-control text-center" name="quantity" value="1">
                             </div>
                             <div class="col-4">
-                                <button class="btn btn-block btn-primary" type="submit">{{ __('Add To Basket') }}</button>
+                                <button class="btn btn-block btn-primary"
+                                        type="submit">{{ __('Add To Basket') }}</button>
                             </div>
                         </div>
                     </div>
@@ -56,7 +58,9 @@
                 <tr {{ $line['stock'] < $line['quantity'] ? 'class=bg-warning' : '' }}>
                     <td>
                         <div class="basket-image__container d-inline-block">
-                            <img class="basket-image" src="{{ \Storage::disk('public')->exists('product_images/' . $line['image']) ? asset('product_images/' . $line['image']) : asset('images/no-image.png')  }}" alt="{{ $line['name'] }}">
+                            <img class="basket-image"
+                                 src="{{ \Storage::disk('public')->exists('product_images/' . $line['image']) ? asset('product_images/' . $line['image']) : asset('images/no-image.png')  }}"
+                                 alt="{{ $line['name'] }}">
                         </div>
                         <h2 class="section-title d-inline-block">
                             <a href="{{ route('products.show', ['product' => $line['product']]) }}">{{ $line['name'] }}</a>
@@ -137,13 +141,13 @@
 
     <div class="row mt-3">
         <div class="col">
-            <a href="{{ route('products') }}">
+            <a class="btn-link" href="{{ route('products') }}">
                 <button class="btn btn-blue">{{ __('Continue Shopping') }}</button>
             </a>
             <button id="empty-basket" class="btn btn-blue">{{ __('Empty basket') }}</button>
         </div>
         <div class="col text-right">
-            <button class="btn btn-primary">{{ __('Save Basket') }}</button>
+            <button id="save-basket" class="btn btn-primary">{{ __('Save Basket') }}</button>
             <a href="{{ route('checkout') }}">
                 <button class="btn btn-primary">{{ __('Checkout') }}</button>
             </a>
@@ -166,6 +170,29 @@
                         location.href = '{{ route('basket.empty') }}';
                     }
                 });
+        });
+
+        $('#save-basket').on('click', async function () {
+            const {value: reference} = await Swal.fire({
+                title: 'Add a reference for your saved basket',
+                input: 'text',
+                showCancelButton: true,
+                inputValidator: (value) => {
+                    if (!value) {
+                        return 'You need to enter a reference.'
+                    }
+                }
+            });
+
+            if (reference) {
+                $.post('/saved-baskets/store', {
+                    reference: reference
+                }).done(function (response) {
+                    return Swal.fire('Success', 'Your basket has been saved.', 'success');
+                }).fail(function (response) {
+                    return Swal.fire('Error', 'Unable to save this basket, please try again.', 'error');
+                });
+            }
         });
     </script>
 @endsection
