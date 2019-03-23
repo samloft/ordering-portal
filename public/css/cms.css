@@ -1,5 +1,4 @@
 @charset "UTF-8";
-
 .sortable-list__container {
   padding: 20px;
 }
@@ -35,22 +34,19 @@ ul.ui-sortable button {
   padding: 0 10px !important;
 }
 
-.jconfirm.jconfirm-white .jconfirm-bg,
-.jconfirm.jconfirm-light .jconfirm-bg {
+.jconfirm.jconfirm-white .jconfirm-bg, .jconfirm.jconfirm-light .jconfirm-bg {
   background-color: #364c66;
   opacity: 1;
 }
 
-.overhang,
-.overhang-overlay {
+.overhang, .overhang-overlay {
   position: fixed;
   top: 0;
   left: 0;
   right: 0;
 }
 
-.overhang-close,
-.overhang-message strong {
+.overhang-close, .overhang-message strong {
   font-weight: 700;
 }
 
@@ -101,8 +97,7 @@ ul.ui-sortable button {
   font-size: 15px;
 }
 
-.overhang-no-option,
-.overhang-yes-option {
+.overhang-no-option, .overhang-yes-option {
   min-width: 50px;
   height: 30px;
   border: none;
@@ -142,11 +137,9 @@ ul.ui-sortable button {
     font-size: 15px;
   }
 }
-
 .custom-file:hover input {
   cursor: pointer;
 }
-
 .custom-file:hover label {
   cursor: pointer;
 }
@@ -157,104 +150,87 @@ ul.ui-sortable button {
     -webkit-transform: translateY(40px);
     transform: translateY(40px);
   }
-
   30%, 70% {
     opacity: 1;
     -webkit-transform: translateY(0px);
     transform: translateY(0px);
   }
-
   100% {
     opacity: 0;
     -webkit-transform: translateY(-40px);
     transform: translateY(-40px);
   }
 }
-
 @keyframes passing-through {
   0% {
     opacity: 0;
     -webkit-transform: translateY(40px);
     transform: translateY(40px);
   }
-
   30%, 70% {
     opacity: 1;
     -webkit-transform: translateY(0px);
     transform: translateY(0px);
   }
-
   100% {
     opacity: 0;
     -webkit-transform: translateY(-40px);
     transform: translateY(-40px);
   }
 }
-
 @-webkit-keyframes slide-in {
   0% {
     opacity: 0;
     -webkit-transform: translateY(40px);
     transform: translateY(40px);
   }
-
   30% {
     opacity: 1;
     -webkit-transform: translateY(0px);
     transform: translateY(0px);
   }
 }
-
 @keyframes slide-in {
   0% {
     opacity: 0;
     -webkit-transform: translateY(40px);
     transform: translateY(40px);
   }
-
   30% {
     opacity: 1;
     -webkit-transform: translateY(0px);
     transform: translateY(0px);
   }
 }
-
 @-webkit-keyframes pulse {
   0% {
     -webkit-transform: scale(1);
     transform: scale(1);
   }
-
   10% {
     -webkit-transform: scale(1.1);
     transform: scale(1.1);
   }
-
   20% {
     -webkit-transform: scale(1);
     transform: scale(1);
   }
 }
-
 @keyframes pulse {
   0% {
     -webkit-transform: scale(1);
     transform: scale(1);
   }
-
   10% {
     -webkit-transform: scale(1.1);
     transform: scale(1.1);
   }
-
   20% {
     -webkit-transform: scale(1);
     transform: scale(1);
   }
 }
-
-.dropzone,
-.dropzone * {
+.dropzone, .dropzone * {
   box-sizing: border-box;
 }
 
@@ -277,8 +253,7 @@ ul.ui-sortable button {
   cursor: default;
 }
 
-.dropzone.dz-clickable .dz-message,
-.dropzone.dz-clickable .dz-message * {
+.dropzone.dz-clickable .dz-message, .dropzone.dz-clickable .dz-message * {
   cursor: pointer;
 }
 
@@ -398,8 +373,7 @@ ul.ui-sortable button {
   border: 1px solid transparent;
 }
 
-.dropzone .dz-preview .dz-details .dz-filename span,
-.dropzone .dz-preview .dz-details .dz-size span {
+.dropzone .dz-preview .dz-details .dz-filename span, .dropzone .dz-preview .dz-details .dz-size span {
   background-color: rgba(255, 255, 255, 0.4);
   padding: 0 0.4em;
   border-radius: 3px;
@@ -439,8 +413,7 @@ ul.ui-sortable button {
   animation: slide-in 3s cubic-bezier(0.77, 0, 0.175, 1);
 }
 
-.dropzone .dz-preview .dz-success-mark,
-.dropzone .dz-preview .dz-error-mark {
+.dropzone .dz-preview .dz-success-mark, .dropzone .dz-preview .dz-error-mark {
   pointer-events: none;
   opacity: 0;
   z-index: 500;
@@ -452,8 +425,7 @@ ul.ui-sortable button {
   margin-top: -27px;
 }
 
-.dropzone .dz-preview .dz-success-mark svg,
-.dropzone .dz-preview .dz-error-mark svg {
+.dropzone .dz-preview .dz-success-mark svg, .dropzone .dz-preview .dz-error-mark svg {
   display: block;
   width: 54px;
   height: 54px;
@@ -566,4 +538,3 @@ ul.ui-sortable button {
   max-height: 300px;
   overflow: auto;
 }
-

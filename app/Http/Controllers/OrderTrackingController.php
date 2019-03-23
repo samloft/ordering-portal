@@ -7,15 +7,19 @@ use App\Models\OrderTracking\Header;
 use App\Models\OrderTracking\Lines;
 use App\Models\Prices;
 use Auth;
+use Illuminate\Http\Request;
 
 class OrderTrackingController extends Controller
 {
     /**
+     * @param Request $request
      * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
      */
-    public function index()
+    public function index(Request $request)
     {
-        $orders = Header::list();
+        $search = $request ? true : false;
+
+        $orders = Header::list($search, $request);
 
         return view('order-tracking.index', compact('orders'));
     }
