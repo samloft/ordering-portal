@@ -251,7 +251,13 @@ hr {
   padding-top: 13px !important;
 }
 
+.basket-image__container {
+  width: 80px;
+  text-align: center;
+}
+
 img.basket-image {
+  max-width: 70px;
   max-height: 40px;
 }
 

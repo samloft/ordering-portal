@@ -55,7 +55,9 @@
             @foreach($basket['lines'] as $line)
                 <tr>
                     <td>
-                        <img class="basket-image" src="{{ $line['image'] }}">
+                        <div class="basket-image__container d-inline-block">
+                            <img class="basket-image" src="{{ \Storage::disk('public')->exists('product_images/' . $line['image']) ? asset('product_images/' . $line['image']) : asset('images/no-image.png')  }}" alt="{{ $line['name'] }}">
+                        </div>
                         <h2 class="section-title d-inline-block">{{ $line['name'] }}</h2>
                     </td>
                     <td>{{ $line['product'] }}</td>
