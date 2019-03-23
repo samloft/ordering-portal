@@ -3,14 +3,7 @@
 @section('page.title', 'Basket')
 
 @section('content')
-    <div class="row">
-        <div class="col">
-            <h1 class="page-title">{{ __('Checkout') }}</h1>
-        </div>
-        <div class="col text-right">
-            Tracking Stuffs
-        </div>
-    </div>
+    @include('layout.progress', ['progress_title' => 'Checkout', 'progress_amount' => 2])
 
     <div class="row">
         <div class="col-lg-5 d-flex align-items-stretch">
