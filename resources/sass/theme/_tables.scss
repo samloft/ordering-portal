@@ -35,3 +35,19 @@ table tr.clickable {
 .table-expected thead {
   background-color: rgba(205, 209, 212, 1.0);
 }
+
+.quantity-column {
+  width: 80px;
+  padding-top: 8px !important;
+  padding-left: 20px !important;
+}
+
+.form-quantity {
+  height: 25px;
+  width: 70px;
+  text-align: right;
+}
+
+.quantity-options {
+  font-size: 10px;
+}

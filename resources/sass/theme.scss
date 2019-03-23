@@ -248,7 +248,7 @@ hr {
 }
 
 .table-basket td:not(:first-child) {
-  padding-top: 13px !important;
+  padding-top: 13px;
 }
 
 .basket-image__container {
@@ -307,6 +307,16 @@ a img:hover {
   max-height: 100%;
   margin: auto;
   display: block;
+}
+
+.quantity-options span {
+  cursor: pointer;
+  color: rgba(128, 208, 216, 1.0);
+  padding-right: 3px;
+}
+
+.quantity-options span:hover {
+  font-weight: 900;
 }
 
 

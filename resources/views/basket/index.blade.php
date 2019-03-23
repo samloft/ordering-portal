@@ -46,7 +46,7 @@
             <th>{{ __('Unit') }}</th>
             <th class="text-right">{{ __('Stock (†)') }}</th>
             <th class="text-right">{{ __('Net Price') }}</th>
-            <th class="text-right">{{ __('Quantity') }}</th>
+            <th class="text-center">{{ __('Quantity') }}</th>
             <th class="text-right">{{ __('Total Price') }}</th>
         </tr>
         </thead>
@@ -58,13 +58,20 @@
                         <div class="basket-image__container d-inline-block">
                             <img class="basket-image" src="{{ \Storage::disk('public')->exists('product_images/' . $line['image']) ? asset('product_images/' . $line['image']) : asset('images/no-image.png')  }}" alt="{{ $line['name'] }}">
                         </div>
-                        <h2 class="section-title d-inline-block">{{ $line['name'] }}</h2>
+                        <h2 class="section-title d-inline-block">
+                            <a href="{{ route('products.show', ['product' => $line['product']]) }}">{{ $line['name'] }}</a>
+                        </h2>
                     </td>
                     <td>{{ $line['product'] }}</td>
                     <td>{{ $line['uom'] }}</td>
                     <td class="text-right">{{ $line['stock'] }}</td>
                     <td class="text-right">{{ $line['unit_price'] }}</td>
-                    <td class="text-right">{{ $line['quantity'] }}</td>
+                    <td class="quantity-column">
+                        <input name="line_qty" class="form-control form-quantity" value="{{ $line['quantity'] }}">
+                        <span class="quantity-options">
+                            <span class="quantity-update">Update</span> <span class="quantity-remove">Remove</span>
+                        </span>
+                    </td>
                     <td class="text-right">{{ $line['price'] }}</td>
                 </tr>
             @endforeach

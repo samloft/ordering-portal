@@ -237,7 +237,7 @@ hr {
 }
 
 .table-basket td:not(:first-child) {
-  padding-top: 13px !important;
+  padding-top: 13px;
 }
 
 .basket-image__container {
@@ -296,6 +296,16 @@ a img:hover {
   max-height: 100%;
   margin: auto;
   display: block;
+}
+
+.quantity-options span {
+  cursor: pointer;
+  color: #80d0d8;
+  padding-right: 3px;
+}
+
+.quantity-options span:hover {
+  font-weight: 900;
 }
 
 header {
@@ -540,6 +550,22 @@ table tr.clickable {
 
 .table-expected thead {
   background-color: #cdd1d4;
+}
+
+.quantity-column {
+  width: 80px;
+  padding-top: 8px !important;
+  padding-left: 20px !important;
+}
+
+.form-quantity {
+  height: 25px;
+  width: 70px;
+  text-align: right;
+}
+
+.quantity-options {
+  font-size: 10px;
 }
 
 form button {
