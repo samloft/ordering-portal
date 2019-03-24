@@ -95,3 +95,11 @@ span.required:after {
 .ui-helper-hidden-accessible {
   display: none;
 }
+
+.form-date {
+  background-color: white !important;
+}
+
+.form-date:hover {
+  cursor: pointer;
+}

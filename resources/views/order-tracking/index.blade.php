@@ -40,7 +40,7 @@
                             <label>{{ __('From') }}</label>
                         </div>
                         <div class="col-lg-8">
-                            <input name="date_from" class="form-control" autocomplete="off">
+                            <input name="date_from" class="form-control form-date" autocomplete="off" readonly>
                         </div>
                     </div>
 
@@ -49,7 +49,7 @@
                             <label>{{ __('To') }}</label>
                         </div>
                         <div class="col-lg-8">
-                            <input name="date_to" class="form-control" autocomplete="off">
+                            <input name="date_to" class="form-control form-date" autocomplete="off" readonly>
                         </div>
                     </div>
 
