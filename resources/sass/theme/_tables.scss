@@ -1,0 +1,53 @@
+.table th, .table td {
+  padding: 0.30rem;
+}
+
+.table-basket {
+  margin-top: 20px;
+}
+
+.table-basket thead {
+  background-color: rgb(255, 255, 255);
+}
+
+.table-basket thead th {
+  font-size: 14px;
+  font-weight: 300;
+}
+
+table .bg-danger {
+  background-color: rgba(249, 214, 213, 1.0) !important;
+  color: rgba(118, 27, 24, 1.0) !important;
+}
+
+table .bg-warning {
+  background-color: rgba(255, 251, 219, 1.0) !important;
+  color: rgba(134, 125, 41, 1.0) !important;
+}
+
+table tr.clickable {
+  cursor: pointer;
+}
+.table-expected {
+  border: 1px solid rgb(222, 226, 230);
+}
+
+.table-expected thead {
+  background-color: rgba(205, 209, 212, 1.0);
+}
+
+.quantity-column {
+  width: 80px;
+  padding-top: 8px !important;
+  padding-left: 20px !important;
+}
+
+.form-quantity {
+  height: 25px;
+  width: 70px;
+  text-align: right;
+}
+
+.quantity-options {
+  font-size: 10px;
+}

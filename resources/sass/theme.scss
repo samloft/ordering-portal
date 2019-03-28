@@ -1,0 +1,344 @@
+@import 'theme/variables';
+@import 'variables';
+
+$primary-color: rgba(128, 208, 216, 1.0);
+
+body {
+  font-family: "ff-dax-web-pro", "arial", serif;
+  min-height: 100vh;
+  position: relative;
+  background-color: rgba(235, 236, 237, 1.0);
+}
+
+.content {
+  height: 100%;
+}
+
+.container.content {
+  padding-top: 20px;
+  padding-bottom: 20px;
+  margin-bottom: 110px;
+}
+
+.external-content {
+  border: none;
+  width: 100%;
+  height: 100%;
+}
+
+.categories .list-group-item {
+  padding: 0.50rem 0.75rem;
+  border: none;
+  color: rgba(49, 49, 49, 1.0);
+}
+
+.categories .cat-0 {
+  background-color: rgba(254, 245, 108, 1.0);
+}
+
+.categories .cat-1 {
+  background-color: rgba(229, 235, 139, 1.0);
+}
+
+.categories .cat-2 {
+  background-color: rgba(198, 224, 159, 1.0);
+}
+
+.categories .cat-3 {
+  background-color: rgba(167, 216, 184, 1.0);
+}
+
+.categories .cat-4 {
+  background-color: rgba(130, 206, 202, 1.0);
+}
+
+.categories .cat-5 {
+  background-color: rgba(0, 186, 198, 1.0);
+}
+
+.categories .dropdown-menu {
+  width: 100%;
+}
+
+.categories .list-group-item a {
+  color: rgba(49, 49, 49, 1.0);
+  display: block;
+  width: 100%;
+}
+
+.list-group .sub-category {
+  background-color: rgb(255, 255, 255);
+  padding: 0.1rem 0.75rem;
+  border: none;
+  border-radius: 0;
+  color: rgba(49, 49, 49, 1.0);
+}
+
+.list-group .sub-category .list-group-item {
+  padding: 0.1rem 0.75rem;
+  font-size: 12px;
+}
+
+.cookie-consent {
+  text-align: center;
+  padding: 10px;
+  background-color: rgba(130, 206, 202, 1.0);
+  font-weight: 900;
+}
+
+.cookie-consent__agree {
+  margin-left: 10px;
+  cursor: pointer;
+  border: 1px solid rgb(200, 220, 105);
+  background-color: #c8dc69;
+  color: #050602;
+  display: inline-block;
+  font-weight: 400;
+  text-align: center;
+  vertical-align: middle;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+  padding: 0.375rem 0.75rem;
+  font-size: 0.9rem;
+  line-height: 1.6;
+  border-radius: 0.25rem;
+  transition: color 0.15s ease-in-out, background-color 0.15s ease-in-out, border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
+}
+
+.address span {
+  display: block;
+}
+
+a.btn-link {
+  text-decoration: none !important;
+}
+
+.page-link {
+  color: rgb(0, 0, 0);
+}
+
+.page-item.active .page-link {
+  color: rgb(0, 0, 0);
+  background-color: rgba(200, 220, 105, 1.0);
+  border-color: rgba(200, 220, 105, 1.0);
+}
+
+hr {
+  border-bottom: 2px solid rgba(130, 202, 156, 1.0);
+  margin-top: 0.5rem;
+  margin-bottom: 0.5rem;
+}
+
+.basket-total {
+  margin-top: 0.5rem;
+  margin-bottom: 0.5rem;
+  font-weight: 900;
+  font-size: 14px;
+}
+
+.small-print {
+  font-size: 10px;
+  margin-top: 10px;
+}
+
+.card-body.quick-buy-basket {
+  padding: 5px;
+}
+
+.quick-buy-basket .form-group {
+  margin: 0;
+}
+
+.quick-buy-basket label {
+  margin: 0;
+}
+
+.quick-buy-basket .row {
+  margin: 0;
+}
+
+.quick-buy-basket .col {
+  padding: 2px;
+}
+
+.quick-buy-basket .col-2 {
+  padding: 2px;
+}
+
+.quick-buy-basket .col-4 {
+  padding: 2px;
+}
+
+.w-20 {
+  -webkit-box-flex: 0;
+  -ms-flex: 0 0 20%;
+  flex: 0 0 20%;
+  max-width: 20%;
+  margin-bottom: 20px;
+}
+
+@media screen and (max-width: 1231px) {
+  .w-20 {
+    -ms-flex: 0 0 25%;
+    flex: 0 0 25%;
+    max-width: 25%;
+  }
+}
+
+@media screen and (max-width: 1220px) {
+  .w-20 {
+    -ms-flex: 0 0 30%;
+    flex: 0 0 30%;
+    max-width: 30%;
+  }
+}
+
+.product-list hr {
+  margin-top: 0.1rem;
+  margin-bottom: 0.1rem;
+}
+
+.product-list .product-pricing {
+  line-height: 1.2rem;
+  font-size: 13px;
+}
+
+.product-list .product-details h5 {
+  font-weight: 300;
+  font-size: 14px;
+}
+
+.product-list .product-details h5 span.primary-font {
+  font-weight: 900;
+  color: $primary-color;
+}
+
+.product-list .product-pricing .product-basket {
+  margin-top: 10px;
+}
+
+.product-list .stock-levels .input-group-text {
+  background-color: rgba(134, 136, 139, 1.0);
+  border-color: rgba(134, 136, 139, 1.0);
+  color: rgb(255, 255, 255);
+  cursor: default;
+}
+
+.product-list .stock-levels input {
+  background-color: rgba(236, 237, 237, 1.0);
+  border-color: rgba(236, 237, 237, 1.0);
+  text-align: center;
+  border-bottom-right-radius: 0.25rem !important;
+  border-top-right-radius: 0.25rem !important;
+  cursor: default;
+}
+
+.no-product {
+  margin-top: 1.9rem;
+}
+
+.breadcrumbs {
+  padding-bottom: 0.5rem;
+}
+
+.table-basket tbody tr {
+  background-color: rgb(255, 255, 255);
+}
+
+.table-basket td:not(:first-child) {
+  padding-top: 13px;
+}
+
+.basket-image__container {
+  width: 80px;
+  text-align: center;
+}
+
+img.basket-image {
+  max-width: 70px;
+  max-height: 40px;
+}
+
+a img:hover {
+  opacity: 0.8;
+}
+
+.product-category-images a {
+  font-size: 12px;
+  color: rgb(0, 0, 0);
+}
+
+.product-category-images span {
+  display: block;
+  padding-left: auto;
+  padding-right: auto;
+  max-width: 145px;
+}
+
+.sub-category-image {
+  padding: 10px;
+  width: 145px;
+  height: 145px;
+  background-color: rgb(255, 255, 255);
+  display:flex;
+  align-items:center;
+  box-shadow: $box-shadow;
+}
+
+.sub-category-image img {
+  max-width: 100%;
+  max-height: 100%;
+  margin: auto;
+  display: block;
+}
+
+.product-list-image {
+  width: 90px;
+  height: 90px;
+  background-color: rgb(255, 255, 255);
+  display:flex;
+  align-items:center;
+}
+
+.product-list-image img {
+  max-width: 100%;
+  max-height: 100%;
+  margin: auto;
+  display: block;
+}
+
+.quantity-options span {
+  cursor: pointer;
+  color: rgba(128, 208, 216, 1.0);
+  padding-right: 3px;
+}
+
+.quantity-options span:hover {
+  font-weight: 900;
+}
+
+.progress-full {
+  background-color: rgba(200, 220, 105, 1.0);
+}
+
+.progress-empty {
+  background-color: rgba(255, 255, 255, 1.0);
+}
+
+
+@import 'theme/header';
+@import 'theme/login';
+@import 'theme/navigation';
+@import 'theme/footer';
+
+@import 'theme/cards';
+@import 'theme/buttons';
+@import 'theme/tables';
+@import 'theme/forms';
+@import 'theme/alerts';
+@import 'theme/text';
+@import 'theme/modals';
+@import 'theme/loaders';
+@import 'theme/jquery-ui';
