@@ -52,7 +52,21 @@ class Basket extends Model
         $product_lines = [];
 
         foreach ($lines as $line) {
-            $goods_total = $goods_total + (discount($line->price) * $line->quantity);
+            switch (true) {
+                case $line->quantity >= $line->break3 && $line->price3 != 0:
+                    $net_price = $line->price3;
+                    break;
+                case $line->quantity >= $line->break2 && $line->price2 != 0:
+                    $net_price = $line->price2;
+                    break;
+                case $line->quantity >= $line->break1 && $line->price1 != 0:
+                    $net_price = $line->price1;
+                    break;
+                default:
+                    $net_price = $line->price;
+            }
+
+            $goods_total = $goods_total + (discount($net_price) * $line->quantity);
 
             if (Storage::disk('public')->exists('product_images/' . $line->product . '.png')) {
                 $image = asset('product_images/' . $line->product . '.png');
@@ -67,8 +81,8 @@ class Basket extends Model
                 'stock' => $line->stock_level,
                 'image' => $image,
                 'quantity' => $line->quantity,
-                'price' => currency(discount($line->price) * $line->quantity, 2),
-                'unit_price' => currency(discount($line->price), 4),
+                'price' => currency(discount($net_price) * $line->quantity, 2),
+                'unit_price' => currency(discount($net_price), 4),
             ];
         }
 
@@ -87,25 +101,6 @@ class Basket extends Model
             'lines' => $product_lines,
         ];
     }
-
-//    /**
-//     * Return summary details based on users current basket.
-//     *
-//     * @return array
-//     */
-//    public static function summary()
-//    {
-//        $summary = (new Basket)->selectRaw('SUM(prices.price * basket.quantity) as goods_total, COUNT(basket.product) as line_count')
-//            ->join('prices', 'basket.product', '=', 'prices.product')
-//            ->where('prices.customer_code', Auth::user()->customer_code)
-//            ->where('basket.customer_code', Auth::user()->customer_code)
-//            ->first();
-//
-//        return [
-//            'lines' => $summary->line_count,
-//            'goods_total' => currency($summary->goods_total, 2)
-//        ];
-//    }
 
     /**
      * Add array of order lines into customers basket.
@@ -176,6 +171,13 @@ class Basket extends Model
             ->delete();
     }
 
+    /**
+     * Update the quantity for a given product line in the basket.
+     *
+     * @param $product
+     * @param $quantity
+     * @return int
+     */
     public static function updateLine($product, $quantity)
     {
         return (new Basket)->where('customer_code', Auth::user()->customer_code)
