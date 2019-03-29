@@ -26,6 +26,11 @@ class Basket extends Model
         return $this->belongsTo(Products::class, 'product', 'product');
     }
 
+    /**
+     * Return relationship for prices.
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     */
     public function prices()
     {
         return $this->belongsTo(Prices::class, 'product', 'product')->where('prices.customer_code', Auth::user()->customer_code);
