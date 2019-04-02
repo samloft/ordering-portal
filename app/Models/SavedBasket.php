@@ -38,7 +38,7 @@ class SavedBasket extends Model
      */
     public static function show($id)
     {
-        return (new SavedBasket)->select('saved_basket.product', 'name', 'quantity', 'id', 'reference', 'prices.price')
+        return (new SavedBasket)->select('saved_basket.product', 'name', 'quantity', 'id', 'reference', 'prices.price', 'created_at')
             ->where('saved_basket.customer_code', Auth::user()->customer_code)
             ->where('id', $id)
             ->leftJoin('products', 'products.product', 'saved_basket.product')
