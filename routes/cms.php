@@ -21,6 +21,11 @@ Route::group(['middleware' => 'auth:admin'], function () {
 
     Route::get('/', 'Cms\HomeController@index')->name('cms.index');
 
+    Route::group(['prefix' => 'company-information'], function () {
+        Route::get('/', 'Cms\CompanyDetailsController@index')->name('company-information');
+        Route::post('store', 'Cms\CompanyDetailsController@store')->name('company-information.store');
+    });
+
     Route::group(['prefix' => 'home-links'], function () {
         Route::get('/', 'Cms\HomeLinksController@index')->name('cms.home-links');
         Route::post('store', 'Cms\HomeLinksController@store')->name('cms.home-links.store');
