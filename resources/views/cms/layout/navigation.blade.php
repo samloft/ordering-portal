@@ -26,7 +26,7 @@
                 </li>
 
                 <li class="sidebar-menu-item">
-                    <a class="sidebar-menu-button" href="{{ route('company-information') }}">
+                    <a class="sidebar-menu-button" href="{{ route('cms.company-information') }}">
                         <i class="sidebar-menu-icon sidebar-menu-icon--left material-icons">business</i>
                         <span class="sidebar-menu-text">{{ __('Company Details') }}</span>
                     </a>
