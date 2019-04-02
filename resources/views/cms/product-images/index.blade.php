@@ -1,6 +1,7 @@
 @extends('cms.layout.master')
 
 @section('page.title', 'Product Images')
+@section('page.heading', 'Product Images')
 
 @section('content')
     <div class="container-fluid page__container">

@@ -1,6 +1,7 @@
 @extends('cms.layout.master')
 
 @section('page.title', 'Home Links')
+@section('page.heading', 'Home Page Links')
 
 @section('content')
     <div class="container-fluid page__container">

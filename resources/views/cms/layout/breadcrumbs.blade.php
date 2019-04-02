@@ -7,7 +7,7 @@
                     <li class="breadcrumb-item active" aria-current="page">@yield('page.title')</li>
                 </ol>
             </nav>
-            <h1 class="m-0">Home Page Links</h1>
+            <h1 class="m-0">@yield('page.heading')</h1>
         </div>
     </div>
 </div>
