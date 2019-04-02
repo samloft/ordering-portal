@@ -9,7 +9,7 @@ class CompanyDetailsController extends Controller
 {
     public function index()
     {
-
+        return view('cms.company-information.index');
     }
 
     /**
