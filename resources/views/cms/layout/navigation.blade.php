@@ -4,8 +4,8 @@
             <div class="sidebar-heading sidebar-m-t pt-3">{{ __('Menu') }}</div>
 
             <ul class="sidebar-menu" id="components_menu">
-                <li class="sidebar-menu-item active">
-                    <a class="sidebar-menu-button" href="/">
+                <li class="sidebar-menu-item {{ setActive('cms.index') }}">
+                    <a class="sidebar-menu-button" href="{{ route('cms.index') }}">
                         <i class="sidebar-menu-icon sidebar-menu-icon--left material-icons">dvr</i>
                         <span class="sidebar-menu-text">{{ __('Dashboard') }}</span>
                     </a>
@@ -25,7 +25,7 @@
                     </a>
                 </li>
 
-                <li class="sidebar-menu-item">
+                <li class="sidebar-menu-item {{ setActive('cms.company-information') }}">
                     <a class="sidebar-menu-button" href="{{ route('cms.company-information') }}">
                         <i class="sidebar-menu-icon sidebar-menu-icon--left material-icons">business</i>
                         <span class="sidebar-menu-text">{{ __('Company Details') }}</span>
@@ -37,7 +37,7 @@
 
             <div class="sidebar-block p-0">
                 <ul class="sidebar-menu">
-                    <li class="sidebar-menu-item">
+                    <li class="sidebar-menu-item {{ setActive('cms.home-links') }}">
                         <a class="sidebar-menu-button" href="{{ route('cms.home-links') }}">
                             <i class="sidebar-menu-icon sidebar-menu-icon--left material-icons">insert_link</i>
                             <span class="sidebar-menu-text">{{ __('Home Links') }}</span>
@@ -65,7 +65,7 @@
                         </a>
                     </li>
 
-                    <li class="sidebar-menu-item">
+                    <li class="sidebar-menu-item {{ setActive('cms.product-images') }}">
                         <a class="sidebar-menu-button" href="{{ route('cms.product-images') }}">
                             <i class="sidebar-menu-icon sidebar-menu-icon--left material-icons">image</i>
                             <span class="sidebar-menu-text">{{ __('Product Images') }}</span>
