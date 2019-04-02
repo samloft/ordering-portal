@@ -24,6 +24,13 @@
                         <span class="sidebar-menu-text">{{ __('Admin Users') }}</span>
                     </a>
                 </li>
+
+                <li class="sidebar-menu-item">
+                    <a class="sidebar-menu-button" href="{{ route('company-information') }}">
+                        <i class="sidebar-menu-icon sidebar-menu-icon--left material-icons">business</i>
+                        <span class="sidebar-menu-text">{{ __('Company Details') }}</span>
+                    </a>
+                </li>
             </ul>
 
             <div class="sidebar-heading">{{ __('Settings') }}</div>
