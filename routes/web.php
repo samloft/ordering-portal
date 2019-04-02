@@ -65,6 +65,7 @@ Route::group(['middleware' => ['auth', 'has.customer']], function () {
         Route::get('view', 'SavedBasketController@show')->name('saved-baskets.show');
         Route::post('store', 'SavedBasketController@store')->name('saved-baskets.store');
         Route::get('delete', 'SavedBasketController@destroy')->name('saved-baskets.destroy');
+        Route::get('copy/{id}', 'SavedBasketController@copyToBasket')->name('saved-baskets.copy');
     });
 
     /*

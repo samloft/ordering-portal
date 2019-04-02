@@ -87,4 +87,30 @@ class SavedBasketController extends Controller
             redirect(route('saved-baskets'))
                 ->with('error', 'Unable to delete saved basket, please try again.');
     }
+
+    /**
+     * Take a saved basket, and copy it into the actual basket.
+     *
+     * @param $id
+     * @return \Illuminate\Http\RedirectResponse|\Illuminate\Routing\Redirector
+     */
+    public function copyToBasket($id)
+    {
+        $saved_basket = SavedBasket::show($id);
+        $products = [];
+
+        foreach ($saved_basket as $line) {
+            if ($line->price) {
+                $products[] = [
+                    'product' => $line->product,
+                    'quantity' => $line->quantity
+                ];
+            }
+        }
+
+        $copied = Basket::store($products);
+
+        return $copied ? redirect(route('basket'))->with('success', 'Saved basket has been copied') :
+            back()->with('error', 'Unable to copy products to basket, please try again');
+    }
 }

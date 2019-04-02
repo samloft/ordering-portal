@@ -30,6 +30,12 @@ class SavedBasket extends Model
             ->paginate(10);
     }
 
+    /**
+     * Get the items for a saved basket by ID.
+     *
+     * @param $id
+     * @return mixed
+     */
     public static function show($id)
     {
         return (new SavedBasket)->select('saved_basket.product', 'name', 'quantity', 'id', 'reference', 'prices.price')

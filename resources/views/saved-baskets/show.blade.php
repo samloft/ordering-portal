@@ -24,7 +24,8 @@
                         <button class="btn btn-blue btn-block">{{ __('Back') }}</button>
                     </div>
                     <div class="col">
-                        <a class="btn-link" href="{{ route('saved-baskets.destroy', ['id' => $saved_basket->first()->id]) }}">
+                        <a class="btn-link"
+                           href="{{ route('saved-baskets.destroy', ['id' => $saved_basket->first()->id]) }}">
                             <button class="btn btn-outline-danger btn-block">{{ __('Delete Template') }}</button>
                         </a>
                     </div>
@@ -57,7 +58,9 @@
                 </span>
 
                 <div class="text-right">
-                    <button class="btn btn-primary">{{ __('Add to basket') }}</button>
+                    <a href="{{ route('saved-baskets.copy', ['id' => $saved_basket->first()->id]) }}">
+                        <button class="btn btn-primary">{{ __('Add to basket') }}</button>
+                    </a>
                 </div>
             </div>
         </div>
