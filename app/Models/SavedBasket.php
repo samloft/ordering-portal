@@ -32,13 +32,13 @@ class SavedBasket extends Model
                     if ($request->date_from) {
                         $date_from = Carbon::createFromFormat('d/m/Y', $request->date_from)->format('Y-m-d');
 
-                        $query->where('date_received', '>=', $date_from);
+                        $query->where('created_at', '>=', $date_from);
                     }
 
                     if ($request->date_to) {
                         $date_to = Carbon::createFromFormat('d/m/Y', $request->date_to)->format('Y-m-d');
 
-                        $query->where('date_received', '<=', $date_to);
+                        $query->where('created_at', '<=', $date_to);
                     }
                 })
                 ->groupBy(['id', 'reference', 'created_at'])
