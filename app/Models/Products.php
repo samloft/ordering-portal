@@ -69,7 +69,7 @@ class Products extends Model
      */
     public static function show($product_code)
     {
-        return (new Products)->select('products.product', 'name', 'uom', 'price', 'quantity', 'order_multiples')
+        return (new Products)->select('products.product', 'name', 'description', 'uom', 'price', 'quantity', 'order_multiples')
             ->whereHas('prices')
             ->where('products.product', $product_code)
             ->leftJoin('prices', 'prices.product', 'products.product')

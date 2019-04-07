@@ -17,16 +17,17 @@
 
                             <div class="row product-details">
                                 <div class="col-sm-auto">
-                                    <div class="product-list-image">
+                                    <div class="product-view-image">
                                         <img id="enlarge-image"
-                                             src="{{ \Storage::disk('public')->exists('product_images/' . encodeUrl($product->product) . '.png') ? asset('/product_images/' . encodeUrl($product->product) . '.png') : asset('images/no-image.png') }}">
+                                             src="{{ Storage::disk('public')->exists('product_images/' . encodeUrl($product->product) . '.png') ? asset('/product_images/' . encodeUrl($product->product) . '.png') : asset('images/no-image.png') }}">
                                     </div>
                                 </div>
                                 <div class="col-lg pt-2 pl-0">
                                     <h5>Product Code: <span id="product-code"
                                                             class="primary-font">{{ $product->product }}</span></h5>
                                     <h5>Unit Type: <span class="primary-font">{{ $product->uom }}</span></h5>
-                                    <h5>{{ $product->description }}</h5>
+                                    <h5>Product Description:</h5>
+                                    <h5><span class="primary-font">{{ $product->description }}</span></h5>
                                 </div>
                             </div>
                         </div>

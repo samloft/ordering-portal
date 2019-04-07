@@ -153,10 +153,4 @@
         </div>
 
     </div>
-
-    <div id="img-modal" class="img-modal">
-        <span class="close">&times;</span>
-        <img class="img-modal-content" id="product-image" alt="Image Coming Soon">
-        <div id="caption"></div>
-    </div>
 @endsection

@@ -33,9 +33,14 @@
 
 @include('layout.footer')
 
+<div id="img-modal" class="img-modal">
+    <span class="close">&times;</span>
+    <img class="img-modal-content" id="product-image" alt="Image Coming Soon">
+    <div id="caption"></div>
+</div>
+
 <script type="text/javascript" src="{{ mix('js/app.js') }}"></script>
 <script type="text/javascript" src="{{ mix('js/main.js') }}"></script>
-{{--<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>--}}
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@8"></script>
 <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.min.js"></script>
 @yield('scripts')
