@@ -21,7 +21,9 @@
 
                 <div class="mt-3 row">
                     <div class="col">
-                        <button class="btn btn-blue btn-block">{{ __('Back') }}</button>
+                        <button class="btn btn-blue btn-block" onclick="window.history.back();">
+                            {{ __('Back') }}
+                        </button>
                     </div>
                     <div class="col">
                         <a class="btn-link"

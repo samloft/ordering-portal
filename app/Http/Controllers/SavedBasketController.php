@@ -39,7 +39,7 @@ class SavedBasketController extends Controller
     {
         $saved_basket = SavedBasket::show($request->id);
 
-        if ($saved_basket) {
+        if (count($saved_basket) > 0) {
             return view('saved-baskets.show', compact('saved_basket'));
         }
 
