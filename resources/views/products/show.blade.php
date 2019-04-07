@@ -31,6 +31,34 @@
                             </div>
                         </div>
                         <div class="col-lg-3 text-right product-pricing">
+                            @if ($product->prices->break1 > 0 || $product->prices->break2 > 0 || $product->prices->break3 > 0)
+                                <table class="bulk-rates">
+                                    <thead>
+                                    <tr>
+                                        <th>Qty</th>
+                                        <th>Discount %</th>
+                                        <th class="text-right">Net Price</th>
+                                    </tr>
+                                    </thead>
+                                    <tbody>
+                                    @for ($i = 0; $i < 4; $i++)
+                                        @php
+                                            $break = 'break' . $i; $price = 'price' . $i;
+                                        @endphp
+
+                                        @if ($product->prices->$break > 0)
+                                            <tr>
+                                                <td>{{ $product->prices->$break }}</td>
+                                                <td>{{ bulkDiscount($product->prices->price, $product->prices->$price) }}</td>
+                                                <td class="text-right">{{ currency(discount($product->prices->$price), 4) }}</td>
+                                            </tr>
+                                        @endif
+                                    @endfor
+                                    </tbody>
+                                </table>
+                                <hr>
+                            @endif
+
                             <div class="row">
                                 <div class="col text-left">
                                     Trade Price:

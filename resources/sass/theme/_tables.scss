@@ -51,3 +51,12 @@ table tr.clickable {
 .quantity-options {
   font-size: 10px;
 }
+
+.product-pricing table.bulk-rates {
+  font-size: 13px;
+  width: 100%;
+}
+
+.product-pricing table.bulk-rates th:first-of-type {
+  width: 30px;
+}

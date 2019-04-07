@@ -1,1 +1,196 @@
-!function(e){var o={};function n(r){if(o[r])return o[r].exports;var t=o[r]={i:r,l:!1,exports:{}};return e[r].call(t.exports,t,t.exports,n),t.l=!0,t.exports}n.m=e,n.c=o,n.d=function(e,o,r){n.o(e,o)||Object.defineProperty(e,o,{enumerable:!0,get:r})},n.r=function(e){"undefined"!=typeof Symbol&&Symbol.toStringTag&&Object.defineProperty(e,Symbol.toStringTag,{value:"Module"}),Object.defineProperty(e,"__esModule",{value:!0})},n.t=function(e,o){if(1&o&&(e=n(e)),8&o)return e;if(4&o&&"object"==typeof e&&e&&e.__esModule)return e;var r=Object.create(null);if(n.r(r),Object.defineProperty(r,"default",{enumerable:!0,value:e}),2&o&&"string"!=typeof e)for(var t in e)n.d(r,t,function(o){return e[o]}.bind(null,t));return r},n.n=function(e){var o=e&&e.__esModule?function(){return e.default}:function(){return e};return n.d(o,"a",o),o},n.o=function(e,o){return Object.prototype.hasOwnProperty.call(e,o)},n.p="/",n(n.s=2)}({2:function(e,o,n){e.exports=n("aFbA")},aFbA:function(e,o,n){n("c9jI")},c9jI:function(e,o){$.fn.overhang=function(e){function o(e,o){t.fadeOut(100),r.slideUp(s.speed,function(){e&&s.callback(null!==o?n.data(o):"")})}var n=$(this),r=$("<div class='overhang'></div>"),t=$("<div class='overhang-overlay'></div>");$(".overhang").remove(),$(".overhang-overlay").remove();var a={success:["#2ECC71","#27AE60"],error:["#E74C3C","#C0392B"],warn:["#E67E22","#D35400"],info:["#3498DB","#2980B9"],prompt:["#9B59B6","#8E44AD"],confirm:["#1ABC9C","#16A085"],default:["#95A5A6","#7F8C8D"]},s=$.extend({type:"success",custom:!1,message:"This is an overhang.js message!",textColor:"#FFFFFF",yesMessage:"Yes",noMessage:"No",yesColor:"#2ECC71",noColor:"#E74C3C",duration:1.5,speed:500,closeConfirm:!1,upper:!1,easing:"easeOutBounce",html:!1,overlay:!1,callback:function(){}},e);s.type=s.type.toLowerCase();-1===$.inArray(s.type,["success","error","warn","info","prompt","confirm"])&&(s.type="default",console.log("You have entered invalid type name for an overhang message. Overhang resorted to the default theme.")),s.custom?(s.primary=e.primary||a.default[0],s.accent=e.accent||a.default[1]):(s.primary=a[s.type][0]||a.default[0],s.accent=a[s.type][1]||a.default[1]),("prompt"===s.type||"confirm"===s.type)&&(s.primary=e.primary||a[s.type][0],s.accent=e.accent||a[s.type][1],s.closeConfirm=!0),r.css("background-color",s.primary),r.css("border-bottom","6px solid "+s.accent);var c=$("<span class='overhang-message'></span>");c.css("color",s.textColor),s.html?c.html(s.message):c.text(s.upper?s.message.toUpperCase():s.message),r.append(c);var l=$("<input class='overhang-prompt-field' />"),i=$("<button class='overhang-yes-option'>"+s.yesMessage+"</button>"),p=$("<button class='overhang-no-option'>"+s.noMessage+"</button>");if(i.css("background-color",s.yesColor),p.css("background-color",s.noColor),s.closeConfirm){var u=$("<span class='overhang-close'></span>");u.css("color",s.accent),"confirm"!==s.type&&r.append(u)}if("prompt"===s.type?(r.append(l),n.data("overhangPrompt",null),l.keydown(function(e){13==e.keyCode&&(n.data("overhangPrompt",l.val()),o(!0,"overhangPrompt"))})):"confirm"===s.type&&(r.append(i),r.append(p),r.append(u),n.data("overhangConfirm",null),i.click(function(){n.data("overhangConfirm",!0),o(!0,"overhangConfirm")}),p.click(function(){n.data("overhangConfirm",!1),o(!0,"overhangConfirm")})),n.append(r),r.slideDown(s.speed,s.easing),s.overlay&&(s.overlayColor&&t.css("background-color",s.overlayColor),n.append(t)),s.closeConfirm&&!e.duration)u.click(function(){"prompt"!==s.type&&"confirm"!==s.type?o(!0,null):o(!1,null)});else if(s.closeConfirm&&e.duration){var f=setTimeout(function(){r.slideUp(s.speed,function(){o(!0,null)})},1e3*s.duration);u.click(function(){clearTimeout(f),"prompt"!==s.type&&"confirm"!==s.type?o(!0,null):o(!1,null)})}else r.delay(1e3*s.duration).slideUp(s.speed,function(){o(!0,null)})}}});
+/******/ (function(modules) { // webpackBootstrap
+/******/ 	// The module cache
+/******/ 	var installedModules = {};
+/******/
+/******/ 	// The require function
+/******/ 	function __webpack_require__(moduleId) {
+/******/
+/******/ 		// Check if module is in cache
+/******/ 		if(installedModules[moduleId]) {
+/******/ 			return installedModules[moduleId].exports;
+/******/ 		}
+/******/ 		// Create a new module (and put it into the cache)
+/******/ 		var module = installedModules[moduleId] = {
+/******/ 			i: moduleId,
+/******/ 			l: false,
+/******/ 			exports: {}
+/******/ 		};
+/******/
+/******/ 		// Execute the module function
+/******/ 		modules[moduleId].call(module.exports, module, module.exports, __webpack_require__);
+/******/
+/******/ 		// Flag the module as loaded
+/******/ 		module.l = true;
+/******/
+/******/ 		// Return the exports of the module
+/******/ 		return module.exports;
+/******/ 	}
+/******/
+/******/
+/******/ 	// expose the modules object (__webpack_modules__)
+/******/ 	__webpack_require__.m = modules;
+/******/
+/******/ 	// expose the module cache
+/******/ 	__webpack_require__.c = installedModules;
+/******/
+/******/ 	// define getter function for harmony exports
+/******/ 	__webpack_require__.d = function(exports, name, getter) {
+/******/ 		if(!__webpack_require__.o(exports, name)) {
+/******/ 			Object.defineProperty(exports, name, { enumerable: true, get: getter });
+/******/ 		}
+/******/ 	};
+/******/
+/******/ 	// define __esModule on exports
+/******/ 	__webpack_require__.r = function(exports) {
+/******/ 		if(typeof Symbol !== 'undefined' && Symbol.toStringTag) {
+/******/ 			Object.defineProperty(exports, Symbol.toStringTag, { value: 'Module' });
+/******/ 		}
+/******/ 		Object.defineProperty(exports, '__esModule', { value: true });
+/******/ 	};
+/******/
+/******/ 	// create a fake namespace object
+/******/ 	// mode & 1: value is a module id, require it
+/******/ 	// mode & 2: merge all properties of value into the ns
+/******/ 	// mode & 4: return value when already ns object
+/******/ 	// mode & 8|1: behave like require
+/******/ 	__webpack_require__.t = function(value, mode) {
+/******/ 		if(mode & 1) value = __webpack_require__(value);
+/******/ 		if(mode & 8) return value;
+/******/ 		if((mode & 4) && typeof value === 'object' && value && value.__esModule) return value;
+/******/ 		var ns = Object.create(null);
+/******/ 		__webpack_require__.r(ns);
+/******/ 		Object.defineProperty(ns, 'default', { enumerable: true, value: value });
+/******/ 		if(mode & 2 && typeof value != 'string') for(var key in value) __webpack_require__.d(ns, key, function(key) { return value[key]; }.bind(null, key));
+/******/ 		return ns;
+/******/ 	};
+/******/
+/******/ 	// getDefaultExport function for compatibility with non-harmony modules
+/******/ 	__webpack_require__.n = function(module) {
+/******/ 		var getter = module && module.__esModule ?
+/******/ 			function getDefault() { return module['default']; } :
+/******/ 			function getModuleExports() { return module; };
+/******/ 		__webpack_require__.d(getter, 'a', getter);
+/******/ 		return getter;
+/******/ 	};
+/******/
+/******/ 	// Object.prototype.hasOwnProperty.call
+/******/ 	__webpack_require__.o = function(object, property) { return Object.prototype.hasOwnProperty.call(object, property); };
+/******/
+/******/ 	// __webpack_public_path__
+/******/ 	__webpack_require__.p = "/";
+/******/
+/******/
+/******/ 	// Load entry module and return exports
+/******/ 	return __webpack_require__(__webpack_require__.s = 2);
+/******/ })
+/************************************************************************/
+/******/ ({
+
+/***/ "./resources/js/cms.js":
+/*!*****************************!*\
+  !*** ./resources/js/cms.js ***!
+  \*****************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+__webpack_require__(/*! ./cms/alerts */ "./resources/js/cms/alerts.js");
+
+/***/ }),
+
+/***/ "./resources/js/cms/alerts.js":
+/*!************************************!*\
+  !*** ./resources/js/cms/alerts.js ***!
+  \************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+$.fn.overhang = function (e) {
+  function o(e, o) {
+    r.fadeOut(100), a.slideUp(c.speed, function () {
+      e && c.callback(null !== o ? n.data(o) : "");
+    });
+  }
+
+  var n = $(this),
+      a = $("<div class='overhang'></div>"),
+      r = $("<div class='overhang-overlay'></div>");
+  $(".overhang").remove(), $(".overhang-overlay").remove();
+  var t = {
+    success: ["#2ECC71", "#27AE60"],
+    error: ["#E74C3C", "#C0392B"],
+    warn: ["#E67E22", "#D35400"],
+    info: ["#3498DB", "#2980B9"],
+    prompt: ["#9B59B6", "#8E44AD"],
+    confirm: ["#1ABC9C", "#16A085"],
+    "default": ["#95A5A6", "#7F8C8D"]
+  },
+      s = {
+    type: "success",
+    custom: !1,
+    message: "This is an overhang.js message!",
+    textColor: "#FFFFFF",
+    yesMessage: "Yes",
+    noMessage: "No",
+    yesColor: "#2ECC71",
+    noColor: "#E74C3C",
+    duration: 1.5,
+    speed: 500,
+    closeConfirm: !1,
+    upper: !1,
+    easing: "easeOutBounce",
+    html: !1,
+    overlay: !1,
+    callback: function callback() {}
+  },
+      c = $.extend(s, e);
+  c.type = c.type.toLowerCase();
+  var l = ["success", "error", "warn", "info", "prompt", "confirm"];
+  -1 === $.inArray(c.type, l) && (c.type = "default", console.log("You have entered invalid type name for an overhang message. Overhang resorted to the default theme.")), c.custom ? (c.primary = e.primary || t["default"][0], c.accent = e.accent || t["default"][1]) : (c.primary = t[c.type][0] || t["default"][0], c.accent = t[c.type][1] || t["default"][1]), ("prompt" === c.type || "confirm" === c.type) && (c.primary = e.primary || t[c.type][0], c.accent = e.accent || t[c.type][1], c.closeConfirm = !0), a.css("background-color", c.primary), a.css("border-bottom", "6px solid " + c.accent);
+  var p = $("<span class='overhang-message'></span>");
+  p.css("color", c.textColor), c.html ? p.html(c.message) : p.text(c.upper ? c.message.toUpperCase() : c.message), a.append(p);
+  var i = $("<input class='overhang-prompt-field' />"),
+      u = $("<button class='overhang-yes-option'>" + c.yesMessage + "</button>"),
+      d = $("<button class='overhang-no-option'>" + c.noMessage + "</button>");
+
+  if (u.css("background-color", c.yesColor), d.css("background-color", c.noColor), c.closeConfirm) {
+    var m = $("<span class='overhang-close'></span>");
+    m.css("color", c.accent), "confirm" !== c.type && a.append(m);
+  }
+
+  if ("prompt" === c.type ? (a.append(i), n.data("overhangPrompt", null), i.keydown(function (e) {
+    13 == e.keyCode && (n.data("overhangPrompt", i.val()), o(!0, "overhangPrompt"));
+  })) : "confirm" === c.type && (a.append(u), a.append(d), a.append(m), n.data("overhangConfirm", null), u.click(function () {
+    n.data("overhangConfirm", !0), o(!0, "overhangConfirm");
+  }), d.click(function () {
+    n.data("overhangConfirm", !1), o(!0, "overhangConfirm");
+  })), n.append(a), a.slideDown(c.speed, c.easing), c.overlay && (c.overlayColor && r.css("background-color", c.overlayColor), n.append(r)), c.closeConfirm && !e.duration) m.click(function () {
+    "prompt" !== c.type && "confirm" !== c.type ? o(!0, null) : o(!1, null);
+  });else if (c.closeConfirm && e.duration) {
+    var f = setTimeout(function () {
+      a.slideUp(c.speed, function () {
+        o(!0, null);
+      });
+    }, 1e3 * c.duration);
+    m.click(function () {
+      clearTimeout(f), "prompt" !== c.type && "confirm" !== c.type ? o(!0, null) : o(!1, null);
+    });
+  } else a.delay(1e3 * c.duration).slideUp(c.speed, function () {
+    o(!0, null);
+  });
+};
+
+/***/ }),
+
+/***/ 2:
+/*!***********************************!*\
+  !*** multi ./resources/js/cms.js ***!
+  \***********************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+module.exports = __webpack_require__(/*! /Users/samuel/Code/shop/resources/js/cms.js */"./resources/js/cms.js");
+
+
+/***/ })
+
+/******/ });

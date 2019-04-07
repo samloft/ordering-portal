@@ -54,7 +54,8 @@
             "app/Helpers/Currency.php",
             "app/Helpers/OnlineDiscount.php",
             "app/Helpers/Vat.php",
-            "app/Helpers/Url.php"
+            "app/Helpers/Url.php",
+            "app/Helpers/BulkDiscount.php"
         ]
     },
     "autoload-dev": {

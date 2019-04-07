@@ -200,33 +200,33 @@ hr {
   margin-bottom: 0.1rem;
 }
 
-.product-list .product-pricing {
+.product-pricing {
   line-height: 1.2rem;
   font-size: 13px;
 }
 
-.product-list .product-details h5 {
+.product-details h5 {
   font-weight: 300;
   font-size: 14px;
 }
 
-.product-list .product-details h5 span.primary-font {
+.product-details h5 span.primary-font {
   font-weight: 900;
   color: $primary-color;
 }
 
-.product-list .product-pricing .product-basket {
+.product-pricing .product-basket {
   margin-top: 10px;
 }
 
-.product-list .stock-levels .input-group-text {
+.stock-levels .input-group-text {
   background-color: rgba(134, 136, 139, 1.0);
   border-color: rgba(134, 136, 139, 1.0);
   color: rgb(255, 255, 255);
   cursor: default;
 }
 
-.product-list .stock-levels input {
+.stock-levels input {
   background-color: rgba(236, 237, 237, 1.0);
   border-color: rgba(236, 237, 237, 1.0);
   text-align: center;
