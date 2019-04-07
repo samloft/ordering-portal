@@ -36397,6 +36397,8 @@ __webpack_require__(/*! ./modules/categories */ "./resources/js/modules/categori
 
 __webpack_require__(/*! ./modules/products */ "./resources/js/modules/products.js");
 
+__webpack_require__(/*! ./modules/inputs */ "./resources/js/modules/inputs.js");
+
 /***/ }),
 
 /***/ "./resources/js/bootstrap.js":
@@ -36675,6 +36677,24 @@ $(function () {
 
 /***/ }),
 
+/***/ "./resources/js/modules/inputs.js":
+/*!****************************************!*\
+  !*** ./resources/js/modules/inputs.js ***!
+  \****************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+$(function () {
+  $('input[name="date_from"]').datepicker({
+    dateFormat: 'dd/mm/yy'
+  });
+  $('input[name="date_to"]').datepicker({
+    dateFormat: 'dd/mm/yy'
+  });
+});
+
+/***/ }),
+
 /***/ "./resources/js/modules/products.js":
 /*!******************************************!*\
   !*** ./resources/js/modules/products.js ***!
@@ -36731,17 +36751,6 @@ $(function () {
 
 /***/ }),
 
-/***/ "./resources/sass/pdf.scss":
-/*!*********************************!*\
-  !*** ./resources/sass/pdf.scss ***!
-  \*********************************/
-/*! no static exports found */
-/***/ (function(module, exports) {
-
-throw new Error("Module build failed (from ./node_modules/css-loader/index.js):\nModuleBuildError: Module build failed (from ./node_modules/sass-loader/lib/loader.js):\nError: ENOENT: no such file or directory, open '/Users/samuel/Code/shop/resources/sass/pdf.scss'\n    at runLoaders (/Users/samuel/Code/shop/node_modules/webpack/lib/NormalModule.js:301:20)\n    at /Users/samuel/Code/shop/node_modules/loader-runner/lib/LoaderRunner.js:364:11\n    at /Users/samuel/Code/shop/node_modules/loader-runner/lib/LoaderRunner.js:200:19\n    at process.nextTick (/Users/samuel/Code/shop/node_modules/enhanced-resolve/lib/CachedInputFileSystem.js:73:15)\n    at process.internalTickCallback (internal/process/next_tick.js:70:11)");
-
-/***/ }),
-
 /***/ "./resources/sass/theme.scss":
 /*!***********************************!*\
   !*** ./resources/sass/theme.scss ***!
@@ -36754,17 +36763,16 @@ throw new Error("Module build failed (from ./node_modules/css-loader/index.js):\
 /***/ }),
 
 /***/ 0:
-/*!*********************************************************************************************************************************************!*\
-  !*** multi ./resources/js/app.js ./resources/sass/app.scss ./resources/sass/theme.scss ./resources/sass/cms.scss ./resources/sass/pdf.scss ***!
-  \*********************************************************************************************************************************************/
+/*!*******************************************************************************************************************!*\
+  !*** multi ./resources/js/app.js ./resources/sass/app.scss ./resources/sass/theme.scss ./resources/sass/cms.scss ***!
+  \*******************************************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
 __webpack_require__(/*! /Users/samuel/Code/shop/resources/js/app.js */"./resources/js/app.js");
 __webpack_require__(/*! /Users/samuel/Code/shop/resources/sass/app.scss */"./resources/sass/app.scss");
 __webpack_require__(/*! /Users/samuel/Code/shop/resources/sass/theme.scss */"./resources/sass/theme.scss");
-__webpack_require__(/*! /Users/samuel/Code/shop/resources/sass/cms.scss */"./resources/sass/cms.scss");
-module.exports = __webpack_require__(/*! /Users/samuel/Code/shop/resources/sass/pdf.scss */"./resources/sass/pdf.scss");
+module.exports = __webpack_require__(/*! /Users/samuel/Code/shop/resources/sass/cms.scss */"./resources/sass/cms.scss");
 
 
 /***/ })

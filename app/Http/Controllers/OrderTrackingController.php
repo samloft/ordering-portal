@@ -7,13 +7,17 @@ use App\Models\OrderTracking\Header;
 use App\Models\OrderTracking\Lines;
 use App\Models\Prices;
 use Auth;
+use Illuminate\Contracts\View\Factory;
+use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
+use Illuminate\Routing\Redirector;
+use Illuminate\View\View;
 
 class OrderTrackingController extends Controller
 {
     /**
      * @param Request $request
-     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     * @return Factory|View
      */
     public function index(Request $request)
     {
@@ -28,7 +32,7 @@ class OrderTrackingController extends Controller
      * Show details for the given order number.
      *
      * @param $order
-     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     * @return Factory|View
      */
     public function show($order)
     {
@@ -58,7 +62,7 @@ class OrderTrackingController extends Controller
      * Copy the order lines from a given order number.
      *
      * @param $order_number
-     * @return \Illuminate\Http\RedirectResponse|\Illuminate\Routing\Redirector
+     * @return RedirectResponse|Redirector
      */
     public function copy($order_number)
     {
@@ -72,7 +76,13 @@ class OrderTrackingController extends Controller
         }
     }
 
-    public function invoicePdf($order_number, $customer_order_number, $download = false)
+    /**
+     * @param $order_number
+     * @param $customer_order_number
+     * @param bool $download
+     * @return array
+     */
+    public function invoicePdf($order_number, $customer_order_number, $download = false) : array
     {
         $authorized = Header::show(urldecode($order_number));
 

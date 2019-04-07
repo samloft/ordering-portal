@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\Auth;
 
@@ -21,7 +22,27 @@ class SavedBasket extends Model
     public static function list($search, $request)
     {
         if ($search) {
+            return (new SavedBasket)->select('id', 'reference', 'created_at')
+                ->where('customer_code', Auth::user()->customer_code)
+                ->when($request, function ($query) use ($request) {
+                    if ($request->reference) {
+                        $query->where('reference', 'like', '%' . $request->reference . '%');
+                    }
 
+                    if ($request->date_from) {
+                        $date_from = Carbon::createFromFormat('d/m/Y', $request->date_from)->format('Y-m-d');
+
+                        $query->where('date_received', '>=', $date_from);
+                    }
+
+                    if ($request->date_to) {
+                        $date_to = Carbon::createFromFormat('d/m/Y', $request->date_to)->format('Y-m-d');
+
+                        $query->where('date_received', '<=', $date_to);
+                    }
+                })
+                ->groupBy(['id', 'reference', 'created_at'])
+                ->paginate(10);
         }
 
         return (new SavedBasket)->select('id', 'reference', 'created_at')
@@ -42,7 +63,7 @@ class SavedBasket extends Model
             ->where('saved_basket.customer_code', Auth::user()->customer_code)
             ->where('id', $id)
             ->leftJoin('products', 'products.product', 'saved_basket.product')
-            ->leftJoin('prices', function($join) {
+            ->leftJoin('prices', function ($join) {
                 $join->on('prices.product', 'saved_basket.product');
                 $join->where('prices.customer_code', Auth::user()->customer_code);
             })

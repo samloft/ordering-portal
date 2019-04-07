@@ -12,14 +12,34 @@
             <div class="card card-body">
                 <h2 class="section-title">{{ __('Search Templates') }}</h2>
 
-                <div class="form-group">
-                    <label>Template Reference</label>
-                    <input class="form-control">
-                </div>
+                <form method="get" action="{{ route('saved-baskets') }}">
+                    <div class="form-group">
+                        <label>Template Reference</label>
+                        <input name="reference" class="form-control" autocomplete="off">
+                    </div>
 
-                <label>Date Range</label>
+                    <label>{{ __('Date Range') }}</label>
 
-                <button class="btn btn-blue btn-block">{{ __('Search Saved Baskets') }}</button>
+                    <div class="row mb-1">
+                        <div class="col">
+                            <label>{{ __('From') }}</label>
+                        </div>
+                        <div class="col-lg-8">
+                            <input name="date_from" class="form-control form-date" autocomplete="off" readonly>
+                        </div>
+                    </div>
+
+                    <div class="row mb-3">
+                        <div class="col">
+                            <label>{{ __('To') }}</label>
+                        </div>
+                        <div class="col-lg-8">
+                            <input name="date_to" class="form-control form-date" autocomplete="off" readonly>
+                        </div>
+                    </div>
+
+                    <button type="submit" class="btn btn-blue btn-block">{{ __('Search Saved Baskets') }}</button>
+                </form>
             </div>
         </div>
         <div class="col-lg-8 d-flex align-items-stretch">
@@ -51,6 +71,7 @@
                     @endforeach
                     </tbody>
                 </table>
+                {{ $saved_baskets->appends($_GET)->links('layout.pagination') }}
             </div>
         </div>
     </div>

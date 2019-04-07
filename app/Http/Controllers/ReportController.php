@@ -4,15 +4,16 @@ namespace App\Http\Controllers;
 
 use App\Models\OrderTracking\Header;
 use Barryvdh\DomPDF\Facade as PDF;
-use Dompdf\Options;
+use Illuminate\Contracts\View\Factory;
 use Illuminate\Http\Request;
+use Illuminate\View\View;
 
 class ReportController extends Controller
 {
     /**
      * Display the report page for a user to choose a report.
      *
-     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     * @return Factory|View
      */
     public function index()
     {

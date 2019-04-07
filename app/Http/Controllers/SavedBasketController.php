@@ -4,15 +4,21 @@ namespace App\Http\Controllers;
 
 use App\Models\Basket;
 use App\Models\SavedBasket;
+use Illuminate\Contracts\Routing\ResponseFactory;
+use Illuminate\Contracts\View\Factory;
+use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
+use Illuminate\Http\Response;
+use Illuminate\Routing\Redirector;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Str;
+use Illuminate\View\View;
 
 class SavedBasketController extends Controller
 {
     /**
      * @param Request $request
-     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     * @return Factory|View
      */
     public function index(Request $request)
     {
@@ -42,7 +48,7 @@ class SavedBasketController extends Controller
 
     /**
      * @param Request $request
-     * @return \Illuminate\Contracts\Routing\ResponseFactory|\Illuminate\Http\Response
+     * @return ResponseFactory|Response
      */
     public function store(Request $request)
     {
@@ -71,7 +77,7 @@ class SavedBasketController extends Controller
      * Delete a given saved basket.
      *
      * @param Request $request
-     * @return \Illuminate\Http\RedirectResponse
+     * @return RedirectResponse
      */
     public function destroy(Request $request)
     {
@@ -92,7 +98,7 @@ class SavedBasketController extends Controller
      * Take a saved basket, and copy it into the actual basket.
      *
      * @param $id
-     * @return \Illuminate\Http\RedirectResponse|\Illuminate\Routing\Redirector
+     * @return RedirectResponse|Redirector
      */
     public function copyToBasket($id)
     {
