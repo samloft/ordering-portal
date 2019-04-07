@@ -73,6 +73,7 @@ Route::group(['middleware' => ['auth', 'has.customer']], function () {
      */
     Route::group(['prefix' => 'reports'], function () {
         Route::get('/', 'ReportController@index')->name('reports');
+        Route::post('show', 'ReportController@show')->name('reports.show');
     });
 
     /*

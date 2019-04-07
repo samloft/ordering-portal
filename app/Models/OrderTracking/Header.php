@@ -3,6 +3,7 @@
 namespace App\Models\OrderTracking;
 
 use Carbon\Carbon;
+use DB;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\Auth;
 
@@ -77,5 +78,24 @@ class Header extends Model
     {
         return (new Header)->where('customer_code', Auth::user()->customer_code)
             ->where('order_no', $order)->first();
+    }
+
+    /**
+     * Get all the backorders for the logged in customer.
+     *
+     * @return \Illuminate\Database\Eloquent\Builder[]|\Illuminate\Database\Eloquent\Collection|\Illuminate\Database\Query\Builder[]|\Illuminate\Support\Collection
+     */
+    public static function backOrders()
+    {
+        return (new Header)
+            ->selectRaw('order_tracking_header.order_no, order_tracking_header.date_received, order_tracking_lines.product, order_tracking_lines.line_qty, order_tracking_lines.long_description, MIN(expected_stock.due_date) as due_date')
+            ->leftJoin('order_tracking_lines', 'order_tracking_header.order_no', '=', 'order_tracking_lines.order_no')
+            ->leftJoin('expected_stock', 'order_tracking_lines.product', '=', 'expected_stock.product')
+            ->where('customer_code', Auth::user()->customer_code)
+            ->whereNotIn('status', ['Invoiced', 'Cancelled'])
+            ->where('order_tracking_header.order_no', 'like', '%/%')
+            ->where('order_tracking_lines.product', 'not like', '%M19%')
+            ->groupBy('order_tracking_header.order_no', 'order_tracking_header.date_received', 'order_tracking_lines.product', 'order_tracking_lines.line_qty', 'order_tracking_lines.long_description')
+            ->get();
     }
 }
