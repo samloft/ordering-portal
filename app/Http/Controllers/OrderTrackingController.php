@@ -70,7 +70,7 @@ class OrderTrackingController extends Controller
         $added_to_basket = Basket::store($order_lines);
 
         if ($added_to_basket) {
-            return redirect(route('basket'))->with('success', 'Order lines from order ' . $order_number . ' have been added to your basket');
+            return redirect(route('basket'))->with('success', 'Order lines from order ' . decodeUrl($order_number) . ' have been added to your basket');
         } else {
             return back()->with('error', 'An error occurred when copying this order to the basket, please try again');
         }

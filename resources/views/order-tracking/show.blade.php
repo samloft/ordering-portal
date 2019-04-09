@@ -90,7 +90,7 @@
         </div>
         <div class="col text-right">
             <a class="btn-link"
-               href="{{ route('order-tracking.copy-to-basket', ['order_number' => urlencode(trim($order->order_no))]) }}">
+               href="{{ route('order-tracking.copy-to-basket', ['order_number' => encodeUrl(trim($order->order_no))]) }}">
                 <button class="btn btn-primary">{{ __('Copy Order To Basket') }}</button>
             </a>
             <a id="invoice-download" class="btn-link d-none">
