@@ -24,15 +24,15 @@ Route::group(['middleware' => ['auth', 'has.customer']], function () {
         Route::get('view/{product}', 'ProductController@show')->name('products.show');
         Route::get('search', 'ProductController@search')->name('products.search');
 
-        Route::get('autocomplete/{search}', function($search) {
+        Route::get('autocomplete/{search}', function ($search) {
             return App\Models\Products::autocomplete($search);
         });
 
         Route::get('{cat1?}/{cat2?}/{cat3?}', 'ProductController@index')->name('products');
     });
 
-    Route::group(['prefix' => 'category'], function() {
-        Route::get('image/{products}', function($products) {
+    Route::group(['prefix' => 'category'], function () {
+        Route::get('image/{products}', function ($products) {
             return App\Models\Products::checkImage($products);
         })->name('products.check-image');
     });
@@ -103,6 +103,11 @@ Route::group(['middleware' => ['auth', 'has.customer']], function () {
             Route::patch('{id}/edit', 'Account\AddressController@update')->name('account.address.update');
             Route::post('default', 'Account\AddressController@default')->name('account.address.default');
             Route::get('{id}/delete', 'Account\AddressController@destroy')->name('account.address.destroy');
+        });
+
+        Route::group(['prefix' => 'customer'], function () {
+            Route::post('change', 'AccountController@changeCustomer')->name('customer.change');
+            Route::get('revert', 'AccountController@revertChangeCustomer')->name('customer.change.revert');
         });
     });
 

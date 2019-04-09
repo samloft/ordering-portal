@@ -26,8 +26,15 @@
 @include('layout.header')
 
 @include('layout.navigation')
-
 <div class="container content">
+    @if (session('temp_customer'))
+        <div class="alert alert-info">
+            <strong>{{ __('Notice!') }}</strong>
+            {!! __('You are currently assuming the customer code: <span class="font-weight-bold">' . session('temp_customer') . '</span>.
+            Your actual Customer Code is <span class="font-weight-bold">' . Auth::user()->customer_code . '</span>. Please <a href="' . route('customer.change.revert') . '">click here</a> to revert back to your default Customer Code.') !!}
+        </div>
+    @endif
+
     @yield('content')
 </div>
 

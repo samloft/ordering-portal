@@ -4,17 +4,22 @@ namespace App\Http\Controllers;
 
 use App\Models\Addresses;
 use App\Models\Countries;
+use App\Models\Customer;
 use App\Models\User;
 use Auth;
+use Illuminate\Contracts\View\Factory;
+use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Hash;
+use Illuminate\View\View;
+use Session;
 
 class AccountController extends Controller
 {
     /**
      * Displays the account page.
      *
-     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     * @return Factory|View
      */
     public function index()
     {
@@ -26,7 +31,7 @@ class AccountController extends Controller
     /**
      * Update user details from the contact page.
      *
-     * @return \Illuminate\Http\RedirectResponse
+     * @return RedirectResponse
      */
     public function store()
     {
@@ -52,5 +57,40 @@ class AccountController extends Controller
             'fax' => 'nullable',
             'mobile' => 'nullable',
         ]);
+    }
+
+    /**
+     * Change the customer the user is currently using.
+     *
+     * @param Request $request
+     * @return RedirectResponse|void
+     */
+    public function changeCustomer(Request $request)
+    {
+        if (Auth::user()->admin !== 1) {
+            return abort(404);
+        }
+
+        $customer = Customer::show($request->customer);
+
+        if (!$customer) {
+            return back()->with('error', 'Customer code ' . $request->customer . ' does not exist');
+        }
+
+        Session::put('temp_customer', $customer->customer_code);
+
+        return back();
+    }
+
+    /**
+     * Revert a changed customer to the users default customer.
+     *
+     * @return RedirectResponse
+     */
+    public function revertChangeCustomer()
+    {
+        Session::put('temp_customer', null);
+
+        return back();
     }
 }

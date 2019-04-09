@@ -2,11 +2,11 @@
     @if (Auth::user()->admin)
         <div class="row">
             <div class="col">
-                <form class="w-100" action="">
+                <form class="w-100" action="{{ route('customer.change') }}" method="post">
                     <div class="form-group">
                         <label>{{ __('Change Customer') }}</label>
                         <div class="input-group">
-                            <input type="text" class="form-control" autocomplete="off">
+                            <input type="text" class="form-control" name="customer" autocomplete="off">
                             <div class="input-group-append">
                                 <button class="input-group-text"><i class="fas fa-user"></i></button>
                             </div>
