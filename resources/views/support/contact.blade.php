@@ -12,7 +12,19 @@
     <div class="row mt-4">
         <div class="col-lg-4">
             <div class="card card-body">
-                Address
+                <div class="address">
+                    <span>{{ env('ADDRESS_LINE_1') }}</span>
+                    <span>{{ env('ADDRESS_LINE_2') }}</span>
+                    <span>{{ env('ADDRESS_LINE_3') }}</span>
+                    <span>{{ env('ADDRESS_LINE_4') }}</span>
+                    <span>{{ env('ADDRESS_LINE_5') }}</span>
+                    <span>{{ env('ADDRESS_POSTCODE') }}</span>
+
+                    <br>
+
+                    <span>{{ env('ADDRESS_TELEPHONE') ? 'Tel: ' . env('ADDRESS_TELEPHONE') : '' }}</span>
+                    <span>{{ env('ADDRESS_FAX') ? 'Fax: ' . env('ADDRESS_FAX') : '' }}</span>
+                </div>
             </div>
         </div>
         <div class="col-lg-8">
