@@ -3,8 +3,13 @@
 namespace App\Http\Controllers\Auth;
 
 use Auth;
+use Illuminate\Contracts\View\Factory;
+use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use Illuminate\Routing\Redirector;
+use Illuminate\Validation\ValidationException;
+use Illuminate\View\View;
 
 class AdminController extends Controller
 {
@@ -17,7 +22,7 @@ class AdminController extends Controller
     }
 
     /**
-     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     * @return Factory|View
      */
     public function showLoginForm()
     {
@@ -26,8 +31,8 @@ class AdminController extends Controller
 
     /**
      * @param Request $request
-     * @return \Illuminate\Http\RedirectResponse
-     * @throws \Illuminate\Validation\ValidationException
+     * @return RedirectResponse
+     * @throws ValidationException
      */
     public function login(Request $request)
     {
@@ -44,7 +49,7 @@ class AdminController extends Controller
     }
 
     /**
-     * @return \Illuminate\Http\RedirectResponse|\Illuminate\Routing\Redirector
+     * @return RedirectResponse|Redirector
      */
     public function logout()
     {

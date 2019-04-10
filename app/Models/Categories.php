@@ -2,13 +2,15 @@
 
 namespace App\Models;
 
+use Eloquent;
 use Illuminate\Database\Eloquent\Model;
 use Auth;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 
 /**
  * App\Models\Categories
  *
- * @mixin \Eloquent
+ * @mixin Eloquent
  */
 class Categories extends Model
 {
@@ -16,7 +18,7 @@ class Categories extends Model
     public $incrementing = false;
 
     /**
-     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     * @return HasMany
      */
     public function prices()
     {
@@ -32,7 +34,7 @@ class Categories extends Model
     {
         $category_results = (new Categories)->select('cat1_level1', 'cat1_level2', 'cat1_level3', 'cat1_level4', 'cat1_level5')
             ->whereHas('prices', function ($query) {
-                $query->where('customer_code', Auth::user()->customer_code);
+                $query->where('customer_code', Auth::user()->customer->customer_code);
             })->groupBy('cat1_level1', 'cat1_level2', 'cat1_level3', 'cat1_level4', 'cat1_level5')->get();
 
         $array = [];
@@ -104,7 +106,7 @@ class Categories extends Model
             ->where('cat1_level1', $main)
             ->where('cat1_level' . $level, $category)
             ->whereHas('prices', function ($query) {
-                $query->where('customer_code', Auth::user()->customer_code);
+                $query->where('customer_code', Auth::user()->customer->customer_code);
             })->orderBy('cat1_level' . $level)->orderBy('product')->get();
 
         $products = [];

@@ -5,15 +5,18 @@ namespace App\Http\Controllers\Account;
 use App\Models\User;
 use Auth;
 use Hash;
-use Illuminate\Http\Request;
+use Illuminate\Contracts\View\Factory;
+use Illuminate\Http\RedirectResponse;
+use Request;
 use App\Http\Controllers\Controller;
+use Illuminate\View\View;
 
 class PasswordController extends Controller
 {
     /**
      * Show the change password page.
      *
-     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     * @return Factory|View
      */
     public function index()
     {
@@ -24,7 +27,7 @@ class PasswordController extends Controller
      * Update a users password.
      *
      * @param Request $request
-     * @return \Illuminate\Http\RedirectResponse
+     * @return RedirectResponse
      */
     public function store(Request $request)
     {

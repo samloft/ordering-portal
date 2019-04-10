@@ -2,8 +2,8 @@
 
 namespace App\Http\Controllers\Cms;
 
-use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use Illuminate\Http\Response;
 
 class HomeController extends Controller
 {
@@ -20,7 +20,7 @@ class HomeController extends Controller
     /**
      * show dashboard.
      *
-     * @return \Illuminate\Http\Response
+     * @return Response
      */
     public function index()
     {

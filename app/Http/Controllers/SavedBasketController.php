@@ -10,13 +10,16 @@ use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 use Illuminate\Routing\Redirector;
-use Illuminate\Support\Facades\Auth;
+use Auth;
 use Illuminate\Support\Str;
 use Illuminate\View\View;
 
 class SavedBasketController extends Controller
 {
     /**
+     * Display all saved baskets for the current user, if
+     * search parameters are passed, display results that match the search.
+     *
      * @param Request $request
      * @return Factory|View
      */
@@ -59,7 +62,7 @@ class SavedBasketController extends Controller
         foreach ($current_basket['lines'] as $item) {
             $basket_details[] = [
                 'id' => $id,
-                'customer_code' => Auth::user()->customer_code,
+                'customer_code' => Auth::user()->customer->customer_code,
                 'user_id' => Auth::user()->id,
                 'reference' => $request->reference,
                 'product' => trim($item['product']),

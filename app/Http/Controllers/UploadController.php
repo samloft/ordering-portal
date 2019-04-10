@@ -5,15 +5,19 @@ namespace App\Http\Controllers;
 use App\Models\Basket;
 use App\Models\OrderImport;
 use App\Models\Products;
-use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Auth;
+use Exception;
+use Illuminate\Contracts\View\Factory;
+use Illuminate\Http\RedirectResponse;
+use Request;
+use Auth;
+use Illuminate\View\View;
 
 class UploadController extends Controller
 {
     /**
      * Display the CSV upload page.
      *
-     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     * @return Factory|View
      */
     public function index()
     {
@@ -25,8 +29,8 @@ class UploadController extends Controller
      * and check the merged lines for order multiple quantity and increasing as needed.
      *
      * @param Request $request
-     * @return \Illuminate\Contracts\View\Factory|\Illuminate\Http\RedirectResponse|\Illuminate\View\View
-     * @throws \Exception
+     * @return Factory|RedirectResponse|View
+     * @throws Exception
      */
     public function validation(Request $request)
     {
@@ -112,7 +116,7 @@ class UploadController extends Controller
             if (!$product['validation']['error']) {
                 $upload[] = [
                     'user_id' => Auth::user()->id,
-                    'customer_code' => Auth::user()->customer_code,
+                    'customer_code' => Auth::user()->customer->customer_code,
                     'product' => $product['product'],
                     'quantity' => $quantity,
                 ];
@@ -134,8 +138,8 @@ class UploadController extends Controller
     /**
      * When the user clicks "Add to basket" after validation has finished, copy the temp lines in the upload table to the users basket.
      *
-     * @return \Illuminate\Contracts\View\Factory|\Illuminate\Http\RedirectResponse|\Illuminate\View\View
-     * @throws \Exception
+     * @return Factory|RedirectResponse|View
+     * @throws Exception
      */
     public function store()
     {

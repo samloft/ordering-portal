@@ -6,8 +6,9 @@ use App\Models\Categories;
 use App\Models\ExpectedStock;
 use App\Models\HomeLinks;
 use App\Models\Products;
+use Illuminate\Contracts\View\Factory;
 use Illuminate\Support\Facades\Input;
-use PhpParser\Node\Expr\Cast\Object_;
+use Illuminate\View\View;
 
 class ProductController extends Controller
 {
@@ -20,7 +21,7 @@ class ProductController extends Controller
      * @param string $category_three [Optional]
      * @param string $category_four [Optional]
      * @param string $category_five [Optional]
-     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     * @return Factory|View
      */
     public function index($category_one = null, $category_two = null, $category_three = null, $category_four = null, $category_five = null)
     {
@@ -43,7 +44,7 @@ class ProductController extends Controller
             }
         }
 
-        if ($categories['level_1'] <> null) {
+        if ($categories['level_1'] != null) {
             $sub_category_list = Categories::subCategories($current_level, $categories['level_1'], $categories['level_' . $current_level]);
             $products = Products::list($categories);
 
@@ -59,7 +60,7 @@ class ProductController extends Controller
      * Product details page.
      *
      * @param $product_code
-     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     * @return Factory|View
      */
     public function show($product_code)
     {
@@ -96,7 +97,7 @@ class ProductController extends Controller
     /**
      * Product search based on code, name, description.
      *
-     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     * @return Factory|View
      */
     public function search()
     {

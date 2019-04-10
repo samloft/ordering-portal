@@ -3,12 +3,14 @@
 namespace App\Models;
 
 use Auth;
+use Eloquent;
+use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Database\Eloquent\Model;
 
 /**
  * App\Models\Customer
  *
- * @mixin \Eloquent
+ * @mixin Eloquent
  */
 class Prices extends Model
 {
@@ -18,11 +20,10 @@ class Prices extends Model
     /**
      * Return a list of all products that have a price list.
      *
-     * @return Prices[]|\Illuminate\Database\Eloquent\Collection
+     * @return Prices[]|Collection
      */
     public static function productList()
     {
-//        return (new Prices)->select('product')->groupBy('product')->orderBy('product', 'asc')->get();
         return (new Prices)->select('product')->where('product', 'not like', '%*%')->distinct()->orderBy('product', 'asc')->get();
     }
 
@@ -34,7 +35,7 @@ class Prices extends Model
      */
     public static function product($product_code)
     {
-        $exists = (new Prices)->where('customer_code', Auth::user()->customer_code)->where('product', $product_code)->first();
+        $exists = (new Prices)->where('customer_code', Auth::user()->customer->customer_code)->where('product', $product_code)->first();
 
         return $exists ? true : false;
     }

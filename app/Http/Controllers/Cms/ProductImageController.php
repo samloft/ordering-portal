@@ -4,25 +4,23 @@ namespace App\Http\Controllers\Cms;
 
 use App\Models\Prices;
 use App\Models\Products;
+use Illuminate\Contracts\View\Factory;
+use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
-use Illuminate\Support\Facades\File;
-use Illuminate\Support\Facades\Storage;
+use File;
+use Storage;
+use Illuminate\View\View;
 
 class ProductImageController extends Controller
 {
     /**
-     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     * Display the product images page.
+     *
+     * @return Factory|View
      */
     public function index()
     {
-//        $product_list = Prices::productList();
-//        $products = [];
-//
-//        foreach ($product_list as $product) {
-//            $products[] = encodeUrl($product->product);
-//        }
-
         return view('cms.product-images.index');
     }
 
@@ -54,8 +52,7 @@ class ProductImageController extends Controller
      * Upload product images.
      *
      * @param Request $request
-     * @return \Illuminate\Http\JsonResponse
-     * @throws \Illuminate\Contracts\Filesystem\FileNotFoundException
+     * @return JsonResponse
      */
     public function store(Request $request)
     {
@@ -63,7 +60,7 @@ class ProductImageController extends Controller
         $name = $image->getClientOriginalName();
         $extension = $image->getClientOriginalExtension();
 
-        if ($extension <> 'png') {
+        if ($extension != 'png') {
             return response()->json($name . ' must be a png', 400);
         }
 

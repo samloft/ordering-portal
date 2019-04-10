@@ -2,14 +2,19 @@
 
 namespace App\Models;
 
+use Eloquent;
+use Exception;
+use Illuminate\Contracts\Filesystem\FileNotFoundException;
+use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Support\Facades\File;
-use Illuminate\Support\Facades\Storage;
+use File;
+use Illuminate\Support\Str;
+use Storage;
 
 /**
  * App\Models\HomeLinks
  *
- * @mixin \Eloquent
+ * @mixin Eloquent
  */
 class HomeLinks extends Model
 {
@@ -31,7 +36,7 @@ class HomeLinks extends Model
      *
      * @param $request
      * @return bool
-     * @throws \Illuminate\Contracts\Filesystem\FileNotFoundException
+     * @throws FileNotFoundException
      */
     public static function store($request)
     {
@@ -59,7 +64,7 @@ class HomeLinks extends Model
      *
      * @param $request
      * @return bool
-     * @throws \Illuminate\Contracts\Filesystem\FileNotFoundException
+     * @throws FileNotFoundException
      */
     public static function edit($request)
     {
@@ -89,12 +94,11 @@ class HomeLinks extends Model
      * @param $type
      * @param $name
      * @return array
-     * @throws \Illuminate\Contracts\Filesystem\FileNotFoundException
      */
     public static function storeLinkImage($image, $type, $name)
     {
         $extension = $image->getClientOriginalExtension();
-        $image_name = $type . '-' . str_slug($name) . '.' . $extension;
+        $image_name = $type . '-' . str::slug($name, '-') . '.' . $extension;
         $image_path = 'images/home-links/' . $image_name;
 
         return ['status' => Storage::disk('public')->put($image_path, File::get($image)), 'name' => $image_name];
@@ -105,7 +109,7 @@ class HomeLinks extends Model
      *
      * @param array|\Illuminate\Support\Collection|int $id
      * @return bool|int|null
-     * @throws \Exception
+     * @throws Exception
      */
     public static function destroy($id)
     {
@@ -119,7 +123,7 @@ class HomeLinks extends Model
     /**
      * Return all the category links for the home page.
      *
-     * @return HomeLinks[]|\Illuminate\Database\Eloquent\Collection
+     * @return HomeLinks[]|Collection
      */
     public static function categories()
     {
@@ -129,7 +133,7 @@ class HomeLinks extends Model
     /**
      * Return all the advert links for the home page.
      *
-     * @return HomeLinks[]|\Illuminate\Database\Eloquent\Collection
+     * @return HomeLinks[]|Collection
      */
     public static function adverts()
     {

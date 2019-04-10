@@ -2,19 +2,23 @@
 
 namespace App\Models;
 
+use Eloquent;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Foundation\Auth\User as Authenticatable;
-use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\Hash;
+use Auth;
+use Hash;
+use App\Traits\CustomerDetails;
 
 /**
  * App\User
  *
- * @mixin \Eloquent
+ * @mixin Eloquent
  */
 class User extends Authenticatable
 {
     use Notifiable;
+    use CustomerDetails;
 
     /**
      * The attributes that are mass assignable.
@@ -35,20 +39,43 @@ class User extends Authenticatable
     ];
 
     /**
-     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
-     */
-    public function customer()
-    {
-        return $this->belongsTo(Customer::class, 'customer_code', 'customer_code');
-    }
-
-    /**
-     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     * @return HasMany
      */
     public function addresses()
     {
         return $this->hasMany(Addresses::class, 'customer_code', 'customer_code');
     }
+
+//    public function customer()
+//    {
+//        if (Session::get('temp_customer')) {
+//            $customer = (new Customer)->where('customer_code', Session::get('temp_customer'))->first()->toArray();
+//
+//            Auth::user()->customer = $customer;
+//
+//            return Auth::user()->customer = $customer;
+//        }
+//
+//        return $this->belongsTo(Customer::class, 'customer_code', 'customer_code');
+//    }
+
+//    public function getCustomerAttribute()
+//    {
+//        if (Session::get('temp_customer')) {
+//            if (empty(Auth::user()->customer) || Auth::user()->customer->customer_code != Session::get('temp_customer')) {
+//                $customer = (new Customer)->where('customer_code', Session::get('temp_customer'))->first();
+//
+//                return Auth::user()->customer = $customer;
+//            }
+//
+//            return Auth::user()->customer;
+//        }
+//
+//            $customer = $this->belongsTo(Customer::class, 'customer_code', 'customer_code')->first();
+//
+//            return Auth::user()->customer = $customer;
+//
+//    }
 
     /**
      * @param $user_details

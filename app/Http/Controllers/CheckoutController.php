@@ -4,14 +4,16 @@ namespace App\Http\Controllers;
 
 use App\Models\Addresses;
 use App\Models\Basket;
+use Illuminate\Contracts\View\Factory;
 use Illuminate\Http\Request;
+use Illuminate\View\View;
 
 class CheckoutController extends Controller
 {
     /**
      * Show the checkout page so a user can complete the order.
      *
-     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     * @return Factory|View
      */
     public function index()
     {

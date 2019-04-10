@@ -4,6 +4,8 @@ namespace App\Http\Controllers\Auth;
 
 use App\Models\User;
 use App\Http\Controllers\Controller;
+use Illuminate\Http\RedirectResponse;
+use Illuminate\Routing\Redirector;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Foundation\Auth\RegistersUsers;
@@ -43,7 +45,7 @@ class RegisterController extends Controller
     /**
      * Redirect users to the login page if they attempt to access a registration page.
      *
-     * @return \Illuminate\Http\RedirectResponse|\Illuminate\Routing\Redirector
+     * @return RedirectResponse|Redirector
      */
     public function showRegistrationForm()
     {

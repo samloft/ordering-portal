@@ -4,15 +4,22 @@ namespace App\Http\Controllers;
 
 use App\Models\Basket;
 use App\Models\Products;
+use Exception;
+use Illuminate\Contracts\Routing\ResponseFactory;
+use Illuminate\Contracts\View\Factory;
+use Illuminate\Http\JsonResponse;
+use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Auth;
+use Illuminate\Http\Response;
+use Auth;
+use Illuminate\View\View;
 
 class BasketController extends Controller
 {
     /**
      * Display the users basket
      *
-     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     * @return Factory|View
      */
     public function index()
     {
@@ -24,8 +31,8 @@ class BasketController extends Controller
     /**
      * Remove all items from customers basket.
      *
-     * @return \Illuminate\Http\RedirectResponse
-     * @throws \Exception
+     * @return RedirectResponse
+     * @throws Exception
      */
     public function clear()
     {
@@ -38,7 +45,7 @@ class BasketController extends Controller
      * Add a product to the basket
      *
      * @param Request $request
-     * @return \Illuminate\Http\JsonResponse
+     * @return JsonResponse
      */
     public function addProduct(Request $request)
     {
@@ -69,7 +76,7 @@ class BasketController extends Controller
 
         $details[] = [
             'user_id' => Auth::user()->id,
-            'customer_code' => Auth::user()->customer_code,
+            'customer_code' => Auth::user()->customer->customer_code,
             'product' => $product_details->product,
             'quantity' => $quantity
         ];
@@ -105,7 +112,7 @@ class BasketController extends Controller
      * Remove a product line from the basket by product code.
      *
      * @param Request $request
-     * @return \Illuminate\Contracts\Routing\ResponseFactory|\Illuminate\Http\Response
+     * @return ResponseFactory|Response
      */
     public function removeProduct(Request $request)
     {
@@ -118,7 +125,7 @@ class BasketController extends Controller
      * Update the basket quantity for the given product.
      *
      * @param Request $request
-     * @return \Illuminate\Contracts\Routing\ResponseFactory|\Illuminate\Http\Response
+     * @return ResponseFactory|Response
      */
     public function updateProductQuantity(Request $request)
     {

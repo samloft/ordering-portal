@@ -2,13 +2,16 @@
 
 namespace App\Models;
 
+use Eloquent;
+use Exception;
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Collection;
+use Auth;
 
 /**
  * App\Models\Addresses
  *
- * @mixin \Eloquent
+ * @mixin Eloquent
  */
 class Addresses extends Model
 {
@@ -19,7 +22,7 @@ class Addresses extends Model
      */
     public static function show()
     {
-        return (new Addresses)->where('customer_code', Auth::user()->customer_code)->orderBy('default', 'desc')->paginate(5);
+        return (new Addresses)->where('customer_code', Auth::user()->customer->customer_code)->orderBy('default', 'desc')->paginate(5);
     }
 
     /**
@@ -28,7 +31,7 @@ class Addresses extends Model
      */
     public static function details($address_id)
     {
-        return (new Addresses)->where('customer_code', Auth::user()->customer_code)->where('id', $address_id)->first();
+        return (new Addresses)->where('customer_code', Auth::user()->customer->customer_code)->where('id', $address_id)->first();
     }
 
     /**
@@ -37,7 +40,7 @@ class Addresses extends Model
      */
     public static function store($address)
     {
-        $address['customer_code'] = Auth::user()->customer_code;
+        $address['customer_code'] = Auth::user()->customer->customer_code;
         $address['created_at'] = date('Y-m-d H:i:s');
 
         $create_address = (new Addresses)->insertGetId($address);
@@ -72,7 +75,7 @@ class Addresses extends Model
      */
     public static function removeDefaults()
     {
-        return (new Addresses)->where('customer_code', Auth::user()->customer_code)->update(['default' => 0]);
+        return (new Addresses)->where('customer_code', Auth::user()->customer->customer_code)->update(['default' => 0]);
     }
 
     /**
@@ -91,7 +94,7 @@ class Addresses extends Model
      */
     public static function getDefault()
     {
-        return (new Addresses)->where('customer_code', Auth::user()->customer_code)->where('default', 1)->first();
+        return (new Addresses)->where('customer_code', Auth::user()->customer->customer_code)->where('default', 1)->first();
     }
 
     /**
@@ -100,13 +103,13 @@ class Addresses extends Model
      */
     public static function canEdit($address_id)
     {
-        return (new Addresses)->where('customer_code', Auth::user()->customer_code)->where('id', $address_id)->first();
+        return (new Addresses)->where('customer_code', Auth::user()->customer->customer_code)->where('id', $address_id)->first();
     }
 
     /**
-     * @param array|\Illuminate\Support\Collection|int $address_id
+     * @param array|Collection|int $address_id
      * @return int
-     * @throws \Exception
+     * @throws Exception
      */
     public static function destroy($address_id)
     {

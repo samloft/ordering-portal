@@ -2,13 +2,16 @@
 
 namespace App\Models;
 
+use Eloquent;
+use Exception;
+use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Support\Facades\Auth;
+use Auth;
 
 /**
  * App\Models\OrderImport
  *
- * @mixin \Eloquent
+ * @mixin Eloquent
  */
 class OrderImport extends Model
 {
@@ -16,7 +19,7 @@ class OrderImport extends Model
      * Clears down any previous uploaded lines for current logged in user.
      *
      * @return mixed
-     * @throws \Exception
+     * @throws Exception
      */
     public static function clearDown()
     {
@@ -37,10 +40,10 @@ class OrderImport extends Model
     /**
      * Return all order import lines based on customer.
      *
-     * @return OrderImport[]|\Illuminate\Database\Eloquent\Collection
+     * @return OrderImport[]|Collection
      */
     public static function show()
     {
-        return (new OrderImport)->where('customer_code', Auth::user()->customer_code)->get()->toArray();
+        return (new OrderImport)->where('customer_code', Auth::user()->customer->customer_code)->get()->toArray();
     }
 }

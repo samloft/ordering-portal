@@ -27,7 +27,7 @@
 
 @include('layout.navigation')
 <div class="container content">
-    @if (session('temp_customer'))
+    @if (Auth::user() && session('temp_customer'))
         <div class="alert alert-info">
             <strong>{{ __('Notice!') }}</strong>
             {!! __('You are currently assuming the customer code: <span class="font-weight-bold">' . session('temp_customer') . '</span>.

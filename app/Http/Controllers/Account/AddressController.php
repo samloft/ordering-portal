@@ -6,13 +6,16 @@ use App\Models\Addresses;
 use App\Models\Countries;
 use Auth;
 use App\Http\Controllers\Controller;
+use Exception;
+use Illuminate\Http\RedirectResponse;
+use Illuminate\Http\Response;
 
 class AddressController extends Controller
 {
     /**
      * Display a listing of the addresses.
      *
-     * @return \Illuminate\Http\Response
+     * @return Response
      */
     public function index()
     {
@@ -24,7 +27,7 @@ class AddressController extends Controller
     /**
      * Show the form for creating a new addresses.
      *
-     * @return \Illuminate\Http\Response
+     * @return Response
      */
     public function create()
     {
@@ -36,13 +39,13 @@ class AddressController extends Controller
     /**
      * Store a newly created address in storage.
      *
-     * @return \Illuminate\Http\Response
+     * @return Response
      */
     public function store()
     {
         $address = $this->validation();
 
-        $address['customer_code'] = Auth::user()->customer_code;
+        $address['customer_code'] = Auth::user()->customer->customer_code;
         $address['default'] = request('default') ? 1 : 0;
 
         $create = Addresses::store($address);
@@ -54,7 +57,7 @@ class AddressController extends Controller
      * Show the form for editing the specified address.
      *
      * @param  int $id
-     * @return \Illuminate\Http\Response
+     * @return Response
      */
     public function edit($id)
     {
@@ -68,7 +71,7 @@ class AddressController extends Controller
      * Update the specified address in storage.
      *
      * @param $id
-     * @return \Illuminate\Http\Response
+     * @return Response
      */
     public function update($id)
     {
@@ -85,8 +88,8 @@ class AddressController extends Controller
      * Remove the specified address from storage.
      *
      * @param  int $id
-     * @return \Illuminate\Http\Response
-     * @throws \Exception
+     * @return Response
+     * @throws Exception
      */
     public function destroy($id)
     {
@@ -104,7 +107,7 @@ class AddressController extends Controller
     /**
      * Set the address as the default for the customer
      *
-     * @return \Illuminate\Http\RedirectResponse
+     * @return RedirectResponse
      */
     public function default()
     {

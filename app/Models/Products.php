@@ -2,9 +2,12 @@
 
 namespace App\Models;
 
+use Eloquent;
 use Illuminate\Database\Eloquent\Model;
 use Auth;
-use Illuminate\Support\Facades\Storage;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\HasMany;
+use Storage;
 
 /**
  * App\Models\Products
@@ -16,15 +19,15 @@ class Products extends Model
     protected $table = 'products';
 
     /**
-     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     * @return HasMany
      */
     public function prices()
     {
-        return $this->belongsTo(Prices::class, 'product', 'product')->where('customer_code', Auth::user()->customer_code);
+        return $this->belongsTo(Prices::class, 'product', 'product')->where('customer_code', Auth::user()->customer->customer_code);
     }
 
     /**
-     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     * @return BelongsTo
      */
     public function categories()
     {
@@ -32,7 +35,7 @@ class Products extends Model
     }
 
     /**
-     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     * @return BelongsTo
      */
     public function stock()
     {
@@ -55,7 +58,7 @@ class Products extends Model
             })
             ->join('prices', 'products.product', '=', 'prices.product')
             ->join('stock_levels', 'products.product', '=', 'stock_levels.product')
-            ->where('prices.customer_code', Auth::user()->customer_code)
+            ->where('prices.customer_code', Auth::user()->customer->customer_code)
             ->paginate(10);
 
         return $products;
@@ -94,7 +97,7 @@ class Products extends Model
     }
 
     /**
-     * Autocomplete for quickbuy input.
+     * Autocomplete for quick-buy input.
      *
      * @param $search
      * @return Products

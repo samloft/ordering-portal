@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Cms;
 
+use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 
@@ -16,7 +17,7 @@ class CompanyDetailsController extends Controller
      * Update the customer information in the .env file.
      *
      * @param Request $request
-     * @return \Illuminate\Http\RedirectResponse
+     * @return RedirectResponse
      */
     public function store(Request $request)
     {

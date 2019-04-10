@@ -71,7 +71,7 @@
 
                     <div class="text-right">
                         <span>
-                            <strong>{{ __('Welcome') . ' ' . Auth::user()->first_name . ' ' . Auth::user()->last_name }}</strong>, {{ Auth::user()->customer->customer_name ? Auth::user()->customer->customer_name : 'No customer allocated' }}
+                            <strong>{{ __('Welcome') . ' ' . Auth::user()->first_name . ' ' . Auth::user()->last_name }}</strong>, {{ Auth::user()->customer->customer_name }}
                         </span>
                         <span>
                             <a href="{{ route('account') }}">{{ __('Your Account') }}</a> |

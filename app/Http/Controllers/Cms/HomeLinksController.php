@@ -3,13 +3,20 @@
 namespace App\Http\Controllers\Cms;
 
 use App\Models\HomeLinks;
+use Exception;
+use Illuminate\Contracts\Filesystem\FileNotFoundException;
+use Illuminate\Contracts\View\Factory;
+use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use Illuminate\View\View;
 
 class HomeLinksController extends Controller
 {
     /**
-     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     * Display all current categories + adverts.
+     *
+     * @return Factory|View
      */
     public function index()
     {
@@ -20,9 +27,11 @@ class HomeLinksController extends Controller
     }
 
     /**
+     * Create a new home link.
+     *
      * @param Request $request
-     * @return \Illuminate\Http\RedirectResponse
-     * @throws \Illuminate\Contracts\Filesystem\FileNotFoundException
+     * @return RedirectResponse
+     * @throws FileNotFoundException
      */
     public function store(Request $request)
     {
@@ -73,8 +82,8 @@ class HomeLinksController extends Controller
      * Deletes a home link with the given ID.
      *
      * @param $id
-     * @return \Illuminate\Http\RedirectResponse
-     * @throws \Exception
+     * @return RedirectResponse
+     * @throws Exception
      */
     public function destroy($id)
     {

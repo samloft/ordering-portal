@@ -2,14 +2,20 @@
 
 namespace App\Models;
 
+use Eloquent;
+use Exception;
+use Illuminate\Contracts\Routing\ResponseFactory;
+use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\Storage;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Http\Response;
+use Auth;
+use Storage;
 
 /**
  * App\Models\Basket
  *
- * @mixin \Eloquent
+ * @mixin Eloquent
  */
 class Basket extends Model
 {
@@ -19,7 +25,7 @@ class Basket extends Model
     /**
      * Return product relationship on product code from basket.
      *
-     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     * @return BelongsTo
      */
     public function productDetails()
     {
@@ -29,26 +35,26 @@ class Basket extends Model
     /**
      * Return relationship for prices.
      *
-     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     * @return BelongsTo
      */
     public function prices()
     {
-        return $this->belongsTo(Prices::class, 'product', 'product')->where('prices.customer_code', Auth::user()->customer_code);
+        return $this->belongsTo(Prices::class, 'product', 'product')->where('prices.customer_code', Auth::user()->customer->customer_code);
     }
 
     /**
      * Return all basket lines based on customer code
      *
-     * @return Basket[]|\Illuminate\Database\Eloquent\Collection
+     * @return Basket[]|Collection
      */
     public static function show()
     {
         $lines = (new Basket)->selectRaw('basket.product as product, basket.customer_code as customer_code, 
                                                     basket.quantity as quantity, price, break1, price1, break2, price2, 
                                                     break3, price3, name, uom, not_sold, stock_levels.quantity as stock_level')
-            ->where('basket.customer_code', Auth::user()->customer_code)
+            ->where('basket.customer_code', Auth::user()->customer->customer_code)
             ->join('prices', 'basket.product', '=', 'prices.product')
-            ->where('prices.customer_code', Auth::user()->customer_code)
+            ->where('prices.customer_code', Auth::user()->customer->customer_code)
             ->join('products', 'basket.product', '=', 'products.product')
             ->join('stock_levels', 'basket.product', '=', 'stock_levels.product')
             ->get();
@@ -116,7 +122,7 @@ class Basket extends Model
     public static function store($order_lines)
     {
         $user_id = Auth::user()->id;
-        $customer_code = Auth::user()->customer_code;
+        $customer_code = Auth::user()->customer->customer_code;
 
         foreach ($order_lines as $line) {
             // Check that the customer can buy the product.
@@ -148,29 +154,29 @@ class Basket extends Model
      */
     public static function exists($product_code)
     {
-        return (new Basket)->where('customer_code', Auth::user()->customer_code)->where('product', $product_code)->first();
+        return (new Basket)->where('customer_code', Auth::user()->customer->customer_code)->where('product', $product_code)->first();
     }
 
     /**
      * Remove all items from the basket for the logged in customer.
      *
      * @return bool|int|null
-     * @throws \Exception
+     * @throws Exception
      */
     public static function clear()
     {
-        return (new Basket)->where('customer_code', Auth::user()->customer_code)->delete();
+        return (new Basket)->where('customer_code', Auth::user()->customer->customer_code)->delete();
     }
 
     /**
      * Delete an individual product line from the basket.
      *
      * @param $product
-     * @return \Illuminate\Contracts\Routing\ResponseFactory|\Illuminate\Http\Response
+     * @return ResponseFactory|Response
      */
     public static function destroyLine($product)
     {
-        return (new Basket)->where('customer_code', Auth::user()->customer_code)
+        return (new Basket)->where('customer_code', Auth::user()->customer->customer_code)
             ->where('user_id', Auth::user()->id)
             ->where('product', $product)
             ->delete();
@@ -185,7 +191,7 @@ class Basket extends Model
      */
     public static function updateLine($product, $quantity)
     {
-        return (new Basket)->where('customer_code', Auth::user()->customer_code)
+        return (new Basket)->where('customer_code', Auth::user()->customer->customer_code)
             ->where('user_id', Auth::user()->id)
             ->where('product', $product)
             ->update(['quantity' => $quantity]);
