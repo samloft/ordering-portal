@@ -16,6 +16,9 @@ use Illuminate\View\View;
 class OrderTrackingController extends Controller
 {
     /**
+     * Display the order tracking page, showing all orders for the customer if
+     * no search parameters, else get results that match the search.
+     *
      * @param Request $request
      * @return Factory|View
      */
@@ -31,27 +34,25 @@ class OrderTrackingController extends Controller
     /**
      * Show details for the given order number.
      *
-     * @param $order
+     * @param $order_number
      * @return Factory|View
      */
-    public function show($order)
+    public function show($order_number)
     {
-        $order = Header::show(decodeUrl($order));
+        $order = Header::show(decodeUrl($order_number));
+        $order_lines = Lines::show(decodeUrl($order_number));
 
         if (!$order) {
             abort(404);
         }
-
-        $lines = [];
-
-        foreach ($order->lines as $line) {
+        foreach ($order_lines as $line) {
             $lines[] = [
                 'product' => trim($line->product),
                 'long_description' => trim($line->long_description),
                 'line_qty' => trim($line->line_qty),
                 'net_price' => currency($line->net_price, 4),
                 'line_val' => currency($line->line_val, 2),
-                'purchasable' => Prices::product(trim($line->product)),
+                'purchasable' => $line->price ? true : false,
             ];
         }
 
@@ -66,7 +67,7 @@ class OrderTrackingController extends Controller
      */
     public function copy($order_number)
     {
-        $order_lines = Lines::show(urldecode($order_number));
+        $order_lines = Lines::copy(urldecode($order_number));
         $added_to_basket = Basket::store($order_lines);
 
         if ($added_to_basket) {
@@ -77,6 +78,9 @@ class OrderTrackingController extends Controller
     }
 
     /**
+     * Make a lookup for the given order number to see if a copy invoice can be found on the
+     * document archive.
+     *
      * @param $order_number
      * @param $customer_order_number
      * @param bool $download
@@ -93,7 +97,7 @@ class OrderTrackingController extends Controller
             ];
         }
 
-        $customer_code = urlencode(trim(Auth::user()->customer_code));
+        $customer_code = urlencode(trim(Auth::user()->customer->customer_code));
 
         $document_url = 'http://documents.scolmore.com/v1/dbwebq.exe?DbQCMD=LOGIN&DbQCMDNext=SEARCH&SID=36d4afe300&DbQuser=administrator&DbQPass=administrator&DOCID=' . env('V1_DOCID') . '&S0F=ARCH_USER&S0O=EQ&S0V=&S1F=ARCH_DATE&S1O=EQ&S1V=&S2F=DELIVERY_NOTE_NUMBER&S2O=EQ&S2V=' . $order_number . '&S3F=CUSTOMER_CODE&S3O=EQ&S3V=' . $customer_code . '&S4F=CUSTOMER_ORDER_NO&S4O=EQ&S4V=' . $customer_order_number;
 
