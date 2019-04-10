@@ -15,6 +15,24 @@
                 </form>
             </div>
         </div>
+    @elseif (Auth::user()->customers)
+        <div class="row">
+            <div class="col mb-3">
+                <form class="w-100" action="{{ route('customer.change') }}" method="post">
+                    <div class="form-group mb-1">
+                        <label>{{ __('Change Customer') }}</label>
+                        <select class="form-control" name="customer" autocomplete="off">
+                            <option value="{{ Auth::user()->customer_code }}" {{ Auth::user()->customer->customer_code == Auth::user()->customer_code ? 'selected' : '' }}>{{ Auth::user()->customer_code }}</option>
+                            @foreach(Auth::user()->customers as $customer)
+                                <option value="{{ $customer->customer_code }}" {{ Auth::user()->customer->customer_code == $customer->customer_code ? 'selected' : '' }}>{{ $customer->customer_code }}</option>
+                            @endforeach
+                        </select>
+                    </div>
+
+                    <button class="btn btn-block btn-sm btn-primary">{{ __('Change Customer') }}</button>
+                </form>
+            </div>
+        </div>
     @endif
 
     <div class="row">

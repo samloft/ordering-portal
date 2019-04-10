@@ -46,6 +46,16 @@ class User extends Authenticatable
         return $this->hasMany(Addresses::class, 'customer_code', 'customer_code');
     }
 
+    /**
+     * Return all the customers as user has access too.
+     *
+     * @return HasMany
+     */
+    public function customers()
+    {
+        return $this->hasMany(UserCustomers::class);
+    }
+
 //    public function customer()
 //    {
 //        if (Session::get('temp_customer')) {

@@ -6,6 +6,7 @@ use App\Models\Addresses;
 use App\Models\Countries;
 use App\Models\Customer;
 use App\Models\User;
+use App\Models\UserCustomers;
 use Auth;
 use Illuminate\Contracts\View\Factory;
 use Illuminate\Http\RedirectResponse;
@@ -67,8 +68,16 @@ class AccountController extends Controller
      */
     public function changeCustomer(Request $request)
     {
+        if ($request->customer == Auth::user()->customer_code) {
+            return $this->revertChangeCustomer();
+        }
+
         if (Auth::user()->admin !== 1) {
-            return abort(404);
+            $user_can_access = UserCustomers::check($request->customer);
+
+            if (!$user_can_access) {
+                return abort(404);
+            }
         }
 
         $customer = Customer::show($request->customer);
