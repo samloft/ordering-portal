@@ -6,7 +6,7 @@
                     <div class="form-group">
                         <label>{{ __('Change Customer') }}</label>
                         <div class="input-group">
-                            <input type="text" class="form-control" name="customer" autocomplete="off">
+                            <input id="customer-admin" class="form-control" name="customer" autocomplete="off">
                             <div class="input-group-append">
                                 <button class="input-group-text"><i class="fas fa-user"></i></button>
                             </div>

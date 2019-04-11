@@ -11,6 +11,10 @@
 |
 */
 
+use App\Models\Basket;
+use App\Models\Customer;
+use Illuminate\Http\Request;
+
 Route::group(['middleware' => ['auth', 'has.customer']], function () {
     /*
      *  Home Page
@@ -36,6 +40,13 @@ Route::group(['middleware' => ['auth', 'has.customer']], function () {
             return App\Models\Products::checkImage($products);
         })->name('products.check-image');
     });
+
+    /*
+     * Customer code auto complete.
+     */
+    Route::post('customer/autocomplete', function(Request $request) {
+        return Customer::autocomplete($request->customer);
+    })->name('customer.autocomplete');
 
     /*
      * Order Tracking
@@ -123,11 +134,11 @@ Route::group(['middleware' => ['auth', 'has.customer']], function () {
         Route::post('update-product', 'BasketController@updateProductQuantity')->name('basket.update-line');
 
         Route::get('summary', function () {
-            return \App\Models\Basket::show();
+            return Basket::show();
         })->name('basket.summary');
 
         Route::get('dropdown', function () {
-            return \App\Models\Basket::show();
+            return Basket::show();
         })->name('basket.dropdown');
     });
 
