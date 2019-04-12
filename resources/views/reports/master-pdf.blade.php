@@ -67,9 +67,9 @@
             margin-top: 10px;
         }
 
-        .address span {
-            display: block;
-        }
+        /*.address span {*/
+        /*    display: block;*/
+        /*}*/
 
         h3.title {
             font-weight: 900;
@@ -98,16 +98,16 @@
         <img class="logo" src="https://scolmoreonline.com/assets/images/scolmore_small.png" alt="Image not found">
     </div>
     <div class="col text-right address">
-        <span>{{ env('ADDRESS_LINE_1') }}</span>
-        <span>{{ env('ADDRESS_LINE_2') }}</span>
-        <span>{{ env('ADDRESS_LINE_3') }}</span>
-        <span>{{ env('ADDRESS_LINE_4') }}</span>
-        <span>{{ env('ADDRESS_LINE_5') }}</span>
-        <span>{{ env('ADDRESS_POSTCODE') }}</span>
+        <div>{{ env('ADDRESS_LINE_1') }}</div>
+        <div>{{ env('ADDRESS_LINE_2') }}</div>
+        <div>{{ env('ADDRESS_LINE_3') }}</div>
+        <div>{{ env('ADDRESS_LINE_4') }}</div>
+        <div>{{ env('ADDRESS_LINE_5') }}</div>
+        <div>{{ env('ADDRESS_POSTCODE') }}</div>
 
         <div class="contact-numbers">
-            <span>{{ env('ADDRESS_TELEPHONE') ? 'Tel: ' .  env('ADDRESS_TELEPHONE') : '' }}</span>
-            <span>{{ env('ADDRESS_FAX') ? 'Fax: ' .  env('ADDRESS_FAX') : '' }}</span>
+            <div>{{ env('ADDRESS_TELEPHONE') ? 'Tel: ' .  env('ADDRESS_TELEPHONE') : '' }}</div>
+            <div>{{ env('ADDRESS_FAX') ? 'Fax: ' .  env('ADDRESS_FAX') : '' }}</div>
         </div>
     </div>
 </div>
