@@ -11,14 +11,14 @@
         <div class="text-center">
             <form action="{{ route('reports.show') }}" method="post">
                 <div class="form-check">
-                    <input class="form-check-input" type="radio" name="report" value="account_summary">
+                    <input class="form-check-input" type="radio" name="report" value="account_summary" autocomplete="off">
                     <label class="form-check-label">
                         {{ __('Account Summary') }}
                     </label>
                 </div>
 
                 <div class="form-check">
-                    <input class="form-check-input" type="radio" name="report" value="back_orders">
+                    <input class="form-check-input" type="radio" name="report" value="back_orders" autocomplete="off">
                     <label class="form-check-label">
                         {{ __('Back Order History') }}
                     </label>
@@ -26,7 +26,7 @@
 
                 <div class="form-group form-inline justify-content-center mt-3">
                     <label class="mr-1">{{ __('Output As: ') }}</label>
-                    <select class="form-control form-control-sm" name="output">
+                    <select class="form-control form-control-sm" name="output" autocomplete="off">
                         <option value="pdf">{{ __('PDF') }}</option>
                         <option value="csv">{{ __('CSV') }}</option>
                     </select>

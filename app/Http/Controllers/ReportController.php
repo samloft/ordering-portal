@@ -102,20 +102,21 @@ class ReportController extends Controller
      */
     public function createCSV($filename, $headings, $lines)
     {
-        $handle = fopen($filename, 'w+');
+        $callback = function () use ($headings, $lines) {
+            $handle = fopen('php://output', 'w+');
+            fputcsv($handle, $headings);
 
-        fputcsv($handle, $headings);
+            foreach ($lines as $line) {
+                fputcsv($handle, $line);
+            }
 
-        foreach ($lines as $line) {
-            fputcsv($handle, $line);
-        }
-
-        fclose($handle);
+            fclose($handle);
+        };
 
         $headers = [
             'Content-Type' => 'text/css'
         ];
 
-        return response()->download($filename, $filename, $headers);
+        return response()->streamDownload($callback, $filename, $headers);
     }
 }
