@@ -24,6 +24,14 @@
                     </label>
                 </div>
 
+                <div class="form-group form-inline justify-content-center mt-3">
+                    <label class="mr-1">{{ __('Output As: ') }}</label>
+                    <select class="form-control form-control-sm" name="output">
+                        <option value="pdf">{{ __('PDF') }}</option>
+                        <option value="csv">{{ __('CSV') }}</option>
+                    </select>
+                </div>
+
                 <button type="submit" class="btn btn-primary mt-4">{{ __('Run Report') }}</button>
             </form>
         </div>
