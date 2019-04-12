@@ -90,7 +90,7 @@ class ReportController extends Controller
 
     public function accountSummaryReport($output)
     {
-        ini_set('memory_limit', '128M');
+        ini_set('memory_limit', '256M');
 
         $invoice_lines = AccountSummary::show();
 
