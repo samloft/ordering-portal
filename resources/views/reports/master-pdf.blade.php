@@ -77,11 +77,11 @@
             text-align: center;
         }
 
-        .details span.heading {
-            float: left;
-            font-weight: 900;
-            width: 100px !important;
-        }
+        /*.details span.heading {*/
+        /*    float: left;*/
+        /*    font-weight: 900;*/
+        /*    width: 100px !important;*/
+        /*}*/
 
         img.logo {
             background-color: #b9c5d3;
@@ -116,10 +116,10 @@
 
 <div class="details">
     <p>
-        <span class="heading">{{ __('Account Code: ') }}</span>{{ Auth::user()->customer_code }}
+        <strong>{{ __('Account Code: ') }}</strong>{{ Auth::user()->customer_code }}
     </p>
     <p>
-        <span class="heading">{{ __('Customer: ') }}</span>{{ Auth::user()->customer->customer_name }}
+        <strong>{{ __('Customer: ') }}</strong>{{ Auth::user()->customer->customer_name }}
     </p>
 </div>
 
