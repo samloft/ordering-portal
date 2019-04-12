@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\AccountSummary;
 use App\Models\OrderTracking\Header;
 use Barryvdh\DomPDF\Facade as PDF;
 use Carbon\Carbon;
@@ -89,6 +90,61 @@ class ReportController extends Controller
 
     public function accountSummaryReport($output)
     {
+        ini_set('memory_limit', '128M');
+
+        $invoice_lines = AccountSummary::show();
+
+        if (count($invoice_lines) > 0) {
+            $summary_lines = AccountSummary::summary();
+
+            if ($output == 'pdf') {
+                $pdf = PDF::loadView('reports.account-summary', compact('invoice_lines'));
+
+                return $pdf->download('account_summary.pdf');
+            }
+
+            if ($output == 'csv') {
+//                $total_price = 0;
+//
+//                $summary_headings[] = ['Total Outstanding'];
+//                $summary_detail = [];
+//
+//                foreach ($summary_lines as $summary_line) {
+//                    $summary_headings[] = [
+//                        $summary_line->age
+//                    ];
+//
+//                    $summary_detail[] = [
+//                        $summary_line->price
+//                    ];
+//
+//                    $total_price = $total_price = $summary_line->price;
+//                }
+//
+//                array_unshift($summary_detail, [$total_price]);
+//
+//                $invoice_headings = [
+//                    'Invoice No.', 'Order No.', 'Invoice Date', 'Due Date', 'Amount'
+//                ];
+//
+//                $headings = array_merge($summary_headings, $summary_detail, $invoice_headings);
+//
+//                $lines = [];
+//
+//                foreach ($invoice_lines as $invoice_line) {
+//                    $lines[] = [
+//                        $invoice_line->item_no,
+//                        $invoice_line->reference,
+//                        Carbon::parse($invoice_line->dated)->format('d-m-Y'),
+//                        Carbon::parse($invoice_line->due_date)->format('d-m-Y'),
+//                        $invoice_line->unall_curr_amount
+//                    ];
+//                }
+//
+//                return $this->createCSV('account_summary.csv', $headings, $lines);
+            }
+        }
+
         return back()->with('error', 'You dont currently have an order summary to display.');
     }
 
