@@ -1,15 +1,15 @@
-@extends('reports.master-pdf')
+@extends('layout.master-pdf')
 
 @section('report.title', 'Back Order Items')
 
 @section('content')
-    <p class="table-heading text-center">{{ __('Outstanding Items') }}</p>
+    <p class="table-heading">{{ __('Outstanding Items') }}</p>
 
     <div class="small-print">
         {{ __('The table below lists all items you have ordered that are on back order, please note there is a delay of up to 24 hours in the accuracy of our data.') }}
     </div>
 
-    <table border="1" style="width: 100%; border-collapse: collapse;">
+    <table>
         <thead>
         <tr>
             <th>{{ __('Order No.') }}</th>
