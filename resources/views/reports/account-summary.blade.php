@@ -10,7 +10,6 @@
     </div>
 
     <table border="1" style="width: 100%; border-collapse: collapse;">
-{{--        <thead>--}}
         <tr>
             <th>{{ __('Invoice No.') }}</th>
             <th>{{ __('Order No.') }}</th>
@@ -18,8 +17,6 @@
             <th>{{ __('Due Date') }}</th>
             <th>{{ __('Amount') }}</th>
         </tr>
-{{--        </thead>--}}
-{{--        <tbody>--}}
         @foreach($invoice_lines as $invoice_line)
             <tr>
                 <td>{{ $invoice_line->item_no }}</td>
@@ -29,6 +26,5 @@
                 <td style="text-align: right;">{{ $invoice_line->unall_curr_amount }}</td>
             </tr>
         @endforeach
-{{--        </tbody>--}}
     </table>
 @endsection

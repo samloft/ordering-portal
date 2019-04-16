@@ -98,50 +98,56 @@ class ReportController extends Controller
             $summary_lines = AccountSummary::summary();
 
             if ($output == 'pdf') {
-                $pdf = PDF::loadView('reports.account-summary', compact('invoice_lines'));
+                $pdf = PDF::loadView('reports.account-summary', compact('invoice_lines', 'summary_lines'));
 
                 return $pdf->download('account_summary.pdf');
             }
 
             if ($output == 'csv') {
-//                $total_price = 0;
+                $total_price = 0;
 //
-//                $summary_headings[] = ['Total Outstanding'];
-//                $summary_detail = [];
-//
-//                foreach ($summary_lines as $summary_line) {
-//                    $summary_headings[] = [
-//                        $summary_line->age
-//                    ];
-//
-//                    $summary_detail[] = [
-//                        $summary_line->price
-//                    ];
-//
-//                    $total_price = $total_price = $summary_line->price;
-//                }
+                $summary_headings[] = ['Total Outstanding'];
+                $summary_detail = [];
+
+                foreach ($summary_lines as $summary_line) {
+                    $summary_headings[] = [
+                        $summary_line->age
+                    ];
+
+                    $summary_detail[] = [
+                        $summary_line->price
+                    ];
+
+                    $total_price = $total_price = $summary_line->price;
+                }
+
+                $summary_detail[] = [
+                    $total_price
+                ];
 //
 //                array_unshift($summary_detail, [$total_price]);
 //
-//                $invoice_headings = [
-//                    'Invoice No.', 'Order No.', 'Invoice Date', 'Due Date', 'Amount'
-//                ];
+                $invoice_headings = [
+                    'Invoice No.', 'Order No.', 'Invoice Date', 'Due Date', 'Amount'
+                ];
+
+                $headings = $invoice_headings;
 //
 //                $headings = array_merge($summary_headings, $summary_detail, $invoice_headings);
+
+                $lines = [];
+
+                foreach ($invoice_lines as $invoice_line) {
+                    $lines[] = [
+                        $invoice_line->item_no,
+                        $invoice_line->reference,
+                        Carbon::parse($invoice_line->dated)->format('d-m-Y'),
+                        Carbon::parse($invoice_line->due_date)->format('d-m-Y'),
+                        $invoice_line->unall_curr_amount
+                    ];
+                }
 //
-//                $lines = [];
-//
-//                foreach ($invoice_lines as $invoice_line) {
-//                    $lines[] = [
-//                        $invoice_line->item_no,
-//                        $invoice_line->reference,
-//                        Carbon::parse($invoice_line->dated)->format('d-m-Y'),
-//                        Carbon::parse($invoice_line->due_date)->format('d-m-Y'),
-//                        $invoice_line->unall_curr_amount
-//                    ];
-//                }
-//
-//                return $this->createCSV('account_summary.csv', $headings, $lines);
+                return $this->createCSV('account_summary.csv', $headings, $lines);
             }
         }
 
@@ -154,16 +160,28 @@ class ReportController extends Controller
      * @param $filename
      * @param $headings
      * @param $lines
+     * @param null $extra_headings
+     * @param null $extra_lines
      * @return BinaryFileResponse
      */
-    public function createCSV($filename, $headings, $lines)
+    public function createCSV($filename, $headings, $lines, $extra_headings = null, $extra_lines = null)
     {
-        $callback = function () use ($headings, $lines) {
+        $callback = function () use ($headings, $lines, $extra_headings, $extra_lines) {
             $handle = fopen('php://output', 'w+');
             fputcsv($handle, $headings);
 
             foreach ($lines as $line) {
                 fputcsv($handle, $line);
+            }
+
+            if ($extra_headings) {
+                fputcsv($handle, $extra_headings);
+            }
+
+            if ($extra_lines) {
+                foreach ($extra_lines as $extra_line) {
+                    fputcsv($handle, $extra_line);
+                }
             }
 
             fclose($handle);

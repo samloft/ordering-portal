@@ -46,6 +46,19 @@
     <div id="caption"></div>
 </div>
 
+<div class="modal fade" id="loader" tabindex="-1" role="dialog" data-backdrop="static">
+    <div class="modal-dialog modal-sm" role="document">
+        <div class="modal-content">
+            <div class="modal-body text-center">
+                <div class="loader"></div>
+                <div class="loader-txt">
+                    <p></p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
 <script type="text/javascript" src="{{ mix('js/app.js') }}"></script>
 <script type="text/javascript" src="{{ mix('js/main.js') }}"></script>
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@8"></script>

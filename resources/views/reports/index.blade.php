@@ -9,7 +9,7 @@
         @include('layout.alerts')
 
         <div class="text-center">
-            <form action="{{ route('reports.show') }}" method="post">
+            <form id="run-report" action="{{ route('reports.show') }}" method="post">
                 <div class="form-check">
                     <input class="form-check-input" type="radio" name="report" value="account_summary" autocomplete="off">
                     <label class="form-check-label">

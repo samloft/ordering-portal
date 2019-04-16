@@ -3,6 +3,7 @@ $('input[type="file"]').change(function (file) {
 });
 
 $('button[id="upload-order"]').on('click', function () {
+    $('#loader .loader-txt').html('Uploading your order, please wait');
     $('#loader').modal('show');
 });
 

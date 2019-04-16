@@ -19,6 +19,7 @@ class AccountSummary extends Model
 
     /**
      * Get all the outstanding orders for a customers account.
+     * Limited to 320 due to slowness in DomPDF.
      *
      * @return \Illuminate\Database\Eloquent\Builder[]|\Illuminate\Database\Eloquent\Collection
      */
@@ -26,6 +27,7 @@ class AccountSummary extends Model
     {
         return (new AccountSummary)->where('customer_code', Auth::user()->customer->customer_code)
             ->orderBy('due_date', 'desc')->orderBy('item_no', 'desc')
+            ->limit(320)
             ->get();
     }
 
