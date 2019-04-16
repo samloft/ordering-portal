@@ -95,7 +95,18 @@ class ReportController extends Controller
         $invoice_lines = AccountSummary::show();
 
         if (count($invoice_lines) > 0) {
-            $summary_lines = AccountSummary::summary();
+            $summary = AccountSummary::summary();
+            $summary_lines = [];
+            $total_outstanding = 0;
+
+
+            foreach ($summary as $key => $value) {
+                $summary_lines[$value->age] = $value->price;
+
+                $total_outstanding = $total_outstanding + $value->price;
+            }
+
+            $summary_lines['Total Outstanding'] = $total_outstanding;
 
             if ($output == 'pdf') {
                 $pdf = PDF::loadView('reports.account-summary', compact('invoice_lines', 'summary_lines'));

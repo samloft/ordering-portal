@@ -7,6 +7,10 @@
             padding-left: 5px;
             padding-right: 5px;
         }
+
+        .text-right {
+            text-align: right !important;
+        }
     </style>
 </head>
 
