@@ -5,7 +5,6 @@ namespace App\Http\Controllers;
 use App\Models\Basket;
 use App\Models\OrderTracking\Header;
 use App\Models\OrderTracking\Lines;
-use App\Models\Prices;
 use Auth;
 use Illuminate\Contracts\View\Factory;
 use Illuminate\Http\RedirectResponse;
@@ -86,7 +85,7 @@ class OrderTrackingController extends Controller
      * @param bool $download
      * @return array
      */
-    public function invoicePdf($order_number, $customer_order_number, $download = false) : array
+    public function invoicePdf($order_number, $customer_order_number, $download = false): array
     {
         $authorized = Header::show(urldecode($order_number));
 

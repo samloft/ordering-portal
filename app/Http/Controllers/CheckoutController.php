@@ -17,7 +17,9 @@ class CheckoutController extends Controller
      */
     public function index()
     {
-        $basket = Basket::show();
+        $delivery = 'blah';
+
+        $basket = Basket::show($delivery);
 
         if ($basket['line_count'] == 0) {
             return redirect(route('basket'))->with('error', 'You have not items in your basket to checkout with.');
@@ -25,6 +27,6 @@ class CheckoutController extends Controller
 
         $default_address = Addresses::getDefault();
 
-        return view('checkout.index', compact('default_address'));
+        return view('checkout.index', compact('default_address', 'basket'));
     }
 }

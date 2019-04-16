@@ -129,28 +129,28 @@
 
         <div class="row">
             <div class="col">Goods Total</div>
-            <div class="col text-right">£0.00</div>
+            <div class="col text-right">{{ $basket['summary']['goods_total'] }}</div>
         </div>
         <div class="row">
             <div class="col">Shipping</div>
-            <div class="col text-right">£0.00</div>
+            <div class="col text-right">{{ $basket['summary']['shipping'] }}</div>
         </div>
         <div class="row">
             <div class="col">Sub Total</div>
-            <div class="col text-right">£0.00</div>
+            <div class="col text-right">{{ $basket['summary']['sub_total'] }}</div>
         </div>
         <div class="row">
             <div class="col">Small Order Charge*</div>
-            <div class="col text-right">£0.00</div>
+            <div class="col text-right">{{ $basket['summary']['small_order_charge'] }}</div>
         </div>
         <div class="row">
             <div class="col">VAT</div>
-            <div class="col text-right">£0.00</div>
+            <div class="col text-right">{{ $basket['summary']['vat'] }}</div>
         </div>
         <hr>
         <div class="row basket-total">
             <div class="col">Order Total</div>
-            <div class="col text-right">£0.00</div>
+            <div class="col text-right">{{ $basket['summary']['total'] }}</div>
         </div>
 
         <div class="small-print">

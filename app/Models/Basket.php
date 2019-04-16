@@ -45,9 +45,10 @@ class Basket extends Model
     /**
      * Return all basket lines based on customer code
      *
+     * @param null $delivery
      * @return Basket[]|Collection
      */
-    public static function show()
+    public static function show($delivery = null)
     {
         $lines = (new Basket)->selectRaw('basket.product as product, basket.customer_code as customer_code, 
                                                     basket.quantity as quantity, price, break1, price1, break2, price2, 
@@ -99,14 +100,20 @@ class Basket extends Model
 
         $small_order_charge = static::smallOrderCharge($goods_total);
 
+        if ($delivery) {
+            $delivery_charge = 0;
+        } else {
+            $delivery_charge = 10;
+        }
+
         return [
             'summary' => [
                 'goods_total' => currency($goods_total, 2),
-                'shipping' => currency(0, 2),
+                'shipping' => currency($delivery_charge, 2),
                 'sub_total' => currency($goods_total, 2),
                 'small_order_charge' => currency($small_order_charge, 2),
-                'vat' => currency(vatAmount($goods_total + $small_order_charge), 2),
-                'total' => currency(vatIncluded($goods_total + $small_order_charge), 2)
+                'vat' => currency(vatAmount($goods_total + $small_order_charge + $delivery_charge), 2),
+                'total' => currency(vatIncluded($goods_total + $small_order_charge + $delivery_charge), 2)
             ],
             'line_count' => count($product_lines),
             'lines' => $product_lines,
