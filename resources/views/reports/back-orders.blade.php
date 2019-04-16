@@ -9,7 +9,7 @@
         {{ __('The table below lists all items you have ordered that are on back order, please note there is a delay of up to 24 hours in the accuracy of our data.') }}
     </div>
 
-    <table>
+    <table border="1" style="width: 100%; border-collapse: collapse;">
         <thead>
         <tr>
             <th>{{ __('Order No.') }}</th>

@@ -115,36 +115,21 @@ class ReportController extends Controller
             }
 
             if ($output == 'csv') {
-                $total_price = 0;
-//
-                $summary_headings[] = ['Total Outstanding'];
-                $summary_detail = [];
-
-                foreach ($summary_lines as $summary_line) {
-                    $summary_headings[] = [
-                        $summary_line->age
-                    ];
-
-                    $summary_detail[] = [
-                        $summary_line->price
-                    ];
-
-                    $total_price = $total_price = $summary_line->price;
-                }
-
-                $summary_detail[] = [
-                    $total_price
+                $summary_headings = [
+                    'Total Outstanding', 'Not Due', 'Overdue up to 30 days', 'Overdue up to 60 days', 'Overdue over 60 days'
                 ];
-//
-//                array_unshift($summary_detail, [$total_price]);
-//
+
+                $summary_line[] = [
+                    isset($summary_lines['Total Outstanding']) ? $summary_lines['Total Outstanding'] : 0,
+                    isset($summary_lines['Not due']) ? $summary_lines['Not due'] : 0,
+                    isset($summary_lines['Overdue up to 30 day']) ? $summary_lines['Overdue up to 30 day'] : 0,
+                    isset($summary_lines['Overdue up to 60 days']) ? $summary_lines['Overdue up to 60 days'] : 0,
+                    isset($summary_lines['Over 60 days overdue']) ? $summary_lines['Over 60 days overdue'] : 0
+                ];
+
                 $invoice_headings = [
                     'Invoice No.', 'Order No.', 'Invoice Date', 'Due Date', 'Amount'
                 ];
-
-                $headings = $invoice_headings;
-//
-//                $headings = array_merge($summary_headings, $summary_detail, $invoice_headings);
 
                 $lines = [];
 
@@ -157,8 +142,8 @@ class ReportController extends Controller
                         $invoice_line->unall_curr_amount
                     ];
                 }
-//
-                return $this->createCSV('account_summary.csv', $headings, $lines);
+
+                return $this->createCSV('account_summary.csv', $summary_headings, $summary_line, $invoice_headings, $lines);
             }
         }
 
