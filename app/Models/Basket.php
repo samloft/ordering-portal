@@ -45,11 +45,11 @@ class Basket extends Model
     /**
      * Return all basket lines based on customer code
      *
-     * @param null $delivery
+     * @param int $shipping_value
      * @param null $country
      * @return Basket[]|Collection
      */
-    public static function show($delivery = null, $country = null)
+    public static function show($shipping_value = 0, $country = null) : array
     {
         $lines = (new Basket)->selectRaw('basket.product as product, basket.customer_code as customer_code, 
                                                     basket.quantity as quantity, price, break1, price1, break2, price2, 
@@ -102,20 +102,20 @@ class Basket extends Model
 //        $small_order_charge = static::smallOrderCharge($goods_total);
         $small_order_charge = SmallOrderCharge::value($goods_total, $country);
 
-        if ($delivery) {
-            $delivery_charge = 0;
-        } else {
-            $delivery_charge = 10;
-        }
+//        if ($delivery) {
+//            $delivery_charge = 0;
+//        } else {
+//            $delivery_charge = 10;
+//        }
 
         return [
             'summary' => [
                 'goods_total' => currency($goods_total, 2),
-                'shipping' => currency($delivery_charge, 2),
-                'sub_total' => currency($goods_total, 2),
+                'shipping' => currency($shipping_value, 2),
+                'sub_total' => currency($goods_total + $shipping_value, 2),
                 'small_order_charge' => currency($small_order_charge, 2),
-                'vat' => currency(vatAmount($goods_total + $small_order_charge + $delivery_charge), 2),
-                'total' => currency(vatIncluded($goods_total + $small_order_charge + $delivery_charge), 2)
+                'vat' => currency(vatAmount($goods_total + $small_order_charge + $shipping_value), 2),
+                'total' => currency(vatIncluded($goods_total + $small_order_charge + $shipping_value), 2)
             ],
             'line_count' => count($product_lines),
             'lines' => $product_lines,

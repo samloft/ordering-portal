@@ -6,7 +6,3 @@
  */
 
 require('./bootstrap');
-require('./modules/basket');
-require('./modules/categories');
-require('./modules/products');
-require('./modules/inputs');

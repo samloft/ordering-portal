@@ -1,3 +1,9 @@
+require('./modules/basket');
+require('./modules/categories');
+require('./modules/products');
+require('./modules/inputs');
+require('./modules/checkout');
+
 $('input[type="file"]').change(function (file) {
     $('.custom-file-label').html(file.target.files[0].name);
 });

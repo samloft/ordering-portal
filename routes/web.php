@@ -133,8 +133,8 @@ Route::group(['middleware' => ['auth', 'has.customer']], function () {
         Route::post('delete-product', 'BasketController@removeProduct')->name('basket.delete-line');
         Route::post('update-product', 'BasketController@updateProductQuantity')->name('basket.update-line');
 
-        Route::get('summary', function () {
-            return Basket::show();
+        Route::get('summary/{shipping_value?}', function ($shipping_value) {
+            return Basket::show($shipping_value);
         })->name('basket.summary');
 
         Route::get('dropdown', function () {

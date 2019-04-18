@@ -62,8 +62,12 @@
                 <div class="form-group row">
                     <label class="col-sm-4 col-form-label">{{ __('Shipping') }}</label>
                     <div class="col-sm-8">
-                        <select class="form-control">
-                            <option value=""></option>
+                        <select class="form-control" name="shipping" autocomplete="off">
+                            @foreach($delivery_methods as $delivery_method)
+                                <option value="{{ $delivery_method->uuid }}" data-cost="{{ $delivery_method->price }}">
+                                    {{ $delivery_method->title }}
+                                </option>
+                            @endforeach
                         </select>
                     </div>
                 </div>
@@ -129,28 +133,28 @@
 
         <div class="row">
             <div class="col">Goods Total</div>
-            <div class="col text-right">{{ $basket['summary']['goods_total'] }}</div>
+            <div class="col text-right"><span id="goods_total">{{ $basket['summary']['goods_total'] }}</span></div>
         </div>
         <div class="row">
             <div class="col">Shipping</div>
-            <div class="col text-right">{{ $basket['summary']['shipping'] }}</div>
+            <div class="col text-right"><span id="shipping">{{ $basket['summary']['shipping'] }}</span></div>
         </div>
         <div class="row">
             <div class="col">Sub Total</div>
-            <div class="col text-right">{{ $basket['summary']['sub_total'] }}</div>
+            <div class="col text-right"><span id="sub_total">{{ $basket['summary']['sub_total'] }}</span></div>
         </div>
         <div class="row">
             <div class="col">Small Order Charge*</div>
-            <div class="col text-right">{{ $basket['summary']['small_order_charge'] }}</div>
+            <div class="col text-right"><span id="small_order_charge">{{ $basket['summary']['small_order_charge'] }}</span></div>
         </div>
         <div class="row">
             <div class="col">VAT</div>
-            <div class="col text-right">{{ $basket['summary']['vat'] }}</div>
+            <div class="col text-right"><span id="vat">{{ $basket['summary']['vat'] }}</span></div>
         </div>
         <hr>
         <div class="row basket-total">
             <div class="col">Order Total</div>
-            <div class="col text-right">{{ $basket['summary']['total'] }}</div>
+            <div class="col text-right"><span id="total">{{ $basket['summary']['total'] }}</span></div>
         </div>
 
         <div class="small-print">
