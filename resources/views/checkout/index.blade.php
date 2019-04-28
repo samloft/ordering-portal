@@ -26,7 +26,7 @@
 
                         <div class="text-right mt-2">
                             <a href="{{ route('account.addresses') }}" class="btn-link">
-                                <button class="btn btn-blue">{{ __('Change Delivery Address') }}</button>
+                                <button type="button" class="btn btn-blue">{{ __('Change Delivery Address') }}</button>
                             </a>
                         </div>
                     </div>
