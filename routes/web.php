@@ -147,6 +147,7 @@ Route::group(['middleware' => ['auth', 'has.customer']], function () {
      */
     Route::group(['prefix' => 'checkout'], function () {
         Route::get('/', 'CheckoutController@index')->name('checkout');
+        Route::post('order', 'CheckoutController@store')->name('checkout.order');
     });
 });
 
