@@ -43,7 +43,7 @@ class ReportController extends Controller
             return $this->accountSummaryReport($output);
         }
 
-        return abort(404);
+        return back()->with('error', 'You must select a report to run');
     }
 
     /**
