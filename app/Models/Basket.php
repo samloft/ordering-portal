@@ -65,6 +65,7 @@ class Basket extends Model
         $product_lines = [];
 
         foreach ($lines as $line) {
+            // Check for any bulk discounts and adjust the prices to match if found.
             switch (true) {
                 case $line->quantity >= $line->break3 && $line->price3 != 0:
                     $net_price = $line->price3;
@@ -81,6 +82,7 @@ class Basket extends Model
 
             $goods_total = $goods_total + (discount($net_price) * $line->quantity);
 
+            // Check for a matching product image.
             if (Storage::disk('public')->exists('product_images/' . $line->product . '.png')) {
                 $image = asset('product_images/' . $line->product . '.png');
             } else {
@@ -94,19 +96,14 @@ class Basket extends Model
                 'stock' => $line->stock_level,
                 'image' => $image,
                 'quantity' => $line->quantity,
+                'discount' => 2,
+                'net_price' => $net_price,
                 'price' => currency(discount($net_price) * $line->quantity, 2),
                 'unit_price' => currency(discount($net_price), 4),
             ];
         }
 
-//        $small_order_charge = static::smallOrderCharge($goods_total);
         $small_order_charge = SmallOrderCharge::value($goods_total, $country);
-
-//        if ($delivery) {
-//            $delivery_charge = 0;
-//        } else {
-//            $delivery_charge = 10;
-//        }
 
         return [
             'summary' => [

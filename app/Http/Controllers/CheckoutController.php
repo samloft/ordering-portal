@@ -50,7 +50,25 @@ class CheckoutController extends Controller
             return back()->with('error', 'You must accept the terms before you can place your order.')->withInput($request->all());
         }
 
-        dd($request);
+        $delivery = DeliveryMethods::details($request->shipping);
+
+        $order_details = [
+            'header' => [
+                'reference' => $request->reference,
+                'notes' => $request->notes,
+                'shipping' => $delivery,
+                'first_name' => $request->first_name,
+                'last_name' => $request->last_name,
+                'telephone' => $request->telephone,
+                'evening_telephone' => $request->evening_telephone,
+                'fax' => $request->fax,
+                'mobile' => $request->mobile,
+                'delivery_address' => session('address') ? session('address') : Addresses::getDefault()->getAttributes()
+            ],
+            'details' => Basket::show($delivery['cost'])
+        ];
+
+        dd($order_details);
 
         // After checkout complete
         if (session('address')) {
@@ -59,6 +77,11 @@ class CheckoutController extends Controller
     }
 
     public function complete($order_number)
+    {
+
+    }
+
+    public function generateOrderFile()
     {
 
     }
