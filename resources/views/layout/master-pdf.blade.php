@@ -29,11 +29,13 @@
         }
 
         table {
+            width: 100%;
             border: 1px solid #000000;
             border-collapse: collapse;
         }
 
         th, td {
+            border: 1px solid #000000;
             padding-left: 5px;
             padding-right: 5px;
         }
