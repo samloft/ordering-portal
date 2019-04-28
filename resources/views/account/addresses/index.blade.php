@@ -22,35 +22,36 @@
                         </ul>
                     </div>
                     <div class="col-lg-3 text-right">
-                        @if ($address->default)
-                            <h3 class="text-center">{{ __('Default Address') }}</h3>
+                        @if ($checkout)
+                            <a href="{{ route('account.address.select', ['id' => $address->id]) }}" class="btn-link">
+                                <button class="btn btn-block btn-sm btn-blue mb-1">{{ __('Select Address') }}</button>
+                            </a>
                         @else
-                            @if ($checkout)
-                                <a href="{{ route('account.address.select', ['id' => $address->id]) }}" class="btn-link">
-                                    <button class="btn btn-block btn-sm btn-blue mb-1">{{ __('Select Address') }}</button>
-                                </a>
+                            @if ($address->default)
+                                <h3 class="text-center">{{ __('Default Address') }}</h3>
+                            @else
+                                <form method="post" action="{{ route('account.address.default') }}" class="mb-1">
+                                    <button class="btn btn-block btn-sm btn-blue" name="id" value="{{ $address->id }}">
+                                        {{ __('Set As Default') }}
+                                    </button>
+                                </form>
                             @endif
-                            <form method="post" action="{{ route('account.address.default') }}" class="mb-1">
-                                <button class="btn btn-block btn-sm btn-blue" name="id" value="{{ $address->id }}">
-                                    {{ __('Set As Default') }}
-                                </button>
-                            </form>
+
+                            <a href="{{ route('account.address.edit', [$address->id]) }}" class="btn-link">
+                                <button class="btn btn-block btn-sm btn-blue">{{ __('Edit Address') }}</button>
+                            </a>
+
+                            <button id="delete-address" class="btn btn-block btn-sm btn-blue mt-1"
+                                    value="{{ $address->id }}">{{ __('Remove Address') }}
+                            </button>
                         @endif
-
-                        <a href="{{ route('account.address.edit', [$address->id]) }}" class="btn-link">
-                            <button class="btn btn-block btn-sm btn-blue">{{ __('Edit Address') }}</button>
-                        </a>
-
-                        <button id="delete-address" class="btn btn-block btn-sm btn-blue mt-1"
-                                value="{{ $address->id }}">{{ __('Remove Address') }}
-                        </button>
                     </div>
                 </div>
             </div>
         @endforeach
 
         <div class="mb-2">
-            {{ $addresses->links('layout.pagination') }}
+            {{ $addresses->appends(request()->input())->links('layout.pagination') }}
         </div>
     @else
         <div class="text-center mt-5 mb-5">
@@ -65,7 +66,8 @@
             </a>
         </div>
         <div class="col-lg-6 text-right">
-            <a href="{{ route('account.address.create') }}" class="btn-link">
+            <a href="@if($checkout) {{ route('account.address.create', ['checkout' => $checkout]) }} @else {{ route('account.address.create') }} @endif"
+               class="btn-link">
                 <button class="btn btn-primary">{{ __('Add New Address') }}</button>
             </a>
         </div>

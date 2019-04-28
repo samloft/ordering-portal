@@ -38,9 +38,10 @@ class AddressController extends Controller
      */
     public function create()
     {
+        $checkout = Input::get('checkout');
         $countries = Countries::show();
 
-        return view('account.addresses.show', compact('countries'));
+        return view('account.addresses.show', compact('countries', 'checkout'));
     }
 
     /**
@@ -50,12 +51,20 @@ class AddressController extends Controller
      */
     public function store()
     {
+        $checkout = request('checkout');
         $address = $this->validation();
 
         $address['customer_code'] = Auth::user()->customer->customer_code;
         $address['default'] = request('default') ? 1 : 0;
 
         $create = Addresses::store($address);
+
+        if ($checkout) {
+            $address = Addresses::details($create);
+            $this->tempAddress($address);
+
+            return $create ? redirect(route('checkout')) : back()->with('error', 'Unable to create new address, please try again');
+        }
 
         return $create ? back()->with('success', 'New address has been created') : back()->with('error', 'Unable to create new address, please try again');
     }
@@ -141,9 +150,22 @@ class AddressController extends Controller
             return redirect(route('account.addresses'))->with('error', 'Address not found, please try again');
         }
 
+        $this->tempAddress($address);
+
+        return redirect(route('checkout'));
+    }
+
+    /**
+     * Stores the given temporary address in a session for use
+     * on checkout.
+     *
+     * @param $address
+     */
+    public function tempAddress($address)
+    {
         session([
             'address' => [
-                'address_id' => $address_id,
+                'address_id' => $address->id,
                 'address_details' => [
                     'company_name' => $address->company_name,
                     'address_2' => $address->address_line_2,
@@ -154,8 +176,6 @@ class AddressController extends Controller
                 ]
             ]
         ]);
-
-        return redirect(route('checkout'));
     }
 
     /**
