@@ -114,6 +114,7 @@ Route::group(['middleware' => ['auth', 'has.customer']], function () {
             Route::patch('{id}/edit', 'Account\AddressController@update')->name('account.address.update');
             Route::post('default', 'Account\AddressController@default')->name('account.address.default');
             Route::get('{id}/delete', 'Account\AddressController@destroy')->name('account.address.destroy');
+            Route::get('select', 'Account\AddressController@select')->name('account.address.select');
         });
 
         Route::group(['prefix' => 'customer'], function () {

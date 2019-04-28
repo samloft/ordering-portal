@@ -51,6 +51,11 @@ class CheckoutController extends Controller
         }
 
         dd($request);
+
+        // After checkout complete
+        if (session('address')) {
+            session()->forget('address');
+        }
     }
 
     public function complete($order_number)

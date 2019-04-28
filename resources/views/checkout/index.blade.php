@@ -1,6 +1,6 @@
 @extends('layout.master')
 
-@section('page.title', 'Basket')
+@section('page.title', 'Checkout')
 
 @section('content')
     @include('layout.progress', ['progress_title' => 'Checkout', 'progress_amount' => 2])
@@ -11,9 +11,18 @@
                 <div class="card card-body">
                     <h2 class="section-title">{{ __('Delivery Address') }}</h2>
                     <div class="address">
-                        @if ($default_address)
+                        @if (session('address'))
                             <div class="address">
-                                <span>{{ $default_address->address_line_1 }}</span>
+                                <span>{{ session('address.address_details.company_name') }}</span>
+                                <span>{{ session('address.address_details.address_2') }}</span>
+                                <span>{{ session('address.address_details.address_3') }}</span>
+                                <span>{{ session('address.address_details.address_4') }}</span>
+                                <span>{{ session('address.address_details.address_5') }}</span>
+                                <span>{{ session('address.address_details.postcode') }}</span>
+                            </div>
+                        @elseif ($default_address)
+                            <div class="address">
+                                <span>{{ $default_address->company_name }}</span>
                                 <span>{{ $default_address->address_line_2 }}</span>
                                 <span>{{ $default_address->address_line_3 }}</span>
                                 <span>{{ $default_address->address_line_4 }}</span>
@@ -25,7 +34,7 @@
                         @endif
 
                         <div class="text-right mt-2">
-                            <a href="{{ route('account.addresses') }}" class="btn-link">
+                            <a href="{{ route('account.addresses', ['checkout' => true]) }}" class="btn-link">
                                 <button type="button" class="btn btn-blue">{{ __('Change Delivery Address') }}</button>
                             </a>
                         </div>

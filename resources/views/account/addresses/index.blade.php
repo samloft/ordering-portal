@@ -25,6 +25,11 @@
                         @if ($address->default)
                             <h3 class="text-center">{{ __('Default Address') }}</h3>
                         @else
+                            @if ($checkout)
+                                <a href="{{ route('account.address.select', ['id' => $address->id]) }}" class="btn-link">
+                                    <button class="btn btn-block btn-sm btn-blue mb-1">{{ __('Select Address') }}</button>
+                                </a>
+                            @endif
                             <form method="post" action="{{ route('account.address.default') }}" class="mb-1">
                                 <button class="btn btn-block btn-sm btn-blue" name="id" value="{{ $address->id }}">
                                     {{ __('Set As Default') }}

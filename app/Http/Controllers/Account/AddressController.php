@@ -9,6 +9,8 @@ use App\Http\Controllers\Controller;
 use Exception;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Response;
+use Illuminate\Routing\Redirector;
+use Illuminate\Support\Facades\Input;
 
 class AddressController extends Controller
 {
@@ -19,9 +21,14 @@ class AddressController extends Controller
      */
     public function index()
     {
-        $addresses = Addresses::show();
+        if (session('address')) {
+            session()->forget('address');
+        }
 
-        return view('account.addresses.index', compact('addresses'));
+        $addresses = Addresses::show();
+        $checkout = Input::get('checkout') ? true : false;
+
+        return view('account.addresses.index', compact('addresses', 'checkout'));
     }
 
     /**
@@ -56,7 +63,7 @@ class AddressController extends Controller
     /**
      * Show the form for editing the specified address.
      *
-     * @param  int $id
+     * @param int $id
      * @return Response
      */
     public function edit($id)
@@ -87,7 +94,7 @@ class AddressController extends Controller
     /**
      * Remove the specified address from storage.
      *
-     * @param  int $id
+     * @param int $id
      * @return Response
      * @throws Exception
      */
@@ -118,6 +125,37 @@ class AddressController extends Controller
         }
 
         return Addresses::setDefault(request('id')) ? redirect(route('account.addresses'))->with('success', 'New address set as default') : back()->with('error', 'Unable to set new address to default, please try again');
+    }
+
+    /**
+     * Selects a none default address for checkout.
+     *
+     * @return RedirectResponse|Redirector
+     */
+    public function select()
+    {
+        $address_id = Input::get('id');
+        $address = Addresses::details($address_id);
+
+        if (!$address) {
+            return redirect(route('account.addresses'))->with('error', 'Address not found, please try again');
+        }
+
+        session([
+            'address' => [
+                'address_id' => $address_id,
+                'address_details' => [
+                    'company_name' => $address->company_name,
+                    'address_2' => $address->address_line_2,
+                    'address_3' => $address->address_line_3,
+                    'address_4' => $address->address_line_4,
+                    'address_5' => $address->address_line_5,
+                    'postcode' => $address->post_code
+                ]
+            ]
+        ]);
+
+        return redirect(route('checkout'));
     }
 
     /**
