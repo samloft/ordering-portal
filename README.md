@@ -14,3 +14,9 @@ This system is still highly under construction (Being worked on in spare time).
   - Order Uploads - Upload a CSV file with product | quantity to import your order.
   - Reports.
   - And more.
+  
+ # Roadmap
+ 
+ Check out the Trello link to see what is being worked on and whats planned.
+ 
+ [Trello](https://trello.com/b/3GdkAgNR/ordering-portal-roadmap)
