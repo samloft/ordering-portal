@@ -12,35 +12,41 @@
 
         @if ($order['errors'] > 0)
             <div class="alert alert-danger">
-                <strong>{{ $order['errors'] }} Errors Found!</strong> Lines in red will not be added to your basket.
+                <strong>{{ $order['errors'] . __('Errors Found!') }}</strong> {{ __('Lines in red will not be added to your basket.') }}
             </div>
         @endif
 
         @if ($order['warnings'] > 0)
             <div class="alert alert-warning">
-                <strong>{{ $order['warnings'] }} Warnings Found!</strong> Lines in yellow will be added to your basket,
-                but have a warning attached, please check the warning messages below.
+                <strong>{{ $order['warnings'] . __('Warnings Found!') }}</strong> {{ __('Lines in yellow will be added to your basket,
+                but have a warning attached, please check the warning messages below.') }}
             </div>
         @endif
 
         <table class="table table-striped table-bordered">
             <thead class="thead-dark">
             <tr>
-                <th>Product</th>
-                <th>Quantity</th>
-                <th class="text-right">Status</th>
+                <th>{{ __('Product') }}</th>
+                <th>{{ __('Quantity') }}</th>
+                <th class="text-right">{{ __('Status') }}</th>
+                <th class="text-right">{{ __('Passed Price (Net)') }}</th>
+                <th class="text-right">{{ __('Actual Price (Net)') }}</th>
             </tr>
             </thead>
             <tbody>
             @foreach ($order as $line)
                 @if ($line['product'])
-                    <tr class="{{ $line['validation']['error'] ? 'bg-danger' : ($line['validation']['warning'] ? 'bg-warning' : '') }}">
+                    <tr>
 
-                        <td>{{ $line['product'] }}</td>
+                        <td class="{{ $line['validation']['error'] ? 'bg-danger' : ($line['validation']['warning'] ? 'bg-warning' : '') }}">
+                            {{ $line['product'] }}
+                        </td>
 
-                        <td class="text-right">{{ $line['quantity'] }}</td>
+                        <td class="text-right {{ $line['validation']['error'] ? 'bg-danger' : ($line['validation']['warning'] ? 'bg-warning' : '') }}">
+                            {{ $line['quantity'] }}
+                        </td>
 
-                        <td class="text-right">
+                        <td class="text-right {{ $line['validation']['error'] ? 'bg-danger' : ($line['validation']['warning'] ? 'bg-warning' : '') }}">
                             @if ($line['validation']['error'])
                                 {{ $line['validation']['error'] }} <i class="fas fa-times-circle"></i>
                             @elseif ($line['validation']['warning'])
@@ -49,6 +55,10 @@
                                 Valid <i class="text-success fas fa-check-circle"></i>
                             @endif
                         </td>
+
+                        <td class="text-right {{ $line['price_match_error'] ? 'bg-info' : '' }}">{{ $line['passed_price'] ? $line['passed_price'] : '' }}</td>
+
+                        <td class="text-right {{ $line['price_match_error'] ? 'bg-info' : '' }}">{{ $line['price'] ? $line['price'] : '' }}</td>
                     </tr>
                 @endif
             @endforeach
@@ -59,12 +69,12 @@
     <div class="row mt-3">
         <div class="col">
             <a href="{{ route('upload') }}">
-                <button class="btn btn-primary">Back</button>
+                <button class="btn btn-primary">{{ __('Back') }}</button>
             </a>
         </div>
         <div class="col text-right">
             <a href="{{ route('upload-completed') }}">
-                <button class="btn btn-blue">Add Order To Basket</button>
+                <button class="btn btn-blue">{{ __('Add Order To Basket') }}</button>
             </a>
         </div>
     </div>

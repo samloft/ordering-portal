@@ -9,10 +9,10 @@
         @include('layout.alerts')
 
         <div class="alert alert-warning mb-5">
-            <strong>Note!</strong> To upload an order, you must use a <strong>CSV</strong>
-            file that's in the format,
+            {!! ('<strong>Note!</strong> To upload an order, you must use a <strong>CSV</strong>
+            file that\'s in the format,
             product code in the first column and quantity in the second column (No headers).
-            Once uploaded you'll be taken to a page where you can review and confirm your order.
+            Once uploaded you\'ll be taken to a page where you can review and confirm your order.') !!}
         </div>
 
         <form method="post" action="{{ route('upload-validate') }}" enctype="multipart/form-data">
@@ -26,18 +26,5 @@
                 </div>
             </div>
         </form>
-    </div>
-
-    <div class="modal fade" id="loader" tabindex="-1" role="dialog" data-backdrop="static">
-        <div class="modal-dialog modal-sm" role="document">
-            <div class="modal-content">
-                <div class="modal-body text-center">
-                    <div class="loader"></div>
-                    <div class="loader-txt">
-                        <p>{{ __('Please wait while we validate your order upload') }}</p>
-                    </div>
-                </div>
-            </div>
-        </div>
     </div>
 @endsection

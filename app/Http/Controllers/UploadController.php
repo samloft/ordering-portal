@@ -8,7 +8,7 @@ use App\Models\Products;
 use Exception;
 use Illuminate\Contracts\View\Factory;
 use Illuminate\Http\RedirectResponse;
-use Request;
+use Illuminate\Http\Request;
 use Auth;
 use Illuminate\View\View;
 
@@ -50,8 +50,14 @@ class UploadController extends Controller
         foreach ($order_lines as $key => $value) {
             $product_code = $value[0];
             $product_qty = (int) str_replace([',', '.'], '', $value[1]);
+            $product_price = null;
+            $price_match = false;
             $error_message = null;
             $warning_message = null;
+
+            if (isset($value[2])) {
+                $product_price = $value[2];
+            }
 
             if ($product_code && $product_qty > 0) {
                 $product = Products::show($value[0]);
@@ -61,10 +67,21 @@ class UploadController extends Controller
                     $error_message = 'Product not found';
                 }
 
+                if ($product_price) {
+                    if ($product_price == $product->price) {
+                        $price_match = false;
+                    } else {
+                        $price_match = true;
+                    }
+                }
+
                 $order[] = [
                     'product' => $product_code,
                     'quantity' => $product_qty,
                     'old_quantity' => $product_qty,
+                    'passed_price' => $product_price,
+                    'price' => isset($product->price) ? $product->price : null,
+                    'price_match_error' => $price_match,
                     'multiples' => isset($product->order_multiples) ? $product->order_multiples : 1,
                     'validation' => [
                         'error' => $error_message,
@@ -105,6 +122,9 @@ class UploadController extends Controller
             $product_lines[] = [
                 'product' => $product['product'],
                 'quantity' => $quantity,
+                'price' => $product['price'],
+                'price_match_error' => $product['price_match_error'],
+                'passed_price' => $product['passed_price'],
                 'old_quantity' => $product['old_quantity'],
                 'multiples' => $product['multiples'],
                 'validation' => [
