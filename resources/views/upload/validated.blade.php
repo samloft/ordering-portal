@@ -12,13 +12,13 @@
 
         @if ($order['errors'] > 0)
             <div class="alert alert-danger">
-                <strong>{{ $order['errors'] . __('Errors Found!') }}</strong> {{ __('Lines in red will not be added to your basket.') }}
+                <strong>{{ $order['errors'] . __(' Errors Found!') }}</strong> {{ __('Lines in red will not be added to your basket.') }}
             </div>
         @endif
 
         @if ($order['warnings'] > 0)
             <div class="alert alert-warning">
-                <strong>{{ $order['warnings'] . __('Warnings Found!') }}</strong> {{ __('Lines in yellow will be added to your basket,
+                <strong>{{ $order['warnings'] . __(' Warnings Found!') }}</strong> {{ __('Lines in yellow will be added to your basket,
                 but have a warning attached, please check the warning messages below.') }}
             </div>
         @endif
