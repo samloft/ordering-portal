@@ -31,10 +31,10 @@
             <div class="col-lg-4 col-md-12 card-group-row__col">
                 <div class="card card-group-row__card card-body card-body-x-lg flex-row align-items-center">
                     <div class="flex">
-                        <div class="card-header__title text-muted mb-2">Website Traffic</div>
-                        <div class="text-amount">8,391</div>
-                        <div class="text-stats text-danger">3.5% <i
-                                    class="material-icons">arrow_downward</i></div>
+                        <div class="card-header__title text-muted mb-2">{{ __('Site Users') }}</div>
+                        <div class="text-amount">{{ $users }}</div>
+{{--                        <div class="text-stats text-danger">3.5% <i--}}
+{{--                                    class="material-icons">arrow_downward</i></div>--}}
                     </div>
                     <div><i class="material-icons icon-muted icon-40pt ml-3">perm_identity</i></div>
                 </div>

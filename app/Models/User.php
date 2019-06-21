@@ -3,12 +3,14 @@
 namespace App\Models;
 
 use Eloquent;
+use Illuminate\Contracts\Pagination\LengthAwarePaginator;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Auth;
 use Hash;
 use App\Traits\CustomerDetails;
+use Illuminate\Support\Collection;
 
 /**
  * App\User
@@ -112,5 +114,37 @@ class User extends Authenticatable
         $user->save();
 
         return $user->wasChanged();
+    }
+
+    /**
+     * Return all the users/customers.
+     *
+     * @param $search
+     * @return LengthAwarePaginator
+     */
+    public static function listAll($search): LengthAwarePaginator
+    {
+        if ($search) {
+            return (new User)
+                ->where('username', 'like', '%' . $search . '%')
+                ->orWhere('first_name', 'like', '%' . $search . '%')
+                ->orWhere('last_name', 'like', '%' . $search . '%')
+                ->orWhere('email', 'like', '%' . $search . '%')
+                ->orWhere('customer_code', 'like', '%' . $search . '%')
+                ->orderBy('username', 'asc')
+                ->paginate(10);
+        }
+
+        return (new User)->orderBy('username', 'asc')->paginate(10);
+    }
+
+    /**
+     * Return a count of all the current users.
+     *
+     * @return int
+     */
+    public static function countAll()
+    {
+        return (new User)->count();
     }
 }

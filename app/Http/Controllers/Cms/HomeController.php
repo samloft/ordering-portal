@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Cms;
 
 use App\Http\Controllers\Controller;
+use App\Models\User;
 use Illuminate\Http\Response;
 
 class HomeController extends Controller
@@ -24,6 +25,8 @@ class HomeController extends Controller
      */
     public function index()
     {
-        return view('cms.index');
+        $users = User::countAll();
+
+        return view('cms.index', compact('users'));
     }
 }

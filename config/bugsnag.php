@@ -36,6 +36,7 @@ return [
     |
     */
 
+//    'app_version' => Version::major() . '.' . Version::minor() . '.' . Version::patch() . ':' . Version::build(),
     'app_version' => '',
 
     /*

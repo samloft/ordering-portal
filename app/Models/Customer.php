@@ -6,6 +6,7 @@ use Eloquent;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Model;
 use Auth;
+use Illuminate\Support\Collection;
 use Request;
 
 /**

@@ -11,8 +11,8 @@
                     </a>
                 </li>
 
-                <li class="sidebar-menu-item">
-                    <a class="sidebar-menu-button" href="#">
+                <li class="sidebar-menu-item {{ setActive('cms.site-users') }}">
+                    <a class="sidebar-menu-button" href="{{ route('cms.site-users') }}">
                         <i class="sidebar-menu-icon sidebar-menu-icon--left material-icons">people</i>
                         <span class="sidebar-menu-text">{{ __('Site Users') }}</span>
                     </a>
