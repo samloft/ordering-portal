@@ -1,7 +1,7 @@
 <div class="mdk-drawer  js-mdk-drawer" id="default-drawer" data-align="start">
     <div class="mdk-drawer__content">
-        <div class="sidebar sidebar-light sidebar-left simplebar" data-simplebar>
-            <div class="sidebar-heading sidebar-m-t pt-3">{{ __('Menu') }}</div>
+        <div class="sidebar sidebar-dark bg-dark sidebar-left simplebar" data-simplebar>
+            <div class="sidebar-heading sidebar-m-t mt-0 pt-5">{{ __('Menu') }}</div>
 
             <ul class="sidebar-menu" id="components_menu">
                 <li class="sidebar-menu-item {{ setActive('cms.index') }}">

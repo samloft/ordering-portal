@@ -1,7 +1,7 @@
 <div id="header" class="mdk-header js-mdk-header m-0" data-fixed>
     <div class="mdk-header__content">
 
-        <div class="navbar navbar-expand-sm navbar-main navbar-dark bg-dark  pr-0" id="navbar" data-primary>
+        <div class="navbar navbar-expand-sm navbar-main navbar-dark bg-primary-dark pr-0" id="navbar" data-primary>
             <div class="container-fluid p-0">
 
                 <button class="navbar-toggler navbar-toggler-right d-block d-md-none" type="button"
