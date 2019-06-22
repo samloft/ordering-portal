@@ -40,6 +40,7 @@
                                 <th>{{ __('Username') }}</th>
                                 <th>{{ __('Can Order') }}</th>
                                 <th>{{ __('Default Customer') }}</th>
+                                <th>{{ __('Extra Customers') }}</th>
                                 <th>{{ __('Type') }}</th>
                                 <th>{{ __('Email') }}</th>
                                 <th class="text-right">{{ __('Actions') }}</th>
@@ -58,6 +59,7 @@
                                         @endif
                                     </td>
                                     <td>{{ $site_user->customer_code }}</td>
+                                    <td><span class="badge badge-info">{{ $site_user->customers->count() }}</span></td>
                                     <td>
                                         @if ($site_user->admin)
                                             <span class="badge badge-warning">{{ __('ADMIN') }}</span>
