@@ -16,9 +16,7 @@ use Illuminate\Http\Request;
 */
 
 Route::get('login', 'Auth\AdminController@showLoginForm')->name('cms.login');
-Route::get('forgot', 'Auth\AdminForgotPasswordController@showLinkRequestForm')->name('cms.forgot');
 Route::post('login', 'Auth\AdminController@login')->name('cms.login.submit');
-Route::post('forgot', 'Auth\AdminForgotPasswordController@showLinkRequestForm')->name('cms.forgot.submit');
 
 Route::group(['middleware' => 'auth:admin'], function () {
 
@@ -62,6 +60,13 @@ Route::group(['middleware' => 'auth:admin'], function () {
         Route::post('show', function (Request $request) {
             return HomeLinks::show($request->id);
         })->name('cms.home-links.show');
+    });
+
+    Route::group(['prefix' => 'contacts'], function () {
+        Route::get('/', 'Cms\ContactController@index')->name('cms.contacts');
+        Route::post('/', 'Cms\ContactController@store')->name('cms.contacts.store');
+        Route::get('view/{id}', 'Cms\ContactController@show')->name('cms.contacts.show');
+        Route::get('delete/{id}', 'Cms\ContactController@destroy')->name('cms.contacts.delete');
     });
 
     /* Product images */

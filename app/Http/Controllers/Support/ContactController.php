@@ -2,7 +2,9 @@
 
 namespace App\Http\Controllers\Support;
 
+use App\Models\Contacts;
 use Illuminate\Contracts\View\Factory;
+use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\View\View;
@@ -16,6 +18,8 @@ class ContactController extends Controller
      */
     public function index()
     {
-        return view('support.contact');
+        $contacts = Contacts::show();
+
+        return view('support.contact', compact('contacts'));
     }
 }
