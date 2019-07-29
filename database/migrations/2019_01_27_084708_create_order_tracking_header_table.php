@@ -14,7 +14,7 @@ class CreateOrderTrackingHeaderTable extends Migration
     public function up()
     {
         Schema::create('order_tracking_header', function (Blueprint $table) {
-            $table->string('order_no', 10)->primary();
+            $table->string('order_no', 10);
             $table->string('base_order', 10);
             $table->string('customer_order_no', 20);
             $table->string('status', 20);
