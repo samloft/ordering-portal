@@ -29,6 +29,11 @@ class AdminController extends Controller
         return view('cms.auth.login');
     }
 
+    public function showForgotform()
+    {
+        return view('cms.auth.password-email');
+    }
+
     /**
      * @param Request $request
      * @return RedirectResponse

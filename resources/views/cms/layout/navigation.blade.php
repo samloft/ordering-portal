@@ -18,8 +18,8 @@
                     </a>
                 </li>
 
-                <li class="sidebar-menu-item">
-                    <a class="sidebar-menu-button" href="#">
+                <li class="sidebar-menu-item {{ setActive('cms.admin') }}">
+                    <a class="sidebar-menu-button" href="{{ route('cms.admin') }}">
                         <i class="sidebar-menu-icon sidebar-menu-icon--left material-icons">nature_people</i>
                         <span class="sidebar-menu-text">{{ __('Admin Users') }}</span>
                     </a>

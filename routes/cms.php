@@ -16,7 +16,9 @@ use Illuminate\Http\Request;
 */
 
 Route::get('login', 'Auth\AdminController@showLoginForm')->name('cms.login');
+Route::get('forgot', 'Auth\AdminForgotPasswordController@showLinkRequestForm')->name('cms.forgot');
 Route::post('login', 'Auth\AdminController@login')->name('cms.login.submit');
+Route::post('forgot', 'Auth\AdminForgotPasswordController@showLinkRequestForm')->name('cms.forgot.submit');
 
 Route::group(['middleware' => 'auth:admin'], function () {
 
@@ -24,22 +26,26 @@ Route::group(['middleware' => 'auth:admin'], function () {
 
     Route::get('/', 'Cms\HomeController@index')->name('cms.index');
 
-    Route::group(['prefix' => 'site-users'], function() {
+    Route::group(['prefix' => 'site-users'], function () {
         Route::get('/', 'Cms\UserController@index')->name('cms.site-users');
-        Route::get('show/{id}', function($id) {
+        Route::get('show/{id}', function ($id) {
             return User::show($id);
         })->name('cms.site-users.show');
         Route::get('delete/{id}', 'Cms\UserController@destroy')->name('cms.site-users.destroy');
         Route::post('validate', 'Cms\UserController@validation')->name('cms.site-users.validate');
         Route::post('store', 'Cms\UserController@store')->name('cms.site-users.store');
 
-        Route::post('extra-customers/destroy', function(Request $request) {
+        Route::post('extra-customers/destroy', function (Request $request) {
             return UserCustomers::destroy($request->id);
         })->name('cms.extra-customers.destroy');
 
-        Route::post('extra-customers/store', function(Request $request) {
+        Route::post('extra-customers/store', function (Request $request) {
             return UserCustomers::store($request);
         })->name('cms.extra-customers.store');
+    });
+
+    Route::group(['prefix' => 'admin-users'], function () {
+        Route::get('/', 'Cms\AdminController@index')->name('cms.admin');
     });
 
     Route::group(['prefix' => 'company-information'], function () {
