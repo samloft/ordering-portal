@@ -49,7 +49,7 @@ class UploadController extends Controller
 
         foreach ($order_lines as $key => $value) {
             $product_code = $value[0];
-            $product_qty = (int) str_replace([',', '.'], '', $value[1]);
+            $product_qty = (int)str_replace([',', '.'], '', $value[1]);
             $product_price = null;
             $price_match = false;
             $error_message = null;

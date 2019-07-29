@@ -32,6 +32,14 @@ class Categories extends Model
      */
     public static function list()
     {
+        /*
+         * SELECT cat1_level1, cat1_level2, cat1_level3, cat1_level4, cat1_level5
+         * FROM categories
+         * WHERE product IN (SELECT product FROM prices WHERE customer_code = '%CUSTOMER_CODE%'
+         * GROUP BY cat1_level1, cat1_level2, cat1_level3, cat1_level4, cat1_level5
+         */
+
+
         $category_results = (new Categories)->select('cat1_level1', 'cat1_level2', 'cat1_level3', 'cat1_level4', 'cat1_level5')
             ->whereHas('prices', function ($query) {
                 $query->where('customer_code', Auth::user()->customer->customer_code);

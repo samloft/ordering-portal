@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Eloquent;
 use Illuminate\Contracts\Pagination\LengthAwarePaginator;
+use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Foundation\Auth\User as Authenticatable;
@@ -58,47 +59,30 @@ class User extends Authenticatable
         return $this->hasMany(UserCustomers::class);
     }
 
-//    public function customer()
-//    {
-//        if (Session::get('temp_customer')) {
-//            $customer = (new Customer)->where('customer_code', Session::get('temp_customer'))->first()->toArray();
-//
-//            Auth::user()->customer = $customer;
-//
-//            return Auth::user()->customer = $customer;
-//        }
-//
-//        return $this->belongsTo(Customer::class, 'customer_code', 'customer_code');
-//    }
-
-//    public function getCustomerAttribute()
-//    {
-//        if (Session::get('temp_customer')) {
-//            if (empty(Auth::user()->customer) || Auth::user()->customer->customer_code != Session::get('temp_customer')) {
-//                $customer = (new Customer)->where('customer_code', Session::get('temp_customer'))->first();
-//
-//                return Auth::user()->customer = $customer;
-//            }
-//
-//            return Auth::user()->customer;
-//        }
-//
-//            $customer = $this->belongsTo(Customer::class, 'customer_code', 'customer_code')->first();
-//
-//            return Auth::user()->customer = $customer;
-//
-//    }
-
     /**
+     * Create/update a site user.
+     *
      * @param $user_details
      * @return mixed
      */
     public static function store($user_details)
     {
-        $user = User::find(Auth::id());
-        $user->update($user_details);
+        $user_details['customer_code'] = strtoupper($user_details['customer_code']);
 
-        return $user->wasChanged();
+        if ($user_details['id']) {
+            if ($user_details['password']) {
+                $user_details['password'] = Hash::make($user_details['password']);
+            } else {
+                $user_details = array_filter($user_details);
+            }
+
+            return (new User)->where('id', $user_details['id'])->update($user_details);
+        }
+
+        $user_details['password'] = Hash::make($user_details['password']);
+        $user_details['created_at'] = date('Y-m-d H:i:s');
+
+        return (new User)->insert($user_details);
     }
 
     /**
@@ -146,5 +130,29 @@ class User extends Authenticatable
     public static function countAll()
     {
         return (new User)->count();
+    }
+
+    /**
+     * Return user details with any extra customers.
+     *
+     * @param $id
+     * @return Builder[]|\Illuminate\Database\Eloquent\Collection
+     */
+    public static function show($id)
+    {
+        return (new User)->where('id', $id)
+            ->with('customers')
+            ->first();
+    }
+
+    /**
+     * Delete the given user by ID.
+     *
+     * @param array|Collection|int $id
+     * @return int|mixed
+     */
+    public static function destroy($id)
+    {
+        return (new User)->where('id', $id)->delete();
     }
 }

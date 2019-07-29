@@ -44,6 +44,7 @@ class OrderTrackingController extends Controller
         if (!$order) {
             abort(404);
         }
+
         foreach ($order_lines as $line) {
             $lines[] = [
                 'product' => trim($line->product),

@@ -67,3 +67,36 @@ $.fn.overhang = function (e) {
         o(!0, null)
     })
 };
+
+window.alertError = function(errorMessage) {
+    $('#modal-error-alert #error-message').text(errorMessage);
+    $('#modal-error-alert').modal('show');
+};
+
+window.alertConfirmDelete = function(title, message, confirmEndpoint = null, callBack = false) {
+    $.confirm({
+        title: title,
+        content: message,
+        buttons: {
+            confirm: {
+                text: 'Confirm Delete',
+                btnClass: 'btn-danger',
+                action: function () {
+                    if (confirmEndpoint) {
+                        window.location.replace(confirmEndpoint);
+                        return $('.modal').modal('hide');
+                    }
+
+                    return callBack(true);
+                }
+            },
+            cancel: {
+                text: 'Cancel',
+                btnClass: 'btn-blue',
+                action: function () {
+                    return callBack(false);
+                }
+            }
+        }
+    });
+};

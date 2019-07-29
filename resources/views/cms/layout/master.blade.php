@@ -107,6 +107,19 @@
     })()
 </script>
 
+<div id="modal-error-alert" class="modal fade" tabindex="-1" role="dialog" aria-modal="true" data-backdrop="static">
+    <div class="modal-dialog modal-dialog-centered modal-sm">
+        <div class="modal-content bg-danger">
+            <div class="modal-body text-center p-4">
+                <i class="material-icons icon-40pt text-white mb-2">report_problem</i>
+                <h4 class="text-white">{{ __('Ohhh Snap!') }}</h4>
+                <p id="error-message" class="text-white mt-3"></p>
+                <button type="button" class="btn btn-light my-2" data-dismiss="modal">{{ __('Continue') }}</button>
+            </div>
+        </div>
+    </div>
+</div>
+
 @yield('scripts')
 
 </body>
