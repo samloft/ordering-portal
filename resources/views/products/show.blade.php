@@ -166,7 +166,7 @@
                 </div>
             @endif
 
-            <div class="text-right mt-2">
+            <div class="text-right mt-4">
                 <button class="btn btn-blue" onclick="window.history.back();">Return to products</button>
             </div>
         </div>
