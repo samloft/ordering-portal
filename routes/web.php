@@ -91,7 +91,9 @@ Route::group(['middleware' => ['auth', 'has.customer']], function () {
      * Support pages
      */
     Route::group(['prefix' => 'support'], function () {
-
+        Route::get('terms', 'Support\TermsController@index')->name('support.terms');
+        Route::get('data-protection', 'Support\DataProtectionController@index')->name('support.data');
+        Route::get('accessibility', 'Support\AccessibilityController@index')->name('support.accessibility');
     });
 
     /*

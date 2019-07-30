@@ -5,9 +5,9 @@
                 <div class="footer-links">
                     <a href="{{ route('support.contact') }}">{{ __('Contact Us') }}</a>
                     @if (Auth::user())
-                        | <a href="">{{ __('Accessibility Policy') }}</a>
-                        | <a href="">{{ __('Data Protection') }}</a>
-                        | <a href="">{{ __('Terms And Conditions') }}</a>
+                        | <a href="{{ route('support.accessibility') }}">{{ __('Accessibility Policy') }}</a>
+                        | <a href="{{ route('support.data') }}">{{ __('Data Protection') }}</a>
+                        | <a href="{{ route('support.terms') }}">{{ __('Terms And Conditions') }}</a>
                     @endif
                 </div>
 
