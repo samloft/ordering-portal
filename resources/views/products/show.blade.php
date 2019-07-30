@@ -143,6 +143,23 @@
                         </table>
                     </div>
                 @endif
+
+                @if (count($product_specs) > 0)
+                    <div class="card card-body mt-3">
+                        <h5 class="mb-3">{{ __('Product Specs') }}</h5>
+
+                        <table class="table table-striped table-specs">
+                            <tbody>
+                            @foreach($product_specs as $product_spec)
+                                <tr>
+                                    <th>{{ $product_spec->name }}</th>
+                                    <td>{{ $product_spec->value }}</td>
+                                </tr>
+                            @endforeach
+                            </tbody>
+                        </table>
+                    </div>
+                @endif
             @else
                 <div class="card card-body no-product">
                     Oops, no product :(

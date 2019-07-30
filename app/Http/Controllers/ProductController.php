@@ -6,6 +6,7 @@ use App\Models\Categories;
 use App\Models\ExpectedStock;
 use App\Models\HomeLinks;
 use App\Models\Products;
+use App\models\ProductSpec;
 use Illuminate\Contracts\View\Factory;
 use Illuminate\Support\Facades\Input;
 use Illuminate\View\View;
@@ -71,6 +72,7 @@ class ProductController extends Controller
         $product_code = decodeUrl($product_code);
         $product = Products::show($product_code);
         $expected_stock = ExpectedStock::show($product_code);
+        $product_specs = ProductSpec::show($product_code);
 
         $categories = [
             'level_1' => isset($category_array[1]) ? decodeUrl($category_array[1]) : '',
@@ -91,7 +93,7 @@ class ProductController extends Controller
             ];
         }
 
-        return view('products.show', compact('categories', 'category_list', 'product', 'expected_stock'));
+        return view('products.show', compact('categories', 'category_list', 'product', 'expected_stock', 'product_specs'));
     }
 
     /**
