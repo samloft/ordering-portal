@@ -22,7 +22,7 @@
             <div class="col">
                 <div class="row">
                     <div class="col footer-links">
-                        Social
+                        {{ __('Social') }}
                     </div>
                     @if (env('APP_ANDROID') || env('APP_APPLE'))
                         <div class="col footer-links">
