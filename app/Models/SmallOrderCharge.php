@@ -23,23 +23,27 @@ class SmallOrderCharge extends Model
      */
     public static function value($order_value, $country = null)
     {
-        $small_order = (new SmallOrderCharge)->where('country', $country)->first();
+        if ($country) {
+            $small_order = (new SmallOrderCharge)->where('country', $country)->first();
 
-        if ($small_order) {
-            if ($order_value < $small_order->threshold) {
-                return (int)$small_order->charge;
+            if ($small_order) {
+                if ($order_value < $small_order->threshold) {
+                    return (int)$small_order->charge;
+                }
+
+                return 0;
+            }
+        } else {
+            // Country with a null value is a 'Global' option to apply to any country.
+            $small_order = (new SmallOrderCharge)->where('country', null)->first();
+
+            if ($small_order) {
+                if ($order_value < $small_order->threshold) {
+                    return (int)$small_order->charge;
+                }
             }
 
             return 0;
-        }
-
-        // Country with a null value is a 'Global' option to apply to any country.
-        $small_order = (new SmallOrderCharge)->where('country', null)->first();
-
-        if ($small_order) {
-            if ($order_value < $small_order->threshold) {
-                return (int)$small_order->charge;
-            }
         }
 
         return 0;
