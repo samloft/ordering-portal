@@ -72,7 +72,7 @@ class Products extends Model
      */
     public static function show($product_code)
     {
-        return (new Products)->select('products.product', 'name', 'description', 'uom', 'price', 'quantity', 'order_multiples')
+        return (new Products)->select(['products.product', 'name', 'description', 'uom', 'price', 'quantity', 'order_multiples'])
             ->whereHas('prices')
             ->where('products.product', $product_code)
             ->leftJoin('prices', 'prices.product', 'products.product')
@@ -90,10 +90,13 @@ class Products extends Model
     {
         return (new Products)->whereHas('prices')
             ->where(function ($query) use ($search_term) {
-                $query->whereRaw('upper(product) LIKE \'%' . strtoupper($search_term) . '%\'')
+                $query->whereRaw('upper(products.product) LIKE \'%' . strtoupper($search_term) . '%\'')
                     ->orWhereRaw('upper(name) LIKE \'%' . strtoupper($search_term) . '%\'')
                     ->orWhereRaw('upper(description) LIKE \'%' . strtoupper($search_term) . '%\'');
-            })->paginate(10);
+            })->join('prices', 'products.product', '=', 'prices.product')
+            ->join('stock_levels', 'products.product', '=', 'stock_levels.product')
+            ->where('prices.customer_code', Auth::user()->customer->customer_code)
+            ->paginate(10);
     }
 
     /**
