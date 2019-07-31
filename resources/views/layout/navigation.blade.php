@@ -31,6 +31,9 @@
                                 <li class="nav-item text-center">
                                     <a class="nav-link {{ setActive('reports') }}" href="{{ route('reports') }}">{{ __('Reports') }}</a>
                                 </li>
+                                <li class="nav-item text-center">
+                                    <a class="nav-link {{ setActive('product-data') }}" href="{{ route('product-data') }}">{{ __('Product Data') }}</a>
+                                </li>
                             </ul>
                         </div>
                     </nav>

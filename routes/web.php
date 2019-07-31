@@ -44,7 +44,7 @@ Route::group(['middleware' => ['auth', 'has.customer']], function () {
     /*
      * Customer code auto complete.
      */
-    Route::post('customer/autocomplete', function(Request $request) {
+    Route::post('customer/autocomplete', function (Request $request) {
         return Customer::autocomplete($request->customer);
     })->name('customer.autocomplete');
 
@@ -94,6 +94,13 @@ Route::group(['middleware' => ['auth', 'has.customer']], function () {
         Route::get('terms', 'Support\TermsController@index')->name('support.terms');
         Route::get('data-protection', 'Support\DataProtectionController@index')->name('support.data');
         Route::get('accessibility', 'Support\AccessibilityController@index')->name('support.accessibility');
+    });
+
+    /*
+     * Product Data
+     */
+    Route::group(['prefix' => 'product-data'], function () {
+        Route::get('/', 'ProductDataController@index')->name('product-data');
     });
 
     /*

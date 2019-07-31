@@ -68,11 +68,7 @@ class UploadController extends Controller
                 }
 
                 if ($product_price) {
-                    if ($product_price == $product->price) {
-                        $price_match = false;
-                    } else {
-                        $price_match = true;
-                    }
+                    $price_match = $product_price == $product->price ? false : true;
                 }
 
                 $order[] = [
