@@ -12,10 +12,11 @@
                 </div>
 
                 <div class="footer-address">
-                    <strong>Scolmore International Limited</strong> Scolmore Park, Landsberg, Lichfield Road Ind. Est.,
-                    Tamworth B79 7XB.<br/>
-                    Tel: 01827 63454 | Fax: 01827 63362 | Email: <a
-                            href="MAILTO:sales@scolmore.com">sales@scolmore.com</a>
+                    <strong>{{ env('ADDRESS_LINE_1') }}</strong> {{ env('ADDRESS_LINE_2') }}
+                    , {{ env('ADDRESS_LINE_3') }}, {{ env('ADDRESS_LINE_4') }},
+                    {{ env('ADDRESS_LINE_5') }} {{ env('ADDRESS_POSTCODE') }}.<br/>
+                    {{ env('ADDRESS_TELEPHONE') ? 'Tel: ' . env('ADDRESS_TELEPHONE') : '' }} {{ env('ADDRESS_FAX') ? '| Fax: ' . env('ADDRESS_FAX') : '' }}
+                    {!! env('ADDRESS_EMAIL') ? '| Email: <a href="MAILTO:' . env('ADDRESS_EMAIL') . '">' . env('ADDRESS_EMAIL') . '</a>' : '' !!}
                 </div>
             </div>
             <div class="col">
@@ -23,13 +24,24 @@
                     <div class="col footer-links">
                         Social
                     </div>
-                    <div class="col footer-links">
-                        Download our app
-                        <div class="d-inline-block">
-                            <img src="{{ asset('images/appstore.png') }}">
-                            <img src="{{ asset('images/googleplay.png') }}">
+                    @if (env('APP_ANDROID') || env('APP_APPLE'))
+                        <div class="col footer-links">
+                            Download our app
+                            <div class="d-inline-block">
+                                @if (env('APP_APPLE'))
+                                    <a href="{{ env('APP_APPLE') }}">
+                                        <img src="{{ asset('images/appstore.png') }}" alt="Apple APP">
+                                    </a>
+                                @endif
+
+                                @if (env('APP_ANDROID'))
+                                    <a href="{{ env('APP_ANDROID') }}">
+                                        <img src="{{ asset('images/googleplay.png') }}" alt="Android APP">
+                                    </a>
+                                @endif
+                            </div>
                         </div>
-                    </div>
+                    @endif
                 </div>
             </div>
         </div>
