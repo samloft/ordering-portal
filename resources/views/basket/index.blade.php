@@ -153,6 +153,7 @@
                 text: "Are you sure? This cannot be un-done.",
                 icon: "warning",
                 buttons: true,
+                showCancelButton: true,
                 dangerMode: true,
             })
                 .then((willDelete) => {
