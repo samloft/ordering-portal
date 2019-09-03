@@ -8,6 +8,7 @@ use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Input;
+use Illuminate\Support\Str;
 use Illuminate\View\View;
 
 class UserController extends Controller
@@ -33,6 +34,9 @@ class UserController extends Controller
      */
     public function store(Request $request)
     {
+        $user_details = $request->toArray();
+        $user_details['api_token'] = Str::random(60);
+
         $user = User::store($request->toArray());
 
         if ($request->id) {

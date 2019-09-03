@@ -10,10 +10,18 @@ class ProductDataController extends Controller
 {
     public function index()
     {
-        $specs = Prices::productSpecs();
+        $prices = Prices::productPrices();
+        $products = [];
 
-        foreach ($specs as $spec) {
-            dd($spec);
+        foreach ($prices as $price) {
+            $products[] = [
+                'product' => $price->product,
+                'description' => $price->description,
+                'trade_price' => $price->trade_price,
+                'net_price' => $price->price,
+            ];
         }
+
+
     }
 }

@@ -47,6 +47,19 @@
                         <button class="btn btn-blue">{{ __('Change Password') }}</button>
                     </a>
                 </div>
+
+                <h2 class="section-title mt-3">{{ __('API') }}</h2>
+                <p>{{ __('Here is your unique API token to give you access to the Scolmore API') }}</p>
+
+                <div class="input-group">
+                <input class="form-control"  value="{{ auth()->user()->api_token }}" disabled>
+                    <div class="input-group-btn">
+                        <button class="btn btn-default" type="button"><i class="fa fa-copy"></i></button>
+                    </div>
+                </div>
+
+                <a href="#" class="btn btn-blue btn-block mt-3">{{ __('View Documentation') }}</a>
+
             </div>
         </div>
         <div class="col-lg-7 d-flex align-items-stretch">
