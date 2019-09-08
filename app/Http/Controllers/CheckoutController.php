@@ -5,11 +5,13 @@ namespace App\Http\Controllers;
 use App\Models\Addresses;
 use App\Models\Basket;
 use App\Models\DeliveryMethods;
+use App\Notifications\OrderPlacedNotification;
 use Illuminate\Contracts\View\Factory;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\View\View;
 use Auth;
+use Notification;
 
 class CheckoutController extends Controller
 {
@@ -22,6 +24,9 @@ class CheckoutController extends Controller
     {
         $basket = Basket::show();
         $delivery_methods = DeliveryMethods::show();
+
+        //Notification::route('slack', env('SLACK_HOOK'))
+        //    ->notify(new OrderPlacedNotification());
 
         if (!Auth::user()->can_order) {
             return redirect(route('basket'))->with('error', 'You do not have permission to place orders, if you believe this is in error, please contact the sames office');
