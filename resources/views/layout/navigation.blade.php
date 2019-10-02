@@ -74,7 +74,7 @@
 
                     <div class="text-right">
                         <span>
-                            <strong>{{ __('Welcome') . ' ' . auth()->user()->first_name . ' ' . auth()->user()->last_name }}</strong>, {{ auth()->user()->customer->name }}
+                            <strong>{{ __('Welcome') . ' ' . auth()->user()->name }}</strong>, {{ auth()->user()->customer->name }}
                         </span>
                         <span>
                             <a href="{{ route('account') }}">{{ __('Your Account') }}</a> |
