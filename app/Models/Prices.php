@@ -2,20 +2,20 @@
 
 namespace App\Models;
 
-use Auth;
 use Eloquent;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Database\Eloquent\Model;
 
 /**
- * App\Models\Customer
+ * App\Models\Prices
  *
  * @mixin Eloquent
  */
 class Prices extends Model
 {
     protected $primaryKey = 'product';
+
     public $incrementing = false;
 
     /**
@@ -25,7 +25,7 @@ class Prices extends Model
      */
     public static function productList()
     {
-        return (new Prices)->select('product')->where('product', 'not like', '%*%')->distinct()->orderBy('product', 'asc')->get();
+        return self::select('product')->where('product', 'not like', '%*%')->distinct()->orderBy('product')->get();
     }
 
     /**
@@ -34,9 +34,9 @@ class Prices extends Model
      * @param $product_code
      * @return bool
      */
-    public static function product($product_code)
+    public static function product($product_code): bool
     {
-        $exists = (new Prices)->where('customer_code', Auth::user()->customer->customer_code)->where('product', $product_code)->first();
+        $exists = self::where('customer_code', auth()->user()->customer->code)->where('product', $product_code)->first();
 
         return $exists ? true : false;
     }
@@ -48,8 +48,6 @@ class Prices extends Model
      */
     public static function productPrices()
     {
-        return (new Prices)->where('customer_code', Auth::user()->customer->customer_code)
-            ->join('products', 'prices.product', '=', 'products.product')
-            ->get();
+        return static::where('customer_code', auth()->user()->customer->code)->join('products', 'prices.product', '=', 'products.product')->get();
     }
 }

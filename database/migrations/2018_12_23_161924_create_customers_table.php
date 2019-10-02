@@ -14,24 +14,24 @@ class CreateCustomersTable extends Migration
     public function up(): void
     {
         Schema::create('customers', static function (Blueprint $table) {
-            $table->string('customer_code')->limit(8)->unique();
-            $table->string('customer_name')->limit(32);
-            $table->string('address_line_1')->limit(64);
-            $table->string('address_line_2')->limit(64);
-            $table->string('city')->limit(64);
-            $table->string('country')->limit(64);
-            $table->string('post_code')->limit(64);
-            $table->string('invoice_customer_name')->limit(32);
-            $table->string('invoice_customer_address_line_1')->limit(64);
-            $table->string('invoice_customer_address_line_2')->limit(64);
-            $table->string('invoice_customer_city')->limit(64);
-            $table->string('invoice_customer_country')->limit(64);
-            $table->string('invoice_customer_postcode')->limit(64);
-            $table->string('vat_flag')->limit(2)->nullable();
-            $table->string('currency')->limit(3);
+            $table->string('code')->unique();
+            $table->string('name');
+            $table->string('address_line_1')->nullable();
+            $table->string('address_line_2')->nullable();
+            $table->string('city')->nullable();
+            $table->string('country')->nullable();
+            $table->string('post_code')->nullable();
+            $table->string('invoice_name')->nullable();
+            $table->string('invoice_address_line_1')->nullable();
+            $table->string('invoice_address_line_2')->nullable();
+            $table->string('invoice_city')->nullable();
+            $table->string('invoice_country')->nullable();
+            $table->string('invoice_postcode')->nullable();
+            $table->string('vat_flag')->default('SS');
+            $table->string('currency')->default('GBP');
 
-            $table->primary('customer_code');
-            $table->index('customer_code');
+            $table->primary('code');
+            $table->index('code');
         });
     }
 

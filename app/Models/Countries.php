@@ -16,6 +16,6 @@ class Countries extends Model
      */
     public static function show()
     {
-        return (new Countries)->get();
+        return self::get();
     }
 }

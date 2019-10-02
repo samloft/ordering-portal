@@ -5,10 +5,9 @@ namespace App\Models;
 use Carbon\Carbon;
 use Eloquent;
 use Illuminate\Database\Eloquent\Model;
-use Auth;
 
 /**
- * App\Models\Products
+ * App\Models\SavedBasket
  *
  * @mixin Eloquent
  */
@@ -28,9 +27,9 @@ class SavedBasket extends Model
     public static function list($search, $request)
     {
         if ($search) {
-            return (new SavedBasket)->select('id', 'reference', 'created_at')
-                ->where('customer_code', Auth::user()->customer->customer_code)
-                ->when($request, function ($query) use ($request) {
+            return self::select(['id', 'reference', 'created_at'])
+                ->where('customer_code', auth()->user()->customer->code)
+                ->when($request, static function ($query) use ($request) {
                     if ($request->reference) {
                         $query->where('reference', 'like', '%' . $request->reference . '%');
                     }
@@ -51,8 +50,8 @@ class SavedBasket extends Model
                 ->paginate(10);
         }
 
-        return (new SavedBasket)->select('id', 'reference', 'created_at')
-            ->where('customer_code', Auth::user()->customer->customer_code)
+        return self::select(['id', 'reference', 'created_at'])
+            ->where('customer_code', auth()->user()->customer->code)
             ->groupBy(['id', 'reference', 'created_at'])
             ->paginate(10);
     }
@@ -65,13 +64,13 @@ class SavedBasket extends Model
      */
     public static function show($id)
     {
-        return (new SavedBasket)->select('saved_basket.product', 'name', 'quantity', 'id', 'reference', 'prices.price', 'created_at')
-            ->where('saved_basket.customer_code', Auth::user()->customer->customer_code)
+        return self::select(['saved_basket.product', 'name', 'quantity', 'id', 'reference', 'prices.price', 'created_at'])
+            ->where('saved_basket.customer_code', auth()->user()->customer->code)
             ->where('id', $id)
             ->leftJoin('products', 'products.product', 'saved_basket.product')
-            ->leftJoin('prices', function ($join) {
+            ->leftJoin('prices', static function ($join) {
                 $join->on('prices.product', 'saved_basket.product');
-                $join->where('prices.customer_code', Auth::user()->customer->customer_code);
+                $join->where('prices.customer_code', auth()->user()->customer->code);
             })
             ->get();
     }
@@ -82,9 +81,9 @@ class SavedBasket extends Model
      * @param $items
      * @return bool
      */
-    public static function store($items)
+    public static function store($items): bool
     {
-        return (new SavedBasket)->insert($items);
+        return self::insert($items);
     }
 
     /**
@@ -93,9 +92,9 @@ class SavedBasket extends Model
      * @param $id
      * @return int
      */
-    public static function destroy($id)
+    public static function destroy($id): int
     {
-        return (new SavedBasket)->where('customer_code', Auth::user()->customer->customer_code)
+        return self::where('customer_code', auth()->user()->customer->code)
             ->where('id', $id)
             ->delete();
     }

@@ -9,10 +9,9 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Query\Builder;
 use Illuminate\Support\Collection;
-use Auth;
 
 /**
- * App\Models\Addresses
+ * App\Models\OrderTracking\Header
  *
  * @mixin Eloquent
  */
@@ -23,9 +22,9 @@ class Header extends Model
     /**
      * @return HasMany
      */
-    public function lines()
+    public function lines(): HasMany
     {
-        return $this->hasMany(Lines::class, 'order_no', 'order_no')->orderBy('order_line_no', 'asc');
+        return $this->hasMany(Lines::class, 'order_no', 'order_no')->orderBy('order_line_no');
     }
 
     /**
@@ -36,11 +35,11 @@ class Header extends Model
      * @param $request
      * @return LengthAwarePaginator
      */
-    public static function list($search, $request)
+    public static function list($search, $request): LengthAwarePaginator
     {
         if ($search) {
-            return (new Header)->where('customer_code', Auth::user()->customer->customer_code)
-                ->when($request, function ($query) use ($request) {
+            return self::where('customer_code', auth()->user()->customer->code)
+                ->when($request, static function ($query) use ($request) {
                     if ($request->order_number) {
                         $query->where('order_no', 'like', '%' . $request->order_number . '%');
                     }
@@ -68,7 +67,7 @@ class Header extends Model
                 ->orderBy('date_received', 'desc')->paginate(10);
         }
 
-        return (new Header)->where('customer_code', Auth::user()->customer->customer_code)
+        return self::where('customer_code', auth()->user()->customer->code)
             ->orderBy('date_received', 'desc')->paginate(10);
     }
 
@@ -80,7 +79,7 @@ class Header extends Model
      */
     public static function show($order)
     {
-        return (new Header)->where('customer_code', Auth::user()->customer->customer_code)
+        return self::where('customer_code', auth()->user()->customer->code)
             ->where('order_no', $order)->first();
     }
 
@@ -91,11 +90,10 @@ class Header extends Model
      */
     public static function backOrders()
     {
-        return (new Header)
-            ->selectRaw('order_tracking_header.order_no, order_tracking_header.date_received, order_tracking_lines.product, order_tracking_lines.line_qty, order_tracking_lines.long_description, MIN(expected_stock.due_date) as due_date')
+        return self::selectRaw('order_tracking_header.order_no, order_tracking_header.date_received, order_tracking_lines.product, order_tracking_lines.line_qty, order_tracking_lines.long_description, MIN(expected_stock.due_date) as due_date')
             ->leftJoin('order_tracking_lines', 'order_tracking_header.order_no', '=', 'order_tracking_lines.order_no')
             ->leftJoin('expected_stock', 'order_tracking_lines.product', '=', 'expected_stock.product')
-            ->where('customer_code', Auth::user()->customer->customer_code)
+            ->where('customer_code', auth()->user()->customer->code)
             ->whereNotIn('status', ['Invoiced', 'Cancelled'])
             ->where('order_tracking_header.order_no', 'like', '%/%')
             ->where('order_tracking_lines.product', 'not like', '%M19%')

@@ -1,7 +1,7 @@
 <div class="nav-header">
     <div class="container">
         <div class="row">
-            @if (!Auth::user())
+            @guest
                 <div class="col d-flex">
                     <h4 class="align-self-center">{{ __('Welcome to ' . ucfirst(env('APP_NAME')) . ' online ordering') }}</h4>
                 </div>
@@ -31,21 +31,21 @@
                                 <li class="nav-item text-center">
                                     <a class="nav-link {{ setActive('reports') }}" href="{{ route('reports') }}">{{ __('Reports') }}</a>
                                 </li>
-                                <li class="nav-item text-center">
-                                    <a class="nav-link {{ setActive('product-data') }}" href="{{ route('product-data') }}">{{ __('Product Data') }}</a>
-                                </li>
+{{--                                <li class="nav-item text-center">--}}
+{{--                                    <a class="nav-link {{ setActive('product-data') }}" href="{{ route('product-data') }}">{{ __('Product Data') }}</a>--}}
+{{--                                </li>--}}
                             </ul>
                         </div>
                     </nav>
                 </div>
-            @endif
+            @endguest
 
-            @if (!Auth::user())
+            @guest
                 <div class="col text-right">
                     <form class="pt-2 pb-2 m-0" method="POST" action="{{ route('login') }}">
                         <div class="form-row">
                             <div class="col-5">
-                                <input class="form-control" name="username" placeholder="Username">
+                                <input class="form-control" name="email" placeholder="Email Address">
                             </div>
                             <div class="col-5">
                                 <input type="password" class="form-control" name="password" placeholder="Password">
@@ -74,7 +74,7 @@
 
                     <div class="text-right">
                         <span>
-                            <strong>{{ __('Welcome') . ' ' . Auth::user()->first_name . ' ' . Auth::user()->last_name }}</strong>, {{ Auth::user()->customer->customer_name }}
+                            <strong>{{ __('Welcome') . ' ' . auth()->user()->first_name . ' ' . auth()->user()->last_name }}</strong>, {{ auth()->user()->customer->name }}
                         </span>
                         <span>
                             <a href="{{ route('account') }}">{{ __('Your Account') }}</a> |
@@ -84,7 +84,7 @@
                         <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;"></form>
                     </div>
                 </div>
-            @endif
+            @endguest
         </div>
     </div>
 </div>

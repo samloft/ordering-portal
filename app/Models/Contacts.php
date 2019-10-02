@@ -18,18 +18,18 @@ class Contacts extends Model
     /**
      * @return Collection
      */
-    public static function show()
+    public static function show(): Collection
     {
-        return (new Contacts)->orderBy('name', 'desc')->get();
+        return self::orderBy('name', 'desc')->get();
     }
 
     /**
      * @param $contact
      * @return bool
      */
-    public static function store($contact)
+    public static function store($contact): bool
     {
-        return (new Contacts)->insert($contact);
+        return self::insert($contact);
     }
 
     /**
@@ -37,9 +37,9 @@ class Contacts extends Model
      * @param $contact
      * @return int
      */
-    public static function edit($id, $contact)
+    public static function edit($id, $contact): int
     {
-        return (new Contacts)->where('id', $id)->update($contact);
+        return self::where('id', $id)->update($contact);
     }
 
     /**
@@ -48,6 +48,6 @@ class Contacts extends Model
      */
     public static function destroy($id)
     {
-        return (new Contacts)->where('id', $id)->delete();
+        return self::where('id', $id)->delete();
     }
 }

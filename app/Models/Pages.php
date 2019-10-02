@@ -19,6 +19,6 @@ class Pages extends Model
      */
     public static function show($page_name)
     {
-        return (new Pages)->where('name', $page_name)->first();
+        return staitc::where('name', $page_name)->first();
     }
 }

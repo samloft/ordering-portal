@@ -40,12 +40,12 @@ class ProductController extends Controller
         $current_level = 0;
 
         foreach ($categories as $level) {
-            if ($level != null) {
+            if ($level !== null) {
                 $current_level++;
             }
         }
 
-        if ($categories['level_1'] != null) {
+        if ($categories['level_1'] !== null) {
             $sub_category_list = Categories::subCategories($current_level, $categories['level_1'], $categories['level_' . $current_level]);
             $products = Products::list($categories);
 
@@ -82,7 +82,7 @@ class ProductController extends Controller
             'level_5' => isset($category_array[5]) ? decodeUrl($category_array[5]) : '',
         ];
 
-        if (isset($category_array[1]) && substr($category_array[1], 0, 6) == 'search') {
+        if (isset($category_array[1]) && strpos($category_array[1], 'search') === 0) {
             $categories = [
                 'level_1' => 'search',
                 'level_2' => null,

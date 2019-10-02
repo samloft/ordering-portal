@@ -8,13 +8,12 @@ use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Foundation\Auth\User as Authenticatable;
-use Auth;
 use Hash;
 use App\Traits\CustomerDetails;
 use Illuminate\Support\Collection;
 
 /**
- * App\User
+ * App\Models\User
  *
  * @mixin Eloquent
  */
@@ -44,7 +43,7 @@ class User extends Authenticatable
     /**
      * @return HasMany
      */
-    public function addresses()
+    public function addresses(): HasMany
     {
         return $this->hasMany(Addresses::class, 'customer_code', 'customer_code');
     }
@@ -54,7 +53,7 @@ class User extends Authenticatable
      *
      * @return HasMany
      */
-    public function customers()
+    public function customers(): HasMany
     {
         return $this->hasMany(UserCustomers::class);
     }
@@ -76,13 +75,13 @@ class User extends Authenticatable
                 $user_details = array_filter($user_details);
             }
 
-            return (new User)->where('id', $user_details['id'])->update($user_details);
+            return self::where('id', $user_details['id'])->update($user_details);
         }
 
         $user_details['password'] = Hash::make($user_details['password']);
         $user_details['created_at'] = date('Y-m-d H:i:s');
 
-        return (new User)->insert($user_details);
+        return self::insert($user_details);
     }
 
     /**
@@ -91,7 +90,7 @@ class User extends Authenticatable
      */
     public static function changePassword($password)
     {
-        $user = User::find(Auth::id());
+        $user = self::find(auth()->user()->id);
 
         $user->password = Hash::make($password);
         $user->password_updated = date('Y-m-d H:i:s');
@@ -109,17 +108,16 @@ class User extends Authenticatable
     public static function listAll($search): LengthAwarePaginator
     {
         if ($search) {
-            return (new User)
-                ->where('username', 'like', '%' . $search . '%')
+            return self::where('username', 'like', '%' . $search . '%')
                 ->orWhere('first_name', 'like', '%' . $search . '%')
                 ->orWhere('last_name', 'like', '%' . $search . '%')
                 ->orWhere('email', 'like', '%' . $search . '%')
                 ->orWhere('customer_code', 'like', '%' . $search . '%')
-                ->orderBy('username', 'asc')
+                ->orderBy('username')
                 ->paginate(10);
         }
 
-        return (new User)->orderBy('username', 'asc')->paginate(10);
+        return self::orderBy('username')->paginate(10);
     }
 
     /**
@@ -127,9 +125,9 @@ class User extends Authenticatable
      *
      * @return int
      */
-    public static function countAll()
+    public static function countAll(): int
     {
-        return (new User)->count();
+        return self::count();
     }
 
     /**
@@ -140,7 +138,7 @@ class User extends Authenticatable
      */
     public static function show($id)
     {
-        return (new User)->where('id', $id)
+        return self::where('id', $id)
             ->with('customers')
             ->first();
     }
@@ -153,6 +151,6 @@ class User extends Authenticatable
      */
     public static function destroy($id)
     {
-        return (new User)->where('id', $id)->delete();
+        return self::where('id', $id)->delete();
     }
 }

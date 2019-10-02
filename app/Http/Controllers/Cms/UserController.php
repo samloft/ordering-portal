@@ -32,10 +32,10 @@ class UserController extends Controller
      * @param Request $request
      * @return RedirectResponse
      */
-    public function store(Request $request)
+    public function store(Request $request): RedirectResponse
     {
-        $user_details = $request->toArray();
-        $user_details['api_token'] = Str::random(60);
+        //$user_details = $request->toArray();
+        //$user_details['api_token'] = Str::random(60);
 
         $user = User::store($request->toArray());
 
@@ -52,7 +52,7 @@ class UserController extends Controller
      * @param $id
      * @return RedirectResponse
      */
-    public function destroy($id)
+    public function destroy($id): RedirectResponse
     {
         $deleted = User::destroy($id);
 

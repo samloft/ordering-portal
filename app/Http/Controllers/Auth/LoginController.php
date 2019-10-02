@@ -60,11 +60,12 @@ class LoginController extends Controller
      * @param User $user
      * @return RedirectResponse
      */
-    protected function authenticated(Request $request, User $user)
+    protected function authenticated(Request $request, User $user): RedirectResponse
     {
-        if (!$user->customer) {
+        if (! $user->customer) {
             Session::remove('temp_customer');
-            Auth::logout();
+
+            auth()->logout();
 
             return back()->with('errors', ['no_customer' => 'This account does not have a customer assigned, please contact the sales office reporting this error.']);
         }
@@ -72,39 +73,16 @@ class LoginController extends Controller
         return redirect()->intended($this->redirectPath());
     }
 
-    /**
-     * @return bool|string
-     */
-    public function loginContent()
-    {
-        $external_url = curl_init('https://scolmore.com/newproducts.php');
-
-        curl_setopt($external_url, CURLOPT_RETURNTRANSFER, 1);
-        $external_content = curl_exec($external_url);
-
-        return $external_content;
-    }
-
     ///**
-    // * @param Request $request
-    // * @return array
+    // * @return bool|string
     // */
-    //protected function credentials(Request $request)
+    //public function loginContent()
     //{
-    //    $field = filter_var($request->input($this->username()), FILTER_VALIDATE_EMAIL) ? 'email' : 'username';
+    //    $external_url = curl_init('https://scolmore.com/newproducts.php');
     //
-    //    $request->merge([
-    //        $field => $request->input($this->username()),
-    //    ]);
+    //    curl_setopt($external_url, CURLOPT_RETURNTRANSFER, 1);
+    //    $external_content = curl_exec($external_url);
     //
-    //    return $request->only($field, 'password');
-    //}
-
-    ///**
-    // * @return string
-    // */
-    //public function username()
-    //{
-    //    return 'username';
+    //    return $external_content;
     //}
 }

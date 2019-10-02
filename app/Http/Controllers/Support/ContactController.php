@@ -4,8 +4,6 @@ namespace App\Http\Controllers\Support;
 
 use App\Models\Contacts;
 use Illuminate\Contracts\View\Factory;
-use Illuminate\Http\RedirectResponse;
-use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\View\View;
 

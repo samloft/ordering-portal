@@ -11,5 +11,5 @@
  */
 function setActive(string $route_name, string $class_name = 'active')
 {
-    return strstr(\Request::route()->getName(), $route_name) ? $class_name : '';
+    return strpos(request()->route()->getName(), $route_name) !== false ? $class_name : '';
 }

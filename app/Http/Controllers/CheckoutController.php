@@ -28,11 +28,11 @@ class CheckoutController extends Controller
         //Notification::route('slack', env('SLACK_HOOK'))
         //    ->notify(new OrderPlacedNotification());
 
-        if (!Auth::user()->can_order) {
+        if (! auth()->user()->can_order) {
             return redirect(route('basket'))->with('error', 'You do not have permission to place orders, if you believe this is in error, please contact the sames office');
         }
 
-        if ($basket['line_count'] == 0) {
+        if ($basket['line_count'] === 0) {
             return redirect(route('basket'))->with('error', 'You have no items in your basket to checkout with.');
         }
 
@@ -47,11 +47,11 @@ class CheckoutController extends Controller
      * @param Request $request
      * @return RedirectResponse
      */
-    public function store(Request $request)
+    public function store(Request $request): RedirectResponse
     {
         $this->validation($request);
 
-        if (!$request->terms) {
+        if (! $request->terms) {
             return back()->with('error', 'You must accept the terms before you can place your order.')->withInput($request->all());
         }
 
@@ -68,9 +68,9 @@ class CheckoutController extends Controller
                 'evening_telephone' => $request->evening_telephone,
                 'fax' => $request->fax,
                 'mobile' => $request->mobile,
-                'delivery_address' => session('address') ? session('address') : Addresses::getDefault()->getAttributes()
+                'delivery_address' => session('address') ?: Addresses::getDefault()->getAttributes(),
             ],
-            'details' => Basket::show($delivery['cost'])
+            'details' => Basket::show($delivery['cost']),
         ];
 
         dd($order_details);
@@ -103,7 +103,7 @@ class CheckoutController extends Controller
             'reference' => 'required',
             'shipping' => 'required|exists:delivery_methods,uuid',
             'first_name' => 'required',
-            'last_name' => 'required'
+            'last_name' => 'required',
         ]);
     }
 }

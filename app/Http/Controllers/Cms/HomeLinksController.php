@@ -31,9 +31,8 @@ class HomeLinksController extends Controller
      *
      * @param Request $request
      * @return RedirectResponse
-     * @throws FileNotFoundException
      */
-    public function store(Request $request)
+    public function store(Request $request): RedirectResponse
     {
         if ($request->id) {
             $store = HomeLinks::edit($request);
@@ -52,12 +51,12 @@ class HomeLinksController extends Controller
      * @param Request $request
      * @return array
      */
-    public function updatePositions(Request $request)
+    public function updatePositions(Request $request): array
     {
         $link_items = [];
 
         foreach ($request->items as $item) {
-            $row = json_decode($item);
+            $row = json_decode($item, true);
 
             $link_items[] = [
                 'id' => (int)$row->id,
@@ -85,7 +84,7 @@ class HomeLinksController extends Controller
      * @return RedirectResponse
      * @throws Exception
      */
-    public function destroy($id)
+    public function destroy($id): RedirectResponse
     {
         $deleted = HomeLinks::destroy($id);
 

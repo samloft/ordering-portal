@@ -4,13 +4,12 @@ namespace App\Models;
 
 use Eloquent;
 use Illuminate\Database\Eloquent\Model;
-use Auth;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Collection;
 
 /**
- * App\UserCustomers
+ * App\Models\UserCustomers
  *
  * @mixin Eloquent
  */
@@ -24,8 +23,8 @@ class UserCustomers extends Model
      */
     public static function check($customer_code)
     {
-        return (new UserCustomers)->where('customer_code', $customer_code)
-            ->where('user_id', Auth::user()->id)->first();
+        return self::where('customer_code', $customer_code)
+            ->where('user_id', auth()->user()->id)->first();
     }
 
     /**
@@ -34,9 +33,9 @@ class UserCustomers extends Model
      * @param array|Collection|int $id
      * @return int
      */
-    public static function destroy($id)
+    public static function destroy($id): int
     {
-        return (new UserCustomers)->where('id', $id)->delete();
+        return self::where('id', $id)->delete();
     }
 
     /**
@@ -45,7 +44,7 @@ class UserCustomers extends Model
      * @param Request $request
      * @return JsonResponse
      */
-    public static function store(Request $request)
+    public static function store(Request $request): JsonResponse
     {
         $id = $request->user_id;
         $request->customer_code = strtoupper($request->customer_code);
@@ -61,7 +60,7 @@ class UserCustomers extends Model
             'updated_at' => date('Y-m-d H:i:s')
         ];
 
-        $created = (new UserCustomers)->insertGetId($extra_customer);
+        $created = self::insertGetId($extra_customer);
 
         if ($created) {
             return response()->json([
@@ -69,7 +68,7 @@ class UserCustomers extends Model
                 'error' => null,
                 'id' => $created,
                 'customer_code' => $extra_customer['customer_code'],
-            ], 200);
+            ]);
         }
 
         return response()->json([

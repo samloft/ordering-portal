@@ -5,9 +5,6 @@ namespace App\Models;
 use Eloquent;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Model;
-use Auth;
-use Illuminate\Support\Collection;
-use Request;
 
 /**
  * App\Models\Customer
@@ -16,7 +13,6 @@ use Request;
  */
 class Customer extends Model
 {
-    protected $primaryKey = 'customer_code';
     public $incrementing = false;
     public $timestamps = false;
 
@@ -28,7 +24,7 @@ class Customer extends Model
      */
     public static function show($customer_code)
     {
-        return (new Customer)->where('customer_code', $customer_code)->first();
+        return self::where('code', $customer_code)->first();
     }
 
     /**
@@ -37,16 +33,16 @@ class Customer extends Model
      * @param $customer_search
      * @return Customer
      */
-    public static function autocomplete($customer_search)
+    public static function autocomplete($customer_search): Customer
     {
-        if (Auth::user()->admin) {
-            return (new Customer)->select(['customer_code', 'customer_name'])
-                ->whereRaw('UPPER(customer_code) like \'' . $customer_search . '%\'')
-                ->orderBy('customer_code', 'asc')
+        if (auth()->user()->admin) {
+            return self::select(['code', 'name'])
+                ->whereRaw('UPPER(code) like \'' . $customer_search . '%\'')
+                ->orderBy('code')
                 ->limit(10)
                 ->get();
         }
 
-        return response()->json('Access Denied', 500);
+        return response()->json('Access Denied', 401);
     }
 }

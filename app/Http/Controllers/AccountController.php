@@ -3,15 +3,12 @@
 namespace App\Http\Controllers;
 
 use App\Models\Addresses;
-use App\Models\Countries;
 use App\Models\Customer;
 use App\Models\User;
 use App\Models\UserCustomers;
-use Auth;
 use Illuminate\Contracts\View\Factory;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
-use Hash;
 use Illuminate\View\View;
 use Session;
 
@@ -34,7 +31,7 @@ class AccountController extends Controller
      *
      * @return RedirectResponse
      */
-    public function store()
+    public function store(): RedirectResponse
     {
         $user = $this->validation();
 
@@ -68,22 +65,22 @@ class AccountController extends Controller
      */
     public function changeCustomer(Request $request)
     {
-        if ($request->customer == Auth::user()->customer_code) {
+        if ($request->customer === auth()->user()->customer_code) {
             return $this->revertChangeCustomer();
         }
 
-        if (Auth::user()->admin !== 1) {
+        if (auth()->user()->admin !== 1) {
             $user_can_access = UserCustomers::check($request->customer);
 
-            if (!$user_can_access) {
+            if (! $user_can_access) {
                 return abort(404);
             }
         }
 
         $customer = Customer::show($request->customer);
 
-        if (!$customer) {
-            return back()->with('error', 'Customer code ' . $request->customer . ' does not exist');
+        if (! $customer) {
+            return back()->with('error', 'Customer code '.$request->customer.' does not exist');
         }
 
         Session::put('temp_customer', $customer->customer_code);
@@ -96,9 +93,9 @@ class AccountController extends Controller
      *
      * @return RedirectResponse
      */
-    public function revertChangeCustomer()
+    public function revertChangeCustomer(): RedirectResponse
     {
-        Session::put('temp_customer', null);
+        Session::put('temp_customer');
 
         return back();
     }

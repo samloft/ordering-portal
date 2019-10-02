@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Collection;
 
 /**
- * App\Models\Customer
+ * App\Models\DeliveryMethods
  *
  * @mixin Eloquent
  */
@@ -20,7 +20,7 @@ class DeliveryMethods extends Model
      */
     public static function show(): Collection
     {
-        return (new DeliveryMethods)->orderBy('price', 'asc')->get();
+        return self::orderBy('price')->get();
     }
 
     /**
@@ -31,7 +31,7 @@ class DeliveryMethods extends Model
      */
     public static function details($id) : array
     {
-        $delivery_details = (new DeliveryMethods)->where('uuid', $id)->first();
+        $delivery_details = self::where('uuid', $id)->findOrFail();
 
         // Work out any calculations.
         $delivery = [

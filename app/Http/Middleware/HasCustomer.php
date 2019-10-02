@@ -3,7 +3,6 @@
 namespace App\Http\Middleware;
 
 use Closure;
-use Auth;
 use Illuminate\Http\Request;
 use Session;
 
@@ -21,9 +20,9 @@ class HasCustomer
      */
     public function handle($request, Closure $next)
     {
-        if (!Auth::user()->customer) {
+        if (! auth()->user()->customer) {
             Session::remove('temp_customer');
-            Auth::logout();
+            auth()->logout();
 
             return redirect(route('login'))->with('errors', ['no_customer' => 'This account does not have a customer assigned, please contact the sales office reporting this error.']);
         }

@@ -9,7 +9,6 @@ use Exception;
 use Illuminate\Contracts\View\Factory;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
-use Auth;
 use Illuminate\View\View;
 
 class UploadController extends Controller
@@ -62,28 +61,60 @@ class UploadController extends Controller
             if ($product_code && $product_qty > 0) {
                 $product = Products::show($value[0]);
 
-                if (!$product || $product->not_sold == 'Y') {
+                if (!$product || $product->not_sold === 'Y') {
                     $errors++;
                     $error_message = 'Product not found';
                 }
 
                 if ($product_price) {
-                    $price_match = $product_price == $product->price ? false : true;
+                    $price_match = $product_price !== $product->price;
                 }
 
-                $order[] = [
-                    'product' => $product_code,
-                    'quantity' => $product_qty,
-                    'old_quantity' => $product_qty,
-                    'passed_price' => $product_price,
-                    'price' => isset($product->price) ? $product->price : null,
-                    'price_match_error' => $price_match,
-                    'multiples' => isset($product->order_multiples) ? $product->order_multiples : 1,
-                    'validation' => [
-                        'error' => $error_message,
-                        'warning' => $warning_message
-                    ]
-                ];
+                if (isset($product->price)) {
+                    if (isset($product->order_multiples)) {
+                        $order[] = [
+                            'product' => $product_code,
+                            'quantity' => $product_qty,
+                            'old_quantity' => $product_qty,
+                            'passed_price' => $product_price,
+                            'price' => $product->price,
+                            'price_match_error' => $price_match,
+                            'multiples' => $product->order_multiples,
+                            'validation' => [
+                                'error' => $error_message,
+                                'warning' => $warning_message
+                            ]
+                        ];
+                    } else {
+                        $order[] = [
+                            'product' => $product_code,
+                            'quantity' => $product_qty,
+                            'old_quantity' => $product_qty,
+                            'passed_price' => $product_price,
+                            'price' => $product->price,
+                            'price_match_error' => $price_match,
+                            'multiples' => 1,
+                            'validation' => [
+                                'error' => $error_message,
+                                'warning' => $warning_message
+                            ]
+                        ];
+                    }
+                } else {
+                    $order[] = [
+                        'product' => $product_code,
+                        'quantity' => $product_qty,
+                        'old_quantity' => $product_qty,
+                        'passed_price' => $product_price,
+                        'price' => null,
+                        'price_match_error' => $price_match,
+                        'multiples' => $product->order_multiples ?? 1,
+                        'validation' => [
+                            'error' => $error_message,
+                            'warning' => $warning_message
+                        ]
+                    ];
+                }
             }
         }
 
@@ -131,8 +162,8 @@ class UploadController extends Controller
 
             if (!$product['validation']['error']) {
                 $upload[] = [
-                    'user_id' => Auth::user()->id,
-                    'customer_code' => Auth::user()->customer->customer_code,
+                    'user_id' => auth()->user()->id,
+                    'customer_code' => auth()->user()->customer->code,
                     'product' => $product['product'],
                     'quantity' => $quantity,
                 ];

@@ -39,7 +39,7 @@ class AdminController extends Controller
      * @return RedirectResponse
      * @throws ValidationException
      */
-    public function login(Request $request)
+    public function login(Request $request): RedirectResponse
     {
         $this->validate($request, [
             'email' => 'required|email',

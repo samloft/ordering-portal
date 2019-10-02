@@ -35,11 +35,11 @@ class ReportController extends Controller
     {
         $output = $request->output;
 
-        if ($request->report == 'back_orders') {
+        if ($request->report === 'back_orders') {
             return $this->backOrderReport($output);
         }
 
-        if ($request->report == 'account_summary') {
+        if ($request->report === 'account_summary') {
             return $this->accountSummaryReport($output);
         }
 
@@ -57,13 +57,13 @@ class ReportController extends Controller
         $back_orders = Header::backOrders();
 
         if (count($back_orders) > 0) {
-            if ($output == 'pdf') {
+            if ($output === 'pdf') {
                 $pdf = PDF::loadView('reports.back-orders', compact('back_orders'));
 
-                return $pdf->download('back_orders.pdf');
+                return $pdf::download('back_orders.pdf');
             }
 
-            if ($output == 'csv') {
+            if ($output === 'csv') {
                 $headings = [
                     'Order Number', 'Product', 'Description', 'Ordered', 'Outstanding', 'Next Expecting',
                 ];
@@ -103,28 +103,28 @@ class ReportController extends Controller
             foreach ($summary as $key => $value) {
                 $summary_lines[$value->age] = $value->price;
 
-                $total_outstanding = $total_outstanding + $value->price;
+                $total_outstanding += $value->price;
             }
 
             $summary_lines['Total Outstanding'] = $total_outstanding;
 
-            if ($output == 'pdf') {
+            if ($output === 'pdf') {
                 $pdf = PDF::loadView('reports.account-summary', compact('invoice_lines', 'summary_lines'));
 
-                return $pdf->download('account_summary.pdf');
+                return $pdf::download('account_summary.pdf');
             }
 
-            if ($output == 'csv') {
+            if ($output === 'csv') {
                 $summary_headings = [
                     'Total Outstanding', 'Not Due', 'Overdue up to 30 days', 'Overdue up to 60 days', 'Overdue over 60 days'
                 ];
 
                 $summary_line[] = [
-                    isset($summary_lines['Total Outstanding']) ? $summary_lines['Total Outstanding'] : 0,
-                    isset($summary_lines['Not due']) ? $summary_lines['Not due'] : 0,
-                    isset($summary_lines['Overdue up to 30 day']) ? $summary_lines['Overdue up to 30 day'] : 0,
-                    isset($summary_lines['Overdue up to 60 days']) ? $summary_lines['Overdue up to 60 days'] : 0,
-                    isset($summary_lines['Over 60 days overdue']) ? $summary_lines['Over 60 days overdue'] : 0
+                    $summary_lines['Total Outstanding'] ?? 0,
+                    $summary_lines['Not due'] ?? 0,
+                    $summary_lines['Overdue up to 30 day'] ?? 0,
+                    $summary_lines['Overdue up to 60 days'] ?? 0,
+                    $summary_lines['Over 60 days overdue'] ?? 0
                 ];
 
                 $invoice_headings = [
@@ -160,10 +160,10 @@ class ReportController extends Controller
      * @param null $extra_lines
      * @return BinaryFileResponse
      */
-    public function createCSV($filename, $headings, $lines, $extra_headings = null, $extra_lines = null)
+    public function createCSV($filename, $headings, $lines, $extra_headings = null, $extra_lines = null): BinaryFileResponse
     {
-        $callback = function () use ($headings, $lines, $extra_headings, $extra_lines) {
-            $handle = fopen('php://output', 'w+');
+        $callback = static function () use ($headings, $lines, $extra_headings, $extra_lines) {
+            $handle = fopen('php://output', 'wb+');
             fputcsv($handle, $headings);
 
             foreach ($lines as $line) {

@@ -4,7 +4,6 @@ namespace App\Http\Controllers\Account;
 
 use App\Models\Addresses;
 use App\Models\Countries;
-use Auth;
 use App\Http\Controllers\Controller;
 use Exception;
 use Illuminate\Http\RedirectResponse;
@@ -19,7 +18,7 @@ class AddressController extends Controller
      *
      * @return Response
      */
-    public function index()
+    public function index(): Response
     {
         if (session('address')) {
             session()->forget('address');
@@ -36,7 +35,7 @@ class AddressController extends Controller
      *
      * @return Response
      */
-    public function create()
+    public function create(): Response
     {
         $checkout = Input::get('checkout');
         $countries = Countries::show();
@@ -49,12 +48,12 @@ class AddressController extends Controller
      *
      * @return Response
      */
-    public function store()
+    public function store(): Response
     {
         $checkout = request('checkout');
         $address = $this->validation();
 
-        $address['customer_code'] = Auth::user()->customer->customer_code;
+        $address['customer_code'] = auth()->user()->customer->code;
         $address['default'] = request('default') ? 1 : 0;
 
         $create = Addresses::store($address);
@@ -75,7 +74,7 @@ class AddressController extends Controller
      * @param int $id
      * @return Response
      */
-    public function edit($id)
+    public function edit($id): Response
     {
         $countries = Countries::show();
         $address = Addresses::details($id);
@@ -89,7 +88,7 @@ class AddressController extends Controller
      * @param $id
      * @return Response
      */
-    public function update($id)
+    public function update($id): Response
     {
         $address = $this->validation();
 
@@ -107,7 +106,7 @@ class AddressController extends Controller
      * @return Response
      * @throws Exception
      */
-    public function destroy($id)
+    public function destroy($id): Response
     {
         $permission = Addresses::canEdit($id);
 
@@ -125,7 +124,7 @@ class AddressController extends Controller
      *
      * @return RedirectResponse
      */
-    public function default()
+    public function default(): RedirectResponse
     {
         $permission = Addresses::canEdit(request('id'));
 
@@ -161,7 +160,7 @@ class AddressController extends Controller
      *
      * @param $address
      */
-    public function tempAddress($address)
+    public function tempAddress($address): void
     {
         session([
             'address' => [

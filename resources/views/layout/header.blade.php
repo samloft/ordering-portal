@@ -22,7 +22,7 @@
                 </div>
             @endif
 
-            @if (Auth::user())
+            @auth
                 @php($basket = \App\Models\Basket::show())
                 <div class="col mt-auto mb-auto">
                     <div class="header-basket float-right text-center">
@@ -46,7 +46,7 @@
                         </div>
                     </div>
                 </div>
-            @endif
+            @endauth
         </div>
     </div>
 </header>

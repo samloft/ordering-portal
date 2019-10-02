@@ -8,10 +8,8 @@
  * @param int $vat_percent
  * @return float|int
  */
-function vatAmount($value = 0, $vat_percent = 0)
+function vatAmount($value = 0, $vat_percent = 20)
 {
-    $vat_percent = 20;
-
     return ($vat_percent / 100) * ($value);
 }
 
@@ -22,9 +20,7 @@ function vatAmount($value = 0, $vat_percent = 0)
  * @param int $vat_percent
  * @return float|int
  */
-function vatIncluded($value = 0, $vat_percent = 0)
+function vatIncluded($value = 0, $vat_percent = 20)
 {
-    $vat_percent = 20;
-
     return $value * (1 + $vat_percent / 100);
 }

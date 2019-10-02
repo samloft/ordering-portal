@@ -4,12 +4,11 @@ namespace App\Models;
 
 use Eloquent;
 use Illuminate\Database\Eloquent\Model;
-use Auth;
 use Illuminate\Database\Query\Builder;
 use Illuminate\Support\Collection;
 
 /**
- * App\Models\Addresses
+ * App\Models\AccountSummary
  *
  * @mixin Eloquent
  */
@@ -25,7 +24,7 @@ class AccountSummary extends Model
      */
     public static function show()
     {
-        return (new AccountSummary)->where('customer_code', Auth::user()->customer->customer_code)
+        return self::where('customer_code', auth()->user()->customer->code)
             ->orderBy('due_date', 'desc')->orderBy('item_no', 'desc')
             ->limit(320)
             ->get();
@@ -38,8 +37,8 @@ class AccountSummary extends Model
      */
     public static function summary()
     {
-        return (new AccountSummary)->selectRaw('SUM(unall_curr_amount) AS price, age')
-            ->where('customer_code', Auth::user()->customer->customer_code)
+        return self::selectRaw('SUM(unall_curr_amount) AS price, age')
+            ->where('customer_code', auth()->user()->customer->code)
             ->groupBy('age')
             ->get();
     }

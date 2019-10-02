@@ -4,7 +4,6 @@ namespace App\Http\Controllers\Support;
 
 use App\Models\SupportPages;
 use Illuminate\Contracts\View\Factory;
-use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\View\View;
 

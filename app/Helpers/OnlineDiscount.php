@@ -9,9 +9,7 @@
  * @param int $discount_percent
  * @return float|int
  */
-function discount($value = 0, $discount_percent = 0)
+function discount($value = 0, $discount_percent = 2)
 {
-    $discount_percent = 2;
-
     return $value * ((100 - $discount_percent) / 100);
 }

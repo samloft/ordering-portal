@@ -6,19 +6,19 @@ use Faker\Generator as Faker;
 
 $factory->define(Customer::class, static function (Faker $faker) {
     return [
-        'customer_code' => 'SCO100',
-        'customer_name' => $faker->name,
+        'code' => 'SCO100',
+        'name' => $faker->name,
         'address_line_1' => $faker->streetAddress,
         'address_line_2' => $faker->streetAddress,
         'city' => $faker->city,
         'country' => $faker->country,
         'post_code' => $faker->postcode,
-        'invoice_customer_name' => $faker->name,
-        'invoice_customer_address_line_1' => $faker->streetAddress,
-        'invoice_customer_address_line_2' => $faker->streetAddress,
-        'invoice_customer_city' => $faker->city,
-        'invoice_customer_country' => $faker->country,
-        'invoice_customer_postcode' => $faker->postcode,
+        'invoice_name' => $faker->name,
+        'invoice_address_line_1' => $faker->streetAddress,
+        'invoice_address_line_2' => $faker->streetAddress,
+        'invoice_city' => $faker->city,
+        'invoice_country' => $faker->country,
+        'invoice_postcode' => $faker->postcode,
         'vat_flag' => 'SS',
         'currency' => 'GBP',
     ];

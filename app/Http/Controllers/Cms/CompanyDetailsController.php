@@ -19,7 +19,7 @@ class CompanyDetailsController extends Controller
      * @param Request $request
      * @return RedirectResponse
      */
-    public function store(Request $request)
+    public function store(Request $request): RedirectResponse
     {
         $env_path = base_path('.env');
 

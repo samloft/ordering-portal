@@ -6,7 +6,6 @@ use Eloquent;
 use Exception;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Database\Eloquent\Model;
-use Auth;
 
 /**
  * App\Models\OrderImport
@@ -23,7 +22,7 @@ class OrderImport extends Model
      */
     public static function clearDown()
     {
-        return (new OrderImport)->where('user_id', Auth::user()->id)->delete();
+        return static::where('user_id', auth()->user()->id)->delete();
     }
 
     /**
@@ -34,7 +33,7 @@ class OrderImport extends Model
      */
     public static function store($lines)
     {
-        return (new OrderImport)->insert($lines);
+        return static::insert($lines);
     }
 
     /**
@@ -44,6 +43,6 @@ class OrderImport extends Model
      */
     public static function show()
     {
-        return (new OrderImport)->where('customer_code', Auth::user()->customer->customer_code)->get()->toArray();
+        return static::where('customer_code', auth()->user()->customer->code)->get()->toArray();
     }
 }

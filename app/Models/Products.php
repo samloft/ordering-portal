@@ -2,11 +2,9 @@
 
 namespace App\Models;
 
-use Eloquent;
 use Illuminate\Database\Eloquent\Model;
-use Auth;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
-use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Http\JsonResponse;
 use Storage;
 
 /**
@@ -19,17 +17,17 @@ class Products extends Model
     protected $table = 'products';
 
     /**
-     * @return HasMany
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
      */
-    public function prices()
+    public function prices(): BelongsTo
     {
-        return $this->belongsTo(Prices::class, 'product', 'product')->where('customer_code', Auth::user()->customer->customer_code);
+        return $this->belongsTo(Prices::class, 'product', 'product')->where('customer_code', auth()->user()->customer->customer);
     }
 
     /**
      * @return BelongsTo
      */
-    public function categories()
+    public function categories(): BelongsTo
     {
         return $this->belongsTo(Categories::class, 'product', 'product');
     }
@@ -37,7 +35,7 @@ class Products extends Model
     /**
      * @return BelongsTo
      */
-    public function stock()
+    public function stock(): BelongsTo
     {
         return $this->belongsTo(Stock::class, 'product', 'product');
     }
@@ -50,9 +48,9 @@ class Products extends Model
      */
     public static function list($categories)
     {
-        $products = (new Products)->whereHas('prices')->whereHas('categories', function ($query) use ($categories) {
+        $products = self::whereHas('prices')->whereHas('categories', static function ($query) use ($categories) {
             $query->where('cat1_level1', ($categories['level_1']))->where('cat1_level2', $categories['level_2'])->where('cat1_level3', $categories['level_3']);
-        })->join('prices', 'products.product', '=', 'prices.product')->join('stock_levels', 'products.product', '=', 'stock_levels.product')->where('prices.customer_code', Auth::user()->customer->customer_code)->paginate(10);
+        })->join('prices', 'products.product', '=', 'prices.product')->join('stock_levels', 'products.product', '=', 'stock_levels.product')->where('prices.customer_code', auth()->user()->customer->code)->paginate(10);
 
         return $products;
     }
@@ -65,7 +63,7 @@ class Products extends Model
      */
     public static function show($product_code)
     {
-        return (new Products)->select([
+        return self::select([
             'products.product',
             'name',
             'description',
@@ -84,9 +82,9 @@ class Products extends Model
      */
     public static function search($search_term)
     {
-        return (new Products)->whereHas('prices')->where(function ($query) use ($search_term) {
+        return self::whereHas('prices')->where(static function ($query) use ($search_term) {
             $query->whereRaw('upper(products.product) LIKE \'%'.strtoupper($search_term).'%\'')->orWhereRaw('upper(name) LIKE \'%'.strtoupper($search_term).'%\'')->orWhereRaw('upper(description) LIKE \'%'.strtoupper($search_term).'%\'');
-        })->join('prices', 'products.product', '=', 'prices.product')->join('stock_levels', 'products.product', '=', 'stock_levels.product')->where('prices.customer_code', Auth::user()->customer->customer_code)->paginate(10);
+        })->join('prices', 'products.product', '=', 'prices.product')->join('stock_levels', 'products.product', '=', 'stock_levels.product')->where('prices.customer_code', auth()->user()->customer->code)->paginate(10);
     }
 
     /**
@@ -95,18 +93,18 @@ class Products extends Model
      * @param $search
      * @return Products
      */
-    public static function autocomplete($search)
+    public static function autocomplete($search): Products
     {
-        return (new Products)->select('product')->whereHas('prices')->whereRaw('UPPER(product) like \''.$search.'%\'')->orderBy('product', 'asc')->limit(10)->get();
+        return self::select('product')->whereHas('prices')->whereRaw('UPPER(product) like \''.$search.'%\'')->orderBy('product', 'asc')->limit(10)->get();
     }
 
     /**
      * @param $product
      * @return \Illuminate\Http\JsonResponse
      */
-    public static function details($product)
+    public static function details($product): JsonResponse
     {
-        $product_details = (new Products)->where('product', $product)->first();
+        $product_details = self::where('product', $product)->first();
 
         if ($product_details) {
             $image_check = self::checkImage($product_details->product);
@@ -114,8 +112,8 @@ class Products extends Model
             return response()->json([
                 'product_code' => $product_details->product,
                 'description' => $product_details->name,
-                'image_file' => $image_check['found'] ? asset($image_check['image']) : null
-            ], 200);
+                'image_file' => $image_check['found'] ? asset($image_check['image']) : null,
+            ]);
         }
 
         return response()->json([
@@ -129,7 +127,7 @@ class Products extends Model
      * @param $products
      * @return array
      */
-    public static function checkImage($products)
+    public static function checkImage($products): array
     {
         $products = explode(',', $products);
 

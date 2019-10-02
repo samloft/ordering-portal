@@ -28,7 +28,7 @@ class UserFactory
         $user = factory(User::class)->create($attributes);
 
         factory(Customer::class, $this->customer)->create([
-            'customer_code' => $user->customer_code,
+            'code' => $user->customer_code,
         ]);
 
         return $user;

@@ -10,7 +10,6 @@ use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 use Illuminate\Routing\Redirector;
-use Auth;
 use Illuminate\Support\Str;
 use Illuminate\View\View;
 
@@ -62,8 +61,8 @@ class SavedBasketController extends Controller
         foreach ($current_basket['lines'] as $item) {
             $basket_details[] = [
                 'id' => $id,
-                'customer_code' => Auth::user()->customer->customer_code,
-                'user_id' => Auth::user()->id,
+                'customer_code' => auth()->user()->customer->code,
+                'user_id' => auth()->user()->id,
                 'reference' => $request->reference,
                 'product' => trim($item['product']),
                 'quantity' => $item['quantity'],
@@ -82,7 +81,7 @@ class SavedBasketController extends Controller
      * @param Request $request
      * @return RedirectResponse
      */
-    public function destroy(Request $request)
+    public function destroy(Request $request): RedirectResponse
     {
         if ($request->id) {
             $deleted = SavedBasket::destroy($request->id);

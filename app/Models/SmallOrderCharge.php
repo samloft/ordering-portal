@@ -6,7 +6,7 @@ use Eloquent;
 use Illuminate\Database\Eloquent\Model;
 
 /**
- * App\Models\Products
+ * App\Models\SmallOrderCharge
  *
  * @mixin Eloquent
  */
@@ -21,10 +21,10 @@ class SmallOrderCharge extends Model
      * @param $country
      * @return int
      */
-    public static function value($order_value, $country = null)
+    public static function value($order_value, $country = null): int
     {
         if ($country) {
-            $small_order = (new SmallOrderCharge)->where('country', $country)->first();
+            $small_order = self::where('country', $country)->first();
 
             if ($small_order) {
                 if ($order_value < $small_order->threshold) {
@@ -35,7 +35,7 @@ class SmallOrderCharge extends Model
             }
         } else {
             // Country with a null value is a 'Global' option to apply to any country.
-            $small_order = (new SmallOrderCharge)->where('country', null)->first();
+            $small_order = self::where('country')->first();
 
             if ($small_order) {
                 if ($order_value < $small_order->threshold) {
@@ -54,9 +54,9 @@ class SmallOrderCharge extends Model
      *
      * @return bool
      */
-    public static function enabled()
+    public static function enabled(): bool
     {
-        $charges = (new SmallOrderCharge)->get();
+        $charges = self::get();
 
         if ($charges) {
             return true;

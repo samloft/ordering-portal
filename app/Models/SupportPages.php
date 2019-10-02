@@ -20,6 +20,6 @@ class SupportPages extends Model
      */
     public static function show($page_name)
     {
-        return (new SupportPages)->where('page_name', $page_name)->first();
+        return self::where('page_name', $page_name)->first();
     }
 }

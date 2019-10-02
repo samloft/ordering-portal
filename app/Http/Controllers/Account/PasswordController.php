@@ -3,7 +3,6 @@
 namespace App\Http\Controllers\Account;
 
 use App\Models\User;
-use Auth;
 use Hash;
 use Illuminate\Contracts\View\Factory;
 use Illuminate\Http\RedirectResponse;
@@ -29,14 +28,14 @@ class PasswordController extends Controller
      * @param Request $request
      * @return RedirectResponse
      */
-    public function store(Request $request)
+    public function store(Request $request): RedirectResponse
     {
-        if (!Hash::check($request->current_password, Auth::user()->getAuthPassword())) {
+        if (! Hash::check($request->current_password, auth()->user()->getAuthPassword())) {
             return back()->with('error', 'Current password is not correct, please try again');
         }
 
         $request->validate([
-            'new_password' => 'required|confirmed'
+            'new_password' => 'required|confirmed',
         ]);
 
         $password_updated = User::changePassword($request->new_password);

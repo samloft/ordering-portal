@@ -9,18 +9,21 @@ use Auth;
 trait CustomerDetails
 {
     /** @var Customer */
-    protected $currentCustomer;
+    protected $current_customer;
 
+    /**
+     * @return \App\Models\Customer|\Illuminate\Database\Eloquent\Builder|\Illuminate\Database\Eloquent\Model|object|null
+     */
     public function getCustomerAttribute()
     {
-        if ($currentCustomer = $this->currentCustomer) {
-            return $currentCustomer;
+        if ($current_customer = $this->current_customer) {
+            return $current_customer;
         }
 
         if (Session::get('temp_customer')) {
-            return $this->currentCustomer = Customer::where('customer_code', Session::get('temp_customer'))->first();
+            return $this->current_customer = Customer::where('code', Session::get('temp_customer'))->first();
         }
 
-        return $this->currentCustomer = Customer::where('customer_code', Auth::user()->customer_code)->first();
+        return $this->current_customer = Customer::where('code', Auth::user()->customer_code)->first();
     }
 }

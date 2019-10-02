@@ -16,7 +16,7 @@ class SiteAdmin
      */
     public function handle($request, Closure $next)
     {
-        if (Auth::user() && Auth::user()->admin == 1) {
+        if (auth()->user() && auth()->user()->admin === 1) {
             return $next($request);
         }
 

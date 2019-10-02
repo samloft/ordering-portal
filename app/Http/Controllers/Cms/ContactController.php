@@ -34,7 +34,7 @@ class ContactController extends Controller
     /**
      * @return RedirectResponse
      */
-    public function store()
+    public function store(): RedirectResponse
     {
         $contact = [
             'name' => request()->name,
@@ -58,7 +58,7 @@ class ContactController extends Controller
      * @param $id
      * @return RedirectResponse
      */
-    public function destroy($id)
+    public function destroy($id): RedirectResponse
     {
         $deleted = Contacts::destroy($id);
 

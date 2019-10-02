@@ -34,7 +34,7 @@ class BasketController extends Controller
      * @return RedirectResponse
      * @throws Exception
      */
-    public function clear()
+    public function clear(): RedirectResponse
     {
         $cleared = Basket::clear();
 
@@ -61,7 +61,7 @@ class BasketController extends Controller
             ], 201);
         }
 
-        if (!(int)$quantity || !$quantity > 0) {
+        if (!(int)$quantity || (! $quantity) > 0) {
             return response()->json([
                 'error' => true,
                 'message' => $quantity . ' is not a valid quantity, please enter numeric values or more than 0 only.'
@@ -75,8 +75,8 @@ class BasketController extends Controller
         }
 
         $details[] = [
-            'user_id' => Auth::user()->id,
-            'customer_code' => Auth::user()->customer->customer_code,
+            'user_id' => auth()->user()->id,
+            'customer_code' => auth()->user()->customer->customer_code,
             'product' => $product_details->product,
             'quantity' => $quantity
         ];
@@ -86,7 +86,7 @@ class BasketController extends Controller
         if ($store_basket) {
             return response()->json([
                 'error' => false,
-                'message' => isset($warning) ? $warning : null,
+                'message' => $warning ?? null,
                 'basket' => $store_basket['basket_updated'],
                 'product' => [
                     'image' => 'https://scolmoreonline.com/product_images/' . $product_details->product . '.png',
@@ -99,7 +99,7 @@ class BasketController extends Controller
                     'stock' => $product_details->quantity,
                     'link' => '/products/view/' . decodeUrl($product_details->product),
                 ]
-            ], 200);
+            ]);
         }
 
         return response()->json([

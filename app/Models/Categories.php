@@ -4,7 +4,6 @@ namespace App\Models;
 
 use Eloquent;
 use Illuminate\Database\Eloquent\Model;
-use Auth;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 
 /**
@@ -15,12 +14,13 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
 class Categories extends Model
 {
     protected $primaryKey = 'product';
+
     public $incrementing = false;
 
     /**
      * @return HasMany
      */
-    public function prices()
+    public function prices(): HasMany
     {
         return $this->hasMany(Prices::class, 'product', 'product');
     }
@@ -30,25 +30,22 @@ class Categories extends Model
      *
      * @return array
      */
-    public static function list()
+    public static function list(): array
     {
-        /*
-         * SELECT cat1_level1, cat1_level2, cat1_level3, cat1_level4, cat1_level5
-         * FROM categories
-         * WHERE product IN (SELECT product FROM prices WHERE customer_code = '%CUSTOMER_CODE%'
-         * GROUP BY cat1_level1, cat1_level2, cat1_level3, cat1_level4, cat1_level5
-         */
-
-
-        $category_results = (new Categories)->select('cat1_level1', 'cat1_level2', 'cat1_level3', 'cat1_level4', 'cat1_level5')
-            ->whereHas('prices', function ($query) {
-                $query->where('customer_code', Auth::user()->customer->customer_code);
-            })->groupBy('cat1_level1', 'cat1_level2', 'cat1_level3', 'cat1_level4', 'cat1_level5')->get();
+        $category_results = self::select([
+            'cat1_level1',
+            'cat1_level2',
+            'cat1_level3',
+            'cat1_level4',
+            'cat1_level5',
+        ])->whereHas('prices', static function ($query) {
+            $query->where('customer_code', auth()->user()->customer->code);
+        })->groupBy('cat1_level1', 'cat1_level2', 'cat1_level3', 'cat1_level4', 'cat1_level5')->get();
 
         $array = [];
 
         foreach ($category_results as $category) {
-            if (trim($category->cat1_level1) <> '') {
+            if (trim($category->cat1_level1) !== '') {
                 $array[strtoupper(trim($category->cat1_level1))]
                 [trim($category->cat1_level2)]
                 [trim($category->cat1_level3)]
@@ -64,19 +61,19 @@ class Categories extends Model
                 'level' => 1,
                 'name' => $key,
                 'url' => encodeUrl($key),
-                'sub' => []
+                'sub' => [],
             ];
 
             end($categories);
             $level_1 = key($categories);
 
             foreach ($array[$key] as $key1 => $value1) {
-                if ($key1 != '') {
+                if ($key1 !== '') {
                     $categories[$level_1]['sub'][] = [
                         'level' => 2,
                         'name' => $key1,
                         'url' => encodeUrl($key1),
-                        'sub' => []
+                        'sub' => [],
                     ];
                 }
 
@@ -84,11 +81,11 @@ class Categories extends Model
                 $level_2 = key($categories[$level_1]['sub']);
 
                 foreach ($array[$key][$key1] as $key2 => $value2) {
-                    if ($key2 != '') {
+                    if ($key2 !== '') {
                         $categories[$level_1]['sub'][$level_2]['sub'][] = [
                             'level' => 3,
                             'name' => $key2,
-                            'url' => encodeUrl($key2)
+                            'url' => encodeUrl($key2),
                         ];
                     }
                 }
@@ -106,23 +103,20 @@ class Categories extends Model
      * @param $category
      * @return array
      */
-    public static function subCategories($level, $main, $category)
+    public static function subCategories($level, $main, $category): array
     {
         $sub_categories = [];
 
-        $subs = (new Categories)
-            ->where('cat1_level1', $main)
-            ->where('cat1_level' . $level, $category)
-            ->whereHas('prices', function ($query) {
-                $query->where('customer_code', Auth::user()->customer->customer_code);
-            })->orderBy('cat1_level' . $level)->orderBy('product')->get();
+        $subs = static::where('cat1_level1', $main)->where('cat1_level'.$level, $category)->whereHas('prices', static function ($query) {
+            $query->where('customer_code', auth()->user()->customer->code);
+        })->orderBy('cat1_level'.$level)->orderBy('product')->get();
 
         $products = [];
 
         foreach ($subs as $sub) {
-            $cat_level = 'cat1_level' . ($level + 1);
+            $cat_level = 'cat1_level'.($level + 1);
 
-            if (isset($sub->$cat_level) && trim($sub->$cat_level) <> '') {
+            if (isset($sub->$cat_level) && trim($sub->$cat_level) !== '') {
                 $products[] = [
                     'product' => encodeUrl($sub->product),
                     'category' => trim($sub->$cat_level),
@@ -142,7 +136,7 @@ class Categories extends Model
             $product_list = null;
 
             foreach ($products as $product) {
-                if ($product['category'] == $key && $count <= 4) {
+                if (($product['category'] === $key) && $count <= 4) {
                     // Grab the first 4 products and add them to the array (For category images).
                     $sub_categories[$key]['product_list'][] = encodeUrl($product['product']);
                     $count++;

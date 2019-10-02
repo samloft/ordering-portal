@@ -5,7 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Model;
 
 /**
- * App\Models\Customer
+ * App\Models\ExpectedStock
  *
  * @mixin \Eloquent
  */
@@ -22,7 +22,7 @@ class ExpectedStock extends Model
      */
     public static function show($product)
     {
-        return (new ExpectedStock)->selectRaw('SUM(quantity) as quantity, due_date')
+        return self::selectRaw('SUM(quantity) as quantity, due_date')
             ->where('product', $product)
             ->groupBy('due_date')
             ->orderBy('due_date', 'asc')

@@ -16,7 +16,7 @@ class CmsAdmin
      */
     public function handle($request, Closure $next)
     {
-        if (Auth::user() && Auth::user()->cms_admin == 1) {
+        if (auth()->user() && auth()->user()->cms_admin === 1) {
             return $next($request);
         }
 

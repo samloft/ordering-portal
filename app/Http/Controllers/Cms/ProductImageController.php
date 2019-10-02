@@ -29,7 +29,7 @@ class ProductImageController extends Controller
      *
      * @return array
      */
-    public function missingImages()
+    public function missingImages(): array
     {
         $product_list = Prices::productList();
         $missing_images = [];
@@ -54,20 +54,20 @@ class ProductImageController extends Controller
      * @param Request $request
      * @return JsonResponse
      */
-    public function store(Request $request)
+    public function store(Request $request): JsonResponse
     {
         $image = $request->file('file');
         $name = $image->getClientOriginalName();
         $extension = $image->getClientOriginalExtension();
 
-        if ($extension != 'png') {
+        if ($extension !== 'png') {
             return response()->json($name . ' must be a png', 400);
         }
 
         $upload = Storage::disk('public')->put('product_images/' . $name, File::get($image));
 
         if ($upload) {
-            return response()->json('success', 200);
+            return response()->json('success');
         }
 
         return response()->json('Failed to upload ' . $name, 400);

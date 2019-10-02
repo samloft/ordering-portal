@@ -23,7 +23,7 @@ class HomeController extends Controller
      *
      * @return Response
      */
-    public function index()
+    public function index(): Response
     {
         $users = User::countAll();
 
