@@ -10,7 +10,7 @@
 
                     <div class="card-body">
                         <p>
-                            {{ __('Please enter your username and click "Send Password Reset Link" and we will send password reset
+                            {{ __('Please enter your email and click "Send Password Reset Link" and we will send password reset
                             instructions to your email address.') }}
                         </p>
 
@@ -23,16 +23,16 @@
                         <form method="POST" action="{{ route('password.email') }}">
 
                             <div class="form-group row">
-                                <label for="username" class="col-md-4 col-form-label">{{ __('Username') }}</label>
+                                <label for="email" class="col-md-4 col-form-label">{{ __('Email') }}</label>
 
                                 <div class="col">
-                                    <input id="username"
-                                           class="form-control{{ $errors->has('username') ? ' is-invalid' : '' }}"
-                                           name="username" value="{{ old('username') }}" required>
+                                    <input id="email"
+                                           class="form-control{{ $errors->has('email') ? ' is-invalid' : '' }}"
+                                           name="email" value="{{ old('email') }}" required>
 
-                                    @if ($errors->has('username'))
+                                    @if ($errors->has('email'))
                                         <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $errors->first('username') }}</strong>
+                                        <strong>{{ $errors->first('email') }}</strong>
                                     </span>
                                     @endif
                                 </div>

@@ -39,24 +39,6 @@ class RegisterController extends Controller
      */
     public function __construct()
     {
-        $this->middleware('guest');
-    }
-
-    /**
-     * Redirect users to the login page if they attempt to access a registration page.
-     *
-     * @return RedirectResponse|Redirector
-     */
-    public function showRegistrationForm()
-    {
-        return redirect('/login');
-    }
-
-    /**
-     * Stop any type of registration happening.
-     */
-    public function register()
-    {
         abort(404);
     }
 }

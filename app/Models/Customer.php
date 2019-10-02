@@ -18,6 +18,7 @@ class Customer extends Model
 {
     protected $primaryKey = 'customer_code';
     public $incrementing = false;
+    public $timestamps = false;
 
     /**
      * Get customer details for the given customer code.

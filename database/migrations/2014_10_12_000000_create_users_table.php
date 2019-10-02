@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
+use Illuminate\Support\Str;
 
 class CreateUsersTable extends Migration
 {
@@ -11,28 +12,23 @@ class CreateUsersTable extends Migration
      *
      * @return void
      */
-    public function up()
+    public function up(): void
     {
-        Schema::create('users', function (Blueprint $table) {
+        Schema::create('users', static function (Blueprint $table) {
             $table->increments('id');
-            $table->string('username')->unique();
             $table->string('customer_code');
             $table->string('email')->unique();
-            $table->timestamp('email_verified_at')->nullable();
             $table->string('password');
             $table->dateTime('password_updated')->nullable();
             $table->rememberToken();
-            $table->string('first_name');
-            $table->string('last_name')->nullable();
+            $table->string('name');
             $table->string('telephone')->nullable();
-            $table->string('evening_telephone')->nullable();
-            $table->string('fax')->nullable();
             $table->string('mobile')->nullable();
             $table->boolean('admin')->default(0);
-            $table->boolean('cms_admin')->default(0);
             $table->float('discount')->default(0);
             $table->integer('country_id')->default(1);
             $table->boolean('can_order')->default(1);
+            $table->string('api_token', 80)->unique()->nullable()->default(Str::random(60));
             $table->timestamps();
         });
     }
@@ -42,7 +38,7 @@ class CreateUsersTable extends Migration
      *
      * @return void
      */
-    public function down()
+    public function down(): void
     {
         Schema::dropIfExists('users');
     }

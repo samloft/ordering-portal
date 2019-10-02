@@ -11,9 +11,9 @@ class CreateCustomersTable extends Migration
      *
      * @return void
      */
-    public function up()
+    public function up(): void
     {
-        Schema::create('customers', function (Blueprint $table) {
+        Schema::create('customers', static function (Blueprint $table) {
             $table->string('customer_code')->limit(8)->unique();
             $table->string('customer_name')->limit(32);
             $table->string('address_line_1')->limit(64);
@@ -24,9 +24,9 @@ class CreateCustomersTable extends Migration
             $table->string('invoice_customer_name')->limit(32);
             $table->string('invoice_customer_address_line_1')->limit(64);
             $table->string('invoice_customer_address_line_2')->limit(64);
-            $table->string('invoice_customer_address_line_3')->limit(64);
-            $table->string('invoice_customer_address_line_4')->limit(64);
-            $table->string('invoice_customer_address_line_5')->limit(64);
+            $table->string('invoice_customer_city')->limit(64);
+            $table->string('invoice_customer_country')->limit(64);
+            $table->string('invoice_customer_postcode')->limit(64);
             $table->string('vat_flag')->limit(2)->nullable();
             $table->string('currency')->limit(3);
 
@@ -40,7 +40,7 @@ class CreateCustomersTable extends Migration
      *
      * @return void
      */
-    public function down()
+    public function down(): void
     {
         Schema::dropIfExists('customers');
     }
