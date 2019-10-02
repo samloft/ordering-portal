@@ -18,7 +18,7 @@ class ChangeCustomerTest extends TestCase
      */
     public function a_user_can_see_change_customer_if_additional_customers_added(): void
     {
-        $user = $user = (new UserFactory)->withCustomer()->withUserCustomers(2)->create();
+        $user = (new UserFactory)->withCustomer()->withUserCustomers(2)->create();
 
         $this->signIn($user);
 
@@ -32,10 +32,26 @@ class ChangeCustomerTest extends TestCase
      */
     public function a_user_cannot_see_change_customer_if_no_additional_customers_added(): void
     {
-        $user = $user = (new UserFactory)->withCustomer()->create();
+        $user = (new UserFactory)->withCustomer()->create();
 
         $this->signIn($user);
 
         $this->get('/products')->assertDontSee('Change Customer');
+    }
+
+    /**
+     * A user can see change customer if they have the admin flag set to true.
+     *
+     * @test
+     */
+    public function a_user_can_see_change_customer_if_set_as_admin(): void
+    {
+        $user = (new UserFactory)->withCustomer()->create([
+            'admin' => true,
+        ]);
+
+        $this->signIn($user);
+
+        $this->get('/products')->assertSee('Change Customer');
     }
 }
