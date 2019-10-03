@@ -1,8 +1,7 @@
+window.Vue = require('vue');
 
-/**
- * First we will load all of this project's JavaScript dependencies which
- * includes Vue and other libraries. It is a great starting point when
- * building robust, powerful web applications using Vue and Laravel.
- */
+// Vue.component('dropdown', require('./components/Dropdown.vue').default);
 
-require('./bootstrap');
+const app = new Vue({
+    el: '#app',
+});

@@ -20,6 +20,7 @@
         "webpack": "^4.41.0"
     },
     "dependencies": {
-        "tailwindcss": "^1.1.2"
+        "tailwindcss": "^1.1.2",
+        "vue": "^2.6.10"
     }
 }
