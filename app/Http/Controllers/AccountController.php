@@ -73,7 +73,7 @@ class AccountController extends Controller
             $user_can_access = UserCustomers::check($request->customer);
 
             if (! $user_can_access) {
-                return abort(404);
+                return abort(401);
             }
         }
 
@@ -83,7 +83,7 @@ class AccountController extends Controller
             return back()->with('error', 'Customer code '.$request->customer.' does not exist');
         }
 
-        Session::put('temp_customer', $customer->customer_code);
+        Session::put('temp_customer', $customer->code);
 
         return back();
     }

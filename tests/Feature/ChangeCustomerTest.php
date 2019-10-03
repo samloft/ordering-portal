@@ -4,6 +4,7 @@ namespace Tests\Feature;
 
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Foundation\Testing\WithFaker;
+use Tests\Setup\CustomerFactory;
 use Tests\Setup\UserFactory;
 use Tests\TestCase;
 
@@ -53,5 +54,73 @@ class ChangeCustomerTest extends TestCase
         $this->signIn($user);
 
         $this->get('/products')->assertSee('Change Customer');
+    }
+
+    /**
+     * Check that a user can change to a customer they have access to.
+     *
+     * @test
+     */
+    public function a_user_with_additional_customers_can_change_customer(): void
+    {
+        $user = (new UserFactory)->withCustomer()->withUserCustomers(2)->create();
+
+        $this->signIn($user);
+
+        $customer = $user->customers[1]->customer_code;
+
+        $response = $this->post('/account/customer/change', [
+            'customer' => $customer,
+        ]);
+
+        $response->assertSessionHas('temp_customer')->assertStatus(302);
+
+        $this->assertEquals(session('temp_customer'), $customer);
+    }
+
+    /**
+     * A user can only change customer account for a customer that they have access to.
+     *
+     * @test
+     */
+    public function a_user_cannot_change_customer_to_one_they_dont_have_access(): void
+    {
+        $user = (new UserFactory)->withCustomer()->withUserCustomers(2)->create();
+
+        $customer = (new CustomerFactory)->create([
+            'code' => str_random(8),
+        ]);
+
+        $this->signIn($user);
+
+        $response = $this->post('/account/customer/change', [
+            'customer' => $customer->code,
+        ]);
+
+        $response->assertSessionMissing('temp_customer')->assertStatus(401);
+
+        $this->assertNotEquals(auth()->user()->customer->code, $customer->code);
+    }
+
+    /**
+     * A user can revert back to their default customer.
+     *
+     * @test
+     */
+    public function a_user_can_revert_to_default_customer(): void
+    {
+        $user = (new UserFactory)->withCustomer()->withUserCustomers(2)->create();
+
+        $this->signIn($user);
+
+        $this->post('/account/customer/change', [
+            'customer' => $user->customers[1]->customer_code,
+        ]);
+
+        $response = $this->get('/account/customer/revert');
+
+        $response->assertSessionMissing('temp_customer');
+
+        $this->assertNotEquals(auth()->user()->customer->code, $user->customers[1]->customer_code);
     }
 }
