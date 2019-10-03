@@ -1,0 +1,37 @@
+main.auth {
+    @apply .bg-background_content-color .text-background_content-text;
+
+    .auth-form {
+        @apply .py-56 .px-32;
+
+        h1 {
+            @apply .uppercase .text-center .text-3xl .mb-20;
+
+            span {
+                @apply .block .normal-case .font-thin .text-lg;
+            }
+        }
+    }
+
+    .auth-details {
+        @apply .hidden .bg-background_primary-color .text-background_primary-text .p-56;
+
+        @screen lg {
+            @apply .block .w-2/3;
+        }
+
+        img.logo {
+            @apply .mb-5;
+
+            max-height: 80px;
+        }
+
+        h1 {
+            @apply .text-4xl .font-light .mb-3;
+        }
+
+        p {
+            @apply .max-w-2xl .font-thin;
+        }
+    }
+}

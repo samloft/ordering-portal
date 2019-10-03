@@ -12,8 +12,8 @@
     <script>try{Typekit.load({ async: true });}catch(e){}</script>
 
     <link href="{{ mix('css/app.css') }}" rel="stylesheet">
-    <link href="{{ mix('css/theme.css') }}" rel="stylesheet">
-    <link href="{{ asset('css/style.css') }}" rel="stylesheet">
+{{--    <link href="{{ mix('css/theme.css') }}" rel="stylesheet">--}}
+{{--    <link href="{{ asset('css/style.css') }}" rel="stylesheet">--}}
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.5.0/css/all.css"
           integrity="sha384-B4dIYHKNBt8Bc12p+WXckhzcICo0wtJAoU8YZTY5qE0Id1GSseTk6S+L3BlXeVIU" crossorigin="anonymous">
 
@@ -59,10 +59,10 @@
     </div>
 </div>
 
-<script type="text/javascript" src="{{ mix('js/app.js') }}"></script>
-<script type="text/javascript" src="{{ mix('js/main.js') }}"></script>
-<script src="https://cdn.jsdelivr.net/npm/sweetalert2@8"></script>
-<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.min.js"></script>
+{{--<script type="text/javascript" src="{{ mix('js/app.js') }}"></script>--}}
+{{--<script type="text/javascript" src="{{ mix('js/main.js') }}"></script>--}}
+{{--<script src="https://cdn.jsdelivr.net/npm/sweetalert2@8"></script>--}}
+{{--<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.min.js"></script>--}}
 @yield('scripts')
 
 </body>

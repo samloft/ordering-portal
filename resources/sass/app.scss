@@ -1,14 +1,24 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
 
-// Fonts
-//@import url('https://fonts.googleapis.com/css?family=Nunito');
+@import url('https://fonts.googleapis.com/css?family=Poppins:100,100i,200,200i,300,300i,400,400i,500,500i,600,600i,700,700i,800,800i,900,900i&display=swap');
 
-// Variables
-@import 'variables';
-
-// Bootstrap
-@import '~bootstrap/scss/bootstrap';
-
-.navbar-laravel {
-  background-color: #fff;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.04);
+html {
+    font-family: 'Poppins', sans-serif;
 }
+
+a > img {
+    &:hover {
+        @apply .opacity-75;
+    }
+}
+
+@import 'themes/scolmore';
+@import 'themes/unicrimp';
+@import 'themes/ovia';
+
+@import 'components/auth';
+@import 'components/forms';
+@import 'components/buttons';
+@import 'components/alerts';

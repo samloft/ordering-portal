@@ -1,0 +1,47 @@
+.alert {
+    @apply .fill-current .border-t-4 .rounded-b .px-4 .py-3 .shadow mb-5;
+
+    .alert-body {
+        @apply .flex;
+    }
+
+    .icon {
+        @apply .w-8 .mr-4 .my-1;
+    }
+
+    .alert-title {
+        @apply .font-medium;
+    }
+
+    .alert-text {
+        @apply .text-sm .font-light;
+    }
+}
+
+.alert-success {
+    @apply .bg-teal-100 .border-teal-500 .text-teal-900;
+
+    .icon {
+        .primary {
+            @apply .text-teal-200;
+        }
+
+        .secondary {
+            @apply .text-teal-500;
+        }
+    }
+}
+
+.alert-danger {
+    @apply .bg-red-100 .border-red-500 .text-red-500;
+
+    .icon {
+        .primary {
+            @apply .text-red-200;
+        }
+
+        .secondary {
+            @apply .text-red-500;
+        }
+    }
+}

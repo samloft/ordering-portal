@@ -1,0 +1,23 @@
+.button {
+    @apply .rounded .p-3;
+
+    &:hover {
+        @apply .opacity-75;
+    }
+}
+
+.button-primary {
+    @apply .bg-button-primary_color .text-button-primary_text;
+}
+
+.button-link {
+    color: rgba(55, 79, 115, 1.0);
+
+    &:hover {
+        @apply .underline;
+    }
+}
+
+.button-block {
+    @apply .w-full;
+}
