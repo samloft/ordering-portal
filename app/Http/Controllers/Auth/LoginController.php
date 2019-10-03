@@ -67,7 +67,7 @@ class LoginController extends Controller
 
             auth()->logout();
 
-            return back()->with('errors', ['no_customer' => 'This account does not have a customer assigned, please contact the sales office reporting this error.']);
+            return back()->with('error', 'This account does not have a customer assigned, please contact the sales office reporting this error.');
         }
 
         return redirect()->intended($this->redirectPath());

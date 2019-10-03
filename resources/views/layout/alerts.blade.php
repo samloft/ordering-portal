@@ -1,4 +1,4 @@
-@if ($errors->any() || session('error'))
+@if ($errors->any())
     <div class="alert alert-danger" role="alert">
         <div class="alert-body">
             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" class="icon">
@@ -8,7 +8,23 @@
             </svg>
             <div>
                 <p class="alert-title">Error!</p>
-                <p class="alert-text">{!! $errors->first() ?: session('error') !!}</p>
+                <p class="alert-text">{!! $errors->first() !!}</p>
+            </div>
+        </div>
+    </div>
+@endif
+
+@if(session('error'))
+    <div class="alert alert-danger" role="alert">
+        <div class="alert-body">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" class="icon">
+                <circle cx="12" cy="12" r="10" class="primary"></circle>
+                <path class="secondary"
+                      d="M13.41 12l2.83 2.83a1 1 0 0 1-1.41 1.41L12 13.41l-2.83 2.83a1 1 0 1 1-1.41-1.41L10.59 12 7.76 9.17a1 1 0 0 1 1.41-1.41L12 10.59l2.83-2.83a1 1 0 0 1 1.41 1.41L13.41 12z"></path>
+            </svg>
+            <div>
+                <p class="alert-title">Error!</p>
+                <p class="alert-text">{!! session('error') !!}</p>
             </div>
         </div>
     </div>
