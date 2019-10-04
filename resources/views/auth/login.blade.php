@@ -16,6 +16,13 @@
             <input type="password" id="password" class="form-input" name="password" autocomplete="off" required>
         </div>
 
+        <div class="flex mb-6">
+            <label class="checkbox flex items-center">
+                <input type="checkbox" class="form-checkbox" name="remember" {{ old('remember') ? 'checked' : '' }}>
+                <span class="ml-2">{{ __('Remember me') }}</span>
+            </label>
+        </div>
+
         <button type="submit" class="button button-primary button-block">
             {{ __('Login') }}
         </button>

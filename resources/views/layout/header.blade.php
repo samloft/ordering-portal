@@ -8,19 +8,19 @@
                     </a>
                 </div>
             </div>
-            @if (!Auth::user() && count($errors) > 0)
-                <div class="col text-right mt-auto">
-                    <div class="text-left alert alert-danger">
-                        @if (is_array($errors))
-                            <strong>Error!</strong> {{ $errors['no_customer'] }}
-                        @else
-                            <strong>Error!</strong> The credentials you supplied do not match our records. If you have
-                            forgotten your
-                            password, click <a href="{{ route('password.request') }}">here</a> to reset it.
-                        @endif
-                    </div>
-                </div>
-            @endif
+{{--            @if (!Auth::user() && count($errors) > 0)--}}
+{{--                <div class="col text-right mt-auto">--}}
+{{--                    <div class="text-left alert alert-danger">--}}
+{{--                        @if (is_array($errors))--}}
+{{--                            <strong>Error!</strong> {{ $errors['no_customer'] }}--}}
+{{--                        @else--}}
+{{--                            <strong>Error!</strong> The credentials you supplied do not match our records. If you have--}}
+{{--                            forgotten your--}}
+{{--                            password, click <a href="{{ route('password.request') }}">here</a> to reset it.--}}
+{{--                        @endif--}}
+{{--                    </div>--}}
+{{--                </div>--}}
+{{--            @endif--}}
 
             @auth
                 @php($basket = \App\Models\Basket::show())

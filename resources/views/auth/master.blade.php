@@ -15,8 +15,8 @@
     <main class="auth">
         <div class="flex flex-col flex-1 h-full px-4 sm:px-0">
             <div class="flex w-full h-full sm:mx-0">
-                <div class="flex flex-col lg:w-1/3 md:w-1/2 p-4">
-                    <div class="auth-form">
+{{--                <div class="flex flex-col lg:w-1/3 md:w-1/2">--}}
+                    <div class="auth-form lg:w-1/4 md:w-1/2">
 
                         <h1>
                             @yield('content.heading')
@@ -28,7 +28,7 @@
                         @yield('content')
 
                     </div>
-                </div>
+{{--                </div>--}}
 
                 <div class="auth-details">
                     <a href="/">

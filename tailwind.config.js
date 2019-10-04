@@ -12,6 +12,10 @@ module.exports = {
         colors: {
             transparent: 'transparent',
 
+            brand: {
+                primary: 'var(--button-primary-color)',
+            },
+
             background_primary: {
                 color: 'var(--background-primary-color)',
                 text: 'var(--background-primary-text)',
