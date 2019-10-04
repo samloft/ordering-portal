@@ -8,6 +8,10 @@ html {
     font-family: 'Poppins', sans-serif;
 }
 
+body {
+    @apply .bg-background_content-color .text-background_content-text;
+}
+
 a > img {
     &:hover {
         @apply .opacity-75;
@@ -18,7 +22,12 @@ a > img {
 @import 'themes/unicrimp';
 @import 'themes/ovia';
 
+@import 'components/header';
+@import 'components/navigation';
+@import 'components/footer';
+
 @import 'components/auth';
 @import 'components/forms';
 @import 'components/buttons';
+@import 'components/icons';
 @import 'components/alerts';

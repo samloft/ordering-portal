@@ -10,6 +10,10 @@
     @apply .bg-button-primary_color .text-button-primary_text;
 }
 
+.button-secondary {
+    @apply .bg-button-secondary_color .text-button-secondary_text;
+}
+
 .button-link {
     color: rgba(55, 79, 115, 1.0);
 

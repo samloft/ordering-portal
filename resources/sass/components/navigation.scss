@@ -1,0 +1,38 @@
+nav.menu-wrapper {
+    @apply .shadow .bg-background_invert-color .text-background_invert-text;
+
+    .menu {
+        @apply .justify-center .mx-auto .px-4 .text-white .text-center;
+
+        .menu-item {
+            @apply .flex;
+
+            a {
+                @apply .leading-tight .uppercase .text-sm .font-thin .m-3 .rounded-lg .no-underline .flex .items-center .text-center;
+
+                padding: 10px 20px;
+
+                &.active {
+                    @apply .bg-background_primary-color;
+                }
+
+                &:hover {
+                    @apply .bg-background_primary-color;
+                }
+            }
+
+            &:not(:last-child):after {
+                @apply .block;
+
+                margin-top: auto;
+                margin-bottom: auto;
+                height: 20px;
+                width: 1px;
+                background: rgba(255, 255, 255, .1);
+                content: '';
+            }
+        }
+    }
+}
+
+

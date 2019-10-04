@@ -21,6 +21,11 @@ module.exports = {
                 text: 'var(--background-primary-text)',
             },
 
+            background_invert: {
+                color: 'var(--background-invert-color)',
+                text: 'var(--background-invert-text)'
+            },
+
             background_content: {
                 color: 'rgba(246, 246, 252, 1.0)',
                 text: 'rgba(40, 41, 44, 1.0)'
@@ -28,7 +33,15 @@ module.exports = {
 
             button: {
                 primary_color: 'var(--button-primary-color)',
-                primary_text: 'var(--button-primary-text)'
+                primary_text: 'var(--button-primary-text)',
+
+                secondary_color: 'var(--button-secondary-color)',
+                secondary_text: 'var(--button-secondary-text)',
+            },
+
+            icon: {
+                primary: 'var(--icon-primary)',
+                secondary: 'var(--icon-secondary)',
             },
 
             success: {

@@ -1,0 +1,19 @@
+header {
+    @apply .bg-background_primary-color .text-background_primary-text;
+
+    .logo {
+        max-width: 200px;
+    }
+
+    .dropdown {
+        @apply .rounded .relative;
+    }
+
+    .dropdown-menu-item {
+        @apply .block .no-underline .text-sm .leading-loose .px-4 .text-gray-700 .py-1;
+
+        &:hover {
+            @apply .bg-gray-300;
+        }
+    }
+}

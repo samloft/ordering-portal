@@ -1,6 +1,14 @@
 .theme-scolmore {
     --background-primary-color: rgba(49, 49, 49, 1.0);
     --background-primary-text: rgb(255, 255, 255);
+    --background-invert-color: rgba(92, 93, 95, 1.0);
+    --background-invert-text: rgb(255, 255, 255);
+
     --button-primary-color: rgba(200, 220, 105, 1.0);
     --button-primary-text: rgb(0, 0, 0);
+    --button-secondary-color: rgba(130, 202, 156, 1.0);
+    --button-secondary-text: rgb(0, 0, 0);
+
+    --icon-primary: rgba(130, 202, 156, 1.0);
+    --icon-secondary: rgba(155, 239, 188, 0.63);
 }
