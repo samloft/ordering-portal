@@ -4,7 +4,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
-    <title>{{ ucfirst(config('app.name')) . ' Online Ordering'}} - @yield('page.title')</title>
+    <title>{{ ucfirst(config('app.name')) . ' Online Portal'}} - @yield('page.title')</title>
 
     <link href="{{ mix('css/app.css') }}" rel="stylesheet">
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.5.0/css/all.css"
