@@ -1,6 +1,10 @@
 .alert {
     @apply .fill-current .border-t-4 .rounded-b .px-4 .py-3 .shadow mb-5;
 
+    svg {
+        max-height: 64px;
+    }
+
     .alert-body {
         @apply .flex;
     }
