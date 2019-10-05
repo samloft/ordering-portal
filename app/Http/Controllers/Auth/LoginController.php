@@ -72,17 +72,4 @@ class LoginController extends Controller
 
         return redirect()->intended($this->redirectPath());
     }
-
-    ///**
-    // * @return bool|string
-    // */
-    //public function loginContent()
-    //{
-    //    $external_url = curl_init('https://scolmore.com/newproducts.php');
-    //
-    //    curl_setopt($external_url, CURLOPT_RETURNTRANSFER, 1);
-    //    $external_content = curl_exec($external_url);
-    //
-    //    return $external_content;
-    //}
 }

@@ -14,25 +14,30 @@
 <div id="app" class="theme-{{ config('app.name') }}">
     <main class="auth">
         <div class="flex flex-col flex-1 h-full px-4 sm:px-0">
-            <div class="flex w-full h-full sm:mx-0">
-{{--                <div class="flex flex-col lg:w-1/3 md:w-1/2">--}}
-                    <div class="auth-form lg:w-1/4 md:w-1/2">
+            <div class="flex w-full h-full items-center">
 
-                        <h1>
-                            @yield('content.heading')
-                            <span>@yield('content.sub.heading')</span>
-                        </h1>
+                <div class="auth-form">
+                    <a href="/" class="logo-heading">
+                        <img class="logo" src="{{ asset('images/logos/logo-' . config('app.name') . '-dark.png') }}"
+                             alt="{{ config('app.name') }}">
 
-                        @include('layout.alerts')
+                        <h1>{{ __('Ordering Portal') }}</h1>
+                    </a>
 
-                        @yield('content')
+                    <h1>
+                        @yield('content.heading')
+                        <span>@yield('content.sub.heading')</span>
+                    </h1>
 
-                    </div>
-{{--                </div>--}}
+                    @include('layout.alerts')
+
+                    @yield('content')
+
+                </div>
 
                 <div class="auth-details">
                     <a href="/">
-                        <img class="logo" src="{{ asset('images/logo-' . config('app.name') . '.png') }}"
+                        <img class="logo" src="{{ asset('images/logos/logo-' . config('app.name') . '.png') }}"
                              alt="{{ config('app.name') }}">
                     </a>
 
