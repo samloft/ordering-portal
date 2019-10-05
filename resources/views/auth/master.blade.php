@@ -13,8 +13,8 @@
 
 <div id="app" class="theme-{{ config('app.name') }}">
     <main class="auth">
-        <div class="flex flex-col flex-1 h-full px-4 sm:px-0">
-            <div class="flex w-full h-full items-center">
+{{--        <div class="flex h-full px-4 items-center sm:px-0">--}}
+{{--            <div class="flex-col w-full h-full items-center">--}}
 
                 <div class="auth-form">
                     <a href="/" class="logo-heading">
@@ -45,8 +45,8 @@
 
                     <p>{{ __('The updated site now incorporates a number of improved features that allow users to access new information directly and more easily.') }}</p>
                 </div>
-            </div>
-        </div>
+{{--            </div>--}}
+{{--        </div>--}}
     </main>
 </div>
 

@@ -1,19 +1,19 @@
 main.auth {
-    @apply .bg-background_content-color .text-background_content-text .h-full;
+    @apply .flex .items-center .bg-background_content-color .text-background_content-text .h-full;
 
     .auth-form {
-        @apply .flex .flex-col .p-4 .w-full;
+        @apply .p-4 .w-full .h-full;
 
         @screen md {
-            @apply .px-20;
+            @apply .h-auto .px-20;
         }
 
         @screen lg {
-            @apply .px-20;
+            @apply .h-auto .px-20;
         }
 
         @screen xl {
-            @apply .w-1/3;
+            @apply .h-auto .w-1/3;
         }
 
         .logo-heading {
@@ -27,6 +27,12 @@ main.auth {
                 @apply .mb-5 .m-auto;
 
                 max-height: 120px;
+
+                @screen sm {
+                    @apply .mb-0 .mb-1;
+
+                    max-height: 60px;
+                }
             }
 
             @screen lg {
@@ -35,7 +41,11 @@ main.auth {
         }
 
         h1 {
-            @apply .uppercase .text-center .text-3xl .mb-20;
+            @apply .uppercase .text-center .text-3xl .mb-3;
+
+            @screen md {
+                @apply .mb-0 .mb-20;
+            }
 
             span {
                 @apply .block .normal-case .font-thin .text-lg;
