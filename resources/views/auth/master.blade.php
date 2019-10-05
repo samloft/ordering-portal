@@ -13,40 +13,35 @@
 
 <div id="app" class="theme-{{ config('app.name') }}">
     <main class="auth">
-{{--        <div class="flex h-full px-4 items-center sm:px-0">--}}
-{{--            <div class="flex-col w-full h-full items-center">--}}
+        <div class="auth-form">
+            <a href="/" class="logo-heading">
+                <img class="logo" src="{{ asset('images/logos/logo-' . config('app.name') . '-dark.png') }}"
+                     alt="{{ config('app.name') }}">
 
-                <div class="auth-form">
-                    <a href="/" class="logo-heading">
-                        <img class="logo" src="{{ asset('images/logos/logo-' . config('app.name') . '-dark.png') }}"
-                             alt="{{ config('app.name') }}">
+                <h1>{{ __('Ordering Portal') }}</h1>
+            </a>
 
-                        <h1>{{ __('Ordering Portal') }}</h1>
-                    </a>
+            <h1 class="title">
+                @yield('content.heading')
+                <span>@yield('content.sub.heading')</span>
+            </h1>
 
-                    <h1>
-                        @yield('content.heading')
-                        <span>@yield('content.sub.heading')</span>
-                    </h1>
+            @include('layout.alerts')
 
-                    @include('layout.alerts')
+            @yield('content')
 
-                    @yield('content')
+        </div>
 
-                </div>
+        <div class="auth-details">
+            <a href="/">
+                <img class="logo" src="{{ asset('images/logos/logo-' . config('app.name') . '.png') }}"
+                     alt="{{ config('app.name') }}">
+            </a>
 
-                <div class="auth-details">
-                    <a href="/">
-                        <img class="logo" src="{{ asset('images/logos/logo-' . config('app.name') . '.png') }}"
-                             alt="{{ config('app.name') }}">
-                    </a>
+            <h1>{{ __('Welcome to our ordering portal.') }}</h1>
 
-                    <h1>{{ __('Welcome to our ordering portal.') }}</h1>
-
-                    <p>{{ __('The updated site now incorporates a number of improved features that allow users to access new information directly and more easily.') }}</p>
-                </div>
-{{--            </div>--}}
-{{--        </div>--}}
+            <p>{{ __('The updated site now incorporates a number of improved features that allow users to access new information directly and more easily.') }}</p>
+        </div>
     </main>
 </div>
 
