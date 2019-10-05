@@ -5,7 +5,7 @@
         @apply .flex;
     }
 
-    .icon {
+    .alert-icon {
         @apply .w-8 .mr-4 .my-1;
     }
 
@@ -21,27 +21,23 @@
 .alert-success {
     @apply .bg-teal-100 .border-teal-500 .text-teal-900;
 
-    .icon {
-        .primary {
-            @apply .text-teal-200;
-        }
+    .primary {
+        @apply .text-teal-200;
+    }
 
-        .secondary {
-            @apply .text-teal-500;
-        }
+    .secondary {
+        @apply .text-teal-500;
     }
 }
 
 .alert-danger {
     @apply .bg-red-100 .border-red-500 .text-red-500;
 
-    .icon {
-        .primary {
-            @apply .text-red-200;
-        }
+    .primary {
+        @apply .text-red-200;
+    }
 
-        .secondary {
-            @apply .text-red-500;
-        }
+    .secondary {
+        @apply .text-red-500;
     }
 }
