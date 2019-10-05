@@ -1,5 +1,5 @@
 .button {
-    @apply .rounded .p-3;
+    @apply .rounded .p-3 .leading-none .shadow;
 
     &:hover {
         @apply .opacity-75;
