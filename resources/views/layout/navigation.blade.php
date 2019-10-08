@@ -14,7 +14,7 @@
         </div>
 
         <div class="menu-item">
-            <a href="{{ route('upload') }}">{{ __('Order Upload') }}</a>
+            <a href="{{ route('upload') }}" class="{{ setActive('upload') }}">{{ __('Order Upload') }}</a>
         </div>
 
         <div class="menu-item">

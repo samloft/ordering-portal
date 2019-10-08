@@ -36,10 +36,10 @@ class UploadController extends Controller
         OrderImport::clearDown();
 
         $request->validate([
-            'input_file' => 'required|mimes:csv,txt'
+            'csv_file' => 'required|mimes:csv,txt'
         ]);
 
-        $order_lines = array_map('str_getcsv', file($request->file('input_file')));
+        $order_lines = array_map('str_getcsv', file($request->file('csv_file')));
 
         $order = [];
         $upload = [];

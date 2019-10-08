@@ -8,25 +8,23 @@
         <span class="block text-lg font-thin">{{ __('Upload your order for a faster ordering process') }}</span>
     </h1>
 
-    <div class="bg-white rounded shadow p-6 text-center">
+    <div class="bg-white rounded shadow-md p-6">
         @include('layout.alerts')
 
-{{--        <div class="alert alert-warning mb-5">--}}
-{{--            {!! ('<strong>Note!</strong> To upload an order, you must use a <strong>CSV</strong>--}}
-{{--            file that\'s in the format,--}}
-{{--            product code in the first column and quantity in the second column (No headers).--}}
-{{--            Once uploaded you\'ll be taken to a page where you can review and confirm your order.') !!}--}}
-{{--        </div>--}}
+        <div class="flex">
+            <div class="w-1/3 pr-10">
+                Order Upload
 
-        <form method="post" action="{{ route('upload-validate') }}" enctype="multipart/form-data">
-            <div class="form-row justify-content-center mb-5">
-                <div class="input-group">
-                    <label class="custom-file-label">{{ __('Choose a CSV file') }}</label>
-                    <input type="file" id="order-file" class="custom-file-input" name="input_file">
-                </div>
-
-                    <button id="upload-order" class="button button-primary">{{ __('Upload Order') }} <i class="fa fa-download"></i></button>
+                <p class="text-gray-500 text-md mt-2">
+                    Upload your order with a simple CSV file, entering product code in column A and quantity in column B
+                </p>
             </div>
-        </form>
+
+            <div class="w-2/3">
+                <form method="post" action="{{ route('upload-validate') }}" enctype="multipart/form-data">
+                    <order-upload></order-upload>
+                </form>
+            </div>
+        </div>
     </div>
 @endsection

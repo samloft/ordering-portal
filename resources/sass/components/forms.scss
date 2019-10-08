@@ -32,3 +32,44 @@
         @apply .cursor-pointer;
     }
 }
+
+.input-wrap {
+    @apply .w-full .text-center .text-brand-primary;
+
+    position: relative;
+    overflow: hidden;
+    display: inline-block;
+
+    i {
+        @apply .block .text-3xl .pb-5;
+    }
+
+    span {
+        @apply .block .font-thin .text-lg .text-gray-400;
+    }
+
+    label {
+        @apply .py-20;
+    }
+}
+
+.custom-file-label {
+    @apply .rounded-lg .border .border-brand-primary .text-xl;
+
+    font-weight: bold;
+}
+
+.input-wrap input[type=file] {
+    @pply .w-full;
+
+    position: absolute;
+    height: 280px;
+    left: 0;
+    top: 0;
+    opacity: 0;
+
+    &:hover {
+        @apply .cursor-pointer;
+    }
+}
+

@@ -3,28 +3,33 @@
 @section('page.title', 'Order Upload Validation')
 
 @section('content')
-    <h1 class="page-title">{{ __('Upload An Order (Validation)') }}</h1>
+    <h1 class="text-center font-semi-bold text-2xl mb-3">
+        {{ __('Order Validation') }}
+        <span
+            class="block text-lg font-thin">{{ __('Your order has been validated, please check it over and click the "Add order to basket" button below to finish.') }}</span>
+    </h1>
 
-    <div class="card card-body">
+    <div class="bg-white rounded shadow-md p-6">
         @include('layout.alerts')
 
-        <p>{{ __('Your order has been validated, please check it over and click the "Add order to basket" button below to finish.') }}</p>
-
         @if ($order['errors'] > 0)
-            <div class="alert alert-danger">
-                <strong>{{ $order['errors'] . __(' Errors Found!') }}</strong> {{ __('Lines in red will not be added to your basket.') }}
+            <div class="alert alert-danger" role="alert">
+                <div class="alert-body">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" class="alert-icon">
+                        <circle cx="12" cy="12" r="10" class="primary"></circle>
+                        <path class="secondary"
+                              d="M13.41 12l2.83 2.83a1 1 0 0 1-1.41 1.41L12 13.41l-2.83 2.83a1 1 0 1 1-1.41-1.41L10.59 12 7.76 9.17a1 1 0 0 1 1.41-1.41L12 10.59l2.83-2.83a1 1 0 0 1 1.41 1.41L13.41 12z"></path>
+                    </svg>
+                    <div>
+                        <p class="alert-title">{{ $order['errors'] . __(' Errors Found!') }}</p>
+                        <p class="alert-text">{{ __('Lines in red will not be added to your basket.') }}</p>
+                    </div>
+                </div>
             </div>
         @endif
 
-        @if ($order['warnings'] > 0)
-            <div class="alert alert-warning">
-                <strong>{{ $order['warnings'] . __(' Warnings Found!') }}</strong> {{ __('Lines in yellow will be added to your basket,
-                but have a warning attached, please check the warning messages below.') }}
-            </div>
-        @endif
-
-        <table class="table table-striped table-bordered">
-            <thead class="thead-dark">
+        <table>
+            <thead>
             <tr>
                 <th>{{ __('Product') }}</th>
                 <th>{{ __('Quantity') }}</th>
@@ -56,25 +61,18 @@
                             @endif
                         </td>
 
-                        <td class="text-right {{ $line['price_match_error'] ? 'bg-info' : '' }}">{{ $line['passed_price'] ? $line['passed_price'] : '' }}</td>
+                        <td class="text-right {{ $line['price_match_error'] ? 'bg-info' : '' }}">{{ $line['passed_price'] ?: '' }}</td>
 
-                        <td class="text-right {{ $line['price_match_error'] ? 'bg-info' : '' }}">{{ $line['price'] ? $line['price'] : '' }}</td>
+                        <td class="text-right {{ $line['price_match_error'] ? 'bg-info' : '' }}">{{ $line['price'] ?: '' }}</td>
                     </tr>
                 @endif
             @endforeach
             </tbody>
         </table>
-    </div>
 
-    <div class="row mt-3">
-        <div class="col">
-            <a href="{{ route('upload') }}">
-                <button class="btn btn-primary">{{ __('Back') }}</button>
-            </a>
-        </div>
-        <div class="col text-right">
+        <div class="text-right mt-5">
             <a href="{{ route('upload-completed') }}">
-                <button class="btn btn-blue">{{ __('Add Order To Basket') }}</button>
+                <button class="button button-primary">{{ __('Add Order To Basket') }}</button>
             </a>
         </div>
     </div>

@@ -1,0 +1,25 @@
+table {
+    @apply .rounded .w-full .text-left .shadow;
+
+    thead {
+        @apply .bg-gray-400 .uppercase;
+
+        th {
+            @apply .font-medium .py-2 .px-4 .text-gray-700;
+        }
+
+        th:first-child {
+            @apply .rounded-tl;
+        }
+
+        th:last-child {
+            @apply .rounded-tr;
+        }
+    }
+
+    tbody {
+        td {
+            @apply .border-t .border-gray-300 .py-2 .px-4;
+        }
+    }
+}
