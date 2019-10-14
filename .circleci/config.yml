@@ -16,7 +16,6 @@ jobs:
         enviroment:
           - MYSQL_ALLOW_EMPTY_PASSWORD=true
           - MYSQL_ROOT_PASSWORD=
-          - MYSQL_DB=shop
 
     steps:
       - run:
@@ -64,6 +63,10 @@ jobs:
           paths:
             - node_modules
             - ~/.yarn
+
+      - run:
+          name: Create MySQL Database
+          command: mysql -h 127.0.0.1 -u root -e "CREATE DATABASE shop;"
 
       - run:
           name: Migrate Database
