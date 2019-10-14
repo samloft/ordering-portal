@@ -17,6 +17,10 @@ jobs:
           - MYSQL_ALLOW_EMPTY_PASSWORD=true
           - MYSQL_ROOT_PASSWORD=
 
+      branches:
+        only:
+          - development
+
     steps:
       - run:
           name: Install System Dependencies
@@ -75,3 +79,7 @@ jobs:
       - run:
           name: PHPUnit Tests
           command: ./vendor/bin/phpunit
+
+      - run:
+          name: Merge to Staging
+          command: fit merge staging
