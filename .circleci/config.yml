@@ -16,7 +16,7 @@ jobs:
         enviroment:
           - MYSQL_ALLOW_EMPTY_PASSWORD=true
           - MYSQL_ROOT_PASSWORD=
-          - MYSQL_DATABASE=shop
+          - MYSQL_DB=shop
 
     steps:
       - run:
