@@ -82,4 +82,4 @@ jobs:
 
       - run:
           name: Merge to Staging
-          command: git merge origin/staging
+          command: git rebase staging
