@@ -38,8 +38,8 @@ jobs:
             - node_modules
             - ~/.yarn
 
-      - run: touch storage/testing.sqlite
-      - run: php artisan migrate --env=testing --force
+#      - run: touch storage/testing.sqlite
+#      - run: php artisan migrate --env=testing --force
 
       - run: npm run production
       - run: ./vendor/bin/phpunit
