@@ -2,42 +2,48 @@ version: 2
 jobs:
   build:
     docker:
-#      - image: circleci/php:7.3-node-browsers
-      - image: laraveldev/nginx
+      - image: circleci/php:7.3-stretch-node-browsers
 
 
     steps:
       - checkout
 
-      - run: sudo apt update
-      - run: sudo apt install -y libpng-dev
+      - run: sudo apt update && sudo apt install zlib1g-dev libsqlite3-dev
 
       - run: sudo docker-php-ext-install zip
       - run: sudo docker-php-ext-install gd
 
       - restore_cache:
-          keys:
-            - v1-dependencies-{{ checksum "composer.json" }}
-            - v1-dependencies-
+        keys:
+          - v1-dependencies-{{ checksum "composer.json" }}
+          - v1-dependencies-
 
-      - run: composer install -n --prefer-dist
+      - run: composer update && composer install -n --prefer-dist
 
       - save_cache:
-          key: v1-dependencies-{{ checksum "composer.json" }}
+          key: composer-v1-{{ checksum "composer.json" }}
           paths:
-            - ./vendor
+            - vendor
+
       - restore_cache:
           keys:
-            - node-v1-{{ checksum "package.json" }}
-            - node-v1-
+            - node-v4-{{ checksum "package.json" }}
+            - node-v4-
+
       - run: npm install
       - save_cache:
-          key: node-v1-{{ checksum "package.json" }}
-          paths:
-            - node_modules
+        key: node-v4-{{ checksum "package.json" }}
+        paths:
+          - node_modules
+          - ~/.yarn
+
+      - run: touch storage/testing.sqlite
+      - run: php artisan migrate --env=testing --database=sqlite_testing --force
 
       - run: npm run production
-      - run: touch storage/testing.sqlite
-      - run: php artisan migrate --env=testing --force
-
       - run: ./vendor/bin/phpunit
+
+      - store_test_results:
+        path: tests/_output
+      - store_artifacts:
+        path: tests/_output
