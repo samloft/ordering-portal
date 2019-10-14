@@ -20,10 +20,10 @@ jobs:
 
     steps:
       - run:
-        name: Install System Dependencies
-        command: |
-          sudo apt update
-          sudo apt install -y zlib1g-dev libsqlite3-dev libpng-dev
+          name: Install System Dependencies
+          command: |
+            sudo apt update
+            sudo apt install -y zlib1g-dev libsqlite3-dev libpng-dev
 
       - run: sudo docker-php-ext-install zip
       - run: sudo docker-php-ext-install gd
