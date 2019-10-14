@@ -17,9 +17,9 @@ jobs:
           - MYSQL_ALLOW_EMPTY_PASSWORD=true
           - MYSQL_ROOT_PASSWORD=
 
-      branches:
-        only:
-          - development
+    branches:
+      only:
+        - development
 
     steps:
       - run:
