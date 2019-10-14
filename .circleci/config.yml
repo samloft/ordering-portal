@@ -9,11 +9,8 @@ jobs:
 
       - run: sudo apt update
 
-      -run:
-        name: Install PHP Extentions
-        command: |
-          sudo docker-php-ext-install zip
-          sudo docker-php-ext-install ext-gd
+      -run: sudo docker-php-ext-install zip
+      -run: sudo docker-php-ext-install ext-gd
 
       - restore_cache:
           keys:
