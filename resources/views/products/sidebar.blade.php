@@ -1,49 +1,52 @@
-<div class="col-lg-3 product-sidebar">
-    @if (auth()->user()->admin)
-        <div class="row">
-            <div class="col">
-                <form class="w-100" action="{{ route('customer.change') }}" method="post">
-                    <div class="form-group">
-                        <label>{{ __('Change Customer') }}</label>
-                        <div class="input-group">
-                            <input id="customer-admin" class="form-control" name="customer" autocomplete="off">
-                            <div class="input-group-append">
-                                <button class="input-group-text"><i class="fas fa-user"></i></button>
-                            </div>
-                        </div>
-                    </div>
-                </form>
-            </div>
-        </div>
-    @elseif (count(auth()->user()->customers) > 0)
-        <div class="row">
-            <div class="col mb-3">
-                <form class="w-100" action="{{ route('customer.change') }}" method="post">
-                    <div class="form-group mb-1">
-                        <label>{{ __('Change Customer') }}</label>
-                        <select class="form-control" name="customer" autocomplete="off">
-                            <option value="{{ Auth::user()->customer_code }}" {{ auth()->user()->customer->code === auth()->user()->customer_code ? 'selected' : '' }}>{{ auth()->user()->customer_code }}</option>
-                            @foreach(auth()->user()->customers as $customer)
-                                <option value="{{ $customer->customer_code }}" {{ auth()->user()->customer->code === $customer->customer_code ? 'selected' : '' }}>{{ $customer->customer_code }}</option>
-                            @endforeach
-                        </select>
-                    </div>
+<div class="w-1/4">
+    @if (auth()->user()->admin || count(auth()->user()->customers) > 0)
+        <h4 class="uppercase mb-3 font-medium tracking-wider">{{ __('Change Customer') }}</h4>
 
-                    <button class="btn btn-block btn-sm btn-primary">{{ __('Change Customer') }}</button>
-                </form>
-            </div>
-        </div>
+        <form method="POST" action="{{ route('customer.change') }}">
+            @if (auth()->user()->admin)
+
+            @else
+                <div class="relative mb-2">
+                    <select name="customer" class="w-full p-2 rounded border text-gray-600 appearance-none"
+                            autocomplete="off">
+                        <option
+                            value="{{ auth()->user()->customer_code }}" {{ auth()->user()->customer_code === auth()->user()->customer->code ? 'selected' : '' }}>
+                            {{ auth()->user()->customer_code }}
+                        </option>
+
+                        @foreach(auth()->user()->customers as $customer)
+                            <option
+                                value="{{ $customer->customer_code }}" {{ auth()->user()->customer->code === $customer->customer_code ? 'selected' : '' }}>
+                                {{ $customer->customer_code }}
+                            </option>
+                        @endforeach
+                    </select>
+                    <div class="pointer-events-none absolute inset-y-0 right-0 flex items-center px-3 text-gray-700">
+                        <svg class="fill-current h-4 w-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20">
+                            <path d="M9.293 12.95l.707.707L15.657 8l-1.414-1.414L10 10.828 5.757 6.586 4.343 8z"/>
+                        </svg>
+                    </div>
+                </div>
+            @endif
+
+            <button class="button button-primary button-block">{{ __('Change customer') }}</button>
+        </form>
     @endif
 
     <div class="row">
         <div class="col">
+
+            <h4 class="uppercase mb-3 font-medium tracking-wider">{{ __('Search') }}</h4>
+
             <form class="w-100" action="{{ route('products.search') }}" method="get">
                 <div class="form-group">
-                    <label>{{ __('Search') }}</label>
                     <div class="input-group">
-                        <input type="text" class="form-control" name="query" autocomplete="off">
-                        <div class="input-group-append">
-                            <button class="input-group-text"><i class="fas fa-search"></i></button>
+                        <div class="relative">
+                            <input type="text" class="form-control" name="query" autocomplete="off">
+                            <div
+                                class="pointer-events-none absolute inset-y-0 right-0 flex items-center px-3 text-gray-700">
+                                <button class="input-group-text"><i class="fas fa-search"></i></button>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -51,32 +54,25 @@
         </div>
     </div>
 
-    <div class="row">
-        <div class="col">
-            <form method="post" id="product-add-basket-quickbuy">
-                <div class="form-group mb-1">
-                    <label>{{ __('Quick Buy') }}</label>
-                    <input id="quick-buy" class="form-control" name="product"
-                           placeholder="{{ __('Enter Product Code') }}" autocomplete="off">
-                </div>
+    <h4 class="uppercase mb-3 font-medium tracking-wider">{{ __('Quick Buy') }}</h4>
 
-                <div class="input-group">
-                    <div class="input-group-prepend">
-                        <span class="input-group-text">{{ __('Qty:') }}</span>
-                    </div>
-                    <input class="form-control mr-2" name="quantity" value="{{ __('1') }}">
-                    <span class="input-group-btn">
-                                <button class="btn btn-primary" name="quick_buy_submit"
-                                        type="submit">{{ __('Add To Basket') }}</button>
-                            </span>
-                </div>
-            </form>
+    <form method="post" id="product-add-basket-quickbuy">
+        <input id="quick-buy" class="mb-2" name="product"
+               placeholder="{{ __('Enter Product Code') }}" autocomplete="off">
+
+        <div class="flex">
+            <div class="align-items-center">
+                <span class="mr-2 text-gray-600">{{ __('Qty:') }}</span>
+                <input class="w-24 mr-2" name="quantity" value="1" autocomplete="off">
+            </div>
+            <button class="button button-primary flex-grow" name="quick_buy_submit"
+                    type="submit">{{ __('Add to basket') }}</button>
         </div>
-    </div>
+    </form>
 
     <div class="row mb-2">
         <div class="col">
-            <label>{{ __('Categories') }}</label>
+            <h4 class="uppercase mb-3 font-medium tracking-wider">{{ __('Categories') }}</h4>
 
             <ul class="categories list-group w-100">
                 @foreach($category_list as $key => $category)
@@ -85,30 +81,30 @@
                             {{ $category_list[$key]['name'] }}
                             @if (count($category_list[$key]['sub']) > 0)
                                 <span class="float-right pt-1">
-                                <i class="fas {{ $categories['level_1'] == $category_list[$key]['name'] ? 'fa-chevron-down' : 'fa-chevron-right' }}"></i>
+                                <i class="fas {{ $categories['level_1'] === $category_list[$key]['name'] ? 'fa-chevron-down' : 'fa-chevron-right' }}"></i>
                             </span>
                             @endif
                         </a>
                     </li>
-                    @if ($categories['level_1'] == $category_list[$key]['name'] && count($category_list[$key]['sub']) > 0)
+                    @if ($categories['level_1'] === $category_list[$key]['name'] && count($category_list[$key]['sub']) > 0)
                         <ul class="list-group sub-category">
                             @foreach ($category_list[$key]['sub'] as $level_2)
                                 <li class="list-group-item">
                                     <a href="{{ route('products', [$category_list[$key]['url'], $level_2['url']]) }}"
-                                       class="{{ $categories['level_2'] == $level_2['name'] ? 'font-weight-bold' : '' }}">
+                                       class="{{ $categories['level_2'] === $level_2['name'] ? 'font-weight-bold' : '' }}">
                                         {{ $level_2['name'] }}
                                         @if (count($level_2['sub']) > 0)
                                             <span class="float-right pt-1"><i
-                                                        class="fas {{ $categories['level_2'] == $level_2['name'] ? 'fa-chevron-down' : 'fa-chevron-right' }}"></i></span>
+                                                    class="fas {{ $categories['level_2'] === $level_2['name'] ? 'fa-chevron-down' : 'fa-chevron-right' }}"></i></span>
                                         @endif
                                     </a>
                                 </li>
-                                @if ($categories['level_2'] == $level_2['name'] && count($level_2['sub']) > 0)
+                                @if ($categories['level_2'] === $level_2['name'] && count($level_2['sub']) > 0)
                                     <ul class="list-group sub-category">
                                         @foreach ($level_2['sub'] as $level_3)
                                             <li class="list-group-item">
                                                 <a href="{{ route('products', [$category_list[$key]['url'], $level_2['url'], $level_3['url']]) }}"
-                                                   class="{{ $categories['level_3'] == $level_3['name'] ? 'font-weight-bold' : '' }}">
+                                                   class="{{ $categories['level_3'] === $level_3['name'] ? 'font-weight-bold' : '' }}">
                                                     {{ $level_3['name'] }}
                                                 </a>
                                             </li>
