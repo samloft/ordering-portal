@@ -1,6 +1,8 @@
 # Ordering Portal
 ----
 
+[![CircleCI](https://circleci.com/gh/samloft/ordering-portal.svg?style=svg)](https://circleci.com/gh/samloft/ordering-portal)
+
 Ordering portal is ecommerce portal for a Sage ERP 1000 system, taking extracted data from Sage as syncs to populate the database for this system.
 This system is still highly under construction (Being worked on in spare time).
 
