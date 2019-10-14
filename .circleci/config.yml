@@ -4,7 +4,6 @@ jobs:
     docker:
       - image: circleci/php:7.3-stretch-node-browsers
 
-
     steps:
       - checkout
 
@@ -14,9 +13,9 @@ jobs:
       - run: sudo docker-php-ext-install gd
 
       - restore_cache:
-        keys:
-          - v1-dependencies-{{ checksum "composer.json" }}
-          - v1-dependencies-
+          keys:
+            - v1-dependencies-{{ checksum "composer.json" }}
+            - v1-dependencies-
 
       - run: composer update && composer install -n --prefer-dist
 
@@ -29,13 +28,12 @@ jobs:
           keys:
             - node-v4-{{ checksum "package.json" }}
             - node-v4-
-
       - run: npm install
       - save_cache:
-        key: node-v4-{{ checksum "package.json" }}
-        paths:
-          - node_modules
-          - ~/.yarn
+          key: node-v4-{{ checksum "package.json" }}
+          paths:
+            - node_modules
+            - ~/.yarn
 
       - run: touch storage/testing.sqlite
       - run: php artisan migrate --env=testing --database=sqlite_testing --force
@@ -44,6 +42,6 @@ jobs:
       - run: ./vendor/bin/phpunit
 
       - store_test_results:
-        path: tests/_output
+          path: tests/_output
       - store_artifacts:
-        path: tests/_output
+          path: tests/_output
