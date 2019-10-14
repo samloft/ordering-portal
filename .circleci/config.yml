@@ -22,7 +22,7 @@ jobs:
           name: Install System Dependencies
           command: |
             sudo apt update
-            sudo apt install -y zlib1g-dev libsqlite3-dev libpng-dev
+            sudo apt install -y zlib1g-dev libsqlite3-dev libpng-dev mysql-client
 
       - run:
           name: Install PHP Extensions
