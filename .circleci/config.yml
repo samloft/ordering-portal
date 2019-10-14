@@ -2,7 +2,9 @@ version: 2
 jobs:
   build:
     docker:
-      - image: circleci/php:7.3-node-browsers
+#      - image: circleci/php:7.3-node-browsers
+      - image: laraveldev/nginx
+
 
     steps:
       - checkout
