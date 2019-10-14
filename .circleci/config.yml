@@ -2,18 +2,35 @@ version: 2
 jobs:
   build:
     docker:
-#      - image: circleci/php:7.3-stretch-node-browsers
       - image: circleci/php:7.3-stretch-node-browsers
+        enviroment:
+          APP_ENV: testing
+          DB_CONNECTION: mysql
+          DB_DATABASE: shop
+          DB_USERNAME: root
+          DB_PASSWORD:
+          SESSION_DRIVER: database
+          CACHE_DRIVER: file
+
+      - image: circleci/mysql:5.7
+        enviroment:
+          - MYSQL_ALLOW_EMPTY_PASSWORD=true
+          - MYSQL_ROOT_PASSWORD=
+          - MYSQL_DATABASE=shop
 
     steps:
-      - checkout
-
-      - run: sudo apt update && sudo apt install zlib1g-dev libsqlite3-dev libpng-dev
+      - run:
+        name: Install System Dependencies
+        command: |
+          sudo apt update
+          sudo apt install -y zlib1g-dev libsqlite3-dev libpng-dev
 
       - run: sudo docker-php-ext-install zip
       - run: sudo docker-php-ext-install gd
 
       - run: sudo composer self-update
+
+      - checkout
 
       - restore_cache:
           keys:
@@ -43,8 +60,3 @@ jobs:
 
       - run: npm run production
       - run: ./vendor/bin/phpunit
-
-      - store_test_results:
-          path: tests/_output
-      - store_artifacts:
-          path: tests/_output
