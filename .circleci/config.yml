@@ -8,6 +8,7 @@ jobs:
       - checkout
 
       - run: sudo apt update
+      - run: sudp apt install -y libpng-dev
 
       - run: sudo docker-php-ext-install zip
       - run: sudo docker-php-ext-install gd
