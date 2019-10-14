@@ -12,7 +12,7 @@ jobs:
       - run: sudo docker-php-ext-install zip
       - run: sudo docker-php-ext-install gd
       - run: sudo docker-php-ext-install pdo
-      - run: sudo docker-php-ext-install sqlite
+      - run: sudo docker-php-ext-install sqlite3
       - run: sudo docker-php-ext-install pdo_sqlite && docker-php-ext-enable pdo_sqlite
 
       - run: sudo composer self-update
