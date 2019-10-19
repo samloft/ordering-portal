@@ -8,11 +8,11 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Collection;
 
 /**
- * App\Models\Addresses
+ * App\Models\Address
  *
  * @mixin Eloquent
  */
-class Addresses extends Model
+class Address extends Model
 {
     protected $guarded = [];
 

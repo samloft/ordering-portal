@@ -1,6 +1,6 @@
 @extends('layout.master')
 
-@section('page.title', 'Addresses')
+@section('page.title', 'Address')
 
 @section('content')
     <h1 class="page-title">{{ __('New Delivery Address') }}</h1>

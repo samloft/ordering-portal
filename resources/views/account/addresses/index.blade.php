@@ -1,9 +1,9 @@
 @extends('layout.master')
 
-@section('page.title', 'Addresses')
+@section('page.title', 'Address')
 
 @section('content')
-    <h1 class="page-title">{{ __('Delivery Addresses') }}</h1>
+    <h1 class="page-title">{{ __('Address') }}</h1>
 
     @include('layout.alerts')
 

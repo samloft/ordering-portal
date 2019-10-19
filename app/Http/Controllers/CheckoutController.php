@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Addresses;
+use App\Models\Address;
 use App\Models\Basket;
 use App\Models\DeliveryMethods;
 use App\Notifications\OrderPlacedNotification;
@@ -36,7 +36,7 @@ class CheckoutController extends Controller
             return redirect(route('basket'))->with('error', 'You have no items in your basket to checkout with.');
         }
 
-        $default_address = Addresses::getDefault();
+        $default_address = Address::getDefault();
 
         return view('checkout.index', compact('default_address', 'basket', 'delivery_methods'));
     }
@@ -68,7 +68,7 @@ class CheckoutController extends Controller
                 'evening_telephone' => $request->evening_telephone,
                 'fax' => $request->fax,
                 'mobile' => $request->mobile,
-                'delivery_address' => session('address') ?: Addresses::getDefault()->getAttributes(),
+                'delivery_address' => session('address') ?: Address::getDefault()->getAttributes(),
             ],
             'details' => Basket::show($delivery['cost']),
         ];

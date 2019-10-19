@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers\Account;
 
-use App\Models\Addresses;
+use App\Models\Address;
 use App\Models\Countries;
 use App\Http\Controllers\Controller;
 use Exception;
@@ -14,18 +14,16 @@ use Illuminate\Support\Facades\Input;
 class AddressController extends Controller
 {
     /**
-     * Display a listing of the addresses.
-     *
-     * @return Response
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
      */
-    public function index(): Response
+    public function index()
     {
         if (session('address')) {
             session()->forget('address');
         }
 
-        $addresses = Addresses::show();
-        $checkout = Input::get('checkout') ? true : false;
+        $addresses = Address::show();
+        $checkout = request('checkout') ? true : false;
 
         return view('account.addresses.index', compact('addresses', 'checkout'));
     }
@@ -37,7 +35,7 @@ class AddressController extends Controller
      */
     public function create(): Response
     {
-        $checkout = Input::get('checkout');
+        $checkout = request('checkout');
         $countries = Countries::show();
 
         return view('account.addresses.show', compact('countries', 'checkout'));
@@ -56,10 +54,10 @@ class AddressController extends Controller
         $address['customer_code'] = auth()->user()->customer->code;
         $address['default'] = request('default') ? 1 : 0;
 
-        $create = Addresses::store($address);
+        $create = Address::store($address);
 
         if ($checkout) {
-            $address = Addresses::details($create);
+            $address = Address::details($create);
             $this->tempAddress($address);
 
             return $create ? redirect(route('checkout')) : back()->with('error', 'Unable to create new address, please try again');
@@ -77,7 +75,7 @@ class AddressController extends Controller
     public function edit($id): Response
     {
         $countries = Countries::show();
-        $address = Addresses::details($id);
+        $address = Address::details($id);
 
         return $address ? view('account.addresses.show', compact('countries', 'address')) : abort(404);
     }
@@ -94,7 +92,7 @@ class AddressController extends Controller
 
         $address['default'] = request('default') ? 1 : 0;
 
-        $create = Addresses::edit($id, $address);
+        $create = Address::edit($id, $address);
 
         return $create ? back()->with('success', 'Address has been updated') : back()->with('error', 'Unable to update address, please try again');
     }
@@ -108,13 +106,13 @@ class AddressController extends Controller
      */
     public function destroy($id): Response
     {
-        $permission = Addresses::canEdit($id);
+        $permission = Address::canEdit($id);
 
         if (!$permission) {
             return back()->with('error', 'You do not have permission to delete this address');
         }
 
-        $deleted = Addresses::destroy($id);
+        $deleted = Address::destroy($id);
 
         return $deleted ? redirect(route('account.addresses'))->with('success', 'Address has been deleted') : back()->with('error', 'Unable to delete address, please try again later');
     }
@@ -126,13 +124,13 @@ class AddressController extends Controller
      */
     public function default(): RedirectResponse
     {
-        $permission = Addresses::canEdit(request('id'));
+        $permission = Address::canEdit(request('id'));
 
         if (!$permission) {
             return back()->with('error', 'You do not have permission to edit this address');
         }
 
-        return Addresses::setDefault(request('id')) ? redirect(route('account.addresses'))->with('success', 'New address set as default') : back()->with('error', 'Unable to set new address to default, please try again');
+        return Address::setDefault(request('id')) ? redirect(route('account.addresses'))->with('success', 'New address set as default') : back()->with('error', 'Unable to set new address to default, please try again');
     }
 
     /**
@@ -142,8 +140,8 @@ class AddressController extends Controller
      */
     public function select()
     {
-        $address_id = Input::get('id');
-        $address = Addresses::details($address_id);
+        $address_id = request('id');
+        $address = Address::details($address_id);
 
         if (!$address) {
             return redirect(route('account.addresses'))->with('error', 'Address not found, please try again');

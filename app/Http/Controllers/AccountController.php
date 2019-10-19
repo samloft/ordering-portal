@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Addresses;
+use App\Models\Address;
 use App\Models\Customer;
 use App\Models\User;
 use App\Models\UserCustomer;
@@ -21,7 +21,7 @@ class AccountController extends Controller
      */
     public function index()
     {
-        $default_address = Addresses::getDefault();
+        $default_address = Address::getDefault();
 
         return view('account.index', compact('default_address'));
     }

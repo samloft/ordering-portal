@@ -11,16 +11,17 @@ class CreateAddressesTable extends Migration
      *
      * @return void
      */
-    public function up()
+    public function up(): void
     {
-        Schema::create('addresses', function (Blueprint $table) {
+        Schema::create('addresses', static function (Blueprint $table) {
             $table->increments('id');
             $table->string('customer_code');
+            $table->integer('user_id');
             $table->string('company_name');
             $table->string('address_line_2');
             $table->string('address_line_3');
-            $table->string('address_line_4');
-            $table->string('address_line_5');
+            $table->string('address_line_4')->nullable();
+            $table->string('address_line_5')->nullable();
             $table->integer('country_id');
             $table->string('post_code');
             $table->integer('default')->default(0);
@@ -33,7 +34,7 @@ class CreateAddressesTable extends Migration
      *
      * @return void
      */
-    public function down()
+    public function down(): void
     {
         Schema::dropIfExists('addresses');
     }

@@ -1,5 +1,6 @@
 <?php
 
+use App\Models\Address;
 use App\Models\User;
 use App\Models\Category;
 use App\Models\Customer;
@@ -30,6 +31,9 @@ class DatabaseSeeder extends Seeder
         factory(Customer::class)->create(['code' => 'SCO200']);
 
         factory(UserCustomer::class)->create(['user_id' => $user->id, 'customer_code' => 'SCO200']);
+
+        factory(Address::class, 10)->create(['user_id' => $user->id, 'customer_code' => 'SCO100']);
+        factory(Address::class, 10)->create(['user_id' => $user->id, 'customer_code' => 'SCO200']);
 
         factory(Product::class, 500)->create()->each(static function ($product) {
             factory(Price::class)->create(['product' => $product->code]);
