@@ -14,6 +14,8 @@ class ExpectedStock extends Model
     protected $table = 'expected_stock';
     protected $dates = ['due_date'];
 
+    public $timestamps = false;
+
     /**
      * Get all expected stock from the passed product code
      *
