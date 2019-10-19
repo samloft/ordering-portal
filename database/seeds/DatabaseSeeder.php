@@ -1,6 +1,7 @@
 <?php
 
 use App\Models\Address;
+use App\Models\CmsUser;
 use App\Models\ExpectedStock;
 use App\Models\User;
 use App\Models\Category;
@@ -42,5 +43,10 @@ class DatabaseSeeder extends Seeder
             factory(Stock::class)->create(['product' => $product->code]);
             factory(ExpectedStock::class)->create(['product' => $product->code]);
         });
+
+        factory(CmsUser::class)->create([
+            'email' => 'example@example.com',
+            'password' => bcrypt('password')
+        ]);
     }
 }

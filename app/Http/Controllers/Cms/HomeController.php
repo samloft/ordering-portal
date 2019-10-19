@@ -19,11 +19,9 @@ class HomeController extends Controller
     }
 
     /**
-     * show dashboard.
-     *
-     * @return Response
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
      */
-    public function index(): Response
+    public function index()
     {
         $users = User::countAll();
 

@@ -11,15 +11,14 @@ class CreateCmsUsersTable extends Migration
      *
      * @return void
      */
-    public function up()
+    public function up(): void
     {
-        Schema::create('cms_users', function (Blueprint $table) {
+        Schema::create('cms_users', static function (Blueprint $table) {
             $table->increments('id');
+            $table->string('name');
             $table->string('email')->unique();
             $table->string('password');
             $table->rememberToken();
-            $table->string('first_name');
-            $table->string('last_name')->nullable();
             $table->timestamps();
         });
     }
@@ -29,7 +28,7 @@ class CreateCmsUsersTable extends Migration
      *
      * @return void
      */
-    public function down()
+    public function down(): void
     {
         Schema::dropIfExists('cms_users');
     }
