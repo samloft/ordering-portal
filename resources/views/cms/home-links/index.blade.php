@@ -54,7 +54,7 @@
         <div class="card card-form">
             <div class="row no-gutters">
                 <div class="col-lg-4 card-body">
-                    <p><strong class="headings-color">{{ __('Categories') }}</strong></p>
+                    <p><strong class="headings-color">{{ __('Category') }}</strong></p>
 
                     <p class="text-muted">
                         {{ __('Create/Delete category images/links and adjust the position that the categories will display on the home & product page.') }}

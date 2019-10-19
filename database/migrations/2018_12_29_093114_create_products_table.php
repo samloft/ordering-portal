@@ -11,28 +11,25 @@ class CreateProductsTable extends Migration
      *
      * @return void
      */
-    public function up()
+    public function up(): void
     {
-        Schema::create('products', function (Blueprint $table) {
-            $table->char('product')->primary()->limit(20)->default('');
-            $table->char('type')->limit(1)->default('');
-            $table->char('name')->limit(40);
-            $table->char('uom')->limit(30)->default('');
-            $table->char('pack_description')->limit(50)->default('');
-            $table->integer('pack_quantity')->limit(11);
+        Schema::create('products', static function (Blueprint $table) {
+            $table->char('code')->primary();
+            $table->char('type');
+            $table->char('name');
+            $table->char('uom');
             $table->float('trade_price');
-            $table->integer('order_multiples')->limit(11);
-            $table->char('description')->limit(100);
-            $table->char('note')->limit(100);
-            $table->string('link1')->limit(100);
-            $table->string('link2')->limit(100);
-            $table->string('link3')->limit(100);
-            $table->char('not_sold')->limit(1);
-            $table->char('vat_flag')->limit(1)->default('');
-            $table->char('discount_code')->limit(8);
-            $table->char('packaging')->limit(11);
+            $table->integer('order_multiples');
+            $table->char('description');
+            $table->char('note')->nullable();
+            $table->string('link1')->nullable();
+            $table->string('link2')->nullable();
+            $table->string('link3')->nullable();
+            $table->boolean('not_sold');
+            $table->char('vat_flag')->default('S');
+            $table->integer('packaging');
 
-            $table->index('product');
+            $table->index('code');
         });
     }
 
@@ -41,7 +38,7 @@ class CreateProductsTable extends Migration
      *
      * @return void
      */
-    public function down()
+    public function down(): void
     {
         Schema::dropIfExists('products');
     }

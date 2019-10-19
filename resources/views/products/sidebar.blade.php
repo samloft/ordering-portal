@@ -72,7 +72,7 @@
 
     <div class="row mb-2">
         <div class="col">
-            <h4 class="uppercase mb-3 font-medium tracking-wider">{{ __('Categories') }}</h4>
+            <h4 class="uppercase mb-3 font-medium tracking-wider">{{ __('Category') }}</h4>
 
             <ul class="categories list-group w-100">
                 @foreach($category_list as $key => $category)

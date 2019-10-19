@@ -11,9 +11,9 @@ class CreatePagesTable extends Migration
      *
      * @return void
      */
-    public function up()
+    public function up(): void
     {
-        Schema::create('pages', function (Blueprint $table) {
+        Schema::create('pages', static function (Blueprint $table) {
             $table->increments('id');
             $table->string('name');
             $table->text('contents');
@@ -26,7 +26,7 @@ class CreatePagesTable extends Migration
      *
      * @return void
      */
-    public function down()
+    public function down(): void
     {
         Schema::dropIfExists('pages');
     }

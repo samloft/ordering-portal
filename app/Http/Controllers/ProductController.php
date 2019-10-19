@@ -2,10 +2,10 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Categories;
+use App\Models\Category;
 use App\Models\ExpectedStock;
 use App\Models\HomeLinks;
-use App\Models\Products;
+use App\Models\Product;
 use App\models\ProductSpec;
 use Illuminate\Contracts\View\Factory;
 use Illuminate\Support\Facades\Input;
@@ -14,7 +14,7 @@ use Illuminate\View\View;
 class ProductController extends Controller
 {
     /**
-     * Products index, if categories are given, gets the sub categories.
+     * Product index, if categories are given, gets the sub categories.
      * If no sub categories for that level, display the products.
      *
      * @param string $category_one [Optional]
@@ -26,7 +26,7 @@ class ProductController extends Controller
      */
     public function index($category_one = null, $category_two = null, $category_three = null, $category_four = null, $category_five = null)
     {
-        $category_list = Categories::list();
+        $category_list = Category::list();
         $sub_category_list = [];
 
         $categories = [
@@ -46,8 +46,8 @@ class ProductController extends Controller
         }
 
         if ($categories['level_1'] !== null) {
-            $sub_category_list = Categories::subCategories($current_level, $categories['level_1'], $categories['level_' . $current_level]);
-            $products = Products::list($categories);
+            $sub_category_list = Category::subCategories($current_level, $categories['level_1'], $categories['level_' . $current_level]);
+            $products = Product::list($categories);
 
             return view('products.products', compact('categories', 'category_list', 'products', 'sub_category_list'));
         }
@@ -68,11 +68,10 @@ class ProductController extends Controller
         $previous_categories = str_replace(url('/'), '', url()->previous());
         $category_array = array_values(array_filter(explode('/', $previous_categories)));
 
-        $category_list = Categories::list();
+        $category_list = Category::list();
         $product_code = decodeUrl($product_code);
-        $product = Products::show($product_code);
+        $product = Product::show($product_code);
         $expected_stock = ExpectedStock::show($product_code);
-        $product_specs = ProductSpec::show($product_code);
 
         $categories = [
             'level_1' => isset($category_array[1]) ? decodeUrl($category_array[1]) : '',
@@ -93,7 +92,7 @@ class ProductController extends Controller
             ];
         }
 
-        return view('products.show', compact('categories', 'category_list', 'product', 'expected_stock', 'product_specs'));
+        return view('products.show', compact('categories', 'category_list', 'product', 'expected_stock'));
     }
 
     /**
@@ -103,9 +102,9 @@ class ProductController extends Controller
      */
     public function search()
     {
-        $category_list = Categories::list();
-        $search_term = urldecode(Input::get('query'));
-        $products = Products::search($search_term);
+        $category_list = Category::list();
+        $search_term = urldecode(request('query'));
+        $products = Product::search($search_term);
 
         $categories = [
             'level_1' => 'search',

@@ -9,11 +9,11 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Collection;
 
 /**
- * App\Models\UserCustomers
+ * App\Models\UserCustomer
  *
  * @mixin Eloquent
  */
-class UserCustomers extends Model
+class UserCustomer extends Model
 {
     /**
      * Check that a user has access to a customer.

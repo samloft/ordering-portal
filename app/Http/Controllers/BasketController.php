@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Basket;
-use App\Models\Products;
+use App\Models\Product;
 use Exception;
 use Illuminate\Contracts\Routing\ResponseFactory;
 use Illuminate\Contracts\View\Factory;
@@ -52,7 +52,7 @@ class BasketController extends Controller
         $product = trim($request->product);
         $quantity = trim($request->quantity);
 
-        $product_details = Products::show($product);
+        $product_details = Product::show($product);
 
         if (!$product_details) {
             return response()->json([

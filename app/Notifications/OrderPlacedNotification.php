@@ -33,12 +33,16 @@ class OrderPlacedNotification extends Notification
         return ['mail', 'slack'];
     }
 
-    public function toSlack($notifiable)
+    /**
+     * @param $notifiable
+     * @return \Illuminate\Notifications\Messages\SlackMessage
+     */
+    public function toSlack($notifiable): SlackMessage
     {
         return (new SlackMessage)->from('Online Ordering')->to('#online-ordering')
             ->success()
-            ->content('[Scolmore] - Order has been placed')
-            ->attachment(function ($attachment) {
+            ->content('[' . ucfirst(config('app.name')) . '] - Order has been placed')
+            ->attachment(static function ($attachment) {
                 $attachment->title('Order Number 1322')
                     ->fields([
                         'Lines' => '12',

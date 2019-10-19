@@ -6,7 +6,7 @@
         </div>
 
         <div class="menu-item">
-            <a href="{{ route('products') }}" class="{{ setActive('products') }}">{{ __('Products') }}</a>
+            <a href="{{ route('products') }}" class="{{ setActive('products') }}">{{ __('Product') }}</a>
         </div>
 
         <div class="menu-item">
@@ -51,7 +51,7 @@
 {{--                                    <a class="nav-link {{ setActive('home') }}" href="{{ route('home') }}">{{ __('Home') }}</a>--}}
 {{--                                </li>--}}
 {{--                                <li class="nav-item text-center">--}}
-{{--                                    <a class="nav-link {{ setActive('products') }}" href="{{ route('products') }}">{{ __('Products') }}</a>--}}
+{{--                                    <a class="nav-link {{ setActive('products') }}" href="{{ route('products') }}">{{ __('Product') }}</a>--}}
 {{--                                </li>--}}
 {{--                                <li class="nav-item text-center">--}}
 {{--                                    <a class="nav-link {{ setActive('order-tracking') }}" href="{{ route('order-tracking') }}">{{ __('Order Tracking') }}</a>--}}

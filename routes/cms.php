@@ -2,7 +2,7 @@
 
 use App\Models\HomeLinks;
 use App\Models\User;
-use App\Models\UserCustomers;
+use App\Models\UserCustomer;
 use Illuminate\Http\Request;
 
 /*
@@ -34,11 +34,11 @@ Route::group(['middleware' => 'auth:admin'], function () {
         Route::post('store', 'Cms\UserController@store')->name('cms.site-users.store');
 
         Route::post('extra-customers/destroy', function (Request $request) {
-            return UserCustomers::destroy($request->id);
+            return UserCustomer::destroy($request->id);
         })->name('cms.extra-customers.destroy');
 
         Route::post('extra-customers/store', function (Request $request) {
-            return UserCustomers::store($request);
+            return UserCustomer::store($request);
         })->name('cms.extra-customers.store');
     });
 

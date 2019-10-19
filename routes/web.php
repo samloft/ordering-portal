@@ -29,7 +29,7 @@ Route::group(['middleware' => ['auth', 'has.customer']], function () {
         Route::get('search', 'ProductController@search')->name('products.search');
 
         Route::get('autocomplete/{search}', function ($search) {
-            return App\Models\Products::autocomplete($search);
+            return App\Models\Product::autocomplete($search);
         });
 
         Route::get('{cat1?}/{cat2?}/{cat3?}', 'ProductController@index')->name('products');
@@ -37,7 +37,7 @@ Route::group(['middleware' => ['auth', 'has.customer']], function () {
 
     Route::group(['prefix' => 'category'], function () {
         Route::get('image/{products}', function ($products) {
-            return App\Models\Products::checkImage($products);
+            return App\Models\Product::checkImage($products);
         })->name('products.check-image');
     });
 

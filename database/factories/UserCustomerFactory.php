@@ -2,7 +2,7 @@
 
 /** @var \Illuminate\Database\Eloquent\Factory $factory */
 
-use App\Models\UserCustomers;
+use App\Models\UserCustomer;
 use Faker\Generator as Faker;
 
 /*
@@ -16,7 +16,7 @@ use Faker\Generator as Faker;
 |
 */
 
-$factory->define(UserCustomers::class, static function (Faker $faker) {
+$factory->define(UserCustomer::class, static function (Faker $faker) {
     return [
         'customer_code' => 'SCO100',
         'user_id' => 1,

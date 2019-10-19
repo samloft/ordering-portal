@@ -4,7 +4,7 @@ namespace Tests\Setup;
 
 use App\Models\User;
 use App\Models\Customer;
-use App\Models\UserCustomers;
+use App\Models\UserCustomer;
 
 class UserFactory
 {
@@ -47,7 +47,7 @@ class UserFactory
                     'code' => str_random(8)
                 ]);
 
-                factory(UserCustomers::class)->create([
+                factory(UserCustomer::class)->create([
                     'user_id' => $user->id,
                     'customer_code' => $customer->code,
                 ]);

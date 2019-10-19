@@ -7,22 +7,23 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 
 /**
- * App\Models\Categories
+ * App\Models\Category
  *
  * @mixin Eloquent
  */
-class Categories extends Model
+class Category extends Model
 {
     protected $primaryKey = 'product';
 
     public $incrementing = false;
+    public $timestamps = false;
 
     /**
      * @return HasMany
      */
     public function prices(): HasMany
     {
-        return $this->hasMany(Prices::class, 'product', 'product');
+        return $this->hasMany(Price::class, 'product', 'product');
     }
 
     /**
@@ -33,24 +34,24 @@ class Categories extends Model
     public static function list(): array
     {
         $category_results = self::select([
-            'cat1_level1',
-            'cat1_level2',
-            'cat1_level3',
-            'cat1_level4',
-            'cat1_level5',
+            'level_1',
+            'level_2',
+            'level_3',
+            'level_4',
+            'level_5',
         ])->whereHas('prices', static function ($query) {
             $query->where('customer_code', auth()->user()->customer->code);
-        })->groupBy('cat1_level1', 'cat1_level2', 'cat1_level3', 'cat1_level4', 'cat1_level5')->get();
+        })->groupBy('level_1', 'level_2', 'level_3', 'level_4', 'level_5')->get();
 
         $array = [];
 
         foreach ($category_results as $category) {
-            if (trim($category->cat1_level1) !== '') {
-                $array[strtoupper(trim($category->cat1_level1))]
-                [trim($category->cat1_level2)]
-                [trim($category->cat1_level3)]
-                [trim($category->cat1_level4)]
-                [trim($category->cat1_level5)] = [];
+            if (trim($category->level_1) !== '') {
+                $array[strtoupper(trim($category->level_1))]
+                [trim($category->level_2)]
+                [trim($category->level_3)]
+                [trim($category->level_4)]
+                [trim($category->level_5)] = [];
             }
         }
 
@@ -107,14 +108,14 @@ class Categories extends Model
     {
         $sub_categories = [];
 
-        $subs = static::where('cat1_level1', $main)->where('cat1_level'.$level, $category)->whereHas('prices', static function ($query) {
+        $subs = static::where('level_1', $main)->where('level_'.$level, $category)->whereHas('prices', static function ($query) {
             $query->where('customer_code', auth()->user()->customer->code);
-        })->orderBy('cat1_level'.$level)->orderBy('product')->get();
+        })->orderBy('level_'.$level)->orderBy('product')->get();
 
         $products = [];
 
         foreach ($subs as $sub) {
-            $cat_level = 'cat1_level'.($level + 1);
+            $cat_level = 'level_'.($level + 1);
 
             if (isset($sub->$cat_level) && trim($sub->$cat_level) !== '') {
                 $products[] = [

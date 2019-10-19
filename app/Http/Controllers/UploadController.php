@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Basket;
 use App\Models\OrderImport;
-use App\Models\Products;
+use App\Models\Product;
 use Exception;
 use Illuminate\Contracts\View\Factory;
 use Illuminate\Http\RedirectResponse;
@@ -59,7 +59,7 @@ class UploadController extends Controller
             }
 
             if ($product_code && $product_qty > 0) {
-                $product = Products::show($value[0]);
+                $product = Product::show($value[0]);
 
                 if (!$product || $product->not_sold === 'Y') {
                     $errors++;

@@ -5,7 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Addresses;
 use App\Models\Customer;
 use App\Models\User;
-use App\Models\UserCustomers;
+use App\Models\UserCustomer;
 use Illuminate\Contracts\View\Factory;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
@@ -70,7 +70,7 @@ class AccountController extends Controller
         }
 
         if (auth()->user()->admin !== 1) {
-            $user_can_access = UserCustomers::check($request->customer);
+            $user_can_access = UserCustomer::check($request->customer);
 
             if (! $user_can_access) {
                 return abort(401);

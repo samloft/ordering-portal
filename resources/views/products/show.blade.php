@@ -3,7 +3,7 @@
 @section('page.title', 'View Product')
 
 @section('content')
-    <div class="row">
+    <div class="flex">
         @include('products.sidebar')
 
         <div class="col">
@@ -114,7 +114,7 @@
                                     <span class="input-group-text">Stock Level</span>
                                 </div>
                                 <input class="form-control form-control-sm"
-                                       value="{{ $product->stock->quantity ? $product->stock->quantity : 0 }}"
+                                       value="{{ $product->stock->quantity ?? 0 }}"
                                        readonly>
                                 <span class="input-group-btn">
                             </span>
@@ -137,23 +137,6 @@
                                 <tr>
                                     <td class="text-center">{{ $stock->due_date->format('d-m-Y') }}</td>
                                     <td class="text-center">{{ $stock->quantity }}</td>
-                                </tr>
-                            @endforeach
-                            </tbody>
-                        </table>
-                    </div>
-                @endif
-
-                @if (count($product_specs) > 0)
-                    <div class="card card-body mt-3">
-                        <h5 class="mb-3">{{ __('Product Specs') }}</h5>
-
-                        <table class="table table-striped table-specs">
-                            <tbody>
-                            @foreach($product_specs as $product_spec)
-                                <tr>
-                                    <th>{{ $product_spec->name }}</th>
-                                    <td>{{ $product_spec->value }}</td>
                                 </tr>
                             @endforeach
                             </tbody>

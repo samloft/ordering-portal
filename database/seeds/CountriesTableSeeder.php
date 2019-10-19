@@ -11,7 +11,7 @@ class CountriesTableSeeder extends Seeder
      */
     public function run()
     {
-        if (DB::table('countries')->count() == 0) {
+        if (DB::table('countries')->count() === 0) {
             DB::table('countries')->insert([
                 ['name' => 'UK'],
                 ['name' => 'AFGHANISTAN'],

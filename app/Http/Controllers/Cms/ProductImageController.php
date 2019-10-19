@@ -2,8 +2,8 @@
 
 namespace App\Http\Controllers\Cms;
 
-use App\Models\Prices;
-use App\Models\Products;
+use App\Models\Price;
+use App\Models\Product;
 use Illuminate\Contracts\View\Factory;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
@@ -31,11 +31,11 @@ class ProductImageController extends Controller
      */
     public function missingImages(): array
     {
-        $product_list = Prices::productList();
+        $product_list = Price::productList();
         $missing_images = [];
 
         foreach ($product_list as $product) {
-            $image = Products::checkImage(encodeUrl($product->product));
+            $image = Product::checkImage(encodeUrl($product->product));
 
             if (!$image['found']) {
                 $missing_images[] = [

@@ -11,18 +11,18 @@ class CreatePricesTable extends Migration
      *
      * @return void
      */
-    public function up()
+    public function up(): void
     {
-        Schema::create('prices', function (Blueprint $table) {
+        Schema::create('prices', static function (Blueprint $table) {
             $table->string('customer_code');
             $table->string('product');
             $table->float('price');
-            $table->float('break1');
-            $table->float('price1');
-            $table->float('break2');
-            $table->float('price2');
-            $table->float('break3');
-            $table->float('price3');
+            $table->float('break1')->nullable();
+            $table->float('price1')->nullable();
+            $table->float('break2')->nullable();
+            $table->float('price2')->nullable();
+            $table->float('break3')->nullable();
+            $table->float('price3')->nullable();
 
             $table->primary(['customer_code', 'product']);
             $table->index(['product', 'customer_code']);
@@ -34,7 +34,7 @@ class CreatePricesTable extends Migration
      *
      * @return void
      */
-    public function down()
+    public function down(): void
     {
         Schema::dropIfExists('prices');
     }

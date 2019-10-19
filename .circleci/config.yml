@@ -70,19 +70,19 @@ jobs:
           name: PHPUnit Tests
           command: ./vendor/bin/phpunit
 
-      - run:
-          name: Install NPM
-          command: npm install
-
-      - save_cache:
-          key: node-v4-{{ checksum "package.json" }}
-          paths:
-            - node_modules
-            - ~/.yarn
-
-      - run:
-          name: Build assets
-          command: npm run production
+#      - run:
+#          name: Install NPM
+#          command: npm install
+#
+#      - save_cache:
+#          key: node-v4-{{ checksum "package.json" }}
+#          paths:
+#            - node_modules
+#            - ~/.yarn
+#
+#      - run:
+#          name: Build assets
+#          command: npm run production
 
       - run:
           name: Merge to Staging

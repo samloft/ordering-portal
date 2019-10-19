@@ -1,12 +1,12 @@
 @extends('layout.master')
 
-@section('page.title', 'Products')
+@section('page.title', 'Product')
 
 @section('content')
-    <div class="row">
+    <div class="flex">
         @include('products.sidebar')
 
-        <div class="col">
+        <div class="w-auto">
             @include('home.categories')
         </div>
     </div>

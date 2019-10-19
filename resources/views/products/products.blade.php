@@ -1,9 +1,9 @@
 @extends('layout.master')
 
-@section('page.title', 'Products')
+@section('page.title', 'Product')
 
 @section('content')
-    <div class="row">
+    <div class="flex">
         @include('products.sidebar')
 
         <div class="col">
@@ -47,20 +47,20 @@
                             <div class="row">
                                 <div class="col">
                                     <h2 class="section-title">
-                                        <a href="/products/view/{{ encodeUrl($product->product) }}">{{ $product->name }}</a>
+                                        <a href="/products/view/{{ encodeUrl($product->code) }}">{{ $product->name }}</a>
                                     </h2>
 
                                     <div class="row product-details">
                                         <div class="col-sm-auto">
                                             <div class="product-list-image">
-                                                <img id="enlarge-image" alt="{{ $product->product }}"
-                                                     src="{{ \Storage::disk('public')->exists('product_images/' . encodeUrl($product->product) . '.png') ? asset('product_images/' . encodeUrl($product->product) . '.png') : asset('images/no-image.png') }}">
+                                                <img id="enlarge-image" alt="{{ $product->code }}"
+                                                     src="{{ \Storage::disk('public')->exists('product_images/' . encodeUrl($product->code) . '.png') ? asset('product_images/' . encodeUrl($product->code) . '.png') : asset('images/no-image.png') }}">
                                             </div>
                                         </div>
                                         <div class="col-lg pt-2 pl-0">
                                             <h5>
                                                 {{ __('Product Code: ') }}
-                                                <span id="product-code" class="primary-font">{{ $product->product }}</span>
+                                                <span id="product-code" class="primary-font">{{ $product->code }}</span>
                                             </h5>
                                             <h5>
                                                 {{ __('Unit Type: ') }}
@@ -114,7 +114,7 @@
                                             <input class="form-control form-control-sm mr-1" name="quantity"
                                                    value="{{ $product->order_multiples }}" autocomplete="off">
                                             <span class="input-group-btn">
-                                            <input name="product" value="{{ $product->product }}" autocomplete="off"
+                                            <input name="product" value="{{ $product->code }}" autocomplete="off"
                                                    hidden>
                                 <button class="btn btn-sm btn-primary" type="submit">{{ __('Add To Basket') }}</button>
                             </span>
@@ -124,7 +124,7 @@
                             </div>
                             <div class="row mt-2">
                                 <div class="col">
-                                    <a href="{{ route('products.show', $product->product) }}">
+                                    <a href="{{ route('products.show', $product->code) }}">
                                         <button class="btn btn-sm btn-blue">{{ __('View Details & Availability') }}</button>
                                     </a>
                                 </div>
@@ -135,7 +135,7 @@
                                         </div>
                                         <input class="form-control form-control-sm"
 {{--                                               value="{{ $product->stock->quantity ? $product->stock->quantity : 0 }}"--}}
-                                               value="{{ $product->quantity ? $product->quantity : 0 }}"
+                                               value="{{ $product->quantity ?: 0 }}"
                                                readonly>
                                         <span class="input-group-btn">
                             </span>

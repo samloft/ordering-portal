@@ -1,6 +1,6 @@
 <?php
 
-use App\Models\Products;
+use App\Models\Product;
 use Illuminate\Http\Request;
 
 /*
@@ -20,7 +20,7 @@ Route::group(['middleware' => 'auth:api', 'prefix' => 'v1'], function () {
     });
 
     Route::get('product', function() {
-        return Products::details(request('product'));
+        return Product::details(request('product'));
     });
 });
 

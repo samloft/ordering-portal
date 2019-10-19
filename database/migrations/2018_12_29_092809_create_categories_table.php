@@ -11,15 +11,15 @@ class CreateCategoriesTable extends Migration
      *
      * @return void
      */
-    public function up()
+    public function up(): void
     {
-        Schema::create('categories', function (Blueprint $table) {
+        Schema::create('categories', static function (Blueprint $table) {
             $table->string('product')->limit(20);
-            $table->string('cat1_level1')->nullable()->default(NULL);
-            $table->string('cat1_level2')->nullable()->default(NULL);
-            $table->string('cat1_level3')->nullable()->default(NULL);
-            $table->string('cat1_level4')->nullable()->default(NULL);
-            $table->string('cat1_level5')->nullable()->default(NULL);
+            $table->string('level_1')->nullable();
+            $table->string('level_2')->nullable();
+            $table->string('level_3')->nullable();
+            $table->string('level_4')->nullable();
+            $table->string('level_5')->nullable();
         });
     }
 
@@ -28,7 +28,7 @@ class CreateCategoriesTable extends Migration
      *
      * @return void
      */
-    public function down()
+    public function down(): void
     {
         Schema::dropIfExists('categories');
     }

@@ -29,7 +29,7 @@ class Basket extends Model
      */
     public function productDetails(): BelongsTo
     {
-        return $this->belongsTo(Products::class, 'product', 'product');
+        return $this->belongsTo(Product::class, 'product', 'product');
     }
 
     /**
@@ -39,7 +39,7 @@ class Basket extends Model
      */
     public function prices(): BelongsTo
     {
-        return $this->belongsTo(Prices::class, 'product', 'product')->where('prices.customer_code', auth()->user()->customer->code);
+        return $this->belongsTo(Price::class, 'product', 'product')->where('prices.customer_code', auth()->user()->customer->code);
     }
 
     /**
@@ -126,7 +126,7 @@ class Basket extends Model
 
         foreach ($order_lines as $line) {
             // Check that the customer can buy the product.
-            $customer_can_buy = Products::show($line['product']);
+            $customer_can_buy = Product::show($line['product']);
 
             if ($customer_can_buy) {
                 $product = static::exists($line['product']);
