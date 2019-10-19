@@ -59,16 +59,6 @@ jobs:
             - node-v4-
 
       - run:
-          name: Install NPM
-          command: npm install
-
-      - save_cache:
-          key: node-v4-{{ checksum "package.json" }}
-          paths:
-            - node_modules
-            - ~/.yarn
-
-      - run:
           name: Create MySQL Database
           command: mysql -h 127.0.0.1 -u root -e "CREATE DATABASE shop;"
 
@@ -79,6 +69,20 @@ jobs:
       - run:
           name: PHPUnit Tests
           command: ./vendor/bin/phpunit
+
+      - run:
+          name: Install NPM
+          command: npm install
+
+      - save_cache:
+          key: node-v4-{{ checksum "package.json" }}
+          paths:
+            - node_modules
+            - ~/.yarn
+
+      - run:
+          name: Build assets
+          command: npm run production
 
       - run:
           name: Merge to Staging
