@@ -190,8 +190,7 @@ class UploadController extends Controller
      */
     public function store()
     {
-        $order_lines = OrderImport::show();
-        $added_to_basket = Basket::store($order_lines);
+        $added_to_basket = Basket::store(OrderImport::show());
 
         if ($added_to_basket) {
             OrderImport::clearDown();

@@ -15,7 +15,16 @@ use Storage;
 class Product extends Model
 {
     protected $table = 'products';
+
     public $timestamps = false;
+
+    /**
+     * @return string
+     */
+    public function path(): string
+    {
+        return "/products/view/{$this->code}";
+    }
 
     /**
      * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
@@ -84,11 +93,8 @@ class Product extends Model
     public static function search($search_term)
     {
         return self::whereHas('prices')->where(static function ($query) use ($search_term) {
-            $query->whereRaw('upper(products.code) LIKE \'%'.strtoupper($search_term).'%\'')
-                ->orWhereRaw('upper(name) LIKE \'%'.strtoupper($search_term).'%\'')
-                ->orWhereRaw('upper(description) LIKE \'%'.strtoupper($search_term).'%\'');
-        })->join('prices', 'products.code', '=', 'prices.product')
-            ->leftJoin('stock_levels', 'products.code', '=', 'stock_levels.product')
+            $query->whereRaw('upper(products.code) LIKE \'%'.strtoupper($search_term).'%\'')->orWhereRaw('upper(name) LIKE \'%'.strtoupper($search_term).'%\'')->orWhereRaw('upper(description) LIKE \'%'.strtoupper($search_term).'%\'');
+        })->join('prices', 'products.code', '=', 'prices.product')->leftJoin('stock_levels', 'products.code', '=', 'stock_levels.product')
             //->where('prices.customer_code', auth()->user()->customer->code)
             ->paginate(10);
     }
