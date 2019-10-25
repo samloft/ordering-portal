@@ -188,9 +188,7 @@ class UploadController extends Controller
      */
     public function store()
     {
-        $added_to_basket = Basket::store(OrderImport::show());
-
-        if ($added_to_basket) {
+        if (Basket::store(OrderImport::show())) {
             return view('upload.completed');
         }
 
