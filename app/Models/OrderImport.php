@@ -3,8 +3,6 @@
 namespace App\Models;
 
 use Eloquent;
-use Exception;
-use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Database\Eloquent\Model;
 
 /**
@@ -15,23 +13,22 @@ use Illuminate\Database\Eloquent\Model;
 class OrderImport extends Model
 {
     /**
-     * Clears down any previous uploaded lines for current logged in user.
+     * Clears down any previous uploaded lines for current logged in user/customer combo.
      *
      * @return mixed
-     * @throws Exception
      */
     public static function clearDown()
     {
-        return static::where('user_id', auth()->user()->id)->delete();
+        return static::where('user_id', auth()->user()->id)->where('customer_code', auth()->user()->customer->code)->delete();
     }
 
     /**
      * Adds an array of all validated products that have been uploaded from CSV.
      *
      * @param $lines
-     * @return mixed
+     * @return bool
      */
-    public static function store($lines)
+    public static function store($lines): bool
     {
         return static::insert($lines);
     }
@@ -39,10 +36,10 @@ class OrderImport extends Model
     /**
      * Return all order import lines based on customer.
      *
-     * @return OrderImport[]|Collection
+     * @return array
      */
-    public static function show()
+    public static function show(): array
     {
-        return static::where('customer_code', auth()->user()->customer->code)->get()->toArray();
+        return static::where('user_id', auth()->user()->id)->where('customer_code', auth()->user()->customer->code)->get()->toArray();
     }
 }
