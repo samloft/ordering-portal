@@ -12,7 +12,7 @@
     <div class="bg-white rounded shadow-md p-6">
         @include('layout.alerts')
 
-        @if ($order['errors'] > 0)
+        @if ($product_lines['errors'] > 0)
             <div class="alert alert-danger" role="alert">
                 <div class="alert-body">
                     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" class="alert-icon">
@@ -21,7 +21,7 @@
                               d="M13.41 12l2.83 2.83a1 1 0 0 1-1.41 1.41L12 13.41l-2.83 2.83a1 1 0 1 1-1.41-1.41L10.59 12 7.76 9.17a1 1 0 0 1 1.41-1.41L12 10.59l2.83-2.83a1 1 0 0 1 1.41 1.41L13.41 12z"></path>
                     </svg>
                     <div>
-                        <p class="alert-title">{{ $order['errors'] . __(' Errors Found!') }}</p>
+                        <p class="alert-title">{{ $product_lines['errors'] . __(' Errors Found!') }}</p>
                         <p class="alert-text">{{ __('Lines in red will not be added to your basket.') }}</p>
                     </div>
                 </div>
@@ -34,12 +34,14 @@
                 <th>{{ __('Product') }}</th>
                 <th>{{ __('Quantity') }}</th>
                 <th class="text-right">{{ __('Status') }}</th>
-                <th class="text-right">{{ __('Passed Price (Net)') }}</th>
-                <th class="text-right">{{ __('Actual Price (Net)') }}</th>
+                @if($product_lines['prices_passed'])
+                    <th class="text-right">{{ __('Passed Price (Net)') }}</th>
+                    <th class="text-right">{{ __('Actual Price (Net)') }}</th>
+                @endif
             </tr>
             </thead>
             <tbody>
-            @foreach ($order as $line)
+            @foreach ($product_lines as $line)
                 @if ($line['product'])
                     <tr>
 
@@ -61,9 +63,11 @@
                             @endif
                         </td>
 
-                        <td class="text-right {{ $line['price_match_error'] ? 'bg-info' : '' }}">{{ $line['passed_price'] ?: '' }}</td>
+                        @if($product_lines['prices_passed'])
+                            <td class="text-right {{ $line['price_match_error'] ? 'bg-info' : '' }}">{{ $line['passed_price'] ?: '' }}</td>
 
-                        <td class="text-right {{ $line['price_match_error'] ? 'bg-info' : '' }}">{{ $line['price'] ?: '' }}</td>
+                            <td class="text-right {{ $line['price_match_error'] ? 'bg-info' : '' }}">{{ $line['price'] ?: '' }}</td>
+                        @endif
                     </tr>
                 @endif
             @endforeach

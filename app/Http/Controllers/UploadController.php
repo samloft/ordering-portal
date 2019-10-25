@@ -37,27 +37,20 @@ class UploadController extends Controller
             'csv_file' => 'required|mimes:csv,txt',
         ]);
 
-        $order_lines = array_map('str_getcsv', file(request()->file('csv_file')));
-
-        $order = [];
         $upload = [];
         $errors = 0;
         $warnings = 0;
+        $prices_passed = false;
 
-        foreach ($order_lines as $key => $value) {
+        foreach (array_map('str_getcsv', file(request()->file('csv_file'))) as $key => $value) {
             $product_code = $value[0];
             $product_qty = (int) str_replace([',', '.'], '', $value[1]);
-            $product_price = null;
-            $price_match = false;
+            $product_price = $value[2] ?? null;
             $error_message = null;
             $warning_message = null;
 
-            if (isset($value[2])) {
-                $product_price = $value[2];
-            }
-
             if ($product_code && $product_qty > 0) {
-                $product = Product::show($value[0]);
+                $product = Product::show($product_code);
 
                 if (! $product || $product->not_sold === 'Y') {
                     $errors++;
@@ -65,58 +58,29 @@ class UploadController extends Controller
                 }
 
                 if ($product_price) {
-                    $price_match = $product_price !== $product->price;
+                    $prices_passed = true;
+                    $price_match = ($product_price !== $product->price);
+                } else {
+                    $price_match = null;
                 }
 
-                if (isset($product->price)) {
-                    if (isset($product->order_multiples)) {
-                        $order[] = [
-                            'product' => $product_code,
-                            'quantity' => $product_qty,
-                            'old_quantity' => $product_qty,
-                            'passed_price' => $product_price,
-                            'price' => $product->price,
-                            'price_match_error' => $price_match,
-                            'multiples' => $product->order_multiples,
-                            'validation' => [
-                                'error' => $error_message,
-                                'warning' => $warning_message,
-                            ],
-                        ];
-                    } else {
-                        $order[] = [
-                            'product' => $product_code,
-                            'quantity' => $product_qty,
-                            'old_quantity' => $product_qty,
-                            'passed_price' => $product_price,
-                            'price' => $product->price,
-                            'price_match_error' => $price_match,
-                            'multiples' => 1,
-                            'validation' => [
-                                'error' => $error_message,
-                                'warning' => $warning_message,
-                            ],
-                        ];
-                    }
-                } else {
-                    $order[] = [
-                        'product' => $product_code,
-                        'quantity' => $product_qty,
-                        'old_quantity' => $product_qty,
-                        'passed_price' => $product_price,
-                        'price' => null,
-                        'price_match_error' => $price_match,
-                        'multiples' => $product->order_multiples ?? 1,
-                        'validation' => [
-                            'error' => $error_message,
-                            'warning' => $warning_message,
-                        ],
-                    ];
-                }
+                $order[] = [
+                    'product' => $product_code,
+                    'quantity' => $product_qty,
+                    'old_quantity' => $product_qty,
+                    'passed_price' => $product_price,
+                    'price' => $product->price ?? null,
+                    'price_match_error' => $price_match,
+                    'multiples' => $product->order_multiples ?? 1,
+                    'validation' => [
+                        'error' => $error_message,
+                        'warning' => $warning_message,
+                    ],
+                ];
             }
         }
 
-        if (! $order) {
+        if (! isset($order)) {
             return back()->with('error', 'No products found, please check your file is formatted correctly...');
         }
 
@@ -168,16 +132,15 @@ class UploadController extends Controller
             }
         }
 
-        $order = $product_lines;
-
         if (! OrderImport::store($upload)) {
             return back()->with('error', 'An unknown error occurred, please try uploading again.');
         }
 
-        $order['errors'] = $errors;
-        $order['warnings'] = $warnings;
+        $product_lines['prices_passed'] = $prices_passed;
+        $product_lines['errors'] = $errors;
+        $product_lines['warnings'] = $warnings;
 
-        return view('upload.validated', compact('order'));
+        return view('upload.validated', compact('product_lines'));
     }
 
     /**
