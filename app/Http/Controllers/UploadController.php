@@ -5,17 +5,16 @@ namespace App\Http\Controllers;
 use App\Models\Basket;
 use App\Models\OrderImport;
 use App\Models\Product;
-use Exception;
-use Illuminate\Contracts\View\Factory;
-use Illuminate\Http\RedirectResponse;
-use Illuminate\View\View;
+use Illuminate\Contracts\View\Factory as FactoryAlias;
+use Illuminate\Http\RedirectResponse as RedirectResponseAlias;
+use Illuminate\View\View as ViewAlias;
 
 class UploadController extends Controller
 {
     /**
      * Display the CSV upload page.
      *
-     * @return Factory|View
+     * @return FactoryAlias|ViewAlias
      */
     public function index()
     {
@@ -26,8 +25,7 @@ class UploadController extends Controller
      * Take a CSV file and validate each line, validating products and qty and merging duplicated products. Then looping over the new array
      * and check the merged lines for order multiple quantity and increasing as needed.
      *
-     * @return Factory|RedirectResponse|View
-     * @throws Exception
+     * @return FactoryAlias|RedirectResponseAlias|ViewAlias
      */
     public function validation()
     {
@@ -146,8 +144,7 @@ class UploadController extends Controller
     /**
      * When the user clicks "Add to basket" after validation has finished, copy the temp lines in the upload table to the users basket.
      *
-     * @return Factory|RedirectResponse|View
-     * @throws Exception
+     * @return FactoryAlias|RedirectResponseAlias|ViewAlias
      */
     public function store()
     {
