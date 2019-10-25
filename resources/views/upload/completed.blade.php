@@ -5,8 +5,9 @@
 @section('content')
     <h1 class="text-center font-semi-bold text-2xl mb-3">
         {{ __('Upload Completed') }}
-        <span
-            class="block text-lg font-thin">{{ __('Your order upload has been completed') }}</span>
+        <span class="block text-lg font-thin">
+            {{ __('Your order upload has been completed') }}
+        </span>
     </h1>
 
     <div class="bg-white rounded shadow-md p-6">

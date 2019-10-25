@@ -5,8 +5,9 @@
 @section('content')
     <h1 class="text-center font-semi-bold text-2xl mb-3">
         {{ __('Order Validation') }}
-        <span
-            class="block text-lg font-thin">{{ __('Your order has been validated, please check it over and click the "Add order to basket" button below to finish.') }}</span>
+        <span class="block text-lg font-thin">
+            {{ __('Your order has been validated, please check it over and click the "Add order to basket" button below to finish.') }}
+        </span>
     </h1>
 
     <div class="bg-white rounded shadow-md p-6">
@@ -45,15 +46,15 @@
                 @if ($line['product'])
                     <tr>
 
-                        <td class="{{ $line['validation']['error'] ? 'bg-danger' : ($line['validation']['warning'] ? 'bg-warning' : '') }}">
+                        <td class="{{ $line['validation']['error'] ? 'bg-danger' : ($line['validation']['warning'] ?? 'bg-warning') }}">
                             {{ $line['product'] }}
                         </td>
 
-                        <td class="text-right {{ $line['validation']['error'] ? 'bg-danger' : ($line['validation']['warning'] ? 'bg-warning' : '') }}">
+                        <td class="text-right {{ $line['validation']['error'] ? 'bg-danger' : ($line['validation']['warning'] ?? 'bg-warning') }}">
                             {{ $line['quantity'] }}
                         </td>
 
-                        <td class="text-right {{ $line['validation']['error'] ? 'bg-danger' : ($line['validation']['warning'] ? 'bg-warning' : '') }}">
+                        <td class="text-right {{ $line['validation']['error'] ? 'bg-danger' : ($line['validation']['warning'] ?? 'bg-warning') }}">
                             @if ($line['validation']['error'])
                                 {{ $line['validation']['error'] }} <i class="fas fa-times-circle"></i>
                             @elseif ($line['validation']['warning'])
@@ -73,11 +74,11 @@
             @endforeach
             </tbody>
         </table>
+    </div>
 
-        <div class="text-right mt-5">
-            <a href="{{ route('upload-completed') }}">
-                <button class="button button-primary">{{ __('Add Order To Basket') }}</button>
-            </a>
-        </div>
+    <div class="text-right mt-5">
+        <a href="{{ route('upload-completed') }}">
+            <button class="button button-primary">{{ __('Add Order To Basket') }}</button>
+        </a>
     </div>
 @endsection
