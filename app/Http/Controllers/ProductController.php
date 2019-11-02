@@ -40,7 +40,7 @@ class ProductController extends Controller
         $current_level = 0;
 
         foreach ($categories as $level) {
-            if ($level !== null) {
+            if ($level) {
                 $current_level++;
             }
         }

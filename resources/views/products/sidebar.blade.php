@@ -1,4 +1,4 @@
-<div class="w-1/4">
+<div class="w-1/4 pr-5">
     @if (auth()->user()->admin || count(auth()->user()->customers) > 0)
         <h4 class="uppercase mb-3 font-medium tracking-wider">{{ __('Change Customer') }}</h4>
 
@@ -72,11 +72,11 @@
 
     <div class="row mb-2">
         <div class="col">
-            <h4 class="uppercase mb-3 font-medium tracking-wider">{{ __('Category') }}</h4>
+            <h4 class="uppercase mb-3 font-medium tracking-wider">{{ __('Categories') }}</h4>
 
-            <ul class="categories list-group w-100">
+            <ul class="">
                 @foreach($category_list as $key => $category)
-                    <li class="list-group-item cat-{{ $key }}">
+                    <li class="py-2">
                         <a href="{{ route('products', $category_list[$key]['url']) }}">
                             {{ $category_list[$key]['name'] }}
                             @if (count($category_list[$key]['sub']) > 0)
@@ -87,9 +87,9 @@
                         </a>
                     </li>
                     @if ($categories['level_1'] === $category_list[$key]['name'] && count($category_list[$key]['sub']) > 0)
-                        <ul class="list-group sub-category">
+                        <ul class="">
                             @foreach ($category_list[$key]['sub'] as $level_2)
-                                <li class="list-group-item">
+                                <li class="py-1 pl-2">
                                     <a href="{{ route('products', [$category_list[$key]['url'], $level_2['url']]) }}"
                                        class="{{ $categories['level_2'] === $level_2['name'] ? 'font-weight-bold' : '' }}">
                                         {{ $level_2['name'] }}
@@ -100,9 +100,9 @@
                                     </a>
                                 </li>
                                 @if ($categories['level_2'] === $level_2['name'] && count($level_2['sub']) > 0)
-                                    <ul class="list-group sub-category">
+                                    <ul class="pl-4">
                                         @foreach ($level_2['sub'] as $level_3)
-                                            <li class="list-group-item">
+                                            <li class="py-1">
                                                 <a href="{{ route('products', [$category_list[$key]['url'], $level_2['url'], $level_3['url']]) }}"
                                                    class="{{ $categories['level_3'] === $level_3['name'] ? 'font-weight-bold' : '' }}">
                                                     {{ $level_3['name'] }}

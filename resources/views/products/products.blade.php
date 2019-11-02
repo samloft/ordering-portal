@@ -6,10 +6,10 @@
     <div class="flex">
         @include('products.sidebar')
 
-        <div class="col">
+        <div class="w-3/4">
             @include('products.breadcrumbs')
 
-            @if (!isset($sub_category_list) && count($products) == 0)
+            @if (!isset($sub_category_list) && count($products) === 0)
                 <div class="card card-body text-center">
                     <h4>{{ __('No products found.') }}</h4>
                 </div>

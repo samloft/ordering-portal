@@ -6,7 +6,7 @@
     <div class="flex">
         @include('products.sidebar')
 
-        <div class="col">
+        <div class="w-3/4">
             @if ($product)
                 @include('products.breadcrumbs')
 

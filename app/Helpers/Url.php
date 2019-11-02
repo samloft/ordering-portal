@@ -43,6 +43,10 @@ function encodeUrl($url_string)
  */
 function decodeUrl($url_string)
 {
+    if (!$url_string) {
+        return null;
+    }
+
     $characters = urlCharacters();
 
     return urldecode(str_replace(
