@@ -19,7 +19,7 @@
                                 <div class="col-sm-auto">
                                     <div class="product-view-image">
                                         <img id="enlarge-image"
-                                             src="{{ Storage::disk('public')->exists('product_images/' . encodeUrl($product->product) . '.png') ? asset('/product_images/' . encodeUrl($product->product) . '.png') : asset('images/no-image.png') }}">
+                                             src="{{ $product->image() }}">
                                     </div>
                                 </div>
                                 <div class="col-lg pt-2 pl-0">
@@ -150,7 +150,7 @@
             @endif
 
             <div class="text-right mt-4">
-                <button class="btn btn-blue" onclick="window.history.back();">Return to products</button>
+                <button class="button button-primary" onclick="window.history.back();">Return to products</button>
             </div>
         </div>
     </div>

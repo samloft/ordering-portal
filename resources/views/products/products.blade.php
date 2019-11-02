@@ -54,7 +54,7 @@
                                         <div class="col-sm-auto">
                                             <div class="product-list-image">
                                                 <img id="enlarge-image" alt="{{ $product->code }}"
-                                                     src="{{ \Storage::disk('public')->exists('product_images/' . encodeUrl($product->code) . '.png') ? asset('product_images/' . encodeUrl($product->code) . '.png') : asset('images/no-image.png') }}">
+                                                     src="{{ $product->image() }}">
                                             </div>
                                         </div>
                                         <div class="col-lg pt-2 pl-0">

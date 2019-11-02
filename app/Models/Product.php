@@ -27,6 +27,20 @@ class Product extends Model
     }
 
     /**
+     * @return string
+     */
+    public function image(): string
+    {
+        $image = str_replace('/', '^', $this->code).'.png';
+
+        if(Storage::disk('public')->exists('product_images/'.$image)) {
+            return asset('product_images/'.$image);
+        }
+
+        return asset('images/no-image.png');
+    }
+
+    /**
      * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
      */
     public function prices(): BelongsTo
