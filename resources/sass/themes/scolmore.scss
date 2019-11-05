@@ -12,3 +12,33 @@
     --icon-primary: rgba(130, 202, 156, 1.0);
     --icon-secondary: rgba(155, 239, 188, 0.63);
 }
+
+.categories-nav {
+    .top-level:nth-child(1) {
+        background-color: rgba(254, 245, 108, 1.0);
+    }
+
+    .top-level:nth-child(2) {
+        background-color: rgba(229, 235, 139, 1.0);
+    }
+
+    .top-level:nth-child(3) {
+        background-color: rgba(198, 224, 159, 1.0);
+    }
+
+    .top-level:nth-child(4) {
+        background-color: rgba(167, 216, 184, 1.0);
+    }
+
+    .top-level:nth-child(5) {
+        background-color: rgba(130, 206, 202, 1.0);
+    }
+
+    .top-level:nth-child(6) {
+        background-color: rgba(104, 185, 196, 1.0);
+    }
+
+    .top-level:nth-child(7) {
+        background-color: rgba(0, 186, 198, 1.0);
+    }
+}

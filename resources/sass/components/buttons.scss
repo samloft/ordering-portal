@@ -25,3 +25,9 @@
 .button-block {
     @apply .w-full;
 }
+
+.sidebar {
+    .add-basket {
+        @apply .button .button-primary .flex-grow .p-0;
+    }
+}

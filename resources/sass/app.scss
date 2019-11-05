@@ -18,10 +18,6 @@ a > img {
     }
 }
 
-@import 'themes/scolmore';
-@import 'themes/unicrimp';
-@import 'themes/ovia';
-
 @import 'components/header';
 @import 'components/navigation';
 @import 'components/footer';
@@ -32,3 +28,9 @@ a > img {
 @import 'components/icons';
 @import 'components/alerts';
 @import 'components/tables';
+@import 'components/categories';
+@import 'components/headings';
+
+@import 'themes/scolmore';
+@import 'themes/unicrimp';
+@import 'themes/ovia';

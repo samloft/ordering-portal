@@ -1,0 +1,25 @@
+.categories-nav {
+    a {
+        @apply .py-2 .px-2 .block;
+    }
+
+    .active {
+        @apply .font-medium;
+    }
+
+    .top-level {
+        @apply .shadow;
+    }
+
+    .top-level:first-of-type {
+        @apply .rounded-t-lg;
+    }
+
+    .top-level:last-of-type {
+        @apply .rounded-b-lg;
+    }
+
+    .sub-categories {
+        @apply .bg-white .text-sm;
+    }
+}
