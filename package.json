@@ -20,6 +20,7 @@
         "webpack": "^4.41.0"
     },
     "dependencies": {
+        "postcss-custom-properties": "^9.0.2",
         "tailwindcss": "^1.1.2",
         "vue": "^2.6.10"
     }
