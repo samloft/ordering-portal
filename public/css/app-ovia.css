@@ -700,22 +700,27 @@ video {
 }
 
 .bg-brand-primary{
+  background-color: rgba(2, 163, 218, 1.0);
   background-color: var(--button-primary-color);
 }
 
 .bg-background_primary-color{
+  background-color: rgba(2, 163, 218, 1.0);
   background-color: var(--background-primary-color);
 }
 
 .bg-background_primary-text{
+  background-color: rgb(255, 255, 255);
   background-color: var(--background-primary-text);
 }
 
 .bg-background_invert-color{
+  background-color: rgba(1, 113, 153, 1.0);
   background-color: var(--background-invert-color);
 }
 
 .bg-background_invert-text{
+  background-color: rgb(255, 255, 255);
   background-color: var(--background-invert-text);
 }
 
@@ -728,10 +733,12 @@ video {
 }
 
 .bg-button-primary_color{
+  background-color: rgba(2, 163, 218, 1.0);
   background-color: var(--button-primary-color);
 }
 
 .bg-button-primary_text{
+  background-color: rgb(255, 255, 255);
   background-color: var(--button-primary-text);
 }
 
@@ -1132,22 +1139,27 @@ video {
 }
 
 .hover\:bg-brand-primary:hover{
+  background-color: rgba(2, 163, 218, 1.0);
   background-color: var(--button-primary-color);
 }
 
 .hover\:bg-background_primary-color:hover{
+  background-color: rgba(2, 163, 218, 1.0);
   background-color: var(--background-primary-color);
 }
 
 .hover\:bg-background_primary-text:hover{
+  background-color: rgb(255, 255, 255);
   background-color: var(--background-primary-text);
 }
 
 .hover\:bg-background_invert-color:hover{
+  background-color: rgba(1, 113, 153, 1.0);
   background-color: var(--background-invert-color);
 }
 
 .hover\:bg-background_invert-text:hover{
+  background-color: rgb(255, 255, 255);
   background-color: var(--background-invert-text);
 }
 
@@ -1160,10 +1172,12 @@ video {
 }
 
 .hover\:bg-button-primary_color:hover{
+  background-color: rgba(2, 163, 218, 1.0);
   background-color: var(--button-primary-color);
 }
 
 .hover\:bg-button-primary_text:hover{
+  background-color: rgb(255, 255, 255);
   background-color: var(--button-primary-text);
 }
 
@@ -1564,22 +1578,27 @@ video {
 }
 
 .focus\:bg-brand-primary:focus{
+  background-color: rgba(2, 163, 218, 1.0);
   background-color: var(--button-primary-color);
 }
 
 .focus\:bg-background_primary-color:focus{
+  background-color: rgba(2, 163, 218, 1.0);
   background-color: var(--background-primary-color);
 }
 
 .focus\:bg-background_primary-text:focus{
+  background-color: rgb(255, 255, 255);
   background-color: var(--background-primary-text);
 }
 
 .focus\:bg-background_invert-color:focus{
+  background-color: rgba(1, 113, 153, 1.0);
   background-color: var(--background-invert-color);
 }
 
 .focus\:bg-background_invert-text:focus{
+  background-color: rgb(255, 255, 255);
   background-color: var(--background-invert-text);
 }
 
@@ -1592,10 +1611,12 @@ video {
 }
 
 .focus\:bg-button-primary_color:focus{
+  background-color: rgba(2, 163, 218, 1.0);
   background-color: var(--button-primary-color);
 }
 
 .focus\:bg-button-primary_text:focus{
+  background-color: rgb(255, 255, 255);
   background-color: var(--button-primary-text);
 }
 
@@ -2076,22 +2097,27 @@ video {
 }
 
 .border-brand-primary{
+  border-color: rgba(2, 163, 218, 1.0);
   border-color: var(--button-primary-color);
 }
 
 .border-background_primary-color{
+  border-color: rgba(2, 163, 218, 1.0);
   border-color: var(--background-primary-color);
 }
 
 .border-background_primary-text{
+  border-color: rgb(255, 255, 255);
   border-color: var(--background-primary-text);
 }
 
 .border-background_invert-color{
+  border-color: rgba(1, 113, 153, 1.0);
   border-color: var(--background-invert-color);
 }
 
 .border-background_invert-text{
+  border-color: rgb(255, 255, 255);
   border-color: var(--background-invert-text);
 }
 
@@ -2104,10 +2130,12 @@ video {
 }
 
 .border-button-primary_color{
+  border-color: rgba(2, 163, 218, 1.0);
   border-color: var(--button-primary-color);
 }
 
 .border-button-primary_text{
+  border-color: rgb(255, 255, 255);
   border-color: var(--button-primary-text);
 }
 
@@ -2508,22 +2536,27 @@ video {
 }
 
 .hover\:border-brand-primary:hover{
+  border-color: rgba(2, 163, 218, 1.0);
   border-color: var(--button-primary-color);
 }
 
 .hover\:border-background_primary-color:hover{
+  border-color: rgba(2, 163, 218, 1.0);
   border-color: var(--background-primary-color);
 }
 
 .hover\:border-background_primary-text:hover{
+  border-color: rgb(255, 255, 255);
   border-color: var(--background-primary-text);
 }
 
 .hover\:border-background_invert-color:hover{
+  border-color: rgba(1, 113, 153, 1.0);
   border-color: var(--background-invert-color);
 }
 
 .hover\:border-background_invert-text:hover{
+  border-color: rgb(255, 255, 255);
   border-color: var(--background-invert-text);
 }
 
@@ -2536,10 +2569,12 @@ video {
 }
 
 .hover\:border-button-primary_color:hover{
+  border-color: rgba(2, 163, 218, 1.0);
   border-color: var(--button-primary-color);
 }
 
 .hover\:border-button-primary_text:hover{
+  border-color: rgb(255, 255, 255);
   border-color: var(--button-primary-text);
 }
 
@@ -2940,22 +2975,27 @@ video {
 }
 
 .focus\:border-brand-primary:focus{
+  border-color: rgba(2, 163, 218, 1.0);
   border-color: var(--button-primary-color);
 }
 
 .focus\:border-background_primary-color:focus{
+  border-color: rgba(2, 163, 218, 1.0);
   border-color: var(--background-primary-color);
 }
 
 .focus\:border-background_primary-text:focus{
+  border-color: rgb(255, 255, 255);
   border-color: var(--background-primary-text);
 }
 
 .focus\:border-background_invert-color:focus{
+  border-color: rgba(1, 113, 153, 1.0);
   border-color: var(--background-invert-color);
 }
 
 .focus\:border-background_invert-text:focus{
+  border-color: rgb(255, 255, 255);
   border-color: var(--background-invert-text);
 }
 
@@ -2968,10 +3008,12 @@ video {
 }
 
 .focus\:border-button-primary_color:focus{
+  border-color: rgba(2, 163, 218, 1.0);
   border-color: var(--button-primary-color);
 }
 
 .focus\:border-button-primary_text:focus{
+  border-color: rgb(255, 255, 255);
   border-color: var(--button-primary-text);
 }
 
@@ -6218,102 +6260,127 @@ video {
 }
 
 .placeholder-brand-primary::-webkit-input-placeholder{
+  color: rgba(2, 163, 218, 1.0);
   color: var(--button-primary-color);
 }
 
 .placeholder-brand-primary::-moz-placeholder{
+  color: rgba(2, 163, 218, 1.0);
   color: var(--button-primary-color);
 }
 
 .placeholder-brand-primary:-ms-input-placeholder{
+  color: rgba(2, 163, 218, 1.0);
   color: var(--button-primary-color);
 }
 
 .placeholder-brand-primary::-ms-input-placeholder{
+  color: rgba(2, 163, 218, 1.0);
   color: var(--button-primary-color);
 }
 
 .placeholder-brand-primary::placeholder{
+  color: rgba(2, 163, 218, 1.0);
   color: var(--button-primary-color);
 }
 
 .placeholder-background_primary-color::-webkit-input-placeholder{
+  color: rgba(2, 163, 218, 1.0);
   color: var(--background-primary-color);
 }
 
 .placeholder-background_primary-color::-moz-placeholder{
+  color: rgba(2, 163, 218, 1.0);
   color: var(--background-primary-color);
 }
 
 .placeholder-background_primary-color:-ms-input-placeholder{
+  color: rgba(2, 163, 218, 1.0);
   color: var(--background-primary-color);
 }
 
 .placeholder-background_primary-color::-ms-input-placeholder{
+  color: rgba(2, 163, 218, 1.0);
   color: var(--background-primary-color);
 }
 
 .placeholder-background_primary-color::placeholder{
+  color: rgba(2, 163, 218, 1.0);
   color: var(--background-primary-color);
 }
 
 .placeholder-background_primary-text::-webkit-input-placeholder{
+  color: rgb(255, 255, 255);
   color: var(--background-primary-text);
 }
 
 .placeholder-background_primary-text::-moz-placeholder{
+  color: rgb(255, 255, 255);
   color: var(--background-primary-text);
 }
 
 .placeholder-background_primary-text:-ms-input-placeholder{
+  color: rgb(255, 255, 255);
   color: var(--background-primary-text);
 }
 
 .placeholder-background_primary-text::-ms-input-placeholder{
+  color: rgb(255, 255, 255);
   color: var(--background-primary-text);
 }
 
 .placeholder-background_primary-text::placeholder{
+  color: rgb(255, 255, 255);
   color: var(--background-primary-text);
 }
 
 .placeholder-background_invert-color::-webkit-input-placeholder{
+  color: rgba(1, 113, 153, 1.0);
   color: var(--background-invert-color);
 }
 
 .placeholder-background_invert-color::-moz-placeholder{
+  color: rgba(1, 113, 153, 1.0);
   color: var(--background-invert-color);
 }
 
 .placeholder-background_invert-color:-ms-input-placeholder{
+  color: rgba(1, 113, 153, 1.0);
   color: var(--background-invert-color);
 }
 
 .placeholder-background_invert-color::-ms-input-placeholder{
+  color: rgba(1, 113, 153, 1.0);
   color: var(--background-invert-color);
 }
 
 .placeholder-background_invert-color::placeholder{
+  color: rgba(1, 113, 153, 1.0);
   color: var(--background-invert-color);
 }
 
 .placeholder-background_invert-text::-webkit-input-placeholder{
+  color: rgb(255, 255, 255);
   color: var(--background-invert-text);
 }
 
 .placeholder-background_invert-text::-moz-placeholder{
+  color: rgb(255, 255, 255);
   color: var(--background-invert-text);
 }
 
 .placeholder-background_invert-text:-ms-input-placeholder{
+  color: rgb(255, 255, 255);
   color: var(--background-invert-text);
 }
 
 .placeholder-background_invert-text::-ms-input-placeholder{
+  color: rgb(255, 255, 255);
   color: var(--background-invert-text);
 }
 
 .placeholder-background_invert-text::placeholder{
+  color: rgb(255, 255, 255);
   color: var(--background-invert-text);
 }
 
@@ -6358,42 +6425,52 @@ video {
 }
 
 .placeholder-button-primary_color::-webkit-input-placeholder{
+  color: rgba(2, 163, 218, 1.0);
   color: var(--button-primary-color);
 }
 
 .placeholder-button-primary_color::-moz-placeholder{
+  color: rgba(2, 163, 218, 1.0);
   color: var(--button-primary-color);
 }
 
 .placeholder-button-primary_color:-ms-input-placeholder{
+  color: rgba(2, 163, 218, 1.0);
   color: var(--button-primary-color);
 }
 
 .placeholder-button-primary_color::-ms-input-placeholder{
+  color: rgba(2, 163, 218, 1.0);
   color: var(--button-primary-color);
 }
 
 .placeholder-button-primary_color::placeholder{
+  color: rgba(2, 163, 218, 1.0);
   color: var(--button-primary-color);
 }
 
 .placeholder-button-primary_text::-webkit-input-placeholder{
+  color: rgb(255, 255, 255);
   color: var(--button-primary-text);
 }
 
 .placeholder-button-primary_text::-moz-placeholder{
+  color: rgb(255, 255, 255);
   color: var(--button-primary-text);
 }
 
 .placeholder-button-primary_text:-ms-input-placeholder{
+  color: rgb(255, 255, 255);
   color: var(--button-primary-text);
 }
 
 .placeholder-button-primary_text::-ms-input-placeholder{
+  color: rgb(255, 255, 255);
   color: var(--button-primary-text);
 }
 
 .placeholder-button-primary_text::placeholder{
+  color: rgb(255, 255, 255);
   color: var(--button-primary-text);
 }
 
@@ -8378,102 +8455,127 @@ video {
 }
 
 .focus\:placeholder-brand-primary:focus::-webkit-input-placeholder{
+  color: rgba(2, 163, 218, 1.0);
   color: var(--button-primary-color);
 }
 
 .focus\:placeholder-brand-primary:focus::-moz-placeholder{
+  color: rgba(2, 163, 218, 1.0);
   color: var(--button-primary-color);
 }
 
 .focus\:placeholder-brand-primary:focus:-ms-input-placeholder{
+  color: rgba(2, 163, 218, 1.0);
   color: var(--button-primary-color);
 }
 
 .focus\:placeholder-brand-primary:focus::-ms-input-placeholder{
+  color: rgba(2, 163, 218, 1.0);
   color: var(--button-primary-color);
 }
 
 .focus\:placeholder-brand-primary:focus::placeholder{
+  color: rgba(2, 163, 218, 1.0);
   color: var(--button-primary-color);
 }
 
 .focus\:placeholder-background_primary-color:focus::-webkit-input-placeholder{
+  color: rgba(2, 163, 218, 1.0);
   color: var(--background-primary-color);
 }
 
 .focus\:placeholder-background_primary-color:focus::-moz-placeholder{
+  color: rgba(2, 163, 218, 1.0);
   color: var(--background-primary-color);
 }
 
 .focus\:placeholder-background_primary-color:focus:-ms-input-placeholder{
+  color: rgba(2, 163, 218, 1.0);
   color: var(--background-primary-color);
 }
 
 .focus\:placeholder-background_primary-color:focus::-ms-input-placeholder{
+  color: rgba(2, 163, 218, 1.0);
   color: var(--background-primary-color);
 }
 
 .focus\:placeholder-background_primary-color:focus::placeholder{
+  color: rgba(2, 163, 218, 1.0);
   color: var(--background-primary-color);
 }
 
 .focus\:placeholder-background_primary-text:focus::-webkit-input-placeholder{
+  color: rgb(255, 255, 255);
   color: var(--background-primary-text);
 }
 
 .focus\:placeholder-background_primary-text:focus::-moz-placeholder{
+  color: rgb(255, 255, 255);
   color: var(--background-primary-text);
 }
 
 .focus\:placeholder-background_primary-text:focus:-ms-input-placeholder{
+  color: rgb(255, 255, 255);
   color: var(--background-primary-text);
 }
 
 .focus\:placeholder-background_primary-text:focus::-ms-input-placeholder{
+  color: rgb(255, 255, 255);
   color: var(--background-primary-text);
 }
 
 .focus\:placeholder-background_primary-text:focus::placeholder{
+  color: rgb(255, 255, 255);
   color: var(--background-primary-text);
 }
 
 .focus\:placeholder-background_invert-color:focus::-webkit-input-placeholder{
+  color: rgba(1, 113, 153, 1.0);
   color: var(--background-invert-color);
 }
 
 .focus\:placeholder-background_invert-color:focus::-moz-placeholder{
+  color: rgba(1, 113, 153, 1.0);
   color: var(--background-invert-color);
 }
 
 .focus\:placeholder-background_invert-color:focus:-ms-input-placeholder{
+  color: rgba(1, 113, 153, 1.0);
   color: var(--background-invert-color);
 }
 
 .focus\:placeholder-background_invert-color:focus::-ms-input-placeholder{
+  color: rgba(1, 113, 153, 1.0);
   color: var(--background-invert-color);
 }
 
 .focus\:placeholder-background_invert-color:focus::placeholder{
+  color: rgba(1, 113, 153, 1.0);
   color: var(--background-invert-color);
 }
 
 .focus\:placeholder-background_invert-text:focus::-webkit-input-placeholder{
+  color: rgb(255, 255, 255);
   color: var(--background-invert-text);
 }
 
 .focus\:placeholder-background_invert-text:focus::-moz-placeholder{
+  color: rgb(255, 255, 255);
   color: var(--background-invert-text);
 }
 
 .focus\:placeholder-background_invert-text:focus:-ms-input-placeholder{
+  color: rgb(255, 255, 255);
   color: var(--background-invert-text);
 }
 
 .focus\:placeholder-background_invert-text:focus::-ms-input-placeholder{
+  color: rgb(255, 255, 255);
   color: var(--background-invert-text);
 }
 
 .focus\:placeholder-background_invert-text:focus::placeholder{
+  color: rgb(255, 255, 255);
   color: var(--background-invert-text);
 }
 
@@ -8518,42 +8620,52 @@ video {
 }
 
 .focus\:placeholder-button-primary_color:focus::-webkit-input-placeholder{
+  color: rgba(2, 163, 218, 1.0);
   color: var(--button-primary-color);
 }
 
 .focus\:placeholder-button-primary_color:focus::-moz-placeholder{
+  color: rgba(2, 163, 218, 1.0);
   color: var(--button-primary-color);
 }
 
 .focus\:placeholder-button-primary_color:focus:-ms-input-placeholder{
+  color: rgba(2, 163, 218, 1.0);
   color: var(--button-primary-color);
 }
 
 .focus\:placeholder-button-primary_color:focus::-ms-input-placeholder{
+  color: rgba(2, 163, 218, 1.0);
   color: var(--button-primary-color);
 }
 
 .focus\:placeholder-button-primary_color:focus::placeholder{
+  color: rgba(2, 163, 218, 1.0);
   color: var(--button-primary-color);
 }
 
 .focus\:placeholder-button-primary_text:focus::-webkit-input-placeholder{
+  color: rgb(255, 255, 255);
   color: var(--button-primary-text);
 }
 
 .focus\:placeholder-button-primary_text:focus::-moz-placeholder{
+  color: rgb(255, 255, 255);
   color: var(--button-primary-text);
 }
 
 .focus\:placeholder-button-primary_text:focus:-ms-input-placeholder{
+  color: rgb(255, 255, 255);
   color: var(--button-primary-text);
 }
 
 .focus\:placeholder-button-primary_text:focus::-ms-input-placeholder{
+  color: rgb(255, 255, 255);
   color: var(--button-primary-text);
 }
 
 .focus\:placeholder-button-primary_text:focus::placeholder{
+  color: rgb(255, 255, 255);
   color: var(--button-primary-text);
 }
 
@@ -10761,22 +10873,27 @@ video {
 }
 
 .text-brand-primary{
+  color: rgba(2, 163, 218, 1.0);
   color: var(--button-primary-color);
 }
 
 .text-background_primary-color{
+  color: rgba(2, 163, 218, 1.0);
   color: var(--background-primary-color);
 }
 
 .text-background_primary-text{
+  color: rgb(255, 255, 255);
   color: var(--background-primary-text);
 }
 
 .text-background_invert-color{
+  color: rgba(1, 113, 153, 1.0);
   color: var(--background-invert-color);
 }
 
 .text-background_invert-text{
+  color: rgb(255, 255, 255);
   color: var(--background-invert-text);
 }
 
@@ -10789,10 +10906,12 @@ video {
 }
 
 .text-button-primary_color{
+  color: rgba(2, 163, 218, 1.0);
   color: var(--button-primary-color);
 }
 
 .text-button-primary_text{
+  color: rgb(255, 255, 255);
   color: var(--button-primary-text);
 }
 
@@ -11193,22 +11312,27 @@ video {
 }
 
 .hover\:text-brand-primary:hover{
+  color: rgba(2, 163, 218, 1.0);
   color: var(--button-primary-color);
 }
 
 .hover\:text-background_primary-color:hover{
+  color: rgba(2, 163, 218, 1.0);
   color: var(--background-primary-color);
 }
 
 .hover\:text-background_primary-text:hover{
+  color: rgb(255, 255, 255);
   color: var(--background-primary-text);
 }
 
 .hover\:text-background_invert-color:hover{
+  color: rgba(1, 113, 153, 1.0);
   color: var(--background-invert-color);
 }
 
 .hover\:text-background_invert-text:hover{
+  color: rgb(255, 255, 255);
   color: var(--background-invert-text);
 }
 
@@ -11221,10 +11345,12 @@ video {
 }
 
 .hover\:text-button-primary_color:hover{
+  color: rgba(2, 163, 218, 1.0);
   color: var(--button-primary-color);
 }
 
 .hover\:text-button-primary_text:hover{
+  color: rgb(255, 255, 255);
   color: var(--button-primary-text);
 }
 
@@ -11625,22 +11751,27 @@ video {
 }
 
 .focus\:text-brand-primary:focus{
+  color: rgba(2, 163, 218, 1.0);
   color: var(--button-primary-color);
 }
 
 .focus\:text-background_primary-color:focus{
+  color: rgba(2, 163, 218, 1.0);
   color: var(--background-primary-color);
 }
 
 .focus\:text-background_primary-text:focus{
+  color: rgb(255, 255, 255);
   color: var(--background-primary-text);
 }
 
 .focus\:text-background_invert-color:focus{
+  color: rgba(1, 113, 153, 1.0);
   color: var(--background-invert-color);
 }
 
 .focus\:text-background_invert-text:focus{
+  color: rgb(255, 255, 255);
   color: var(--background-invert-text);
 }
 
@@ -11653,10 +11784,12 @@ video {
 }
 
 .focus\:text-button-primary_color:focus{
+  color: rgba(2, 163, 218, 1.0);
   color: var(--button-primary-color);
 }
 
 .focus\:text-button-primary_text:focus{
+  color: rgb(255, 255, 255);
   color: var(--button-primary-text);
 }
 
@@ -12519,7 +12652,9 @@ a > img:hover {
 }
 
 header {
+  background-color: rgba(2, 163, 218, 1.0);
   background-color: var(--background-primary-color);
+  color: rgb(255, 255, 255);
   color: var(--background-primary-text);
 }
 
@@ -12550,7 +12685,9 @@ header .dropdown-menu-item:hover {
 
 nav.menu-wrapper {
   box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.1), 0 1px 2px 0 rgba(0, 0, 0, 0.06);
+  background-color: rgba(1, 113, 153, 1.0);
   background-color: var(--background-invert-color);
+  color: rgb(255, 255, 255);
   color: var(--background-invert-text);
 }
 
@@ -12583,10 +12720,12 @@ nav.menu-wrapper .menu .menu-item a {
 }
 
 nav.menu-wrapper .menu .menu-item a.active {
+  background-color: rgba(2, 163, 218, 1.0);
   background-color: var(--background-primary-color);
 }
 
 nav.menu-wrapper .menu .menu-item a:hover {
+  background-color: rgba(2, 163, 218, 1.0);
   background-color: var(--background-primary-color);
 }
 
@@ -12601,7 +12740,9 @@ nav.menu-wrapper .menu .menu-item:not(:last-child):after {
 }
 
 footer {
+  background-color: rgba(2, 163, 218, 1.0);
   background-color: var(--background-primary-color);
+  color: rgb(255, 255, 255);
   color: var(--background-primary-text);
 }
 
@@ -12702,7 +12843,9 @@ main.auth .auth-form h1 span {
 
 main.auth .auth-details {
   display: none;
+  background-color: rgba(2, 163, 218, 1.0);
   background-color: var(--background-primary-color);
+  color: rgb(255, 255, 255);
   color: var(--background-primary-text);
   height: 100%;
 }
@@ -12779,6 +12922,7 @@ main.auth .auth-details p {
 }
 
 .auth .form-checkbox:checked {
+  color: rgba(2, 163, 218, 1.0);
   color: var(--button-primary-color);
   border-color: transparent;
   background-image: url("data:image/svg+xml,%3csvg viewBox='0 0 16 16' fill='white' xmlns='http://www.w3.org/2000/svg'%3e%3cpath d='M5.707 7.293a1 1 0 0 0-1.414 1.414l2 2a1 1 0 0 0 1.414 0l4-4a1 1 0 0 0-1.414-1.414L7 8.586 5.707 7.293z'/%3e%3c/svg%3e");
@@ -12800,6 +12944,7 @@ main.auth .auth-details p {
 .input-wrap {
   width: 100%;
   text-align: center;
+  color: rgba(2, 163, 218, 1.0);
   color: var(--button-primary-color);
   position: relative;
   overflow: hidden;
@@ -12827,6 +12972,7 @@ main.auth .auth-details p {
 .custom-file-label {
   border-radius: 0.5rem;
   border-width: 1px;
+  border-color: rgba(2, 163, 218, 1.0);
   border-color: var(--button-primary-color);
   font-size: 1.25rem;
   font-weight: bold;
@@ -12878,7 +13024,9 @@ select {
 }
 
 .button-primary {
+  background-color: rgba(2, 163, 218, 1.0);
   background-color: var(--button-primary-color);
+  color: rgb(255, 255, 255);
   color: var(--button-primary-text);
 }
 
@@ -12904,7 +13052,9 @@ select {
   padding: 0.75rem;
   line-height: 1;
   box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.1), 0 1px 2px 0 rgba(0, 0, 0, 0.06);
+  background-color: rgba(2, 163, 218, 1.0);
   background-color: var(--button-primary-color);
+  color: rgb(255, 255, 255);
   color: var(--button-primary-text);
   flex-grow: 1;
   padding: 0;
@@ -13060,55 +13210,7 @@ table tbody td {
   letter-spacing: 0.05em;
 }
 
-:root .theme-scolmore {
-  --background-primary-color: rgba(49, 49, 49, 1.0);
-  --background-primary-text: rgb(255, 255, 255);
-  --background-invert-color: rgba(92, 93, 95, 1.0);
-  --background-invert-text: rgb(255, 255, 255);
-  --button-primary-color: rgba(200, 220, 105, 1.0);
-  --button-primary-text: rgb(0, 0, 0);
-  --button-secondary-color: rgba(130, 202, 156, 1.0);
-  --button-secondary-text: rgb(0, 0, 0);
-  --icon-primary: rgba(130, 202, 156, 1.0);
-  --icon-secondary: rgba(155, 239, 188, 0.63);
-}
-
-:root .categories-nav .top-level:nth-child(1) {
-  background-color: #fef56c;
-}
-
-:root .categories-nav .top-level:nth-child(2) {
-  background-color: #e5eb8b;
-}
-
-:root .categories-nav .top-level:nth-child(3) {
-  background-color: #c6e09f;
-}
-
-:root .categories-nav .top-level:nth-child(4) {
-  background-color: #a7d8b8;
-}
-
-:root .categories-nav .top-level:nth-child(5) {
-  background-color: #82ceca;
-}
-
-:root .categories-nav .top-level:nth-child(6) {
-  background-color: #68b9c4;
-}
-
-:root .categories-nav .top-level:nth-child(7) {
-  background-color: #00bac6;
-}
-
-.theme-unicrimp {
-  --background-primary-color: rgba(234, 25, 33, 1.0);
-  --background-primary-text: rgb(255, 255, 255);
-  --button-primary-color: rgba(234, 25, 33, 1.0);
-  --button-primary-text: rgb(255, 255, 255);
-}
-
-.theme-ovia {
+:root {
   --background-primary-color: rgba(2, 163, 218, 1.0);
   --background-primary-text: rgb(255, 255, 255);
   --background-invert-color: rgba(1, 113, 153, 1.0);
@@ -13187,22 +13289,27 @@ table tbody td {
   }
 
   .sm\:bg-brand-primary{
+    background-color: rgba(2, 163, 218, 1.0);
     background-color: var(--button-primary-color);
   }
 
   .sm\:bg-background_primary-color{
+    background-color: rgba(2, 163, 218, 1.0);
     background-color: var(--background-primary-color);
   }
 
   .sm\:bg-background_primary-text{
+    background-color: rgb(255, 255, 255);
     background-color: var(--background-primary-text);
   }
 
   .sm\:bg-background_invert-color{
+    background-color: rgba(1, 113, 153, 1.0);
     background-color: var(--background-invert-color);
   }
 
   .sm\:bg-background_invert-text{
+    background-color: rgb(255, 255, 255);
     background-color: var(--background-invert-text);
   }
 
@@ -13215,10 +13322,12 @@ table tbody td {
   }
 
   .sm\:bg-button-primary_color{
+    background-color: rgba(2, 163, 218, 1.0);
     background-color: var(--button-primary-color);
   }
 
   .sm\:bg-button-primary_text{
+    background-color: rgb(255, 255, 255);
     background-color: var(--button-primary-text);
   }
 
@@ -13619,22 +13728,27 @@ table tbody td {
   }
 
   .sm\:hover\:bg-brand-primary:hover{
+    background-color: rgba(2, 163, 218, 1.0);
     background-color: var(--button-primary-color);
   }
 
   .sm\:hover\:bg-background_primary-color:hover{
+    background-color: rgba(2, 163, 218, 1.0);
     background-color: var(--background-primary-color);
   }
 
   .sm\:hover\:bg-background_primary-text:hover{
+    background-color: rgb(255, 255, 255);
     background-color: var(--background-primary-text);
   }
 
   .sm\:hover\:bg-background_invert-color:hover{
+    background-color: rgba(1, 113, 153, 1.0);
     background-color: var(--background-invert-color);
   }
 
   .sm\:hover\:bg-background_invert-text:hover{
+    background-color: rgb(255, 255, 255);
     background-color: var(--background-invert-text);
   }
 
@@ -13647,10 +13761,12 @@ table tbody td {
   }
 
   .sm\:hover\:bg-button-primary_color:hover{
+    background-color: rgba(2, 163, 218, 1.0);
     background-color: var(--button-primary-color);
   }
 
   .sm\:hover\:bg-button-primary_text:hover{
+    background-color: rgb(255, 255, 255);
     background-color: var(--button-primary-text);
   }
 
@@ -14051,22 +14167,27 @@ table tbody td {
   }
 
   .sm\:focus\:bg-brand-primary:focus{
+    background-color: rgba(2, 163, 218, 1.0);
     background-color: var(--button-primary-color);
   }
 
   .sm\:focus\:bg-background_primary-color:focus{
+    background-color: rgba(2, 163, 218, 1.0);
     background-color: var(--background-primary-color);
   }
 
   .sm\:focus\:bg-background_primary-text:focus{
+    background-color: rgb(255, 255, 255);
     background-color: var(--background-primary-text);
   }
 
   .sm\:focus\:bg-background_invert-color:focus{
+    background-color: rgba(1, 113, 153, 1.0);
     background-color: var(--background-invert-color);
   }
 
   .sm\:focus\:bg-background_invert-text:focus{
+    background-color: rgb(255, 255, 255);
     background-color: var(--background-invert-text);
   }
 
@@ -14079,10 +14200,12 @@ table tbody td {
   }
 
   .sm\:focus\:bg-button-primary_color:focus{
+    background-color: rgba(2, 163, 218, 1.0);
     background-color: var(--button-primary-color);
   }
 
   .sm\:focus\:bg-button-primary_text:focus{
+    background-color: rgb(255, 255, 255);
     background-color: var(--button-primary-text);
   }
 
@@ -14563,22 +14686,27 @@ table tbody td {
   }
 
   .sm\:border-brand-primary{
+    border-color: rgba(2, 163, 218, 1.0);
     border-color: var(--button-primary-color);
   }
 
   .sm\:border-background_primary-color{
+    border-color: rgba(2, 163, 218, 1.0);
     border-color: var(--background-primary-color);
   }
 
   .sm\:border-background_primary-text{
+    border-color: rgb(255, 255, 255);
     border-color: var(--background-primary-text);
   }
 
   .sm\:border-background_invert-color{
+    border-color: rgba(1, 113, 153, 1.0);
     border-color: var(--background-invert-color);
   }
 
   .sm\:border-background_invert-text{
+    border-color: rgb(255, 255, 255);
     border-color: var(--background-invert-text);
   }
 
@@ -14591,10 +14719,12 @@ table tbody td {
   }
 
   .sm\:border-button-primary_color{
+    border-color: rgba(2, 163, 218, 1.0);
     border-color: var(--button-primary-color);
   }
 
   .sm\:border-button-primary_text{
+    border-color: rgb(255, 255, 255);
     border-color: var(--button-primary-text);
   }
 
@@ -14995,22 +15125,27 @@ table tbody td {
   }
 
   .sm\:hover\:border-brand-primary:hover{
+    border-color: rgba(2, 163, 218, 1.0);
     border-color: var(--button-primary-color);
   }
 
   .sm\:hover\:border-background_primary-color:hover{
+    border-color: rgba(2, 163, 218, 1.0);
     border-color: var(--background-primary-color);
   }
 
   .sm\:hover\:border-background_primary-text:hover{
+    border-color: rgb(255, 255, 255);
     border-color: var(--background-primary-text);
   }
 
   .sm\:hover\:border-background_invert-color:hover{
+    border-color: rgba(1, 113, 153, 1.0);
     border-color: var(--background-invert-color);
   }
 
   .sm\:hover\:border-background_invert-text:hover{
+    border-color: rgb(255, 255, 255);
     border-color: var(--background-invert-text);
   }
 
@@ -15023,10 +15158,12 @@ table tbody td {
   }
 
   .sm\:hover\:border-button-primary_color:hover{
+    border-color: rgba(2, 163, 218, 1.0);
     border-color: var(--button-primary-color);
   }
 
   .sm\:hover\:border-button-primary_text:hover{
+    border-color: rgb(255, 255, 255);
     border-color: var(--button-primary-text);
   }
 
@@ -15427,22 +15564,27 @@ table tbody td {
   }
 
   .sm\:focus\:border-brand-primary:focus{
+    border-color: rgba(2, 163, 218, 1.0);
     border-color: var(--button-primary-color);
   }
 
   .sm\:focus\:border-background_primary-color:focus{
+    border-color: rgba(2, 163, 218, 1.0);
     border-color: var(--background-primary-color);
   }
 
   .sm\:focus\:border-background_primary-text:focus{
+    border-color: rgb(255, 255, 255);
     border-color: var(--background-primary-text);
   }
 
   .sm\:focus\:border-background_invert-color:focus{
+    border-color: rgba(1, 113, 153, 1.0);
     border-color: var(--background-invert-color);
   }
 
   .sm\:focus\:border-background_invert-text:focus{
+    border-color: rgb(255, 255, 255);
     border-color: var(--background-invert-text);
   }
 
@@ -15455,10 +15597,12 @@ table tbody td {
   }
 
   .sm\:focus\:border-button-primary_color:focus{
+    border-color: rgba(2, 163, 218, 1.0);
     border-color: var(--button-primary-color);
   }
 
   .sm\:focus\:border-button-primary_text:focus{
+    border-color: rgb(255, 255, 255);
     border-color: var(--button-primary-text);
   }
 
@@ -18705,102 +18849,127 @@ table tbody td {
   }
 
   .sm\:placeholder-brand-primary::-webkit-input-placeholder{
+    color: rgba(2, 163, 218, 1.0);
     color: var(--button-primary-color);
   }
 
   .sm\:placeholder-brand-primary::-moz-placeholder{
+    color: rgba(2, 163, 218, 1.0);
     color: var(--button-primary-color);
   }
 
   .sm\:placeholder-brand-primary:-ms-input-placeholder{
+    color: rgba(2, 163, 218, 1.0);
     color: var(--button-primary-color);
   }
 
   .sm\:placeholder-brand-primary::-ms-input-placeholder{
+    color: rgba(2, 163, 218, 1.0);
     color: var(--button-primary-color);
   }
 
   .sm\:placeholder-brand-primary::placeholder{
+    color: rgba(2, 163, 218, 1.0);
     color: var(--button-primary-color);
   }
 
   .sm\:placeholder-background_primary-color::-webkit-input-placeholder{
+    color: rgba(2, 163, 218, 1.0);
     color: var(--background-primary-color);
   }
 
   .sm\:placeholder-background_primary-color::-moz-placeholder{
+    color: rgba(2, 163, 218, 1.0);
     color: var(--background-primary-color);
   }
 
   .sm\:placeholder-background_primary-color:-ms-input-placeholder{
+    color: rgba(2, 163, 218, 1.0);
     color: var(--background-primary-color);
   }
 
   .sm\:placeholder-background_primary-color::-ms-input-placeholder{
+    color: rgba(2, 163, 218, 1.0);
     color: var(--background-primary-color);
   }
 
   .sm\:placeholder-background_primary-color::placeholder{
+    color: rgba(2, 163, 218, 1.0);
     color: var(--background-primary-color);
   }
 
   .sm\:placeholder-background_primary-text::-webkit-input-placeholder{
+    color: rgb(255, 255, 255);
     color: var(--background-primary-text);
   }
 
   .sm\:placeholder-background_primary-text::-moz-placeholder{
+    color: rgb(255, 255, 255);
     color: var(--background-primary-text);
   }
 
   .sm\:placeholder-background_primary-text:-ms-input-placeholder{
+    color: rgb(255, 255, 255);
     color: var(--background-primary-text);
   }
 
   .sm\:placeholder-background_primary-text::-ms-input-placeholder{
+    color: rgb(255, 255, 255);
     color: var(--background-primary-text);
   }
 
   .sm\:placeholder-background_primary-text::placeholder{
+    color: rgb(255, 255, 255);
     color: var(--background-primary-text);
   }
 
   .sm\:placeholder-background_invert-color::-webkit-input-placeholder{
+    color: rgba(1, 113, 153, 1.0);
     color: var(--background-invert-color);
   }
 
   .sm\:placeholder-background_invert-color::-moz-placeholder{
+    color: rgba(1, 113, 153, 1.0);
     color: var(--background-invert-color);
   }
 
   .sm\:placeholder-background_invert-color:-ms-input-placeholder{
+    color: rgba(1, 113, 153, 1.0);
     color: var(--background-invert-color);
   }
 
   .sm\:placeholder-background_invert-color::-ms-input-placeholder{
+    color: rgba(1, 113, 153, 1.0);
     color: var(--background-invert-color);
   }
 
   .sm\:placeholder-background_invert-color::placeholder{
+    color: rgba(1, 113, 153, 1.0);
     color: var(--background-invert-color);
   }
 
   .sm\:placeholder-background_invert-text::-webkit-input-placeholder{
+    color: rgb(255, 255, 255);
     color: var(--background-invert-text);
   }
 
   .sm\:placeholder-background_invert-text::-moz-placeholder{
+    color: rgb(255, 255, 255);
     color: var(--background-invert-text);
   }
 
   .sm\:placeholder-background_invert-text:-ms-input-placeholder{
+    color: rgb(255, 255, 255);
     color: var(--background-invert-text);
   }
 
   .sm\:placeholder-background_invert-text::-ms-input-placeholder{
+    color: rgb(255, 255, 255);
     color: var(--background-invert-text);
   }
 
   .sm\:placeholder-background_invert-text::placeholder{
+    color: rgb(255, 255, 255);
     color: var(--background-invert-text);
   }
 
@@ -18845,42 +19014,52 @@ table tbody td {
   }
 
   .sm\:placeholder-button-primary_color::-webkit-input-placeholder{
+    color: rgba(2, 163, 218, 1.0);
     color: var(--button-primary-color);
   }
 
   .sm\:placeholder-button-primary_color::-moz-placeholder{
+    color: rgba(2, 163, 218, 1.0);
     color: var(--button-primary-color);
   }
 
   .sm\:placeholder-button-primary_color:-ms-input-placeholder{
+    color: rgba(2, 163, 218, 1.0);
     color: var(--button-primary-color);
   }
 
   .sm\:placeholder-button-primary_color::-ms-input-placeholder{
+    color: rgba(2, 163, 218, 1.0);
     color: var(--button-primary-color);
   }
 
   .sm\:placeholder-button-primary_color::placeholder{
+    color: rgba(2, 163, 218, 1.0);
     color: var(--button-primary-color);
   }
 
   .sm\:placeholder-button-primary_text::-webkit-input-placeholder{
+    color: rgb(255, 255, 255);
     color: var(--button-primary-text);
   }
 
   .sm\:placeholder-button-primary_text::-moz-placeholder{
+    color: rgb(255, 255, 255);
     color: var(--button-primary-text);
   }
 
   .sm\:placeholder-button-primary_text:-ms-input-placeholder{
+    color: rgb(255, 255, 255);
     color: var(--button-primary-text);
   }
 
   .sm\:placeholder-button-primary_text::-ms-input-placeholder{
+    color: rgb(255, 255, 255);
     color: var(--button-primary-text);
   }
 
   .sm\:placeholder-button-primary_text::placeholder{
+    color: rgb(255, 255, 255);
     color: var(--button-primary-text);
   }
 
@@ -20865,102 +21044,127 @@ table tbody td {
   }
 
   .sm\:focus\:placeholder-brand-primary:focus::-webkit-input-placeholder{
+    color: rgba(2, 163, 218, 1.0);
     color: var(--button-primary-color);
   }
 
   .sm\:focus\:placeholder-brand-primary:focus::-moz-placeholder{
+    color: rgba(2, 163, 218, 1.0);
     color: var(--button-primary-color);
   }
 
   .sm\:focus\:placeholder-brand-primary:focus:-ms-input-placeholder{
+    color: rgba(2, 163, 218, 1.0);
     color: var(--button-primary-color);
   }
 
   .sm\:focus\:placeholder-brand-primary:focus::-ms-input-placeholder{
+    color: rgba(2, 163, 218, 1.0);
     color: var(--button-primary-color);
   }
 
   .sm\:focus\:placeholder-brand-primary:focus::placeholder{
+    color: rgba(2, 163, 218, 1.0);
     color: var(--button-primary-color);
   }
 
   .sm\:focus\:placeholder-background_primary-color:focus::-webkit-input-placeholder{
+    color: rgba(2, 163, 218, 1.0);
     color: var(--background-primary-color);
   }
 
   .sm\:focus\:placeholder-background_primary-color:focus::-moz-placeholder{
+    color: rgba(2, 163, 218, 1.0);
     color: var(--background-primary-color);
   }
 
   .sm\:focus\:placeholder-background_primary-color:focus:-ms-input-placeholder{
+    color: rgba(2, 163, 218, 1.0);
     color: var(--background-primary-color);
   }
 
   .sm\:focus\:placeholder-background_primary-color:focus::-ms-input-placeholder{
+    color: rgba(2, 163, 218, 1.0);
     color: var(--background-primary-color);
   }
 
   .sm\:focus\:placeholder-background_primary-color:focus::placeholder{
+    color: rgba(2, 163, 218, 1.0);
     color: var(--background-primary-color);
   }
 
   .sm\:focus\:placeholder-background_primary-text:focus::-webkit-input-placeholder{
+    color: rgb(255, 255, 255);
     color: var(--background-primary-text);
   }
 
   .sm\:focus\:placeholder-background_primary-text:focus::-moz-placeholder{
+    color: rgb(255, 255, 255);
     color: var(--background-primary-text);
   }
 
   .sm\:focus\:placeholder-background_primary-text:focus:-ms-input-placeholder{
+    color: rgb(255, 255, 255);
     color: var(--background-primary-text);
   }
 
   .sm\:focus\:placeholder-background_primary-text:focus::-ms-input-placeholder{
+    color: rgb(255, 255, 255);
     color: var(--background-primary-text);
   }
 
   .sm\:focus\:placeholder-background_primary-text:focus::placeholder{
+    color: rgb(255, 255, 255);
     color: var(--background-primary-text);
   }
 
   .sm\:focus\:placeholder-background_invert-color:focus::-webkit-input-placeholder{
+    color: rgba(1, 113, 153, 1.0);
     color: var(--background-invert-color);
   }
 
   .sm\:focus\:placeholder-background_invert-color:focus::-moz-placeholder{
+    color: rgba(1, 113, 153, 1.0);
     color: var(--background-invert-color);
   }
 
   .sm\:focus\:placeholder-background_invert-color:focus:-ms-input-placeholder{
+    color: rgba(1, 113, 153, 1.0);
     color: var(--background-invert-color);
   }
 
   .sm\:focus\:placeholder-background_invert-color:focus::-ms-input-placeholder{
+    color: rgba(1, 113, 153, 1.0);
     color: var(--background-invert-color);
   }
 
   .sm\:focus\:placeholder-background_invert-color:focus::placeholder{
+    color: rgba(1, 113, 153, 1.0);
     color: var(--background-invert-color);
   }
 
   .sm\:focus\:placeholder-background_invert-text:focus::-webkit-input-placeholder{
+    color: rgb(255, 255, 255);
     color: var(--background-invert-text);
   }
 
   .sm\:focus\:placeholder-background_invert-text:focus::-moz-placeholder{
+    color: rgb(255, 255, 255);
     color: var(--background-invert-text);
   }
 
   .sm\:focus\:placeholder-background_invert-text:focus:-ms-input-placeholder{
+    color: rgb(255, 255, 255);
     color: var(--background-invert-text);
   }
 
   .sm\:focus\:placeholder-background_invert-text:focus::-ms-input-placeholder{
+    color: rgb(255, 255, 255);
     color: var(--background-invert-text);
   }
 
   .sm\:focus\:placeholder-background_invert-text:focus::placeholder{
+    color: rgb(255, 255, 255);
     color: var(--background-invert-text);
   }
 
@@ -21005,42 +21209,52 @@ table tbody td {
   }
 
   .sm\:focus\:placeholder-button-primary_color:focus::-webkit-input-placeholder{
+    color: rgba(2, 163, 218, 1.0);
     color: var(--button-primary-color);
   }
 
   .sm\:focus\:placeholder-button-primary_color:focus::-moz-placeholder{
+    color: rgba(2, 163, 218, 1.0);
     color: var(--button-primary-color);
   }
 
   .sm\:focus\:placeholder-button-primary_color:focus:-ms-input-placeholder{
+    color: rgba(2, 163, 218, 1.0);
     color: var(--button-primary-color);
   }
 
   .sm\:focus\:placeholder-button-primary_color:focus::-ms-input-placeholder{
+    color: rgba(2, 163, 218, 1.0);
     color: var(--button-primary-color);
   }
 
   .sm\:focus\:placeholder-button-primary_color:focus::placeholder{
+    color: rgba(2, 163, 218, 1.0);
     color: var(--button-primary-color);
   }
 
   .sm\:focus\:placeholder-button-primary_text:focus::-webkit-input-placeholder{
+    color: rgb(255, 255, 255);
     color: var(--button-primary-text);
   }
 
   .sm\:focus\:placeholder-button-primary_text:focus::-moz-placeholder{
+    color: rgb(255, 255, 255);
     color: var(--button-primary-text);
   }
 
   .sm\:focus\:placeholder-button-primary_text:focus:-ms-input-placeholder{
+    color: rgb(255, 255, 255);
     color: var(--button-primary-text);
   }
 
   .sm\:focus\:placeholder-button-primary_text:focus::-ms-input-placeholder{
+    color: rgb(255, 255, 255);
     color: var(--button-primary-text);
   }
 
   .sm\:focus\:placeholder-button-primary_text:focus::placeholder{
+    color: rgb(255, 255, 255);
     color: var(--button-primary-text);
   }
 
@@ -23248,22 +23462,27 @@ table tbody td {
   }
 
   .sm\:text-brand-primary{
+    color: rgba(2, 163, 218, 1.0);
     color: var(--button-primary-color);
   }
 
   .sm\:text-background_primary-color{
+    color: rgba(2, 163, 218, 1.0);
     color: var(--background-primary-color);
   }
 
   .sm\:text-background_primary-text{
+    color: rgb(255, 255, 255);
     color: var(--background-primary-text);
   }
 
   .sm\:text-background_invert-color{
+    color: rgba(1, 113, 153, 1.0);
     color: var(--background-invert-color);
   }
 
   .sm\:text-background_invert-text{
+    color: rgb(255, 255, 255);
     color: var(--background-invert-text);
   }
 
@@ -23276,10 +23495,12 @@ table tbody td {
   }
 
   .sm\:text-button-primary_color{
+    color: rgba(2, 163, 218, 1.0);
     color: var(--button-primary-color);
   }
 
   .sm\:text-button-primary_text{
+    color: rgb(255, 255, 255);
     color: var(--button-primary-text);
   }
 
@@ -23680,22 +23901,27 @@ table tbody td {
   }
 
   .sm\:hover\:text-brand-primary:hover{
+    color: rgba(2, 163, 218, 1.0);
     color: var(--button-primary-color);
   }
 
   .sm\:hover\:text-background_primary-color:hover{
+    color: rgba(2, 163, 218, 1.0);
     color: var(--background-primary-color);
   }
 
   .sm\:hover\:text-background_primary-text:hover{
+    color: rgb(255, 255, 255);
     color: var(--background-primary-text);
   }
 
   .sm\:hover\:text-background_invert-color:hover{
+    color: rgba(1, 113, 153, 1.0);
     color: var(--background-invert-color);
   }
 
   .sm\:hover\:text-background_invert-text:hover{
+    color: rgb(255, 255, 255);
     color: var(--background-invert-text);
   }
 
@@ -23708,10 +23934,12 @@ table tbody td {
   }
 
   .sm\:hover\:text-button-primary_color:hover{
+    color: rgba(2, 163, 218, 1.0);
     color: var(--button-primary-color);
   }
 
   .sm\:hover\:text-button-primary_text:hover{
+    color: rgb(255, 255, 255);
     color: var(--button-primary-text);
   }
 
@@ -24112,22 +24340,27 @@ table tbody td {
   }
 
   .sm\:focus\:text-brand-primary:focus{
+    color: rgba(2, 163, 218, 1.0);
     color: var(--button-primary-color);
   }
 
   .sm\:focus\:text-background_primary-color:focus{
+    color: rgba(2, 163, 218, 1.0);
     color: var(--background-primary-color);
   }
 
   .sm\:focus\:text-background_primary-text:focus{
+    color: rgb(255, 255, 255);
     color: var(--background-primary-text);
   }
 
   .sm\:focus\:text-background_invert-color:focus{
+    color: rgba(1, 113, 153, 1.0);
     color: var(--background-invert-color);
   }
 
   .sm\:focus\:text-background_invert-text:focus{
+    color: rgb(255, 255, 255);
     color: var(--background-invert-text);
   }
 
@@ -24140,10 +24373,12 @@ table tbody td {
   }
 
   .sm\:focus\:text-button-primary_color:focus{
+    color: rgba(2, 163, 218, 1.0);
     color: var(--button-primary-color);
   }
 
   .sm\:focus\:text-button-primary_text:focus{
+    color: rgb(255, 255, 255);
     color: var(--button-primary-text);
   }
 
@@ -25063,22 +25298,27 @@ table tbody td {
   }
 
   .md\:bg-brand-primary{
+    background-color: rgba(2, 163, 218, 1.0);
     background-color: var(--button-primary-color);
   }
 
   .md\:bg-background_primary-color{
+    background-color: rgba(2, 163, 218, 1.0);
     background-color: var(--background-primary-color);
   }
 
   .md\:bg-background_primary-text{
+    background-color: rgb(255, 255, 255);
     background-color: var(--background-primary-text);
   }
 
   .md\:bg-background_invert-color{
+    background-color: rgba(1, 113, 153, 1.0);
     background-color: var(--background-invert-color);
   }
 
   .md\:bg-background_invert-text{
+    background-color: rgb(255, 255, 255);
     background-color: var(--background-invert-text);
   }
 
@@ -25091,10 +25331,12 @@ table tbody td {
   }
 
   .md\:bg-button-primary_color{
+    background-color: rgba(2, 163, 218, 1.0);
     background-color: var(--button-primary-color);
   }
 
   .md\:bg-button-primary_text{
+    background-color: rgb(255, 255, 255);
     background-color: var(--button-primary-text);
   }
 
@@ -25495,22 +25737,27 @@ table tbody td {
   }
 
   .md\:hover\:bg-brand-primary:hover{
+    background-color: rgba(2, 163, 218, 1.0);
     background-color: var(--button-primary-color);
   }
 
   .md\:hover\:bg-background_primary-color:hover{
+    background-color: rgba(2, 163, 218, 1.0);
     background-color: var(--background-primary-color);
   }
 
   .md\:hover\:bg-background_primary-text:hover{
+    background-color: rgb(255, 255, 255);
     background-color: var(--background-primary-text);
   }
 
   .md\:hover\:bg-background_invert-color:hover{
+    background-color: rgba(1, 113, 153, 1.0);
     background-color: var(--background-invert-color);
   }
 
   .md\:hover\:bg-background_invert-text:hover{
+    background-color: rgb(255, 255, 255);
     background-color: var(--background-invert-text);
   }
 
@@ -25523,10 +25770,12 @@ table tbody td {
   }
 
   .md\:hover\:bg-button-primary_color:hover{
+    background-color: rgba(2, 163, 218, 1.0);
     background-color: var(--button-primary-color);
   }
 
   .md\:hover\:bg-button-primary_text:hover{
+    background-color: rgb(255, 255, 255);
     background-color: var(--button-primary-text);
   }
 
@@ -25927,22 +26176,27 @@ table tbody td {
   }
 
   .md\:focus\:bg-brand-primary:focus{
+    background-color: rgba(2, 163, 218, 1.0);
     background-color: var(--button-primary-color);
   }
 
   .md\:focus\:bg-background_primary-color:focus{
+    background-color: rgba(2, 163, 218, 1.0);
     background-color: var(--background-primary-color);
   }
 
   .md\:focus\:bg-background_primary-text:focus{
+    background-color: rgb(255, 255, 255);
     background-color: var(--background-primary-text);
   }
 
   .md\:focus\:bg-background_invert-color:focus{
+    background-color: rgba(1, 113, 153, 1.0);
     background-color: var(--background-invert-color);
   }
 
   .md\:focus\:bg-background_invert-text:focus{
+    background-color: rgb(255, 255, 255);
     background-color: var(--background-invert-text);
   }
 
@@ -25955,10 +26209,12 @@ table tbody td {
   }
 
   .md\:focus\:bg-button-primary_color:focus{
+    background-color: rgba(2, 163, 218, 1.0);
     background-color: var(--button-primary-color);
   }
 
   .md\:focus\:bg-button-primary_text:focus{
+    background-color: rgb(255, 255, 255);
     background-color: var(--button-primary-text);
   }
 
@@ -26439,22 +26695,27 @@ table tbody td {
   }
 
   .md\:border-brand-primary{
+    border-color: rgba(2, 163, 218, 1.0);
     border-color: var(--button-primary-color);
   }
 
   .md\:border-background_primary-color{
+    border-color: rgba(2, 163, 218, 1.0);
     border-color: var(--background-primary-color);
   }
 
   .md\:border-background_primary-text{
+    border-color: rgb(255, 255, 255);
     border-color: var(--background-primary-text);
   }
 
   .md\:border-background_invert-color{
+    border-color: rgba(1, 113, 153, 1.0);
     border-color: var(--background-invert-color);
   }
 
   .md\:border-background_invert-text{
+    border-color: rgb(255, 255, 255);
     border-color: var(--background-invert-text);
   }
 
@@ -26467,10 +26728,12 @@ table tbody td {
   }
 
   .md\:border-button-primary_color{
+    border-color: rgba(2, 163, 218, 1.0);
     border-color: var(--button-primary-color);
   }
 
   .md\:border-button-primary_text{
+    border-color: rgb(255, 255, 255);
     border-color: var(--button-primary-text);
   }
 
@@ -26871,22 +27134,27 @@ table tbody td {
   }
 
   .md\:hover\:border-brand-primary:hover{
+    border-color: rgba(2, 163, 218, 1.0);
     border-color: var(--button-primary-color);
   }
 
   .md\:hover\:border-background_primary-color:hover{
+    border-color: rgba(2, 163, 218, 1.0);
     border-color: var(--background-primary-color);
   }
 
   .md\:hover\:border-background_primary-text:hover{
+    border-color: rgb(255, 255, 255);
     border-color: var(--background-primary-text);
   }
 
   .md\:hover\:border-background_invert-color:hover{
+    border-color: rgba(1, 113, 153, 1.0);
     border-color: var(--background-invert-color);
   }
 
   .md\:hover\:border-background_invert-text:hover{
+    border-color: rgb(255, 255, 255);
     border-color: var(--background-invert-text);
   }
 
@@ -26899,10 +27167,12 @@ table tbody td {
   }
 
   .md\:hover\:border-button-primary_color:hover{
+    border-color: rgba(2, 163, 218, 1.0);
     border-color: var(--button-primary-color);
   }
 
   .md\:hover\:border-button-primary_text:hover{
+    border-color: rgb(255, 255, 255);
     border-color: var(--button-primary-text);
   }
 
@@ -27303,22 +27573,27 @@ table tbody td {
   }
 
   .md\:focus\:border-brand-primary:focus{
+    border-color: rgba(2, 163, 218, 1.0);
     border-color: var(--button-primary-color);
   }
 
   .md\:focus\:border-background_primary-color:focus{
+    border-color: rgba(2, 163, 218, 1.0);
     border-color: var(--background-primary-color);
   }
 
   .md\:focus\:border-background_primary-text:focus{
+    border-color: rgb(255, 255, 255);
     border-color: var(--background-primary-text);
   }
 
   .md\:focus\:border-background_invert-color:focus{
+    border-color: rgba(1, 113, 153, 1.0);
     border-color: var(--background-invert-color);
   }
 
   .md\:focus\:border-background_invert-text:focus{
+    border-color: rgb(255, 255, 255);
     border-color: var(--background-invert-text);
   }
 
@@ -27331,10 +27606,12 @@ table tbody td {
   }
 
   .md\:focus\:border-button-primary_color:focus{
+    border-color: rgba(2, 163, 218, 1.0);
     border-color: var(--button-primary-color);
   }
 
   .md\:focus\:border-button-primary_text:focus{
+    border-color: rgb(255, 255, 255);
     border-color: var(--button-primary-text);
   }
 
@@ -30581,102 +30858,127 @@ table tbody td {
   }
 
   .md\:placeholder-brand-primary::-webkit-input-placeholder{
+    color: rgba(2, 163, 218, 1.0);
     color: var(--button-primary-color);
   }
 
   .md\:placeholder-brand-primary::-moz-placeholder{
+    color: rgba(2, 163, 218, 1.0);
     color: var(--button-primary-color);
   }
 
   .md\:placeholder-brand-primary:-ms-input-placeholder{
+    color: rgba(2, 163, 218, 1.0);
     color: var(--button-primary-color);
   }
 
   .md\:placeholder-brand-primary::-ms-input-placeholder{
+    color: rgba(2, 163, 218, 1.0);
     color: var(--button-primary-color);
   }
 
   .md\:placeholder-brand-primary::placeholder{
+    color: rgba(2, 163, 218, 1.0);
     color: var(--button-primary-color);
   }
 
   .md\:placeholder-background_primary-color::-webkit-input-placeholder{
+    color: rgba(2, 163, 218, 1.0);
     color: var(--background-primary-color);
   }
 
   .md\:placeholder-background_primary-color::-moz-placeholder{
+    color: rgba(2, 163, 218, 1.0);
     color: var(--background-primary-color);
   }
 
   .md\:placeholder-background_primary-color:-ms-input-placeholder{
+    color: rgba(2, 163, 218, 1.0);
     color: var(--background-primary-color);
   }
 
   .md\:placeholder-background_primary-color::-ms-input-placeholder{
+    color: rgba(2, 163, 218, 1.0);
     color: var(--background-primary-color);
   }
 
   .md\:placeholder-background_primary-color::placeholder{
+    color: rgba(2, 163, 218, 1.0);
     color: var(--background-primary-color);
   }
 
   .md\:placeholder-background_primary-text::-webkit-input-placeholder{
+    color: rgb(255, 255, 255);
     color: var(--background-primary-text);
   }
 
   .md\:placeholder-background_primary-text::-moz-placeholder{
+    color: rgb(255, 255, 255);
     color: var(--background-primary-text);
   }
 
   .md\:placeholder-background_primary-text:-ms-input-placeholder{
+    color: rgb(255, 255, 255);
     color: var(--background-primary-text);
   }
 
   .md\:placeholder-background_primary-text::-ms-input-placeholder{
+    color: rgb(255, 255, 255);
     color: var(--background-primary-text);
   }
 
   .md\:placeholder-background_primary-text::placeholder{
+    color: rgb(255, 255, 255);
     color: var(--background-primary-text);
   }
 
   .md\:placeholder-background_invert-color::-webkit-input-placeholder{
+    color: rgba(1, 113, 153, 1.0);
     color: var(--background-invert-color);
   }
 
   .md\:placeholder-background_invert-color::-moz-placeholder{
+    color: rgba(1, 113, 153, 1.0);
     color: var(--background-invert-color);
   }
 
   .md\:placeholder-background_invert-color:-ms-input-placeholder{
+    color: rgba(1, 113, 153, 1.0);
     color: var(--background-invert-color);
   }
 
   .md\:placeholder-background_invert-color::-ms-input-placeholder{
+    color: rgba(1, 113, 153, 1.0);
     color: var(--background-invert-color);
   }
 
   .md\:placeholder-background_invert-color::placeholder{
+    color: rgba(1, 113, 153, 1.0);
     color: var(--background-invert-color);
   }
 
   .md\:placeholder-background_invert-text::-webkit-input-placeholder{
+    color: rgb(255, 255, 255);
     color: var(--background-invert-text);
   }
 
   .md\:placeholder-background_invert-text::-moz-placeholder{
+    color: rgb(255, 255, 255);
     color: var(--background-invert-text);
   }
 
   .md\:placeholder-background_invert-text:-ms-input-placeholder{
+    color: rgb(255, 255, 255);
     color: var(--background-invert-text);
   }
 
   .md\:placeholder-background_invert-text::-ms-input-placeholder{
+    color: rgb(255, 255, 255);
     color: var(--background-invert-text);
   }
 
   .md\:placeholder-background_invert-text::placeholder{
+    color: rgb(255, 255, 255);
     color: var(--background-invert-text);
   }
 
@@ -30721,42 +31023,52 @@ table tbody td {
   }
 
   .md\:placeholder-button-primary_color::-webkit-input-placeholder{
+    color: rgba(2, 163, 218, 1.0);
     color: var(--button-primary-color);
   }
 
   .md\:placeholder-button-primary_color::-moz-placeholder{
+    color: rgba(2, 163, 218, 1.0);
     color: var(--button-primary-color);
   }
 
   .md\:placeholder-button-primary_color:-ms-input-placeholder{
+    color: rgba(2, 163, 218, 1.0);
     color: var(--button-primary-color);
   }
 
   .md\:placeholder-button-primary_color::-ms-input-placeholder{
+    color: rgba(2, 163, 218, 1.0);
     color: var(--button-primary-color);
   }
 
   .md\:placeholder-button-primary_color::placeholder{
+    color: rgba(2, 163, 218, 1.0);
     color: var(--button-primary-color);
   }
 
   .md\:placeholder-button-primary_text::-webkit-input-placeholder{
+    color: rgb(255, 255, 255);
     color: var(--button-primary-text);
   }
 
   .md\:placeholder-button-primary_text::-moz-placeholder{
+    color: rgb(255, 255, 255);
     color: var(--button-primary-text);
   }
 
   .md\:placeholder-button-primary_text:-ms-input-placeholder{
+    color: rgb(255, 255, 255);
     color: var(--button-primary-text);
   }
 
   .md\:placeholder-button-primary_text::-ms-input-placeholder{
+    color: rgb(255, 255, 255);
     color: var(--button-primary-text);
   }
 
   .md\:placeholder-button-primary_text::placeholder{
+    color: rgb(255, 255, 255);
     color: var(--button-primary-text);
   }
 
@@ -32741,102 +33053,127 @@ table tbody td {
   }
 
   .md\:focus\:placeholder-brand-primary:focus::-webkit-input-placeholder{
+    color: rgba(2, 163, 218, 1.0);
     color: var(--button-primary-color);
   }
 
   .md\:focus\:placeholder-brand-primary:focus::-moz-placeholder{
+    color: rgba(2, 163, 218, 1.0);
     color: var(--button-primary-color);
   }
 
   .md\:focus\:placeholder-brand-primary:focus:-ms-input-placeholder{
+    color: rgba(2, 163, 218, 1.0);
     color: var(--button-primary-color);
   }
 
   .md\:focus\:placeholder-brand-primary:focus::-ms-input-placeholder{
+    color: rgba(2, 163, 218, 1.0);
     color: var(--button-primary-color);
   }
 
   .md\:focus\:placeholder-brand-primary:focus::placeholder{
+    color: rgba(2, 163, 218, 1.0);
     color: var(--button-primary-color);
   }
 
   .md\:focus\:placeholder-background_primary-color:focus::-webkit-input-placeholder{
+    color: rgba(2, 163, 218, 1.0);
     color: var(--background-primary-color);
   }
 
   .md\:focus\:placeholder-background_primary-color:focus::-moz-placeholder{
+    color: rgba(2, 163, 218, 1.0);
     color: var(--background-primary-color);
   }
 
   .md\:focus\:placeholder-background_primary-color:focus:-ms-input-placeholder{
+    color: rgba(2, 163, 218, 1.0);
     color: var(--background-primary-color);
   }
 
   .md\:focus\:placeholder-background_primary-color:focus::-ms-input-placeholder{
+    color: rgba(2, 163, 218, 1.0);
     color: var(--background-primary-color);
   }
 
   .md\:focus\:placeholder-background_primary-color:focus::placeholder{
+    color: rgba(2, 163, 218, 1.0);
     color: var(--background-primary-color);
   }
 
   .md\:focus\:placeholder-background_primary-text:focus::-webkit-input-placeholder{
+    color: rgb(255, 255, 255);
     color: var(--background-primary-text);
   }
 
   .md\:focus\:placeholder-background_primary-text:focus::-moz-placeholder{
+    color: rgb(255, 255, 255);
     color: var(--background-primary-text);
   }
 
   .md\:focus\:placeholder-background_primary-text:focus:-ms-input-placeholder{
+    color: rgb(255, 255, 255);
     color: var(--background-primary-text);
   }
 
   .md\:focus\:placeholder-background_primary-text:focus::-ms-input-placeholder{
+    color: rgb(255, 255, 255);
     color: var(--background-primary-text);
   }
 
   .md\:focus\:placeholder-background_primary-text:focus::placeholder{
+    color: rgb(255, 255, 255);
     color: var(--background-primary-text);
   }
 
   .md\:focus\:placeholder-background_invert-color:focus::-webkit-input-placeholder{
+    color: rgba(1, 113, 153, 1.0);
     color: var(--background-invert-color);
   }
 
   .md\:focus\:placeholder-background_invert-color:focus::-moz-placeholder{
+    color: rgba(1, 113, 153, 1.0);
     color: var(--background-invert-color);
   }
 
   .md\:focus\:placeholder-background_invert-color:focus:-ms-input-placeholder{
+    color: rgba(1, 113, 153, 1.0);
     color: var(--background-invert-color);
   }
 
   .md\:focus\:placeholder-background_invert-color:focus::-ms-input-placeholder{
+    color: rgba(1, 113, 153, 1.0);
     color: var(--background-invert-color);
   }
 
   .md\:focus\:placeholder-background_invert-color:focus::placeholder{
+    color: rgba(1, 113, 153, 1.0);
     color: var(--background-invert-color);
   }
 
   .md\:focus\:placeholder-background_invert-text:focus::-webkit-input-placeholder{
+    color: rgb(255, 255, 255);
     color: var(--background-invert-text);
   }
 
   .md\:focus\:placeholder-background_invert-text:focus::-moz-placeholder{
+    color: rgb(255, 255, 255);
     color: var(--background-invert-text);
   }
 
   .md\:focus\:placeholder-background_invert-text:focus:-ms-input-placeholder{
+    color: rgb(255, 255, 255);
     color: var(--background-invert-text);
   }
 
   .md\:focus\:placeholder-background_invert-text:focus::-ms-input-placeholder{
+    color: rgb(255, 255, 255);
     color: var(--background-invert-text);
   }
 
   .md\:focus\:placeholder-background_invert-text:focus::placeholder{
+    color: rgb(255, 255, 255);
     color: var(--background-invert-text);
   }
 
@@ -32881,42 +33218,52 @@ table tbody td {
   }
 
   .md\:focus\:placeholder-button-primary_color:focus::-webkit-input-placeholder{
+    color: rgba(2, 163, 218, 1.0);
     color: var(--button-primary-color);
   }
 
   .md\:focus\:placeholder-button-primary_color:focus::-moz-placeholder{
+    color: rgba(2, 163, 218, 1.0);
     color: var(--button-primary-color);
   }
 
   .md\:focus\:placeholder-button-primary_color:focus:-ms-input-placeholder{
+    color: rgba(2, 163, 218, 1.0);
     color: var(--button-primary-color);
   }
 
   .md\:focus\:placeholder-button-primary_color:focus::-ms-input-placeholder{
+    color: rgba(2, 163, 218, 1.0);
     color: var(--button-primary-color);
   }
 
   .md\:focus\:placeholder-button-primary_color:focus::placeholder{
+    color: rgba(2, 163, 218, 1.0);
     color: var(--button-primary-color);
   }
 
   .md\:focus\:placeholder-button-primary_text:focus::-webkit-input-placeholder{
+    color: rgb(255, 255, 255);
     color: var(--button-primary-text);
   }
 
   .md\:focus\:placeholder-button-primary_text:focus::-moz-placeholder{
+    color: rgb(255, 255, 255);
     color: var(--button-primary-text);
   }
 
   .md\:focus\:placeholder-button-primary_text:focus:-ms-input-placeholder{
+    color: rgb(255, 255, 255);
     color: var(--button-primary-text);
   }
 
   .md\:focus\:placeholder-button-primary_text:focus::-ms-input-placeholder{
+    color: rgb(255, 255, 255);
     color: var(--button-primary-text);
   }
 
   .md\:focus\:placeholder-button-primary_text:focus::placeholder{
+    color: rgb(255, 255, 255);
     color: var(--button-primary-text);
   }
 
@@ -35124,22 +35471,27 @@ table tbody td {
   }
 
   .md\:text-brand-primary{
+    color: rgba(2, 163, 218, 1.0);
     color: var(--button-primary-color);
   }
 
   .md\:text-background_primary-color{
+    color: rgba(2, 163, 218, 1.0);
     color: var(--background-primary-color);
   }
 
   .md\:text-background_primary-text{
+    color: rgb(255, 255, 255);
     color: var(--background-primary-text);
   }
 
   .md\:text-background_invert-color{
+    color: rgba(1, 113, 153, 1.0);
     color: var(--background-invert-color);
   }
 
   .md\:text-background_invert-text{
+    color: rgb(255, 255, 255);
     color: var(--background-invert-text);
   }
 
@@ -35152,10 +35504,12 @@ table tbody td {
   }
 
   .md\:text-button-primary_color{
+    color: rgba(2, 163, 218, 1.0);
     color: var(--button-primary-color);
   }
 
   .md\:text-button-primary_text{
+    color: rgb(255, 255, 255);
     color: var(--button-primary-text);
   }
 
@@ -35556,22 +35910,27 @@ table tbody td {
   }
 
   .md\:hover\:text-brand-primary:hover{
+    color: rgba(2, 163, 218, 1.0);
     color: var(--button-primary-color);
   }
 
   .md\:hover\:text-background_primary-color:hover{
+    color: rgba(2, 163, 218, 1.0);
     color: var(--background-primary-color);
   }
 
   .md\:hover\:text-background_primary-text:hover{
+    color: rgb(255, 255, 255);
     color: var(--background-primary-text);
   }
 
   .md\:hover\:text-background_invert-color:hover{
+    color: rgba(1, 113, 153, 1.0);
     color: var(--background-invert-color);
   }
 
   .md\:hover\:text-background_invert-text:hover{
+    color: rgb(255, 255, 255);
     color: var(--background-invert-text);
   }
 
@@ -35584,10 +35943,12 @@ table tbody td {
   }
 
   .md\:hover\:text-button-primary_color:hover{
+    color: rgba(2, 163, 218, 1.0);
     color: var(--button-primary-color);
   }
 
   .md\:hover\:text-button-primary_text:hover{
+    color: rgb(255, 255, 255);
     color: var(--button-primary-text);
   }
 
@@ -35988,22 +36349,27 @@ table tbody td {
   }
 
   .md\:focus\:text-brand-primary:focus{
+    color: rgba(2, 163, 218, 1.0);
     color: var(--button-primary-color);
   }
 
   .md\:focus\:text-background_primary-color:focus{
+    color: rgba(2, 163, 218, 1.0);
     color: var(--background-primary-color);
   }
 
   .md\:focus\:text-background_primary-text:focus{
+    color: rgb(255, 255, 255);
     color: var(--background-primary-text);
   }
 
   .md\:focus\:text-background_invert-color:focus{
+    color: rgba(1, 113, 153, 1.0);
     color: var(--background-invert-color);
   }
 
   .md\:focus\:text-background_invert-text:focus{
+    color: rgb(255, 255, 255);
     color: var(--background-invert-text);
   }
 
@@ -36016,10 +36382,12 @@ table tbody td {
   }
 
   .md\:focus\:text-button-primary_color:focus{
+    color: rgba(2, 163, 218, 1.0);
     color: var(--button-primary-color);
   }
 
   .md\:focus\:text-button-primary_text:focus{
+    color: rgb(255, 255, 255);
     color: var(--button-primary-text);
   }
 
@@ -36939,22 +37307,27 @@ table tbody td {
   }
 
   .lg\:bg-brand-primary{
+    background-color: rgba(2, 163, 218, 1.0);
     background-color: var(--button-primary-color);
   }
 
   .lg\:bg-background_primary-color{
+    background-color: rgba(2, 163, 218, 1.0);
     background-color: var(--background-primary-color);
   }
 
   .lg\:bg-background_primary-text{
+    background-color: rgb(255, 255, 255);
     background-color: var(--background-primary-text);
   }
 
   .lg\:bg-background_invert-color{
+    background-color: rgba(1, 113, 153, 1.0);
     background-color: var(--background-invert-color);
   }
 
   .lg\:bg-background_invert-text{
+    background-color: rgb(255, 255, 255);
     background-color: var(--background-invert-text);
   }
 
@@ -36967,10 +37340,12 @@ table tbody td {
   }
 
   .lg\:bg-button-primary_color{
+    background-color: rgba(2, 163, 218, 1.0);
     background-color: var(--button-primary-color);
   }
 
   .lg\:bg-button-primary_text{
+    background-color: rgb(255, 255, 255);
     background-color: var(--button-primary-text);
   }
 
@@ -37371,22 +37746,27 @@ table tbody td {
   }
 
   .lg\:hover\:bg-brand-primary:hover{
+    background-color: rgba(2, 163, 218, 1.0);
     background-color: var(--button-primary-color);
   }
 
   .lg\:hover\:bg-background_primary-color:hover{
+    background-color: rgba(2, 163, 218, 1.0);
     background-color: var(--background-primary-color);
   }
 
   .lg\:hover\:bg-background_primary-text:hover{
+    background-color: rgb(255, 255, 255);
     background-color: var(--background-primary-text);
   }
 
   .lg\:hover\:bg-background_invert-color:hover{
+    background-color: rgba(1, 113, 153, 1.0);
     background-color: var(--background-invert-color);
   }
 
   .lg\:hover\:bg-background_invert-text:hover{
+    background-color: rgb(255, 255, 255);
     background-color: var(--background-invert-text);
   }
 
@@ -37399,10 +37779,12 @@ table tbody td {
   }
 
   .lg\:hover\:bg-button-primary_color:hover{
+    background-color: rgba(2, 163, 218, 1.0);
     background-color: var(--button-primary-color);
   }
 
   .lg\:hover\:bg-button-primary_text:hover{
+    background-color: rgb(255, 255, 255);
     background-color: var(--button-primary-text);
   }
 
@@ -37803,22 +38185,27 @@ table tbody td {
   }
 
   .lg\:focus\:bg-brand-primary:focus{
+    background-color: rgba(2, 163, 218, 1.0);
     background-color: var(--button-primary-color);
   }
 
   .lg\:focus\:bg-background_primary-color:focus{
+    background-color: rgba(2, 163, 218, 1.0);
     background-color: var(--background-primary-color);
   }
 
   .lg\:focus\:bg-background_primary-text:focus{
+    background-color: rgb(255, 255, 255);
     background-color: var(--background-primary-text);
   }
 
   .lg\:focus\:bg-background_invert-color:focus{
+    background-color: rgba(1, 113, 153, 1.0);
     background-color: var(--background-invert-color);
   }
 
   .lg\:focus\:bg-background_invert-text:focus{
+    background-color: rgb(255, 255, 255);
     background-color: var(--background-invert-text);
   }
 
@@ -37831,10 +38218,12 @@ table tbody td {
   }
 
   .lg\:focus\:bg-button-primary_color:focus{
+    background-color: rgba(2, 163, 218, 1.0);
     background-color: var(--button-primary-color);
   }
 
   .lg\:focus\:bg-button-primary_text:focus{
+    background-color: rgb(255, 255, 255);
     background-color: var(--button-primary-text);
   }
 
@@ -38315,22 +38704,27 @@ table tbody td {
   }
 
   .lg\:border-brand-primary{
+    border-color: rgba(2, 163, 218, 1.0);
     border-color: var(--button-primary-color);
   }
 
   .lg\:border-background_primary-color{
+    border-color: rgba(2, 163, 218, 1.0);
     border-color: var(--background-primary-color);
   }
 
   .lg\:border-background_primary-text{
+    border-color: rgb(255, 255, 255);
     border-color: var(--background-primary-text);
   }
 
   .lg\:border-background_invert-color{
+    border-color: rgba(1, 113, 153, 1.0);
     border-color: var(--background-invert-color);
   }
 
   .lg\:border-background_invert-text{
+    border-color: rgb(255, 255, 255);
     border-color: var(--background-invert-text);
   }
 
@@ -38343,10 +38737,12 @@ table tbody td {
   }
 
   .lg\:border-button-primary_color{
+    border-color: rgba(2, 163, 218, 1.0);
     border-color: var(--button-primary-color);
   }
 
   .lg\:border-button-primary_text{
+    border-color: rgb(255, 255, 255);
     border-color: var(--button-primary-text);
   }
 
@@ -38747,22 +39143,27 @@ table tbody td {
   }
 
   .lg\:hover\:border-brand-primary:hover{
+    border-color: rgba(2, 163, 218, 1.0);
     border-color: var(--button-primary-color);
   }
 
   .lg\:hover\:border-background_primary-color:hover{
+    border-color: rgba(2, 163, 218, 1.0);
     border-color: var(--background-primary-color);
   }
 
   .lg\:hover\:border-background_primary-text:hover{
+    border-color: rgb(255, 255, 255);
     border-color: var(--background-primary-text);
   }
 
   .lg\:hover\:border-background_invert-color:hover{
+    border-color: rgba(1, 113, 153, 1.0);
     border-color: var(--background-invert-color);
   }
 
   .lg\:hover\:border-background_invert-text:hover{
+    border-color: rgb(255, 255, 255);
     border-color: var(--background-invert-text);
   }
 
@@ -38775,10 +39176,12 @@ table tbody td {
   }
 
   .lg\:hover\:border-button-primary_color:hover{
+    border-color: rgba(2, 163, 218, 1.0);
     border-color: var(--button-primary-color);
   }
 
   .lg\:hover\:border-button-primary_text:hover{
+    border-color: rgb(255, 255, 255);
     border-color: var(--button-primary-text);
   }
 
@@ -39179,22 +39582,27 @@ table tbody td {
   }
 
   .lg\:focus\:border-brand-primary:focus{
+    border-color: rgba(2, 163, 218, 1.0);
     border-color: var(--button-primary-color);
   }
 
   .lg\:focus\:border-background_primary-color:focus{
+    border-color: rgba(2, 163, 218, 1.0);
     border-color: var(--background-primary-color);
   }
 
   .lg\:focus\:border-background_primary-text:focus{
+    border-color: rgb(255, 255, 255);
     border-color: var(--background-primary-text);
   }
 
   .lg\:focus\:border-background_invert-color:focus{
+    border-color: rgba(1, 113, 153, 1.0);
     border-color: var(--background-invert-color);
   }
 
   .lg\:focus\:border-background_invert-text:focus{
+    border-color: rgb(255, 255, 255);
     border-color: var(--background-invert-text);
   }
 
@@ -39207,10 +39615,12 @@ table tbody td {
   }
 
   .lg\:focus\:border-button-primary_color:focus{
+    border-color: rgba(2, 163, 218, 1.0);
     border-color: var(--button-primary-color);
   }
 
   .lg\:focus\:border-button-primary_text:focus{
+    border-color: rgb(255, 255, 255);
     border-color: var(--button-primary-text);
   }
 
@@ -42457,102 +42867,127 @@ table tbody td {
   }
 
   .lg\:placeholder-brand-primary::-webkit-input-placeholder{
+    color: rgba(2, 163, 218, 1.0);
     color: var(--button-primary-color);
   }
 
   .lg\:placeholder-brand-primary::-moz-placeholder{
+    color: rgba(2, 163, 218, 1.0);
     color: var(--button-primary-color);
   }
 
   .lg\:placeholder-brand-primary:-ms-input-placeholder{
+    color: rgba(2, 163, 218, 1.0);
     color: var(--button-primary-color);
   }
 
   .lg\:placeholder-brand-primary::-ms-input-placeholder{
+    color: rgba(2, 163, 218, 1.0);
     color: var(--button-primary-color);
   }
 
   .lg\:placeholder-brand-primary::placeholder{
+    color: rgba(2, 163, 218, 1.0);
     color: var(--button-primary-color);
   }
 
   .lg\:placeholder-background_primary-color::-webkit-input-placeholder{
+    color: rgba(2, 163, 218, 1.0);
     color: var(--background-primary-color);
   }
 
   .lg\:placeholder-background_primary-color::-moz-placeholder{
+    color: rgba(2, 163, 218, 1.0);
     color: var(--background-primary-color);
   }
 
   .lg\:placeholder-background_primary-color:-ms-input-placeholder{
+    color: rgba(2, 163, 218, 1.0);
     color: var(--background-primary-color);
   }
 
   .lg\:placeholder-background_primary-color::-ms-input-placeholder{
+    color: rgba(2, 163, 218, 1.0);
     color: var(--background-primary-color);
   }
 
   .lg\:placeholder-background_primary-color::placeholder{
+    color: rgba(2, 163, 218, 1.0);
     color: var(--background-primary-color);
   }
 
   .lg\:placeholder-background_primary-text::-webkit-input-placeholder{
+    color: rgb(255, 255, 255);
     color: var(--background-primary-text);
   }
 
   .lg\:placeholder-background_primary-text::-moz-placeholder{
+    color: rgb(255, 255, 255);
     color: var(--background-primary-text);
   }
 
   .lg\:placeholder-background_primary-text:-ms-input-placeholder{
+    color: rgb(255, 255, 255);
     color: var(--background-primary-text);
   }
 
   .lg\:placeholder-background_primary-text::-ms-input-placeholder{
+    color: rgb(255, 255, 255);
     color: var(--background-primary-text);
   }
 
   .lg\:placeholder-background_primary-text::placeholder{
+    color: rgb(255, 255, 255);
     color: var(--background-primary-text);
   }
 
   .lg\:placeholder-background_invert-color::-webkit-input-placeholder{
+    color: rgba(1, 113, 153, 1.0);
     color: var(--background-invert-color);
   }
 
   .lg\:placeholder-background_invert-color::-moz-placeholder{
+    color: rgba(1, 113, 153, 1.0);
     color: var(--background-invert-color);
   }
 
   .lg\:placeholder-background_invert-color:-ms-input-placeholder{
+    color: rgba(1, 113, 153, 1.0);
     color: var(--background-invert-color);
   }
 
   .lg\:placeholder-background_invert-color::-ms-input-placeholder{
+    color: rgba(1, 113, 153, 1.0);
     color: var(--background-invert-color);
   }
 
   .lg\:placeholder-background_invert-color::placeholder{
+    color: rgba(1, 113, 153, 1.0);
     color: var(--background-invert-color);
   }
 
   .lg\:placeholder-background_invert-text::-webkit-input-placeholder{
+    color: rgb(255, 255, 255);
     color: var(--background-invert-text);
   }
 
   .lg\:placeholder-background_invert-text::-moz-placeholder{
+    color: rgb(255, 255, 255);
     color: var(--background-invert-text);
   }
 
   .lg\:placeholder-background_invert-text:-ms-input-placeholder{
+    color: rgb(255, 255, 255);
     color: var(--background-invert-text);
   }
 
   .lg\:placeholder-background_invert-text::-ms-input-placeholder{
+    color: rgb(255, 255, 255);
     color: var(--background-invert-text);
   }
 
   .lg\:placeholder-background_invert-text::placeholder{
+    color: rgb(255, 255, 255);
     color: var(--background-invert-text);
   }
 
@@ -42597,42 +43032,52 @@ table tbody td {
   }
 
   .lg\:placeholder-button-primary_color::-webkit-input-placeholder{
+    color: rgba(2, 163, 218, 1.0);
     color: var(--button-primary-color);
   }
 
   .lg\:placeholder-button-primary_color::-moz-placeholder{
+    color: rgba(2, 163, 218, 1.0);
     color: var(--button-primary-color);
   }
 
   .lg\:placeholder-button-primary_color:-ms-input-placeholder{
+    color: rgba(2, 163, 218, 1.0);
     color: var(--button-primary-color);
   }
 
   .lg\:placeholder-button-primary_color::-ms-input-placeholder{
+    color: rgba(2, 163, 218, 1.0);
     color: var(--button-primary-color);
   }
 
   .lg\:placeholder-button-primary_color::placeholder{
+    color: rgba(2, 163, 218, 1.0);
     color: var(--button-primary-color);
   }
 
   .lg\:placeholder-button-primary_text::-webkit-input-placeholder{
+    color: rgb(255, 255, 255);
     color: var(--button-primary-text);
   }
 
   .lg\:placeholder-button-primary_text::-moz-placeholder{
+    color: rgb(255, 255, 255);
     color: var(--button-primary-text);
   }
 
   .lg\:placeholder-button-primary_text:-ms-input-placeholder{
+    color: rgb(255, 255, 255);
     color: var(--button-primary-text);
   }
 
   .lg\:placeholder-button-primary_text::-ms-input-placeholder{
+    color: rgb(255, 255, 255);
     color: var(--button-primary-text);
   }
 
   .lg\:placeholder-button-primary_text::placeholder{
+    color: rgb(255, 255, 255);
     color: var(--button-primary-text);
   }
 
@@ -44617,102 +45062,127 @@ table tbody td {
   }
 
   .lg\:focus\:placeholder-brand-primary:focus::-webkit-input-placeholder{
+    color: rgba(2, 163, 218, 1.0);
     color: var(--button-primary-color);
   }
 
   .lg\:focus\:placeholder-brand-primary:focus::-moz-placeholder{
+    color: rgba(2, 163, 218, 1.0);
     color: var(--button-primary-color);
   }
 
   .lg\:focus\:placeholder-brand-primary:focus:-ms-input-placeholder{
+    color: rgba(2, 163, 218, 1.0);
     color: var(--button-primary-color);
   }
 
   .lg\:focus\:placeholder-brand-primary:focus::-ms-input-placeholder{
+    color: rgba(2, 163, 218, 1.0);
     color: var(--button-primary-color);
   }
 
   .lg\:focus\:placeholder-brand-primary:focus::placeholder{
+    color: rgba(2, 163, 218, 1.0);
     color: var(--button-primary-color);
   }
 
   .lg\:focus\:placeholder-background_primary-color:focus::-webkit-input-placeholder{
+    color: rgba(2, 163, 218, 1.0);
     color: var(--background-primary-color);
   }
 
   .lg\:focus\:placeholder-background_primary-color:focus::-moz-placeholder{
+    color: rgba(2, 163, 218, 1.0);
     color: var(--background-primary-color);
   }
 
   .lg\:focus\:placeholder-background_primary-color:focus:-ms-input-placeholder{
+    color: rgba(2, 163, 218, 1.0);
     color: var(--background-primary-color);
   }
 
   .lg\:focus\:placeholder-background_primary-color:focus::-ms-input-placeholder{
+    color: rgba(2, 163, 218, 1.0);
     color: var(--background-primary-color);
   }
 
   .lg\:focus\:placeholder-background_primary-color:focus::placeholder{
+    color: rgba(2, 163, 218, 1.0);
     color: var(--background-primary-color);
   }
 
   .lg\:focus\:placeholder-background_primary-text:focus::-webkit-input-placeholder{
+    color: rgb(255, 255, 255);
     color: var(--background-primary-text);
   }
 
   .lg\:focus\:placeholder-background_primary-text:focus::-moz-placeholder{
+    color: rgb(255, 255, 255);
     color: var(--background-primary-text);
   }
 
   .lg\:focus\:placeholder-background_primary-text:focus:-ms-input-placeholder{
+    color: rgb(255, 255, 255);
     color: var(--background-primary-text);
   }
 
   .lg\:focus\:placeholder-background_primary-text:focus::-ms-input-placeholder{
+    color: rgb(255, 255, 255);
     color: var(--background-primary-text);
   }
 
   .lg\:focus\:placeholder-background_primary-text:focus::placeholder{
+    color: rgb(255, 255, 255);
     color: var(--background-primary-text);
   }
 
   .lg\:focus\:placeholder-background_invert-color:focus::-webkit-input-placeholder{
+    color: rgba(1, 113, 153, 1.0);
     color: var(--background-invert-color);
   }
 
   .lg\:focus\:placeholder-background_invert-color:focus::-moz-placeholder{
+    color: rgba(1, 113, 153, 1.0);
     color: var(--background-invert-color);
   }
 
   .lg\:focus\:placeholder-background_invert-color:focus:-ms-input-placeholder{
+    color: rgba(1, 113, 153, 1.0);
     color: var(--background-invert-color);
   }
 
   .lg\:focus\:placeholder-background_invert-color:focus::-ms-input-placeholder{
+    color: rgba(1, 113, 153, 1.0);
     color: var(--background-invert-color);
   }
 
   .lg\:focus\:placeholder-background_invert-color:focus::placeholder{
+    color: rgba(1, 113, 153, 1.0);
     color: var(--background-invert-color);
   }
 
   .lg\:focus\:placeholder-background_invert-text:focus::-webkit-input-placeholder{
+    color: rgb(255, 255, 255);
     color: var(--background-invert-text);
   }
 
   .lg\:focus\:placeholder-background_invert-text:focus::-moz-placeholder{
+    color: rgb(255, 255, 255);
     color: var(--background-invert-text);
   }
 
   .lg\:focus\:placeholder-background_invert-text:focus:-ms-input-placeholder{
+    color: rgb(255, 255, 255);
     color: var(--background-invert-text);
   }
 
   .lg\:focus\:placeholder-background_invert-text:focus::-ms-input-placeholder{
+    color: rgb(255, 255, 255);
     color: var(--background-invert-text);
   }
 
   .lg\:focus\:placeholder-background_invert-text:focus::placeholder{
+    color: rgb(255, 255, 255);
     color: var(--background-invert-text);
   }
 
@@ -44757,42 +45227,52 @@ table tbody td {
   }
 
   .lg\:focus\:placeholder-button-primary_color:focus::-webkit-input-placeholder{
+    color: rgba(2, 163, 218, 1.0);
     color: var(--button-primary-color);
   }
 
   .lg\:focus\:placeholder-button-primary_color:focus::-moz-placeholder{
+    color: rgba(2, 163, 218, 1.0);
     color: var(--button-primary-color);
   }
 
   .lg\:focus\:placeholder-button-primary_color:focus:-ms-input-placeholder{
+    color: rgba(2, 163, 218, 1.0);
     color: var(--button-primary-color);
   }
 
   .lg\:focus\:placeholder-button-primary_color:focus::-ms-input-placeholder{
+    color: rgba(2, 163, 218, 1.0);
     color: var(--button-primary-color);
   }
 
   .lg\:focus\:placeholder-button-primary_color:focus::placeholder{
+    color: rgba(2, 163, 218, 1.0);
     color: var(--button-primary-color);
   }
 
   .lg\:focus\:placeholder-button-primary_text:focus::-webkit-input-placeholder{
+    color: rgb(255, 255, 255);
     color: var(--button-primary-text);
   }
 
   .lg\:focus\:placeholder-button-primary_text:focus::-moz-placeholder{
+    color: rgb(255, 255, 255);
     color: var(--button-primary-text);
   }
 
   .lg\:focus\:placeholder-button-primary_text:focus:-ms-input-placeholder{
+    color: rgb(255, 255, 255);
     color: var(--button-primary-text);
   }
 
   .lg\:focus\:placeholder-button-primary_text:focus::-ms-input-placeholder{
+    color: rgb(255, 255, 255);
     color: var(--button-primary-text);
   }
 
   .lg\:focus\:placeholder-button-primary_text:focus::placeholder{
+    color: rgb(255, 255, 255);
     color: var(--button-primary-text);
   }
 
@@ -47000,22 +47480,27 @@ table tbody td {
   }
 
   .lg\:text-brand-primary{
+    color: rgba(2, 163, 218, 1.0);
     color: var(--button-primary-color);
   }
 
   .lg\:text-background_primary-color{
+    color: rgba(2, 163, 218, 1.0);
     color: var(--background-primary-color);
   }
 
   .lg\:text-background_primary-text{
+    color: rgb(255, 255, 255);
     color: var(--background-primary-text);
   }
 
   .lg\:text-background_invert-color{
+    color: rgba(1, 113, 153, 1.0);
     color: var(--background-invert-color);
   }
 
   .lg\:text-background_invert-text{
+    color: rgb(255, 255, 255);
     color: var(--background-invert-text);
   }
 
@@ -47028,10 +47513,12 @@ table tbody td {
   }
 
   .lg\:text-button-primary_color{
+    color: rgba(2, 163, 218, 1.0);
     color: var(--button-primary-color);
   }
 
   .lg\:text-button-primary_text{
+    color: rgb(255, 255, 255);
     color: var(--button-primary-text);
   }
 
@@ -47432,22 +47919,27 @@ table tbody td {
   }
 
   .lg\:hover\:text-brand-primary:hover{
+    color: rgba(2, 163, 218, 1.0);
     color: var(--button-primary-color);
   }
 
   .lg\:hover\:text-background_primary-color:hover{
+    color: rgba(2, 163, 218, 1.0);
     color: var(--background-primary-color);
   }
 
   .lg\:hover\:text-background_primary-text:hover{
+    color: rgb(255, 255, 255);
     color: var(--background-primary-text);
   }
 
   .lg\:hover\:text-background_invert-color:hover{
+    color: rgba(1, 113, 153, 1.0);
     color: var(--background-invert-color);
   }
 
   .lg\:hover\:text-background_invert-text:hover{
+    color: rgb(255, 255, 255);
     color: var(--background-invert-text);
   }
 
@@ -47460,10 +47952,12 @@ table tbody td {
   }
 
   .lg\:hover\:text-button-primary_color:hover{
+    color: rgba(2, 163, 218, 1.0);
     color: var(--button-primary-color);
   }
 
   .lg\:hover\:text-button-primary_text:hover{
+    color: rgb(255, 255, 255);
     color: var(--button-primary-text);
   }
 
@@ -47864,22 +48358,27 @@ table tbody td {
   }
 
   .lg\:focus\:text-brand-primary:focus{
+    color: rgba(2, 163, 218, 1.0);
     color: var(--button-primary-color);
   }
 
   .lg\:focus\:text-background_primary-color:focus{
+    color: rgba(2, 163, 218, 1.0);
     color: var(--background-primary-color);
   }
 
   .lg\:focus\:text-background_primary-text:focus{
+    color: rgb(255, 255, 255);
     color: var(--background-primary-text);
   }
 
   .lg\:focus\:text-background_invert-color:focus{
+    color: rgba(1, 113, 153, 1.0);
     color: var(--background-invert-color);
   }
 
   .lg\:focus\:text-background_invert-text:focus{
+    color: rgb(255, 255, 255);
     color: var(--background-invert-text);
   }
 
@@ -47892,10 +48391,12 @@ table tbody td {
   }
 
   .lg\:focus\:text-button-primary_color:focus{
+    color: rgba(2, 163, 218, 1.0);
     color: var(--button-primary-color);
   }
 
   .lg\:focus\:text-button-primary_text:focus{
+    color: rgb(255, 255, 255);
     color: var(--button-primary-text);
   }
 
@@ -48815,22 +49316,27 @@ table tbody td {
   }
 
   .xl\:bg-brand-primary{
+    background-color: rgba(2, 163, 218, 1.0);
     background-color: var(--button-primary-color);
   }
 
   .xl\:bg-background_primary-color{
+    background-color: rgba(2, 163, 218, 1.0);
     background-color: var(--background-primary-color);
   }
 
   .xl\:bg-background_primary-text{
+    background-color: rgb(255, 255, 255);
     background-color: var(--background-primary-text);
   }
 
   .xl\:bg-background_invert-color{
+    background-color: rgba(1, 113, 153, 1.0);
     background-color: var(--background-invert-color);
   }
 
   .xl\:bg-background_invert-text{
+    background-color: rgb(255, 255, 255);
     background-color: var(--background-invert-text);
   }
 
@@ -48843,10 +49349,12 @@ table tbody td {
   }
 
   .xl\:bg-button-primary_color{
+    background-color: rgba(2, 163, 218, 1.0);
     background-color: var(--button-primary-color);
   }
 
   .xl\:bg-button-primary_text{
+    background-color: rgb(255, 255, 255);
     background-color: var(--button-primary-text);
   }
 
@@ -49247,22 +49755,27 @@ table tbody td {
   }
 
   .xl\:hover\:bg-brand-primary:hover{
+    background-color: rgba(2, 163, 218, 1.0);
     background-color: var(--button-primary-color);
   }
 
   .xl\:hover\:bg-background_primary-color:hover{
+    background-color: rgba(2, 163, 218, 1.0);
     background-color: var(--background-primary-color);
   }
 
   .xl\:hover\:bg-background_primary-text:hover{
+    background-color: rgb(255, 255, 255);
     background-color: var(--background-primary-text);
   }
 
   .xl\:hover\:bg-background_invert-color:hover{
+    background-color: rgba(1, 113, 153, 1.0);
     background-color: var(--background-invert-color);
   }
 
   .xl\:hover\:bg-background_invert-text:hover{
+    background-color: rgb(255, 255, 255);
     background-color: var(--background-invert-text);
   }
 
@@ -49275,10 +49788,12 @@ table tbody td {
   }
 
   .xl\:hover\:bg-button-primary_color:hover{
+    background-color: rgba(2, 163, 218, 1.0);
     background-color: var(--button-primary-color);
   }
 
   .xl\:hover\:bg-button-primary_text:hover{
+    background-color: rgb(255, 255, 255);
     background-color: var(--button-primary-text);
   }
 
@@ -49679,22 +50194,27 @@ table tbody td {
   }
 
   .xl\:focus\:bg-brand-primary:focus{
+    background-color: rgba(2, 163, 218, 1.0);
     background-color: var(--button-primary-color);
   }
 
   .xl\:focus\:bg-background_primary-color:focus{
+    background-color: rgba(2, 163, 218, 1.0);
     background-color: var(--background-primary-color);
   }
 
   .xl\:focus\:bg-background_primary-text:focus{
+    background-color: rgb(255, 255, 255);
     background-color: var(--background-primary-text);
   }
 
   .xl\:focus\:bg-background_invert-color:focus{
+    background-color: rgba(1, 113, 153, 1.0);
     background-color: var(--background-invert-color);
   }
 
   .xl\:focus\:bg-background_invert-text:focus{
+    background-color: rgb(255, 255, 255);
     background-color: var(--background-invert-text);
   }
 
@@ -49707,10 +50227,12 @@ table tbody td {
   }
 
   .xl\:focus\:bg-button-primary_color:focus{
+    background-color: rgba(2, 163, 218, 1.0);
     background-color: var(--button-primary-color);
   }
 
   .xl\:focus\:bg-button-primary_text:focus{
+    background-color: rgb(255, 255, 255);
     background-color: var(--button-primary-text);
   }
 
@@ -50191,22 +50713,27 @@ table tbody td {
   }
 
   .xl\:border-brand-primary{
+    border-color: rgba(2, 163, 218, 1.0);
     border-color: var(--button-primary-color);
   }
 
   .xl\:border-background_primary-color{
+    border-color: rgba(2, 163, 218, 1.0);
     border-color: var(--background-primary-color);
   }
 
   .xl\:border-background_primary-text{
+    border-color: rgb(255, 255, 255);
     border-color: var(--background-primary-text);
   }
 
   .xl\:border-background_invert-color{
+    border-color: rgba(1, 113, 153, 1.0);
     border-color: var(--background-invert-color);
   }
 
   .xl\:border-background_invert-text{
+    border-color: rgb(255, 255, 255);
     border-color: var(--background-invert-text);
   }
 
@@ -50219,10 +50746,12 @@ table tbody td {
   }
 
   .xl\:border-button-primary_color{
+    border-color: rgba(2, 163, 218, 1.0);
     border-color: var(--button-primary-color);
   }
 
   .xl\:border-button-primary_text{
+    border-color: rgb(255, 255, 255);
     border-color: var(--button-primary-text);
   }
 
@@ -50623,22 +51152,27 @@ table tbody td {
   }
 
   .xl\:hover\:border-brand-primary:hover{
+    border-color: rgba(2, 163, 218, 1.0);
     border-color: var(--button-primary-color);
   }
 
   .xl\:hover\:border-background_primary-color:hover{
+    border-color: rgba(2, 163, 218, 1.0);
     border-color: var(--background-primary-color);
   }
 
   .xl\:hover\:border-background_primary-text:hover{
+    border-color: rgb(255, 255, 255);
     border-color: var(--background-primary-text);
   }
 
   .xl\:hover\:border-background_invert-color:hover{
+    border-color: rgba(1, 113, 153, 1.0);
     border-color: var(--background-invert-color);
   }
 
   .xl\:hover\:border-background_invert-text:hover{
+    border-color: rgb(255, 255, 255);
     border-color: var(--background-invert-text);
   }
 
@@ -50651,10 +51185,12 @@ table tbody td {
   }
 
   .xl\:hover\:border-button-primary_color:hover{
+    border-color: rgba(2, 163, 218, 1.0);
     border-color: var(--button-primary-color);
   }
 
   .xl\:hover\:border-button-primary_text:hover{
+    border-color: rgb(255, 255, 255);
     border-color: var(--button-primary-text);
   }
 
@@ -51055,22 +51591,27 @@ table tbody td {
   }
 
   .xl\:focus\:border-brand-primary:focus{
+    border-color: rgba(2, 163, 218, 1.0);
     border-color: var(--button-primary-color);
   }
 
   .xl\:focus\:border-background_primary-color:focus{
+    border-color: rgba(2, 163, 218, 1.0);
     border-color: var(--background-primary-color);
   }
 
   .xl\:focus\:border-background_primary-text:focus{
+    border-color: rgb(255, 255, 255);
     border-color: var(--background-primary-text);
   }
 
   .xl\:focus\:border-background_invert-color:focus{
+    border-color: rgba(1, 113, 153, 1.0);
     border-color: var(--background-invert-color);
   }
 
   .xl\:focus\:border-background_invert-text:focus{
+    border-color: rgb(255, 255, 255);
     border-color: var(--background-invert-text);
   }
 
@@ -51083,10 +51624,12 @@ table tbody td {
   }
 
   .xl\:focus\:border-button-primary_color:focus{
+    border-color: rgba(2, 163, 218, 1.0);
     border-color: var(--button-primary-color);
   }
 
   .xl\:focus\:border-button-primary_text:focus{
+    border-color: rgb(255, 255, 255);
     border-color: var(--button-primary-text);
   }
 
@@ -54333,102 +54876,127 @@ table tbody td {
   }
 
   .xl\:placeholder-brand-primary::-webkit-input-placeholder{
+    color: rgba(2, 163, 218, 1.0);
     color: var(--button-primary-color);
   }
 
   .xl\:placeholder-brand-primary::-moz-placeholder{
+    color: rgba(2, 163, 218, 1.0);
     color: var(--button-primary-color);
   }
 
   .xl\:placeholder-brand-primary:-ms-input-placeholder{
+    color: rgba(2, 163, 218, 1.0);
     color: var(--button-primary-color);
   }
 
   .xl\:placeholder-brand-primary::-ms-input-placeholder{
+    color: rgba(2, 163, 218, 1.0);
     color: var(--button-primary-color);
   }
 
   .xl\:placeholder-brand-primary::placeholder{
+    color: rgba(2, 163, 218, 1.0);
     color: var(--button-primary-color);
   }
 
   .xl\:placeholder-background_primary-color::-webkit-input-placeholder{
+    color: rgba(2, 163, 218, 1.0);
     color: var(--background-primary-color);
   }
 
   .xl\:placeholder-background_primary-color::-moz-placeholder{
+    color: rgba(2, 163, 218, 1.0);
     color: var(--background-primary-color);
   }
 
   .xl\:placeholder-background_primary-color:-ms-input-placeholder{
+    color: rgba(2, 163, 218, 1.0);
     color: var(--background-primary-color);
   }
 
   .xl\:placeholder-background_primary-color::-ms-input-placeholder{
+    color: rgba(2, 163, 218, 1.0);
     color: var(--background-primary-color);
   }
 
   .xl\:placeholder-background_primary-color::placeholder{
+    color: rgba(2, 163, 218, 1.0);
     color: var(--background-primary-color);
   }
 
   .xl\:placeholder-background_primary-text::-webkit-input-placeholder{
+    color: rgb(255, 255, 255);
     color: var(--background-primary-text);
   }
 
   .xl\:placeholder-background_primary-text::-moz-placeholder{
+    color: rgb(255, 255, 255);
     color: var(--background-primary-text);
   }
 
   .xl\:placeholder-background_primary-text:-ms-input-placeholder{
+    color: rgb(255, 255, 255);
     color: var(--background-primary-text);
   }
 
   .xl\:placeholder-background_primary-text::-ms-input-placeholder{
+    color: rgb(255, 255, 255);
     color: var(--background-primary-text);
   }
 
   .xl\:placeholder-background_primary-text::placeholder{
+    color: rgb(255, 255, 255);
     color: var(--background-primary-text);
   }
 
   .xl\:placeholder-background_invert-color::-webkit-input-placeholder{
+    color: rgba(1, 113, 153, 1.0);
     color: var(--background-invert-color);
   }
 
   .xl\:placeholder-background_invert-color::-moz-placeholder{
+    color: rgba(1, 113, 153, 1.0);
     color: var(--background-invert-color);
   }
 
   .xl\:placeholder-background_invert-color:-ms-input-placeholder{
+    color: rgba(1, 113, 153, 1.0);
     color: var(--background-invert-color);
   }
 
   .xl\:placeholder-background_invert-color::-ms-input-placeholder{
+    color: rgba(1, 113, 153, 1.0);
     color: var(--background-invert-color);
   }
 
   .xl\:placeholder-background_invert-color::placeholder{
+    color: rgba(1, 113, 153, 1.0);
     color: var(--background-invert-color);
   }
 
   .xl\:placeholder-background_invert-text::-webkit-input-placeholder{
+    color: rgb(255, 255, 255);
     color: var(--background-invert-text);
   }
 
   .xl\:placeholder-background_invert-text::-moz-placeholder{
+    color: rgb(255, 255, 255);
     color: var(--background-invert-text);
   }
 
   .xl\:placeholder-background_invert-text:-ms-input-placeholder{
+    color: rgb(255, 255, 255);
     color: var(--background-invert-text);
   }
 
   .xl\:placeholder-background_invert-text::-ms-input-placeholder{
+    color: rgb(255, 255, 255);
     color: var(--background-invert-text);
   }
 
   .xl\:placeholder-background_invert-text::placeholder{
+    color: rgb(255, 255, 255);
     color: var(--background-invert-text);
   }
 
@@ -54473,42 +55041,52 @@ table tbody td {
   }
 
   .xl\:placeholder-button-primary_color::-webkit-input-placeholder{
+    color: rgba(2, 163, 218, 1.0);
     color: var(--button-primary-color);
   }
 
   .xl\:placeholder-button-primary_color::-moz-placeholder{
+    color: rgba(2, 163, 218, 1.0);
     color: var(--button-primary-color);
   }
 
   .xl\:placeholder-button-primary_color:-ms-input-placeholder{
+    color: rgba(2, 163, 218, 1.0);
     color: var(--button-primary-color);
   }
 
   .xl\:placeholder-button-primary_color::-ms-input-placeholder{
+    color: rgba(2, 163, 218, 1.0);
     color: var(--button-primary-color);
   }
 
   .xl\:placeholder-button-primary_color::placeholder{
+    color: rgba(2, 163, 218, 1.0);
     color: var(--button-primary-color);
   }
 
   .xl\:placeholder-button-primary_text::-webkit-input-placeholder{
+    color: rgb(255, 255, 255);
     color: var(--button-primary-text);
   }
 
   .xl\:placeholder-button-primary_text::-moz-placeholder{
+    color: rgb(255, 255, 255);
     color: var(--button-primary-text);
   }
 
   .xl\:placeholder-button-primary_text:-ms-input-placeholder{
+    color: rgb(255, 255, 255);
     color: var(--button-primary-text);
   }
 
   .xl\:placeholder-button-primary_text::-ms-input-placeholder{
+    color: rgb(255, 255, 255);
     color: var(--button-primary-text);
   }
 
   .xl\:placeholder-button-primary_text::placeholder{
+    color: rgb(255, 255, 255);
     color: var(--button-primary-text);
   }
 
@@ -56493,102 +57071,127 @@ table tbody td {
   }
 
   .xl\:focus\:placeholder-brand-primary:focus::-webkit-input-placeholder{
+    color: rgba(2, 163, 218, 1.0);
     color: var(--button-primary-color);
   }
 
   .xl\:focus\:placeholder-brand-primary:focus::-moz-placeholder{
+    color: rgba(2, 163, 218, 1.0);
     color: var(--button-primary-color);
   }
 
   .xl\:focus\:placeholder-brand-primary:focus:-ms-input-placeholder{
+    color: rgba(2, 163, 218, 1.0);
     color: var(--button-primary-color);
   }
 
   .xl\:focus\:placeholder-brand-primary:focus::-ms-input-placeholder{
+    color: rgba(2, 163, 218, 1.0);
     color: var(--button-primary-color);
   }
 
   .xl\:focus\:placeholder-brand-primary:focus::placeholder{
+    color: rgba(2, 163, 218, 1.0);
     color: var(--button-primary-color);
   }
 
   .xl\:focus\:placeholder-background_primary-color:focus::-webkit-input-placeholder{
+    color: rgba(2, 163, 218, 1.0);
     color: var(--background-primary-color);
   }
 
   .xl\:focus\:placeholder-background_primary-color:focus::-moz-placeholder{
+    color: rgba(2, 163, 218, 1.0);
     color: var(--background-primary-color);
   }
 
   .xl\:focus\:placeholder-background_primary-color:focus:-ms-input-placeholder{
+    color: rgba(2, 163, 218, 1.0);
     color: var(--background-primary-color);
   }
 
   .xl\:focus\:placeholder-background_primary-color:focus::-ms-input-placeholder{
+    color: rgba(2, 163, 218, 1.0);
     color: var(--background-primary-color);
   }
 
   .xl\:focus\:placeholder-background_primary-color:focus::placeholder{
+    color: rgba(2, 163, 218, 1.0);
     color: var(--background-primary-color);
   }
 
   .xl\:focus\:placeholder-background_primary-text:focus::-webkit-input-placeholder{
+    color: rgb(255, 255, 255);
     color: var(--background-primary-text);
   }
 
   .xl\:focus\:placeholder-background_primary-text:focus::-moz-placeholder{
+    color: rgb(255, 255, 255);
     color: var(--background-primary-text);
   }
 
   .xl\:focus\:placeholder-background_primary-text:focus:-ms-input-placeholder{
+    color: rgb(255, 255, 255);
     color: var(--background-primary-text);
   }
 
   .xl\:focus\:placeholder-background_primary-text:focus::-ms-input-placeholder{
+    color: rgb(255, 255, 255);
     color: var(--background-primary-text);
   }
 
   .xl\:focus\:placeholder-background_primary-text:focus::placeholder{
+    color: rgb(255, 255, 255);
     color: var(--background-primary-text);
   }
 
   .xl\:focus\:placeholder-background_invert-color:focus::-webkit-input-placeholder{
+    color: rgba(1, 113, 153, 1.0);
     color: var(--background-invert-color);
   }
 
   .xl\:focus\:placeholder-background_invert-color:focus::-moz-placeholder{
+    color: rgba(1, 113, 153, 1.0);
     color: var(--background-invert-color);
   }
 
   .xl\:focus\:placeholder-background_invert-color:focus:-ms-input-placeholder{
+    color: rgba(1, 113, 153, 1.0);
     color: var(--background-invert-color);
   }
 
   .xl\:focus\:placeholder-background_invert-color:focus::-ms-input-placeholder{
+    color: rgba(1, 113, 153, 1.0);
     color: var(--background-invert-color);
   }
 
   .xl\:focus\:placeholder-background_invert-color:focus::placeholder{
+    color: rgba(1, 113, 153, 1.0);
     color: var(--background-invert-color);
   }
 
   .xl\:focus\:placeholder-background_invert-text:focus::-webkit-input-placeholder{
+    color: rgb(255, 255, 255);
     color: var(--background-invert-text);
   }
 
   .xl\:focus\:placeholder-background_invert-text:focus::-moz-placeholder{
+    color: rgb(255, 255, 255);
     color: var(--background-invert-text);
   }
 
   .xl\:focus\:placeholder-background_invert-text:focus:-ms-input-placeholder{
+    color: rgb(255, 255, 255);
     color: var(--background-invert-text);
   }
 
   .xl\:focus\:placeholder-background_invert-text:focus::-ms-input-placeholder{
+    color: rgb(255, 255, 255);
     color: var(--background-invert-text);
   }
 
   .xl\:focus\:placeholder-background_invert-text:focus::placeholder{
+    color: rgb(255, 255, 255);
     color: var(--background-invert-text);
   }
 
@@ -56633,42 +57236,52 @@ table tbody td {
   }
 
   .xl\:focus\:placeholder-button-primary_color:focus::-webkit-input-placeholder{
+    color: rgba(2, 163, 218, 1.0);
     color: var(--button-primary-color);
   }
 
   .xl\:focus\:placeholder-button-primary_color:focus::-moz-placeholder{
+    color: rgba(2, 163, 218, 1.0);
     color: var(--button-primary-color);
   }
 
   .xl\:focus\:placeholder-button-primary_color:focus:-ms-input-placeholder{
+    color: rgba(2, 163, 218, 1.0);
     color: var(--button-primary-color);
   }
 
   .xl\:focus\:placeholder-button-primary_color:focus::-ms-input-placeholder{
+    color: rgba(2, 163, 218, 1.0);
     color: var(--button-primary-color);
   }
 
   .xl\:focus\:placeholder-button-primary_color:focus::placeholder{
+    color: rgba(2, 163, 218, 1.0);
     color: var(--button-primary-color);
   }
 
   .xl\:focus\:placeholder-button-primary_text:focus::-webkit-input-placeholder{
+    color: rgb(255, 255, 255);
     color: var(--button-primary-text);
   }
 
   .xl\:focus\:placeholder-button-primary_text:focus::-moz-placeholder{
+    color: rgb(255, 255, 255);
     color: var(--button-primary-text);
   }
 
   .xl\:focus\:placeholder-button-primary_text:focus:-ms-input-placeholder{
+    color: rgb(255, 255, 255);
     color: var(--button-primary-text);
   }
 
   .xl\:focus\:placeholder-button-primary_text:focus::-ms-input-placeholder{
+    color: rgb(255, 255, 255);
     color: var(--button-primary-text);
   }
 
   .xl\:focus\:placeholder-button-primary_text:focus::placeholder{
+    color: rgb(255, 255, 255);
     color: var(--button-primary-text);
   }
 
@@ -58876,22 +59489,27 @@ table tbody td {
   }
 
   .xl\:text-brand-primary{
+    color: rgba(2, 163, 218, 1.0);
     color: var(--button-primary-color);
   }
 
   .xl\:text-background_primary-color{
+    color: rgba(2, 163, 218, 1.0);
     color: var(--background-primary-color);
   }
 
   .xl\:text-background_primary-text{
+    color: rgb(255, 255, 255);
     color: var(--background-primary-text);
   }
 
   .xl\:text-background_invert-color{
+    color: rgba(1, 113, 153, 1.0);
     color: var(--background-invert-color);
   }
 
   .xl\:text-background_invert-text{
+    color: rgb(255, 255, 255);
     color: var(--background-invert-text);
   }
 
@@ -58904,10 +59522,12 @@ table tbody td {
   }
 
   .xl\:text-button-primary_color{
+    color: rgba(2, 163, 218, 1.0);
     color: var(--button-primary-color);
   }
 
   .xl\:text-button-primary_text{
+    color: rgb(255, 255, 255);
     color: var(--button-primary-text);
   }
 
@@ -59308,22 +59928,27 @@ table tbody td {
   }
 
   .xl\:hover\:text-brand-primary:hover{
+    color: rgba(2, 163, 218, 1.0);
     color: var(--button-primary-color);
   }
 
   .xl\:hover\:text-background_primary-color:hover{
+    color: rgba(2, 163, 218, 1.0);
     color: var(--background-primary-color);
   }
 
   .xl\:hover\:text-background_primary-text:hover{
+    color: rgb(255, 255, 255);
     color: var(--background-primary-text);
   }
 
   .xl\:hover\:text-background_invert-color:hover{
+    color: rgba(1, 113, 153, 1.0);
     color: var(--background-invert-color);
   }
 
   .xl\:hover\:text-background_invert-text:hover{
+    color: rgb(255, 255, 255);
     color: var(--background-invert-text);
   }
 
@@ -59336,10 +59961,12 @@ table tbody td {
   }
 
   .xl\:hover\:text-button-primary_color:hover{
+    color: rgba(2, 163, 218, 1.0);
     color: var(--button-primary-color);
   }
 
   .xl\:hover\:text-button-primary_text:hover{
+    color: rgb(255, 255, 255);
     color: var(--button-primary-text);
   }
 
@@ -59740,22 +60367,27 @@ table tbody td {
   }
 
   .xl\:focus\:text-brand-primary:focus{
+    color: rgba(2, 163, 218, 1.0);
     color: var(--button-primary-color);
   }
 
   .xl\:focus\:text-background_primary-color:focus{
+    color: rgba(2, 163, 218, 1.0);
     color: var(--background-primary-color);
   }
 
   .xl\:focus\:text-background_primary-text:focus{
+    color: rgb(255, 255, 255);
     color: var(--background-primary-text);
   }
 
   .xl\:focus\:text-background_invert-color:focus{
+    color: rgba(1, 113, 153, 1.0);
     color: var(--background-invert-color);
   }
 
   .xl\:focus\:text-background_invert-text:focus{
+    color: rgb(255, 255, 255);
     color: var(--background-invert-text);
   }
 
@@ -59768,10 +60400,12 @@ table tbody td {
   }
 
   .xl\:focus\:text-button-primary_color:focus{
+    color: rgba(2, 163, 218, 1.0);
     color: var(--button-primary-color);
   }
 
   .xl\:focus\:text-button-primary_text:focus{
+    color: rgb(255, 255, 255);
     color: var(--button-primary-text);
   }
 

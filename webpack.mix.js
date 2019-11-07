@@ -1,12 +1,11 @@
 const mix = require('laravel-mix');
-const tailwindcss = require('tailwindcss');
-const postcss = require('postcss-custom-properties');
 
 mix.options({
     processCssUrls: false,
     postCss: [
-        tailwindcss('tailwind.config.js'),
-        postcss
+        require('postcss-import'),
+        require('tailwindcss')('tailwind.config.js'),
+        require('postcss-custom-properties')
     ]
 });
 
@@ -21,6 +20,9 @@ mix.options({
  |
  */
 
-mix.sass('resources/sass/app.scss', 'public/css')
+// mix.sass('resources/sass/app.scss', 'public/css')
+mix.sass('resources/sass/themes/scolmore.scss', 'public/css/app-scolmore.css')
+    .sass('resources/sass/themes/ovia.scss', 'public/css/app-ovia.css')
+    .sass('resources/sass/themes/unicrimp.scss', 'public/css/app-unicrimp.css')
     .js('resources/js/app.js', 'public/js')
     .version();

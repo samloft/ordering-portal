@@ -1,4 +1,6 @@
-.theme-scolmore {
+@import '../app';
+
+:root {
     --background-primary-color: rgba(49, 49, 49, 1.0);
     --background-primary-text: rgb(255, 255, 255);
     --background-invert-color: rgba(92, 93, 95, 1.0);

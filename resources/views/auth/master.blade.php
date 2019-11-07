@@ -6,12 +6,12 @@
 
     <title>{{ ucfirst(config('app.name', 'Online Ordering')) . ' Online Ordering'}} - @yield('page.title')</title>
 
-    <link href="{{ mix('css/app.css') }}" rel="stylesheet">
+    <link href="{{ mix('css/app-' . env('APP_NAME') . '.css') }}" rel="stylesheet">
 </head>
 
 <body>
 
-<div id="app" class="theme-{{ config('app.name') }}">
+<div id="app">
     <main class="auth">
         <div class="auth-form">
             <a href="/" class="logo-heading">

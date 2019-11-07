@@ -13023,10 +13023,32 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
-/***/ "./resources/sass/app.scss":
-/*!*********************************!*\
-  !*** ./resources/sass/app.scss ***!
-  \*********************************/
+/***/ "./resources/sass/themes/ovia.scss":
+/*!*****************************************!*\
+  !*** ./resources/sass/themes/ovia.scss ***!
+  \*****************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+// removed by extract-text-webpack-plugin
+
+/***/ }),
+
+/***/ "./resources/sass/themes/scolmore.scss":
+/*!*********************************************!*\
+  !*** ./resources/sass/themes/scolmore.scss ***!
+  \*********************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+// removed by extract-text-webpack-plugin
+
+/***/ }),
+
+/***/ "./resources/sass/themes/unicrimp.scss":
+/*!*********************************************!*\
+  !*** ./resources/sass/themes/unicrimp.scss ***!
+  \*********************************************/
 /*! no static exports found */
 /***/ (function(module, exports) {
 
@@ -13035,14 +13057,16 @@ __webpack_require__.r(__webpack_exports__);
 /***/ }),
 
 /***/ 0:
-/*!*************************************************************!*\
-  !*** multi ./resources/js/app.js ./resources/sass/app.scss ***!
-  \*************************************************************/
+/*!*************************************************************************************************************************************************!*\
+  !*** multi ./resources/js/app.js ./resources/sass/themes/scolmore.scss ./resources/sass/themes/ovia.scss ./resources/sass/themes/unicrimp.scss ***!
+  \*************************************************************************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
 __webpack_require__(/*! /Users/samuel/Code/shop/resources/js/app.js */"./resources/js/app.js");
-module.exports = __webpack_require__(/*! /Users/samuel/Code/shop/resources/sass/app.scss */"./resources/sass/app.scss");
+__webpack_require__(/*! /Users/samuel/Code/shop/resources/sass/themes/scolmore.scss */"./resources/sass/themes/scolmore.scss");
+__webpack_require__(/*! /Users/samuel/Code/shop/resources/sass/themes/ovia.scss */"./resources/sass/themes/ovia.scss");
+module.exports = __webpack_require__(/*! /Users/samuel/Code/shop/resources/sass/themes/unicrimp.scss */"./resources/sass/themes/unicrimp.scss");
 
 
 /***/ })

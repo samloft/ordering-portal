@@ -13,7 +13,7 @@
     @yield ('styles')
 </head>
 
-<body class="theme-{{ config('app.name') }}">
+<body>
 
 <div id="app" class="flex flex-col min-h-screen w-full">
 

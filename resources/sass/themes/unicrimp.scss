@@ -1,4 +1,6 @@
-.theme-unicrimp {
+@import '../app';
+
+:root {
     --background-primary-color: rgba(234, 25, 33, 1.0);
     --background-primary-text: rgb(255, 255, 255);
     --button-primary-color: rgba(234, 25, 33, 1.0);
