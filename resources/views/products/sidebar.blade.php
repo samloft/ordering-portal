@@ -29,7 +29,7 @@
                 </div>
             @endif
 
-            <button class="button button-primary button-block">{{ __('Change customer') }}</button>
+            <button class="button button-primary button-block">{{ __('Change Customer') }}</button>
         </form>
     @endif
 

@@ -6,7 +6,7 @@
 
     <title>{{ ucfirst(config('app.name', 'Online Ordering')) . ' Online Ordering'}} - @yield('page.title')</title>
 
-    <link href="{{ mix('css/app-' . env('APP_NAME') . '.css') }}" rel="stylesheet">
+    <link href="{{ mix('css/app-' . config('app.name') . '.css') }}" rel="stylesheet">
 </head>
 
 <body>
