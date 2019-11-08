@@ -20,23 +20,29 @@
                             <div class="w-1/5 px-3">
                                 <a href="/products/{{ ($categories['level_1'] <> '' ? $categories['level_1'] . '/' : '') . ($categories['level_2'] <> '' ? $categories['level_2'] . '/' : '') . $sub_category_list[$key]['slug'] }}">
                                     <div
-                                        class="h-40 bg-white relative text-center p-3 rounded-lg mb-6 shadow-md hover:shadow-lg">
-                                        @if (isset($sub_category_list[$key]['category_image']))
-                                            <div class="sub-category-image">
-                                                <img
-                                                    src="{{ isset($sub_category_list[$key]['image']) ? asset('product_images/' . $sub_category_list[$key]['image']) : 'https://scolmoreonline.com/assets/images/no-image.png' }}"
-                                                    alt="{{ $key }}">
-                                            </div>
-                                        @else
-                                            <div class="sub-category-image"
-                                                 data-products=@json($sub_category_list[$key]['product_list'])>
-                                                <div class="spinner">
-                                                    <div class="bounce1"></div>
-                                                    <div class="bounce2"></div>
-                                                    <div class="bounce3"></div>
-                                                </div>
-                                            </div>
-                                        @endif
+                                        class="bg-white relative text-center rounded-lg mb-6 shadow-md hover:shadow-lg">
+                                        <div class="h-40">
+                                            <img
+                                                class="h-32 mx-auto"
+                                                src="{{ isset($sub_category_list[$key]['image']) ? asset('product_images/' . $sub_category_list[$key]['image']) : 'https://scolmoreonline.com/assets/images/no-image.png' }}"
+                                                alt="{{ $key }}">
+                                        </div>
+                                        {{--                                        @if (isset($sub_category_list[$key]['category_image']))--}}
+                                        {{--                                            <div class="sub-category-image">--}}
+                                        {{--                                                <img--}}
+                                        {{--                                                    src="{{ isset($sub_category_list[$key]['image']) ? asset('product_images/' . $sub_category_list[$key]['image']) : 'https://scolmoreonline.com/assets/images/no-image.png' }}"--}}
+                                        {{--                                                    alt="{{ $key }}">--}}
+                                        {{--                                            </div>--}}
+                                        {{--                                        @else--}}
+                                        {{--                                            <div class="sub-category-image"--}}
+                                        {{--                                                 data-products=@json($sub_category_list[$key]['product_list'])>--}}
+                                        {{--                                                <div class="spinner">--}}
+                                        {{--                                                    <div class="bounce1"></div>--}}
+                                        {{--                                                    <div class="bounce2"></div>--}}
+                                        {{--                                                    <div class="bounce3"></div>--}}
+                                        {{--                                                </div>--}}
+                                        {{--                                            </div>--}}
+                                        {{--                                        @endif--}}
                                         <div class="absolute inset-x-0 bottom-0 bg-gray-200 rounded-b-lg py-2 text-sm">
                                             <span>{{ $key }}</span>
                                         </div>
@@ -49,21 +55,19 @@
 
                 @if (count($products) > 0)
                     @foreach($products as $product)
-                        <div class="card card-body product-list mb-2">
-                            <div class="row">
-                                <div class="col">
+                        <div class="w-full rounded overflow-hidden bg-white p-5 shadow mb-5">
+                            <div class="flex">
+                                <div class="w-3/4">
                                     <h2 class="section-title">
                                         <a href="/products/view/{{ encodeUrl($product->code) }}">{{ $product->name }}</a>
                                     </h2>
 
-                                    <div class="row product-details">
-                                        <div class="col-sm-auto">
-                                            <div class="product-list-image">
-                                                <img id="enlarge-image" alt="{{ $product->code }}"
-                                                     src="{{ $product->image() }}">
-                                            </div>
+                                    <div class="flex items-center">
+                                        <div class="w-1/3">
+                                            <img id="enlarge-image" class="h-32" alt="{{ $product->code }}"
+                                                 src="{{ $product->image() }}">
                                         </div>
-                                        <div class="col-lg pt-2 pl-0">
+                                        <div class="pl-3 pr-10">
                                             <h5>
                                                 {{ __('Product Code: ') }}
                                                 <span id="product-code" class="primary-font">{{ $product->code }}</span>
@@ -77,8 +81,9 @@
                                         </div>
                                     </div>
                                 </div>
-                                <div class="col-lg-3 text-right product-pricing">
-                                    <div class="row">
+
+                                <div class="w-1/4">
+                                    <div class="flex justify-between">
                                         <div class="col text-left">
                                             {{ __('Trade Price:') }}
                                         </div>
@@ -86,7 +91,7 @@
                                             {{ currency($product->trade_price, 4) }}
                                         </div>
                                     </div>
-                                    <div class="row">
+                                    <div class="flex justify-between">
                                         <div class="col text-left">
                                             {{ __('Unit Price:') }}
                                         </div>
@@ -94,7 +99,7 @@
                                             {{ currency($product->price, 4) }}
                                         </div>
                                     </div>
-                                    <div class="row">
+                                    <div class="flex justify-between">
                                         <div class="col text-left">
                                             {{ __('Discount:') }}
                                         </div>
@@ -103,7 +108,7 @@
                                         </div>
                                     </div>
                                     <hr>
-                                    <div class="row">
+                                    <div class="flex justify-between">
                                         <div class="col text-left">
                                             <strong>{{ __('Net Price:') }}</strong>
                                         </div>
@@ -112,41 +117,30 @@
                                         </div>
                                     </div>
                                     <hr>
-                                    <form id="product-add-basket-products" class="m-0" method="post">
-                                        <div class="input-group input-group-sm product-basket">
-                                            <div class="input-group-prepend">
-                                                <span class="input-group-text">{{ __('Qty:') }}</span>
+                                    <form id="product-add-basket-products" method="post">
+                                        <div class="flex justify-between items-center mt-3">
+                                                <span class="">{{ __('Qty:') }}</span>
+                                                <input class="w-10 " name="quantity"
+                                                       value="{{ $product->order_multiples }}" autocomplete="off">
+                                                <input name="product" value="{{ $product->code }}" autocomplete="off"
+                                                       hidden>
+                                                <button class="button button-primary"
+                                                        type="submit">{{ __('Add To Basket') }}</button>
                                             </div>
-                                            <input class="form-control form-control-sm mr-1" name="quantity"
-                                                   value="{{ $product->order_multiples }}" autocomplete="off">
-                                            <span class="input-group-btn">
-                                            <input name="product" value="{{ $product->code }}" autocomplete="off"
-                                                   hidden>
-                                <button class="btn btn-sm btn-primary" type="submit">{{ __('Add To Basket') }}</button>
-                            </span>
-                                        </div>
                                     </form>
                                 </div>
                             </div>
-                            <div class="row mt-2">
-                                <div class="col">
-                                    <a href="{{ route('products.show', $product->code) }}">
-                                        <button
-                                            class="btn btn-sm btn-blue">{{ __('View Details & Availability') }}</button>
-                                    </a>
-                                </div>
-                                <div class="col-lg-3 text-right">
-                                    <div class="input-group input-group-sm stock-levels">
-                                        <div class="input-group-prepend">
-                                            <span class="input-group-text">{{ __('Stock Level') }}</span>
-                                        </div>
-                                        <input class="form-control form-control-sm"
-                                               {{--                                               value="{{ $product->stock->quantity ? $product->stock->quantity : 0 }}"--}}
+                            <div class="flex justify-between">
+                                <a href="{{ route('products.show', $product->code) }}">
+                                    <button class="button button-secondary">
+                                        {{ __('View Details & Availability') }}
+                                    </button>
+                                </a>
+                                <div class="">
+                                        <span>{{ __('Stock Level') }}</span>
+                                        <input class="w-20"
                                                value="{{ $product->quantity ?: 0 }}"
                                                readonly>
-                                        <span class="input-group-btn">
-                            </span>
-                                    </div>
                                 </div>
                             </div>
                         </div>
