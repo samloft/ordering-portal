@@ -58,7 +58,7 @@
                         <div class="w-full rounded bg-white p-5 shadow mb-5 text-sm">
                             <div class="flex mb-2">
                                 <div class="w-3/4">
-                                    <h2 class="font-semibold text-lg text-primary">
+                                    <h2 class="font-semibold text-lg text-primary mb-2">
                                         <a href="/products/view/{{ encodeUrl($product->code) }}">{{ $product->name }}</a>
                                     </h2>
 
