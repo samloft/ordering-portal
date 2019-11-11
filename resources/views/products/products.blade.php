@@ -65,8 +65,7 @@
                                     <div class="flex items-center">
                                         <expandable-image class="w-32"
                                                           alt="{{ $product->code }}"
-                                                          src="{{ $product->image() }}"
-                                                          title="{{ $product->code }}">
+                                                          src="{{ $product->image() }}">
                                         </expandable-image>
 
                                         <div class="pl-3 pr-10">

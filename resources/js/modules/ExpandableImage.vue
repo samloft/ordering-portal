@@ -3,6 +3,7 @@
         class="expandable-image"
         :class="{expanded: expanded}"
         @click="expanded = true">
+
         <i class="close-button">
 
             <svg style="width:24px;height:24px" viewBox="0 0 24 24">
@@ -25,6 +26,8 @@
             }
         },
 
+        props: ['title', 'description'],
+
         methods: {
             closeImage(event) {
                 this.expanded = false;
@@ -32,6 +35,12 @@
             },
             freezeVp(e) {
                 e.preventDefault()
+            },
+            closeIfClickedOutside(event) {
+                if (!event.target.closest('img')) {
+                    this.expanded = false;
+                    document.removeEventListener('click', this.closeIfClickedOutside);
+                }
             }
         },
 
@@ -45,6 +54,7 @@
                         document.body.appendChild(this.cloned);
                         document.body.style.overflow = 'hidden';
                         this.cloned.addEventListener('touchmove', this.freezeVp, false);
+                        document.addEventListener('click', this.closeIfClickedOutside);
                         setTimeout(() => {
                             this.cloned.style.opacity = 1;
                         }, 0)

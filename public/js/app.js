@@ -168,6 +168,7 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
@@ -175,6 +176,7 @@ __webpack_require__.r(__webpack_exports__);
       closeButtonRef: null
     };
   },
+  props: ['title', 'description'],
   methods: {
     closeImage: function closeImage(event) {
       this.expanded = false;
@@ -182,6 +184,12 @@ __webpack_require__.r(__webpack_exports__);
     },
     freezeVp: function freezeVp(e) {
       e.preventDefault();
+    },
+    closeIfClickedOutside: function closeIfClickedOutside(event) {
+      if (!event.target.closest('img')) {
+        this.expanded = false;
+        document.removeEventListener('click', this.closeIfClickedOutside);
+      }
     }
   },
   watch: {
@@ -200,6 +208,7 @@ __webpack_require__.r(__webpack_exports__);
 
           _this.cloned.addEventListener('touchmove', _this.freezeVp, false);
 
+          document.addEventListener('click', _this.closeIfClickedOutside);
           setTimeout(function () {
             _this.cloned.style.opacity = 1;
           }, 0);
