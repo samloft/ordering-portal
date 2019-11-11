@@ -18,6 +18,10 @@ a > img {
     }
 }
 
+hr {
+    @apply .border-t-2 .border-brand-primary;
+}
+
 @import 'components/header';
 @import 'components/navigation';
 @import 'components/footer';

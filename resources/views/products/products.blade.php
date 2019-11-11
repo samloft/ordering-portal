@@ -55,26 +55,24 @@
 
                 @if (count($products) > 0)
                     @foreach($products as $product)
-                        <div class="w-full rounded overflow-hidden bg-white p-5 shadow mb-5">
+                        <div class="w-full rounded overflow-hidden bg-white p-5 shadow mb-5 text-sm">
                             <div class="flex">
                                 <div class="w-3/4">
-                                    <h2 class="section-title">
+                                    <h2 class="font-semibold text-lg text-primary">
                                         <a href="/products/view/{{ encodeUrl($product->code) }}">{{ $product->name }}</a>
                                     </h2>
 
                                     <div class="flex items-center">
-                                        <div class="w-1/3">
-                                            <img id="enlarge-image" class="h-32" alt="{{ $product->code }}"
-                                                 src="{{ $product->image() }}">
-                                        </div>
+                                        <img id="enlarge-image" class="h-32" alt="{{ $product->code }}"
+                                             src="{{ $product->image() }}">
                                         <div class="pl-3 pr-10">
                                             <h5>
                                                 {{ __('Product Code: ') }}
-                                                <span id="product-code" class="primary-font">{{ $product->code }}</span>
+                                                <span id="product-code" class="font-semibold text-primary">{{ $product->code }}</span>
                                             </h5>
                                             <h5>
                                                 {{ __('Unit Type: ') }}
-                                                <span class="primary-font">{{ $product->uom }}</span>
+                                                <span class="font-semibold text-primary">{{ $product->uom }}</span>
                                             </h5>
 
                                             <h5>{{ $product->description }}</h5>
@@ -119,28 +117,30 @@
                                     <hr>
                                     <form id="product-add-basket-products" method="post">
                                         <div class="flex justify-between items-center mt-3">
-                                                <span class="">{{ __('Qty:') }}</span>
-                                                <input class="w-10 " name="quantity"
-                                                       value="{{ $product->order_multiples }}" autocomplete="off">
-                                                <input name="product" value="{{ $product->code }}" autocomplete="off"
-                                                       hidden>
-                                                <button class="button button-primary"
-                                                        type="submit">{{ __('Add To Basket') }}</button>
-                                            </div>
+                                            <span>{{ __('Qty:') }}</span>
+                                            <input class="w-10 " name="quantity"
+                                                   value="{{ $product->order_multiples }}" autocomplete="off">
+                                            <input name="product" value="{{ $product->code }}" autocomplete="off"
+                                                   hidden>
+                                            <button class="button button-primary"
+                                                    type="submit">{{ __('Add To Basket') }}</button>
+                                        </div>
                                     </form>
                                 </div>
                             </div>
-                            <div class="flex justify-between">
+                            <div class="flex justify-between items-center">
                                 <a href="{{ route('products.show', $product->code) }}">
-                                    <button class="button button-secondary">
+                                    <button class="button button-inverse">
                                         {{ __('View Details & Availability') }}
                                     </button>
                                 </a>
-                                <div class="">
-                                        <span>{{ __('Stock Level') }}</span>
-                                        <input class="w-20"
-                                               value="{{ $product->quantity ?: 0 }}"
-                                               readonly>
+                                <div class="block">
+                                    <div class="text-xxs bg-gray-600 text-white p-1 rounded-t">
+                                        {{ __('Stock Level') }}
+                                    </div>
+                                    <div class="text-center bg-gray-200 text-xs rounded-b">
+                                        {{ $product->quantity ?: 0 }}
+                                    </div>
                                 </div>
                             </div>
                         </div>

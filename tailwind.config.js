@@ -12,6 +12,8 @@ module.exports = {
         colors: {
             transparent: 'transparent',
 
+            primary: 'var(--primary-text)',
+
             brand: {
                 primary: 'var(--button-primary-color)',
             },
@@ -37,6 +39,9 @@ module.exports = {
 
                 secondary_color: 'var(--button-secondary-color)',
                 secondary_text: 'var(--button-secondary-text)',
+
+                inverse_color: 'var(--button-inverse-color)',
+                inverse_text: 'var(--button-inverse-text)'
             },
 
             icon: {
@@ -288,6 +293,7 @@ module.exports = {
             ],
         },
         fontSize: {
+            xxs: '0.50rem',
             xs: '0.75rem',
             sm: '0.875rem',
             base: '1rem',
@@ -524,6 +530,5 @@ module.exports = {
         zIndex: ['responsive'],
     },
     corePlugins: {},
-    plugins: [
-    ],
+    plugins: [],
 };

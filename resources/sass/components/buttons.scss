@@ -1,5 +1,5 @@
 .button {
-    @apply .rounded .p-3 .leading-none .shadow;
+    @apply .rounded .p-3 .leading-none;
 
     &:hover {
         @apply .opacity-75;
@@ -12,6 +12,10 @@
 
 .button-secondary {
     @apply .bg-button-secondary_color .text-button-secondary_text;
+}
+
+.button-inverse {
+    @apply .bg-button-inverse_color .text-button-inverse_text;
 }
 
 .button-link {

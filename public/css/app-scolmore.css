@@ -699,6 +699,11 @@ video {
   background-color: transparent;
 }
 
+.bg-primary{
+  background-color: rgba(128, 208, 216, 1.0);
+  background-color: var(--primary-text);
+}
+
 .bg-brand-primary{
   background-color: rgba(200, 220, 105, 1.0);
   background-color: var(--button-primary-color);
@@ -750,6 +755,16 @@ video {
 .bg-button-secondary_text{
   background-color: rgb(0, 0, 0);
   background-color: var(--button-secondary-text);
+}
+
+.bg-button-inverse_color{
+  background-color: rgba(128, 208, 216, 1.0);
+  background-color: var(--button-inverse-color);
+}
+
+.bg-button-inverse_text{
+  background-color: rgb(0, 0, 0);
+  background-color: var(--button-inverse-text);
 }
 
 .bg-icon-primary{
@@ -1142,6 +1157,11 @@ video {
   background-color: transparent;
 }
 
+.hover\:bg-primary:hover{
+  background-color: rgba(128, 208, 216, 1.0);
+  background-color: var(--primary-text);
+}
+
 .hover\:bg-brand-primary:hover{
   background-color: rgba(200, 220, 105, 1.0);
   background-color: var(--button-primary-color);
@@ -1193,6 +1213,16 @@ video {
 .hover\:bg-button-secondary_text:hover{
   background-color: rgb(0, 0, 0);
   background-color: var(--button-secondary-text);
+}
+
+.hover\:bg-button-inverse_color:hover{
+  background-color: rgba(128, 208, 216, 1.0);
+  background-color: var(--button-inverse-color);
+}
+
+.hover\:bg-button-inverse_text:hover{
+  background-color: rgb(0, 0, 0);
+  background-color: var(--button-inverse-text);
 }
 
 .hover\:bg-icon-primary:hover{
@@ -1585,6 +1615,11 @@ video {
   background-color: transparent;
 }
 
+.focus\:bg-primary:focus{
+  background-color: rgba(128, 208, 216, 1.0);
+  background-color: var(--primary-text);
+}
+
 .focus\:bg-brand-primary:focus{
   background-color: rgba(200, 220, 105, 1.0);
   background-color: var(--button-primary-color);
@@ -1636,6 +1671,16 @@ video {
 .focus\:bg-button-secondary_text:focus{
   background-color: rgb(0, 0, 0);
   background-color: var(--button-secondary-text);
+}
+
+.focus\:bg-button-inverse_color:focus{
+  background-color: rgba(128, 208, 216, 1.0);
+  background-color: var(--button-inverse-color);
+}
+
+.focus\:bg-button-inverse_text:focus{
+  background-color: rgb(0, 0, 0);
+  background-color: var(--button-inverse-text);
 }
 
 .focus\:bg-icon-primary:focus{
@@ -2108,6 +2153,11 @@ video {
   border-color: transparent;
 }
 
+.border-primary{
+  border-color: rgba(128, 208, 216, 1.0);
+  border-color: var(--primary-text);
+}
+
 .border-brand-primary{
   border-color: rgba(200, 220, 105, 1.0);
   border-color: var(--button-primary-color);
@@ -2159,6 +2209,16 @@ video {
 .border-button-secondary_text{
   border-color: rgb(0, 0, 0);
   border-color: var(--button-secondary-text);
+}
+
+.border-button-inverse_color{
+  border-color: rgba(128, 208, 216, 1.0);
+  border-color: var(--button-inverse-color);
+}
+
+.border-button-inverse_text{
+  border-color: rgb(0, 0, 0);
+  border-color: var(--button-inverse-text);
 }
 
 .border-icon-primary{
@@ -2551,6 +2611,11 @@ video {
   border-color: transparent;
 }
 
+.hover\:border-primary:hover{
+  border-color: rgba(128, 208, 216, 1.0);
+  border-color: var(--primary-text);
+}
+
 .hover\:border-brand-primary:hover{
   border-color: rgba(200, 220, 105, 1.0);
   border-color: var(--button-primary-color);
@@ -2602,6 +2667,16 @@ video {
 .hover\:border-button-secondary_text:hover{
   border-color: rgb(0, 0, 0);
   border-color: var(--button-secondary-text);
+}
+
+.hover\:border-button-inverse_color:hover{
+  border-color: rgba(128, 208, 216, 1.0);
+  border-color: var(--button-inverse-color);
+}
+
+.hover\:border-button-inverse_text:hover{
+  border-color: rgb(0, 0, 0);
+  border-color: var(--button-inverse-text);
 }
 
 .hover\:border-icon-primary:hover{
@@ -2994,6 +3069,11 @@ video {
   border-color: transparent;
 }
 
+.focus\:border-primary:focus{
+  border-color: rgba(128, 208, 216, 1.0);
+  border-color: var(--primary-text);
+}
+
 .focus\:border-brand-primary:focus{
   border-color: rgba(200, 220, 105, 1.0);
   border-color: var(--button-primary-color);
@@ -3045,6 +3125,16 @@ video {
 .focus\:border-button-secondary_text:focus{
   border-color: rgb(0, 0, 0);
   border-color: var(--button-secondary-text);
+}
+
+.focus\:border-button-inverse_color:focus{
+  border-color: rgba(128, 208, 216, 1.0);
+  border-color: var(--button-inverse-color);
+}
+
+.focus\:border-button-inverse_text:focus{
+  border-color: rgb(0, 0, 0);
+  border-color: var(--button-inverse-text);
 }
 
 .focus\:border-icon-primary:focus{
@@ -6283,6 +6373,31 @@ video {
   color: transparent;
 }
 
+.placeholder-primary::-webkit-input-placeholder{
+  color: rgba(128, 208, 216, 1.0);
+  color: var(--primary-text);
+}
+
+.placeholder-primary::-moz-placeholder{
+  color: rgba(128, 208, 216, 1.0);
+  color: var(--primary-text);
+}
+
+.placeholder-primary:-ms-input-placeholder{
+  color: rgba(128, 208, 216, 1.0);
+  color: var(--primary-text);
+}
+
+.placeholder-primary::-ms-input-placeholder{
+  color: rgba(128, 208, 216, 1.0);
+  color: var(--primary-text);
+}
+
+.placeholder-primary::placeholder{
+  color: rgba(128, 208, 216, 1.0);
+  color: var(--primary-text);
+}
+
 .placeholder-brand-primary::-webkit-input-placeholder{
   color: rgba(200, 220, 105, 1.0);
   color: var(--button-primary-color);
@@ -6546,6 +6661,56 @@ video {
 .placeholder-button-secondary_text::placeholder{
   color: rgb(0, 0, 0);
   color: var(--button-secondary-text);
+}
+
+.placeholder-button-inverse_color::-webkit-input-placeholder{
+  color: rgba(128, 208, 216, 1.0);
+  color: var(--button-inverse-color);
+}
+
+.placeholder-button-inverse_color::-moz-placeholder{
+  color: rgba(128, 208, 216, 1.0);
+  color: var(--button-inverse-color);
+}
+
+.placeholder-button-inverse_color:-ms-input-placeholder{
+  color: rgba(128, 208, 216, 1.0);
+  color: var(--button-inverse-color);
+}
+
+.placeholder-button-inverse_color::-ms-input-placeholder{
+  color: rgba(128, 208, 216, 1.0);
+  color: var(--button-inverse-color);
+}
+
+.placeholder-button-inverse_color::placeholder{
+  color: rgba(128, 208, 216, 1.0);
+  color: var(--button-inverse-color);
+}
+
+.placeholder-button-inverse_text::-webkit-input-placeholder{
+  color: rgb(0, 0, 0);
+  color: var(--button-inverse-text);
+}
+
+.placeholder-button-inverse_text::-moz-placeholder{
+  color: rgb(0, 0, 0);
+  color: var(--button-inverse-text);
+}
+
+.placeholder-button-inverse_text:-ms-input-placeholder{
+  color: rgb(0, 0, 0);
+  color: var(--button-inverse-text);
+}
+
+.placeholder-button-inverse_text::-ms-input-placeholder{
+  color: rgb(0, 0, 0);
+  color: var(--button-inverse-text);
+}
+
+.placeholder-button-inverse_text::placeholder{
+  color: rgb(0, 0, 0);
+  color: var(--button-inverse-text);
 }
 
 .placeholder-icon-primary::-webkit-input-placeholder{
@@ -8498,6 +8663,31 @@ video {
   color: transparent;
 }
 
+.focus\:placeholder-primary:focus::-webkit-input-placeholder{
+  color: rgba(128, 208, 216, 1.0);
+  color: var(--primary-text);
+}
+
+.focus\:placeholder-primary:focus::-moz-placeholder{
+  color: rgba(128, 208, 216, 1.0);
+  color: var(--primary-text);
+}
+
+.focus\:placeholder-primary:focus:-ms-input-placeholder{
+  color: rgba(128, 208, 216, 1.0);
+  color: var(--primary-text);
+}
+
+.focus\:placeholder-primary:focus::-ms-input-placeholder{
+  color: rgba(128, 208, 216, 1.0);
+  color: var(--primary-text);
+}
+
+.focus\:placeholder-primary:focus::placeholder{
+  color: rgba(128, 208, 216, 1.0);
+  color: var(--primary-text);
+}
+
 .focus\:placeholder-brand-primary:focus::-webkit-input-placeholder{
   color: rgba(200, 220, 105, 1.0);
   color: var(--button-primary-color);
@@ -8761,6 +8951,56 @@ video {
 .focus\:placeholder-button-secondary_text:focus::placeholder{
   color: rgb(0, 0, 0);
   color: var(--button-secondary-text);
+}
+
+.focus\:placeholder-button-inverse_color:focus::-webkit-input-placeholder{
+  color: rgba(128, 208, 216, 1.0);
+  color: var(--button-inverse-color);
+}
+
+.focus\:placeholder-button-inverse_color:focus::-moz-placeholder{
+  color: rgba(128, 208, 216, 1.0);
+  color: var(--button-inverse-color);
+}
+
+.focus\:placeholder-button-inverse_color:focus:-ms-input-placeholder{
+  color: rgba(128, 208, 216, 1.0);
+  color: var(--button-inverse-color);
+}
+
+.focus\:placeholder-button-inverse_color:focus::-ms-input-placeholder{
+  color: rgba(128, 208, 216, 1.0);
+  color: var(--button-inverse-color);
+}
+
+.focus\:placeholder-button-inverse_color:focus::placeholder{
+  color: rgba(128, 208, 216, 1.0);
+  color: var(--button-inverse-color);
+}
+
+.focus\:placeholder-button-inverse_text:focus::-webkit-input-placeholder{
+  color: rgb(0, 0, 0);
+  color: var(--button-inverse-text);
+}
+
+.focus\:placeholder-button-inverse_text:focus::-moz-placeholder{
+  color: rgb(0, 0, 0);
+  color: var(--button-inverse-text);
+}
+
+.focus\:placeholder-button-inverse_text:focus:-ms-input-placeholder{
+  color: rgb(0, 0, 0);
+  color: var(--button-inverse-text);
+}
+
+.focus\:placeholder-button-inverse_text:focus::-ms-input-placeholder{
+  color: rgb(0, 0, 0);
+  color: var(--button-inverse-text);
+}
+
+.focus\:placeholder-button-inverse_text:focus::placeholder{
+  color: rgb(0, 0, 0);
+  color: var(--button-inverse-text);
 }
 
 .focus\:placeholder-icon-primary:focus::-webkit-input-placeholder{
@@ -10936,6 +11176,11 @@ video {
   color: transparent;
 }
 
+.text-primary{
+  color: rgba(128, 208, 216, 1.0);
+  color: var(--primary-text);
+}
+
 .text-brand-primary{
   color: rgba(200, 220, 105, 1.0);
   color: var(--button-primary-color);
@@ -10987,6 +11232,16 @@ video {
 .text-button-secondary_text{
   color: rgb(0, 0, 0);
   color: var(--button-secondary-text);
+}
+
+.text-button-inverse_color{
+  color: rgba(128, 208, 216, 1.0);
+  color: var(--button-inverse-color);
+}
+
+.text-button-inverse_text{
+  color: rgb(0, 0, 0);
+  color: var(--button-inverse-text);
 }
 
 .text-icon-primary{
@@ -11379,6 +11634,11 @@ video {
   color: transparent;
 }
 
+.hover\:text-primary:hover{
+  color: rgba(128, 208, 216, 1.0);
+  color: var(--primary-text);
+}
+
 .hover\:text-brand-primary:hover{
   color: rgba(200, 220, 105, 1.0);
   color: var(--button-primary-color);
@@ -11430,6 +11690,16 @@ video {
 .hover\:text-button-secondary_text:hover{
   color: rgb(0, 0, 0);
   color: var(--button-secondary-text);
+}
+
+.hover\:text-button-inverse_color:hover{
+  color: rgba(128, 208, 216, 1.0);
+  color: var(--button-inverse-color);
+}
+
+.hover\:text-button-inverse_text:hover{
+  color: rgb(0, 0, 0);
+  color: var(--button-inverse-text);
 }
 
 .hover\:text-icon-primary:hover{
@@ -11822,6 +12092,11 @@ video {
   color: transparent;
 }
 
+.focus\:text-primary:focus{
+  color: rgba(128, 208, 216, 1.0);
+  color: var(--primary-text);
+}
+
 .focus\:text-brand-primary:focus{
   color: rgba(200, 220, 105, 1.0);
   color: var(--button-primary-color);
@@ -11873,6 +12148,16 @@ video {
 .focus\:text-button-secondary_text:focus{
   color: rgb(0, 0, 0);
   color: var(--button-secondary-text);
+}
+
+.focus\:text-button-inverse_color:focus{
+  color: rgba(128, 208, 216, 1.0);
+  color: var(--button-inverse-color);
+}
+
+.focus\:text-button-inverse_text:focus{
+  color: rgb(0, 0, 0);
+  color: var(--button-inverse-text);
 }
 
 .focus\:text-icon-primary:focus{
@@ -12259,6 +12544,10 @@ video {
 
 .focus\:text-pink-900:focus{
   color: #702459;
+}
+
+.text-xxs{
+  font-size: 0.50rem;
 }
 
 .text-xs{
@@ -12727,6 +13016,12 @@ a > img:hover {
   opacity: 0.75;
 }
 
+hr {
+  border-top-width: 2px;
+  border-color: rgba(200, 220, 105, 1.0);
+  border-color: var(--button-primary-color);
+}
+
 header {
   background-color: rgba(49, 49, 49, 1.0);
   background-color: var(--background-primary-color);
@@ -13092,7 +13387,6 @@ select {
   border-radius: 0.25rem;
   padding: 0.75rem;
   line-height: 1;
-  box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.1), 0 1px 2px 0 rgba(0, 0, 0, 0.06);
 }
 
 .button:hover {
@@ -13113,6 +13407,13 @@ select {
   color: var(--button-secondary-text);
 }
 
+.button-inverse {
+  background-color: rgba(128, 208, 216, 1.0);
+  background-color: var(--button-inverse-color);
+  color: rgb(0, 0, 0);
+  color: var(--button-inverse-text);
+}
+
 .button-link {
   color: #374f73;
 }
@@ -13129,7 +13430,6 @@ select {
   border-radius: 0.25rem;
   padding: 0.75rem;
   line-height: 1;
-  box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.1), 0 1px 2px 0 rgba(0, 0, 0, 0.06);
   background-color: rgba(200, 220, 105, 1.0);
   background-color: var(--button-primary-color);
   color: rgb(0, 0, 0);
@@ -13297,8 +13597,11 @@ table tbody td {
   --button-primary-text: rgb(0, 0, 0);
   --button-secondary-color: rgba(130, 202, 156, 1.0);
   --button-secondary-text: rgb(0, 0, 0);
+  --button-inverse-color:rgba(128, 208, 216, 1.0);
+  --button-inverse-text: rgb(0, 0, 0);
   --icon-primary: rgba(130, 202, 156, 1.0);
   --icon-secondary: rgba(155, 239, 188, 0.63);
+  --primary-text: rgba(128, 208, 216, 1.0);
 }
 
 .categories-nav .top-level:nth-child(1) {
@@ -13398,6 +13701,11 @@ table tbody td {
     background-color: transparent;
   }
 
+  .sm\:bg-primary{
+    background-color: rgba(128, 208, 216, 1.0);
+    background-color: var(--primary-text);
+  }
+
   .sm\:bg-brand-primary{
     background-color: rgba(200, 220, 105, 1.0);
     background-color: var(--button-primary-color);
@@ -13449,6 +13757,16 @@ table tbody td {
   .sm\:bg-button-secondary_text{
     background-color: rgb(0, 0, 0);
     background-color: var(--button-secondary-text);
+  }
+
+  .sm\:bg-button-inverse_color{
+    background-color: rgba(128, 208, 216, 1.0);
+    background-color: var(--button-inverse-color);
+  }
+
+  .sm\:bg-button-inverse_text{
+    background-color: rgb(0, 0, 0);
+    background-color: var(--button-inverse-text);
   }
 
   .sm\:bg-icon-primary{
@@ -13841,6 +14159,11 @@ table tbody td {
     background-color: transparent;
   }
 
+  .sm\:hover\:bg-primary:hover{
+    background-color: rgba(128, 208, 216, 1.0);
+    background-color: var(--primary-text);
+  }
+
   .sm\:hover\:bg-brand-primary:hover{
     background-color: rgba(200, 220, 105, 1.0);
     background-color: var(--button-primary-color);
@@ -13892,6 +14215,16 @@ table tbody td {
   .sm\:hover\:bg-button-secondary_text:hover{
     background-color: rgb(0, 0, 0);
     background-color: var(--button-secondary-text);
+  }
+
+  .sm\:hover\:bg-button-inverse_color:hover{
+    background-color: rgba(128, 208, 216, 1.0);
+    background-color: var(--button-inverse-color);
+  }
+
+  .sm\:hover\:bg-button-inverse_text:hover{
+    background-color: rgb(0, 0, 0);
+    background-color: var(--button-inverse-text);
   }
 
   .sm\:hover\:bg-icon-primary:hover{
@@ -14284,6 +14617,11 @@ table tbody td {
     background-color: transparent;
   }
 
+  .sm\:focus\:bg-primary:focus{
+    background-color: rgba(128, 208, 216, 1.0);
+    background-color: var(--primary-text);
+  }
+
   .sm\:focus\:bg-brand-primary:focus{
     background-color: rgba(200, 220, 105, 1.0);
     background-color: var(--button-primary-color);
@@ -14335,6 +14673,16 @@ table tbody td {
   .sm\:focus\:bg-button-secondary_text:focus{
     background-color: rgb(0, 0, 0);
     background-color: var(--button-secondary-text);
+  }
+
+  .sm\:focus\:bg-button-inverse_color:focus{
+    background-color: rgba(128, 208, 216, 1.0);
+    background-color: var(--button-inverse-color);
+  }
+
+  .sm\:focus\:bg-button-inverse_text:focus{
+    background-color: rgb(0, 0, 0);
+    background-color: var(--button-inverse-text);
   }
 
   .sm\:focus\:bg-icon-primary:focus{
@@ -14807,6 +15155,11 @@ table tbody td {
     border-color: transparent;
   }
 
+  .sm\:border-primary{
+    border-color: rgba(128, 208, 216, 1.0);
+    border-color: var(--primary-text);
+  }
+
   .sm\:border-brand-primary{
     border-color: rgba(200, 220, 105, 1.0);
     border-color: var(--button-primary-color);
@@ -14858,6 +15211,16 @@ table tbody td {
   .sm\:border-button-secondary_text{
     border-color: rgb(0, 0, 0);
     border-color: var(--button-secondary-text);
+  }
+
+  .sm\:border-button-inverse_color{
+    border-color: rgba(128, 208, 216, 1.0);
+    border-color: var(--button-inverse-color);
+  }
+
+  .sm\:border-button-inverse_text{
+    border-color: rgb(0, 0, 0);
+    border-color: var(--button-inverse-text);
   }
 
   .sm\:border-icon-primary{
@@ -15250,6 +15613,11 @@ table tbody td {
     border-color: transparent;
   }
 
+  .sm\:hover\:border-primary:hover{
+    border-color: rgba(128, 208, 216, 1.0);
+    border-color: var(--primary-text);
+  }
+
   .sm\:hover\:border-brand-primary:hover{
     border-color: rgba(200, 220, 105, 1.0);
     border-color: var(--button-primary-color);
@@ -15301,6 +15669,16 @@ table tbody td {
   .sm\:hover\:border-button-secondary_text:hover{
     border-color: rgb(0, 0, 0);
     border-color: var(--button-secondary-text);
+  }
+
+  .sm\:hover\:border-button-inverse_color:hover{
+    border-color: rgba(128, 208, 216, 1.0);
+    border-color: var(--button-inverse-color);
+  }
+
+  .sm\:hover\:border-button-inverse_text:hover{
+    border-color: rgb(0, 0, 0);
+    border-color: var(--button-inverse-text);
   }
 
   .sm\:hover\:border-icon-primary:hover{
@@ -15693,6 +16071,11 @@ table tbody td {
     border-color: transparent;
   }
 
+  .sm\:focus\:border-primary:focus{
+    border-color: rgba(128, 208, 216, 1.0);
+    border-color: var(--primary-text);
+  }
+
   .sm\:focus\:border-brand-primary:focus{
     border-color: rgba(200, 220, 105, 1.0);
     border-color: var(--button-primary-color);
@@ -15744,6 +16127,16 @@ table tbody td {
   .sm\:focus\:border-button-secondary_text:focus{
     border-color: rgb(0, 0, 0);
     border-color: var(--button-secondary-text);
+  }
+
+  .sm\:focus\:border-button-inverse_color:focus{
+    border-color: rgba(128, 208, 216, 1.0);
+    border-color: var(--button-inverse-color);
+  }
+
+  .sm\:focus\:border-button-inverse_text:focus{
+    border-color: rgb(0, 0, 0);
+    border-color: var(--button-inverse-text);
   }
 
   .sm\:focus\:border-icon-primary:focus{
@@ -18982,6 +19375,31 @@ table tbody td {
     color: transparent;
   }
 
+  .sm\:placeholder-primary::-webkit-input-placeholder{
+    color: rgba(128, 208, 216, 1.0);
+    color: var(--primary-text);
+  }
+
+  .sm\:placeholder-primary::-moz-placeholder{
+    color: rgba(128, 208, 216, 1.0);
+    color: var(--primary-text);
+  }
+
+  .sm\:placeholder-primary:-ms-input-placeholder{
+    color: rgba(128, 208, 216, 1.0);
+    color: var(--primary-text);
+  }
+
+  .sm\:placeholder-primary::-ms-input-placeholder{
+    color: rgba(128, 208, 216, 1.0);
+    color: var(--primary-text);
+  }
+
+  .sm\:placeholder-primary::placeholder{
+    color: rgba(128, 208, 216, 1.0);
+    color: var(--primary-text);
+  }
+
   .sm\:placeholder-brand-primary::-webkit-input-placeholder{
     color: rgba(200, 220, 105, 1.0);
     color: var(--button-primary-color);
@@ -19245,6 +19663,56 @@ table tbody td {
   .sm\:placeholder-button-secondary_text::placeholder{
     color: rgb(0, 0, 0);
     color: var(--button-secondary-text);
+  }
+
+  .sm\:placeholder-button-inverse_color::-webkit-input-placeholder{
+    color: rgba(128, 208, 216, 1.0);
+    color: var(--button-inverse-color);
+  }
+
+  .sm\:placeholder-button-inverse_color::-moz-placeholder{
+    color: rgba(128, 208, 216, 1.0);
+    color: var(--button-inverse-color);
+  }
+
+  .sm\:placeholder-button-inverse_color:-ms-input-placeholder{
+    color: rgba(128, 208, 216, 1.0);
+    color: var(--button-inverse-color);
+  }
+
+  .sm\:placeholder-button-inverse_color::-ms-input-placeholder{
+    color: rgba(128, 208, 216, 1.0);
+    color: var(--button-inverse-color);
+  }
+
+  .sm\:placeholder-button-inverse_color::placeholder{
+    color: rgba(128, 208, 216, 1.0);
+    color: var(--button-inverse-color);
+  }
+
+  .sm\:placeholder-button-inverse_text::-webkit-input-placeholder{
+    color: rgb(0, 0, 0);
+    color: var(--button-inverse-text);
+  }
+
+  .sm\:placeholder-button-inverse_text::-moz-placeholder{
+    color: rgb(0, 0, 0);
+    color: var(--button-inverse-text);
+  }
+
+  .sm\:placeholder-button-inverse_text:-ms-input-placeholder{
+    color: rgb(0, 0, 0);
+    color: var(--button-inverse-text);
+  }
+
+  .sm\:placeholder-button-inverse_text::-ms-input-placeholder{
+    color: rgb(0, 0, 0);
+    color: var(--button-inverse-text);
+  }
+
+  .sm\:placeholder-button-inverse_text::placeholder{
+    color: rgb(0, 0, 0);
+    color: var(--button-inverse-text);
   }
 
   .sm\:placeholder-icon-primary::-webkit-input-placeholder{
@@ -21197,6 +21665,31 @@ table tbody td {
     color: transparent;
   }
 
+  .sm\:focus\:placeholder-primary:focus::-webkit-input-placeholder{
+    color: rgba(128, 208, 216, 1.0);
+    color: var(--primary-text);
+  }
+
+  .sm\:focus\:placeholder-primary:focus::-moz-placeholder{
+    color: rgba(128, 208, 216, 1.0);
+    color: var(--primary-text);
+  }
+
+  .sm\:focus\:placeholder-primary:focus:-ms-input-placeholder{
+    color: rgba(128, 208, 216, 1.0);
+    color: var(--primary-text);
+  }
+
+  .sm\:focus\:placeholder-primary:focus::-ms-input-placeholder{
+    color: rgba(128, 208, 216, 1.0);
+    color: var(--primary-text);
+  }
+
+  .sm\:focus\:placeholder-primary:focus::placeholder{
+    color: rgba(128, 208, 216, 1.0);
+    color: var(--primary-text);
+  }
+
   .sm\:focus\:placeholder-brand-primary:focus::-webkit-input-placeholder{
     color: rgba(200, 220, 105, 1.0);
     color: var(--button-primary-color);
@@ -21460,6 +21953,56 @@ table tbody td {
   .sm\:focus\:placeholder-button-secondary_text:focus::placeholder{
     color: rgb(0, 0, 0);
     color: var(--button-secondary-text);
+  }
+
+  .sm\:focus\:placeholder-button-inverse_color:focus::-webkit-input-placeholder{
+    color: rgba(128, 208, 216, 1.0);
+    color: var(--button-inverse-color);
+  }
+
+  .sm\:focus\:placeholder-button-inverse_color:focus::-moz-placeholder{
+    color: rgba(128, 208, 216, 1.0);
+    color: var(--button-inverse-color);
+  }
+
+  .sm\:focus\:placeholder-button-inverse_color:focus:-ms-input-placeholder{
+    color: rgba(128, 208, 216, 1.0);
+    color: var(--button-inverse-color);
+  }
+
+  .sm\:focus\:placeholder-button-inverse_color:focus::-ms-input-placeholder{
+    color: rgba(128, 208, 216, 1.0);
+    color: var(--button-inverse-color);
+  }
+
+  .sm\:focus\:placeholder-button-inverse_color:focus::placeholder{
+    color: rgba(128, 208, 216, 1.0);
+    color: var(--button-inverse-color);
+  }
+
+  .sm\:focus\:placeholder-button-inverse_text:focus::-webkit-input-placeholder{
+    color: rgb(0, 0, 0);
+    color: var(--button-inverse-text);
+  }
+
+  .sm\:focus\:placeholder-button-inverse_text:focus::-moz-placeholder{
+    color: rgb(0, 0, 0);
+    color: var(--button-inverse-text);
+  }
+
+  .sm\:focus\:placeholder-button-inverse_text:focus:-ms-input-placeholder{
+    color: rgb(0, 0, 0);
+    color: var(--button-inverse-text);
+  }
+
+  .sm\:focus\:placeholder-button-inverse_text:focus::-ms-input-placeholder{
+    color: rgb(0, 0, 0);
+    color: var(--button-inverse-text);
+  }
+
+  .sm\:focus\:placeholder-button-inverse_text:focus::placeholder{
+    color: rgb(0, 0, 0);
+    color: var(--button-inverse-text);
   }
 
   .sm\:focus\:placeholder-icon-primary:focus::-webkit-input-placeholder{
@@ -23635,6 +24178,11 @@ table tbody td {
     color: transparent;
   }
 
+  .sm\:text-primary{
+    color: rgba(128, 208, 216, 1.0);
+    color: var(--primary-text);
+  }
+
   .sm\:text-brand-primary{
     color: rgba(200, 220, 105, 1.0);
     color: var(--button-primary-color);
@@ -23686,6 +24234,16 @@ table tbody td {
   .sm\:text-button-secondary_text{
     color: rgb(0, 0, 0);
     color: var(--button-secondary-text);
+  }
+
+  .sm\:text-button-inverse_color{
+    color: rgba(128, 208, 216, 1.0);
+    color: var(--button-inverse-color);
+  }
+
+  .sm\:text-button-inverse_text{
+    color: rgb(0, 0, 0);
+    color: var(--button-inverse-text);
   }
 
   .sm\:text-icon-primary{
@@ -24078,6 +24636,11 @@ table tbody td {
     color: transparent;
   }
 
+  .sm\:hover\:text-primary:hover{
+    color: rgba(128, 208, 216, 1.0);
+    color: var(--primary-text);
+  }
+
   .sm\:hover\:text-brand-primary:hover{
     color: rgba(200, 220, 105, 1.0);
     color: var(--button-primary-color);
@@ -24129,6 +24692,16 @@ table tbody td {
   .sm\:hover\:text-button-secondary_text:hover{
     color: rgb(0, 0, 0);
     color: var(--button-secondary-text);
+  }
+
+  .sm\:hover\:text-button-inverse_color:hover{
+    color: rgba(128, 208, 216, 1.0);
+    color: var(--button-inverse-color);
+  }
+
+  .sm\:hover\:text-button-inverse_text:hover{
+    color: rgb(0, 0, 0);
+    color: var(--button-inverse-text);
   }
 
   .sm\:hover\:text-icon-primary:hover{
@@ -24521,6 +25094,11 @@ table tbody td {
     color: transparent;
   }
 
+  .sm\:focus\:text-primary:focus{
+    color: rgba(128, 208, 216, 1.0);
+    color: var(--primary-text);
+  }
+
   .sm\:focus\:text-brand-primary:focus{
     color: rgba(200, 220, 105, 1.0);
     color: var(--button-primary-color);
@@ -24572,6 +25150,16 @@ table tbody td {
   .sm\:focus\:text-button-secondary_text:focus{
     color: rgb(0, 0, 0);
     color: var(--button-secondary-text);
+  }
+
+  .sm\:focus\:text-button-inverse_color:focus{
+    color: rgba(128, 208, 216, 1.0);
+    color: var(--button-inverse-color);
+  }
+
+  .sm\:focus\:text-button-inverse_text:focus{
+    color: rgb(0, 0, 0);
+    color: var(--button-inverse-text);
   }
 
   .sm\:focus\:text-icon-primary:focus{
@@ -24958,6 +25546,10 @@ table tbody td {
 
   .sm\:focus\:text-pink-900:focus{
     color: #702459;
+  }
+
+  .sm\:text-xxs{
+    font-size: 0.50rem;
   }
 
   .sm\:text-xs{
@@ -25483,6 +26075,11 @@ table tbody td {
     background-color: transparent;
   }
 
+  .md\:bg-primary{
+    background-color: rgba(128, 208, 216, 1.0);
+    background-color: var(--primary-text);
+  }
+
   .md\:bg-brand-primary{
     background-color: rgba(200, 220, 105, 1.0);
     background-color: var(--button-primary-color);
@@ -25534,6 +26131,16 @@ table tbody td {
   .md\:bg-button-secondary_text{
     background-color: rgb(0, 0, 0);
     background-color: var(--button-secondary-text);
+  }
+
+  .md\:bg-button-inverse_color{
+    background-color: rgba(128, 208, 216, 1.0);
+    background-color: var(--button-inverse-color);
+  }
+
+  .md\:bg-button-inverse_text{
+    background-color: rgb(0, 0, 0);
+    background-color: var(--button-inverse-text);
   }
 
   .md\:bg-icon-primary{
@@ -25926,6 +26533,11 @@ table tbody td {
     background-color: transparent;
   }
 
+  .md\:hover\:bg-primary:hover{
+    background-color: rgba(128, 208, 216, 1.0);
+    background-color: var(--primary-text);
+  }
+
   .md\:hover\:bg-brand-primary:hover{
     background-color: rgba(200, 220, 105, 1.0);
     background-color: var(--button-primary-color);
@@ -25977,6 +26589,16 @@ table tbody td {
   .md\:hover\:bg-button-secondary_text:hover{
     background-color: rgb(0, 0, 0);
     background-color: var(--button-secondary-text);
+  }
+
+  .md\:hover\:bg-button-inverse_color:hover{
+    background-color: rgba(128, 208, 216, 1.0);
+    background-color: var(--button-inverse-color);
+  }
+
+  .md\:hover\:bg-button-inverse_text:hover{
+    background-color: rgb(0, 0, 0);
+    background-color: var(--button-inverse-text);
   }
 
   .md\:hover\:bg-icon-primary:hover{
@@ -26369,6 +26991,11 @@ table tbody td {
     background-color: transparent;
   }
 
+  .md\:focus\:bg-primary:focus{
+    background-color: rgba(128, 208, 216, 1.0);
+    background-color: var(--primary-text);
+  }
+
   .md\:focus\:bg-brand-primary:focus{
     background-color: rgba(200, 220, 105, 1.0);
     background-color: var(--button-primary-color);
@@ -26420,6 +27047,16 @@ table tbody td {
   .md\:focus\:bg-button-secondary_text:focus{
     background-color: rgb(0, 0, 0);
     background-color: var(--button-secondary-text);
+  }
+
+  .md\:focus\:bg-button-inverse_color:focus{
+    background-color: rgba(128, 208, 216, 1.0);
+    background-color: var(--button-inverse-color);
+  }
+
+  .md\:focus\:bg-button-inverse_text:focus{
+    background-color: rgb(0, 0, 0);
+    background-color: var(--button-inverse-text);
   }
 
   .md\:focus\:bg-icon-primary:focus{
@@ -26892,6 +27529,11 @@ table tbody td {
     border-color: transparent;
   }
 
+  .md\:border-primary{
+    border-color: rgba(128, 208, 216, 1.0);
+    border-color: var(--primary-text);
+  }
+
   .md\:border-brand-primary{
     border-color: rgba(200, 220, 105, 1.0);
     border-color: var(--button-primary-color);
@@ -26943,6 +27585,16 @@ table tbody td {
   .md\:border-button-secondary_text{
     border-color: rgb(0, 0, 0);
     border-color: var(--button-secondary-text);
+  }
+
+  .md\:border-button-inverse_color{
+    border-color: rgba(128, 208, 216, 1.0);
+    border-color: var(--button-inverse-color);
+  }
+
+  .md\:border-button-inverse_text{
+    border-color: rgb(0, 0, 0);
+    border-color: var(--button-inverse-text);
   }
 
   .md\:border-icon-primary{
@@ -27335,6 +27987,11 @@ table tbody td {
     border-color: transparent;
   }
 
+  .md\:hover\:border-primary:hover{
+    border-color: rgba(128, 208, 216, 1.0);
+    border-color: var(--primary-text);
+  }
+
   .md\:hover\:border-brand-primary:hover{
     border-color: rgba(200, 220, 105, 1.0);
     border-color: var(--button-primary-color);
@@ -27386,6 +28043,16 @@ table tbody td {
   .md\:hover\:border-button-secondary_text:hover{
     border-color: rgb(0, 0, 0);
     border-color: var(--button-secondary-text);
+  }
+
+  .md\:hover\:border-button-inverse_color:hover{
+    border-color: rgba(128, 208, 216, 1.0);
+    border-color: var(--button-inverse-color);
+  }
+
+  .md\:hover\:border-button-inverse_text:hover{
+    border-color: rgb(0, 0, 0);
+    border-color: var(--button-inverse-text);
   }
 
   .md\:hover\:border-icon-primary:hover{
@@ -27778,6 +28445,11 @@ table tbody td {
     border-color: transparent;
   }
 
+  .md\:focus\:border-primary:focus{
+    border-color: rgba(128, 208, 216, 1.0);
+    border-color: var(--primary-text);
+  }
+
   .md\:focus\:border-brand-primary:focus{
     border-color: rgba(200, 220, 105, 1.0);
     border-color: var(--button-primary-color);
@@ -27829,6 +28501,16 @@ table tbody td {
   .md\:focus\:border-button-secondary_text:focus{
     border-color: rgb(0, 0, 0);
     border-color: var(--button-secondary-text);
+  }
+
+  .md\:focus\:border-button-inverse_color:focus{
+    border-color: rgba(128, 208, 216, 1.0);
+    border-color: var(--button-inverse-color);
+  }
+
+  .md\:focus\:border-button-inverse_text:focus{
+    border-color: rgb(0, 0, 0);
+    border-color: var(--button-inverse-text);
   }
 
   .md\:focus\:border-icon-primary:focus{
@@ -31067,6 +31749,31 @@ table tbody td {
     color: transparent;
   }
 
+  .md\:placeholder-primary::-webkit-input-placeholder{
+    color: rgba(128, 208, 216, 1.0);
+    color: var(--primary-text);
+  }
+
+  .md\:placeholder-primary::-moz-placeholder{
+    color: rgba(128, 208, 216, 1.0);
+    color: var(--primary-text);
+  }
+
+  .md\:placeholder-primary:-ms-input-placeholder{
+    color: rgba(128, 208, 216, 1.0);
+    color: var(--primary-text);
+  }
+
+  .md\:placeholder-primary::-ms-input-placeholder{
+    color: rgba(128, 208, 216, 1.0);
+    color: var(--primary-text);
+  }
+
+  .md\:placeholder-primary::placeholder{
+    color: rgba(128, 208, 216, 1.0);
+    color: var(--primary-text);
+  }
+
   .md\:placeholder-brand-primary::-webkit-input-placeholder{
     color: rgba(200, 220, 105, 1.0);
     color: var(--button-primary-color);
@@ -31330,6 +32037,56 @@ table tbody td {
   .md\:placeholder-button-secondary_text::placeholder{
     color: rgb(0, 0, 0);
     color: var(--button-secondary-text);
+  }
+
+  .md\:placeholder-button-inverse_color::-webkit-input-placeholder{
+    color: rgba(128, 208, 216, 1.0);
+    color: var(--button-inverse-color);
+  }
+
+  .md\:placeholder-button-inverse_color::-moz-placeholder{
+    color: rgba(128, 208, 216, 1.0);
+    color: var(--button-inverse-color);
+  }
+
+  .md\:placeholder-button-inverse_color:-ms-input-placeholder{
+    color: rgba(128, 208, 216, 1.0);
+    color: var(--button-inverse-color);
+  }
+
+  .md\:placeholder-button-inverse_color::-ms-input-placeholder{
+    color: rgba(128, 208, 216, 1.0);
+    color: var(--button-inverse-color);
+  }
+
+  .md\:placeholder-button-inverse_color::placeholder{
+    color: rgba(128, 208, 216, 1.0);
+    color: var(--button-inverse-color);
+  }
+
+  .md\:placeholder-button-inverse_text::-webkit-input-placeholder{
+    color: rgb(0, 0, 0);
+    color: var(--button-inverse-text);
+  }
+
+  .md\:placeholder-button-inverse_text::-moz-placeholder{
+    color: rgb(0, 0, 0);
+    color: var(--button-inverse-text);
+  }
+
+  .md\:placeholder-button-inverse_text:-ms-input-placeholder{
+    color: rgb(0, 0, 0);
+    color: var(--button-inverse-text);
+  }
+
+  .md\:placeholder-button-inverse_text::-ms-input-placeholder{
+    color: rgb(0, 0, 0);
+    color: var(--button-inverse-text);
+  }
+
+  .md\:placeholder-button-inverse_text::placeholder{
+    color: rgb(0, 0, 0);
+    color: var(--button-inverse-text);
   }
 
   .md\:placeholder-icon-primary::-webkit-input-placeholder{
@@ -33282,6 +34039,31 @@ table tbody td {
     color: transparent;
   }
 
+  .md\:focus\:placeholder-primary:focus::-webkit-input-placeholder{
+    color: rgba(128, 208, 216, 1.0);
+    color: var(--primary-text);
+  }
+
+  .md\:focus\:placeholder-primary:focus::-moz-placeholder{
+    color: rgba(128, 208, 216, 1.0);
+    color: var(--primary-text);
+  }
+
+  .md\:focus\:placeholder-primary:focus:-ms-input-placeholder{
+    color: rgba(128, 208, 216, 1.0);
+    color: var(--primary-text);
+  }
+
+  .md\:focus\:placeholder-primary:focus::-ms-input-placeholder{
+    color: rgba(128, 208, 216, 1.0);
+    color: var(--primary-text);
+  }
+
+  .md\:focus\:placeholder-primary:focus::placeholder{
+    color: rgba(128, 208, 216, 1.0);
+    color: var(--primary-text);
+  }
+
   .md\:focus\:placeholder-brand-primary:focus::-webkit-input-placeholder{
     color: rgba(200, 220, 105, 1.0);
     color: var(--button-primary-color);
@@ -33545,6 +34327,56 @@ table tbody td {
   .md\:focus\:placeholder-button-secondary_text:focus::placeholder{
     color: rgb(0, 0, 0);
     color: var(--button-secondary-text);
+  }
+
+  .md\:focus\:placeholder-button-inverse_color:focus::-webkit-input-placeholder{
+    color: rgba(128, 208, 216, 1.0);
+    color: var(--button-inverse-color);
+  }
+
+  .md\:focus\:placeholder-button-inverse_color:focus::-moz-placeholder{
+    color: rgba(128, 208, 216, 1.0);
+    color: var(--button-inverse-color);
+  }
+
+  .md\:focus\:placeholder-button-inverse_color:focus:-ms-input-placeholder{
+    color: rgba(128, 208, 216, 1.0);
+    color: var(--button-inverse-color);
+  }
+
+  .md\:focus\:placeholder-button-inverse_color:focus::-ms-input-placeholder{
+    color: rgba(128, 208, 216, 1.0);
+    color: var(--button-inverse-color);
+  }
+
+  .md\:focus\:placeholder-button-inverse_color:focus::placeholder{
+    color: rgba(128, 208, 216, 1.0);
+    color: var(--button-inverse-color);
+  }
+
+  .md\:focus\:placeholder-button-inverse_text:focus::-webkit-input-placeholder{
+    color: rgb(0, 0, 0);
+    color: var(--button-inverse-text);
+  }
+
+  .md\:focus\:placeholder-button-inverse_text:focus::-moz-placeholder{
+    color: rgb(0, 0, 0);
+    color: var(--button-inverse-text);
+  }
+
+  .md\:focus\:placeholder-button-inverse_text:focus:-ms-input-placeholder{
+    color: rgb(0, 0, 0);
+    color: var(--button-inverse-text);
+  }
+
+  .md\:focus\:placeholder-button-inverse_text:focus::-ms-input-placeholder{
+    color: rgb(0, 0, 0);
+    color: var(--button-inverse-text);
+  }
+
+  .md\:focus\:placeholder-button-inverse_text:focus::placeholder{
+    color: rgb(0, 0, 0);
+    color: var(--button-inverse-text);
   }
 
   .md\:focus\:placeholder-icon-primary:focus::-webkit-input-placeholder{
@@ -35720,6 +36552,11 @@ table tbody td {
     color: transparent;
   }
 
+  .md\:text-primary{
+    color: rgba(128, 208, 216, 1.0);
+    color: var(--primary-text);
+  }
+
   .md\:text-brand-primary{
     color: rgba(200, 220, 105, 1.0);
     color: var(--button-primary-color);
@@ -35771,6 +36608,16 @@ table tbody td {
   .md\:text-button-secondary_text{
     color: rgb(0, 0, 0);
     color: var(--button-secondary-text);
+  }
+
+  .md\:text-button-inverse_color{
+    color: rgba(128, 208, 216, 1.0);
+    color: var(--button-inverse-color);
+  }
+
+  .md\:text-button-inverse_text{
+    color: rgb(0, 0, 0);
+    color: var(--button-inverse-text);
   }
 
   .md\:text-icon-primary{
@@ -36163,6 +37010,11 @@ table tbody td {
     color: transparent;
   }
 
+  .md\:hover\:text-primary:hover{
+    color: rgba(128, 208, 216, 1.0);
+    color: var(--primary-text);
+  }
+
   .md\:hover\:text-brand-primary:hover{
     color: rgba(200, 220, 105, 1.0);
     color: var(--button-primary-color);
@@ -36214,6 +37066,16 @@ table tbody td {
   .md\:hover\:text-button-secondary_text:hover{
     color: rgb(0, 0, 0);
     color: var(--button-secondary-text);
+  }
+
+  .md\:hover\:text-button-inverse_color:hover{
+    color: rgba(128, 208, 216, 1.0);
+    color: var(--button-inverse-color);
+  }
+
+  .md\:hover\:text-button-inverse_text:hover{
+    color: rgb(0, 0, 0);
+    color: var(--button-inverse-text);
   }
 
   .md\:hover\:text-icon-primary:hover{
@@ -36606,6 +37468,11 @@ table tbody td {
     color: transparent;
   }
 
+  .md\:focus\:text-primary:focus{
+    color: rgba(128, 208, 216, 1.0);
+    color: var(--primary-text);
+  }
+
   .md\:focus\:text-brand-primary:focus{
     color: rgba(200, 220, 105, 1.0);
     color: var(--button-primary-color);
@@ -36657,6 +37524,16 @@ table tbody td {
   .md\:focus\:text-button-secondary_text:focus{
     color: rgb(0, 0, 0);
     color: var(--button-secondary-text);
+  }
+
+  .md\:focus\:text-button-inverse_color:focus{
+    color: rgba(128, 208, 216, 1.0);
+    color: var(--button-inverse-color);
+  }
+
+  .md\:focus\:text-button-inverse_text:focus{
+    color: rgb(0, 0, 0);
+    color: var(--button-inverse-text);
   }
 
   .md\:focus\:text-icon-primary:focus{
@@ -37043,6 +37920,10 @@ table tbody td {
 
   .md\:focus\:text-pink-900:focus{
     color: #702459;
+  }
+
+  .md\:text-xxs{
+    font-size: 0.50rem;
   }
 
   .md\:text-xs{
@@ -37568,6 +38449,11 @@ table tbody td {
     background-color: transparent;
   }
 
+  .lg\:bg-primary{
+    background-color: rgba(128, 208, 216, 1.0);
+    background-color: var(--primary-text);
+  }
+
   .lg\:bg-brand-primary{
     background-color: rgba(200, 220, 105, 1.0);
     background-color: var(--button-primary-color);
@@ -37619,6 +38505,16 @@ table tbody td {
   .lg\:bg-button-secondary_text{
     background-color: rgb(0, 0, 0);
     background-color: var(--button-secondary-text);
+  }
+
+  .lg\:bg-button-inverse_color{
+    background-color: rgba(128, 208, 216, 1.0);
+    background-color: var(--button-inverse-color);
+  }
+
+  .lg\:bg-button-inverse_text{
+    background-color: rgb(0, 0, 0);
+    background-color: var(--button-inverse-text);
   }
 
   .lg\:bg-icon-primary{
@@ -38011,6 +38907,11 @@ table tbody td {
     background-color: transparent;
   }
 
+  .lg\:hover\:bg-primary:hover{
+    background-color: rgba(128, 208, 216, 1.0);
+    background-color: var(--primary-text);
+  }
+
   .lg\:hover\:bg-brand-primary:hover{
     background-color: rgba(200, 220, 105, 1.0);
     background-color: var(--button-primary-color);
@@ -38062,6 +38963,16 @@ table tbody td {
   .lg\:hover\:bg-button-secondary_text:hover{
     background-color: rgb(0, 0, 0);
     background-color: var(--button-secondary-text);
+  }
+
+  .lg\:hover\:bg-button-inverse_color:hover{
+    background-color: rgba(128, 208, 216, 1.0);
+    background-color: var(--button-inverse-color);
+  }
+
+  .lg\:hover\:bg-button-inverse_text:hover{
+    background-color: rgb(0, 0, 0);
+    background-color: var(--button-inverse-text);
   }
 
   .lg\:hover\:bg-icon-primary:hover{
@@ -38454,6 +39365,11 @@ table tbody td {
     background-color: transparent;
   }
 
+  .lg\:focus\:bg-primary:focus{
+    background-color: rgba(128, 208, 216, 1.0);
+    background-color: var(--primary-text);
+  }
+
   .lg\:focus\:bg-brand-primary:focus{
     background-color: rgba(200, 220, 105, 1.0);
     background-color: var(--button-primary-color);
@@ -38505,6 +39421,16 @@ table tbody td {
   .lg\:focus\:bg-button-secondary_text:focus{
     background-color: rgb(0, 0, 0);
     background-color: var(--button-secondary-text);
+  }
+
+  .lg\:focus\:bg-button-inverse_color:focus{
+    background-color: rgba(128, 208, 216, 1.0);
+    background-color: var(--button-inverse-color);
+  }
+
+  .lg\:focus\:bg-button-inverse_text:focus{
+    background-color: rgb(0, 0, 0);
+    background-color: var(--button-inverse-text);
   }
 
   .lg\:focus\:bg-icon-primary:focus{
@@ -38977,6 +39903,11 @@ table tbody td {
     border-color: transparent;
   }
 
+  .lg\:border-primary{
+    border-color: rgba(128, 208, 216, 1.0);
+    border-color: var(--primary-text);
+  }
+
   .lg\:border-brand-primary{
     border-color: rgba(200, 220, 105, 1.0);
     border-color: var(--button-primary-color);
@@ -39028,6 +39959,16 @@ table tbody td {
   .lg\:border-button-secondary_text{
     border-color: rgb(0, 0, 0);
     border-color: var(--button-secondary-text);
+  }
+
+  .lg\:border-button-inverse_color{
+    border-color: rgba(128, 208, 216, 1.0);
+    border-color: var(--button-inverse-color);
+  }
+
+  .lg\:border-button-inverse_text{
+    border-color: rgb(0, 0, 0);
+    border-color: var(--button-inverse-text);
   }
 
   .lg\:border-icon-primary{
@@ -39420,6 +40361,11 @@ table tbody td {
     border-color: transparent;
   }
 
+  .lg\:hover\:border-primary:hover{
+    border-color: rgba(128, 208, 216, 1.0);
+    border-color: var(--primary-text);
+  }
+
   .lg\:hover\:border-brand-primary:hover{
     border-color: rgba(200, 220, 105, 1.0);
     border-color: var(--button-primary-color);
@@ -39471,6 +40417,16 @@ table tbody td {
   .lg\:hover\:border-button-secondary_text:hover{
     border-color: rgb(0, 0, 0);
     border-color: var(--button-secondary-text);
+  }
+
+  .lg\:hover\:border-button-inverse_color:hover{
+    border-color: rgba(128, 208, 216, 1.0);
+    border-color: var(--button-inverse-color);
+  }
+
+  .lg\:hover\:border-button-inverse_text:hover{
+    border-color: rgb(0, 0, 0);
+    border-color: var(--button-inverse-text);
   }
 
   .lg\:hover\:border-icon-primary:hover{
@@ -39863,6 +40819,11 @@ table tbody td {
     border-color: transparent;
   }
 
+  .lg\:focus\:border-primary:focus{
+    border-color: rgba(128, 208, 216, 1.0);
+    border-color: var(--primary-text);
+  }
+
   .lg\:focus\:border-brand-primary:focus{
     border-color: rgba(200, 220, 105, 1.0);
     border-color: var(--button-primary-color);
@@ -39914,6 +40875,16 @@ table tbody td {
   .lg\:focus\:border-button-secondary_text:focus{
     border-color: rgb(0, 0, 0);
     border-color: var(--button-secondary-text);
+  }
+
+  .lg\:focus\:border-button-inverse_color:focus{
+    border-color: rgba(128, 208, 216, 1.0);
+    border-color: var(--button-inverse-color);
+  }
+
+  .lg\:focus\:border-button-inverse_text:focus{
+    border-color: rgb(0, 0, 0);
+    border-color: var(--button-inverse-text);
   }
 
   .lg\:focus\:border-icon-primary:focus{
@@ -43152,6 +44123,31 @@ table tbody td {
     color: transparent;
   }
 
+  .lg\:placeholder-primary::-webkit-input-placeholder{
+    color: rgba(128, 208, 216, 1.0);
+    color: var(--primary-text);
+  }
+
+  .lg\:placeholder-primary::-moz-placeholder{
+    color: rgba(128, 208, 216, 1.0);
+    color: var(--primary-text);
+  }
+
+  .lg\:placeholder-primary:-ms-input-placeholder{
+    color: rgba(128, 208, 216, 1.0);
+    color: var(--primary-text);
+  }
+
+  .lg\:placeholder-primary::-ms-input-placeholder{
+    color: rgba(128, 208, 216, 1.0);
+    color: var(--primary-text);
+  }
+
+  .lg\:placeholder-primary::placeholder{
+    color: rgba(128, 208, 216, 1.0);
+    color: var(--primary-text);
+  }
+
   .lg\:placeholder-brand-primary::-webkit-input-placeholder{
     color: rgba(200, 220, 105, 1.0);
     color: var(--button-primary-color);
@@ -43415,6 +44411,56 @@ table tbody td {
   .lg\:placeholder-button-secondary_text::placeholder{
     color: rgb(0, 0, 0);
     color: var(--button-secondary-text);
+  }
+
+  .lg\:placeholder-button-inverse_color::-webkit-input-placeholder{
+    color: rgba(128, 208, 216, 1.0);
+    color: var(--button-inverse-color);
+  }
+
+  .lg\:placeholder-button-inverse_color::-moz-placeholder{
+    color: rgba(128, 208, 216, 1.0);
+    color: var(--button-inverse-color);
+  }
+
+  .lg\:placeholder-button-inverse_color:-ms-input-placeholder{
+    color: rgba(128, 208, 216, 1.0);
+    color: var(--button-inverse-color);
+  }
+
+  .lg\:placeholder-button-inverse_color::-ms-input-placeholder{
+    color: rgba(128, 208, 216, 1.0);
+    color: var(--button-inverse-color);
+  }
+
+  .lg\:placeholder-button-inverse_color::placeholder{
+    color: rgba(128, 208, 216, 1.0);
+    color: var(--button-inverse-color);
+  }
+
+  .lg\:placeholder-button-inverse_text::-webkit-input-placeholder{
+    color: rgb(0, 0, 0);
+    color: var(--button-inverse-text);
+  }
+
+  .lg\:placeholder-button-inverse_text::-moz-placeholder{
+    color: rgb(0, 0, 0);
+    color: var(--button-inverse-text);
+  }
+
+  .lg\:placeholder-button-inverse_text:-ms-input-placeholder{
+    color: rgb(0, 0, 0);
+    color: var(--button-inverse-text);
+  }
+
+  .lg\:placeholder-button-inverse_text::-ms-input-placeholder{
+    color: rgb(0, 0, 0);
+    color: var(--button-inverse-text);
+  }
+
+  .lg\:placeholder-button-inverse_text::placeholder{
+    color: rgb(0, 0, 0);
+    color: var(--button-inverse-text);
   }
 
   .lg\:placeholder-icon-primary::-webkit-input-placeholder{
@@ -45367,6 +46413,31 @@ table tbody td {
     color: transparent;
   }
 
+  .lg\:focus\:placeholder-primary:focus::-webkit-input-placeholder{
+    color: rgba(128, 208, 216, 1.0);
+    color: var(--primary-text);
+  }
+
+  .lg\:focus\:placeholder-primary:focus::-moz-placeholder{
+    color: rgba(128, 208, 216, 1.0);
+    color: var(--primary-text);
+  }
+
+  .lg\:focus\:placeholder-primary:focus:-ms-input-placeholder{
+    color: rgba(128, 208, 216, 1.0);
+    color: var(--primary-text);
+  }
+
+  .lg\:focus\:placeholder-primary:focus::-ms-input-placeholder{
+    color: rgba(128, 208, 216, 1.0);
+    color: var(--primary-text);
+  }
+
+  .lg\:focus\:placeholder-primary:focus::placeholder{
+    color: rgba(128, 208, 216, 1.0);
+    color: var(--primary-text);
+  }
+
   .lg\:focus\:placeholder-brand-primary:focus::-webkit-input-placeholder{
     color: rgba(200, 220, 105, 1.0);
     color: var(--button-primary-color);
@@ -45630,6 +46701,56 @@ table tbody td {
   .lg\:focus\:placeholder-button-secondary_text:focus::placeholder{
     color: rgb(0, 0, 0);
     color: var(--button-secondary-text);
+  }
+
+  .lg\:focus\:placeholder-button-inverse_color:focus::-webkit-input-placeholder{
+    color: rgba(128, 208, 216, 1.0);
+    color: var(--button-inverse-color);
+  }
+
+  .lg\:focus\:placeholder-button-inverse_color:focus::-moz-placeholder{
+    color: rgba(128, 208, 216, 1.0);
+    color: var(--button-inverse-color);
+  }
+
+  .lg\:focus\:placeholder-button-inverse_color:focus:-ms-input-placeholder{
+    color: rgba(128, 208, 216, 1.0);
+    color: var(--button-inverse-color);
+  }
+
+  .lg\:focus\:placeholder-button-inverse_color:focus::-ms-input-placeholder{
+    color: rgba(128, 208, 216, 1.0);
+    color: var(--button-inverse-color);
+  }
+
+  .lg\:focus\:placeholder-button-inverse_color:focus::placeholder{
+    color: rgba(128, 208, 216, 1.0);
+    color: var(--button-inverse-color);
+  }
+
+  .lg\:focus\:placeholder-button-inverse_text:focus::-webkit-input-placeholder{
+    color: rgb(0, 0, 0);
+    color: var(--button-inverse-text);
+  }
+
+  .lg\:focus\:placeholder-button-inverse_text:focus::-moz-placeholder{
+    color: rgb(0, 0, 0);
+    color: var(--button-inverse-text);
+  }
+
+  .lg\:focus\:placeholder-button-inverse_text:focus:-ms-input-placeholder{
+    color: rgb(0, 0, 0);
+    color: var(--button-inverse-text);
+  }
+
+  .lg\:focus\:placeholder-button-inverse_text:focus::-ms-input-placeholder{
+    color: rgb(0, 0, 0);
+    color: var(--button-inverse-text);
+  }
+
+  .lg\:focus\:placeholder-button-inverse_text:focus::placeholder{
+    color: rgb(0, 0, 0);
+    color: var(--button-inverse-text);
   }
 
   .lg\:focus\:placeholder-icon-primary:focus::-webkit-input-placeholder{
@@ -47805,6 +48926,11 @@ table tbody td {
     color: transparent;
   }
 
+  .lg\:text-primary{
+    color: rgba(128, 208, 216, 1.0);
+    color: var(--primary-text);
+  }
+
   .lg\:text-brand-primary{
     color: rgba(200, 220, 105, 1.0);
     color: var(--button-primary-color);
@@ -47856,6 +48982,16 @@ table tbody td {
   .lg\:text-button-secondary_text{
     color: rgb(0, 0, 0);
     color: var(--button-secondary-text);
+  }
+
+  .lg\:text-button-inverse_color{
+    color: rgba(128, 208, 216, 1.0);
+    color: var(--button-inverse-color);
+  }
+
+  .lg\:text-button-inverse_text{
+    color: rgb(0, 0, 0);
+    color: var(--button-inverse-text);
   }
 
   .lg\:text-icon-primary{
@@ -48248,6 +49384,11 @@ table tbody td {
     color: transparent;
   }
 
+  .lg\:hover\:text-primary:hover{
+    color: rgba(128, 208, 216, 1.0);
+    color: var(--primary-text);
+  }
+
   .lg\:hover\:text-brand-primary:hover{
     color: rgba(200, 220, 105, 1.0);
     color: var(--button-primary-color);
@@ -48299,6 +49440,16 @@ table tbody td {
   .lg\:hover\:text-button-secondary_text:hover{
     color: rgb(0, 0, 0);
     color: var(--button-secondary-text);
+  }
+
+  .lg\:hover\:text-button-inverse_color:hover{
+    color: rgba(128, 208, 216, 1.0);
+    color: var(--button-inverse-color);
+  }
+
+  .lg\:hover\:text-button-inverse_text:hover{
+    color: rgb(0, 0, 0);
+    color: var(--button-inverse-text);
   }
 
   .lg\:hover\:text-icon-primary:hover{
@@ -48691,6 +49842,11 @@ table tbody td {
     color: transparent;
   }
 
+  .lg\:focus\:text-primary:focus{
+    color: rgba(128, 208, 216, 1.0);
+    color: var(--primary-text);
+  }
+
   .lg\:focus\:text-brand-primary:focus{
     color: rgba(200, 220, 105, 1.0);
     color: var(--button-primary-color);
@@ -48742,6 +49898,16 @@ table tbody td {
   .lg\:focus\:text-button-secondary_text:focus{
     color: rgb(0, 0, 0);
     color: var(--button-secondary-text);
+  }
+
+  .lg\:focus\:text-button-inverse_color:focus{
+    color: rgba(128, 208, 216, 1.0);
+    color: var(--button-inverse-color);
+  }
+
+  .lg\:focus\:text-button-inverse_text:focus{
+    color: rgb(0, 0, 0);
+    color: var(--button-inverse-text);
   }
 
   .lg\:focus\:text-icon-primary:focus{
@@ -49128,6 +50294,10 @@ table tbody td {
 
   .lg\:focus\:text-pink-900:focus{
     color: #702459;
+  }
+
+  .lg\:text-xxs{
+    font-size: 0.50rem;
   }
 
   .lg\:text-xs{
@@ -49653,6 +50823,11 @@ table tbody td {
     background-color: transparent;
   }
 
+  .xl\:bg-primary{
+    background-color: rgba(128, 208, 216, 1.0);
+    background-color: var(--primary-text);
+  }
+
   .xl\:bg-brand-primary{
     background-color: rgba(200, 220, 105, 1.0);
     background-color: var(--button-primary-color);
@@ -49704,6 +50879,16 @@ table tbody td {
   .xl\:bg-button-secondary_text{
     background-color: rgb(0, 0, 0);
     background-color: var(--button-secondary-text);
+  }
+
+  .xl\:bg-button-inverse_color{
+    background-color: rgba(128, 208, 216, 1.0);
+    background-color: var(--button-inverse-color);
+  }
+
+  .xl\:bg-button-inverse_text{
+    background-color: rgb(0, 0, 0);
+    background-color: var(--button-inverse-text);
   }
 
   .xl\:bg-icon-primary{
@@ -50096,6 +51281,11 @@ table tbody td {
     background-color: transparent;
   }
 
+  .xl\:hover\:bg-primary:hover{
+    background-color: rgba(128, 208, 216, 1.0);
+    background-color: var(--primary-text);
+  }
+
   .xl\:hover\:bg-brand-primary:hover{
     background-color: rgba(200, 220, 105, 1.0);
     background-color: var(--button-primary-color);
@@ -50147,6 +51337,16 @@ table tbody td {
   .xl\:hover\:bg-button-secondary_text:hover{
     background-color: rgb(0, 0, 0);
     background-color: var(--button-secondary-text);
+  }
+
+  .xl\:hover\:bg-button-inverse_color:hover{
+    background-color: rgba(128, 208, 216, 1.0);
+    background-color: var(--button-inverse-color);
+  }
+
+  .xl\:hover\:bg-button-inverse_text:hover{
+    background-color: rgb(0, 0, 0);
+    background-color: var(--button-inverse-text);
   }
 
   .xl\:hover\:bg-icon-primary:hover{
@@ -50539,6 +51739,11 @@ table tbody td {
     background-color: transparent;
   }
 
+  .xl\:focus\:bg-primary:focus{
+    background-color: rgba(128, 208, 216, 1.0);
+    background-color: var(--primary-text);
+  }
+
   .xl\:focus\:bg-brand-primary:focus{
     background-color: rgba(200, 220, 105, 1.0);
     background-color: var(--button-primary-color);
@@ -50590,6 +51795,16 @@ table tbody td {
   .xl\:focus\:bg-button-secondary_text:focus{
     background-color: rgb(0, 0, 0);
     background-color: var(--button-secondary-text);
+  }
+
+  .xl\:focus\:bg-button-inverse_color:focus{
+    background-color: rgba(128, 208, 216, 1.0);
+    background-color: var(--button-inverse-color);
+  }
+
+  .xl\:focus\:bg-button-inverse_text:focus{
+    background-color: rgb(0, 0, 0);
+    background-color: var(--button-inverse-text);
   }
 
   .xl\:focus\:bg-icon-primary:focus{
@@ -51062,6 +52277,11 @@ table tbody td {
     border-color: transparent;
   }
 
+  .xl\:border-primary{
+    border-color: rgba(128, 208, 216, 1.0);
+    border-color: var(--primary-text);
+  }
+
   .xl\:border-brand-primary{
     border-color: rgba(200, 220, 105, 1.0);
     border-color: var(--button-primary-color);
@@ -51113,6 +52333,16 @@ table tbody td {
   .xl\:border-button-secondary_text{
     border-color: rgb(0, 0, 0);
     border-color: var(--button-secondary-text);
+  }
+
+  .xl\:border-button-inverse_color{
+    border-color: rgba(128, 208, 216, 1.0);
+    border-color: var(--button-inverse-color);
+  }
+
+  .xl\:border-button-inverse_text{
+    border-color: rgb(0, 0, 0);
+    border-color: var(--button-inverse-text);
   }
 
   .xl\:border-icon-primary{
@@ -51505,6 +52735,11 @@ table tbody td {
     border-color: transparent;
   }
 
+  .xl\:hover\:border-primary:hover{
+    border-color: rgba(128, 208, 216, 1.0);
+    border-color: var(--primary-text);
+  }
+
   .xl\:hover\:border-brand-primary:hover{
     border-color: rgba(200, 220, 105, 1.0);
     border-color: var(--button-primary-color);
@@ -51556,6 +52791,16 @@ table tbody td {
   .xl\:hover\:border-button-secondary_text:hover{
     border-color: rgb(0, 0, 0);
     border-color: var(--button-secondary-text);
+  }
+
+  .xl\:hover\:border-button-inverse_color:hover{
+    border-color: rgba(128, 208, 216, 1.0);
+    border-color: var(--button-inverse-color);
+  }
+
+  .xl\:hover\:border-button-inverse_text:hover{
+    border-color: rgb(0, 0, 0);
+    border-color: var(--button-inverse-text);
   }
 
   .xl\:hover\:border-icon-primary:hover{
@@ -51948,6 +53193,11 @@ table tbody td {
     border-color: transparent;
   }
 
+  .xl\:focus\:border-primary:focus{
+    border-color: rgba(128, 208, 216, 1.0);
+    border-color: var(--primary-text);
+  }
+
   .xl\:focus\:border-brand-primary:focus{
     border-color: rgba(200, 220, 105, 1.0);
     border-color: var(--button-primary-color);
@@ -51999,6 +53249,16 @@ table tbody td {
   .xl\:focus\:border-button-secondary_text:focus{
     border-color: rgb(0, 0, 0);
     border-color: var(--button-secondary-text);
+  }
+
+  .xl\:focus\:border-button-inverse_color:focus{
+    border-color: rgba(128, 208, 216, 1.0);
+    border-color: var(--button-inverse-color);
+  }
+
+  .xl\:focus\:border-button-inverse_text:focus{
+    border-color: rgb(0, 0, 0);
+    border-color: var(--button-inverse-text);
   }
 
   .xl\:focus\:border-icon-primary:focus{
@@ -55237,6 +56497,31 @@ table tbody td {
     color: transparent;
   }
 
+  .xl\:placeholder-primary::-webkit-input-placeholder{
+    color: rgba(128, 208, 216, 1.0);
+    color: var(--primary-text);
+  }
+
+  .xl\:placeholder-primary::-moz-placeholder{
+    color: rgba(128, 208, 216, 1.0);
+    color: var(--primary-text);
+  }
+
+  .xl\:placeholder-primary:-ms-input-placeholder{
+    color: rgba(128, 208, 216, 1.0);
+    color: var(--primary-text);
+  }
+
+  .xl\:placeholder-primary::-ms-input-placeholder{
+    color: rgba(128, 208, 216, 1.0);
+    color: var(--primary-text);
+  }
+
+  .xl\:placeholder-primary::placeholder{
+    color: rgba(128, 208, 216, 1.0);
+    color: var(--primary-text);
+  }
+
   .xl\:placeholder-brand-primary::-webkit-input-placeholder{
     color: rgba(200, 220, 105, 1.0);
     color: var(--button-primary-color);
@@ -55500,6 +56785,56 @@ table tbody td {
   .xl\:placeholder-button-secondary_text::placeholder{
     color: rgb(0, 0, 0);
     color: var(--button-secondary-text);
+  }
+
+  .xl\:placeholder-button-inverse_color::-webkit-input-placeholder{
+    color: rgba(128, 208, 216, 1.0);
+    color: var(--button-inverse-color);
+  }
+
+  .xl\:placeholder-button-inverse_color::-moz-placeholder{
+    color: rgba(128, 208, 216, 1.0);
+    color: var(--button-inverse-color);
+  }
+
+  .xl\:placeholder-button-inverse_color:-ms-input-placeholder{
+    color: rgba(128, 208, 216, 1.0);
+    color: var(--button-inverse-color);
+  }
+
+  .xl\:placeholder-button-inverse_color::-ms-input-placeholder{
+    color: rgba(128, 208, 216, 1.0);
+    color: var(--button-inverse-color);
+  }
+
+  .xl\:placeholder-button-inverse_color::placeholder{
+    color: rgba(128, 208, 216, 1.0);
+    color: var(--button-inverse-color);
+  }
+
+  .xl\:placeholder-button-inverse_text::-webkit-input-placeholder{
+    color: rgb(0, 0, 0);
+    color: var(--button-inverse-text);
+  }
+
+  .xl\:placeholder-button-inverse_text::-moz-placeholder{
+    color: rgb(0, 0, 0);
+    color: var(--button-inverse-text);
+  }
+
+  .xl\:placeholder-button-inverse_text:-ms-input-placeholder{
+    color: rgb(0, 0, 0);
+    color: var(--button-inverse-text);
+  }
+
+  .xl\:placeholder-button-inverse_text::-ms-input-placeholder{
+    color: rgb(0, 0, 0);
+    color: var(--button-inverse-text);
+  }
+
+  .xl\:placeholder-button-inverse_text::placeholder{
+    color: rgb(0, 0, 0);
+    color: var(--button-inverse-text);
   }
 
   .xl\:placeholder-icon-primary::-webkit-input-placeholder{
@@ -57452,6 +58787,31 @@ table tbody td {
     color: transparent;
   }
 
+  .xl\:focus\:placeholder-primary:focus::-webkit-input-placeholder{
+    color: rgba(128, 208, 216, 1.0);
+    color: var(--primary-text);
+  }
+
+  .xl\:focus\:placeholder-primary:focus::-moz-placeholder{
+    color: rgba(128, 208, 216, 1.0);
+    color: var(--primary-text);
+  }
+
+  .xl\:focus\:placeholder-primary:focus:-ms-input-placeholder{
+    color: rgba(128, 208, 216, 1.0);
+    color: var(--primary-text);
+  }
+
+  .xl\:focus\:placeholder-primary:focus::-ms-input-placeholder{
+    color: rgba(128, 208, 216, 1.0);
+    color: var(--primary-text);
+  }
+
+  .xl\:focus\:placeholder-primary:focus::placeholder{
+    color: rgba(128, 208, 216, 1.0);
+    color: var(--primary-text);
+  }
+
   .xl\:focus\:placeholder-brand-primary:focus::-webkit-input-placeholder{
     color: rgba(200, 220, 105, 1.0);
     color: var(--button-primary-color);
@@ -57715,6 +59075,56 @@ table tbody td {
   .xl\:focus\:placeholder-button-secondary_text:focus::placeholder{
     color: rgb(0, 0, 0);
     color: var(--button-secondary-text);
+  }
+
+  .xl\:focus\:placeholder-button-inverse_color:focus::-webkit-input-placeholder{
+    color: rgba(128, 208, 216, 1.0);
+    color: var(--button-inverse-color);
+  }
+
+  .xl\:focus\:placeholder-button-inverse_color:focus::-moz-placeholder{
+    color: rgba(128, 208, 216, 1.0);
+    color: var(--button-inverse-color);
+  }
+
+  .xl\:focus\:placeholder-button-inverse_color:focus:-ms-input-placeholder{
+    color: rgba(128, 208, 216, 1.0);
+    color: var(--button-inverse-color);
+  }
+
+  .xl\:focus\:placeholder-button-inverse_color:focus::-ms-input-placeholder{
+    color: rgba(128, 208, 216, 1.0);
+    color: var(--button-inverse-color);
+  }
+
+  .xl\:focus\:placeholder-button-inverse_color:focus::placeholder{
+    color: rgba(128, 208, 216, 1.0);
+    color: var(--button-inverse-color);
+  }
+
+  .xl\:focus\:placeholder-button-inverse_text:focus::-webkit-input-placeholder{
+    color: rgb(0, 0, 0);
+    color: var(--button-inverse-text);
+  }
+
+  .xl\:focus\:placeholder-button-inverse_text:focus::-moz-placeholder{
+    color: rgb(0, 0, 0);
+    color: var(--button-inverse-text);
+  }
+
+  .xl\:focus\:placeholder-button-inverse_text:focus:-ms-input-placeholder{
+    color: rgb(0, 0, 0);
+    color: var(--button-inverse-text);
+  }
+
+  .xl\:focus\:placeholder-button-inverse_text:focus::-ms-input-placeholder{
+    color: rgb(0, 0, 0);
+    color: var(--button-inverse-text);
+  }
+
+  .xl\:focus\:placeholder-button-inverse_text:focus::placeholder{
+    color: rgb(0, 0, 0);
+    color: var(--button-inverse-text);
   }
 
   .xl\:focus\:placeholder-icon-primary:focus::-webkit-input-placeholder{
@@ -59890,6 +61300,11 @@ table tbody td {
     color: transparent;
   }
 
+  .xl\:text-primary{
+    color: rgba(128, 208, 216, 1.0);
+    color: var(--primary-text);
+  }
+
   .xl\:text-brand-primary{
     color: rgba(200, 220, 105, 1.0);
     color: var(--button-primary-color);
@@ -59941,6 +61356,16 @@ table tbody td {
   .xl\:text-button-secondary_text{
     color: rgb(0, 0, 0);
     color: var(--button-secondary-text);
+  }
+
+  .xl\:text-button-inverse_color{
+    color: rgba(128, 208, 216, 1.0);
+    color: var(--button-inverse-color);
+  }
+
+  .xl\:text-button-inverse_text{
+    color: rgb(0, 0, 0);
+    color: var(--button-inverse-text);
   }
 
   .xl\:text-icon-primary{
@@ -60333,6 +61758,11 @@ table tbody td {
     color: transparent;
   }
 
+  .xl\:hover\:text-primary:hover{
+    color: rgba(128, 208, 216, 1.0);
+    color: var(--primary-text);
+  }
+
   .xl\:hover\:text-brand-primary:hover{
     color: rgba(200, 220, 105, 1.0);
     color: var(--button-primary-color);
@@ -60384,6 +61814,16 @@ table tbody td {
   .xl\:hover\:text-button-secondary_text:hover{
     color: rgb(0, 0, 0);
     color: var(--button-secondary-text);
+  }
+
+  .xl\:hover\:text-button-inverse_color:hover{
+    color: rgba(128, 208, 216, 1.0);
+    color: var(--button-inverse-color);
+  }
+
+  .xl\:hover\:text-button-inverse_text:hover{
+    color: rgb(0, 0, 0);
+    color: var(--button-inverse-text);
   }
 
   .xl\:hover\:text-icon-primary:hover{
@@ -60776,6 +62216,11 @@ table tbody td {
     color: transparent;
   }
 
+  .xl\:focus\:text-primary:focus{
+    color: rgba(128, 208, 216, 1.0);
+    color: var(--primary-text);
+  }
+
   .xl\:focus\:text-brand-primary:focus{
     color: rgba(200, 220, 105, 1.0);
     color: var(--button-primary-color);
@@ -60827,6 +62272,16 @@ table tbody td {
   .xl\:focus\:text-button-secondary_text:focus{
     color: rgb(0, 0, 0);
     color: var(--button-secondary-text);
+  }
+
+  .xl\:focus\:text-button-inverse_color:focus{
+    color: rgba(128, 208, 216, 1.0);
+    color: var(--button-inverse-color);
+  }
+
+  .xl\:focus\:text-button-inverse_text:focus{
+    color: rgb(0, 0, 0);
+    color: var(--button-inverse-text);
   }
 
   .xl\:focus\:text-icon-primary:focus{
@@ -61213,6 +62668,10 @@ table tbody td {
 
   .xl\:focus\:text-pink-900:focus{
     color: #702459;
+  }
+
+  .xl\:text-xxs{
+    font-size: 0.50rem;
   }
 
   .xl\:text-xs{
