@@ -72,6 +72,8 @@ class ProductController extends Controller
         $product_code = decodeUrl($product_code);
         $product = Product::show($product_code);
 
+        dd($product);
+
         $categories = [
             'level_1' => isset($category_array[1]) ? decodeUrl($category_array[1]) : '',
             'level_2' => isset($category_array[2]) ? decodeUrl($category_array[2]) : '',

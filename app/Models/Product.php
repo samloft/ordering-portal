@@ -70,7 +70,7 @@ class Product extends Model
      */
     public function expectedStock(): HasMany
     {
-        return $this->hasMany(ExpectedStock::class, 'product', 'code');
+        return $this->hasMany(ExpectedStock::class, 'product', 'code')->orderBy('due_date', 'asc');
     }
 
     /**
