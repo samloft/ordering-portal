@@ -239,7 +239,7 @@
                 {{--                    </div>--}}
                 {{--                </div>--}}
 
-                @if (count($expected_stock) > 0)
+                @if ($product->expectedStock)
                     <h5 class="mb-3 font-semibold">Expected Stock</h5>
                     <table class="table table-expected">
                         <thead>
@@ -249,7 +249,7 @@
                         </tr>
                         </thead>
                         <tbody>
-                        @foreach($expected_stock as $stock)
+                        @foreach($product->expectedStock as $stock)
                             <tr>
                                 <td class="text-center">{{ $stock->due_date->format('d-m-Y') }}</td>
                                 <td class="text-center">{{ $stock->quantity }}</td>

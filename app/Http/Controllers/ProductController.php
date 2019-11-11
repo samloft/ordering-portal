@@ -71,7 +71,6 @@ class ProductController extends Controller
         $category_list = Category::list();
         $product_code = decodeUrl($product_code);
         $product = Product::show($product_code);
-        $expected_stock = ExpectedStock::show($product_code);
 
         $categories = [
             'level_1' => isset($category_array[1]) ? decodeUrl($category_array[1]) : '',
@@ -92,7 +91,7 @@ class ProductController extends Controller
             ];
         }
 
-        return view('products.show', compact('categories', 'category_list', 'product', 'expected_stock'));
+        return view('products.show', compact('categories', 'category_list', 'product'));
     }
 
     /**

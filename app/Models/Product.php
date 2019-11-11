@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Http\JsonResponse;
 use Storage;
 
@@ -65,6 +66,14 @@ class Product extends Model
     }
 
     /**
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
+    public function expectedStock(): HasMany
+    {
+        return $this->hasMany(ExpectedStock::class, 'product', 'code');
+    }
+
+    /**
      * Return all products for the given categories.
      *
      * @param $categories
@@ -96,7 +105,9 @@ class Product extends Model
             'trade_price',
             'quantity',
             'order_multiples',
-        ])->whereHas('prices')->where('products.code', $product_code)->leftJoin('prices', 'prices.product', 'products.code')->leftJoin('stock_levels', 'stock_levels.product', 'products.code')->first();
+        ])->whereHas('prices')->where('products.code', $product_code)->leftJoin('prices', 'prices.product', 'products.code')->leftJoin('stock_levels', 'stock_levels.product', 'products.code')
+            ->with('expectedStock')
+            ->first();
     }
 
     /**
