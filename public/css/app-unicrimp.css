@@ -13377,6 +13377,30 @@ table tbody td {
   padding-right: 1rem;
 }
 
+table.bulk-rates {
+  box-shadow: none;
+  border-bottom-width: 2px;
+  border-color: rgba(234, 25, 33, 1.0);
+  border-color: var(--button-primary-color);
+  margin-bottom: 1rem;
+}
+
+table.bulk-rates thead {
+  background-color: #fff;
+  font-size: 0.75rem;
+}
+
+table.bulk-rates thead th {
+  color: #000;
+  padding: 0;
+}
+
+table.bulk-rates tbody td {
+  padding: 0;
+  border-width: 0;
+  font-size: 0.875rem;
+}
+
 .categories-nav a {
   padding-top: 0.5rem;
   padding-bottom: 0.5rem;
