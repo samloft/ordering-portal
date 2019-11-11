@@ -139,10 +139,10 @@
                                     </button>
                                 </a>
                                 <div class="block">
-                                    <div class="text-xxs bg-gray-600 text-white p-1 rounded-t">
+                                    <div class="text-xxs bg-gray-600 text-white pl-1 pr-1 rounded-t">
                                         {{ __('Stock Level') }}
                                     </div>
-                                    <div class="text-center bg-gray-200 text-xs rounded-b">
+                                    <div class="text-center bg-gray-200 p-1 text-xs rounded-b">
                                         {{ $product->quantity ?: 0 }}
                                     </div>
                                 </div>
