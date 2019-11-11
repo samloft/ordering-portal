@@ -93,6 +93,7 @@ class Product extends Model
             'description',
             'uom',
             'price',
+            'trade_price',
             'quantity',
             'order_multiples',
         ])->whereHas('prices')->where('products.code', $product_code)->leftJoin('prices', 'prices.product', 'products.code')->leftJoin('stock_levels', 'stock_levels.product', 'products.code')->first();

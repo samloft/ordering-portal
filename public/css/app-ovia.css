@@ -13383,7 +13383,7 @@ table {
 }
 
 table thead {
-  background-color: #cbd5e0;
+  background-color: #718096;
   text-transform: uppercase;
 }
 
@@ -13393,7 +13393,7 @@ table thead th {
   padding-bottom: 0.5rem;
   padding-left: 1rem;
   padding-right: 1rem;
-  color: #4a5568;
+  color: #e2e8f0;
 }
 
 table thead th:first-child {
@@ -13402,6 +13402,10 @@ table thead th:first-child {
 
 table thead th:last-child {
   border-top-right-radius: 0.25rem;
+}
+
+table tbody {
+  background-color: #fff;
 }
 
 table tbody td {

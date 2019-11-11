@@ -59,7 +59,7 @@
                             <div class="flex mb-2">
                                 <div class="w-3/4">
                                     <h2 class="font-semibold text-lg text-primary mb-2">
-                                        <a href="/products/view/{{ encodeUrl($product->code) }}">{{ $product->name }}</a>
+                                        <a href="/products/view/{{ encodeUrl($product->code) }}" class="hover:underline">{{ $product->name }}</a>
                                     </h2>
 
                                     <div class="flex items-center">
