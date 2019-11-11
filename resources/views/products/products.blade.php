@@ -53,7 +53,7 @@
                     </div>
                 @endif
 
-                @if (count($products) > 0)
+                @if ($products)
                     @foreach($products as $product)
                         <div class="w-full rounded bg-white p-5 shadow mb-5 text-sm">
                             <div class="flex mb-2">

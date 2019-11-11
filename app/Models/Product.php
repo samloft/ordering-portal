@@ -121,7 +121,7 @@ class Product extends Model
         return self::whereHas('prices')->where(static function ($query) use ($search_term) {
             $query->whereRaw('upper(products.code) LIKE \'%'.strtoupper($search_term).'%\'')->orWhereRaw('upper(name) LIKE \'%'.strtoupper($search_term).'%\'')->orWhereRaw('upper(description) LIKE \'%'.strtoupper($search_term).'%\'');
         })->join('prices', 'products.code', '=', 'prices.product')->leftJoin('stock_levels', 'products.code', '=', 'stock_levels.product')
-            //->where('prices.customer_code', auth()->user()->customer->code)
+            ->where('prices.customer_code', auth()->user()->customer->code)
             ->paginate(10);
     }
 

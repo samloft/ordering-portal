@@ -26,7 +26,6 @@ class ProductController extends Controller
      */
     public function index($category_one = null, $category_two = null, $category_three = null, $category_four = null, $category_five = null)
     {
-        $category_list = Category::list();
         $sub_category_list = [];
 
         $categories = [
@@ -49,12 +48,12 @@ class ProductController extends Controller
             $sub_category_list = Category::subCategories($current_level, $categories['level_1'], $categories['level_' . $current_level]);
             $products = Product::list($categories);
 
-            return view('products.products', compact('categories', 'category_list', 'products', 'sub_category_list'));
+            return view('products.products', compact('categories', 'products', 'sub_category_list'));
         }
 
         $links['categories'] = HomeLinks::categories();
 
-        return view('products.index', compact('links', 'categories', 'category_list', 'sub_category_list'));
+        return view('products.index', compact('links', 'categories', 'sub_category_list'));
     }
 
     /**
@@ -68,11 +67,7 @@ class ProductController extends Controller
         $previous_categories = str_replace(url('/'), '', url()->previous());
         $category_array = array_values(array_filter(explode('/', $previous_categories)));
 
-        $category_list = Category::list();
-        $product_code = decodeUrl($product_code);
-        $product = Product::show($product_code);
-
-        dd($product);
+        $product = Product::show(decodeUrl($product_code));
 
         $categories = [
             'level_1' => isset($category_array[1]) ? decodeUrl($category_array[1]) : '',
@@ -93,7 +88,7 @@ class ProductController extends Controller
             ];
         }
 
-        return view('products.show', compact('categories', 'category_list', 'product'));
+        return view('products.show', compact('categories', 'product'));
     }
 
     /**
@@ -103,7 +98,6 @@ class ProductController extends Controller
      */
     public function search()
     {
-        $category_list = Category::list();
         $search_term = urldecode(request('query'));
         $products = Product::search($search_term);
 
@@ -116,6 +110,6 @@ class ProductController extends Controller
             'query' => $search_term
         ];
 
-        return view('products.products', compact('products', 'categories', 'category_list'));
+        return view('products.products', compact('products', 'categories'));
     }
 }
