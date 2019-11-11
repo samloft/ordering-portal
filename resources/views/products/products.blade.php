@@ -55,27 +55,32 @@
 
                 @if (count($products) > 0)
                     @foreach($products as $product)
-                        <div class="w-full rounded overflow-hidden bg-white p-5 shadow mb-5 text-sm">
-                            <div class="flex">
+                        <div class="w-full rounded bg-white p-5 shadow mb-5 text-sm">
+                            <div class="flex mb-2">
                                 <div class="w-3/4">
                                     <h2 class="font-semibold text-lg text-primary">
                                         <a href="/products/view/{{ encodeUrl($product->code) }}">{{ $product->name }}</a>
                                     </h2>
 
                                     <div class="flex items-center">
-                                        <img id="enlarge-image" class="h-32" alt="{{ $product->code }}"
-                                             src="{{ $product->image() }}">
+                                        <expandable-image class="w-32"
+                                                          alt="{{ $product->code }}"
+                                                          src="{{ $product->image() }}"
+                                                          title="{{ $product->code }}">
+                                        </expandable-image>
+
                                         <div class="pl-3 pr-10">
                                             <h5>
                                                 {{ __('Product Code: ') }}
-                                                <span id="product-code" class="font-semibold text-primary">{{ $product->code }}</span>
+                                                <span id="product-code"
+                                                      class="font-semibold text-primary">{{ $product->code }}</span>
                                             </h5>
                                             <h5>
                                                 {{ __('Unit Type: ') }}
                                                 <span class="font-semibold text-primary">{{ $product->uom }}</span>
                                             </h5>
 
-                                            <h5>{{ $product->description }}</h5>
+                                            <h5 class="mt-1">{{ $product->description }}</h5>
                                         </div>
                                     </div>
                                 </div>
@@ -106,7 +111,7 @@
                                         </div>
                                     </div>
                                     <hr>
-                                    <div class="flex justify-between">
+                                    <div class="flex justify-between mt-1 mb-1">
                                         <div class="col text-left">
                                             <strong>{{ __('Net Price:') }}</strong>
                                         </div>
