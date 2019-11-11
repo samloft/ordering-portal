@@ -22,12 +22,11 @@ class ProductController extends Controller
      * @param string $category_three [Optional]
      * @param string $category_four [Optional]
      * @param string $category_five [Optional]
+     *
      * @return Factory|View
      */
     public function index($category_one = null, $category_two = null, $category_three = null, $category_four = null, $category_five = null)
     {
-        $sub_category_list = [];
-
         $categories = [
             'level_1' => decodeUrl($category_one),
             'level_2' => decodeUrl($category_two),
@@ -36,24 +35,15 @@ class ProductController extends Controller
             'level_5' => decodeUrl($category_five),
         ];
 
-        $current_level = 0;
-
-        foreach ($categories as $level) {
-            if ($level) {
-                $current_level++;
-            }
-        }
-
         if ($categories['level_1'] !== null) {
-            $sub_category_list = Category::subCategories($current_level, $categories['level_1'], $categories['level_' . $current_level]);
             $products = Product::list($categories);
 
-            return view('products.products', compact('categories', 'products', 'sub_category_list'));
+            return view('products.products', compact('categories', 'products'));
         }
 
         $links['categories'] = HomeLinks::categories();
 
-        return view('products.index', compact('links', 'categories', 'sub_category_list'));
+        return view('products.index', compact('links', 'categories'));
     }
 
     /**
@@ -80,10 +70,6 @@ class ProductController extends Controller
         if (isset($category_array[1]) && strpos($category_array[1], 'search') === 0) {
             $categories = [
                 'level_1' => 'search',
-                'level_2' => null,
-                'level_3' => null,
-                'level_4' => null,
-                'level_5' => null,
                 'query' => substr(decodeUrl($category_array[1]), 13)
             ];
         }
@@ -99,14 +85,11 @@ class ProductController extends Controller
     public function search()
     {
         $search_term = urldecode(request('query'));
+
         $products = Product::search($search_term);
 
         $categories = [
             'level_1' => 'search',
-            'level_2' => null,
-            'level_3' => null,
-            'level_4' => null,
-            'level_5' => null,
             'query' => $search_term
         ];
 
