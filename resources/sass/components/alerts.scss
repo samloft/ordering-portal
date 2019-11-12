@@ -45,3 +45,15 @@
         @apply .text-red-500;
     }
 }
+
+.alert-info {
+    @apply .bg-blue-100 .border-blue-500 .text-blue-500;
+
+    .primary {
+        @apply .text-blue-200;
+    }
+
+    .secondary {
+        @apply .text-blue-500;
+    }
+}

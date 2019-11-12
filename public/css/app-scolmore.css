@@ -13512,6 +13512,20 @@ select {
   color: #f56565;
 }
 
+.alert-info {
+  background-color: #ebf8ff;
+  border-color: #4299e1;
+  color: #4299e1;
+}
+
+.alert-info .primary {
+  color: #bee3f8;
+}
+
+.alert-info .secondary {
+  color: #4299e1;
+}
+
 table {
   border-radius: 0.25rem;
   width: 100%;

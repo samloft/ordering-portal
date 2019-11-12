@@ -25,10 +25,25 @@
 
     <div class="flex-grow container mx-auto sm:px-4 pt-6 pb-8">
         @if (session('temp_customer'))
-            <div class="alert alert-info">
-                <strong>{{ __('Notice!') }}</strong>
-                {!! __('You are currently assuming the customer code: <span class="font-weight-bold">' . session('temp_customer') . '</span>.
-                Your actual Customer Code is <span class="font-weight-bold">' . Auth::user()->customer_code . '</span>. Please <a href="' . route('customer.change.revert') . '">click here</a> to revert back to your default Customer Code.') !!}
+            <div class="alert alert-info" role="alert">
+                <div class="alert-body">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" class="alert-icon">
+                        <path class="primary" d="M12 2a10 10 0 1 1 0 20 10 10 0 0 1 0-20z"></path>
+                        <path class="secondary" d="M11 12a1 1 0 0 1 0-2h2a1 1 0 0 1 .96 1.27L12.33 17H13a1 1 0 0 1 0 2h-2a1 1 0 0 1-.96-1.27L11.67 12H11zm2-4a1.5 1.5 0 1 1 0-3 1.5 1.5 0 0 1 0 3z"></path>
+                    </svg>
+{{--                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" class="alert-icon">--}}
+{{--                        <circle cx="12" cy="12" r="10" class="primary"></circle>--}}
+{{--                        <path class="secondary"--}}
+{{--                              d="M10 14.59l6.3-6.3a1 1 0 0 1 1.4 1.42l-7 7a1 1 0 0 1-1.4 0l-3-3a1 1 0 0 1 1.4-1.42l2.3 2.3z"></path>--}}
+{{--                    </svg>--}}
+                    <div>
+                        <p class="alert-title">{{ __('Notice!') }}</p>
+                        <p class="alert-text">
+                            {!! __('You are currently assuming the customer code: <span class="font-semibold">' . session('temp_customer') . '</span>.
+               Your actual Customer Code is <span class="font-semibold">' . Auth::user()->customer_code . '</span>. Please <a href="' . route('customer.change.revert') . '" class="underline">click here</a> to revert back to your default Customer Code.') !!}
+                        </p>
+                    </div>
+                </div>
             </div>
         @endif
 
