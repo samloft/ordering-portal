@@ -141,8 +141,11 @@
             </table>
         @endif
     @else
-        <div class="card card-body no-product">
-            Oops, no product :(
+        <div class="w-full rounded bg-white p-5 shadow mb-5 text-center">
+            <h2 class="font-semibold tracking-widest">{{ __('Product not found') }}</h2>
+            <p class="font-thin">
+                {{ __('No product was found for this code') }}
+            </p>
         </div>
     @endif
 

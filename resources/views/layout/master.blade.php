@@ -31,11 +31,6 @@
                         <path class="primary" d="M12 2a10 10 0 1 1 0 20 10 10 0 0 1 0-20z"></path>
                         <path class="secondary" d="M11 12a1 1 0 0 1 0-2h2a1 1 0 0 1 .96 1.27L12.33 17H13a1 1 0 0 1 0 2h-2a1 1 0 0 1-.96-1.27L11.67 12H11zm2-4a1.5 1.5 0 1 1 0-3 1.5 1.5 0 0 1 0 3z"></path>
                     </svg>
-{{--                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" class="alert-icon">--}}
-{{--                        <circle cx="12" cy="12" r="10" class="primary"></circle>--}}
-{{--                        <path class="secondary"--}}
-{{--                              d="M10 14.59l6.3-6.3a1 1 0 0 1 1.4 1.42l-7 7a1 1 0 0 1-1.4 0l-3-3a1 1 0 0 1 1.4-1.42l2.3 2.3z"></path>--}}
-{{--                    </svg>--}}
                     <div>
                         <p class="alert-title">{{ __('Notice!') }}</p>
                         <p class="alert-text">
