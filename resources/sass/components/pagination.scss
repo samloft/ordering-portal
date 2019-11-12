@@ -1,0 +1,49 @@
+.pagination {
+    @apply .flex .justify-end;
+
+    .disabled {
+        @apply .cursor-not-allowed;
+
+        a {
+            @apply .cursor-not-allowed .bg-gray-100;
+
+            &:hover {
+                @apply .bg-gray-100;
+            }
+        }
+    }
+
+    ul {
+        @apply .flex;
+
+        .active {
+            a { @apply .bg-brand-primary; }
+        }
+    }
+
+    li {
+        a {
+            @apply .py-1 .px-2 .border-t .border-b .border-l .bg-white;
+
+            &:hover {
+                @apply .bg-brand-primary;
+            }
+        }
+    }
+
+    li:first-of-type {
+        a {
+            @apply .px-2 .rounded-l;
+        }
+    }
+
+    li:last-of-type {
+        a {
+            @apply .px-2 .rounded-r border-r;
+
+            &:hover {
+                @apply .opacity-50;
+            }
+        }
+    }
+}

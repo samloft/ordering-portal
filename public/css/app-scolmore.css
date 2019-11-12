@@ -13616,6 +13616,68 @@ table.bulk-rates tbody td {
   letter-spacing: 0.05em;
 }
 
+.pagination {
+  display: flex;
+  justify-content: flex-end;
+}
+
+.pagination .disabled {
+  cursor: not-allowed;
+}
+
+.pagination .disabled a {
+  cursor: not-allowed;
+  background-color: #f7fafc;
+}
+
+.pagination .disabled a:hover {
+  background-color: #f7fafc;
+}
+
+.pagination ul {
+  display: flex;
+}
+
+.pagination ul .active a {
+  background-color: rgba(200, 220, 105, 1.0);
+  background-color: var(--button-primary-color);
+}
+
+.pagination li a {
+  padding-top: 0.25rem;
+  padding-bottom: 0.25rem;
+  padding-left: 0.5rem;
+  padding-right: 0.5rem;
+  border-top-width: 1px;
+  border-bottom-width: 1px;
+  border-left-width: 1px;
+  background-color: #fff;
+}
+
+.pagination li a:hover {
+  background-color: rgba(200, 220, 105, 1.0);
+  background-color: var(--button-primary-color);
+}
+
+.pagination li:first-of-type a {
+  padding-left: 0.5rem;
+  padding-right: 0.5rem;
+  border-top-left-radius: 0.25rem;
+  border-bottom-left-radius: 0.25rem;
+}
+
+.pagination li:last-of-type a {
+  padding-left: 0.5rem;
+  padding-right: 0.5rem;
+  border-top-right-radius: 0.25rem;
+  border-bottom-right-radius: 0.25rem;
+  border-right-width: 1px;
+}
+
+.pagination li:last-of-type a:hover {
+  opacity: 0.5;
+}
+
 :root {
   --background-primary-color: rgba(49, 49, 49, 1.0);
   --background-primary-text: rgb(255, 255, 255);
