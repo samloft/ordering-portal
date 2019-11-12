@@ -3,12 +3,15 @@
 @section('page.title', 'Products')
 
 @section('product.content')
-    @if (!isset($sub_category_list) && count($products) === 0)
-        <div class="card card-body text-center">
-            <h4>{{ __('No products found.') }}</h4>
+    @if (!$sub_category_list && count($products) === 0)
+        <div class="w-full rounded bg-white p-5 shadow mb-5 text-center">
+            <h2 class="font-semibold tracking-widest">{{ __('No products found') }}</h2>
+            <p class="font-thin">
+                {{ __('No products exist in this category') }}
+            </p>
         </div>
     @else
-        @if (isset($sub_category_list))
+        @if ($sub_category_list)
             <div class="flex flex-wrap -mx-3">
                 @foreach($sub_category_list as $key => $category)
                     <div class="w-1/5 px-3">

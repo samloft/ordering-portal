@@ -13362,7 +13362,7 @@ main.auth .auth-details p {
   cursor: pointer;
 }
 
-input {
+input, textarea {
   border-radius: 0.25rem;
   border-width: 1px;
   padding: 0.5rem;

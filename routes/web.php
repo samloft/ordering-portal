@@ -159,13 +159,14 @@ Route::group(['middleware' => ['auth', 'has.customer']], function () {
         Route::get('/', 'CheckoutController@index')->name('checkout');
         Route::post('order', 'CheckoutController@store')->name('checkout.order');
     });
-});
 
-/* Contact Page */
-Route::group(['prefix' => 'contact'], function () {
-    Route::get('/', 'Support\ContactController@index')->name('support.contact');
-});
+    /* Contact Page */
+    Route::group(['prefix' => 'contact'], static function () {
+        Route::get('/', 'ContactController@index')->name('contact');
+        Route::post('/', 'ContactController@store')->name('contact.email');
+    });
 
+});
 
 Auth::routes();
 

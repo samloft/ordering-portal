@@ -35,10 +35,18 @@ class ProductController extends Controller
             'level_5' => decodeUrl($category_five),
         ];
 
+        $current_level = 0;
+        foreach ($categories as $level) {
+            if ($level) {
+                $current_level++;
+            }
+        }
+
         if ($categories['level_1'] !== null) {
             $products = Product::list($categories);
+            $sub_category_list = Category::subCategories($current_level, $categories['level_1'], $categories['level_' . $current_level]);
 
-            return view('products.products', compact('categories', 'products'));
+            return view('products.products', compact('categories', 'sub_category_list', 'products'));
         }
 
         $links['categories'] = HomeLinks::categories();
@@ -87,12 +95,13 @@ class ProductController extends Controller
         $search_term = urldecode(request('query'));
 
         $products = Product::search($search_term);
+        $sub_category_list = [];
 
         $categories = [
             'level_1' => 'search',
             'query' => $search_term
         ];
 
-        return view('products.products', compact('products', 'categories'));
+        return view('products.products', compact('products', 'categories', 'sub_category_list'));
     }
 }

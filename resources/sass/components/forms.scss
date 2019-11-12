@@ -75,7 +75,7 @@
     }
 }
 
-input {
+input, textarea {
     @apply .rounded .border .p-2 .text-gray-600 .text-sm .w-full;
 }
 

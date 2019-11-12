@@ -2,7 +2,7 @@
     <div class="container mx-auto px-4">
         <div class="md:flex justify-between text-sm">
             <div class="text-center md:text-left py-3 md:py-4 border-b md:border-b-0 text-base">
-                <a href="#" class="no-underline text-grey-dark mr-4 hover:underline">{{ __('Contact Us') }}</a>
+                <a href="{{ route('contact') }}" class="no-underline text-grey-dark mr-4 hover:underline">{{ __('Contact Us') }}</a>
                 <a href="#" class="no-underline text-grey-dark mr-4 hover:underline">{{ __('Accessibility Policy') }}</a>
                 <a href="#" class="no-underline text-grey-dark mr-4 hover:underline">{{ __('Data Protection') }}</a>
                 <a href="#" class="no-underline text-grey-dark mr-4 hover:underline">{{ __('Terms & Conditions') }}</a>
