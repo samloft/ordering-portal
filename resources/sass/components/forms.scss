@@ -10,28 +10,28 @@
             @apply .rounded .border .py-3 .px-3 .text-gray-600 .text-sm .w-full;
         }
     }
+}
 
-    .form-checkbox {
-        @apply .bg-white .border .rounded .align-middle .appearance-none .select-none .flex-shrink-0;
+.form-checkbox {
+    @apply .bg-white .border .rounded .align-middle .appearance-none .select-none .flex-shrink-0;
 
-        height: 1.3em;
-        width: 1.3em;
+    height: 1.3em;
+    width: 1.3em;
 
-        &:checked {
-            @apply .text-brand-primary .border-transparent;
+    &:checked {
+        @apply .text-brand-primary .border-transparent;
 
-            background-image: url("data:image/svg+xml,%3csvg viewBox='0 0 16 16' fill='white' xmlns='http://www.w3.org/2000/svg'%3e%3cpath d='M5.707 7.293a1 1 0 0 0-1.414 1.414l2 2a1 1 0 0 0 1.414 0l4-4a1 1 0 0 0-1.414-1.414L7 8.586 5.707 7.293z'/%3e%3c/svg%3e");
-            background-color: currentColor;
-            background-size: 100% 100%;
-        }
+        background-image: url("data:image/svg+xml,%3csvg viewBox='0 0 16 16' fill='white' xmlns='http://www.w3.org/2000/svg'%3e%3cpath d='M5.707 7.293a1 1 0 0 0-1.414 1.414l2 2a1 1 0 0 0 1.414 0l4-4a1 1 0 0 0-1.414-1.414L7 8.586 5.707 7.293z'/%3e%3c/svg%3e");
+        background-color: currentColor;
+        background-size: 100% 100%;
     }
+}
 
-    .checkbox {
-        @apply .select-none;
+.checkbox {
+    @apply .select-none;
 
-        &:hover {
-            @apply .cursor-pointer;
-        }
+    &:hover {
+        @apply .cursor-pointer;
     }
 }
 

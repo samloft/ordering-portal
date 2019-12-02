@@ -13142,7 +13142,7 @@ main.auth .auth-details p {
   width: 100%;
 }
 
-.auth .form-checkbox {
+.form-checkbox {
   background-color: #fff;
   border-width: 1px;
   border-radius: 0.25rem;
@@ -13159,7 +13159,7 @@ main.auth .auth-details p {
   width: 1.3em;
 }
 
-.auth .form-checkbox:checked {
+.form-checkbox:checked {
   color: rgba(2, 163, 218, 1.0);
   color: var(--button-primary-color);
   border-color: transparent;
@@ -13168,14 +13168,14 @@ main.auth .auth-details p {
   background-size: 100% 100%;
 }
 
-.auth .checkbox {
+.checkbox {
   -webkit-user-select: none;
      -moz-user-select: none;
       -ms-user-select: none;
           user-select: none;
 }
 
-.auth .checkbox:hover {
+.checkbox:hover {
   cursor: pointer;
 }
 
