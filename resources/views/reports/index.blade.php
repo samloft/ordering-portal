@@ -20,7 +20,7 @@
             </label>
 
             <label class="checkbox flex items-center justify-center">
-                <input type="checkbox" class="form-checkbox" name="report">
+                <input type="checkbox" class="form-checkbox" name="report" value="back_orders">
                 <span class="ml-2">{{ __('Back Order History') }}</span>
             </label>
 
@@ -41,37 +41,4 @@
             <button class="button button-primary mt-5">{{ __('Run Report') }}</button>
         </form>
     </div>
-
-    {{--    <div class="card card-body">--}}
-    {{--        @include('layout.alerts')--}}
-
-    {{--        <div class="text-center">--}}
-    {{--            <form id="run-report" action="{{ route('reports.show') }}" method="post">--}}
-    {{--                <div class="form-check">--}}
-    {{--                    <input class="form-check-input" type="radio" name="report" value="account_summary"--}}
-    {{--                           autocomplete="off">--}}
-    {{--                    <label class="form-check-label">--}}
-    {{--                        {{ __('Account Summary') }}--}}
-    {{--                    </label>--}}
-    {{--                </div>--}}
-
-    {{--                <div class="form-check">--}}
-    {{--                    <input class="form-check-input" type="radio" name="report" value="back_orders" autocomplete="off">--}}
-    {{--                    <label class="form-check-label">--}}
-    {{--                        {{ __('Back Order History') }}--}}
-    {{--                    </label>--}}
-    {{--                </div>--}}
-
-    {{--                <div class="form-group form-inline justify-content-center mt-3">--}}
-    {{--                    <label class="mr-1">{{ __('Output As: ') }}</label>--}}
-    {{--                    <select class="form-control form-control-sm" name="output" autocomplete="off">--}}
-    {{--                        <option value="pdf">{{ __('PDF') }}</option>--}}
-    {{--                        <option value="csv">{{ __('CSV') }}</option>--}}
-    {{--                    </select>--}}
-    {{--                </div>--}}
-
-    {{--                <button type="submit" class="btn btn-primary mt-4">{{ __('Run Report') }}</button>--}}
-    {{--            </form>--}}
-    {{--        </div>--}}
-    {{--    </div>--}}
 @endsection
