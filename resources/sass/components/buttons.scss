@@ -6,6 +6,10 @@
     }
 }
 
+.button-sm {
+    @apply .p-0 .text-sm;
+}
+
 .button-primary {
     @apply .bg-button-primary_color .text-button-primary_text;
 }

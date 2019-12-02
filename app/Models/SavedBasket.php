@@ -67,7 +67,7 @@ class SavedBasket extends Model
         return self::select(['saved_basket.product', 'name', 'quantity', 'id', 'reference', 'prices.price', 'created_at'])
             ->where('saved_basket.customer_code', auth()->user()->customer->code)
             ->where('id', $id)
-            ->leftJoin('products', 'products.product', 'saved_basket.product')
+            ->leftJoin('products', 'products.code', 'saved_basket.product')
             ->leftJoin('prices', static function ($join) {
                 $join->on('prices.product', 'saved_basket.product');
                 $join->where('prices.customer_code', auth()->user()->customer->code);

@@ -13389,6 +13389,11 @@ select {
   opacity: 0.75;
 }
 
+.button-sm {
+  padding: 0;
+  font-size: 0.875rem;
+}
+
 .button-primary {
   background-color: rgba(200, 220, 105, 1.0);
   background-color: var(--button-primary-color);
