@@ -26,6 +26,10 @@
     @apply .text-red-900 .bg-red-200;
 }
 
-.bade-warning {
+.badge-warning {
     @apply .text-yellow-900 .bg-yellow-200;
+}
+
+.badge-info {
+    @apply .text-blue-900 .bg-blue-200;
 }

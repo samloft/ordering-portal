@@ -13612,9 +13612,14 @@ table.bulk-rates tbody td {
   background-color: #fed7d7;
 }
 
-.bade-warning {
+.badge-warning {
   color: #744210;
   background-color: #fefcbf;
+}
+
+.badge-info {
+  color: #2a4365;
+  background-color: #bee3f8;
 }
 
 :root {
