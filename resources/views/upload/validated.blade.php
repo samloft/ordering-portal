@@ -3,12 +3,12 @@
 @section('page.title', 'Order Upload Validation')
 
 @section('content')
-    <h1 class="text-center font-semi-bold text-2xl mb-3">
-        {{ __('Order Validation') }}
-        <span class="block text-lg font-thin">
+    <div class="w-full mb-5 text-center">
+        <h2 class="font-semibold tracking-widest">{{ __('Order Validation') }}</h2>
+        <p class="font-thin">
             {{ __('Your order has been validated, please check it over and click the "Add order to basket" button below to finish.') }}
-        </span>
-    </h1>
+        </p>
+    </div>
 
     <div class="bg-white rounded shadow-md p-6">
         @include('layout.alerts')
@@ -56,11 +56,11 @@
 
                         <td class="text-right {{ $line['validation']['error'] ? 'bg-danger' : ($line['validation']['warning'] ?? 'bg-warning') }}">
                             @if ($line['validation']['error'])
-                                {{ $line['validation']['error'] }} <i class="fas fa-times-circle"></i>
+                                <span class="badge badge-danger"><i class="fas fa-times-circle"></i> {{ $line['validation']['error'] }}</span>
                             @elseif ($line['validation']['warning'])
-                                {{ $line['validation']['warning'] }} <i class="fas fa-exclamation-triangle"></i>
+                                <span class="badge bade-warning"><i class="fas fa-exclamation-triangle"></i> {{ $line['validation']['warning'] }}</span>
                             @else
-                                Valid <i class="text-success fas fa-check-circle"></i>
+                                <span class="badge badge-success"><i class="text-success fas fa-check-circle"></i> Valid</span>
                             @endif
                         </td>
 

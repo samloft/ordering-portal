@@ -13208,10 +13208,6 @@ main.auth .auth-details p {
 }
 
 .custom-file-label {
-  border-radius: 0.5rem;
-  border-width: 1px;
-  border-color: rgba(2, 163, 218, 1.0);
-  border-color: var(--button-primary-color);
   font-size: 1.25rem;
   font-weight: bold;
 }
@@ -13599,6 +13595,21 @@ table.bulk-rates tbody td {
 .badge-invoiced {
   color: #22543d;
   background-color: #c6f6d5;
+}
+
+.badge-success {
+  color: #22543d;
+  background-color: #c6f6d5;
+}
+
+.badge-danger {
+  color: #742a2a;
+  background-color: #fed7d7;
+}
+
+.bade-warning {
+  color: #744210;
+  background-color: #fefcbf;
 }
 
 :root {

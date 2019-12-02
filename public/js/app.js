@@ -4385,20 +4385,26 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c("div", { staticClass: "form-row justify-content-center mb-5" }, [
-    _c("div", { staticClass: "input-group input-wrap" }, [
-      _c("label", { staticClass: "custom-file-label" }, [
-        _c("i", { staticClass: "fa fa-file-upload" }),
-        _vm._v(" Click here to select CSV file"),
-        _c("span", [_vm._v(_vm._s(_vm.fileName))])
-      ]),
-      _vm._v(" "),
-      _c("input", {
-        staticClass: "border-2 border-brand-primary",
-        attrs: { type: "file", id: "order-file", name: "csv_file" },
-        on: { change: _vm.updateFileName }
-      })
-    ]),
+  return _c("div", {}, [
+    _c(
+      "div",
+      {
+        staticClass:
+          "input-wrap border border-brand-primary rounded-lg p-5 mb-5 hover:bg-gray-100"
+      },
+      [
+        _c("label", { staticClass: "custom-file-label" }, [
+          _c("i", { staticClass: "fa fa-file-upload" }),
+          _vm._v(" Click here to select CSV file"),
+          _c("span", [_vm._v(_vm._s(_vm.fileName))])
+        ]),
+        _vm._v(" "),
+        _c("input", {
+          attrs: { type: "file", id: "order-file", name: "csv_file" },
+          on: { change: _vm.updateFileName }
+        })
+      ]
+    ),
     _vm._v(" "),
     _vm._m(0)
   ])

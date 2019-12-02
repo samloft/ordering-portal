@@ -1,13 +1,13 @@
 <template>
-    <div class="form-row justify-content-center mb-5">
-        <div class="input-group input-wrap">
-            <label class="custom-file-label"><i class="fa fa-file-upload"></i> Click here to select CSV file<span>{{ fileName }}</span></label>
-            <input type="file" id="order-file" class="border-2 border-brand-primary" name="csv_file" @change="updateFileName">
+    <div class="">
+        <div class="input-wrap border border-brand-primary rounded-lg p-5 mb-5 hover:bg-gray-100">
+            <label class="custom-file-label"><i class="fa fa-file-upload"/> Click here to select CSV file<span>{{ fileName }}</span></label>
+            <input type="file" id="order-file" name="csv_file" @change="updateFileName">
         </div>
 
         <div class="text-right">
             <button id="upload-order" class="button button-primary">Upload Order
-                <i class="fa fa-download"></i>
+                <i class="fa fa-download"/>
             </button>
         </div>
     </div>

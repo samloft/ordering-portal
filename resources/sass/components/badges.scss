@@ -17,3 +17,15 @@
 .badge-invoiced {
     @apply .text-green-900 .bg-green-200;
 }
+
+.badge-success {
+    @apply .text-green-900 .bg-green-200;
+}
+
+.badge-danger {
+    @apply .text-red-900 .bg-red-200;
+}
+
+.bade-warning {
+    @apply .text-yellow-900 .bg-yellow-200;
+}
