@@ -29,8 +29,8 @@ module.exports = {
             },
 
             background_content: {
-                color: 'rgba(246, 246, 252, 1.0)',
-                text: 'rgba(40, 41, 44, 1.0)'
+                color: 'rgba(237, 242, 247, 1.0)',
+                text: 'rgba(26, 32, 44, 1.0)'
             },
 
             button: {

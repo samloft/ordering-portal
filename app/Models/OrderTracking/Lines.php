@@ -2,8 +2,10 @@
 
 namespace App\Models\OrderTracking;
 
+use App\Models\Price;
 use Eloquent;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Query\Builder;
 use Illuminate\Support\Collection;
 
@@ -16,6 +18,13 @@ class Lines extends Model
 {
     protected $table = 'order_tracking_lines';
 
+    public $timestamps = false;
+
+    public function price(): BelongsTo
+    {
+        return $this->belongsTo(Price::class, 'product', 'product');
+    }
+
     /**
      * Get all the product lines for a order tracking header.
      *
@@ -25,8 +34,9 @@ class Lines extends Model
     public static function show($order_number)
     {
         return self::where('order_no', $order_number)
-            ->leftJoin('prices', 'prices.product', '=', 'order_tracking_lines.product')
-            ->where('prices.customer_code', auth()->user()->customer->customer_code)
+            ->with('price')
+            //->leftJoin('prices', 'prices.product', '=', 'order_tracking_lines.product')
+            //->where('prices.customer_code', auth()->user()->customer->code)
             ->get();
     }
 

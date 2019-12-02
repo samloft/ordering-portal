@@ -8,6 +8,6 @@ use Faker\Generator as Faker;
 $factory->define(Stock::class, static function (Faker $faker) {
     return [
         'product' => $faker->randomNumber(8),
-        'quantity' => $faker->numberBetween(0, 3000)
+        'quantity' => $faker->numberBetween(0, 1000)
     ];
 });

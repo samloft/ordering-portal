@@ -727,11 +727,11 @@ video {
 }
 
 .bg-background_content-color{
-  background-color: rgba(246, 246, 252, 1.0);
+  background-color: rgba(237, 242, 247, 1.0);
 }
 
 .bg-background_content-text{
-  background-color: rgba(40, 41, 44, 1.0);
+  background-color: rgba(26, 32, 44, 1.0);
 }
 
 .bg-button-primary_color{
@@ -1176,11 +1176,11 @@ video {
 }
 
 .hover\:bg-background_content-color:hover{
-  background-color: rgba(246, 246, 252, 1.0);
+  background-color: rgba(237, 242, 247, 1.0);
 }
 
 .hover\:bg-background_content-text:hover{
-  background-color: rgba(40, 41, 44, 1.0);
+  background-color: rgba(26, 32, 44, 1.0);
 }
 
 .hover\:bg-button-primary_color:hover{
@@ -1625,11 +1625,11 @@ video {
 }
 
 .focus\:bg-background_content-color:focus{
-  background-color: rgba(246, 246, 252, 1.0);
+  background-color: rgba(237, 242, 247, 1.0);
 }
 
 .focus\:bg-background_content-text:focus{
-  background-color: rgba(40, 41, 44, 1.0);
+  background-color: rgba(26, 32, 44, 1.0);
 }
 
 .focus\:bg-button-primary_color:focus{
@@ -2154,11 +2154,11 @@ video {
 }
 
 .border-background_content-color{
-  border-color: rgba(246, 246, 252, 1.0);
+  border-color: rgba(237, 242, 247, 1.0);
 }
 
 .border-background_content-text{
-  border-color: rgba(40, 41, 44, 1.0);
+  border-color: rgba(26, 32, 44, 1.0);
 }
 
 .border-button-primary_color{
@@ -2603,11 +2603,11 @@ video {
 }
 
 .hover\:border-background_content-color:hover{
-  border-color: rgba(246, 246, 252, 1.0);
+  border-color: rgba(237, 242, 247, 1.0);
 }
 
 .hover\:border-background_content-text:hover{
-  border-color: rgba(40, 41, 44, 1.0);
+  border-color: rgba(26, 32, 44, 1.0);
 }
 
 .hover\:border-button-primary_color:hover{
@@ -3052,11 +3052,11 @@ video {
 }
 
 .focus\:border-background_content-color:focus{
-  border-color: rgba(246, 246, 252, 1.0);
+  border-color: rgba(237, 242, 247, 1.0);
 }
 
 .focus\:border-background_content-text:focus{
-  border-color: rgba(40, 41, 44, 1.0);
+  border-color: rgba(26, 32, 44, 1.0);
 }
 
 .focus\:border-button-primary_color:focus{
@@ -6455,43 +6455,43 @@ video {
 }
 
 .placeholder-background_content-color::-webkit-input-placeholder{
-  color: rgba(246, 246, 252, 1.0);
+  color: rgba(237, 242, 247, 1.0);
 }
 
 .placeholder-background_content-color::-moz-placeholder{
-  color: rgba(246, 246, 252, 1.0);
+  color: rgba(237, 242, 247, 1.0);
 }
 
 .placeholder-background_content-color:-ms-input-placeholder{
-  color: rgba(246, 246, 252, 1.0);
+  color: rgba(237, 242, 247, 1.0);
 }
 
 .placeholder-background_content-color::-ms-input-placeholder{
-  color: rgba(246, 246, 252, 1.0);
+  color: rgba(237, 242, 247, 1.0);
 }
 
 .placeholder-background_content-color::placeholder{
-  color: rgba(246, 246, 252, 1.0);
+  color: rgba(237, 242, 247, 1.0);
 }
 
 .placeholder-background_content-text::-webkit-input-placeholder{
-  color: rgba(40, 41, 44, 1.0);
+  color: rgba(26, 32, 44, 1.0);
 }
 
 .placeholder-background_content-text::-moz-placeholder{
-  color: rgba(40, 41, 44, 1.0);
+  color: rgba(26, 32, 44, 1.0);
 }
 
 .placeholder-background_content-text:-ms-input-placeholder{
-  color: rgba(40, 41, 44, 1.0);
+  color: rgba(26, 32, 44, 1.0);
 }
 
 .placeholder-background_content-text::-ms-input-placeholder{
-  color: rgba(40, 41, 44, 1.0);
+  color: rgba(26, 32, 44, 1.0);
 }
 
 .placeholder-background_content-text::placeholder{
-  color: rgba(40, 41, 44, 1.0);
+  color: rgba(26, 32, 44, 1.0);
 }
 
 .placeholder-button-primary_color::-webkit-input-placeholder{
@@ -8700,43 +8700,43 @@ video {
 }
 
 .focus\:placeholder-background_content-color:focus::-webkit-input-placeholder{
-  color: rgba(246, 246, 252, 1.0);
+  color: rgba(237, 242, 247, 1.0);
 }
 
 .focus\:placeholder-background_content-color:focus::-moz-placeholder{
-  color: rgba(246, 246, 252, 1.0);
+  color: rgba(237, 242, 247, 1.0);
 }
 
 .focus\:placeholder-background_content-color:focus:-ms-input-placeholder{
-  color: rgba(246, 246, 252, 1.0);
+  color: rgba(237, 242, 247, 1.0);
 }
 
 .focus\:placeholder-background_content-color:focus::-ms-input-placeholder{
-  color: rgba(246, 246, 252, 1.0);
+  color: rgba(237, 242, 247, 1.0);
 }
 
 .focus\:placeholder-background_content-color:focus::placeholder{
-  color: rgba(246, 246, 252, 1.0);
+  color: rgba(237, 242, 247, 1.0);
 }
 
 .focus\:placeholder-background_content-text:focus::-webkit-input-placeholder{
-  color: rgba(40, 41, 44, 1.0);
+  color: rgba(26, 32, 44, 1.0);
 }
 
 .focus\:placeholder-background_content-text:focus::-moz-placeholder{
-  color: rgba(40, 41, 44, 1.0);
+  color: rgba(26, 32, 44, 1.0);
 }
 
 .focus\:placeholder-background_content-text:focus:-ms-input-placeholder{
-  color: rgba(40, 41, 44, 1.0);
+  color: rgba(26, 32, 44, 1.0);
 }
 
 .focus\:placeholder-background_content-text:focus::-ms-input-placeholder{
-  color: rgba(40, 41, 44, 1.0);
+  color: rgba(26, 32, 44, 1.0);
 }
 
 .focus\:placeholder-background_content-text:focus::placeholder{
-  color: rgba(40, 41, 44, 1.0);
+  color: rgba(26, 32, 44, 1.0);
 }
 
 .focus\:placeholder-button-primary_color:focus::-webkit-input-placeholder{
@@ -11060,11 +11060,11 @@ video {
 }
 
 .text-background_content-color{
-  color: rgba(246, 246, 252, 1.0);
+  color: rgba(237, 242, 247, 1.0);
 }
 
 .text-background_content-text{
-  color: rgba(40, 41, 44, 1.0);
+  color: rgba(26, 32, 44, 1.0);
 }
 
 .text-button-primary_color{
@@ -11509,11 +11509,11 @@ video {
 }
 
 .hover\:text-background_content-color:hover{
-  color: rgba(246, 246, 252, 1.0);
+  color: rgba(237, 242, 247, 1.0);
 }
 
 .hover\:text-background_content-text:hover{
-  color: rgba(40, 41, 44, 1.0);
+  color: rgba(26, 32, 44, 1.0);
 }
 
 .hover\:text-button-primary_color:hover{
@@ -11958,11 +11958,11 @@ video {
 }
 
 .focus\:text-background_content-color:focus{
-  color: rgba(246, 246, 252, 1.0);
+  color: rgba(237, 242, 247, 1.0);
 }
 
 .focus\:text-background_content-text:focus{
-  color: rgba(40, 41, 44, 1.0);
+  color: rgba(26, 32, 44, 1.0);
 }
 
 .focus\:text-button-primary_color:focus{
@@ -12837,8 +12837,8 @@ html {
 }
 
 body {
-  background-color: rgba(246, 246, 252, 1.0);
-  color: rgba(40, 41, 44, 1.0);
+  background-color: rgba(237, 242, 247, 1.0);
+  color: rgba(26, 32, 44, 1.0);
 }
 
 a > img:hover {
@@ -12947,8 +12947,8 @@ footer {
 main.auth {
   display: flex;
   align-items: center;
-  background-color: rgba(246, 246, 252, 1.0);
-  color: rgba(40, 41, 44, 1.0);
+  background-color: rgba(237, 242, 247, 1.0);
+  color: rgba(26, 32, 44, 1.0);
   height: 100%;
 }
 
@@ -13237,6 +13237,19 @@ select {
   color: var(--button-inverse-text);
 }
 
+.button-danger {
+  border-width: 2px;
+  border-color: #e53e3e;
+  color: #e53e3e;
+  background-color: #fff;
+  padding: 0.65rem;
+}
+
+.button-danger:hover {
+  background-color: #e53e3e;
+  color: #fff;
+}
+
 .button-link {
   color: #374f73;
 }
@@ -13362,7 +13375,7 @@ table thead {
 }
 
 table thead th {
-  font-weight: 500;
+  font-weight: 300;
   padding-top: 0.5rem;
   padding-bottom: 0.5rem;
   padding-left: 1rem;
@@ -13515,6 +13528,39 @@ table.bulk-rates tbody td {
   opacity: 0.5;
 }
 
+.badge {
+  font-size: 0.75rem;
+  font-weight: 600;
+  color: #1a202c;
+  background-color: #edf2f7;
+  border-radius: 9999px;
+  line-height: 1;
+  padding-left: 0.5rem;
+  padding-right: 0.5rem;
+  padding-top: 0.25rem;
+  padding-bottom: 0.25rem;
+}
+
+.badge-in_progress {
+  color: #7b341e;
+  background-color: #feebc8;
+}
+
+.badge-cancelled {
+  color: #742a2a;
+  background-color: #fed7d7;
+}
+
+.badge-despatched {
+  color: #2a4365;
+  background-color: #bee3f8;
+}
+
+.badge-invoiced {
+  color: #22543d;
+  background-color: #c6f6d5;
+}
+
 :root {
   --background-primary-color: rgba(234, 25, 33, 1.0);
   --background-primary-text: rgb(255, 255, 255);
@@ -13619,11 +13665,11 @@ table.bulk-rates tbody td {
   }
 
   .sm\:bg-background_content-color{
-    background-color: rgba(246, 246, 252, 1.0);
+    background-color: rgba(237, 242, 247, 1.0);
   }
 
   .sm\:bg-background_content-text{
-    background-color: rgba(40, 41, 44, 1.0);
+    background-color: rgba(26, 32, 44, 1.0);
   }
 
   .sm\:bg-button-primary_color{
@@ -14068,11 +14114,11 @@ table.bulk-rates tbody td {
   }
 
   .sm\:hover\:bg-background_content-color:hover{
-    background-color: rgba(246, 246, 252, 1.0);
+    background-color: rgba(237, 242, 247, 1.0);
   }
 
   .sm\:hover\:bg-background_content-text:hover{
-    background-color: rgba(40, 41, 44, 1.0);
+    background-color: rgba(26, 32, 44, 1.0);
   }
 
   .sm\:hover\:bg-button-primary_color:hover{
@@ -14517,11 +14563,11 @@ table.bulk-rates tbody td {
   }
 
   .sm\:focus\:bg-background_content-color:focus{
-    background-color: rgba(246, 246, 252, 1.0);
+    background-color: rgba(237, 242, 247, 1.0);
   }
 
   .sm\:focus\:bg-background_content-text:focus{
-    background-color: rgba(40, 41, 44, 1.0);
+    background-color: rgba(26, 32, 44, 1.0);
   }
 
   .sm\:focus\:bg-button-primary_color:focus{
@@ -15046,11 +15092,11 @@ table.bulk-rates tbody td {
   }
 
   .sm\:border-background_content-color{
-    border-color: rgba(246, 246, 252, 1.0);
+    border-color: rgba(237, 242, 247, 1.0);
   }
 
   .sm\:border-background_content-text{
-    border-color: rgba(40, 41, 44, 1.0);
+    border-color: rgba(26, 32, 44, 1.0);
   }
 
   .sm\:border-button-primary_color{
@@ -15495,11 +15541,11 @@ table.bulk-rates tbody td {
   }
 
   .sm\:hover\:border-background_content-color:hover{
-    border-color: rgba(246, 246, 252, 1.0);
+    border-color: rgba(237, 242, 247, 1.0);
   }
 
   .sm\:hover\:border-background_content-text:hover{
-    border-color: rgba(40, 41, 44, 1.0);
+    border-color: rgba(26, 32, 44, 1.0);
   }
 
   .sm\:hover\:border-button-primary_color:hover{
@@ -15944,11 +15990,11 @@ table.bulk-rates tbody td {
   }
 
   .sm\:focus\:border-background_content-color:focus{
-    border-color: rgba(246, 246, 252, 1.0);
+    border-color: rgba(237, 242, 247, 1.0);
   }
 
   .sm\:focus\:border-background_content-text:focus{
-    border-color: rgba(40, 41, 44, 1.0);
+    border-color: rgba(26, 32, 44, 1.0);
   }
 
   .sm\:focus\:border-button-primary_color:focus{
@@ -19347,43 +19393,43 @@ table.bulk-rates tbody td {
   }
 
   .sm\:placeholder-background_content-color::-webkit-input-placeholder{
-    color: rgba(246, 246, 252, 1.0);
+    color: rgba(237, 242, 247, 1.0);
   }
 
   .sm\:placeholder-background_content-color::-moz-placeholder{
-    color: rgba(246, 246, 252, 1.0);
+    color: rgba(237, 242, 247, 1.0);
   }
 
   .sm\:placeholder-background_content-color:-ms-input-placeholder{
-    color: rgba(246, 246, 252, 1.0);
+    color: rgba(237, 242, 247, 1.0);
   }
 
   .sm\:placeholder-background_content-color::-ms-input-placeholder{
-    color: rgba(246, 246, 252, 1.0);
+    color: rgba(237, 242, 247, 1.0);
   }
 
   .sm\:placeholder-background_content-color::placeholder{
-    color: rgba(246, 246, 252, 1.0);
+    color: rgba(237, 242, 247, 1.0);
   }
 
   .sm\:placeholder-background_content-text::-webkit-input-placeholder{
-    color: rgba(40, 41, 44, 1.0);
+    color: rgba(26, 32, 44, 1.0);
   }
 
   .sm\:placeholder-background_content-text::-moz-placeholder{
-    color: rgba(40, 41, 44, 1.0);
+    color: rgba(26, 32, 44, 1.0);
   }
 
   .sm\:placeholder-background_content-text:-ms-input-placeholder{
-    color: rgba(40, 41, 44, 1.0);
+    color: rgba(26, 32, 44, 1.0);
   }
 
   .sm\:placeholder-background_content-text::-ms-input-placeholder{
-    color: rgba(40, 41, 44, 1.0);
+    color: rgba(26, 32, 44, 1.0);
   }
 
   .sm\:placeholder-background_content-text::placeholder{
-    color: rgba(40, 41, 44, 1.0);
+    color: rgba(26, 32, 44, 1.0);
   }
 
   .sm\:placeholder-button-primary_color::-webkit-input-placeholder{
@@ -21592,43 +21638,43 @@ table.bulk-rates tbody td {
   }
 
   .sm\:focus\:placeholder-background_content-color:focus::-webkit-input-placeholder{
-    color: rgba(246, 246, 252, 1.0);
+    color: rgba(237, 242, 247, 1.0);
   }
 
   .sm\:focus\:placeholder-background_content-color:focus::-moz-placeholder{
-    color: rgba(246, 246, 252, 1.0);
+    color: rgba(237, 242, 247, 1.0);
   }
 
   .sm\:focus\:placeholder-background_content-color:focus:-ms-input-placeholder{
-    color: rgba(246, 246, 252, 1.0);
+    color: rgba(237, 242, 247, 1.0);
   }
 
   .sm\:focus\:placeholder-background_content-color:focus::-ms-input-placeholder{
-    color: rgba(246, 246, 252, 1.0);
+    color: rgba(237, 242, 247, 1.0);
   }
 
   .sm\:focus\:placeholder-background_content-color:focus::placeholder{
-    color: rgba(246, 246, 252, 1.0);
+    color: rgba(237, 242, 247, 1.0);
   }
 
   .sm\:focus\:placeholder-background_content-text:focus::-webkit-input-placeholder{
-    color: rgba(40, 41, 44, 1.0);
+    color: rgba(26, 32, 44, 1.0);
   }
 
   .sm\:focus\:placeholder-background_content-text:focus::-moz-placeholder{
-    color: rgba(40, 41, 44, 1.0);
+    color: rgba(26, 32, 44, 1.0);
   }
 
   .sm\:focus\:placeholder-background_content-text:focus:-ms-input-placeholder{
-    color: rgba(40, 41, 44, 1.0);
+    color: rgba(26, 32, 44, 1.0);
   }
 
   .sm\:focus\:placeholder-background_content-text:focus::-ms-input-placeholder{
-    color: rgba(40, 41, 44, 1.0);
+    color: rgba(26, 32, 44, 1.0);
   }
 
   .sm\:focus\:placeholder-background_content-text:focus::placeholder{
-    color: rgba(40, 41, 44, 1.0);
+    color: rgba(26, 32, 44, 1.0);
   }
 
   .sm\:focus\:placeholder-button-primary_color:focus::-webkit-input-placeholder{
@@ -23952,11 +23998,11 @@ table.bulk-rates tbody td {
   }
 
   .sm\:text-background_content-color{
-    color: rgba(246, 246, 252, 1.0);
+    color: rgba(237, 242, 247, 1.0);
   }
 
   .sm\:text-background_content-text{
-    color: rgba(40, 41, 44, 1.0);
+    color: rgba(26, 32, 44, 1.0);
   }
 
   .sm\:text-button-primary_color{
@@ -24401,11 +24447,11 @@ table.bulk-rates tbody td {
   }
 
   .sm\:hover\:text-background_content-color:hover{
-    color: rgba(246, 246, 252, 1.0);
+    color: rgba(237, 242, 247, 1.0);
   }
 
   .sm\:hover\:text-background_content-text:hover{
-    color: rgba(40, 41, 44, 1.0);
+    color: rgba(26, 32, 44, 1.0);
   }
 
   .sm\:hover\:text-button-primary_color:hover{
@@ -24850,11 +24896,11 @@ table.bulk-rates tbody td {
   }
 
   .sm\:focus\:text-background_content-color:focus{
-    color: rgba(246, 246, 252, 1.0);
+    color: rgba(237, 242, 247, 1.0);
   }
 
   .sm\:focus\:text-background_content-text:focus{
-    color: rgba(40, 41, 44, 1.0);
+    color: rgba(26, 32, 44, 1.0);
   }
 
   .sm\:focus\:text-button-primary_color:focus{
@@ -25822,11 +25868,11 @@ table.bulk-rates tbody td {
   }
 
   .md\:bg-background_content-color{
-    background-color: rgba(246, 246, 252, 1.0);
+    background-color: rgba(237, 242, 247, 1.0);
   }
 
   .md\:bg-background_content-text{
-    background-color: rgba(40, 41, 44, 1.0);
+    background-color: rgba(26, 32, 44, 1.0);
   }
 
   .md\:bg-button-primary_color{
@@ -26271,11 +26317,11 @@ table.bulk-rates tbody td {
   }
 
   .md\:hover\:bg-background_content-color:hover{
-    background-color: rgba(246, 246, 252, 1.0);
+    background-color: rgba(237, 242, 247, 1.0);
   }
 
   .md\:hover\:bg-background_content-text:hover{
-    background-color: rgba(40, 41, 44, 1.0);
+    background-color: rgba(26, 32, 44, 1.0);
   }
 
   .md\:hover\:bg-button-primary_color:hover{
@@ -26720,11 +26766,11 @@ table.bulk-rates tbody td {
   }
 
   .md\:focus\:bg-background_content-color:focus{
-    background-color: rgba(246, 246, 252, 1.0);
+    background-color: rgba(237, 242, 247, 1.0);
   }
 
   .md\:focus\:bg-background_content-text:focus{
-    background-color: rgba(40, 41, 44, 1.0);
+    background-color: rgba(26, 32, 44, 1.0);
   }
 
   .md\:focus\:bg-button-primary_color:focus{
@@ -27249,11 +27295,11 @@ table.bulk-rates tbody td {
   }
 
   .md\:border-background_content-color{
-    border-color: rgba(246, 246, 252, 1.0);
+    border-color: rgba(237, 242, 247, 1.0);
   }
 
   .md\:border-background_content-text{
-    border-color: rgba(40, 41, 44, 1.0);
+    border-color: rgba(26, 32, 44, 1.0);
   }
 
   .md\:border-button-primary_color{
@@ -27698,11 +27744,11 @@ table.bulk-rates tbody td {
   }
 
   .md\:hover\:border-background_content-color:hover{
-    border-color: rgba(246, 246, 252, 1.0);
+    border-color: rgba(237, 242, 247, 1.0);
   }
 
   .md\:hover\:border-background_content-text:hover{
-    border-color: rgba(40, 41, 44, 1.0);
+    border-color: rgba(26, 32, 44, 1.0);
   }
 
   .md\:hover\:border-button-primary_color:hover{
@@ -28147,11 +28193,11 @@ table.bulk-rates tbody td {
   }
 
   .md\:focus\:border-background_content-color:focus{
-    border-color: rgba(246, 246, 252, 1.0);
+    border-color: rgba(237, 242, 247, 1.0);
   }
 
   .md\:focus\:border-background_content-text:focus{
-    border-color: rgba(40, 41, 44, 1.0);
+    border-color: rgba(26, 32, 44, 1.0);
   }
 
   .md\:focus\:border-button-primary_color:focus{
@@ -31550,43 +31596,43 @@ table.bulk-rates tbody td {
   }
 
   .md\:placeholder-background_content-color::-webkit-input-placeholder{
-    color: rgba(246, 246, 252, 1.0);
+    color: rgba(237, 242, 247, 1.0);
   }
 
   .md\:placeholder-background_content-color::-moz-placeholder{
-    color: rgba(246, 246, 252, 1.0);
+    color: rgba(237, 242, 247, 1.0);
   }
 
   .md\:placeholder-background_content-color:-ms-input-placeholder{
-    color: rgba(246, 246, 252, 1.0);
+    color: rgba(237, 242, 247, 1.0);
   }
 
   .md\:placeholder-background_content-color::-ms-input-placeholder{
-    color: rgba(246, 246, 252, 1.0);
+    color: rgba(237, 242, 247, 1.0);
   }
 
   .md\:placeholder-background_content-color::placeholder{
-    color: rgba(246, 246, 252, 1.0);
+    color: rgba(237, 242, 247, 1.0);
   }
 
   .md\:placeholder-background_content-text::-webkit-input-placeholder{
-    color: rgba(40, 41, 44, 1.0);
+    color: rgba(26, 32, 44, 1.0);
   }
 
   .md\:placeholder-background_content-text::-moz-placeholder{
-    color: rgba(40, 41, 44, 1.0);
+    color: rgba(26, 32, 44, 1.0);
   }
 
   .md\:placeholder-background_content-text:-ms-input-placeholder{
-    color: rgba(40, 41, 44, 1.0);
+    color: rgba(26, 32, 44, 1.0);
   }
 
   .md\:placeholder-background_content-text::-ms-input-placeholder{
-    color: rgba(40, 41, 44, 1.0);
+    color: rgba(26, 32, 44, 1.0);
   }
 
   .md\:placeholder-background_content-text::placeholder{
-    color: rgba(40, 41, 44, 1.0);
+    color: rgba(26, 32, 44, 1.0);
   }
 
   .md\:placeholder-button-primary_color::-webkit-input-placeholder{
@@ -33795,43 +33841,43 @@ table.bulk-rates tbody td {
   }
 
   .md\:focus\:placeholder-background_content-color:focus::-webkit-input-placeholder{
-    color: rgba(246, 246, 252, 1.0);
+    color: rgba(237, 242, 247, 1.0);
   }
 
   .md\:focus\:placeholder-background_content-color:focus::-moz-placeholder{
-    color: rgba(246, 246, 252, 1.0);
+    color: rgba(237, 242, 247, 1.0);
   }
 
   .md\:focus\:placeholder-background_content-color:focus:-ms-input-placeholder{
-    color: rgba(246, 246, 252, 1.0);
+    color: rgba(237, 242, 247, 1.0);
   }
 
   .md\:focus\:placeholder-background_content-color:focus::-ms-input-placeholder{
-    color: rgba(246, 246, 252, 1.0);
+    color: rgba(237, 242, 247, 1.0);
   }
 
   .md\:focus\:placeholder-background_content-color:focus::placeholder{
-    color: rgba(246, 246, 252, 1.0);
+    color: rgba(237, 242, 247, 1.0);
   }
 
   .md\:focus\:placeholder-background_content-text:focus::-webkit-input-placeholder{
-    color: rgba(40, 41, 44, 1.0);
+    color: rgba(26, 32, 44, 1.0);
   }
 
   .md\:focus\:placeholder-background_content-text:focus::-moz-placeholder{
-    color: rgba(40, 41, 44, 1.0);
+    color: rgba(26, 32, 44, 1.0);
   }
 
   .md\:focus\:placeholder-background_content-text:focus:-ms-input-placeholder{
-    color: rgba(40, 41, 44, 1.0);
+    color: rgba(26, 32, 44, 1.0);
   }
 
   .md\:focus\:placeholder-background_content-text:focus::-ms-input-placeholder{
-    color: rgba(40, 41, 44, 1.0);
+    color: rgba(26, 32, 44, 1.0);
   }
 
   .md\:focus\:placeholder-background_content-text:focus::placeholder{
-    color: rgba(40, 41, 44, 1.0);
+    color: rgba(26, 32, 44, 1.0);
   }
 
   .md\:focus\:placeholder-button-primary_color:focus::-webkit-input-placeholder{
@@ -36155,11 +36201,11 @@ table.bulk-rates tbody td {
   }
 
   .md\:text-background_content-color{
-    color: rgba(246, 246, 252, 1.0);
+    color: rgba(237, 242, 247, 1.0);
   }
 
   .md\:text-background_content-text{
-    color: rgba(40, 41, 44, 1.0);
+    color: rgba(26, 32, 44, 1.0);
   }
 
   .md\:text-button-primary_color{
@@ -36604,11 +36650,11 @@ table.bulk-rates tbody td {
   }
 
   .md\:hover\:text-background_content-color:hover{
-    color: rgba(246, 246, 252, 1.0);
+    color: rgba(237, 242, 247, 1.0);
   }
 
   .md\:hover\:text-background_content-text:hover{
-    color: rgba(40, 41, 44, 1.0);
+    color: rgba(26, 32, 44, 1.0);
   }
 
   .md\:hover\:text-button-primary_color:hover{
@@ -37053,11 +37099,11 @@ table.bulk-rates tbody td {
   }
 
   .md\:focus\:text-background_content-color:focus{
-    color: rgba(246, 246, 252, 1.0);
+    color: rgba(237, 242, 247, 1.0);
   }
 
   .md\:focus\:text-background_content-text:focus{
-    color: rgba(40, 41, 44, 1.0);
+    color: rgba(26, 32, 44, 1.0);
   }
 
   .md\:focus\:text-button-primary_color:focus{
@@ -38025,11 +38071,11 @@ table.bulk-rates tbody td {
   }
 
   .lg\:bg-background_content-color{
-    background-color: rgba(246, 246, 252, 1.0);
+    background-color: rgba(237, 242, 247, 1.0);
   }
 
   .lg\:bg-background_content-text{
-    background-color: rgba(40, 41, 44, 1.0);
+    background-color: rgba(26, 32, 44, 1.0);
   }
 
   .lg\:bg-button-primary_color{
@@ -38474,11 +38520,11 @@ table.bulk-rates tbody td {
   }
 
   .lg\:hover\:bg-background_content-color:hover{
-    background-color: rgba(246, 246, 252, 1.0);
+    background-color: rgba(237, 242, 247, 1.0);
   }
 
   .lg\:hover\:bg-background_content-text:hover{
-    background-color: rgba(40, 41, 44, 1.0);
+    background-color: rgba(26, 32, 44, 1.0);
   }
 
   .lg\:hover\:bg-button-primary_color:hover{
@@ -38923,11 +38969,11 @@ table.bulk-rates tbody td {
   }
 
   .lg\:focus\:bg-background_content-color:focus{
-    background-color: rgba(246, 246, 252, 1.0);
+    background-color: rgba(237, 242, 247, 1.0);
   }
 
   .lg\:focus\:bg-background_content-text:focus{
-    background-color: rgba(40, 41, 44, 1.0);
+    background-color: rgba(26, 32, 44, 1.0);
   }
 
   .lg\:focus\:bg-button-primary_color:focus{
@@ -39452,11 +39498,11 @@ table.bulk-rates tbody td {
   }
 
   .lg\:border-background_content-color{
-    border-color: rgba(246, 246, 252, 1.0);
+    border-color: rgba(237, 242, 247, 1.0);
   }
 
   .lg\:border-background_content-text{
-    border-color: rgba(40, 41, 44, 1.0);
+    border-color: rgba(26, 32, 44, 1.0);
   }
 
   .lg\:border-button-primary_color{
@@ -39901,11 +39947,11 @@ table.bulk-rates tbody td {
   }
 
   .lg\:hover\:border-background_content-color:hover{
-    border-color: rgba(246, 246, 252, 1.0);
+    border-color: rgba(237, 242, 247, 1.0);
   }
 
   .lg\:hover\:border-background_content-text:hover{
-    border-color: rgba(40, 41, 44, 1.0);
+    border-color: rgba(26, 32, 44, 1.0);
   }
 
   .lg\:hover\:border-button-primary_color:hover{
@@ -40350,11 +40396,11 @@ table.bulk-rates tbody td {
   }
 
   .lg\:focus\:border-background_content-color:focus{
-    border-color: rgba(246, 246, 252, 1.0);
+    border-color: rgba(237, 242, 247, 1.0);
   }
 
   .lg\:focus\:border-background_content-text:focus{
-    border-color: rgba(40, 41, 44, 1.0);
+    border-color: rgba(26, 32, 44, 1.0);
   }
 
   .lg\:focus\:border-button-primary_color:focus{
@@ -43753,43 +43799,43 @@ table.bulk-rates tbody td {
   }
 
   .lg\:placeholder-background_content-color::-webkit-input-placeholder{
-    color: rgba(246, 246, 252, 1.0);
+    color: rgba(237, 242, 247, 1.0);
   }
 
   .lg\:placeholder-background_content-color::-moz-placeholder{
-    color: rgba(246, 246, 252, 1.0);
+    color: rgba(237, 242, 247, 1.0);
   }
 
   .lg\:placeholder-background_content-color:-ms-input-placeholder{
-    color: rgba(246, 246, 252, 1.0);
+    color: rgba(237, 242, 247, 1.0);
   }
 
   .lg\:placeholder-background_content-color::-ms-input-placeholder{
-    color: rgba(246, 246, 252, 1.0);
+    color: rgba(237, 242, 247, 1.0);
   }
 
   .lg\:placeholder-background_content-color::placeholder{
-    color: rgba(246, 246, 252, 1.0);
+    color: rgba(237, 242, 247, 1.0);
   }
 
   .lg\:placeholder-background_content-text::-webkit-input-placeholder{
-    color: rgba(40, 41, 44, 1.0);
+    color: rgba(26, 32, 44, 1.0);
   }
 
   .lg\:placeholder-background_content-text::-moz-placeholder{
-    color: rgba(40, 41, 44, 1.0);
+    color: rgba(26, 32, 44, 1.0);
   }
 
   .lg\:placeholder-background_content-text:-ms-input-placeholder{
-    color: rgba(40, 41, 44, 1.0);
+    color: rgba(26, 32, 44, 1.0);
   }
 
   .lg\:placeholder-background_content-text::-ms-input-placeholder{
-    color: rgba(40, 41, 44, 1.0);
+    color: rgba(26, 32, 44, 1.0);
   }
 
   .lg\:placeholder-background_content-text::placeholder{
-    color: rgba(40, 41, 44, 1.0);
+    color: rgba(26, 32, 44, 1.0);
   }
 
   .lg\:placeholder-button-primary_color::-webkit-input-placeholder{
@@ -45998,43 +46044,43 @@ table.bulk-rates tbody td {
   }
 
   .lg\:focus\:placeholder-background_content-color:focus::-webkit-input-placeholder{
-    color: rgba(246, 246, 252, 1.0);
+    color: rgba(237, 242, 247, 1.0);
   }
 
   .lg\:focus\:placeholder-background_content-color:focus::-moz-placeholder{
-    color: rgba(246, 246, 252, 1.0);
+    color: rgba(237, 242, 247, 1.0);
   }
 
   .lg\:focus\:placeholder-background_content-color:focus:-ms-input-placeholder{
-    color: rgba(246, 246, 252, 1.0);
+    color: rgba(237, 242, 247, 1.0);
   }
 
   .lg\:focus\:placeholder-background_content-color:focus::-ms-input-placeholder{
-    color: rgba(246, 246, 252, 1.0);
+    color: rgba(237, 242, 247, 1.0);
   }
 
   .lg\:focus\:placeholder-background_content-color:focus::placeholder{
-    color: rgba(246, 246, 252, 1.0);
+    color: rgba(237, 242, 247, 1.0);
   }
 
   .lg\:focus\:placeholder-background_content-text:focus::-webkit-input-placeholder{
-    color: rgba(40, 41, 44, 1.0);
+    color: rgba(26, 32, 44, 1.0);
   }
 
   .lg\:focus\:placeholder-background_content-text:focus::-moz-placeholder{
-    color: rgba(40, 41, 44, 1.0);
+    color: rgba(26, 32, 44, 1.0);
   }
 
   .lg\:focus\:placeholder-background_content-text:focus:-ms-input-placeholder{
-    color: rgba(40, 41, 44, 1.0);
+    color: rgba(26, 32, 44, 1.0);
   }
 
   .lg\:focus\:placeholder-background_content-text:focus::-ms-input-placeholder{
-    color: rgba(40, 41, 44, 1.0);
+    color: rgba(26, 32, 44, 1.0);
   }
 
   .lg\:focus\:placeholder-background_content-text:focus::placeholder{
-    color: rgba(40, 41, 44, 1.0);
+    color: rgba(26, 32, 44, 1.0);
   }
 
   .lg\:focus\:placeholder-button-primary_color:focus::-webkit-input-placeholder{
@@ -48358,11 +48404,11 @@ table.bulk-rates tbody td {
   }
 
   .lg\:text-background_content-color{
-    color: rgba(246, 246, 252, 1.0);
+    color: rgba(237, 242, 247, 1.0);
   }
 
   .lg\:text-background_content-text{
-    color: rgba(40, 41, 44, 1.0);
+    color: rgba(26, 32, 44, 1.0);
   }
 
   .lg\:text-button-primary_color{
@@ -48807,11 +48853,11 @@ table.bulk-rates tbody td {
   }
 
   .lg\:hover\:text-background_content-color:hover{
-    color: rgba(246, 246, 252, 1.0);
+    color: rgba(237, 242, 247, 1.0);
   }
 
   .lg\:hover\:text-background_content-text:hover{
-    color: rgba(40, 41, 44, 1.0);
+    color: rgba(26, 32, 44, 1.0);
   }
 
   .lg\:hover\:text-button-primary_color:hover{
@@ -49256,11 +49302,11 @@ table.bulk-rates tbody td {
   }
 
   .lg\:focus\:text-background_content-color:focus{
-    color: rgba(246, 246, 252, 1.0);
+    color: rgba(237, 242, 247, 1.0);
   }
 
   .lg\:focus\:text-background_content-text:focus{
-    color: rgba(40, 41, 44, 1.0);
+    color: rgba(26, 32, 44, 1.0);
   }
 
   .lg\:focus\:text-button-primary_color:focus{
@@ -50228,11 +50274,11 @@ table.bulk-rates tbody td {
   }
 
   .xl\:bg-background_content-color{
-    background-color: rgba(246, 246, 252, 1.0);
+    background-color: rgba(237, 242, 247, 1.0);
   }
 
   .xl\:bg-background_content-text{
-    background-color: rgba(40, 41, 44, 1.0);
+    background-color: rgba(26, 32, 44, 1.0);
   }
 
   .xl\:bg-button-primary_color{
@@ -50677,11 +50723,11 @@ table.bulk-rates tbody td {
   }
 
   .xl\:hover\:bg-background_content-color:hover{
-    background-color: rgba(246, 246, 252, 1.0);
+    background-color: rgba(237, 242, 247, 1.0);
   }
 
   .xl\:hover\:bg-background_content-text:hover{
-    background-color: rgba(40, 41, 44, 1.0);
+    background-color: rgba(26, 32, 44, 1.0);
   }
 
   .xl\:hover\:bg-button-primary_color:hover{
@@ -51126,11 +51172,11 @@ table.bulk-rates tbody td {
   }
 
   .xl\:focus\:bg-background_content-color:focus{
-    background-color: rgba(246, 246, 252, 1.0);
+    background-color: rgba(237, 242, 247, 1.0);
   }
 
   .xl\:focus\:bg-background_content-text:focus{
-    background-color: rgba(40, 41, 44, 1.0);
+    background-color: rgba(26, 32, 44, 1.0);
   }
 
   .xl\:focus\:bg-button-primary_color:focus{
@@ -51655,11 +51701,11 @@ table.bulk-rates tbody td {
   }
 
   .xl\:border-background_content-color{
-    border-color: rgba(246, 246, 252, 1.0);
+    border-color: rgba(237, 242, 247, 1.0);
   }
 
   .xl\:border-background_content-text{
-    border-color: rgba(40, 41, 44, 1.0);
+    border-color: rgba(26, 32, 44, 1.0);
   }
 
   .xl\:border-button-primary_color{
@@ -52104,11 +52150,11 @@ table.bulk-rates tbody td {
   }
 
   .xl\:hover\:border-background_content-color:hover{
-    border-color: rgba(246, 246, 252, 1.0);
+    border-color: rgba(237, 242, 247, 1.0);
   }
 
   .xl\:hover\:border-background_content-text:hover{
-    border-color: rgba(40, 41, 44, 1.0);
+    border-color: rgba(26, 32, 44, 1.0);
   }
 
   .xl\:hover\:border-button-primary_color:hover{
@@ -52553,11 +52599,11 @@ table.bulk-rates tbody td {
   }
 
   .xl\:focus\:border-background_content-color:focus{
-    border-color: rgba(246, 246, 252, 1.0);
+    border-color: rgba(237, 242, 247, 1.0);
   }
 
   .xl\:focus\:border-background_content-text:focus{
-    border-color: rgba(40, 41, 44, 1.0);
+    border-color: rgba(26, 32, 44, 1.0);
   }
 
   .xl\:focus\:border-button-primary_color:focus{
@@ -55956,43 +56002,43 @@ table.bulk-rates tbody td {
   }
 
   .xl\:placeholder-background_content-color::-webkit-input-placeholder{
-    color: rgba(246, 246, 252, 1.0);
+    color: rgba(237, 242, 247, 1.0);
   }
 
   .xl\:placeholder-background_content-color::-moz-placeholder{
-    color: rgba(246, 246, 252, 1.0);
+    color: rgba(237, 242, 247, 1.0);
   }
 
   .xl\:placeholder-background_content-color:-ms-input-placeholder{
-    color: rgba(246, 246, 252, 1.0);
+    color: rgba(237, 242, 247, 1.0);
   }
 
   .xl\:placeholder-background_content-color::-ms-input-placeholder{
-    color: rgba(246, 246, 252, 1.0);
+    color: rgba(237, 242, 247, 1.0);
   }
 
   .xl\:placeholder-background_content-color::placeholder{
-    color: rgba(246, 246, 252, 1.0);
+    color: rgba(237, 242, 247, 1.0);
   }
 
   .xl\:placeholder-background_content-text::-webkit-input-placeholder{
-    color: rgba(40, 41, 44, 1.0);
+    color: rgba(26, 32, 44, 1.0);
   }
 
   .xl\:placeholder-background_content-text::-moz-placeholder{
-    color: rgba(40, 41, 44, 1.0);
+    color: rgba(26, 32, 44, 1.0);
   }
 
   .xl\:placeholder-background_content-text:-ms-input-placeholder{
-    color: rgba(40, 41, 44, 1.0);
+    color: rgba(26, 32, 44, 1.0);
   }
 
   .xl\:placeholder-background_content-text::-ms-input-placeholder{
-    color: rgba(40, 41, 44, 1.0);
+    color: rgba(26, 32, 44, 1.0);
   }
 
   .xl\:placeholder-background_content-text::placeholder{
-    color: rgba(40, 41, 44, 1.0);
+    color: rgba(26, 32, 44, 1.0);
   }
 
   .xl\:placeholder-button-primary_color::-webkit-input-placeholder{
@@ -58201,43 +58247,43 @@ table.bulk-rates tbody td {
   }
 
   .xl\:focus\:placeholder-background_content-color:focus::-webkit-input-placeholder{
-    color: rgba(246, 246, 252, 1.0);
+    color: rgba(237, 242, 247, 1.0);
   }
 
   .xl\:focus\:placeholder-background_content-color:focus::-moz-placeholder{
-    color: rgba(246, 246, 252, 1.0);
+    color: rgba(237, 242, 247, 1.0);
   }
 
   .xl\:focus\:placeholder-background_content-color:focus:-ms-input-placeholder{
-    color: rgba(246, 246, 252, 1.0);
+    color: rgba(237, 242, 247, 1.0);
   }
 
   .xl\:focus\:placeholder-background_content-color:focus::-ms-input-placeholder{
-    color: rgba(246, 246, 252, 1.0);
+    color: rgba(237, 242, 247, 1.0);
   }
 
   .xl\:focus\:placeholder-background_content-color:focus::placeholder{
-    color: rgba(246, 246, 252, 1.0);
+    color: rgba(237, 242, 247, 1.0);
   }
 
   .xl\:focus\:placeholder-background_content-text:focus::-webkit-input-placeholder{
-    color: rgba(40, 41, 44, 1.0);
+    color: rgba(26, 32, 44, 1.0);
   }
 
   .xl\:focus\:placeholder-background_content-text:focus::-moz-placeholder{
-    color: rgba(40, 41, 44, 1.0);
+    color: rgba(26, 32, 44, 1.0);
   }
 
   .xl\:focus\:placeholder-background_content-text:focus:-ms-input-placeholder{
-    color: rgba(40, 41, 44, 1.0);
+    color: rgba(26, 32, 44, 1.0);
   }
 
   .xl\:focus\:placeholder-background_content-text:focus::-ms-input-placeholder{
-    color: rgba(40, 41, 44, 1.0);
+    color: rgba(26, 32, 44, 1.0);
   }
 
   .xl\:focus\:placeholder-background_content-text:focus::placeholder{
-    color: rgba(40, 41, 44, 1.0);
+    color: rgba(26, 32, 44, 1.0);
   }
 
   .xl\:focus\:placeholder-button-primary_color:focus::-webkit-input-placeholder{
@@ -60561,11 +60607,11 @@ table.bulk-rates tbody td {
   }
 
   .xl\:text-background_content-color{
-    color: rgba(246, 246, 252, 1.0);
+    color: rgba(237, 242, 247, 1.0);
   }
 
   .xl\:text-background_content-text{
-    color: rgba(40, 41, 44, 1.0);
+    color: rgba(26, 32, 44, 1.0);
   }
 
   .xl\:text-button-primary_color{
@@ -61010,11 +61056,11 @@ table.bulk-rates tbody td {
   }
 
   .xl\:hover\:text-background_content-color:hover{
-    color: rgba(246, 246, 252, 1.0);
+    color: rgba(237, 242, 247, 1.0);
   }
 
   .xl\:hover\:text-background_content-text:hover{
-    color: rgba(40, 41, 44, 1.0);
+    color: rgba(26, 32, 44, 1.0);
   }
 
   .xl\:hover\:text-button-primary_color:hover{
@@ -61459,11 +61505,11 @@ table.bulk-rates tbody td {
   }
 
   .xl\:focus\:text-background_content-color:focus{
-    color: rgba(246, 246, 252, 1.0);
+    color: rgba(237, 242, 247, 1.0);
   }
 
   .xl\:focus\:text-background_content-text:focus{
-    color: rgba(40, 41, 44, 1.0);
+    color: rgba(26, 32, 44, 1.0);
   }
 
   .xl\:focus\:text-button-primary_color:focus{

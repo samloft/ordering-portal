@@ -1,0 +1,19 @@
+.badge {
+    @apply .text-xs .font-semibold .text-gray-900 .bg-gray-200 .rounded-full .leading-none .px-2 .py-1;
+}
+
+.badge-in_progress {
+    @apply .text-orange-900 .bg-orange-200;
+}
+
+.badge-cancelled {
+    @apply .text-red-900 .bg-red-200;
+}
+
+.badge-despatched {
+    @apply .text-blue-900 .bg-blue-200;
+}
+
+.badge-invoiced {
+    @apply .text-green-900 .bg-green-200;
+}

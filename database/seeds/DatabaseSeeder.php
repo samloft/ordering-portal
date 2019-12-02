@@ -3,6 +3,8 @@
 use App\Models\Address;
 use App\Models\CmsUser;
 use App\Models\ExpectedStock;
+use App\Models\OrderTracking\Header;
+use App\Models\OrderTracking\Lines;
 use App\Models\User;
 use App\Models\Category;
 use App\Models\Customer;
@@ -48,5 +50,11 @@ class DatabaseSeeder extends Seeder
             'email' => 'example@example.com',
             'password' => bcrypt('password')
         ]);
+
+        factory(Header::class, 200)->create()->each(static function ($order) {
+            factory(Lines::class)->create([
+                'order_no' => $order->order_no
+            ]);
+        });
     }
 }

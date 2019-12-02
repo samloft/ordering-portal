@@ -18,6 +18,16 @@
     @apply .bg-button-inverse_color .text-button-inverse_text;
 }
 
+.button-danger {
+    @apply .border-2 .border-red-600 .text-red-600 .bg-white;
+
+    padding: 0.65rem;
+
+    &:hover {
+        @apply .bg-red-600 .text-white;
+    }
+}
+
 .button-link {
     color: rgba(55, 79, 115, 1.0);
 

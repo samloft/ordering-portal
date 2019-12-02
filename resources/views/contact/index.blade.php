@@ -38,6 +38,7 @@
                     <div class="relative mb-2">
                         <label for="to">To:</label>
                         <select id="to" name="to">
+                            <option value="sam@scolmore.com">Developer</option>
                             @foreach($contacts as $contact)
                                 <option value="{{ $contact->email }}">{{ $contact->name }}</option>
                             @endforeach

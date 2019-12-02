@@ -17,14 +17,13 @@ class OrderTrackingController extends Controller
      * Display the order tracking page, showing all orders for the customer if
      * no search parameters, else get results that match the search.
      *
-     * @param Request $request
      * @return Factory|View
      */
-    public function index(Request $request)
+    public function index()
     {
-        $search = $request ? true : false;
+        $search = request() ? true : false;
 
-        $orders = Header::list($search, $request);
+        $orders = Header::list($search, request());
 
         return view('order-tracking.index', compact('orders'));
     }
@@ -38,15 +37,10 @@ class OrderTrackingController extends Controller
     public function show($order_number)
     {
         $order = Header::show(decodeUrl($order_number));
-        $order_lines = Lines::show(decodeUrl($order_number));
-
-        if (!$order) {
-            abort(404);
-        }
 
         $lines = [];
 
-        foreach ($order_lines as $line) {
+        foreach ($order->lines as $line) {
             $lines[] = [
                 'product' => trim($line->product),
                 'long_description' => trim($line->long_description),

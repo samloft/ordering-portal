@@ -3,106 +3,85 @@
 @section('page.title', 'Review Order')
 
 @section('content')
-    <h1 class="page-title">{{ __('Review Order') }}</h1>
+    <div class="w-full mb-5 text-center">
+        <h2 class="font-semibold tracking-widest">{{ __('Review Order') }}</h2>
+        <p class="font-thin">
+            {{ __('Review your order and re-order by copying to basket.') }}
+        </p>
+    </div>
 
-    @include('layout.alerts')
+    <div class="bg-white rounded-lg shadow p-4">
 
-    <div class="row">
-        <div class="col d-flex align-items-stretch">
-            <div class="card card-body">
-                <div class="row">
-                    <div class="col">
-                        <h2 class="section-title">{{ __('Delivery Address') }}</h2>
+        @include('layout.alerts')
 
-                        <div class="address">
-                            <span>{{ $order->delivery_address1 }}</span>
-                            <span>{{ $order->delivery_address2 }}</span>
-                            <span>{{ $order->delivery_address3 }}</span>
-                            <span>{{ $order->delivery_address4 }}</span>
-                            <span>{{ $order->delivery_address5 }}</span>
-                        </div>
-                    </div>
-                    <div class="col">
-                        <h2 class="section-title">{{ __('Invoice Address') }}</h2>
+        <div class="flex text-left mt-4 items-center">
+            <div class="w-1/2">
+                <div class="flex">
+                    <div class="font-semibold">{{ __('Order Number') }}</div>
+                    <div class="pl-2">{{ $order->order_no }}</div>
+                </div>
 
-                        <div class="address">
-                            <span>{{ $order->invoice_address_1 }}</span>
-                            <span>{{ $order->invoice_address_2 }}</span>
-                            <span>{{ $order->invoice_address_3 }}</span>
-                            <span>{{ $order->invoice_address_4 }}</span>
-                        </div>
-                    </div>
+                <div class="flex">
+                    <div class="font-semibold">{{ __('Your Reference') }}</div>
+                    <div class="pl-2">{{ $order->customer_order_no }}</div>
+                </div>
+
+                <div class="flex">
+                    <div class="font-semibold">{{ __('Delivery Service') }}</div>
+                    <div class="pl-2">{{ $order->delivery_service }}</div>
+                </div>
+
+                <div class="flex items-center">
+                    <div class="font-semibold">{{ __('Status') }}</div>
+                    <div class="pl-2"><span class="badge badge-{{ str_replace(' ', '_', $order->status) }}">{{ $order->status }}</span></div>
+                </div>
+
+                <div class="flex mt-4">
+                    <div class="font-semibold">{{ __('Net Value') }}</div>
+                    <div class="pl-2">{{ currency($order->value, 2) }}</div>
+                </div>
+
+                <div class="flex">
+                    <div class="font-semibold">{{ __('VAT Value') }}</div>
+                    <div class="pl-2">{{ currency($order->vat_value, 2) }}</div>
+                </div>
+
+                <div class="flex">
+                    <div class="font-semibold">{{ __('Total Value') }}</div>
+                    <div class="pl-2">{{ currency(($order->value + $order->vat_value), 2) }}</div>
                 </div>
             </div>
-        </div>
-        <div class="col d-flex align-items-stretch">
-            <div class="card card-body">
-                <h2 class="section-title">{{ __('Order Details') }}</h2>
 
-                <div class="row">
-                    <div class="col">{{ __('Order Number') }}</div>
-                    <div class="col">{{ $order->order_no }}</div>
-                </div>
-
-                <div class="row">
-                    <div class="col">{{ __('Your Reference') }}</div>
-                    <div class="col">{{ $order->customer_order_no }}</div>
-                </div>
-
-                <div class="row">
-                    <div class="col">{{ __('Delivery Service') }}</div>
-                    <div class="col">{{ $order->delivery_service }}</div>
-                </div>
-
-                <div class="row">
-                    <div class="col">{{ __('Net Value') }}</div>
-                    <div class="col"><strong>{{ currency($order->value, 2) }}</strong></div>
-                </div>
-
-                <div class="row">
-                    <div class="col">{{ __('VAT Value') }}</div>
-                    <div class="col"><strong>{{ currency($order->vat_value, 2) }}</strong></div>
-                </div>
-
-                <div class="row">
-                    <div class="col">{{ __('Total Value') }}</div>
-                    <div class="col"><strong>{{ currency(($order->value + $order->vat_value), 2) }}</strong></div>
-                </div>
-
-                <h2 class="section-title mt-3">{{ __('Contact Details') }}</h2>
-
-                <div class="row">
-                    <div class="col">{{ __('Name') }}</div>
-                    <div class="col">{{ Auth::user()->first_name . ' ' . Auth::user()->last_name }}</div>
-                </div>
-
-                <div class="row">
-                    <div class="col">{{ __('Email') }}</div>
-                    <div class="col">{{ Auth::user()->email }}</div>
-                </div>
+            <div class="w-1/2 text-center bg-gray-200 p-4 rounded">
+                <div>{{ $order->delivery_address1 }}</div>
+                <div>{{ $order->delivery_address2 }}</div>
+                <div>{{ $order->delivery_address3 }}</div>
+                <div>{{ $order->delivery_address4 }}</div>
+                <div>{{ $order->delivery_address5 }}</div>
             </div>
         </div>
     </div>
 
-    <div class="row mt-3 mb-3">
-        <div class="col">
-            <button class="btn btn-blue" onclick="window.history.back();">{{ __('Back') }}</button>
-        </div>
-        <div class="col text-right">
-            <a class="btn-link"
-               href="{{ route('order-tracking.copy-to-basket', ['order_number' => encodeUrl(trim($order->order_no))]) }}">
-                <button class="btn btn-primary">{{ __('Copy Order To Basket') }}</button>
+    <div class="flex justify-between mb-3 mt-3">
+        <button class="button button-inverse" onclick="window.history.back();">{{ __('Back') }}</button>
+
+        <div>
+            <a
+                href="{{ route('order-tracking.copy-to-basket', ['order_number' => encodeUrl(trim($order->order_no))]) }}">
+                <button class="button button-primary">{{ __('Copy Order To Basket') }}</button>
             </a>
             <a id="invoice-download" class="btn-link d-none">
-                <button class="btn btn-primary">{{ __('Download Copy Invoice') }}</button>
+                <button class="button button-primary">{{ __('Download Copy Invoice') }}</button>
             </a>
-            <button class="btn btn-primary">{{ __('Print Order Details') }}</button>
+            <button class="button button-primary">{{ __('Print Order Details') }}</button>
         </div>
     </div>
 
-    <table class="table table-sm table-striped table-hover">
+    <h2 class="font-semibold tracking-widest mt-3 mb-3">{{ __('Order Lines') }}</h2>
+
+    <table>
         <thead>
-        <tr class="table-dark text-dark">
+        <tr>
             <th>{{ __('Product Code') }}</th>
             <th>{{ __('Name') }}</th>
             <th class="text-right">{{ __('Quantity') }}</th>
@@ -111,24 +90,24 @@
         </tr>
         </thead>
         <tbody>
-        @foreach($lines as $line)
-            <tr class="{{ $line['purchasable'] ? '' : 'text-danger' }}">
-                <td>{{ $line['product'] }}</td>
-                <td>{{ $line['long_description'] }}</td>
-                <td class="text-right">{{ $line['line_qty'] }}</td>
-                <td class="text-right">{{ $line['net_price'] }}</td>
-                <td class="text-right">{{ $line['line_val'] }}</td>
+        @foreach($order->lines as $line)
+            <tr class="{{ $line->price ?: 'bg-red-200' }}">
+                <td>{{ $line->product }}</td>
+                <td>{{ $line->long_description }}</td>
+                <td class="text-right">{{ $line->line_qty }}</td>
+                <td class="text-right">{{ currency($line->net_price) }}</td>
+                <td class="text-right">{{ currency($line->line_val) }}</td>
             </tr>
         @endforeach
         </tbody>
     </table>
 
-    <div class="text-right">
-        <small class="text-danger">* Products marked in red are no longer available for purchase.</small>
+    <div class="text-right mt-1">
+        <small class="text-red-600">* Products marked in red are no longer available for purchase.</small>
     </div>
 
-    @if(count($lines) == 0)
-        <h3 class="text-center">No order lines to display.</h3>
+    @if(count($lines) === 0)
+        <h3 class="text-center text-lg font-semibold">No order lines to display.</h3>
     @endif
 @endsection
 
