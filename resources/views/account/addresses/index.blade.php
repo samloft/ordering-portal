@@ -1,47 +1,50 @@
 @extends('layout.master')
 
-@section('page.title', 'Address')
+@section('page.title', 'Addresses')
 
 @section('content')
-    <h1 class="page-title">{{ __('Address') }}</h1>
+    <div class="w-full mb-5 text-center">
+        <h2 class="font-semibold tracking-widest">{{ __('Addresses') }}</h2>
+        <p class="font-thin">
+            {{ __('Update or create delivery addresses') }}
+        </p>
+    </div>
 
     @include('layout.alerts')
 
-    @if (count($addresses) > 0)
+    @if ($addresses)
         @foreach ($addresses as $address)
-            <div class="card card-body mb-2">
-                <div class="row">
-                    <div class="col-lg-9">
-                        <ul class="list-unstyled mb-0">
-                            <li><strong>{{ $address->company_name }}</strong></li>
-                            <li>{{ $address->address_line_2 }}</li>
-                            <li>{{ $address->address_line_3 }}</li>
-                            <li>{{ $address->address_line_4 }}</li>
-                            <li>{{ $address->address_line_5 }}</li>
-                            <li>{{ $address->post_code }}</li>
-                        </ul>
+            <div class="{{ $address->default ? 'bg-primary text-white' : 'bg-white' }} rounded-lg shadow p-4 mb-3">
+                <div class="flex justify-between items-center">
+                    <div>
+                        <div class="font-medium">{{ $address->company_name }}</div>
+                        <div>{{ $address->address_line_2 }}</div>
+                        <div>{{ $address->address_line_3 }}</div>
+                        <div>{{ $address->address_line_4 }}</div>
+                        <div>{{ $address->address_line_5 }}</div>
+                        <div>{{ $address->postcode }}</div>
                     </div>
-                    <div class="col-lg-3 text-right">
+                    <div class="text-right">
                         @if ($checkout)
                             <a href="{{ route('account.address.select', ['id' => $address->id]) }}" class="btn-link">
                                 <button class="btn btn-block btn-sm btn-blue mb-1">{{ __('Select Address') }}</button>
                             </a>
                         @else
                             @if ($address->default)
-                                <h3 class="text-center">{{ __('Default Address') }}</h3>
+                                <h4 class="text-white text-center text-1xl">{{ __('Default Address') }}</h4>
                             @else
                                 <form method="post" action="{{ route('account.address.default') }}" class="mb-1">
-                                    <button class="btn btn-block btn-sm btn-blue" name="id" value="{{ $address->id }}">
+                                    <button class="button button-inverse button-block" name="id" value="{{ $address->id }}">
                                         {{ __('Set As Default') }}
                                     </button>
                                 </form>
                             @endif
 
-                            <a href="{{ route('account.address.edit', [$address->id]) }}" class="btn-link">
-                                <button class="btn btn-block btn-sm btn-blue">{{ __('Edit Address') }}</button>
+                            <a href="{{ route('account.address.edit', [$address->id]) }}">
+                                <button class="button button-primary button-block mb-1">{{ __('Edit Address') }}</button>
                             </a>
 
-                            <button id="delete-address" class="btn btn-block btn-sm btn-blue mt-1"
+                            <button id="delete-address" class="button button-danger button-block"
                                     value="{{ $address->id }}">{{ __('Remove Address') }}
                             </button>
                         @endif
@@ -50,7 +53,7 @@
             </div>
         @endforeach
 
-        <div class="mb-2">
+        <div class="mb-5 mt-5">
             {{ $addresses->appends(request()->input())->links('layout.pagination') }}
         </div>
     @else
@@ -59,18 +62,13 @@
         </div>
     @endif
 
-    <div class="row">
-        <div class="col-lg-6">
-            <a href="{{ route('account') }}" class="btn-link">
-                <button class="btn btn-blue">{{ __('Cancel') }}</button>
-            </a>
-        </div>
-        <div class="col-lg-6 text-right">
-            <a href="@if($checkout) {{ route('account.address.create', ['checkout' => $checkout]) }} @else {{ route('account.address.create') }} @endif"
-               class="btn-link">
-                <button class="btn btn-primary">{{ __('Add New Address') }}</button>
-            </a>
-        </div>
+    <div class="flex justify-between">
+        <a href="{{ route('account') }}">
+            <button class="button button-inverse">{{ __('Cancel') }}</button>
+        </a>
+        <a href="@if($checkout) {{ route('account.address.create', ['checkout' => $checkout]) }} @else {{ route('account.address.create') }} @endif">
+            <button class="button button-primary">{{ __('Add New Address') }}</button>
+        </a>
     </div>
 @endsection
 
