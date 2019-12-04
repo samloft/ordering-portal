@@ -31,9 +31,9 @@ class AddressController extends Controller
     /**
      * Show the form for creating a new addresses.
      *
-     * @return Response
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
      */
-    public function create(): Response
+    public function create()
     {
         $checkout = request('checkout');
         $countries = Countries::show();
@@ -44,9 +44,9 @@ class AddressController extends Controller
     /**
      * Store a newly created address in storage.
      *
-     * @return Response
+     * @return RedirectResponse
      */
-    public function store(): Response
+    public function store(): RedirectResponse
     {
         $checkout = request('checkout');
         $address = $this->validation();
@@ -70,23 +70,24 @@ class AddressController extends Controller
      * Show the form for editing the specified address.
      *
      * @param int $id
-     * @return Response
+     * @return mixed
      */
-    public function edit($id): Response
+    public function edit($id)
     {
+        $checkout = request('checkout');
         $countries = Countries::show();
         $address = Address::details($id);
 
-        return $address ? view('account.addresses.show', compact('countries', 'address')) : abort(404);
+        return $address ? view('account.addresses.show', compact('countries', 'address', 'checkout')) : abort(404);
     }
 
     /**
      * Update the specified address in storage.
      *
      * @param $id
-     * @return Response
+     * @return RedirectResponse
      */
-    public function update($id): Response
+    public function update($id): RedirectResponse
     {
         $address = $this->validation();
 
@@ -100,11 +101,11 @@ class AddressController extends Controller
     /**
      * Remove the specified address from storage.
      *
-     * @param int $id
-     * @return Response
-     * @throws Exception
+     * @param $id
+     * @return RedirectResponse
+     * @throws \Exception
      */
-    public function destroy($id): Response
+    public function destroy($id): RedirectResponse
     {
         $permission = Address::canEdit($id);
 
