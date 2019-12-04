@@ -13405,6 +13405,11 @@ table tbody td {
   padding-right: 1rem;
 }
 
+table .row-sm td {
+  padding-top: 0.25rem;
+  padding-bottom: 0.25rem;
+}
+
 table.bulk-rates {
   box-shadow: none;
   border-bottom-width: 2px;

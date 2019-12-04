@@ -3,144 +3,113 @@
 @section('page.title', 'Basket')
 
 @section('content')
-    @include('layout.progress', ['progress_title' => 'Basket', 'progress_amount' => 1])
+    <div class="w-full mb-5 text-center">
+        <h2 class="font-semibold tracking-widest">{{ __('Basket') }}</h2>
+        <p class="font-thin">
+            {{ __('View your basket.') }}
+        </p>
+    </div>
 
     @include('layout.alerts')
 
-    <div class="row">
-        <div class="col-lg-7"></div>
-        <div class="col-lg-5 justify-content-end">
-            <div class="card card-body quick-buy-basket">
-                <form id="product-add-basket-checkout" method="post">
-                    <div class="form-group">
-                        <label class="font-weight-bold">{{ __('Quick Buy') }}</label>
-                        <div class="row">
-                            <div class="col">
-                                <input id="quick-buy" class="form-control" name="product"
-                                       placeholder="Enter Product Code" autocomplete="off">
-                            </div>
-                            <div class="col-2">
-                                <input type="text" class="form-control text-center" name="quantity" value="1">
-                            </div>
-                            <div class="col-4">
-                                <button class="btn btn-block btn-primary"
-                                        type="submit">{{ __('Add To Basket') }}</button>
-                            </div>
+    <div class="flex items-start justify-end mb-5">
+        <table class="w-8/12">
+            <thead>
+            <tr>
+                <th>{{ __('Product') }}</th>
+                <th>{{ __('Unit') }}</th>
+                <th class="text-right">{{ __('Net Price') }}</th>
+                <th class="text-center">{{ __('Quantity') }}</th>
+                <th class="text-right">{{ __('Total Price') }}</th>
+            </tr>
+            </thead>
+            <tbody class="row-sm">
+            @foreach($basket['lines'] as $line)
+                <tr {{ ($line['stock'] < $line['quantity']) ? 'class=bg-red-200' : ''}} id="{{ $line['product'] }}">
+                    <td>
+                        <div class="flex items-center">
+                            <img class="h-10 mr-2" src="{{ $line['image'] }}" alt="{{ $line['name'] }}">
+                            <h2 class="leading-none">
+                                <a href="{{ route('products.show', ['product' => $line['product']]) }}"><span class="text-primary font-medium">{{ $line['product'] }}</span>
+                                    <br><span class="text-xs">{{ $line['name'] }}</span></a>
+                            </h2>
                         </div>
+                    </td>
+                    <td><span class="badge badge-info">{{ ucfirst(strtolower($line['uom'])) }}</span></td>
+                    <td class="text-right">{{ $line['unit_price'] }}</td>
+                    <td class="text-center">
+                        <input name="line_qty" class="w-20 h-6 text-right" value="{{ $line['quantity'] }}"
+                               autocomplete="off">
+                        <div class="leading-none text-primary">
+                            <small id="basket_line__update" class="quantity-update">Update</small> <small
+                                id="basket-line__remove" class="quantity-remove">Remove</small>
+                        </div>
+                    </td>
+                    <td class="text-right">{{ $line['price'] }}</td>
+                </tr>
+            @endforeach
+            </tbody>
+        </table>
+
+        <div class="w-4/12 ml-10">
+            <div class="bg-white rounded shadow-md p-2 text-center mb-5">
+                <form id="product-add-basket-checkout" class="m-0" method="post">
+                    <label class="font-medium">{{ __('Quick Buy') }}</label>
+                    <div class="flex justify-center">
+                        <input id="quick-buy" class="w-48 mr-1" name="product"
+                               placeholder="Enter Product Code" autocomplete="off">
+                        <input type="text" class="w-12 mr-1" name="quantity" value="1">
+                        <button class="button button-primary">{{ __('Add To Basket') }}</button>
                     </div>
                 </form>
             </div>
-        </div>
-    </div>
 
-    <table class="table table-basket">
-        <thead>
-        <tr>
-            <th>{{ __('Product') }}</th>
-            <th>{{ __('Code') }}</th>
-            <th>{{ __('Unit') }}</th>
-            <th class="text-right">{{ __('Stock (†)') }}</th>
-            <th class="text-right">{{ __('Net Price') }}</th>
-            <th class="text-center">{{ __('Quantity') }}</th>
-            <th class="text-right">{{ __('Total Price') }}</th>
-        </tr>
-        </thead>
-        <tbody>
-        @foreach($basket['lines'] as $line)
-            <tr {{ $line['stock'] < $line['quantity'] ? 'class=bg-warning' : '' }} id="{{ $line['product'] }}">
-                <td>
-                    <div class="basket-image__container d-inline-block">
-                        <img class="basket-image" src="{{ $line['image'] }}" alt="{{ $line['name'] }}">
-                    </div>
-                    <h2 class="section-title d-inline-block">
-                        <a href="{{ route('products.show', ['product' => $line['product']]) }}">{{ $line['name'] }}</a>
-                    </h2>
-                </td>
-                <td id="basket__product">{{ $line['product'] }}</td>
-                <td>{{ $line['uom'] }}</td>
-                <td class="text-right">{{ $line['stock'] }}</td>
-                <td class="text-right">{{ $line['unit_price'] }}</td>
-                <td class="quantity-column">
-                    <input name="line_qty" class="form-control form-quantity" value="{{ $line['quantity'] }}"
-                           autocomplete="off">
-                    <span class="quantity-options">
-                            <span id="basket_line__update" class="quantity-update">Update</span> <span
-                                id="basket-line__remove" class="quantity-remove">Remove</span>
-                        </span>
-                </td>
-                <td class="text-right">{{ $line['price'] }}</td>
-            </tr>
-        @endforeach
-        </tbody>
-    </table>
-
-    <div id="basket-message" class="text-center mb-5" {{ count($basket['lines']) <> 0 ? 'style=display:none' : '' }}>
-        <h2>{{ __('No items are in your basket') }}</h2>
-    </div>
-
-    <div class="row">
-        <div class="col-lg-7">
-            <div class="alert alert-warning p-1">
-                {{ __('Please Note: Lines marked in this colour have a chance of going onto backorder.') }}
-            </div>
-        </div>
-        <div class="col-lg-5 justify-content-end">
-            <div class="card card-body basket-summary">
-                <div class="row">
-                    <div class="col">{{ __('Goods Total') }}</div>
-                    <div id="basket__goods-total" class="col text-right">{{ $basket['summary']['goods_total'] }}</div>
+            <div class="bg-white rounded shadow-md p-6 mb-5">
+                <div class="flex justify-between">
+                    <div>{{ __('Goods Total') }}</div>
+                    <div id="basket__goods-total" class="text-right">{{ $basket['summary']['goods_total'] }}</div>
                 </div>
-                <div class="row">
-                    <div class="col">{{ __('Shipping') }}</div>
-                    <div id="basket__shipping" class="col text-right">{{ $basket['summary']['shipping'] }}</div>
+                <div class="flex justify-between">
+                    <div>{{ __('Shipping') }}</div>
+                    <div id="basket__shipping" class="text-right">{{ $basket['summary']['shipping'] }}</div>
                 </div>
-                <div class="row">
-                    <div class="col">{{ __('Sub Total') }}</div>
-                    <div id="basket__sub-total" class="col text-right">{{ $basket['summary']['sub_total'] }}</div>
+                <div class="flex justify-between">
+                    <div>{{ __('Sub Total') }}</div>
+                    <div id="basket__sub-total" class="text-right">{{ $basket['summary']['sub_total'] }}</div>
                 </div>
-                <div class="row">
-                    <div class="col">{{ __('Small Order Charge*') }}</div>
+                <div class="flex justify-between">
+                    <div>{{ __('Small Order Charge*') }}</div>
                     <div id="basket__small-order-charge"
-                         class="col text-right">{{ $basket['summary']['small_order_charge'] }}</div>
+                         class="text-right">{{ $basket['summary']['small_order_charge'] }}</div>
                 </div>
-                <div class="row">
-                    <div class="col">{{ __('VAT') }}</div>
-                    <div id="basket__vat" class="col text-right">{{ $basket['summary']['vat'] }}</div>
-                </div>
-                <hr>
-                <div class="row basket-total">
-                    <div class="col">{{ __('Order Total') }}</div>
-                    <div id="basket__total" class="col text-right">{{ $basket['summary']['total'] }}</div>
+                <div class="flex justify-between">
+                    <div>{{ __('VAT') }}</div>
+                    <div id="basket__vat" class="text-right">{{ $basket['summary']['vat'] }}</div>
                 </div>
                 <hr>
-                <div class="small-print">
-                    <div class="row">
-                        <div class="col">
-                            {{ __('*orders below £200 attract a £10 small order charge, unless you are collecting your order.') }}
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="col">
-                            {{ __('† Stock levels are only accurate at the time the product is first added to the basket.') }}
-                        </div>
+                <div class="flex justify-between">
+                    <div>{{ __('Order Total') }}</div>
+                    <div id="basket__total" class="text-right">{{ $basket['summary']['total'] }}</div>
+                </div>
+                <hr>
+                <div class="mt-3 text-xs">
+                    {{ __('*orders below £200 attract a £10 small order charge, unless you are collecting your order or paying a delivery charge.') }}
+                </div>
+            </div>
+
+            <div class="alert alert-info" role="alert">
+                <div class="alert-body text-sm leading-none">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" class="alert-icon">
+                        <path class="primary" d="M12 2a10 10 0 1 1 0 20 10 10 0 0 1 0-20z"></path>
+                        <path class="secondary"
+                              d="M11 12a1 1 0 0 1 0-2h2a1 1 0 0 1 .96 1.27L12.33 17H13a1 1 0 0 1 0 2h-2a1 1 0 0 1-.96-1.27L11.67 12H11zm2-4a1.5 1.5 0 1 1 0-3 1.5 1.5 0 0 1 0 3z"></path>
+                    </svg>
+                    <div>
+                        <p class="alert-title">{{ __('Please Note:') }}</p>
+                        <p class="alert-text">{{ __('Lines marked in red have a chance of going onto backorder.') }}</p>
                     </div>
                 </div>
             </div>
-        </div>
-    </div>
-
-    <div class="row mt-3">
-        <div class="col">
-            <a class="btn-link" href="{{ route('products') }}">
-                <button class="btn btn-blue">{{ __('Continue Shopping') }}</button>
-            </a>
-            <button id="empty-basket" class="btn btn-blue">{{ __('Empty basket') }}</button>
-        </div>
-        <div class="col text-right" id="basket-checkout__buttons" {{ count($basket['lines']) == 0 ? 'style=display:none;' : '' }}>
-            <button id="save-basket" class="btn btn-primary">{{ __('Save Basket') }}</button>
-            <a href="{{ route('checkout') }}">
-                <button class="btn btn-primary">{{ __('Checkout') }}</button>
-            </a>
         </div>
     </div>
 @endsection

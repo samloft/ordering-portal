@@ -24,6 +24,12 @@ table {
             @apply .border-t .border-gray-300 .py-2 .px-4;
         }
     }
+
+    .row-sm {
+        td {
+            @apply .py-1;
+        }
+    }
 }
 
 table.bulk-rates {
