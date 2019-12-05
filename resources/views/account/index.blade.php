@@ -33,7 +33,7 @@
                 </div>
 
                 <div class="flex align-items">
-                    <span class="mr-3">{{ __('Current Email') }}</span>
+                    <span class="mr-3 text-gray-500 font-thin">{{ __('Current Email') }}</span>
                     <span class="badge badge-success">{{ auth()->user()->email }}</span>
                 </div>
             </div>
