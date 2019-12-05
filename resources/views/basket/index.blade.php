@@ -13,43 +13,57 @@
     @include('layout.alerts')
 
     <div class="flex items-start justify-end mb-5">
-        <table class="w-8/12">
-            <thead>
-            <tr>
-                <th>{{ __('Product') }}</th>
-                <th>{{ __('Unit') }}</th>
-                <th class="text-right">{{ __('Net Price') }}</th>
-                <th class="text-center">{{ __('Quantity') }}</th>
-                <th class="text-right">{{ __('Total Price') }}</th>
-            </tr>
-            </thead>
-            <tbody class="row-sm">
-            @foreach($basket['lines'] as $line)
-                <tr {{ ($line['stock'] < $line['quantity']) ? 'class=bg-red-200' : ''}} id="{{ $line['product'] }}">
-                    <td>
-                        <div class="flex items-center">
-                            <img class="h-10 mr-2" src="{{ $line['image'] }}" alt="{{ $line['name'] }}">
-                            <h2 class="leading-none">
-                                <a href="{{ route('products.show', ['product' => $line['product']]) }}"><span class="text-primary font-medium">{{ $line['product'] }}</span>
-                                    <br><span class="text-xs">{{ $line['name'] }}</span></a>
-                            </h2>
-                        </div>
-                    </td>
-                    <td><span class="badge badge-info">{{ ucfirst(strtolower($line['uom'])) }}</span></td>
-                    <td class="text-right">{{ $line['unit_price'] }}</td>
-                    <td class="text-center">
-                        <input name="line_qty" class="w-20 h-6 text-right" value="{{ $line['quantity'] }}"
-                               autocomplete="off">
-                        <div class="leading-none text-primary">
-                            <small id="basket_line__update" class="quantity-update">Update</small> <small
-                                id="basket-line__remove" class="quantity-remove">Remove</small>
-                        </div>
-                    </td>
-                    <td class="text-right">{{ $line['price'] }}</td>
+        <div class="w-8/12">
+            <table class="mb-3">
+                <thead>
+                <tr>
+                    <th>{{ __('Product') }}</th>
+                    <th>{{ __('Unit') }}</th>
+                    <th class="text-right">{{ __('Net Price') }}</th>
+                    <th class="text-center">{{ __('Quantity') }}</th>
+                    <th class="text-right">{{ __('Total Price') }}</th>
                 </tr>
-            @endforeach
-            </tbody>
-        </table>
+                </thead>
+                <tbody class="row-sm">
+                @foreach($basket['lines'] as $line)
+                    <tr {{ ($line['stock'] < $line['quantity']) ? 'class=bg-red-200' : ''}} id="{{ $line['product'] }}">
+                        <td>
+                            <div class="flex items-center">
+                                <img class="h-10 mr-2" src="{{ $line['image'] }}" alt="{{ $line['name'] }}">
+                                <h2 class="leading-none">
+                                    <a href="{{ route('products.show', ['product' => $line['product']]) }}"><span
+                                            class="text-primary font-medium">{{ $line['product'] }}</span>
+                                        <br><span class="text-xs">{{ $line['name'] }}</span></a>
+                                </h2>
+                            </div>
+                        </td>
+                        <td><span class="badge badge-info">{{ ucfirst(strtolower($line['uom'])) }}</span></td>
+                        <td class="text-right">{{ $line['unit_price'] }}</td>
+                        <td class="text-center">
+                            <input name="line_qty" class="w-20 h-6 text-right" value="{{ $line['quantity'] }}"
+                                   autocomplete="off">
+                            <div class="leading-none text-primary">
+                                <small id="basket_line__update" class="quantity-update">Update</small> <small
+                                    id="basket-line__remove" class="quantity-remove">Remove</small>
+                            </div>
+                        </td>
+                        <td class="text-right">{{ $line['price'] }}</td>
+                    </tr>
+                @endforeach
+                </tbody>
+            </table>
+
+            <div class="flex justify-between">
+                <div>
+                    <a href="{{ route('products') }}">
+                        <button class="button button-inverse">{{ __('Continue Shopping') }}</button>
+                    </a>
+                    <button id="empty-basket" class="button button-inverse">{{ __('Empty basket') }}</button>
+                </div>
+
+                <button id="save-basket" class="button button-primary">{{ __('Save Basket') }}</button>
+            </div>
+        </div>
 
         <div class="w-4/12 ml-10">
             <div class="bg-white rounded shadow-md p-2 text-center mb-5">
@@ -95,6 +109,13 @@
                 <div class="mt-3 text-xs">
                     {{ __('*orders below £200 attract a £10 small order charge, unless you are collecting your order or paying a delivery charge.') }}
                 </div>
+
+                <a href="{{ route('checkout') }}">
+                    <button class="flex justify-between button button-primary button-block mt-6 text-left">
+                        {{ __('Checkout') }}
+                        <span class="ml-auto">🛒</span>
+                    </button>
+                </a>
             </div>
 
             <div class="alert alert-info" role="alert">
