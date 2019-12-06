@@ -1,0 +1,43 @@
+.basket-dropdown {
+    @apply .bg-white .rounded-lg .shadow-lg .relative .block .text-left .z-50 .text-gray-600;
+
+    width: 350px;
+
+    &:before, &:after {
+        @apply .absolute .w-0 .h-0 .block;
+
+        content: '';
+        bottom: 100%;
+    }
+
+    &:before {
+        left: 19px;
+        border: 10px solid transparent;
+        border-bottom-color: #ddd;
+    }
+
+    &:after {
+        left: 20px;
+        border: 10px solid transparent;
+        border-bottom-color: #fff;
+    }
+
+    .basket-dropdown-summary {
+        @apply .pt-1;
+
+        max-height: 200px;
+        overflow: scroll;
+    }
+
+    .basket-dropdown-content {
+        @apply .pt-1;
+    }
+
+    img {
+        @apply .h-20 .w-20 .mr-2 .pl-2;
+    }
+
+    .basket-dropdown-message {
+        @apply .bg-primary .text-gray-800 .text-center .rounded-b-lg .pt-1 .pb-1;
+    }
+}

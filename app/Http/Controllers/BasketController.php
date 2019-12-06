@@ -13,6 +13,7 @@ use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 use Auth;
 use Illuminate\View\View;
+use Storage;
 
 class BasketController extends Controller
 {
@@ -44,13 +45,12 @@ class BasketController extends Controller
     /**
      * Add a product to the basket
      *
-     * @param Request $request
      * @return JsonResponse
      */
-    public function addProduct(Request $request)
+    public function addProduct()
     {
-        $product = trim($request->product);
-        $quantity = trim($request->quantity);
+        $product = trim(request('product'));
+        $quantity = trim(request('quantity'));
 
         $product_details = Product::show($product);
 
@@ -58,14 +58,14 @@ class BasketController extends Controller
             return response()->json([
                 'error' => true,
                 'message' => 'The product you have entered does not exist.'
-            ], 201);
+            ], 422);
         }
 
         if (!(int)$quantity || (! $quantity) > 0) {
             return response()->json([
                 'error' => true,
                 'message' => $quantity . ' is not a valid quantity, please enter numeric values or more than 0 only.'
-            ], 201);
+            ], 422);
         }
 
         if ($quantity % $product_details->order_multiples !== 0) {
@@ -76,21 +76,27 @@ class BasketController extends Controller
 
         $details[] = [
             'user_id' => auth()->user()->id,
-            'customer_code' => auth()->user()->customer->customer_code,
-            'product' => $product_details->product,
+            'customer_code' => auth()->user()->customer->code,
+            'product' => $product_details->code,
             'quantity' => $quantity
         ];
 
         $store_basket = Basket::store($details);
 
         if ($store_basket) {
+            if (Storage::disk('public')->exists('product_images/'.$product_details->code.'.png')) {
+                $image = asset('product_images/'.$product_details->code.'.png');
+            } else {
+                $image = asset('images/no-image.png');
+            }
+
             return response()->json([
                 'error' => false,
                 'message' => $warning ?? null,
                 'basket' => $store_basket['basket_updated'],
                 'product' => [
-                    'image' => 'https://scolmoreonline.com/product_images/' . $product_details->product . '.png',
-                    'product' => $product_details->product,
+                    'image' => $image,
+                    'code' => $product_details->code,
                     'net_price' => currency(discount($product_details->price)),
                     'quantity' => $quantity,
                     'price' => currency(discount($product_details->price) * $quantity, 2),

@@ -14,22 +14,15 @@
 
             <div class="w-1/4 md:w-auto md:flex text-right p-3 bg-background_invert-color rounded">
                 <div class="flex md:flex md:items-center mr-2">
-                    <div class="mr-2">
-                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"
-                             class="w-10 icon icon-shopping-cart">
-                            <path class="primary"
-                                  d="M7 4h14a1 1 0 0 1 .9 1.45l-4 8a1 1 0 0 1-.9.55H7a1 1 0 0 1-1-1V5a1 1 0 0 1 1-1z"></path>
-                            <path class="secondary"
-                                  d="M17.73 19a2 2 0 1 1-3.46 0H8.73a2 2 0 1 1-3.42-.08A3 3 0 0 1 5 13.17V4H3a1 1 0 1 1 0-2h3a1 1 0 0 1 1 1v10h11a1 1 0 0 1 0 2H6a1 1 0 0 0 0 2h12a1 1 0 0 1 0 2h-.27z"></path>
-                        </svg>
-                    </div>
-                    <div class="md:block ml-2 text-left flex mr-5">
-                        <span class="text-sm font-thin">My Cart</span>
-                        <div class="font-light">£0.00</div>
-                    </div>
-                    <a href="{{ route('basket') }}">
-                        <button class="button button-secondary mr-2">Basket</button>
-                    </a>
+
+                    <basket-dropdown>
+                        <template v-slot:basket_button>
+                            <a href="{{ route('basket') }}">
+                                <button class="button button-secondary mr-2">Basket</button>
+                            </a>
+                        </template>
+                    </basket-dropdown>
+
                     <a href="{{ route('checkout') }}">
                         <button class="button button-primary">Checkout</button>
                     </a>

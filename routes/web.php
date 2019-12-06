@@ -28,7 +28,7 @@ Route::group(['middleware' => ['auth', 'has.customer']], function () {
         Route::get('view/{product}', 'ProductController@show')->name('products.show');
         Route::get('search', 'ProductController@search')->name('products.search');
 
-        Route::get('autocomplete/{search}', function ($search) {
+        Route::get('autocomplete/{search}', static function ($search) {
             return App\Models\Product::autocomplete($search);
         });
 

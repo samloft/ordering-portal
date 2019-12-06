@@ -129,11 +129,10 @@ class Product extends Model
      * Autocomplete for quick-buy input.
      *
      * @param $search
-     * @return Product
      */
-    public static function autocomplete($search): Product
+    public static function autocomplete($search)
     {
-        return self::select('code')->whereHas('prices')->whereRaw('UPPER(code) like \''.$search.'%\'')->orderBy('code', 'asc')->limit(10)->get();
+        return self::select('code')->whereHas('prices')->whereRaw('UPPER(code) like \''.strtoupper($search).'%\'')->orderBy('code', 'asc')->limit(10)->get();
     }
 
     /**

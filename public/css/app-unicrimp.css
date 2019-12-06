@@ -13587,6 +13587,84 @@ h4 {
   background-color: #bee3f8;
 }
 
+.badge-basket {
+  font-size: 0.75rem;
+  font-weight: 500;
+  color: #1a202c;
+  background-color: var(--primary-text);
+  color: #fff;
+  line-height: 1;
+  padding: 0.25rem;
+  position: absolute;
+  left: 0;
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+  text-align: center;
+  border-width: 1px;
+  border-color: var(--primary-text);
+  margin-top: -0.75rem;
+  border-radius: 50%;
+}
+
+.basket-dropdown {
+  background-color: #fff;
+  border-radius: 0.5rem;
+  box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+  position: relative;
+  display: block;
+  text-align: left;
+  z-index: 50;
+  color: #718096;
+  width: 350px;
+}
+
+.basket-dropdown:before, .basket-dropdown:after {
+  position: absolute;
+  width: 0;
+  height: 0;
+  display: block;
+  content: "";
+  bottom: 100%;
+}
+
+.basket-dropdown:before {
+  left: 19px;
+  border: 10px solid transparent;
+  border-bottom-color: #ddd;
+}
+
+.basket-dropdown:after {
+  left: 20px;
+  border: 10px solid transparent;
+  border-bottom-color: #fff;
+}
+
+.basket-dropdown .basket-dropdown-summary {
+  padding-top: 0.25rem;
+  max-height: 200px;
+  overflow: scroll;
+}
+
+.basket-dropdown .basket-dropdown-content {
+  padding-top: 0.25rem;
+}
+
+.basket-dropdown img {
+  height: 5rem;
+  width: 5rem;
+  margin-right: 0.5rem;
+  padding-left: 0.5rem;
+}
+
+.basket-dropdown .basket-dropdown-message {
+  background-color: var(--primary-text);
+  color: #2d3748;
+  text-align: center;
+  border-bottom-right-radius: 0.5rem;
+  border-bottom-left-radius: 0.5rem;
+  padding-top: 0.25rem;
+  padding-bottom: 0.25rem;
+}
+
 :root {
   --background-primary-color: rgba(234, 25, 33, 1.0);
   --background-primary-text: rgb(255, 255, 255);

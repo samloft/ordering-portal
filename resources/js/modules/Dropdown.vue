@@ -4,12 +4,12 @@
              aria-haspopup="true"
              :aria-expanded="isOpen"
              @click="isOpen = !isOpen">
-            <slot name="trigger"></slot>
+            <slot name="trigger"/>
         </div>
 
         <div v-show="isOpen" class="dropdown-menu absolute bg-gray-100 py-2 rounded shadow-lg mt-4 text-left w-full"
              :class="align === 'left' ? 'left-0' : 'right-0'">
-            <slot></slot>
+            <slot/>
         </div>
     </div>
 </template>

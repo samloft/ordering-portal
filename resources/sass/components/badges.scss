@@ -33,3 +33,9 @@
 .badge-info {
     @apply .text-blue-900 .bg-blue-200;
 }
+
+.badge-basket {
+    @apply .text-xs .font-medium .text-gray-900 .bg-primary .text-white .leading-none .p-1 .absolute .left-0 .shadow-md .text-center .border .border-primary -mt-3;
+
+    border-radius: 50%;
+}

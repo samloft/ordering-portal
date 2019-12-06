@@ -51,8 +51,8 @@ class Basket extends Model
      */
     public static function show($shipping_value = 0, $country = null): array
     {
-        $lines = static::selectRaw('basket.product as product, basket.customer_code as customer_code, 
-                                                    basket.quantity as quantity, price, break1, price1, break2, price2, 
+        $lines = static::selectRaw('basket.product as product, basket.customer_code as customer_code,
+                                                    basket.quantity as quantity, price, break1, price1, break2, price2,
                                                     break3, price3, name, uom, not_sold, stock_levels.quantity as stock_level')
             ->where('basket.customer_code', auth()->user()->customer->code)
             ->join('prices', 'basket.product', '=', 'prices.product')
@@ -67,13 +67,13 @@ class Basket extends Model
         foreach ($lines as $line) {
             // Check for any bulk discounts and adjust the prices to match if found.
             switch (true) {
-                case ($line->quantity >= $line->break3) && ($line->price3 !== 0):
+                case ($line->quantity >= $line->break3) && ($line->price3 !== null):
                     $net_price = $line->price3;
                     break;
-                case ($line->quantity >= $line->break2) && ($line->price2 !== 0):
+                case ($line->quantity >= $line->break2) && ($line->price2 !== null):
                     $net_price = $line->price2;
                     break;
-                case ($line->quantity >= $line->break1) && ($line->price1 !== 0):
+                case ($line->quantity >= $line->break1) && ($line->price1 !== null):
                     $net_price = $line->price1;
                     break;
                 default:

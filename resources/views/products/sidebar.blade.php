@@ -46,19 +46,7 @@
 
     <h4>{{ __('Quick Buy') }}</h4>
 
-    <form method="post" id="product-add-basket-quickbuy">
-        <input id="quick-buy" class="mb-2" name="product"
-               placeholder="{{ __('Enter Product Code') }}" autocomplete="off">
-
-        <div class="flex">
-            <div class="align-items-center">
-                <span class="mr-2 text-gray-600">{{ __('Qty:') }}</span>
-                <input class="w-24 mr-2" name="quantity" value="1" autocomplete="off">
-            </div>
-            <button class="button button-primary flex-grow" name="quick_buy_submit"
-                    type="submit">{{ __('Add to basket') }}</button>
-        </div>
-    </form>
+    <quick-buy class="mb-4"></quick-buy>
 
     <h4>{{ __('Categories') }}</h4>
 

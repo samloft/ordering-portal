@@ -67,15 +67,17 @@
 
         <div class="w-4/12 ml-10">
             <div class="bg-white rounded shadow-md p-2 text-center mb-5">
-                <form id="product-add-basket-checkout" class="m-0" method="post">
-                    <label class="font-medium">{{ __('Quick Buy') }}</label>
-                    <div class="flex justify-center">
-                        <input id="quick-buy" class="w-48 mr-1" name="product"
-                               placeholder="Enter Product Code" autocomplete="off">
-                        <input type="text" class="w-12 mr-1" name="quantity" value="1">
-                        <button class="button button-primary">{{ __('Add To Basket') }}</button>
-                    </div>
-                </form>
+                <label class="font-medium">{{ __('Quick Buy') }}</label>
+                <quick-buy></quick-buy>
+{{--                <form id="product-add-basket-checkout" class="m-0" method="post">--}}
+{{--                    <label class="font-medium">{{ __('Quick Buy') }}</label>--}}
+{{--                    <div class="flex justify-center">--}}
+{{--                        <input id="quick-buy" class="w-48 mr-1" name="product"--}}
+{{--                               placeholder="Enter Product Code" autocomplete="off">--}}
+{{--                        <input type="text" class="w-12 mr-1" name="quantity" value="1">--}}
+{{--                        <button class="button button-primary">{{ __('Add To Basket') }}</button>--}}
+{{--                    </div>--}}
+{{--                </form>--}}
             </div>
 
             <div class="bg-white rounded shadow-md p-6 mb-5">
