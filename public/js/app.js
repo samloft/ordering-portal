@@ -2139,6 +2139,13 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
@@ -2148,13 +2155,73 @@ __webpack_require__.r(__webpack_exports__);
   props: {
     products: {}
   },
-  methods: {},
+  methods: {
+    emptyBasket: function emptyBasket() {
+      Vue.swal({
+        title: "Empty Basket?",
+        text: "Are you sure? This cannot be un-done.",
+        type: "warning",
+        showCancelButton: true
+      }).then(function (response) {
+        if (response.value) {
+          location.href = '/basket/empty';
+        }
+      });
+    },
+    saveBasket: function saveBasket() {
+      Vue.swal({
+        title: 'Add a reference for your saved basket',
+        input: 'text',
+        showCancelButton: true,
+        inputValidator: function inputValidator(value) {
+          if (!value) {
+            return 'You need to enter a reference.';
+          }
+        }
+      }).then(function (response) {
+        if (response.value) {
+          axios.post('/saved-baskets/store', {
+            reference: response.value
+          }).then(function (response) {
+            Vue.swal('Success', 'Your saved basket has been created', 'success');
+          })["catch"](function () {
+            Vue.swal('Error', 'Could not create saved basket, please try again', 'error');
+          });
+        }
+      });
+    },
+    updateProduct: function updateProduct(product, quantity) {
+      if (!Number.isInteger(quantity)) {
+        return Vue.swal('Error', 'Quantity must be a number, please fix this error and try again.', 'error');
+      }
+
+      axios.post('/basket/update-product', {
+        product: product,
+        qty: quantity
+      }).then(function () {
+        window.location.reload();
+      })["catch"](function () {
+        Vue.swal('Error', 'Unable to update product, please try again', 'error');
+      });
+    },
+    removeProduct: function removeProduct(product) {
+      axios.post('/basket/delete-product', {
+        product: product
+      }).then(function () {
+        window.location.reload();
+      })["catch"](function () {
+        Vue.swal('Error', 'Could not remove that product, please try again', 'error');
+      });
+    }
+  },
   mounted: function mounted() {
     var _this = this;
 
     this.items = this.products;
     Event.$on('product-added', function (data) {
       _this.items = data.basket_details.lines;
+
+      _this.$forceUpdate();
     });
   }
 });
@@ -9627,94 +9694,140 @@ var render = function() {
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
   return _c("div", [
-    _c(
-      "table",
-      {
-        directives: [
-          {
-            name: "show",
-            rawName: "v-show",
-            value: _vm.products.length > 0,
-            expression: "(products.length > 0)"
-          }
-        ],
-        staticClass: "mb-3"
-      },
-      [
-        _vm._m(0),
-        _vm._v(" "),
-        _c(
-          "tbody",
-          { staticClass: "row-sm" },
-          _vm._l(_vm.items, function(product) {
-            return _c("tr", [
-              _c("td", [
-                _c("div", { staticClass: "flex items-center" }, [
-                  _c("img", {
-                    staticClass: "h-10 mr-2",
-                    attrs: { src: product.image, alt: product.name }
-                  }),
-                  _vm._v(" "),
-                  _c("h2", { staticClass: "leading-none" }, [
-                    _c(
-                      "a",
-                      { attrs: { href: "/products/view/" + product.product } },
-                      [
-                        _c(
-                          "span",
-                          { staticClass: "text-primary font-medium" },
-                          [_vm._v(_vm._s(product.product))]
-                        ),
-                        _vm._v(" "),
-                        _c("br"),
-                        _vm._v(" "),
-                        _c("span", { staticClass: "text-xs" }, [
-                          _vm._v(_vm._s(product.name))
-                        ])
-                      ]
+    _vm.items.length > 0
+      ? _c("table", { staticClass: "mb-5" }, [
+          _vm._m(0),
+          _vm._v(" "),
+          _c(
+            "tbody",
+            { staticClass: "row-sm" },
+            _vm._l(_vm.items, function(product) {
+              return _c("tr", [
+                _c("td", [
+                  _c("div", { staticClass: "flex items-center" }, [
+                    _c("img", {
+                      staticClass: "h-10 mr-2",
+                      attrs: { src: product.image, alt: product.name }
+                    }),
+                    _vm._v(" "),
+                    _c("h2", { staticClass: "leading-none" }, [
+                      _c(
+                        "a",
+                        {
+                          attrs: { href: "/products/view/" + product.product }
+                        },
+                        [
+                          _c(
+                            "span",
+                            { staticClass: "text-primary font-medium" },
+                            [_vm._v(_vm._s(product.product))]
+                          ),
+                          _vm._v(" "),
+                          _c("br"),
+                          _vm._v(" "),
+                          _c("span", { staticClass: "text-xs" }, [
+                            _vm._v(_vm._s(product.name))
+                          ])
+                        ]
+                      )
+                    ])
+                  ])
+                ]),
+                _vm._v(" "),
+                _c("td", [
+                  _c("span", { staticClass: "badge badge-info" }, [
+                    _vm._v(
+                      _vm._s(
+                        product.uom.charAt(0).toUpperCase() +
+                          product.uom.substring(1).toLowerCase()
+                      )
                     )
                   ])
-                ])
-              ]),
-              _vm._v(" "),
-              _c("td", [
-                _c("span", { staticClass: "badge badge-info" }, [
-                  _vm._v(
-                    _vm._s(
-                      product.uom.charAt(0).toUpperCase() +
-                        product.uom.substring(1).toLowerCase()
-                    )
-                  )
-                ])
-              ]),
-              _vm._v(" "),
-              _c("td", { staticClass: "text-right" }, [
-                _vm._v(_vm._s(product.unit_price))
-              ]),
-              _vm._v(" "),
-              _c("td", { staticClass: "text-center" }, [
-                _c("input", {
-                  staticClass: "w-20 h-6 text-right",
-                  attrs: { name: "line_qty", autocomplete: "off" },
-                  domProps: { value: product.quantity }
-                }),
+                ]),
                 _vm._v(" "),
-                _vm._m(1, true)
-              ]),
-              _vm._v(" "),
-              _c("td", { staticClass: "text-right" }, [
-                _vm._v(_vm._s(product.price))
+                _c("td", { staticClass: "text-right" }, [
+                  _vm._v(_vm._s(product.unit_price))
+                ]),
+                _vm._v(" "),
+                _c("td", { staticClass: "text-center" }, [
+                  _c("input", {
+                    directives: [
+                      {
+                        name: "model",
+                        rawName: "v-model",
+                        value: product.quantity,
+                        expression: "product.quantity"
+                      }
+                    ],
+                    staticClass: "w-20 h-6 text-right bg-gray-100",
+                    attrs: { name: "line_qty", autocomplete: "off" },
+                    domProps: { value: product.quantity },
+                    on: {
+                      input: function($event) {
+                        if ($event.target.composing) {
+                          return
+                        }
+                        _vm.$set(product, "quantity", $event.target.value)
+                      }
+                    }
+                  }),
+                  _vm._v(" "),
+                  _c("div", { staticClass: "leading-none text-primary" }, [
+                    _c(
+                      "small",
+                      {
+                        staticClass: "cursor-pointer hover:underline",
+                        on: {
+                          click: function($event) {
+                            return _vm.updateProduct(
+                              product.product,
+                              product.quantity
+                            )
+                          }
+                        }
+                      },
+                      [_vm._v("Update")]
+                    ),
+                    _vm._v(" "),
+                    _c(
+                      "small",
+                      {
+                        staticClass: "cursor-pointer hover:underline",
+                        on: {
+                          click: function($event) {
+                            return _vm.removeProduct(product.product)
+                          }
+                        }
+                      },
+                      [_vm._v("Remove")]
+                    )
+                  ])
+                ]),
+                _vm._v(" "),
+                _c("td", { staticClass: "text-right" }, [
+                  _vm._v(_vm._s(product.price))
+                ])
               ])
-            ])
-          }),
-          0
+            }),
+            0
+          )
+        ])
+      : _vm._e(),
+    _vm._v(" "),
+    _vm.items.length === 0
+      ? _c(
+          "div",
+          {
+            staticClass:
+              "bg-white rounded shadow-md p-6 text-center mb-5 text-2xl font-thin"
+          },
+          [_vm._v("\n        Your basket is currently empty.\n    ")]
         )
-      ]
-    ),
+      : _vm._e(),
     _vm._v(" "),
     _c("div", { staticClass: "flex justify-between" }, [
       _c("div", [
-        _vm._m(2),
+        _vm._m(1),
         _vm._v(" "),
         _c(
           "button",
@@ -9723,13 +9836,14 @@ var render = function() {
               {
                 name: "show",
                 rawName: "v-show",
-                value: _vm.products.length > 0,
-                expression: "(products.length > 0)"
+                value: _vm.items.length > 0,
+                expression: "(items.length > 0)"
               }
             ],
-            staticClass: "button button-inverse"
+            staticClass: "button button-inverse",
+            on: { click: _vm.emptyBasket }
           },
-          [_vm._v("Empty basket")]
+          [_vm._v("Empty basket\n            ")]
         )
       ]),
       _vm._v(" "),
@@ -9740,11 +9854,12 @@ var render = function() {
             {
               name: "show",
               rawName: "v-show",
-              value: _vm.products.length > 0,
-              expression: "(products.length > 0)"
+              value: _vm.items.length > 0,
+              expression: "(items.length > 0)"
             }
           ],
-          staticClass: "button button-primary"
+          staticClass: "button button-primary",
+          on: { click: _vm.saveBasket }
         },
         [_vm._v("Save Basket")]
       )
@@ -9768,30 +9883,6 @@ var staticRenderFns = [
         _vm._v(" "),
         _c("th", { staticClass: "text-right" }, [_vm._v("Total Price")])
       ])
-    ])
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "leading-none text-primary" }, [
-      _c(
-        "small",
-        {
-          staticClass: "quantity-update",
-          attrs: { id: "basket_line__update" }
-        },
-        [_vm._v("Update")]
-      ),
-      _vm._v(" "),
-      _c(
-        "small",
-        {
-          staticClass: "quantity-remove",
-          attrs: { id: "basket-line__remove" }
-        },
-        [_vm._v("Remove")]
-      )
     ])
   },
   function() {
