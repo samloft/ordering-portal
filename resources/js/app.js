@@ -13,6 +13,7 @@ Vue.component('date-picker', require('./modules/DatePicker.vue').default);
 Vue.component('basket-dropdown', require('./modules/BasketDropdown.vue').default);
 Vue.component('quick-buy', require('./modules/QuickBuy.vue').default);
 Vue.component('add-basket', require('./modules/AddBasket.vue').default);
+Vue.component('basket-summary', require('./modules/BasketSummary.vue').default);
 
 window.Event = new Vue();
 
@@ -46,6 +47,15 @@ window.App = new Vue({
 
                     return false;
                 })
-        }
+        },
+        // basketSummary: function () {
+        //     return axios.get('/basket/summary')
+        //         .then(function (response) {
+        //             if (response) {
+        //                 self.basketValue = response.data.summary.goods_total;
+        //                 self.basketItems = response.data.line_count;
+        //             }
+        //         });
+        // }
     }
 });

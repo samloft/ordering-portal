@@ -66,48 +66,14 @@
         </div>
 
         <div class="w-4/12 ml-10">
-            <div class="bg-white rounded shadow-md p-2 text-center mb-5">
+            <div class="bg-white rounded shadow-md p-6 text-center mb-5">
                 <label class="font-medium">{{ __('Quick Buy') }}</label>
                 <quick-buy></quick-buy>
-{{--                <form id="product-add-basket-checkout" class="m-0" method="post">--}}
-{{--                    <label class="font-medium">{{ __('Quick Buy') }}</label>--}}
-{{--                    <div class="flex justify-center">--}}
-{{--                        <input id="quick-buy" class="w-48 mr-1" name="product"--}}
-{{--                               placeholder="Enter Product Code" autocomplete="off">--}}
-{{--                        <input type="text" class="w-12 mr-1" name="quantity" value="1">--}}
-{{--                        <button class="button button-primary">{{ __('Add To Basket') }}</button>--}}
-{{--                    </div>--}}
-{{--                </form>--}}
             </div>
 
             <div class="bg-white rounded shadow-md p-6 mb-5">
-                <div class="flex justify-between">
-                    <div>{{ __('Goods Total') }}</div>
-                    <div id="basket__goods-total" class="text-right">{{ $basket['summary']['goods_total'] }}</div>
-                </div>
-                <div class="flex justify-between">
-                    <div>{{ __('Shipping') }}</div>
-                    <div id="basket__shipping" class="text-right">{{ $basket['summary']['shipping'] }}</div>
-                </div>
-                <div class="flex justify-between">
-                    <div>{{ __('Sub Total') }}</div>
-                    <div id="basket__sub-total" class="text-right">{{ $basket['summary']['sub_total'] }}</div>
-                </div>
-                <div class="flex justify-between">
-                    <div>{{ __('Small Order Charge*') }}</div>
-                    <div id="basket__small-order-charge"
-                         class="text-right">{{ $basket['summary']['small_order_charge'] }}</div>
-                </div>
-                <div class="flex justify-between">
-                    <div>{{ __('VAT') }}</div>
-                    <div id="basket__vat" class="text-right">{{ $basket['summary']['vat'] }}</div>
-                </div>
-                <hr>
-                <div class="flex justify-between">
-                    <div>{{ __('Order Total') }}</div>
-                    <div id="basket__total" class="text-right">{{ $basket['summary']['total'] }}</div>
-                </div>
-                <hr>
+                <basket-summary :summary="{{ json_encode($basket['summary'], true) }}"></basket-summary>
+
                 <div class="mt-3 text-xs">
                     {{ __('*orders below £200 attract a £10 small order charge, unless you are collecting your order or paying a delivery charge.') }}
                 </div>
@@ -138,44 +104,44 @@
 @endsection
 
 @section('scripts')
-    <script>
-        $('#empty-basket').on('click', function () {
-            Swal.fire({
-                title: "Empty Basket?",
-                text: "Are you sure? This cannot be un-done.",
-                icon: "warning",
-                buttons: true,
-                showCancelButton: true,
-                dangerMode: true,
-            })
-                .then((willDelete) => {
-                    if (willDelete) {
-                        location.href = '{{ route('basket.empty') }}';
-                    }
-                });
-        });
+{{--    <script>--}}
+{{--        $('#empty-basket').on('click', function () {--}}
+{{--            Swal.fire({--}}
+{{--                title: "Empty Basket?",--}}
+{{--                text: "Are you sure? This cannot be un-done.",--}}
+{{--                icon: "warning",--}}
+{{--                buttons: true,--}}
+{{--                showCancelButton: true,--}}
+{{--                dangerMode: true,--}}
+{{--            })--}}
+{{--                .then((willDelete) => {--}}
+{{--                    if (willDelete) {--}}
+{{--                        location.href = '{{ route('basket.empty') }}';--}}
+{{--                    }--}}
+{{--                });--}}
+{{--        });--}}
 
-        $('#save-basket').on('click', async function () {
-            const {value: reference} = await Swal.fire({
-                title: 'Add a reference for your saved basket',
-                input: 'text',
-                showCancelButton: true,
-                inputValidator: (value) => {
-                    if (!value) {
-                        return 'You need to enter a reference.'
-                    }
-                }
-            });
+{{--        $('#save-basket').on('click', async function () {--}}
+{{--            const {value: reference} = await Swal.fire({--}}
+{{--                title: 'Add a reference for your saved basket',--}}
+{{--                input: 'text',--}}
+{{--                showCancelButton: true,--}}
+{{--                inputValidator: (value) => {--}}
+{{--                    if (!value) {--}}
+{{--                        return 'You need to enter a reference.'--}}
+{{--                    }--}}
+{{--                }--}}
+{{--            });--}}
 
-            if (reference) {
-                $.post('/saved-baskets/store', {
-                    reference: reference
-                }).done(function (response) {
-                    return Swal.fire('Success', 'Your basket has been saved.', 'success');
-                }).fail(function (response) {
-                    return Swal.fire('Error', 'Unable to save this basket, please try again.', 'error');
-                });
-            }
-        });
-    </script>
+{{--            if (reference) {--}}
+{{--                $.post('/saved-baskets/store', {--}}
+{{--                    reference: reference--}}
+{{--                }).done(function (response) {--}}
+{{--                    return Swal.fire('Success', 'Your basket has been saved.', 'success');--}}
+{{--                }).fail(function (response) {--}}
+{{--                    return Swal.fire('Error', 'Unable to save this basket, please try again.', 'error');--}}
+{{--                });--}}
+{{--            }--}}
+{{--        });--}}
+{{--    </script>--}}
 @endsection
