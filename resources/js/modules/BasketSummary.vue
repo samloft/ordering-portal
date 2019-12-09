@@ -1,34 +1,4 @@
 <template>
-<!--    <div>-->
-<!--        <div class="flex justify-between">-->
-<!--            <div>Goods Total</div>-->
-<!--            <div class="text-right">{{ goods_total }}</div>-->
-<!--        </div>-->
-<!--        <div class="flex justify-between">-->
-<!--            <div>Shipping</div>-->
-<!--            <div class="text-right">{{ shipping }}</div>-->
-<!--        </div>-->
-<!--        <div class="flex justify-between">-->
-<!--            <div>Sub Total</div>-->
-<!--            <div class="text-right">{{ sub_total }}</div>-->
-<!--        </div>-->
-<!--        <div class="flex justify-between">-->
-<!--            <div>Small Order Charge*</div>-->
-<!--            <div class="text-right">{{ small_order_charge }}</div>-->
-<!--        </div>-->
-<!--        <div class="flex justify-between">-->
-<!--            <div>VAT</div>-->
-<!--            <div class="text-right">{{ vat }}</div>-->
-<!--        </div>-->
-<!--        <hr>-->
-<!--        <div class="flex justify-between">-->
-<!--            <div>Order Total</div>-->
-<!--            <div class="text-right">{{ total }}</div>-->
-<!--        </div>-->
-<!--        <hr>-->
-<!--    </div>-->
-
-
     <div>
         <div class="flex justify-between">
             <div>Goods Total</div>
