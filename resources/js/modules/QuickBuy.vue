@@ -2,7 +2,7 @@
     <div>
         <div class="relative">
             <input type="text" :placeholder="placeHolderText" v-model="keywordSearch" class="mb-1"
-                   @keyup="!autoCompleteProgress ? onKeyUp(keywordSearch) : ''"/>
+                   @keyup="onKeyUp(keywordSearch)"/>
 
             <div class="absolute -mt-2 w-full">
                 <ul class="bg-gray-100 rounded-b-lg w-full border-l border-r border-b" v-show="resultItems.length > 0">
@@ -34,49 +34,26 @@
                 quantity: 1,
                 keywordSearch: '',
                 resultItems: [],
-                autoCompleteProgress: '',
                 placeHolderText: '',
             }
         },
         methods: {
-            submit: function () {
-                var self = this;
-
-                axios.post('/basket/add-product', {
-                    product: this.keywordSearch,
-                    quantity: this.quantity
-                })
-                    .then(function (response) {
-                        if (response.data.message) {
-                            Vue.swal('Warning', response.data.message, 'warning');
-                        }
-
-                        self.addedToBasket(response.data);
-                    })
-                    .catch(function (error) {
-                        if (error.response) {
-                            Vue.swal('Error', error.response.data.message, 'error');
-                        }
-                    })
-                    .finally(function () {
-                        self.keywordSearch = '';
-                    });
-            },
-            addedToBasket: function (payload) {
-                Event.$emit('product-added', payload);
+            submit: function() {
+                App.addProductToBasket(this.keywordSearch, this.quantity).then(result => {
+                    if (result) {
+                        this.keywordSearch = '';
+                        this.quantity = 1;
+                    }
+                });
             },
             onSelected(name) {
-                this.autoCompleteProgress = false;
                 this.resultItems = [];
                 this.keywordSearch = name;
             },
             onKeyUp(keywordEntered) {
                 this.resultItems = [];
-                this.autoCompleteProgress = false;
 
                 if (keywordEntered.length > 2) {
-                    this.autoCompleteProgress = true;
-
                     axios.get('/products/autocomplete/' + keywordEntered)
                         .then(response => {
                             var newData = [];
@@ -88,14 +65,11 @@
                             });
 
                             this.resultItems = newData;
-                            this.autoCompleteProgress = false;
                         })
                         .catch(e => {
-                            this.autoCompleteProgress = false;
                             this.resultItems = [];
                         })
                 } else {
-                    this.autoCompleteProgress = false;
                     this.resultItems = [];
                 }
             },

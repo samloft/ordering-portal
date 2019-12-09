@@ -96,17 +96,7 @@
                         </div>
                     </div>
                     <hr>
-                    <form id="product-add-basket-products" method="post">
-                        <div class="flex justify-between items-center mt-3">
-                            <span>{{ __('Qty:') }}</span>
-                            <input class="w-10 " name="quantity"
-                                   value="{{ $product->order_multiples }}" autocomplete="off">
-                            <input name="product" value="{{ $product->code }}" autocomplete="off"
-                                   hidden>
-                            <button class="button button-primary"
-                                    type="submit">{{ __('Add To Basket') }}</button>
-                        </div>
-                    </form>
+                    <add-basket :product="{{ json_encode($product, true) }}"></add-basket>
                 </div>
             </div>
             <div class="flex justify-end">
