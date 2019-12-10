@@ -26,6 +26,7 @@ class CreateProductsTable extends Migration
             $table->string('link2')->nullable();
             $table->string('link3')->nullable();
             $table->boolean('not_sold');
+            $table->integer('stock')->default(0);
             $table->char('vat_flag')->default('S');
             $table->integer('packaging');
 

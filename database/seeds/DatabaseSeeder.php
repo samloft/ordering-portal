@@ -10,7 +10,6 @@ use App\Models\Category;
 use App\Models\Customer;
 use App\Models\Price;
 use App\Models\Product;
-use App\Models\Stock;
 use App\Models\UserCustomer;
 use Illuminate\Database\Seeder;
 
@@ -42,7 +41,6 @@ class DatabaseSeeder extends Seeder
         factory(Product::class, 500)->create()->each(static function ($product) {
             factory(Price::class)->create(['product' => $product->code]);
             factory(Category::class)->create(['product' => $product->code]);
-            factory(Stock::class)->create(['product' => $product->code]);
             factory(ExpectedStock::class)->create(['product' => $product->code]);
         });
 

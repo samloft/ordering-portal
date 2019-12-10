@@ -14,6 +14,7 @@ $factory->define(Product::class, static function (Faker $faker) {
         'trade_price' => $faker->randomFloat(2, 1, 100),
         'order_multiples' => $faker->randomElement($array = [1, 5]),
         'description' => $faker->text(100),
+        'stock' => $faker->numberBetween(0, 1000),
         'not_sold' => false,
         'vat_flag' => 'S',
         'packaging' => 1

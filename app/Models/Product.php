@@ -58,14 +58,6 @@ class Product extends Model
     }
 
     /**
-     * @return BelongsTo
-     */
-    public function stock(): BelongsTo
-    {
-        return $this->belongsTo(Stock::class, 'code', 'product');
-    }
-
-    /**
      * @return \Illuminate\Database\Eloquent\Relations\HasMany
      */
     public function expectedStock(): HasMany
@@ -83,7 +75,7 @@ class Product extends Model
     {
         $products = self::whereHas('prices')->whereHas('categories', static function ($query) use ($categories) {
             $query->where('level_1', ($categories['level_1']))->where('level_2', $categories['level_2'])->where('level_3', $categories['level_3']);
-        })->join('prices', 'products.code', '=', 'prices.product')->leftJoin('stock_levels', 'products.code', '=', 'stock_levels.product')->where('prices.customer_code', auth()->user()->customer->code)->paginate(10);
+        })->join('prices', 'products.code', '=', 'prices.product')->where('prices.customer_code', auth()->user()->customer->code)->paginate(10);
 
         return $products;
     }
@@ -103,9 +95,9 @@ class Product extends Model
             'uom',
             'price',
             'trade_price',
-            'quantity',
+            'stock',
             'order_multiples',
-        ])->whereHas('prices')->where('products.code', $product_code)->leftJoin('prices', 'prices.product', 'products.code')->leftJoin('stock_levels', 'stock_levels.product', 'products.code')
+        ])->whereHas('prices')->where('products.code', $product_code)->leftJoin('prices', 'prices.product', 'products.code')
             ->with('expectedStock')
             ->first();
     }
@@ -120,7 +112,7 @@ class Product extends Model
     {
         return self::whereHas('prices')->where(static function ($query) use ($search_term) {
             $query->whereRaw('upper(products.code) LIKE \'%'.strtoupper($search_term).'%\'')->orWhereRaw('upper(name) LIKE \'%'.strtoupper($search_term).'%\'')->orWhereRaw('upper(description) LIKE \'%'.strtoupper($search_term).'%\'');
-        })->join('prices', 'products.code', '=', 'prices.product')->leftJoin('stock_levels', 'products.code', '=', 'stock_levels.product')
+        })->join('prices', 'products.code', '=', 'prices.product')
             ->where('prices.customer_code', auth()->user()->customer->code)
             ->paginate(10);
     }
@@ -129,6 +121,7 @@ class Product extends Model
      * Autocomplete for quick-buy input.
      *
      * @param $search
+     * @return mixed
      */
     public static function autocomplete($search)
     {

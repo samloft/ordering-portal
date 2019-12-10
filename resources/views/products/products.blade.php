@@ -95,7 +95,7 @@
                                 {{ __('Stock Level') }}
                             </div>
                             <div class="text-center bg-gray-200 p-1 text-xs rounded-b">
-                                {{ $product->quantity ?: 0 }}
+                                {{ $product->stock }}
                             </div>
                         </div>
                     </div>
