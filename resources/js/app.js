@@ -17,6 +17,7 @@ Vue.component('basket-summary', require('./modules/BasketSummary.vue').default);
 Vue.component('basket-table', require('./modules/BasketTable.vue').default);
 Vue.component('customer-switch', require('./modules/CustomerSwitch.vue').default);
 Vue.component('product-categories', require('./modules/ProductCategories.vue').default);
+Vue.component('account-address', require('./modules/AccountAddress.vue').default);
 
 window.Event = new Vue();
 
@@ -51,5 +52,14 @@ window.App = new Vue({
                     return false;
                 })
         },
+        copyToClipboard: function (id) {
+            var range = document.createRange();
+
+            range.selectNode(document.getElementById(id));
+            window.getSelection().removeAllRanges();
+            window.getSelection().addRange(range);
+            document.execCommand("copy");
+            window.getSelection().removeAllRanges();
+        }
     }
 });

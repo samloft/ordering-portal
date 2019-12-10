@@ -1,13 +1,10 @@
 <?php
 
-namespace App\Http\Controllers\Account;
+namespace App\Http\Controllers;
 
 use App\Models\Address;
 use App\Models\Countries;
-use App\Http\Controllers\Controller;
-use Exception;
 use Illuminate\Http\RedirectResponse;
-use Illuminate\Http\Response;
 use Illuminate\Routing\Redirector;
 use Illuminate\Support\Facades\Input;
 
@@ -25,7 +22,7 @@ class AddressController extends Controller
         $addresses = Address::show();
         $checkout = request('checkout') ? true : false;
 
-        return view('account.addresses.index', compact('addresses', 'checkout'));
+        return view('addresses.index', compact('addresses', 'checkout'));
     }
 
     /**
@@ -38,7 +35,7 @@ class AddressController extends Controller
         $checkout = request('checkout');
         $countries = Countries::show();
 
-        return view('account.addresses.show', compact('countries', 'checkout'));
+        return view('addresses.show', compact('countries', 'checkout'));
     }
 
     /**
@@ -78,7 +75,7 @@ class AddressController extends Controller
         $countries = Countries::show();
         $address = Address::details($id);
 
-        return $address ? view('account.addresses.show', compact('countries', 'address', 'checkout')) : abort(404);
+        return $address ? view('addresses.show', compact('countries', 'address', 'checkout')) : abort(404);
     }
 
     /**

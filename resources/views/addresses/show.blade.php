@@ -17,15 +17,15 @@
         <div class="bg-white rounded-lg shadow p-10 mb-5">
             @include('layout.alerts')
 
-            <div id="text-error"></div>
+{{--            <div id="text-error"></div>--}}
 
-            <div class="flex items-center">
-                <input name="postcode_lookup">
-                <button class="w-2/6 ml-2 button button-inverse">{{ __('Lookup Postcode') }}</button>
-            </div>
-            <div class="text-xs mb-5">
-                {{ __('You will still need to enter company name & address line 2 manually') }}
-            </div>
+{{--            <div class="flex items-center">--}}
+{{--                <input name="postcode_lookup">--}}
+{{--                <button class="w-2/6 ml-2 button button-inverse">{{ __('Lookup Postcode') }}</button>--}}
+{{--            </div>--}}
+{{--            <div class="text-xs mb-5">--}}
+{{--                {{ __('You will still need to enter company name & address line 2 manually') }}--}}
+{{--            </div>--}}
 
             <div class="flex items-center mb-3">
                 <label for="company_name" class="w-2/6">{{ __('Company Name') }} <span
@@ -111,22 +111,22 @@
     </form>
 @endsection
 
-@section('scripts')
-    <script>
-        $('#postcode-lookup').on('click', function (e) {
-            e.preventDefault();
-            $('#text-error').empty();
+{{--@section('scripts')--}}
+{{--    <script>--}}
+{{--        $('#postcode-lookup').on('click', function (e) {--}}
+{{--            e.preventDefault();--}}
+{{--            $('#text-error').empty();--}}
 
-            let postcode = $('input[name="postcode_lookup"]').val();
+{{--            let postcode = $('input[name="postcode_lookup"]').val();--}}
 
-            $.get('https://api.postcodes.io/postcodes/' + postcode).done(function (response) {
-                $('input[name="post_code"]').val(response.result.postcode);
-                $('input[name="address_line_3"]').val(response.result.parish.replace(', unparished area', ''));
-                $('input[name="address_line_4"]').val(response.result.admin_county);
-                $('input[name="address_line_5"]').val(response.result.region);
-            }).fail(function () {
-                $('#text-error').text('Invalid Postcode');
-            });
-        });
-    </script>
-@endsection
+{{--            $.get('https://api.postcodes.io/postcodes/' + postcode).done(function (response) {--}}
+{{--                $('input[name="post_code"]').val(response.result.postcode);--}}
+{{--                $('input[name="address_line_3"]').val(response.result.parish.replace(', unparished area', ''));--}}
+{{--                $('input[name="address_line_4"]').val(response.result.admin_county);--}}
+{{--                $('input[name="address_line_5"]').val(response.result.region);--}}
+{{--            }).fail(function () {--}}
+{{--                $('#text-error').text('Invalid Postcode');--}}
+{{--            });--}}
+{{--        });--}}
+{{--    </script>--}}
+{{--@endsection--}}

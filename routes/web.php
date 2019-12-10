@@ -106,27 +106,22 @@ Route::group(['middleware' => ['auth', 'has.customer']], function () {
     /*
      * User Account
     */
-    Route::group(['prefix' => 'account'], function () {
+    Route::group(['prefix' => 'account'], static function () {
         Route::get('/', 'AccountController@index')->name('account');
-        Route::post('store', 'AccountController@store')->name('account.store');
+        Route::post('/', 'AccountController@store')->name('account.store');
 
-        Route::group(['prefix' => 'password'], function () {
-            Route::get('/', 'Account\PasswordController@index')->name('account.password');
-            Route::patch('store', 'Account\PasswordController@store')->name('account.password.store');
+        Route::group(['prefix' => 'addresses'], static function () {
+            Route::get('/', 'AddressController@index')->name('account.addresses');
+            Route::get('create', 'AddressController@create')->name('account.address.create');
+            Route::patch('/', 'AddressController@store')->name('account.address.store');
+            Route::get('{id}/edit', 'AddressController@edit')->name('account.address.edit');
+            Route::patch('{id}/edit', 'AddressController@update')->name('account.address.update');
+            Route::post('default', 'AddressController@default')->name('account.address.default');
+            Route::get('{id}/delete', 'AddressController@destroy')->name('account.address.destroy');
+            Route::get('select', 'AddressController@select')->name('account.address.select');
         });
 
-        Route::group(['prefix' => 'addresses'], function () {
-            Route::get('/', 'Account\AddressController@index')->name('account.addresses');
-            Route::get('create', 'Account\AddressController@create')->name('account.address.create');
-            Route::patch('store', 'Account\AddressController@store')->name('account.address.store');
-            Route::get('{id}/edit', 'Account\AddressController@edit')->name('account.address.edit');
-            Route::patch('{id}/edit', 'Account\AddressController@update')->name('account.address.update');
-            Route::post('default', 'Account\AddressController@default')->name('account.address.default');
-            Route::get('{id}/delete', 'Account\AddressController@destroy')->name('account.address.destroy');
-            Route::get('select', 'Account\AddressController@select')->name('account.address.select');
-        });
-
-        Route::group(['prefix' => 'customer'], function () {
+        Route::group(['prefix' => 'customer'], static function () {
             Route::post('change', 'AccountController@changeCustomer')->name('customer.change');
             Route::get('revert', 'AccountController@revertChangeCustomer')->name('customer.change.revert');
         });

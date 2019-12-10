@@ -11,6 +11,8 @@
     </div>
 
     <div class="bg-white rounded shadow-md p-3 mb-5 mr-2">
+        @include('layout.alerts')
+
         <div class="flex">
             <div class="w-1/3 mr-5">
                 <h4 class="text-primary">{{ __('Your Details') }}</h4>
@@ -51,9 +53,17 @@
                     </div>
 
                     <div class="mb-3">
-                        <label for="name" class="text-sm">{{ __('Password') }}</label>
-                        <input id="name" name="name" class="bg-gray-100"
-                               value="{{ old('password') ?: '************' }}">
+                        <label for="password" class="text-sm">{{ __('Password') }}</label>
+                        <input id="password" name="password" class="bg-gray-100"
+                               placeholder="************"
+                               value="{{ old('password') }}">
+                    </div>
+
+                    <div class="mb-3">
+                        <label for="password-confirm" class="text-sm">{{ __('Password Confirmation') }}</label>
+                        <input id="password-confirm" name="password_confirmation" class="bg-gray-100"
+                               placeholder="************"
+                               value="{{ old('password') }}">
                     </div>
 
                     <div class="mb-3 flex">
@@ -64,7 +74,7 @@
                         </div>
                         <div class="ml-2 w-full">
                             <label for="mobile" class="text-sm">{{ __('mobile') }}</label>
-                            <input id="mobile" name="telephone" class="bg-gray-100"
+                            <input id="mobile" name="mobile" class="bg-gray-100"
                                    value="{{ old('mobile') ?: auth()->user()->mobile }}">
                         </div>
                     </div>
@@ -120,8 +130,8 @@
         <p>{{ __('Below is the unique API key to give you access to the online ordering portal API') }}</p>
 
         <div class="flex justify-between items-center bg-gray-100 text-gray-600 mt-3 p-4 rounded">
-            <span>{{ auth()->user()->api_token }}</span>
-            <span class="badge badge-info cursor-pointer">{{ __('Click to copy') }}</span>
+            <span id="api_token">{{ auth()->user()->api_token }}</span>
+            <span class="badge badge-info cursor-pointer" @click="copyToClipboard('api_token')">{{ __('Click to copy') }}</span>
         </div>
     </div>
 @endsection

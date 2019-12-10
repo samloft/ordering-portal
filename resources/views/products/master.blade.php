@@ -17,6 +17,8 @@
                 </div>
             @endif
 
+            @include('layout.alerts')
+
             @yield('product.content')
         </div>
     </div>

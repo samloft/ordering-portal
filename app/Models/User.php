@@ -85,21 +85,6 @@ class User extends Authenticatable
     }
 
     /**
-     * @param $password
-     * @return mixed
-     */
-    public static function changePassword($password)
-    {
-        $user = self::find(auth()->user()->id);
-
-        $user->password = Hash::make($password);
-        $user->password_updated = date('Y-m-d H:i:s');
-        $user->save();
-
-        return $user->wasChanged();
-    }
-
-    /**
      * Return all the users/customers.
      *
      * @param $search
@@ -134,7 +119,7 @@ class User extends Authenticatable
      * Return user details with any extra customers.
      *
      * @param $id
-     * @return Builder[]|\Illuminate\Database\Eloquent\Collection
+     * @return \Illuminate\Database\Eloquent\Builder|\Illuminate\Database\Eloquent\Model|object
      */
     public static function show($id)
     {
