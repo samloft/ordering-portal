@@ -102,7 +102,7 @@ class BasketController extends Controller
                     'price' => currency(discount($product_details->price) * $quantity, 2),
                     'name' => $product_details->name,
                     'unit' => $product_details->uom,
-                    'stock' => $product_details->quantity,
+                    'stock' => $product_details->stock,
                     'link' => '/products/view/' . decodeUrl($product_details->product),
                 ],
                 'basket_details' => Basket::show()

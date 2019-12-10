@@ -12,7 +12,7 @@
             </thead>
             <tbody class="row-sm">
 
-            <tr v-for="product in items">
+            <tr v-for="product in items" :class="(product.quantity > product.stock) ? 'bg-red-200' : ''">
                 <td>
                     <div class="flex items-center">
                         <img class="h-10 mr-2" :src="product.image" :alt="product.name">
@@ -40,6 +40,8 @@
             </tr>
             </tbody>
         </table>
+
+        <div class="text-xs mb-5">Red product lines have a chance of going onto backorder.</div>
 
         <div v-if="items.length === 0" class="bg-white rounded shadow-md p-6 text-center mb-5 text-2xl font-thin">
             Your basket is currently empty.
@@ -106,9 +108,9 @@
                 });
             },
             updateProduct: function(product, quantity) {
-                if (!Number.isInteger(quantity)) {
-                    return Vue.swal('Error', 'Quantity must be a number, please fix this error and try again.', 'error');
-                }
+                // if (!Number.isInteger(quantity)) {
+                //     return Vue.swal('Error', 'Quantity must be a number, please fix this error and try again.', 'error');
+                // }
 
                 axios.post('/basket/update-product', {
                     product: product,

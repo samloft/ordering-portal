@@ -2146,6 +2146,8 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
@@ -2191,10 +2193,9 @@ __webpack_require__.r(__webpack_exports__);
       });
     },
     updateProduct: function updateProduct(product, quantity) {
-      if (!Number.isInteger(quantity)) {
-        return Vue.swal('Error', 'Quantity must be a number, please fix this error and try again.', 'error');
-      }
-
+      // if (!Number.isInteger(quantity)) {
+      //     return Vue.swal('Error', 'Quantity must be a number, please fix this error and try again.', 'error');
+      // }
       axios.post('/basket/update-product', {
         product: product,
         qty: quantity
@@ -9901,117 +9902,125 @@ var render = function() {
             "tbody",
             { staticClass: "row-sm" },
             _vm._l(_vm.items, function(product) {
-              return _c("tr", [
-                _c("td", [
-                  _c("div", { staticClass: "flex items-center" }, [
-                    _c("img", {
-                      staticClass: "h-10 mr-2",
-                      attrs: { src: product.image, alt: product.name }
-                    }),
-                    _vm._v(" "),
-                    _c("h2", { staticClass: "leading-none" }, [
-                      _c(
-                        "a",
-                        {
-                          attrs: { href: "/products/view/" + product.product }
-                        },
-                        [
-                          _c(
-                            "span",
-                            { staticClass: "text-primary font-medium" },
-                            [_vm._v(_vm._s(product.product))]
-                          ),
-                          _vm._v(" "),
-                          _c("br"),
-                          _vm._v(" "),
-                          _c("span", { staticClass: "text-xs" }, [
-                            _vm._v(_vm._s(product.name))
-                          ])
-                        ]
+              return _c(
+                "tr",
+                { class: product.quantity > product.stock ? "bg-red-200" : "" },
+                [
+                  _c("td", [
+                    _c("div", { staticClass: "flex items-center" }, [
+                      _c("img", {
+                        staticClass: "h-10 mr-2",
+                        attrs: { src: product.image, alt: product.name }
+                      }),
+                      _vm._v(" "),
+                      _c("h2", { staticClass: "leading-none" }, [
+                        _c(
+                          "a",
+                          {
+                            attrs: { href: "/products/view/" + product.product }
+                          },
+                          [
+                            _c(
+                              "span",
+                              { staticClass: "text-primary font-medium" },
+                              [_vm._v(_vm._s(product.product))]
+                            ),
+                            _vm._v(" "),
+                            _c("br"),
+                            _vm._v(" "),
+                            _c("span", { staticClass: "text-xs" }, [
+                              _vm._v(_vm._s(product.name))
+                            ])
+                          ]
+                        )
+                      ])
+                    ])
+                  ]),
+                  _vm._v(" "),
+                  _c("td", [
+                    _c("span", { staticClass: "badge badge-info" }, [
+                      _vm._v(
+                        _vm._s(
+                          product.uom.charAt(0).toUpperCase() +
+                            product.uom.substring(1).toLowerCase()
+                        )
                       )
                     ])
-                  ])
-                ]),
-                _vm._v(" "),
-                _c("td", [
-                  _c("span", { staticClass: "badge badge-info" }, [
-                    _vm._v(
-                      _vm._s(
-                        product.uom.charAt(0).toUpperCase() +
-                          product.uom.substring(1).toLowerCase()
-                      )
-                    )
-                  ])
-                ]),
-                _vm._v(" "),
-                _c("td", { staticClass: "text-right" }, [
-                  _vm._v(_vm._s(product.unit_price))
-                ]),
-                _vm._v(" "),
-                _c("td", { staticClass: "text-center" }, [
-                  _c("input", {
-                    directives: [
-                      {
-                        name: "model",
-                        rawName: "v-model",
-                        value: product.quantity,
-                        expression: "product.quantity"
-                      }
-                    ],
-                    staticClass: "w-20 h-6 text-right bg-gray-100",
-                    attrs: { name: "line_qty", autocomplete: "off" },
-                    domProps: { value: product.quantity },
-                    on: {
-                      input: function($event) {
-                        if ($event.target.composing) {
-                          return
-                        }
-                        _vm.$set(product, "quantity", $event.target.value)
-                      }
-                    }
-                  }),
+                  ]),
                   _vm._v(" "),
-                  _c("div", { staticClass: "leading-none text-primary" }, [
-                    _c(
-                      "small",
-                      {
-                        staticClass: "cursor-pointer hover:underline",
-                        on: {
-                          click: function($event) {
-                            return _vm.updateProduct(
-                              product.product,
-                              product.quantity
-                            )
-                          }
+                  _c("td", { staticClass: "text-right" }, [
+                    _vm._v(_vm._s(product.unit_price))
+                  ]),
+                  _vm._v(" "),
+                  _c("td", { staticClass: "text-center" }, [
+                    _c("input", {
+                      directives: [
+                        {
+                          name: "model",
+                          rawName: "v-model",
+                          value: product.quantity,
+                          expression: "product.quantity"
                         }
-                      },
-                      [_vm._v("Update")]
-                    ),
+                      ],
+                      staticClass: "w-20 h-6 text-right bg-gray-100",
+                      attrs: { name: "line_qty", autocomplete: "off" },
+                      domProps: { value: product.quantity },
+                      on: {
+                        input: function($event) {
+                          if ($event.target.composing) {
+                            return
+                          }
+                          _vm.$set(product, "quantity", $event.target.value)
+                        }
+                      }
+                    }),
                     _vm._v(" "),
-                    _c(
-                      "small",
-                      {
-                        staticClass: "cursor-pointer hover:underline",
-                        on: {
-                          click: function($event) {
-                            return _vm.removeProduct(product.product)
+                    _c("div", { staticClass: "leading-none text-primary" }, [
+                      _c(
+                        "small",
+                        {
+                          staticClass: "cursor-pointer hover:underline",
+                          on: {
+                            click: function($event) {
+                              return _vm.updateProduct(
+                                product.product,
+                                product.quantity
+                              )
+                            }
                           }
-                        }
-                      },
-                      [_vm._v("Remove")]
-                    )
+                        },
+                        [_vm._v("Update")]
+                      ),
+                      _vm._v(" "),
+                      _c(
+                        "small",
+                        {
+                          staticClass: "cursor-pointer hover:underline",
+                          on: {
+                            click: function($event) {
+                              return _vm.removeProduct(product.product)
+                            }
+                          }
+                        },
+                        [_vm._v("Remove")]
+                      )
+                    ])
+                  ]),
+                  _vm._v(" "),
+                  _c("td", { staticClass: "text-right" }, [
+                    _vm._v(_vm._s(product.price))
                   ])
-                ]),
-                _vm._v(" "),
-                _c("td", { staticClass: "text-right" }, [
-                  _vm._v(_vm._s(product.price))
-                ])
-              ])
+                ]
+              )
             }),
             0
           )
         ])
       : _vm._e(),
+    _vm._v(" "),
+    _c("div", { staticClass: "text-xs mb-5" }, [
+      _vm._v("Red product lines have a chance of going onto backorder.")
+    ]),
     _vm._v(" "),
     _vm.items.length === 0
       ? _c(
