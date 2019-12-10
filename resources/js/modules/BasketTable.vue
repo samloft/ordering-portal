@@ -49,7 +49,7 @@
 
         <div class="flex justify-between">
             <div>
-                <a href="">
+                <a href="/products">
                     <button class="button button-inverse">Continue Shopping</button>
                 </a>
                 <button class="button button-inverse" v-show="(items.length > 0)" @click="emptyBasket">Empty basket
