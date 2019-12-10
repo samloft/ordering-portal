@@ -44,7 +44,8 @@ class ProductController extends Controller
 
         if ($categories['level_1'] !== null) {
             $products = Product::list($categories);
-            $sub_category_list = Category::subCategories($current_level, $categories['level_1'], $categories['level_' . $current_level]);
+            $sub_category_list['list'] = Category::subCategories($current_level, $categories['level_1'], $categories['level_' . $current_level]);
+            $sub_category_list['current'] = $categories;
 
             return view('products.products', compact('categories', 'sub_category_list', 'products'));
         }

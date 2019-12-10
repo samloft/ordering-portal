@@ -16,6 +16,7 @@ Vue.component('add-basket', require('./modules/AddBasket.vue').default);
 Vue.component('basket-summary', require('./modules/BasketSummary.vue').default);
 Vue.component('basket-table', require('./modules/BasketTable.vue').default);
 Vue.component('customer-switch', require('./modules/CustomerSwitch.vue').default);
+Vue.component('product-categories', require('./modules/ProductCategories.vue').default);
 
 window.Event = new Vue();
 
