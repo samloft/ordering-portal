@@ -75,7 +75,7 @@
                 axios.get('/basket/dropdown')
                     .then(function (response) {
                         if (response.data.lines) {
-                            self.dropdown = true;
+                            self.dropdown = !!response.data.lines.length > 0;
 
                             self.products = response.data.lines;
                         }
