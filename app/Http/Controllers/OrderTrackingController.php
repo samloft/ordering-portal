@@ -57,11 +57,12 @@ class OrderTrackingController extends Controller
     /**
      * Copy the order lines from a given order number.
      *
-     * @param $order_number
      * @return RedirectResponse|Redirector
      */
-    public function copy($order_number)
+    public function copy()
     {
+        $order_number = request('order_number');
+
         $order_lines = Lines::copy(urldecode($order_number));
         $added_to_basket = Basket::store($order_lines);
 

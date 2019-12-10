@@ -54,7 +54,7 @@ Route::group(['middleware' => ['auth', 'has.customer']], function () {
     Route::group(['prefix' => 'order-tracking'], function () {
         Route::get('/', 'OrderTrackingController@index')->name('order-tracking');
         Route::get('order/{order}', 'OrderTrackingController@show')->name('order-tracking.show');
-        Route::get('copy/{order}', 'OrderTrackingController@copy')->name('order-tracking.copy-to-basket');
+        Route::get('copy', 'OrderTrackingController@copy')->name('order-tracking.copy-to-basket');
 
         Route::get('invoice/{order}/{customer_order}/{download?}', 'OrderTrackingController@invoicePdf')->name('order-tracking.invoice-pdf');
     });
