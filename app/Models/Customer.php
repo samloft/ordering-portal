@@ -31,9 +31,9 @@ class Customer extends Model
      * Autocomplete for customer input.
      *
      * @param $customer_search
-     * @return Customer
+     * @return \Illuminate\Http\JsonResponse|\Illuminate\Support\Collection
      */
-    public static function autocomplete($customer_search): Customer
+    public static function autocomplete($customer_search)
     {
         if (auth()->user()->admin) {
             return self::select(['code', 'name'])

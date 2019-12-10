@@ -2,35 +2,8 @@
     @if (auth()->user()->admin || count(auth()->user()->customers) > 0)
         <h4>{{ __('Change Customer') }}</h4>
 
-        <form method="POST" action="{{ route('customer.change') }}">
-            @if (auth()->user()->admin)
+        <customer-switch :user="{{ json_encode(auth()->user()->load('customers'), true) }}"></customer-switch>
 
-            @else
-                <div class="relative mb-2">
-                    <select name="customer" class="w-full p-2 rounded border text-gray-600 appearance-none"
-                            autocomplete="off">
-                        <option
-                            value="{{ auth()->user()->customer_code }}" {{ auth()->user()->customer_code === auth()->user()->customer->code ? 'selected' : '' }}>
-                            {{ auth()->user()->customer_code }}
-                        </option>
-
-                        @foreach(auth()->user()->customers as $customer)
-                            <option
-                                value="{{ $customer->customer_code }}" {{ auth()->user()->customer->code === $customer->customer_code ? 'selected' : '' }}>
-                                {{ $customer->customer_code }}
-                            </option>
-                        @endforeach
-                    </select>
-                    <div class="pointer-events-none absolute inset-y-0 right-0 flex items-center px-3 text-gray-700">
-                        <svg class="fill-current h-4 w-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20">
-                            <path d="M9.293 12.95l.707.707L15.657 8l-1.414-1.414L10 10.828 5.757 6.586 4.343 8z"/>
-                        </svg>
-                    </div>
-                </div>
-            @endif
-
-            <button class="button button-primary button-block">{{ __('Change Customer') }}</button>
-        </form>
     @endif
 
     <h4>{{ __('Search') }}</h4>
