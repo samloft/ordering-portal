@@ -70,9 +70,9 @@
                 href="{{ route('order-tracking.copy-to-basket', ['order_number' => encodeUrl(trim($order->order_no))]) }}">
                 <button class="button button-primary">{{ __('Copy Order To Basket') }}</button>
             </a>
-            <a id="invoice-download" class="btn-link d-none">
-                <button class="button button-primary">{{ __('Download Copy Invoice') }}</button>
-            </a>
+
+            <order-invoice order="{{ urlencode(trim($order->order_no)) }}" customer_order="{{ urlencode(trim($order->customer_order_no)) }}"></order-invoice>
+
             <button class="button button-primary">{{ __('Print Order Details') }}</button>
         </div>
     </div>
@@ -111,16 +111,16 @@
     @endif
 @endsection
 
-@section('scripts')
-    <script>
-        $.get('/order-tracking/invoice/{{ urlencode(trim($order->order_no)) }}/{{ urlencode(trim($order->customer_order_no)) }}/').done(function (response) {
-            if (response.pdf_exists) {
-                $('#invoice-download')
-                    .attr('href', '/order-tracking/invoice/{{ urlencode(trim($order->order_no)) }}/{{ urlencode(trim($order->customer_order_no)) }}/true')
-                    .removeClass('d-none');
-            }
-        }).fail(function (response) {
-            return console.log(response);
-        });
-    </script>
-@endsection
+{{--@section('scripts')--}}
+{{--    <script>--}}
+{{--        $.get('/order-tracking/invoice/{{ urlencode(trim($order->order_no)) }}/{{ urlencode(trim($order->customer_order_no)) }}/').done(function (response) {--}}
+{{--            if (response.pdf_exists) {--}}
+{{--                $('#invoice-download')--}}
+{{--                    .attr('href', '/order-tracking/invoice/{{ urlencode(trim($order->order_no)) }}/{{ urlencode(trim($order->customer_order_no)) }}/true')--}}
+{{--                    .removeClass('d-none');--}}
+{{--            }--}}
+{{--        }).fail(function (response) {--}}
+{{--            return console.log(response);--}}
+{{--        });--}}
+{{--    </script>--}}
+{{--@endsection--}}

@@ -18,6 +18,7 @@ Vue.component('basket-table', require('./modules/BasketTable.vue').default);
 Vue.component('customer-switch', require('./modules/CustomerSwitch.vue').default);
 Vue.component('product-categories', require('./modules/ProductCategories.vue').default);
 Vue.component('account-address', require('./modules/AccountAddress.vue').default);
+Vue.component('order-invoice', require('./modules/OrderInvoice.vue').default);
 
 window.Event = new Vue();
 
