@@ -43,11 +43,11 @@
             <th>{{ __('Overdue over 60 days') }}</th>
         </tr>
         <tr>
-            <td class="text-right">{{ isset($summary_lines['Total Outstanding']) ? $summary_lines['Total Outstanding'] : 0 }}</td>
-            <td class="text-right">{{ isset($summary_lines['Not due']) ? $summary_lines['Not due'] : 0 }}</td>
-            <td class="text-right">{{ isset($summary_lines['Overdue up to 30 day']) ? $summary_lines['Overdue up to 30 day'] : 0 }}</td>
-            <td class="text-right">{{ isset($summary_lines['Overdue up to 60 days']) ? $summary_lines['Overdue up to 60 days'] : 0 }}</td>
-            <td class="text-right">{{ isset($summary_lines['Over 60 days overdue']) ? $summary_lines['Over 60 days overdue'] : 0 }}</td>
+            <td class="text-right">{{ $summary_lines['Total Outstanding'] ?? 0 }}</td>
+            <td class="text-right">{{ $summary_lines['Not due'] ?? 0 }}</td>
+            <td class="text-right">{{ $summary_lines['Overdue up to 30 day'] ?? 0 }}</td>
+            <td class="text-right">{{ $summary_lines['Overdue up to 60 days'] ?? 0 }}</td>
+            <td class="text-right">{{ $summary_lines['Over 60 days overdue'] ?? 0 }}</td>
         </tr>
     </table>
 @endsection

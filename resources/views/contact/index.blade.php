@@ -54,12 +54,12 @@
                     <div class="mb-2">
                         <label for="name">Name:</label>
                         <input id="name" name="name"
-                               value="{{ Auth::user() ? Auth::user()->first_name . ' ' . Auth::user()->last_name : '' }}">
+                               value="{{ auth()->user() ? auth()->user()->first_name . ' ' . auth()->user()->last_name : '' }}">
                     </div>
 
                     <div class="mb-2">
                         <label for="email">Email:</label>
-                        <input id="email" name="email" value="{{ Auth::user() ? Auth::user()->email : '' }}">
+                        <input id="email" name="email" value="{{ auth()->user() ? auth()->user()->email : '' }}">
                     </div>
 
                     <div class="mb-2">

@@ -11,7 +11,7 @@
     <form class="w-100" action="{{ route('products.search') }}" method="get">
         <div class="relative">
             <input type="text" class="form-control" name="query" autocomplete="off" required>
-            <button class="absolute inset-y-0 right-0 flex items-center px-3 text-gray-700">
+            <button class="absolute inset-y-0 right-0 flex items-center px-3 text-gray-600">
                 <i class="fas fa-search"></i>
             </button>
         </div>

@@ -35,7 +35,7 @@
                         <p class="alert-title">{{ __('Notice!') }}</p>
                         <p class="alert-text">
                             {!! __('You are currently assuming the customer code: <span class="font-semibold">' . session('temp_customer') . '</span>.
-               Your actual Customer Code is <span class="font-semibold">' . Auth::user()->customer_code . '</span>. Please <a href="' . route('customer.change.revert') . '" class="underline">click here</a> to revert back to your default Customer Code.') !!}
+               Your actual Customer Code is <span class="font-semibold">' . auth()->user()->customer_code . '</span>. Please <a href="' . route('customer.change.revert') . '" class="underline">click here</a> to revert back to your default Customer Code.') !!}
                         </p>
                     </div>
                 </div>
@@ -48,25 +48,6 @@
     @include('layout.footer')
 
 </div>
-
-{{--<div id="img-modal" class="img-modal">--}}
-{{--    <span class="close">&times;</span>--}}
-{{--    <img class="img-modal-content" id="product-image" alt="Image Coming Soon">--}}
-{{--    <div id="caption"></div>--}}
-{{--</div>--}}
-
-{{--<div class="modal fade" id="loader" tabindex="-1" role="dialog" data-backdrop="static">--}}
-{{--    <div class="modal-dialog modal-sm" role="document">--}}
-{{--        <div class="modal-content">--}}
-{{--            <div class="modal-body text-center">--}}
-{{--                <div class="loader"></div>--}}
-{{--                <div class="loader-txt">--}}
-{{--                    <p></p>--}}
-{{--                </div>--}}
-{{--            </div>--}}
-{{--        </div>--}}
-{{--    </div>--}}
-{{--</div>--}}
 
 <script type="text/javascript" src="{{ mix('js/app.js') }}"></script>
 

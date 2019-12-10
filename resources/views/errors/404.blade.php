@@ -1,12 +1,10 @@
-<div class="card card-body">
-    <div class="text-center">
-        <img src="https://media1.tenor.com/images/f5b11c5564ee186d00a2b4ff6e027bd7/tenor.gif?itemid=7325938">
-        <h1 class="mt-3">{{ __('404! Oh No! Oh Dear! Page not found.') }}</h1>
-        <p>
-            {{ __('It would seem you have navigated to a page that not longer or has ever existed.') }}
-        </p>
-        <a href="{{ route('home') }}">
-            <button class="btn btn-primary">Return Home</button>
-        </a>
+<div class="md:flex min-h-screen">
+    <div class="w-full md:w-1/2 bg-white flex items-center justify-center ">
+        <div class="max-w-sm m-8">
+            <div class="text-black text-5xl md:text-15xl font-black">404</div>
+            <div class="w-16 h-1 bg-purple-light my-3 md:my-6"></div>
+            <p class="text-grey-darker text-2xl md:text-3xl font-light mb-8 leading-normal">Sorry, the page you are looking for could not be found.</p>
+            <button class="bg-transparent text-grey-darkest font-bold uppercase tracking-wide py-3 px-6 border-2 border-grey-light hover:border-grey rounded-lg">Go Home</button>
+        </div>
     </div>
 </div>
