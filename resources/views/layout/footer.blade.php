@@ -33,30 +33,40 @@
                 <div class="text-grey text-center md:mr-8">
                     <span class="font-thin">{{ __('Social Media') }}</span>
                     <div class="flex justify-center mt-2 mb-2">
-                        <a href="#">
-                            <img class="h-8 mr-1 ml-1 hover:opacity-75" alt="facebook"
-                                 src="https://scolmoreonline.com/assets/images/scolmore/facebook.png">
-                        </a>
+                        @if(env('SOCIAL_FACEBOOK'))
+                            <a href="{{ env('SOCIAL_FACEBOOK') }}">
+                                <img class="h-8 mr-1 ml-1 hover:opacity-75" alt="facebook"
+                                     src="https://scolmoreonline.com/assets/images/scolmore/facebook.png">
+                            </a>
+                        @endif
 
-                        <a href="#">
-                            <img class="h-8 mr-1 ml-1 hover:opacity-75" alt="twitter"
-                                 src="https://scolmoreonline.com/assets/images/scolmore/twitter.png">
-                        </a>
+                        @if(env('SOCIAL_TWITTER'))
+                            <a href="{{ env('SOCIAL_TWITTER') }}">
+                                <img class="h-8 mr-1 ml-1 hover:opacity-75" alt="twitter"
+                                     src="https://scolmoreonline.com/assets/images/scolmore/twitter.png">
+                            </a>
+                        @endif
 
-                        <a href="#">
-                            <img class="h-8 mr-1 ml-1 hover:opacity-75" alt="linkedin"
-                                 src="https://scolmoreonline.com/assets/images/scolmore/linkedin.png">
-                        </a>
+                        @if(env('SOCIAL_LINKEDIN'))
+                            <a href="{{ env('SOCIAL_LINKEDIN') }}">
+                                <img class="h-8 mr-1 ml-1 hover:opacity-75" alt="linkedin"
+                                     src="https://scolmoreonline.com/assets/images/scolmore/linkedin.png">
+                            </a>
+                        @endif
 
-                        <a href="#">
-                            <img class="h-8 mr-1 ml-1 hover:opacity-75" alt="instagram"
-                                 src="https://scolmoreonline.com/assets/images/scolmore/instagram.png">
-                        </a>
+                        @if(env('SOCIAL_INSTAGRAM'))
+                            <a href="{{ env('SOCIAL_INSTAGRAM') }}">
+                                <img class="h-8 mr-1 ml-1 hover:opacity-75" alt="instagram"
+                                     src="https://scolmoreonline.com/assets/images/scolmore/instagram.png">
+                            </a>
+                        @endif
 
-                        <a href="#">
-                            <img class="h-8 mr-1 ml-1 hover:opacity-75" alt="youtube"
-                                 src="https://scolmoreonline.com/assets/images/scolmore/youtube.png">
-                        </a>
+                        @if(env('SOCIAL_YOUTUBE'))
+                            <a href="{{ env('SOCIAL_YOUTUBE') }}">
+                                <img class="h-8 mr-1 ml-1 hover:opacity-75" alt="youtube"
+                                     src="https://scolmoreonline.com/assets/images/scolmore/youtube.png">
+                            </a>
+                        @endif
                     </div>
                 </div>
 
