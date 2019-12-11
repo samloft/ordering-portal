@@ -28,7 +28,7 @@ class CreateProductsTable extends Migration
             $table->boolean('not_sold');
             $table->integer('stock')->default(0);
             $table->char('vat_flag')->default('S');
-            $table->integer('packaging');
+            $table->integer('packaging')->nullable();
 
             $table->index('code');
         });
