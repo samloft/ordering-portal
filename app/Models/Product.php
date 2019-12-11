@@ -73,11 +73,11 @@ class Product extends Model
      */
     public static function list($categories)
     {
-        $products = self::whereHas('prices')->whereHas('categories', static function ($query) use ($categories) {
-            $query->where('level_1', ($categories['level_1']))->where('level_2', $categories['level_2'])->where('level_3', $categories['level_3']);
+        return self::whereHas('prices')->whereHas('categories', static function ($query) use ($categories) {
+            $query->where('level_1', $categories['level_1'])
+                ->where('level_2', $categories['level_2'])
+                ->where('level_3', $categories['level_3']);
         })->join('prices', 'products.code', '=', 'prices.product')->where('prices.customer_code', auth()->user()->customer->code)->paginate(10);
-
-        return $products;
     }
 
     /**

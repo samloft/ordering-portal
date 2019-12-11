@@ -11068,7 +11068,7 @@ var render = function() {
                   "div",
                   {
                     staticClass:
-                      "absolute inset-x-0 bottom-0 bg-gray-200 rounded-b-lg py-2 text-sm"
+                      "absolute inset-x-0 bottom-0 bg-gray-200 rounded-b-lg py-2 text-xs"
                   },
                   [_c("span", [_vm._v(_vm._s(key))])]
                 )

@@ -2,15 +2,31 @@
     <div class="container mx-auto px-4">
         <div class="md:flex justify-between text-sm">
             <div class="text-center md:text-left py-3 md:py-4 border-b md:border-b-0 text-base">
-                <a href="{{ route('contact') }}" class="no-underline text-grey-dark mr-4 hover:underline">{{ __('Contact Us') }}</a>
-                <a href="#" class="no-underline text-grey-dark mr-4 hover:underline">{{ __('Accessibility Policy') }}</a>
-                <a href="#" class="no-underline text-grey-dark mr-4 hover:underline">{{ __('Data Protection') }}</a>
-                <a href="#" class="no-underline text-grey-dark mr-4 hover:underline">{{ __('Terms & Conditions') }}</a>
+                <a href="{{ route('contact') }}" class="no-underline text-grey-dark mr-4 hover:underline">
+                    {{ __('Contact Us') }}
+                </a>
+                <a href="{{ route('support.accessibility') }}" class="no-underline text-grey-dark mr-4 hover:underline">
+                    {{ __('Accessibility Policy') }}
+                </a>
+                <a href="{{ route('support.data') }}" class="no-underline text-grey-dark mr-4 hover:underline">
+                    {{ __('Data Protection') }}
+                </a>
+                <a href="{{ route('support.terms') }}" class="no-underline text-grey-dark mr-4 hover:underline">
+                    {{ __('Terms & Conditions') }}
+                </a>
 
                 <div class="address text-xs mt-3">
-                    <span class="block"><span class="font-semibold">Scolmore International Limited</span> <span
-                            class="font-thin">Scolmore Park, Landsberg<span class="block">Lichfield Road Ind. Est. Tamworth B79 7XB.</span></span></span>
-                    <span class="block"><span class="font-thin">Telephone:</span> 01827 63454 <span class="font-thin">Email:</span> sales@scolmore.com </span>
+                    <span class="block font-thin">
+                        <span class="font-semibold">Scolmore International Limited</span>
+                        <span>Scolmore Park, Landsberg</span>
+                        <span class="block">Lichfield Road Ind. Est. Tamworth B79 7XB.</span>
+                    </span>
+
+                    <span class="block">
+                        <span class="font-thin">Telephone:</span> 01827 63454
+                        <span class="font-thin">Email:</span>
+                        <a href="MAILTO:sales@scolmore.com" class="hover:underline">sales@scolmore.com</a>
+                    </span>
                 </div>
             </div>
             <div class="md:flex items-center py-4">

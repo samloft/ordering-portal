@@ -49,7 +49,7 @@
 
                     </div>
 
-                    <div class="absolute inset-x-0 bottom-0 bg-gray-200 rounded-b-lg py-2 text-sm">
+                    <div class="absolute inset-x-0 bottom-0 bg-gray-200 rounded-b-lg py-2 text-xs">
                         <span>{{ key }}</span>
                     </div>
                 </div>

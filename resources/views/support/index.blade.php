@@ -1,13 +1,11 @@
 @extends('layout.master')
 
-@section('page.title', $title)
+@section('page.title', ucwords(str_replace('-', ' ', $support->name)))
 
 @section('content')
-    <div class="content container">
-        <h1 class="page-title">{{ $title }}</h1>
-
-        <div class="card card-body">
-            {!! $content !!}
-        </div>
+    <div class="w-full mb-5 text-center">
+        <h2 class="font-semibold tracking-widest">{{ ucwords(str_replace('-', ' ', $support->name)) }}</h2>
     </div>
+
+    {!! $support->description !!}
 @endsection

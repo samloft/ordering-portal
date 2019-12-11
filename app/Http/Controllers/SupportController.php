@@ -13,8 +13,8 @@ class SupportController extends Controller
     {
         $page_name = request()->route()->getAction()['page'];
 
-        $content = Page::show($page_name)->description;
+        $support = Page::show($page_name);
 
-        return view('support.index', compact('content'));
+        return view('support.index', compact('support'));
     }
 }
