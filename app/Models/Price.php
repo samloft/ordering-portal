@@ -22,9 +22,9 @@ class Price extends Model
     /**
      * Return a list of all products that have a price list.
      *
-     * @return Price[]|Collection
+     * @return \Illuminate\Support\Collection
      */
-    public static function productList()
+    public static function productList(): \Illuminate\Support\Collection
     {
         return self::select('product')->where('product', 'not like', '%*%')->distinct()->orderBy('product')->get();
     }

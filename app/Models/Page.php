@@ -2,23 +2,22 @@
 
 namespace App\Models;
 
+use Eloquent;
 use Illuminate\Database\Eloquent\Model;
 
 /**
- * App\Models\Pages
+ * App\Models\Page
  *
- * @mixin \Eloquent
+ * @mixin Eloquent
  */
-class Pages extends Model
+class Page extends Model
 {
     /**
-     * Gets HTML data based on given page name.
-     *
      * @param $page_name
      * @return mixed
      */
     public static function show($page_name)
     {
-        return staitc::where('name', $page_name)->first();
+        return self::where('name', $page_name)->first();
     }
 }

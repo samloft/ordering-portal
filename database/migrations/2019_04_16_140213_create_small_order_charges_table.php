@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateSmallOrderChargeTable extends Migration
+class CreateSmallOrderChargesTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,7 +13,7 @@ class CreateSmallOrderChargeTable extends Migration
      */
     public function up()
     {
-        Schema::create('small_order_charge', function (Blueprint $table) {
+        Schema::create('small_order_charges', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->integer('threshold');
             $table->integer('charge');
@@ -29,6 +29,6 @@ class CreateSmallOrderChargeTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('small_order_charge');
+        Schema::dropIfExists('small_order_charges');
     }
 }

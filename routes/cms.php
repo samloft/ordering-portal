@@ -1,6 +1,6 @@
 <?php
 
-use App\Models\HomeLinks;
+use App\Models\HomeLink;
 use App\Models\User;
 use App\Models\UserCustomer;
 use Illuminate\Http\Request;
@@ -58,7 +58,7 @@ Route::group(['middleware' => 'auth:admin'], function () {
         Route::get('delete/{id}', 'Cms\HomeLinksController@destroy')->name('cms.home-links.delete');
 
         Route::post('show', function (Request $request) {
-            return HomeLinks::show($request->id);
+            return HomeLink::show($request->id);
         })->name('cms.home-links.show');
     });
 

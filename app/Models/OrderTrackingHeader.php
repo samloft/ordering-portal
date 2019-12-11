@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Models\OrderTracking;
+namespace App\Models;
 
 use Carbon\Carbon;
 use Eloquent;
@@ -11,11 +11,11 @@ use Illuminate\Database\Query\Builder;
 use Illuminate\Support\Collection;
 
 /**
- * App\Models\OrderTracking\Header
+ * App\Models\OrderTrackingHeader
  *
  * @mixin Eloquent
  */
-class Header extends Model
+class OrderTrackingHeader extends Model
 {
     protected $table = 'order_tracking_header';
 
@@ -26,7 +26,7 @@ class Header extends Model
      */
     public function lines(): HasMany
     {
-        return $this->hasMany(Lines::class, 'order_no', 'order_no')->orderBy('order_line_no');
+        return $this->hasMany(OrderTrackingLine::class, 'order_no', 'order_no')->orderBy('order_line_no');
     }
 
     /**
@@ -73,7 +73,7 @@ class Header extends Model
      * Show order details for order number
      *
      * @param $order
-     * @return Header|Model|object|null
+     * @return OrderTrackingHeader|Model|object|null
      */
     public static function show($order)
     {

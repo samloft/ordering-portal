@@ -12,8 +12,6 @@ use Illuminate\Database\Eloquent\Model;
  */
 class SmallOrderCharge extends Model
 {
-    public $table = 'small_order_charge';
-
     /**
      * Check to see if a small order charge should be applied to an order.
      *

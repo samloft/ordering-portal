@@ -47,7 +47,7 @@
                     </svg>
                     <div>
                         <p class="alert-title">{{ __('Please Note:') }}</p>
-                        <p class="alert-text">{{ __('Lines marked in red have a chance of going onto backorder.') }}</p>
+                        <p class="alert-text">{{ __('OrderTrackingLine marked in red have a chance of going onto backorder.') }}</p>
                     </div>
                 </div>
             </div>

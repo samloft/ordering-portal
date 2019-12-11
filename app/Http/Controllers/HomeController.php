@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\HomeLinks;
+use App\Models\HomeLink;
 use Illuminate\Http\Response;
 
 class HomeController extends Controller
@@ -13,8 +13,8 @@ class HomeController extends Controller
     public function index()
     {
         $links = [
-            'categories' => HomeLinks::categories(),
-            'adverts' => HomeLinks::adverts(),
+            'categories' => HomeLink::categories(),
+            'adverts' => HomeLink::adverts(),
         ];
 
         return view('home.index', compact('links'));

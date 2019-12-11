@@ -11,19 +11,17 @@ use Illuminate\Support\Str;
 use Storage;
 
 /**
- * App\Models\HomeLinks
+ * App\Models\HomeLink
  *
  * @mixin Eloquent
  */
-class HomeLinks extends Model
+class HomeLink extends Model
 {
-    protected $table = 'home_links';
-
     /**
      * Return row for the given ID.
      *
      * @param $id
-     * @return HomeLinks|Model|object|null
+     * @return HomeLink|Model|object|null
      */
     public static function show($id)
     {
@@ -120,7 +118,7 @@ class HomeLinks extends Model
     /**
      * Return all the category links for the home page.
      *
-     * @return HomeLinks[]|Collection
+     * @return HomeLink[]|Collection
      */
     public static function categories()
     {
@@ -130,7 +128,7 @@ class HomeLinks extends Model
     /**
      * Return all the advert links for the home page.
      *
-     * @return HomeLinks[]|Collection
+     * @return HomeLink[]|Collection
      */
     public static function adverts()
     {
@@ -157,7 +155,7 @@ class HomeLinks extends Model
      * by 1 for the next position.
      *
      * @param $type
-     * @return HomeLinks|Model|int|object|null
+     * @return HomeLink|Model|int|object|null
      */
     public static function nextPosition($type)
     {

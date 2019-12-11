@@ -25,7 +25,6 @@ $factory->define(User::class, static function (Faker $faker) {
         'name' => $faker->name,
         'admin' => false,
         'discount' => 0,
-        'country_id' => 1,
         'can_order' => 1
     ];
 });

@@ -26,7 +26,6 @@ class CreateUsersTable extends Migration
             $table->string('mobile')->nullable();
             $table->boolean('admin')->default(0);
             $table->float('discount')->default(0);
-            $table->integer('country_id')->default(1);
             $table->boolean('can_order')->default(1);
             $table->string('api_token', 80)->unique()->default(Str::random(60));
             $table->timestamps();

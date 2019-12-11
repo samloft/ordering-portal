@@ -2,10 +2,10 @@
 
 /** @var \Illuminate\Database\Eloquent\Factory $factory */
 
-use App\Models\OrderTracking\Lines;
+use App\Models\OrderTrackingLine;
 use Faker\Generator as Faker;
 
-$factory->define(Lines::class, static function (Faker $faker) {
+$factory->define(OrderTrackingLine::class, static function (Faker $faker) {
     return [
         'order_no' => $faker->randomNumber(8),
         'order_line_no' => $faker->randomNumber(4),

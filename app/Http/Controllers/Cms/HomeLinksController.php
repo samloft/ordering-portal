@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers\Cms;
 
-use App\Models\HomeLinks;
+use App\Models\HomeLink;
 use Exception;
 use Illuminate\Contracts\Filesystem\FileNotFoundException;
 use Illuminate\Contracts\View\Factory;
@@ -20,8 +20,8 @@ class HomeLinksController extends Controller
      */
     public function index()
     {
-        $adverts = HomeLinks::adverts();
-        $categories = HomeLinks::categories();
+        $adverts = HomeLink::adverts();
+        $categories = HomeLink::categories();
 
         return view('cms.home-links.index', compact('adverts', 'categories'));
     }
@@ -35,12 +35,12 @@ class HomeLinksController extends Controller
     public function store(Request $request): RedirectResponse
     {
         if ($request->id) {
-            $store = HomeLinks::edit($request);
+            $store = HomeLink::edit($request);
 
             return $store ? back()->with('success', 'Home link has been updated') : back()->with('error', 'Unable to update home link, please try again');
         }
 
-        $store = HomeLinks::store($request);
+        $store = HomeLink::store($request);
 
         return $store ? back()->with('success', 'New home link has been created') : back()->with('error', 'Unable to create new home link, please try again');
     }
@@ -65,7 +65,7 @@ class HomeLinksController extends Controller
         }
 
         if ($link_items) {
-            $positions = HomeLinks::updatePositions($link_items);
+            $positions = HomeLink::updatePositions($link_items);
 
             return [
                 'success' => $positions
@@ -86,7 +86,7 @@ class HomeLinksController extends Controller
      */
     public function destroy($id): RedirectResponse
     {
-        $deleted = HomeLinks::destroy($id);
+        $deleted = HomeLink::destroy($id);
 
         return $deleted ? back()->with('success', 'Home link has been deleted') : back()->with('error', 'Unable to delete home link, please try again');
     }

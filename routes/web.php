@@ -90,10 +90,10 @@ Route::group(['middleware' => ['auth', 'has.customer']], function () {
     /*
      * Support pages
      */
-    Route::group(['prefix' => 'support'], function () {
-        Route::get('terms', 'Support\TermsController@index')->name('support.terms');
-        Route::get('data-protection', 'Support\DataProtectionController@index')->name('support.data');
-        Route::get('accessibility', 'Support\AccessibilityController@index')->name('support.accessibility');
+    Route::group(['prefix' => 'support'], static function () {
+        Route::get('terms-and-conditions', ['uses' => 'SupportController@index', 'page' => 'terms-and-conditions'])->name('support.terms');
+        Route::get('accessibility-policy', ['uses' => 'SupportController@index', 'page' => 'accessibility-policy'])->name('support.accessibility');
+        Route::get('data-protection', ['uses' => 'SupportController@index', 'page' => 'data-protection'])->name('support.data');
     });
 
     /*

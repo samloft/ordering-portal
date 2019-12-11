@@ -1,8 +1,7 @@
 <?php
 
-namespace App\Models\OrderTracking;
+namespace App\Models;
 
-use App\Models\Price;
 use Eloquent;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
@@ -10,11 +9,11 @@ use Illuminate\Database\Query\Builder;
 use Illuminate\Support\Collection;
 
 /**
- * App\Models\OrderTracking\Lines
+ * App\Models\OrderTrackingLine
  *
  * @mixin Eloquent
  */
-class Lines extends Model
+class OrderTrackingLine extends Model
 {
     protected $table = 'order_tracking_lines';
 

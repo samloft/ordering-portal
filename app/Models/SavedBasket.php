@@ -13,7 +13,6 @@ use Illuminate\Database\Eloquent\Model;
  */
 class SavedBasket extends Model
 {
-    protected $table = 'saved_basket';
     public $incrementing = false;
     public $timestamps = [];
 

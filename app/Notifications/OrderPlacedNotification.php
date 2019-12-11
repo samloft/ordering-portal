@@ -45,7 +45,7 @@ class OrderPlacedNotification extends Notification
             ->attachment(static function ($attachment) {
                 $attachment->title('Order Number 1322')
                     ->fields([
-                        'Lines' => '12',
+                        'OrderTrackingLine' => '12',
                         'Amount' => '£1,234',
                         'Customer' => 'SCO100',
                         'Was Awesome' => ':-1:',

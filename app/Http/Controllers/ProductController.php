@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Category;
 use App\Models\ExpectedStock;
-use App\Models\HomeLinks;
+use App\Models\HomeLink;
 use App\Models\Product;
 use App\models\ProductSpec;
 use Illuminate\Contracts\View\Factory;
@@ -50,7 +50,7 @@ class ProductController extends Controller
             return view('products.products', compact('categories', 'sub_category_list', 'products'));
         }
 
-        $links['categories'] = HomeLinks::categories();
+        $links['categories'] = HomeLink::categories();
 
         return view('products.index', compact('links', 'categories'));
     }

@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers\Cms;
 
-use App\Models\Contacts;
+use App\Models\Contact;
 use Illuminate\Contracts\View\Factory;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Database\Eloquent\Model;
@@ -17,18 +17,18 @@ class ContactController extends Controller
      */
     public function index()
     {
-        $contacts = Contacts::show();
+        $contacts = Contact::show();
 
         return view('cms.contacts.index', compact('contacts'));
     }
 
     /**
      * @param $id
-     * @return Contacts|Contacts[]|Collection|Model
+     * @return Contact|Contact[]|Collection|Model
      */
     public function show($id)
     {
-        return Contacts::findOrFail($id);
+        return Contact::findOrFail($id);
     }
 
     /**
@@ -44,12 +44,12 @@ class ContactController extends Controller
         if (request()->id) {
             $id = request()->id;
 
-            $updated = Contacts::edit($id, $contact);
+            $updated = Contact::edit($id, $contact);
 
             return $updated ? back()->with('success', 'Contact has been updated') : back()->with('error', 'Unable to update contact, please try again');
         }
 
-        $store = Contacts::store($contact);
+        $store = Contact::store($contact);
 
         return $store ? back()->with('success', 'New contact has been created') : back()->with('error', 'Unable to create new contact, please try again');
     }
@@ -60,7 +60,7 @@ class ContactController extends Controller
      */
     public function destroy($id): RedirectResponse
     {
-        $deleted = Contacts::destroy($id);
+        $deleted = Contact::destroy($id);
 
         return $deleted ? back()->with('success', 'Contact has been deleted') : back()->with('error', 'Unable to delete contact, please try again');
     }

@@ -18,7 +18,7 @@
         <div class="card card-form">
             <div class="row no-gutters">
                 <div class="col-lg-3 card-body">
-                    <p><strong class="headings-color">{{ __('Site Contacts') }}</strong></p>
+                    <p><strong class="headings-color">{{ __('Site Contact') }}</strong></p>
 
                     <p class="text-muted">
                         {{ __('Site contacts are a list of email address that will show up on the "Contact Us" form.') }}

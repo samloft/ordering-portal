@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\AccountSummary;
-use App\Models\OrderTracking\Header;
+use App\Models\OrderTracking\OrderTrackingHeader;
 use Barryvdh\DomPDF\Facade as PDF;
 use Carbon\Carbon;
 use Illuminate\Contracts\View\Factory;
@@ -54,7 +54,7 @@ class ReportController extends Controller
      */
     public function backOrderReport($output)
     {
-        $back_orders = Header::backOrders();
+        $back_orders = OrderTrackingHeader::backOrders();
 
         if (count($back_orders) > 0) {
             if ($output === 'pdf') {

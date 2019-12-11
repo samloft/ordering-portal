@@ -2,10 +2,10 @@
 
 /** @var \Illuminate\Database\Eloquent\Factory $factory */
 
-use App\Models\OrderTracking\Header;
+use App\Models\OrderTrackingHeader;
 use Faker\Generator as Faker;
 
-$factory->define(Header::class, static function (Faker $faker) {
+$factory->define(OrderTrackingHeader::class, static function (Faker $faker) {
     return [
         'order_no' => $order = $faker->randomNumber(8),
         'base_order' => $order,

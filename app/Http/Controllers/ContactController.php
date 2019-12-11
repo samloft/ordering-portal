@@ -3,11 +3,11 @@
 namespace App\Http\Controllers;
 
 use App\Mail\Contact;
-use App\Models\Contacts;
 use Illuminate\Contracts\View\Factory;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\View\View;
 use Mail;
+use App\Models\Page;
 
 class ContactController extends Controller
 {
@@ -18,7 +18,7 @@ class ContactController extends Controller
      */
     public function index()
     {
-        $contacts = Contacts::show();
+        $contacts = Page::where('name', 'contact');
 
         return view('contact.index', compact('contacts'));
     }

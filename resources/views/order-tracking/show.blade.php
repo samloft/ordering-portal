@@ -77,7 +77,7 @@
         </div>
     </div>
 
-    <h2 class="font-semibold tracking-widest mt-3 mb-3">{{ __('Order Lines') }}</h2>
+    <h2 class="font-semibold tracking-widest mt-3 mb-3">{{ __('Order OrderTrackingLine') }}</h2>
 
     <table>
         <thead>

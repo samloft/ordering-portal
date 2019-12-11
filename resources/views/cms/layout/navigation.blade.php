@@ -61,7 +61,7 @@
                     <li class="sidebar-menu-item {{ setActive('cms.contacts') }}">
                         <a class="sidebar-menu-button" href="{{ route('cms.contacts') }}">
                             <i class="sidebar-menu-icon sidebar-menu-icon--left material-icons">contact_mail</i>
-                            <span class="sidebar-menu-text">{{ __('Contacts') }}</span>
+                            <span class="sidebar-menu-text">{{ __('Contact') }}</span>
                         </a>
                     </li>
 

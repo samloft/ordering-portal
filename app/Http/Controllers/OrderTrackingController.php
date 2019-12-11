@@ -3,11 +3,10 @@
 namespace App\Http\Controllers;
 
 use App\Models\Basket;
-use App\Models\OrderTracking\Header;
-use App\Models\OrderTracking\Lines;
+use App\Models\OrderTrackingHeader;
+use App\Models\OrderTrackingLine;
 use Illuminate\Contracts\View\Factory;
 use Illuminate\Http\RedirectResponse;
-use Illuminate\Http\Request;
 use Illuminate\Routing\Redirector;
 use Illuminate\View\View;
 
@@ -23,7 +22,7 @@ class OrderTrackingController extends Controller
     {
         $search = request() ? true : false;
 
-        $orders = Header::list($search, request());
+        $orders = OrderTrackingHeader::list($search, request());
 
         return view('order-tracking.index', compact('orders'));
     }
@@ -36,7 +35,7 @@ class OrderTrackingController extends Controller
      */
     public function show($order_number)
     {
-        $order = Header::show(decodeUrl($order_number));
+        $order = OrderTrackingHeader::show(decodeUrl($order_number));
 
         $lines = [];
 
@@ -63,7 +62,7 @@ class OrderTrackingController extends Controller
     {
         $order_number = request('order_number');
 
-        $order_lines = Lines::copy(urldecode($order_number));
+        $order_lines = OrderTrackingLine::copy(urldecode($order_number));
         $added_to_basket = Basket::store($order_lines);
 
         if ($added_to_basket) {
@@ -84,7 +83,7 @@ class OrderTrackingController extends Controller
      */
     public function invoicePdf($order_number, $customer_order_number, $download = false): array
     {
-        $authorized = Header::show(urldecode($order_number));
+        $authorized = OrderTrackingHeader::show(urldecode($order_number));
 
         if (!$authorized) {
             return [
