@@ -70,20 +70,26 @@
                     </div>
                 </div>
 
-                <div class="text-grey text-center md:ml-4">
-                    <span class="font-thin">{{ __('Download Our App') }}</span>
-                    <div class="flex justify-center mt-2 mb-2">
-                        <a href="#">
-                            <img class="mr-1 ml-1 hover:opacity-75" alt="app store"
-                                 src="https://scolmoreonline.com/assets/images/appstore.png">
-                        </a>
+                @if(env('APP_APPLE') || env('APP_ANDROID'))
+                    <div class="text-grey text-center md:ml-4">
+                        <span class="font-thin">{{ __('Download Our App') }}</span>
+                        <div class="flex justify-center mt-2 mb-2">
+                            @if(env('APP_APPLE'))
+                                <a href="{{ env('APP_APPLE') }}">
+                                    <img class="mr-1 ml-1 hover:opacity-75" alt="app store"
+                                         src="https://scolmoreonline.com/assets/images/appstore.png">
+                                </a>
+                            @endif
 
-                        <a href="#">
-                            <img class="mr-1 ml-1 hover:opacity-75" alt="play store"
-                                 src="https://scolmoreonline.com/assets/images/googleplay.png">
-                        </a>
+                            @if(env('APP_ANDROID'))
+                                <a href="{{ env('APP_ANDROID') }}">
+                                    <img class="mr-1 ml-1 hover:opacity-75" alt="play store"
+                                         src="https://scolmoreonline.com/assets/images/googleplay.png">
+                                </a>
+                            @endif
+                        </div>
                     </div>
-                </div>
+                @endif
             </div>
         </div>
     </div>
