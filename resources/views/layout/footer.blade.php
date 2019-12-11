@@ -23,7 +23,7 @@
                     </span>
 
                     <span class="block">
-                        <span class="font-thin">Telephone:</span> 01827 63454
+                        <span class="font-thin">Telephone:</span> <a href="TEL:01827 63454" class="hover:underline">01827 63454</a>
                         <span class="font-thin">Email:</span>
                         <a href="MAILTO:sales@scolmore.com" class="hover:underline">sales@scolmore.com</a>
                     </span>
