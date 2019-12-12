@@ -12,11 +12,11 @@ class HomeController extends Controller
      */
     public function index()
     {
-        $links = [
-            'categories' => HomeLink::categories(),
-            'adverts' => HomeLink::adverts(),
-        ];
+        //$links = [
+        //    'categories' => HomeLink::categories(),
+        //    'adverts' => HomeLink::adverts(),
+        //];
 
-        return view('home.index', compact('links'));
+        return view('home.index');
     }
 }
