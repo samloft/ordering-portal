@@ -4,7 +4,7 @@ namespace App\Providers;
 
 use App\Models\Category;
 use App\Models\GlobalSettings;
-use Illuminate\Support\Facades\Schema;
+use Illuminate\Support\Facades\Cache;use Illuminate\Support\Facades\Schema;
 use Illuminate\Support\ServiceProvider;
 
 class AppServiceProvider extends ServiceProvider
@@ -22,8 +22,14 @@ class AppServiceProvider extends ServiceProvider
             $view->with('category_list', Category::list());
         });
 
+        if (!Cache::has('company_details')) {
+            Cache::rememberForever('company_details', static function() {
+                return GlobalSettings::where('key', 'company-details')->first()->value;
+            });
+        }
+
         view()->composer(['layout.footer', 'contact.index'], static function($view) {
-            $view->with('company_details', json_decode(GlobalSettings::where('key', 'company-details')->first()->value, true));
+            $view->with('company_details', json_decode(Cache::get('company_details'), true));
         });
     }
 
