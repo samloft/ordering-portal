@@ -22,7 +22,7 @@ class AppServiceProvider extends ServiceProvider
             $view->with('category_list', Category::list());
         });
 
-        view()->composer('layout.footer', static function($view) {
+        view()->composer(['layout.footer', 'contact.index'], static function($view) {
             $view->with('company_details', json_decode(GlobalSettings::where('key', 'company-details')->first()->value, true));
         });
     }

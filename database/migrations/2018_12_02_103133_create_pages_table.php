@@ -40,7 +40,10 @@ class CreatePagesTable extends Migration
 
         DB::table('pages')->insert([
             'name' => 'contact',
-            'description' => '{name: "Site Development", email: "sam@scolmore.com"}',
+            'description' => json_encode([[
+                'name' => 'Site Development',
+                'email' => 'sam@scolmore.com',
+            ]]),
             'created_at' => date('Y-m-d H:i:s'),
         ]);
     }

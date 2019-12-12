@@ -18,7 +18,7 @@ class ContactController extends Controller
      */
     public function index()
     {
-        $contacts = Page::where('name', 'contact');
+        $contacts = json_decode(Page::where('name', 'contact')->first()->description, true);
 
         return view('contact.index', compact('contacts'));
     }

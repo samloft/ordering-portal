@@ -17,30 +17,27 @@
         <div class="w-1/3 mr-4">
             <div class="bg-white rounded shadow p-5">
                 <div class="address">
-                    <div class="font-semibold">{{ env('ADDRESS_LINE_1') }}</div>
-                    <div>{{ env('ADDRESS_LINE_2') }}</div>
-                    <div>{{ env('ADDRESS_LINE_3') }}</div>
-                    <div>{{ env('ADDRESS_LINE_4') }}</div>
-                    <div>{{ env('ADDRESS_LINE_5') }}</div>
-                    <div>{{ env('ADDRESS_POSTCODE') }}</div>
+                    <div class="font-semibold">{{ $company_details['line_1'] }}</div>
+                    <div>{{ $company_details['line_2'] }}</div>
+                    <div>{{ $company_details['line_3'] }}</div>
+                    <div>{{ $company_details['line_4'] }}</div>
+                    <div>{{ $company_details['line_5'] }}</div>
+                    <div>{{ $company_details['postcode'] }}</div>
 
                     <br>
 
-                    <div>{{ env('ADDRESS_TELEPHONE') ? 'Tel: ' . env('ADDRESS_TELEPHONE') : '' }}</div>
-                    <div>{{ env('ADDRESS_FAX') ? 'Fax: ' . env('ADDRESS_FAX') : '' }}</div>
+                    <div>{{ 'Tel: '.$company_details['telephone'] }}</div>
                 </div>
             </div>
         </div>
         <div class="w-2/3">
             <div class="bg-white rounded shadow p-5">
                 <form action="{{ route('contact.email') }}" method="post" class="mb-0">
-
                     <div class="relative mb-2">
                         <label for="to">To:</label>
                         <select id="to" name="to">
-                            <option value="sam@scolmore.com">Developer</option>
                             @foreach($contacts as $contact)
-                                <option value="{{ $contact->email }}">{{ $contact->name }}</option>
+                                <option value="{{ $contact['email'] }}">{{ $contact['name'] }}</option>
                             @endforeach
                         </select>
                         <div
