@@ -9,7 +9,7 @@
  * @return string            Css class name if it's current URI,
  *                           otherwise - empty string
  */
-function setActive(string $route_name, string $class_name = 'active')
+function activeMenu(string $route_name, string $class_name = 'active')
 {
     return strpos(request()->route()->getName(), $route_name) !== false ? $class_name : '';
 }

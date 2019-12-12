@@ -4,7 +4,7 @@
  *
  * Gets the currency symbol to use based on the logged in customer.
  *
- * @param integer $value
+ * @param int $value
  * @param int $decimals
  *
  * @return string            Currency symbol if one matches,

@@ -87,9 +87,13 @@ class OrderTrackingHeader extends Model
      */
     public static function backOrders()
     {
-        return self::selectRaw('order_tracking_header.order_no, order_tracking_header.date_received, order_tracking_lines.product, order_tracking_lines.line_qty, order_tracking_lines.long_description, MIN(expected_stock.due_date) as due_date')->leftJoin('order_tracking_lines', 'order_tracking_header.order_no', '=', 'order_tracking_lines.order_no')->leftJoin('expected_stock', 'order_tracking_lines.product', '=', 'expected_stock.product')->where('customer_code', auth()->user()->customer->code)->whereNotIn('status', [
-                'Invoiced',
-                'Cancelled',
-            ])->where('order_tracking_header.order_no', 'like', '%/%')->where('order_tracking_lines.product', 'not like', '%M19%')->groupBy('order_tracking_header.order_no', 'order_tracking_header.date_received', 'order_tracking_lines.product', 'order_tracking_lines.line_qty', 'order_tracking_lines.long_description')->get();
+        return self::selectRaw('order_tracking_header.order_no, order_tracking_header.date_received, order_tracking_lines.product, order_tracking_lines.line_qty, order_tracking_lines.long_description, MIN(expected_stock.due_date) as due_date')
+            ->leftJoin('order_tracking_lines', 'order_tracking_header.order_no', '=', 'order_tracking_lines.order_no')
+            ->leftJoin('expected_stock', 'order_tracking_lines.product', '=', 'expected_stock.product')
+            ->where('customer_code', auth()->user()->customer->code)->whereNotIn('status', ['Invoiced', 'Cancelled',])
+            ->where('order_tracking_header.order_no', 'like', '%/%')
+            ->where('order_tracking_lines.product', 'not like', '%M19%')
+            ->groupBy('order_tracking_header.order_no', 'order_tracking_header.date_received', 'order_tracking_lines.product', 'order_tracking_lines.line_qty', 'order_tracking_lines.long_description')
+            ->get();
     }
 }

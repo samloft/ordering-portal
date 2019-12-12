@@ -1,7 +1,6 @@
 <?php
 
 use App\Models\Product;
-use Illuminate\Http\Request;
 
 /*
 |--------------------------------------------------------------------------
@@ -14,12 +13,12 @@ use Illuminate\Http\Request;
 |
 */
 
-Route::group(['middleware' => 'auth:api', 'prefix' => 'v1'], function () {
-    Route::get('user', function() {
+Route::group(['middleware' => 'auth:api', 'prefix' => 'v1'], static function () {
+    Route::get('user', static function() {
         return request()->user();
     });
 
-    Route::get('product', function() {
+    Route::get('product', static function() {
         return Product::details(request('product'));
     });
 });
@@ -28,7 +27,7 @@ Route::group(['middleware' => 'auth:api', 'prefix' => 'v1'], function () {
  * API routes that require no authentication.
  */
 
-Route::get('version', function() {
+Route::get('version', static function() {
     return [
         'version' => Version::major() . '.' . Version::minor() . '.' . Version::patch(),
         'build' => Version::build()

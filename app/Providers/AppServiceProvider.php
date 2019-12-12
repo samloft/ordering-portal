@@ -4,7 +4,8 @@ namespace App\Providers;
 
 use App\Models\Category;
 use App\Models\GlobalSettings;
-use Illuminate\Support\Facades\Cache;use Illuminate\Support\Facades\Schema;
+use Illuminate\Support\Facades\Cache;
+use Illuminate\Support\Facades\Schema;
 use Illuminate\Support\ServiceProvider;
 
 class AppServiceProvider extends ServiceProvider

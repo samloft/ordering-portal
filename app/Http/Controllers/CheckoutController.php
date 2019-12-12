@@ -45,9 +45,9 @@ class CheckoutController extends Controller
      * Place the customers order.
      *
      * @param Request $request
-     * @return RedirectResponse
+     * @return \App\Http\Controllers\Array
      */
-    public function store(Request $request): RedirectResponse
+    public function store(Request $request): Array
     {
         $this->validation($request);
 
@@ -73,12 +73,12 @@ class CheckoutController extends Controller
             'details' => Basket::show($delivery['cost']),
         ];
 
-        dd($order_details);
-
         // After checkout complete
         if (session('address')) {
             session()->forget('address');
         }
+
+        return $order_details;
     }
 
     public function complete($order_number)

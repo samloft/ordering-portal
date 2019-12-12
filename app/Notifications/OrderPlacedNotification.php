@@ -19,27 +19,25 @@ class OrderPlacedNotification extends Notification
      */
     public function __construct()
     {
-        //
+
     }
 
     /**
      * Get the notification's delivery channels.
      *
-     * @param mixed $notifiable
      * @return array
      */
-    public function via($notifiable)
+    public function via(): array
     {
         return ['mail', 'slack'];
     }
 
     /**
-     * @param $notifiable
      * @return \Illuminate\Notifications\Messages\SlackMessage
      */
-    public function toSlack($notifiable): SlackMessage
+    public function toSlack(): SlackMessage
     {
-        return (new SlackMessage)->from('Online Ordering')->to('#online-ordering')
+        return (new SlackMessage())->from('Online Ordering')->to('#online-ordering')
             ->success()
             ->content('[' . ucfirst(config('app.name')) . '] - Order has been placed')
             ->attachment(static function ($attachment) {
@@ -56,23 +54,21 @@ class OrderPlacedNotification extends Notification
     /**
      * Get the mail representation of the notification.
      *
-     * @param mixed $notifiable
      * @return \Illuminate\Notifications\Messages\MailMessage
      */
-    public function toMail($notifiable)
+    public function toMail(): MailMessage
     {
-        return (new MailMessage)->line('The introduction to the notification.')->action('Notification Action', url('/'))->line('Thank you for using our application!');
+        return (new MailMessage())->line('The introduction to the notification.')->action('Notification Action', url('/'))->line('Thank you for using our application!');
     }
 
     /**
      * Get the array representation of the notification.
      *
-     * @param mixed $notifiable
      * @return array
      */
-    public function toArray($notifiable)
+    public function toArray()
     {
-        return [//
+        return [
         ];
     }
 }

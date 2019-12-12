@@ -134,7 +134,6 @@ class Category extends Model
 
         foreach ($sub_categories as $key => $value) {
             $count = 0;
-            $product_list = null;
 
             foreach ($products as $product) {
                 if (($product['category'] === $key) && $count <= 4) {

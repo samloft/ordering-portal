@@ -164,7 +164,7 @@ class Product extends Model
         foreach ($products as $product) {
             $product = str_replace(['%2B', '+'], ' ', encodeUrl($product)).'.png';
 
-            $exists = $exists = Storage::disk('public')->exists('product_images/'.$product);
+            $exists = Storage::disk('public')->exists('product_images/'.$product);
 
             if ($exists) {
                 return [

@@ -106,7 +106,7 @@ class AddressController extends Controller
     {
         $permission = Address::canEdit($id);
 
-        if (!$permission) {
+        if (! $permission) {
             return back()->with('error', 'You do not have permission to delete this address');
         }
 
@@ -124,7 +124,7 @@ class AddressController extends Controller
     {
         $permission = Address::canEdit(request('id'));
 
-        if (!$permission) {
+        if (! $permission) {
             return back()->with('error', 'You do not have permission to edit this address');
         }
 
@@ -141,7 +141,7 @@ class AddressController extends Controller
         $address_id = request('id');
         $address = Address::details($address_id);
 
-        if (!$address) {
+        if (! $address) {
             return redirect(route('account.addresses'))->with('error', 'Address not found, please try again');
         }
 
@@ -167,9 +167,9 @@ class AddressController extends Controller
                     'address_3' => $address->address_line_3,
                     'address_4' => $address->address_line_4,
                     'address_5' => $address->address_line_5,
-                    'postcode' => $address->post_code
-                ]
-            ]
+                    'postcode' => $address->post_code,
+                ],
+            ],
         ]);
     }
 

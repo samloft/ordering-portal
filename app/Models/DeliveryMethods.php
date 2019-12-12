@@ -34,12 +34,10 @@ class DeliveryMethods extends Model
         $delivery_details = self::where('uuid', $id)->findOrFail();
 
         // Work out any calculations.
-        $delivery = [
+        return [
             'title' => $delivery_details->title,
             'code' => $delivery_details->code,
             'cost' => $delivery_details->price,
         ];
-
-        return $delivery;
     }
 }

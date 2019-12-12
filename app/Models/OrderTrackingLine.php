@@ -15,9 +15,8 @@ use Illuminate\Support\Collection;
  */
 class OrderTrackingLine extends Model
 {
-    protected $table = 'order_tracking_lines';
-
     public $timestamps = false;
+    protected $table = 'order_tracking_lines';
 
     public function price(): BelongsTo
     {

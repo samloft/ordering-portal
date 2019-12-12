@@ -15,7 +15,7 @@ use App\Models\Basket;
 use App\Models\Customer;
 use Illuminate\Http\Request;
 
-Route::group(['middleware' => ['auth', 'has.customer']], function () {
+Route::group(['middleware' => ['auth', 'has.customer']], static function () {
     /*
      *  Home Page
      */
@@ -24,7 +24,7 @@ Route::group(['middleware' => ['auth', 'has.customer']], function () {
     /*
      *  Product Pages
      */
-    Route::group(['prefix' => 'products'], function () {
+    Route::group(['prefix' => 'products'], static function () {
         Route::get('view/{product}', 'ProductController@show')->name('products.show');
         Route::get('search', 'ProductController@search')->name('products.search');
 
@@ -35,8 +35,8 @@ Route::group(['middleware' => ['auth', 'has.customer']], function () {
         Route::get('{cat1?}/{cat2?}/{cat3?}', 'ProductController@index')->name('products');
     });
 
-    Route::group(['prefix' => 'category'], function () {
-        Route::get('image/{products}', function ($products) {
+    Route::group(['prefix' => 'category'], static function () {
+        Route::get('image/{products}', static function ($products) {
             return App\Models\Product::checkImage($products);
         })->name('products.check-image');
     });
@@ -44,14 +44,14 @@ Route::group(['middleware' => ['auth', 'has.customer']], function () {
     /*
      * Customer code auto complete.
      */
-    Route::post('customer/autocomplete', function (Request $request) {
+    Route::post('customer/autocomplete', static function (Request $request) {
         return Customer::autocomplete($request->customer);
     })->name('customer.autocomplete');
 
     /*
      * Order Tracking
      */
-    Route::group(['prefix' => 'order-tracking'], function () {
+    Route::group(['prefix' => 'order-tracking'], static function () {
         Route::get('/', 'OrderTrackingController@index')->name('order-tracking');
         Route::get('order/{order}', 'OrderTrackingController@show')->name('order-tracking.show');
         Route::get('copy', 'OrderTrackingController@copy')->name('order-tracking.copy-to-basket');
@@ -62,7 +62,7 @@ Route::group(['middleware' => ['auth', 'has.customer']], function () {
     /*
      * Order Upload
      */
-    Route::group(['prefix' => 'upload'], function () {
+    Route::group(['prefix' => 'upload'], static function () {
         Route::get('/', 'UploadController@index')->name('upload');
         Route::post('validation', 'UploadController@validation')->name('upload-validate');
         Route::get('completed', 'UploadController@store')->name('upload-completed');
@@ -71,7 +71,7 @@ Route::group(['middleware' => ['auth', 'has.customer']], function () {
     /*
      * Saved Baskets
      */
-    Route::group(['prefix' => 'saved-baskets'], function () {
+    Route::group(['prefix' => 'saved-baskets'], static function () {
         Route::get('/', 'SavedBasketController@index')->name('saved-baskets');
         Route::get('view', 'SavedBasketController@show')->name('saved-baskets.show');
         Route::post('store', 'SavedBasketController@store')->name('saved-baskets.store');
@@ -82,7 +82,7 @@ Route::group(['middleware' => ['auth', 'has.customer']], function () {
     /*
      * Reports
      */
-    Route::group(['prefix' => 'reports'], function () {
+    Route::group(['prefix' => 'reports'], static function () {
         Route::get('/', 'ReportController@index')->name('reports');
         Route::post('show', 'ReportController@show')->name('reports.show');
     });
@@ -99,7 +99,7 @@ Route::group(['middleware' => ['auth', 'has.customer']], function () {
     /*
      * Product Data
      */
-    Route::group(['prefix' => 'product-data'], function () {
+    Route::group(['prefix' => 'product-data'], static function () {
         Route::get('/', 'ProductDataController@index')->name('product-data');
     });
 
@@ -130,7 +130,7 @@ Route::group(['middleware' => ['auth', 'has.customer']], function () {
     /*
      * Basket
      */
-    Route::group(['prefix' => 'basket'], function () {
+    Route::group(['prefix' => 'basket'], static function () {
         Route::get('/', 'BasketController@index')->name('basket');
         Route::get('empty', 'BasketController@clear')->name('basket.empty');
 
@@ -138,11 +138,11 @@ Route::group(['middleware' => ['auth', 'has.customer']], function () {
         Route::post('delete-product', 'BasketController@removeProduct')->name('basket.delete-line');
         Route::post('update-product', 'BasketController@updateProductQuantity')->name('basket.update-line');
 
-        Route::get('summary/{shipping_value?}', function ($shipping_value = 0) {
+        Route::get('summary/{shipping_value?}', static function ($shipping_value = 0) {
             return Basket::show($shipping_value);
         })->name('basket.summary');
 
-        Route::get('dropdown', function () {
+        Route::get('dropdown', static function () {
             return Basket::show();
         })->name('basket.dropdown');
     });
@@ -150,7 +150,7 @@ Route::group(['middleware' => ['auth', 'has.customer']], function () {
     /*
      * Checkout
      */
-    Route::group(['prefix' => 'checkout'], function () {
+    Route::group(['prefix' => 'checkout'], static function () {
         Route::get('/', 'CheckoutController@index')->name('checkout');
         Route::post('order', 'CheckoutController@store')->name('checkout.order');
     });
@@ -167,6 +167,6 @@ Auth::routes();
 
 Route::get('new-products', 'Auth\LoginController@loginContent')->name('login.content');
 
-Route::fallback(function () {
+Route::fallback(static function () {
     return view('errors.404');
 });

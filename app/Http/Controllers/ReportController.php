@@ -65,7 +65,12 @@ class ReportController extends Controller
 
             if ($output === 'csv') {
                 $headings = [
-                    'Order Number', 'Product', 'Description', 'Ordered', 'Outstanding', 'Next Expecting',
+                    'Order Number',
+                    'Product',
+                    'Description',
+                    'Ordered',
+                    'Outstanding',
+                    'Next Expecting',
                 ];
 
                 $lines = [];
@@ -99,7 +104,6 @@ class ReportController extends Controller
             $summary_lines = [];
             $total_outstanding = 0;
 
-
             foreach ($summary as $key => $value) {
                 $summary_lines[$value->age] = $value->price;
 
@@ -116,7 +120,11 @@ class ReportController extends Controller
 
             if ($output === 'csv') {
                 $summary_headings = [
-                    'Total Outstanding', 'Not Due', 'Overdue up to 30 days', 'Overdue up to 60 days', 'Overdue over 60 days'
+                    'Total Outstanding',
+                    'Not Due',
+                    'Overdue up to 30 days',
+                    'Overdue up to 60 days',
+                    'Overdue over 60 days',
                 ];
 
                 $summary_line[] = [
@@ -124,11 +132,15 @@ class ReportController extends Controller
                     $summary_lines['Not due'] ?? 0,
                     $summary_lines['Overdue up to 30 day'] ?? 0,
                     $summary_lines['Overdue up to 60 days'] ?? 0,
-                    $summary_lines['Over 60 days overdue'] ?? 0
+                    $summary_lines['Over 60 days overdue'] ?? 0,
                 ];
 
                 $invoice_headings = [
-                    'Invoice No.', 'Order No.', 'Invoice Date', 'Due Date', 'Amount'
+                    'Invoice No.',
+                    'Order No.',
+                    'Invoice Date',
+                    'Due Date',
+                    'Amount',
                 ];
 
                 $lines = [];
@@ -139,7 +151,7 @@ class ReportController extends Controller
                         $invoice_line->reference,
                         Carbon::parse($invoice_line->dated)->format('d-m-Y'),
                         Carbon::parse($invoice_line->due_date)->format('d-m-Y'),
-                        $invoice_line->unall_curr_amount
+                        $invoice_line->unall_curr_amount,
                     ];
                 }
 
@@ -160,8 +172,13 @@ class ReportController extends Controller
      * @param null $extra_lines
      * @return BinaryFileResponse
      */
-    public function createCSV($filename, $headings, $lines, $extra_headings = null, $extra_lines = null): BinaryFileResponse
-    {
+    public function createCSV(
+        $filename,
+        $headings,
+        $lines,
+        $extra_headings = null,
+        $extra_lines = null
+    ): BinaryFileResponse {
         $callback = static function () use ($headings, $lines, $extra_headings, $extra_lines) {
             $handle = fopen('php://output', 'wb+');
             fputcsv($handle, $headings);
@@ -184,7 +201,7 @@ class ReportController extends Controller
         };
 
         $headers = [
-            'Content-Type' => 'text/css'
+            'Content-Type' => 'text/css',
         ];
 
         return response()->streamDownload($callback, $filename, $headers);

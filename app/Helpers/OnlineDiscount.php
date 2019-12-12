@@ -5,7 +5,7 @@
  * Take the given value and reduce it by the sites/customers online
  * discount percentage.
  *
- * @param integer $value
+ * @param int $value
  * @param int $discount_percent
  * @return float|int
  */
