@@ -86,12 +86,7 @@
             onSelected(name) {
                 this.customerSearch = name;
                 this.resultItems = [];
-
-                this.submit();
             },
-            submit() {
-                this.$refs.changeCustomer.submit();
-            }
         },
     }
 </script>

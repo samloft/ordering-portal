@@ -2409,10 +2409,6 @@ __webpack_require__.r(__webpack_exports__);
     onSelected: function onSelected(name) {
       this.customerSearch = name;
       this.resultItems = [];
-      this.submit();
-    },
-    submit: function submit() {
-      this.$refs.changeCustomer.submit();
     }
   }
 });
