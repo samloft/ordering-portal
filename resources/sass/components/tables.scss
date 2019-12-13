@@ -2,10 +2,10 @@ table {
     @apply .rounded .w-full .text-left .shadow;
 
     thead {
-        @apply .bg-gray-600 .uppercase;
+        @apply .uppercase;
 
         th {
-            @apply .font-light .py-2 .px-4 .text-gray-300;
+            @apply .bg-gray-600 .font-light .py-2 .px-4 .text-gray-300;
         }
 
         th:first-child {
@@ -18,10 +18,20 @@ table {
     }
 
     tbody {
-        @apply .bg-white;
+        tr:last-child {
+            @apply .rounded-bl .rounded-br;
 
+            td:first-child {
+                @apply .rounded-bl;
+            }
+
+            td:last-child {
+                @apply .rounded-br;
+            }
+        }
+        
         td {
-            @apply .border-t .border-gray-300 .py-2 .px-4;
+            @apply .bg-white .border-t .border-gray-300 .py-2 .px-4;
         }
     }
 
