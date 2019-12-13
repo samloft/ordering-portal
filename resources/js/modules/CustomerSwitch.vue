@@ -4,7 +4,7 @@
 
             <div v-if="user.admin">
                 <div class="relative">
-                    <input type="text" class="form-control" name="customer" autocomplete="off" v-model="customerSearch" @keyup="onKeyUp(customerSearch)" required>
+                    <input type="text" class="form-control" name="customer" autocomplete="off" v-model="customerSearch" v-on:blur="resultItems = []" @keyup="onKeyUp(customerSearch)" required>
                     <button type="submit" class="absolute inset-y-0 right-0 flex items-center px-3 text-gray-700">
                         <i class="fas fa-users text-gray-600"/>
                     </button>

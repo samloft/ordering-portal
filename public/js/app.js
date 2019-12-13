@@ -2856,6 +2856,8 @@ __webpack_require__.r(__webpack_exports__);
         if (result) {
           _this.keywordSearch = '';
           _this.quantity = 1;
+
+          _this.$refs.product.focus();
         }
       });
     },
@@ -10429,6 +10431,9 @@ var render = function() {
                   },
                   domProps: { value: _vm.customerSearch },
                   on: {
+                    blur: function($event) {
+                      _vm.resultItems = []
+                    },
                     keyup: function($event) {
                       return _vm.onKeyUp(_vm.customerSearch)
                     },
@@ -11110,12 +11115,27 @@ var render = function() {
             expression: "keywordSearch"
           }
         ],
+        ref: "product",
         staticClass: "mb-1",
         attrs: { type: "text", placeholder: _vm.placeHolderText },
         domProps: { value: _vm.keywordSearch },
         on: {
-          keyup: function($event) {
-            return _vm.onKeyUp(_vm.keywordSearch)
+          keyup: [
+            function($event) {
+              return _vm.onKeyUp(_vm.keywordSearch)
+            },
+            function($event) {
+              if (
+                !$event.type.indexOf("key") &&
+                _vm._k($event.keyCode, "enter", 13, $event.key, "Enter")
+              ) {
+                return null
+              }
+              return _vm.submit()
+            }
+          ],
+          blur: function($event) {
+            _vm.resultItems = []
           },
           input: function($event) {
             if ($event.target.composing) {
@@ -11183,6 +11203,15 @@ var render = function() {
           attrs: { value: "1", autocomplete: "off" },
           domProps: { value: _vm.quantity },
           on: {
+            keyup: function($event) {
+              if (
+                !$event.type.indexOf("key") &&
+                _vm._k($event.keyCode, "enter", 13, $event.key, "Enter")
+              ) {
+                return null
+              }
+              return _vm.submit()
+            },
             input: function($event) {
               if ($event.target.composing) {
                 return

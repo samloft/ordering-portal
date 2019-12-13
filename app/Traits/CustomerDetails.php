@@ -15,7 +15,6 @@ trait CustomerDetails
      */
     public function getCustomerAttribute()
     {
-        //dd($current_customer);
         if ($this->current_customer) {
             return $this->current_customer;
         }

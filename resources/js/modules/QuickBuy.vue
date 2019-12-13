@@ -1,8 +1,8 @@
 <template>
     <div>
         <div class="relative">
-            <input type="text" :placeholder="placeHolderText" v-model="keywordSearch" class="mb-1"
-                   @keyup="onKeyUp(keywordSearch)"/>
+            <input type="text" ref="product" :placeholder="placeHolderText" v-model="keywordSearch" class="mb-1"
+                   @keyup="onKeyUp(keywordSearch)" v-on:blur="resultItems = []" @keyup.enter="submit()"/>
 
             <div class="absolute -mt-2 w-full">
                 <ul class="bg-gray-100 rounded-b-lg w-full border-l border-r border-b" v-show="resultItems.length > 0">
@@ -17,7 +17,7 @@
         <div class="flex">
             <div class="align-items-center">
                 <span class="mr-2 text-gray-600">Qty:</span>
-                <input class="w-24 mr-2" value="1" v-model="quantity" autocomplete="off">
+                <input class="w-24 mr-2" value="1" v-model="quantity" @keyup.enter="submit()" autocomplete="off">
             </div>
             <button class="button button-primary flex-grow" @click="submit()" type="submit">
                 Add to basket
@@ -43,6 +43,7 @@
                     if (result) {
                         this.keywordSearch = '';
                         this.quantity = 1;
+                        this.$refs.product.focus();
                     }
                 });
             },
