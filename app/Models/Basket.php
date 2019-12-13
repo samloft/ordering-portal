@@ -66,13 +66,13 @@ class Basket extends Model
         foreach ($lines as $line) {
             // Check for any bulk discounts and adjust the prices to match if found.
             switch (true) {
-                case ($line->quantity >= $line->break3) && ($line->price3 !== null):
+                case ($line->quantity >= $line->break3) && ($line->price3 > 0):
                     $net_price = $line->price3;
                     break;
-                case ($line->quantity >= $line->break2) && ($line->price2 !== null):
+                case ($line->quantity >= $line->break2) && ($line->price2 > 0):
                     $net_price = $line->price2;
                     break;
-                case ($line->quantity >= $line->break1) && ($line->price1 !== null):
+                case ($line->quantity >= $line->break1) && ($line->price1 > 0):
                     $net_price = $line->price1;
                     break;
                 default:
