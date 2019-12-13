@@ -2232,6 +2232,7 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
@@ -2277,9 +2278,10 @@ __webpack_require__.r(__webpack_exports__);
       });
     },
     updateProduct: function updateProduct(product, quantity) {
-      // if (!Number.isInteger(quantity)) {
-      //     return Vue.swal('Error', 'Quantity must be a number, please fix this error and try again.', 'error');
-      // }
+      if (!Number.isInteger(parseInt(quantity))) {
+        return Vue.swal('Error', 'Quantity must be a number, please fix this error and try again.', 'error');
+      }
+
       axios.post('/basket/update-product', {
         product: product,
         qty: quantity
@@ -10241,6 +10243,24 @@ var render = function() {
                       attrs: { name: "line_qty", autocomplete: "off" },
                       domProps: { value: product.quantity },
                       on: {
+                        keyup: function($event) {
+                          if (
+                            !$event.type.indexOf("key") &&
+                            _vm._k(
+                              $event.keyCode,
+                              "enter",
+                              13,
+                              $event.key,
+                              "Enter"
+                            )
+                          ) {
+                            return null
+                          }
+                          return _vm.updateProduct(
+                            product.product,
+                            product.quantity
+                          )
+                        },
                         input: function($event) {
                           if ($event.target.composing) {
                             return

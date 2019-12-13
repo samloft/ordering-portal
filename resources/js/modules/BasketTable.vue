@@ -30,6 +30,7 @@
                 <td class="text-right">{{ product.unit_price }}</td>
                 <td class="text-center">
                     <input name="line_qty" class="w-20 h-6 text-right bg-gray-100" v-model="product.quantity"
+                           @keyup.enter="updateProduct(product.product, product.quantity)"
                            autocomplete="off">
                     <div class="leading-none text-primary">
                         <small class="cursor-pointer hover:underline" @click="updateProduct(product.product, product.quantity)">Update</small>
@@ -106,9 +107,9 @@
                 });
             },
             updateProduct: function(product, quantity) {
-                // if (!Number.isInteger(quantity)) {
-                //     return Vue.swal('Error', 'Quantity must be a number, please fix this error and try again.', 'error');
-                // }
+                if (!Number.isInteger(parseInt(quantity))) {
+                    return Vue.swal('Error', 'Quantity must be a number, please fix this error and try again.', 'error');
+                }
 
                 axios.post('/basket/update-product', {
                     product: product,
