@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\HomeLink;
+use App\Models\OrderTrackingLine;
 use Illuminate\Http\Response;
 
 class HomeController extends Controller
@@ -12,11 +13,12 @@ class HomeController extends Controller
      */
     public function index()
     {
+        $popular_products = OrderTrackingLine::popular();
         //$links = [
         //    'categories' => HomeLink::categories(),
         //    'adverts' => HomeLink::adverts(),
         //];
 
-        return view('home.index');
+        return view('home.index', compact('popular_products'));
     }
 }
