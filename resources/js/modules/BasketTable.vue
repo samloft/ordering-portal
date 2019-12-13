@@ -41,8 +41,6 @@
             </tbody>
         </table>
 
-        <div class="text-xs mb-5">Red product lines have a chance of going onto backorder.</div>
-
         <div v-if="items.length === 0" class="bg-white rounded shadow-md p-6 text-center mb-5 text-2xl font-thin">
             Your basket is currently empty.
         </div>
