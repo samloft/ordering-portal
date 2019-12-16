@@ -25,9 +25,9 @@
             <a href="{{ route('reports') }}" class="{{ activeMenu('reports') }}">{{ __('Reports') }}</a>
         </div>
 
-        <div class="menu-item">
-            <a href="#">{{ __('Product Data') }}</a>
-        </div>
+{{--        <div class="menu-item">--}}
+{{--            <a href="#">{{ __('Product Data') }}</a>--}}
+{{--        </div>--}}
 
     </div>
 </nav>

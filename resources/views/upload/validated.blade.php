@@ -23,7 +23,7 @@
                     </svg>
                     <div>
                         <p class="alert-title">{{ $product_lines['errors'] . __(' Errors Found!') }}</p>
-                        <p class="alert-text">{{ __('OrderTrackingLine in red will not be added to your basket.') }}</p>
+                        <p class="alert-text">{{ __('Lines in red will not be added to your basket.') }}</p>
                     </div>
                 </div>
             </div>

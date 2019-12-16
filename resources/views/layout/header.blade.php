@@ -9,8 +9,10 @@
                 </svg>
             </div>
 
-            <img class="logo" src="{{ asset('images/logos/logo-' . config('app.name') .'.png') }}"
-                 alt="{{ config('app.name') }}">
+            <a href="/">
+                <img class="logo" src="{{ asset('images/logos/logo-' . config('app.name') .'.png') }}"
+                     alt="{{ config('app.name') }}">
+            </a>
 
             <div class="w-1/4 md:w-auto md:flex text-right p-3 bg-background_invert-color rounded">
                 <div class="flex md:flex md:items-center mr-2">

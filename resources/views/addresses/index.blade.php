@@ -12,14 +12,14 @@
 
     @include('layout.alerts')
 
-    @if ($addresses)
+    @if (count($addresses) > 0)
         <account-address :addresses="{{ json_encode($addresses, true) }}" checkout="{{ $checkout }}"></account-address>
 
         <div class="mb-5 mt-5">
             {{ $addresses->appends(request()->input())->links('layout.pagination') }}
         </div>
     @else
-        <div class="text-center mt-5 mb-5">
+        <div class="text-center font-medium mt-5 mb-5 bg-white rounded-lg shadow p-10">
             <h2>{{ __('You currently have no delivery addresses, click below to add one.') }}</h2>
         </div>
     @endif

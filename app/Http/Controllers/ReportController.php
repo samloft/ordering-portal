@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\AccountSummary;
-use App\Models\OrderTracking\OrderTrackingHeader;
+use App\Models\OrderTrackingHeader;
 use Barryvdh\DomPDF\Facade as PDF;
 use Carbon\Carbon;
 use Illuminate\Contracts\View\Factory;
@@ -60,7 +60,7 @@ class ReportController extends Controller
             if ($output === 'pdf') {
                 $pdf = PDF::loadView('reports.back-orders', compact('back_orders'));
 
-                return $pdf::download('back_orders.pdf');
+                return $pdf->download('back_orders.pdf');
             }
 
             if ($output === 'csv') {
@@ -115,7 +115,7 @@ class ReportController extends Controller
             if ($output === 'pdf') {
                 $pdf = PDF::loadView('reports.account-summary', compact('invoice_lines', 'summary_lines'));
 
-                return $pdf::download('account_summary.pdf');
+                return $pdf->download('account_summary.pdf');
             }
 
             if ($output === 'csv') {
