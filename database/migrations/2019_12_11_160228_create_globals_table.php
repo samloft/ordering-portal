@@ -34,13 +34,13 @@ class CreateGlobalsTable extends Migration
                 'social' => [
                     'facebook' => 'facebook-url',
                     'twitter' => 'twitter-url',
-                    'linked-in' => 'linkedin-url',
+                    'linkedin' => 'linkedin-url',
                     'instagram' => 'instagram-url',
                     'youtube' => 'youtube-url',
                 ],
                 'apps' => [
-                    'apple-app-store' => 'apple-app-url',
-                    'android-app-store' => 'android-app-url',
+                    'apple' => 'apple-app-url',
+                    'android' => 'android-app-url',
                 ],
             ], true),
             'created_at' => date('Y-m-d H:i:s'),

@@ -17,7 +17,7 @@
         <div class="flex-1 flex overflow-hidden">
             @include('layouts.navigation')
 
-            <main class="flex-1 flex bg-gray-200">
+            <main class="flex-1 flex bg-gray-200 overflow-auto">
                 <div class="flex-1 flex flex-col w-0">
                     <div class="shadow-md">
                         <div class="px-10 py-4 bg-gray-100 border-b">
@@ -26,7 +26,7 @@
                         </div>
                     </div>
 
-                    <div class="px-10 py-4 flex-1 overflow-auto">
+                    <div class="px-10 py-4 flex-1">
                         @yield('content')
                     </div>
                 </div>

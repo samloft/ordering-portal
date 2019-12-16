@@ -48,7 +48,7 @@ Route::group(['middleware' => 'auth:admin'], static function () {
 
     Route::group(['prefix' => 'company-information'], static function () {
         Route::get('/', 'Cms\CompanyDetailsController@index')->name('cms.company-information');
-        Route::post('store', 'Cms\CompanyDetailsController@store')->name('cms.company-information.store');
+        Route::post('/', 'Cms\CompanyDetailsController@store')->name('cms.company-information.store');
     });
 
     Route::group(['prefix' => 'home-links'], static function () {

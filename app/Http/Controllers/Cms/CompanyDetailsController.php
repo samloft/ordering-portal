@@ -2,55 +2,57 @@
 
 namespace App\Http\Controllers\Cms;
 
+use App\Models\GlobalSettings;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Cache;
 
 class CompanyDetailsController extends Controller
 {
+    /**
+     * Display the company details form.
+     *
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     */
     public function index()
     {
-        return view('company-information.index');
+        $company_details = json_decode(GlobalSettings::where('key', 'company-details')->first()->value, true);
+
+        return view('company-information.index', compact('company_details'));
     }
 
     /**
-     * Update the customer information in the .env file.
+     * Update the company details information.
      *
-     * @param Request $request
-     * @return RedirectResponse
+     * @return \Illuminate\Http\RedirectResponse
      */
-    public function store(Request $request): RedirectResponse
+    public function store(): RedirectResponse
     {
-        $env_path = base_path('.env');
+        $company_details = json_encode([
+            'line_1' => request('line_1'),
+            'line_2' => request('line_2'),
+            'line_3' => request('line_3'),
+            'line_4' => request('line_4'),
+            'line_5' => request('line_5'),
+            'postcode' => request('postcode'),
+            'telephone' => request('telephone'),
+            'email' => request('email'),
+            'social' => [
+                'facebook' => request('facebook'),
+                'twitter' => request('twitter'),
+                'linkedin' => request('linkedin'),
+                'instagram' => request('instagram'),
+                'youtube' => request('youtube'),
+            ],
+            'apps' => [
+                'apple' => request('apple'),
+                'android' => request('android'),
+            ],
+        ], true);
 
-        $keys = [
-            // Address Details
-            'ADDRESS_LINE_1' => $request->address_line_1,
-            'ADDRESS_LINE_2' => $request->address_line_2,
-            'ADDRESS_LINE_3' => $request->address_line_3,
-            'ADDRESS_LINE_4' => $request->address_line_4,
-            'ADDRESS_LINE_5' => $request->address_line_5,
-            'ADDRESS_POSTCODE' => $request->postcode,
-            'ADDRESS_TELEPHONE' => $request->telephone,
-            'ADDRESS_FAX' => $request->fax,
-            'ADDRESS_EMAIL' => $request->email,
-
-            // Social Details
-            'SOCIAL_FACEBOOK' => $request->facebook,
-            'SOCIAL_LINKEDIN' => $request->linkedin,
-            'SOCIAL_TWITTER' => $request->twitter,
-            'SOCIAL_INSTAGRAM' => $request->instagram,
-
-            // App Details
-            'APP_APPLE' => $request->apple,
-            'APP_ANDROID' => $request->android,
-        ];
-
-        foreach ($keys as $key => $value) {
-            file_put_contents($env_path, str_replace(
-                $key . '="' . env($key) . '"', $key . '="' . $value . '"', file_get_contents($env_path)
-            ));
-        }
+        GlobalSettings::where('key', 'company-details')->update(['value' => $company_details]);
+        Cache::forget('company_details');
 
         return back()->with('success', 'Company details have been updated');
     }

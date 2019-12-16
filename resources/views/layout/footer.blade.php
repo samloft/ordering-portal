@@ -20,7 +20,7 @@
                         <span class="font-semibold">{{ $company_details['line_1'] }}</span>
                         <span>{{ $company_details['line_2'] }}</span>
                         <span
-                            class="block">{{ $company_details['line_3'] . ' ' . $company_details['line_4'] . ' ' . $company_details['postcode']}}</span>
+                            class="block">{{ $company_details['line_3'] . ' ' . $company_details['line_4'] . ' ' . $company_details['line_5'] . ' ' . $company_details['postcode']}}</span>
                     </span>
 
                     <span class="block">

@@ -8,7 +8,13 @@ html {
     font-family: 'Poppins', sans-serif;
 }
 
+body {
+    @apply .text-gray-800;
+}
+
 @import 'components/alerts';
+@import 'components/forms';
+@import 'components/buttons';
 
 .dropdown {
     @apply .rounded .relative;
