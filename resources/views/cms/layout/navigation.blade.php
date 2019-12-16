@@ -4,28 +4,28 @@
             <div class="sidebar-heading sidebar-m-t mt-0 pt-5">{{ __('Menu') }}</div>
 
             <ul class="sidebar-menu" id="components_menu">
-                <li class="sidebar-menu-item {{ setActive('cms.index') }}">
+                <li class="sidebar-menu-item {{ activeMenu('cms.index') }}">
                     <a class="sidebar-menu-button" href="{{ route('cms.index') }}">
                         <i class="sidebar-menu-icon sidebar-menu-icon--left material-icons">dvr</i>
                         <span class="sidebar-menu-text">{{ __('Dashboard') }}</span>
                     </a>
                 </li>
 
-                <li class="sidebar-menu-item {{ setActive('cms.site-users') }}">
+                <li class="sidebar-menu-item {{ activeMenu('cms.site-users') }}">
                     <a class="sidebar-menu-button" href="{{ route('cms.site-users') }}">
                         <i class="sidebar-menu-icon sidebar-menu-icon--left material-icons">people</i>
                         <span class="sidebar-menu-text">{{ __('Site Users') }}</span>
                     </a>
                 </li>
 
-                <li class="sidebar-menu-item {{ setActive('cms.admin') }}">
+                <li class="sidebar-menu-item {{ activeMenu('cms.admin') }}">
                     <a class="sidebar-menu-button" href="{{ route('cms.admin') }}">
                         <i class="sidebar-menu-icon sidebar-menu-icon--left material-icons">nature_people</i>
                         <span class="sidebar-menu-text">{{ __('Admin Users') }}</span>
                     </a>
                 </li>
 
-                <li class="sidebar-menu-item {{ setActive('cms.company-information') }}">
+                <li class="sidebar-menu-item {{ activeMenu('cms.company-information') }}">
                     <a class="sidebar-menu-button" href="{{ route('cms.company-information') }}">
                         <i class="sidebar-menu-icon sidebar-menu-icon--left material-icons">business</i>
                         <span class="sidebar-menu-text">{{ __('Company Details') }}</span>
@@ -37,7 +37,7 @@
 
             <div class="sidebar-block p-0">
                 <ul class="sidebar-menu">
-                    <li class="sidebar-menu-item {{ setActive('cms.home-links') }}">
+                    <li class="sidebar-menu-item {{ activeMenu('cms.home-links') }}">
                         <a class="sidebar-menu-button" href="{{ route('cms.home-links') }}">
                             <i class="sidebar-menu-icon sidebar-menu-icon--left material-icons">insert_link</i>
                             <span class="sidebar-menu-text">{{ __('Home Links') }}</span>
@@ -58,14 +58,14 @@
                         </a>
                     </li>
 
-                    <li class="sidebar-menu-item {{ setActive('cms.contacts') }}">
+                    <li class="sidebar-menu-item {{ activeMenu('cms.contacts') }}">
                         <a class="sidebar-menu-button" href="{{ route('cms.contacts') }}">
                             <i class="sidebar-menu-icon sidebar-menu-icon--left material-icons">contact_mail</i>
                             <span class="sidebar-menu-text">{{ __('Contact') }}</span>
                         </a>
                     </li>
 
-                    <li class="sidebar-menu-item {{ setActive('cms.product-images') }}">
+                    <li class="sidebar-menu-item {{ activeMenu('cms.product-images') }}">
                         <a class="sidebar-menu-button" href="{{ route('cms.product-images') }}">
                             <i class="sidebar-menu-icon sidebar-menu-icon--left material-icons">image</i>
                             <span class="sidebar-menu-text">{{ __('Product Images') }}</span>

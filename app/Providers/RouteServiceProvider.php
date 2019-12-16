@@ -23,8 +23,6 @@ class RouteServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-        //
-
         parent::boot();
     }
 
@@ -33,7 +31,7 @@ class RouteServiceProvider extends ServiceProvider
      *
      * @return void
      */
-    public function map()
+    public function map(): void
     {
         $this->mapApiRoutes();
 
@@ -49,12 +47,9 @@ class RouteServiceProvider extends ServiceProvider
      *
      * @return void
      */
-    protected function mapWebRoutes()
+    protected function mapWebRoutes(): void
     {
-        Route::domain($this->baseDomain())
-            ->middleware('web')
-            ->namespace($this->namespace)
-            ->group(base_path('routes/web.php'));
+        Route::domain($this->baseDomain())->middleware('web')->namespace($this->namespace)->group(base_path('routes/web.php'));
     }
 
     /**
@@ -64,12 +59,14 @@ class RouteServiceProvider extends ServiceProvider
      *
      * @return void
      */
-    protected function mapCmsRoutes()
+    protected function mapCmsRoutes(): void
     {
-        Route::domain($this->baseDomain('cms'))
-            ->middleware('web')
-            ->namespace($this->namespace)
-            ->group(base_path('routes/cms.php'));
+        //Route::domain($this->baseDomain('cms'))
+        //    ->middleware('web')
+        //    ->namespace($this->namespace)
+        //    ->group(base_path('routes/cms.php'));
+
+        Route::prefix('cms')->middleware('web')->namespace($this->namespace)->group(base_path('routes/cms.php'));
     }
 
     /**
@@ -81,10 +78,7 @@ class RouteServiceProvider extends ServiceProvider
      */
     protected function mapApiRoutes()
     {
-        Route::domain($this->baseDomain('api'))
-            ->middleware('api')
-            ->namespace($this->namespace)
-            ->group(base_path('routes/api.php'));
+        Route::domain($this->baseDomain('api'))->middleware('api')->namespace($this->namespace)->group(base_path('routes/api.php'));
     }
 
     /**
@@ -99,6 +93,6 @@ class RouteServiceProvider extends ServiceProvider
             $sub_domain = "{$sub_domain}.";
         }
 
-        return $sub_domain . config('app.base_domain');
+        return $sub_domain.config('app.base_domain');
     }
 }

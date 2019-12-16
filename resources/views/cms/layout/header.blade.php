@@ -14,6 +14,9 @@
                          alt="Scolmore">
                 </a>
 
+                <a class="dropdown-item" href="/logout"
+                   onclick="event.preventDefault(); document.getElementById('logout-form').submit();">{{ __('Logout') }}</a>
+
                 <ul class="nav navbar-nav d-none d-sm-flex border-left navbar-height align-items-center">
                     <li class="nav-item dropdown">
                         <a href="" class="nav-link dropdown-toggle" data-toggle="dropdown"

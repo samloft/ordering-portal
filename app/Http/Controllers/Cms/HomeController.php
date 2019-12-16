@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Cms;
 
 use App\Http\Controllers\Controller;
+use App\Models\OrderTrackingHeader;
 use App\Models\User;
 use Illuminate\Http\Response;
 
@@ -18,13 +19,13 @@ class HomeController extends Controller
         $this->middleware('auth:admin');
     }
 
-    /**
-     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
-     */
     public function index()
     {
-        $users = User::countAll();
+        $stats = [
+            'users' => User::countAll(),
+            'orders-today' => OrderTrackingHeader::todayCount()
+        ];
 
-        return view('cms.index', compact('users'));
+        return view('dashboard.index', compact('stats'));
     }
 }

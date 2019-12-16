@@ -19,7 +19,7 @@
 
 <body class="layout-default">
 
-<div class="preloader"></div>
+{{--<div class="preloader"></div>--}}
 
 <div class="mdk-header-layout js-mdk-header-layout">
 
@@ -39,12 +39,16 @@
     </div>
 
 </div>
-
-<script type="text/javascript" src="{{ mix('js/app.js') }}"></script>
-<script type="text/javascript" src="{{ mix('js/cms.js') }}"></script>
+<script
+    src="https://code.jquery.com/jquery-3.4.1.min.js"
+    integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo="
+    crossorigin="anonymous"></script>
+<script type="text/javascript" src="{{ asset('js/app.js') }}"></script>
+<script type="text/javascript" src="{{ asset('js/cms.js') }}"></script>
 <script type="text/javascript" src="{{ asset('js/cms/vendor/dom-factory.js') }}"></script>
 <script type="text/javascript" src="{{ asset('js/cms/vendor/material-design-kit.js') }}"></script>
 <script type="text/javascript" src="{{ asset('js/cms/vendor/dropzone.min.js') }}"></script>
+
 <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-confirm/3.3.2/jquery-confirm.min.js"></script>
 

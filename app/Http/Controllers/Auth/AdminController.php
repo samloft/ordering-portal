@@ -26,7 +26,7 @@ class AdminController extends Controller
      */
     public function showLoginForm()
     {
-        return view('cms.auth.login');
+        return view('authentication.login');
     }
 
     public function showForgotform()
