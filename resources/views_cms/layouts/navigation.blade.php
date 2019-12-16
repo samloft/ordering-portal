@@ -15,45 +15,42 @@
             </h2>
 
             <div class="my-3">
-                <a href="#"
-                   class="-mx-3 px-3 py-2 flex items-center justify-between text-sm font-medium bg-gray-200 rounded-lg">
+                <a href="{{ route('cms.index') }}" class="menu-item {{ activeMenu('cms.index') }}">
                     <span class="inline-flex">
                         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"
-                             class="h-6 w-6 fill-current text-gray-700">
+                             class="h-6 w-6 fill-current">
                             <path
                                 d="M3 6a3 3 0 013-3h12a3 3 0 013 3v12a3 3 0 01-3 3H6a3 3 0 01-3-3V6zm3-1a1 1 0 00-1 1v6h1.586A2 2 0 018 12.586L10.414 15h3.172L16 12.586A2 2 0 0117.414 12H19V6a1 1 0 00-1-1H6zm13 9h-1.586L15 16.414a2 2 0 01-1.414.586h-3.172A2 2 0 019 16.414L6.586 14H5v4a1 1 0 001 1h12a1 1 0 001-1v-4z"></path>
                         </svg>
-                        <span class="ml-2 text-gray-800">Dashboard</span>
+                        <span class="menu-title">Dashboard</span>
                     </span>
                 </a>
+
                 <a href="#"
-                   class="mt-2 -mx-3 px-3 py-2 flex items-center justify-between text-sm font-medium text-gray-300 hover:bg-gray-200 hover:text-gray-700 rounded-lg"><span
-                        class="inline-flex">
+                   class="menu-item">
+                    <span class="inline-flex">
                         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"
-                             class="h-6 w-6 fill-current text-gray-500 hover:text-gray-700">
+                             class="h-6 w-6 fill-current">
                             <path
                                 d="M9 12A5 5 0 1 1 9 2a5 5 0 0 1 0 10zm0-2a3 3 0 1 0 0-6 3 3 0 0 0 0 6zm7 11a1 1 0 0 1-2 0v-2a3 3 0 0 0-3-3H7a3 3 0 0 0-3 3v2a1 1 0 0 1-2 0v-2a5 5 0 0 1 5-5h4a5 5 0 0 1 5 5v2zm1-5a1 1 0 0 1 0-2 5 5 0 0 1 5 5v2a1 1 0 0 1-2 0v-2a3 3 0 0 0-3-3zm-2-4a1 1 0 0 1 0-2 3 3 0 0 0 0-6 1 1 0 0 1 0-2 5 5 0 0 1 0 10z"/></svg>
-                        <span class="ml-2">Site Users</span>
+                        <span class="menu-title">Site Users</span>
                     </span>
                 </a>
-                <a href="#"
-                   class="mt-2 -mx-3 px-3 py-2 flex items-center justify-between text-sm font-medium text-gray-300 hover:bg-gray-200 hover:text-gray-700 rounded-lg"><span
-                        class="inline-flex">
-                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"
-                             class="h-6 w-6 fill-current text-gray-500 hover:text-gray-700">
+                <a href="#" class="menu-item">
+                    <span class="inline-flex">
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
                             <path
                                 d="M19 10h2a1 1 0 0 1 0 2h-2v2a1 1 0 0 1-2 0v-2h-2a1 1 0 0 1 0-2h2V8a1 1 0 0 1 2 0v2zM9 12A5 5 0 1 1 9 2a5 5 0 0 1 0 10zm0-2a3 3 0 1 0 0-6 3 3 0 0 0 0 6zm8 11a1 1 0 0 1-2 0v-2a3 3 0 0 0-3-3H7a3 3 0 0 0-3 3v2a1 1 0 0 1-2 0v-2a5 5 0 0 1 5-5h5a5 5 0 0 1 5 5v2z"/></svg>
-                        <span class="ml-2">Admin Users</span>
+                        <span class="menu-title">Admin Users</span>
                     </span>
                 </a>
-                <a href="{{ route('cms.company-information') }}"
-                   class="mt-2 -mx-3 px-3 py-2 flex items-center justify-between text-sm font-medium text-gray-300 hover:bg-gray-200 hover:text-gray-700 rounded-lg"><span
-                        class="inline-flex">
-                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"
-                             class="h-6 w-6 fill-current text-gray-500 hover:text-gray-700">
+
+                <a href="{{ route('cms.company-information') }}" class="menu-item {{ activeMenu('cms.company-information') }}">
+                    <span class="inline-flex">
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
                             <path
                                 d="M19 10v6a2 2 0 0 1 2 2v2a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-2c0-1.1.9-2 2-2v-6a2 2 0 0 1-2-2V7a1 1 0 0 1 .55-.9l8-4a1 1 0 0 1 .9 0l8 4A1 1 0 0 1 21 7v1a2 2 0 0 1-2 2zm-6 0h-2v6h2v-6zm4 0h-2v6h2v-6zm-8 0H7v6h2v-6zM5 7.62V8h14v-.38l-7-3.5-7 3.5zM5 18v2h14v-2H5z"/></svg>
-                        <span class="ml-2">Company Information</span>
+                        <span class="menu-title">Company Information</span>
                     </span>
                 </a>
             </div>

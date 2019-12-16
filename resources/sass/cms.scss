@@ -27,3 +27,33 @@ body {
         @apply .bg-gray-100;
     }
 }
+
+nav {
+    .menu-item {
+        @apply .mt-2 .-mx-3 .px-3 .py-2 .flex .items-center .justify-between .text-sm .font-medium .text-gray-300 .rounded-lg;
+
+        &:hover {
+            @apply .bg-gray-200 .text-gray-700;
+        }
+
+        svg {
+            @apply .text-gray-500 .h-6 .w-6 .fill-current;
+        }
+
+        .menu-title {
+            @apply .ml-2;
+        }
+    }
+
+    .active {
+        @apply .bg-gray-200;
+
+        svg {
+            @apply .text-gray-700;
+        }
+
+        span {
+            @apply .text-gray-800;
+        }
+    }
+}

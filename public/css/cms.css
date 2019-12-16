@@ -13034,6 +13034,51 @@ select {
   background-color: #f7fafc;
 }
 
+nav .menu-item {
+  margin-top: 0.5rem;
+  margin-left: -0.75rem;
+  margin-right: -0.75rem;
+  padding-left: 0.75rem;
+  padding-right: 0.75rem;
+  padding-top: 0.5rem;
+  padding-bottom: 0.5rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  font-size: 0.875rem;
+  font-weight: 500;
+  color: #e2e8f0;
+  border-radius: 0.5rem;
+}
+
+nav .menu-item:hover {
+  background-color: #edf2f7;
+  color: #4a5568;
+}
+
+nav .menu-item svg {
+  color: #a0aec0;
+  height: 1.5rem;
+  width: 1.5rem;
+  fill: currentColor;
+}
+
+nav .menu-item .menu-title {
+  margin-left: 0.5rem;
+}
+
+nav .active {
+  background-color: #edf2f7;
+}
+
+nav .active svg {
+  color: #4a5568;
+}
+
+nav .active span {
+  color: #2d3748;
+}
+
 @media (min-width: 640px){
   .sm\:sr-only{
     position: absolute;
