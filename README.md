@@ -2,6 +2,8 @@
 ----
 
 [![CircleCI](https://circleci.com/gh/samloft/ordering-portal.svg?style=svg)](https://circleci.com/gh/samloft/ordering-portal)
+[![Maintainability](https://api.codeclimate.com/v1/badges/14aae2675520d94d559f/maintainability)](https://codeclimate.com/github/samloft/ordering-portal/maintainability)
+[![Test Coverage](https://api.codeclimate.com/v1/badges/14aae2675520d94d559f/test_coverage)](https://codeclimate.com/github/samloft/ordering-portal/test_coverage)
 
 Ordering portal is ecommerce portal for a Sage ERP 1000 system, taking extracted data from Sage as syncs to populate the database for this system.
 This system is still highly under construction (Being worked on in spare time).
