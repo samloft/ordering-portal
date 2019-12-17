@@ -7,7 +7,6 @@ use Illuminate\Contracts\View\Factory;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
-use Illuminate\Support\Facades\Input;
 use Illuminate\Support\Str;
 use Illuminate\View\View;
 
@@ -20,10 +19,10 @@ class UserController extends Controller
      */
     public function index()
     {
-        $search = Input::get('search');
+        $search = request('search');
         $site_users = User::listAll($search);
 
-        return view('cms.users.index', compact('site_users'));
+        return view('site-users.index', compact('site_users'));
     }
 
     /**

@@ -93,16 +93,14 @@ class User extends Authenticatable
     public static function listAll($search): LengthAwarePaginator
     {
         if ($search) {
-            return self::where('username', 'like', '%' . $search . '%')
-                ->orWhere('first_name', 'like', '%' . $search . '%')
-                ->orWhere('last_name', 'like', '%' . $search . '%')
+            return self::where('name', 'like', '%' . $search . '%')
                 ->orWhere('email', 'like', '%' . $search . '%')
                 ->orWhere('customer_code', 'like', '%' . $search . '%')
-                ->orderBy('username')
+                ->orderBy('name')
                 ->paginate(10);
         }
 
-        return self::orderBy('username')->paginate(10);
+        return self::orderBy('name')->paginate(10);
     }
 
     /**

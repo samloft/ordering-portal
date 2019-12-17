@@ -17,8 +17,7 @@
             <div class="my-3">
                 <a href="{{ route('cms.index') }}" class="menu-item {{ activeMenu('cms.index') }}">
                     <span class="inline-flex">
-                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"
-                             class="h-6 w-6 fill-current">
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
                             <path
                                 d="M3 6a3 3 0 013-3h12a3 3 0 013 3v12a3 3 0 01-3 3H6a3 3 0 01-3-3V6zm3-1a1 1 0 00-1 1v6h1.586A2 2 0 018 12.586L10.414 15h3.172L16 12.586A2 2 0 0117.414 12H19V6a1 1 0 00-1-1H6zm13 9h-1.586L15 16.414a2 2 0 01-1.414.586h-3.172A2 2 0 019 16.414L6.586 14H5v4a1 1 0 001 1h12a1 1 0 001-1v-4z"></path>
                         </svg>
@@ -26,16 +25,15 @@
                     </span>
                 </a>
 
-                <a href="#"
-                   class="menu-item">
+                <a href="{{ route('cms.site-users') }}" class="menu-item {{ activeMenu('cms.site-users') }}">
                     <span class="inline-flex">
-                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"
-                             class="h-6 w-6 fill-current">
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
                             <path
                                 d="M9 12A5 5 0 1 1 9 2a5 5 0 0 1 0 10zm0-2a3 3 0 1 0 0-6 3 3 0 0 0 0 6zm7 11a1 1 0 0 1-2 0v-2a3 3 0 0 0-3-3H7a3 3 0 0 0-3 3v2a1 1 0 0 1-2 0v-2a5 5 0 0 1 5-5h4a5 5 0 0 1 5 5v2zm1-5a1 1 0 0 1 0-2 5 5 0 0 1 5 5v2a1 1 0 0 1-2 0v-2a3 3 0 0 0-3-3zm-2-4a1 1 0 0 1 0-2 3 3 0 0 0 0-6 1 1 0 0 1 0-2 5 5 0 0 1 0 10z"/></svg>
                         <span class="menu-title">Site Users</span>
                     </span>
                 </a>
+
                 <a href="#" class="menu-item">
                     <span class="inline-flex">
                         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
