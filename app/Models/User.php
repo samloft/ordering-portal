@@ -28,7 +28,12 @@ class User extends Authenticatable
      * @var array
      */
     protected $fillable = [
-        'first_name', 'last_name', 'telephone', 'evening_telephone', 'fax', 'mobile'
+        'first_name',
+        'last_name',
+        'telephone',
+        'evening_telephone',
+        'fax',
+        'mobile',
     ];
 
     /**
@@ -37,7 +42,9 @@ class User extends Authenticatable
      * @var array
      */
     protected $hidden = [
-        'password', 'remember_token', 'api_token',
+        'password',
+        'remember_token',
+        'api_token',
     ];
 
     /**
@@ -92,15 +99,13 @@ class User extends Authenticatable
      */
     public static function listAll($search): LengthAwarePaginator
     {
-        if ($search) {
-            return self::where('name', 'like', '%' . $search . '%')
-                ->orWhere('email', 'like', '%' . $search . '%')
-                ->orWhere('customer_code', 'like', '%' . $search . '%')
-                ->orderBy('name')
-                ->paginate(10);
-        }
-
-        return self::orderBy('name')->paginate(10);
+        return self::where(static function ($query) use ($search) {
+            if ($search) {
+                $query->where('name', 'like', '%'.$search.'%');
+                $query->orWhere('email', 'like', '%'.$search.'%');
+                $query->orWhere('customer_code', 'like', '%'.$search.'%');
+            }
+        })->orderBy('name')->with('customers')->paginate(10);
     }
 
     /**
@@ -121,9 +126,7 @@ class User extends Authenticatable
      */
     public static function show($id)
     {
-        return self::where('id', $id)
-            ->with('customers')
-            ->first();
+        return self::where('id', $id)->with('customers')->first();
     }
 
     /**

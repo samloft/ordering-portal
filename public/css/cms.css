@@ -13013,6 +13013,137 @@ select {
   padding: 0;
 }
 
+.badge {
+  font-size: 0.75rem;
+  font-weight: 600;
+  color: #1a202c;
+  background-color: #edf2f7;
+  border-radius: 9999px;
+  line-height: 1;
+  padding-left: 0.5rem;
+  padding-right: 0.5rem;
+  padding-top: 0.25rem;
+  padding-bottom: 0.25rem;
+}
+
+.badge-in_progress {
+  color: #7b341e;
+  background-color: #feebc8;
+}
+
+.badge-cancelled {
+  color: #742a2a;
+  background-color: #fed7d7;
+}
+
+.badge-despatched {
+  color: #2a4365;
+  background-color: #bee3f8;
+}
+
+.badge-invoiced {
+  color: #22543d;
+  background-color: #c6f6d5;
+}
+
+.badge-success {
+  color: #22543d;
+  background-color: #c6f6d5;
+}
+
+.badge-danger {
+  color: #742a2a;
+  background-color: #fed7d7;
+}
+
+.badge-warning {
+  color: #744210;
+  background-color: #fefcbf;
+}
+
+.badge-info {
+  color: #2a4365;
+  background-color: #bee3f8;
+}
+
+.badge-basket {
+  font-size: 0.75rem;
+  font-weight: 500;
+  color: #1a202c;
+  background-color: var(--primary-text);
+  color: #fff;
+  line-height: 1;
+  padding: 0.25rem;
+  position: absolute;
+  left: 0;
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+  text-align: center;
+  border-width: 1px;
+  border-color: var(--primary-text);
+  margin-top: -0.75rem;
+  border-radius: 50%;
+}
+
+.pagination {
+  display: flex;
+  justify-content: flex-end;
+}
+
+.pagination .disabled {
+  cursor: not-allowed;
+}
+
+.pagination .disabled a {
+  cursor: not-allowed;
+  background-color: #f7fafc;
+}
+
+.pagination .disabled a:hover {
+  background-color: #f7fafc;
+}
+
+.pagination ul {
+  display: flex;
+}
+
+.pagination ul .active a {
+  background-color: var(--button-primary-color);
+}
+
+.pagination li a {
+  padding-top: 0.25rem;
+  padding-bottom: 0.25rem;
+  padding-left: 0.5rem;
+  padding-right: 0.5rem;
+  border-top-width: 1px;
+  border-bottom-width: 1px;
+  border-left-width: 1px;
+  background-color: #fff;
+}
+
+.pagination li a:hover {
+  background-color: var(--button-primary-color);
+}
+
+.pagination li:first-of-type a {
+  padding-left: 0.5rem;
+  padding-right: 0.5rem;
+  border-top-left-radius: 0.25rem;
+  border-bottom-left-radius: 0.25rem;
+}
+
+.pagination li:last-of-type a {
+  padding-left: 0.5rem;
+  padding-right: 0.5rem;
+  border-top-right-radius: 0.25rem;
+  border-bottom-right-radius: 0.25rem;
+  border-right-width: 1px;
+}
+
+.pagination li:last-of-type a:hover {
+  opacity: 0.5;
+}
+
 .dropdown {
   border-radius: 0.25rem;
   position: relative;
