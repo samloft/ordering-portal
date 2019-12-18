@@ -71,6 +71,14 @@ jobs:
           name: PHPUnit Tests
           command: ./vendor/bin/phpunit
 
+      - run: sudo pecl channel-update pecl.php.net
+      - run: curl -L https://codeclimate.com/downloads/test-reporter/test-reporter-latest-linux-amd64 > ./cc-test-reporter
+      - run: chmod +x ./cc-test-reporter
+      - run: sudo mkdir -p $CIRCLE_TEST_REPORTS/phpunit
+      - run: ./cc-test-reporter before-build
+      - run: sudo ./vendor/bin/phpunit --coverage-clover clover.xml
+      - run: ./cc-test-reporter after-build -t clover -r '${CODECLIMATE}' --exit-code $?
+
       - run:
           name: Merge to Staging
           command: git checkout -f staging && git merge development && git push -u origin staging --force
