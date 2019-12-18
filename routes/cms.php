@@ -2,7 +2,6 @@
 
 use App\Models\Customer;
 use App\Models\HomeLink;
-use App\Models\User;
 use App\Models\UserCustomer;
 use Illuminate\Http\Request;
 
@@ -27,12 +26,6 @@ Route::group(['middleware' => 'auth:admin'], static function () {
 
     Route::group(['prefix' => 'site-users'], static function () {
         Route::get('/', 'Cms\UserController@index')->name('cms.site-users');
-
-        //Route::get('show/{id}', static function ($id) {
-        //    return User::show($id);
-        //})->name('cms.site-users.show');
-
-        //Route::post('validate', 'Cms\UserController@validation')->name('cms.site-users.validate');
         Route::post('/', 'Cms\UserController@store')->name('cms.site-users.store');
 
         Route::delete('extra-customers/', static function () {
@@ -50,7 +43,7 @@ Route::group(['middleware' => 'auth:admin'], static function () {
     });
 
     Route::group(['prefix' => 'admin-users'], static function () {
-        Route::get('/', 'Cms\AdminController@index')->name('cms.admin');
+        Route::get('/', 'Cms\AdminController@index')->name('cms.admin-users');
     });
 
     Route::group(['prefix' => 'company-information'], static function () {

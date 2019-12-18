@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use Illuminate\Contracts\Pagination\LengthAwarePaginator;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 
 /**
@@ -16,15 +17,19 @@ class Admin extends Authenticatable
     protected $hidden = ['password', 'remember_token'];
 
     /**
-     * @param null $pagination_limit
-     * @return \App\Models\Admin[]|\Illuminate\Contracts\Pagination\LengthAwarePaginator|\Illuminate\Database\Eloquent\Collection
+     * Return all the admin users with optional search parameters.
+     *
+     * @param null $search
+     *
+     * @return \Illuminate\Contracts\Pagination\LengthAwarePaginator
      */
-    public static function show($pagination_limit = null)
+    public static function show($search = null): LengthAwarePaginator
     {
-        if ($pagination_limit) {
-            return self::paginate($pagination_limit);
-        }
-
-        return self::get();
+        return self::where(static function ($query) use ($search) {
+            if ($search) {
+                $query->where('name', 'like', '%'.$search.'%');
+                $query->orWhere('email', 'like', '%'.$search.'%');
+            }
+        })->orderBy('name')->paginate(10);
     }
 }

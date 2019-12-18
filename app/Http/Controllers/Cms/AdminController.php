@@ -14,8 +14,8 @@ class AdminController extends Controller
      */
     public function index()
     {
-        $users = Admin::show(10);
+        $users = Admin::show(request('search'));
 
-        return view('cms.admin.index', compact('users'));
+        return view('admin-users.index', compact('users'));
     }
 }
