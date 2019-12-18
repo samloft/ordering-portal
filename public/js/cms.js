@@ -2051,7 +2051,6 @@ __webpack_require__.r(__webpack_exports__);
   data: function data() {
     return {
       modal: false,
-      buttonText: 'Create',
       userData: {
         id: null,
         name: '',
@@ -6933,7 +6932,9 @@ var render = function() {
                         },
                         [
                           _vm._v(
-                            _vm._s(_vm.buttonText) + "\n                    "
+                            "\n                        " +
+                              _vm._s(this.userData.id ? "Edit" : "Create") +
+                              "\n                    "
                           )
                         ]
                       )

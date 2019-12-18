@@ -126,8 +126,8 @@
                                 class="button bg-gray-500 text-white">Password
                             Reset
                         </button>
-                        <button @click="storeUser(userData.id)" class="button bg-gray-700 text-white w-32">{{ buttonText
-                            }}
+                        <button @click="storeUser(userData.id)" class="button bg-gray-700 text-white w-32">
+                            {{ this.userData.id ? 'Edit' : 'Create' }}
                         </button>
                     </div>
                 </div>
@@ -157,7 +157,6 @@
         data() {
             return {
                 modal: false,
-                buttonText: 'Create',
                 userData: {
                     id: null,
                     name: '',
