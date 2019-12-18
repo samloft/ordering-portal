@@ -7,8 +7,7 @@
         <Transition name="fade">
             <div
                 v-if="modal"
-                class="fixed inset-0 w-full h-screen flex items-center justify-center bg-smoke-dark z-50"
-            >
+                class="fixed inset-0 w-full h-screen flex items-center justify-center bg-smoke-dark z-50">
                 <div class="relative w-full max-w-2xl bg-white shadow-lg rounded-lg p-8 text-left">
                     <div class="mb-3">
                         <label>Name</label>
@@ -23,7 +22,7 @@
                     <div class="mb-3">
                         <div class="flex">
                             <div class="w-full relative mr-1">
-                                <label>Account Type</label>
+                                <label id="">Account Type</label>
                                 <select v-model="userData.admin"
                                         class="p-2 rounded border bg-gray-100 text-gray-600 appearance-none"
                                         autocomplete="off">
@@ -62,7 +61,8 @@
 
                     <div class="mb-3">
                         <label>Customer Code</label>
-                        <input class="bg-gray-100" v-model="userData.customer_code" v-uppercase placeholder="Customer Code">
+                        <input class="bg-gray-100" v-model="userData.customer_code" v-uppercase
+                               placeholder="Customer Code">
                     </div>
 
                     <div v-if="userData.id && (parseInt(userData.admin) !== 1)" class="mb-3">
@@ -99,7 +99,8 @@
 
                     <div v-if="!userData.id && (parseInt(userData.admin) !== 1)" class="mb-3">
                         <label>Additional Customers</label>
-                        <div class="border text-center p-3 text-gray-500 underline">You must save the user before you can add extra customers
+                        <div class="border text-center p-3 text-gray-500 underline">You must save the user before you
+                            can add extra customers
                         </div>
                     </div>
 
@@ -119,7 +120,8 @@
 
                     <div class="mt-8 text-right">
                         <button @click="reload()" class="button button-danger">Exit</button>
-                        <button v-if="userData.id" @click="deleteUser(userData.id)" class="button bg-red-600 text-white">Delete
+                        <button v-if="userData.id" @click="deleteUser(userData.id)"
+                                class="button bg-red-600 text-white">Delete
                             User
                         </button>
                         <button v-if="userData.id" @click="passwordReset(userData.email)"
@@ -173,7 +175,6 @@
         methods: {
             showModal: function () {
                 if (this.user) {
-                    this.buttonText = 'Edit';
                     this.userData = this.user;
                 }
 
@@ -181,9 +182,9 @@
             },
             storeUser: function (id = null) {
                 if (id) {
-                    return axios.patch('/cms/site-users/' + id, this.userData).then(function (response) {
+                    return axios.patch('/cms/site-users/' + id, this.userData).then(response => {
                         return Vue.swal('Success', 'User has been updated', 'success');
-                    }).catch(function (response) {
+                    }).catch(error => {
                         return Vue.swal('Error', 'Unable to update user, please try again', 'error');
                     });
                 }
@@ -197,12 +198,11 @@
                 });
             },
             passwordReset: function (email) {
-                console.log(email);
                 axios.post('/cms/site-users/password-reset', {
                     email: email
-                }).then(function (response) {
+                }).then(response => {
                     Vue.swal('Success', 'Password reset has been sent to ' + email, 'success');
-                }).catch(function (response) {
+                }).catch(error => {
                     Vue.swal('Error', 'Unable to send password reset, please try again', 'error');
                 })
             },
@@ -223,12 +223,12 @@
                             self = this,
                             id = this.userData.id;
 
-                        return axios.get('/cms/customer/validate?code=' + code).then(function (response) {
+                        return axios.get('/cms/customer/validate?code=' + code).then(response => {
                             if (response.data.code) {
                                 return axios.post('/cms/site-users/extra-customers', {
                                     id: id,
                                     code: response.data.code
-                                }).then(function (response) {
+                                }).then(response => {
                                     if (response.data.success) {
                                         self.customers.push({
                                             id: response.data.id,
@@ -237,7 +237,7 @@
                                     } else {
                                         return response.data.errors.first;
                                     }
-                                }).catch(function () {
+                                }).catch(error => {
                                     return 'Unable to add user, please make sure it does not already exist for this customer';
                                 });
                             } else {
@@ -259,7 +259,7 @@
                     if (response.value) {
                         return axios.delete('/cms/site-users/extra-customers', {
                             data: {id: id}
-                        }).then(function (response) {
+                        }).then(response => {
                             if (response.data) {
                                 self.customers.splice(self.customers.indexOf(index), 1);
                             } else {
@@ -275,7 +275,7 @@
                     text: 'Are you sure? This cannot be un-done.',
                     type: 'warning',
                     showCancelButton: true,
-                }).then((response) => {
+                }).then(response => {
                     if (response.value) {
                         return axios.delete('/cms/site-users/' + id).then(function (response) {
                             if (response.data.deleted) {
@@ -283,8 +283,8 @@
                                     title: "Deleted",
                                     text: "Site user has been successfully deleted",
                                     type: "success"
-                                }).then(function(response) {
-                                    if(response.value) {
+                                }).then(response => {
+                                    if (response.value) {
                                         return window.location.reload();
                                     }
                                 });
@@ -293,7 +293,7 @@
                             }
                         });
                     }
-                }).catch(function (response) {
+                }).catch(error => {
                     Vue.swal('Error', 'Unable to delete user', 'error');
                 });
             },
