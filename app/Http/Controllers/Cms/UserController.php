@@ -3,10 +3,12 @@
 namespace App\Http\Controllers\Cms;
 
 use App\Models\User;
+use Illuminate\Support\Str;
 use Illuminate\Contracts\View\Factory;
-use Illuminate\Http\RedirectResponse;
+use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Password;
 use Illuminate\View\View;
 
 class UserController extends Controller
@@ -27,63 +29,67 @@ class UserController extends Controller
     /**
      * Create/Update a user.
      *
-     * @param Request $request
-     * @return RedirectResponse
+     * @return \App\Models\User|\Illuminate\Database\Eloquent\Model
      */
-    public function store(Request $request): RedirectResponse
+    public function store()
     {
-        //$user_details = $request->toArray();
-        //$user_details['api_token'] = Str::random(60);
+        $this->validation();
 
-        $user = User::store($request->toArray());
+        request()->merge([
+            'password' => bcrypt(Str::random(20)),
+            'api_token' => Str::random(60)
+        ]);
 
-        if ($request->id) {
-            return $user ? back()->with('success', 'User has been updated') : back()->with('error', 'Unable to update user, please try again later');
-        }
-
-        return $user ? back()->with('success', 'New user has been created') : back()->with('error', 'Unable to create user, please try again later');
+        return User::create(request()->all());
     }
 
     /**
-     * Delete a user.
+     * Update the given user.
+     *
+     * @return int
+     */
+    public function update(): int
+    {
+        return User::where('id', request('id'))->update(request()->all());
+    }
+
+    /**
+     * Delete a user by ID.
      *
      * @param $id
-     * @return RedirectResponse
+     * @return \Illuminate\Http\JsonResponse
      */
-    public function destroy($id): RedirectResponse
+    public function destroy($id): JsonResponse
     {
         $deleted = User::destroy($id);
 
-        return $deleted ? back()->with('success', 'User has been deleted.') : back()->with('error', 'Unable to delete user, please try again later');
+        return response()->json(['deleted' => $deleted]);
+    }
+
+    /**
+     * Send a password reset on behalf of the given user.
+     *
+     * @return mixed
+     */
+    public function passwordReset()
+    {
+        $user = User::where('email', request('email'))->firstOrFail();
+        $token = Password::getRepository()->create($user);
+
+        return $user->sendPasswordResetNotification($token);
     }
 
     /**
      * Validate user details before passing to be stored.
      *
-     * @param Request $request
      * @return mixed
      */
-    public function validation(Request $request)
+    public function validation()
     {
-        $id = $request->id;
-
-        if ($id) {
-            return $request->validate([
-                'first_name' => 'required',
-                'last_name' => 'required',
-                'username' => 'required|unique:users,username,' . $id,
-                'email' => 'required|unique:users,email,' . $id,
-                'customer_code' => 'required|exists:customers,customer_code'
-            ]);
-        }
-
-        return $request->validate([
-            'first_name' => 'required',
-            'last_name' => 'required',
-            'username' => 'required|unique:users,username',
-            'password' => 'required',
+        return request()->validate([
+            'name' => 'required',
             'email' => 'required|unique:users,email',
-            'customer_code' => 'required|exists:customers,customer_code'
+            'customer_code' => 'required|exists:customers,code',
         ]);
     }
 }

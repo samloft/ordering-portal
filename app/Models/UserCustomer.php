@@ -41,21 +41,20 @@ class UserCustomer extends Model
     /**
      * Store an extra customer for the given user.
      *
-     * @param Request $request
      * @return JsonResponse
      */
-    public static function store(Request $request): JsonResponse
+    public static function store(): JsonResponse
     {
-        $id = $request->user_id;
-        $request->customer_code = strtoupper($request->customer_code);
+        //$id = request('id');
+        //$customer = request('customer');
 
-        $request->validate([
-            'customer_code' => 'required|exists:customers|unique:user_customers,customer_code,NULL,id,user_id,' . $id
+        request()->validate([
+            'code' => 'required|unique:user_customers,customer_code,NULL,id,user_id,' . request('id')
         ]);
 
         $extra_customer = [
-            'user_id' => $id,
-            'customer_code' => strtoupper($request->customer_code),
+            'user_id' => request('id'),
+            'customer_code' => request('code'),
             'created_at' => date('Y-m-d H:i:s'),
             'updated_at' => date('Y-m-d H:i:s')
         ];
@@ -65,15 +64,15 @@ class UserCustomer extends Model
         if ($created) {
             return response()->json([
                 'success' => true,
-                'error' => null,
+                'errors' => [],
                 'id' => $created,
                 'customer_code' => $extra_customer['customer_code'],
             ]);
         }
 
         return response()->json([
-            'success' => true,
-            'error' => 'Unable to add extra customer, please try again',
+            'success' => false,
+            'errors' => ['Unable to add extra customer, please try again'],
             'id' => null,
             'customer_code' => null,
         ], 422);

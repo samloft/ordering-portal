@@ -1,5 +1,6 @@
 <?php
 
+use App\Models\Customer;
 use App\Models\HomeLink;
 use App\Models\User;
 use App\Models\UserCustomer;
@@ -26,20 +27,26 @@ Route::group(['middleware' => 'auth:admin'], static function () {
 
     Route::group(['prefix' => 'site-users'], static function () {
         Route::get('/', 'Cms\UserController@index')->name('cms.site-users');
-        Route::get('show/{id}', static function ($id) {
-            return User::show($id);
-        })->name('cms.site-users.show');
-        Route::get('delete/{id}', 'Cms\UserController@destroy')->name('cms.site-users.destroy');
-        Route::post('validate', 'Cms\UserController@validation')->name('cms.site-users.validate');
-        Route::post('store', 'Cms\UserController@store')->name('cms.site-users.store');
 
-        Route::post('extra-customers/destroy', static function (Request $request) {
-            return UserCustomer::destroy($request->id);
+        //Route::get('show/{id}', static function ($id) {
+        //    return User::show($id);
+        //})->name('cms.site-users.show');
+
+        //Route::post('validate', 'Cms\UserController@validation')->name('cms.site-users.validate');
+        Route::post('/', 'Cms\UserController@store')->name('cms.site-users.store');
+
+        Route::delete('extra-customers/', static function () {
+            return UserCustomer::destroy(request('id'));
         })->name('cms.extra-customers.destroy');
 
-        Route::post('extra-customers/store', static function (Request $request) {
-            return UserCustomer::store($request);
+        Route::post('extra-customers', static function () {
+            return UserCustomer::store();
         })->name('cms.extra-customers.store');
+
+        Route::post('password-reset', 'Cms\UserController@passwordReset')->name('cms.site-users.password-reset');
+
+        Route::patch('{id}', 'Cms\UserController@update')->name('cms.site-users.update');
+        Route::delete('{id}', 'Cms\UserController@destroy')->name('cms.site-users.destroy');
     });
 
     Route::group(['prefix' => 'admin-users'], static function () {
@@ -74,6 +81,12 @@ Route::group(['middleware' => 'auth:admin'], static function () {
         Route::get('/', 'Cms\ProductImageController@index')->name('cms.product-images');
         Route::post('check', 'Cms\ProductImageController@missingImages')->name('cms.product-images.check');
         Route::post('store', 'Cms\ProductImageController@store')->name('cms.product-images.store');
+    });
+
+    Route::group(['prefix' => 'customer'], static function() {
+        Route::get('validate', static function() {
+            return Customer::show(request('code'));
+        });
     });
 
 });

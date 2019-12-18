@@ -7,6 +7,7 @@ import 'sweetalert2/dist/sweetalert2.min.css';
 Vue.use(VueSweetalert2);
 
 Vue.component('dropdown', require('./modules/Dropdown.vue').default);
+Vue.component('site-users', require('./modules/SiteUsers.vue').default);
 
 window.Event = new Vue();
 

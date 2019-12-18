@@ -4,12 +4,17 @@
 @section('sub-title', 'Users that have access to the ordering portal.')
 
 @section('content')
+    <div class="flex justify-end mb-3">
+        <site-users>
+            <template v-slot:trigger>
+                <button class="button bg-gray-700 text-white">
+                    {{ __('Create User') }}
+                </button>
+            </template>
+        </site-users>
+    </div>
+
     <div class="px-6 pt-4 pb-6 xl:px-10 xl:pt-6 xl:pb-8 bg-white rounded-lg shadow mb-5">
-        <div class="text-right mb-3">
-            <button class="button bg-gray-700 text-white">
-                {{ __('Create User') }}
-            </button>
-        </div>
 
         <form class="m-0" method="get" action="{{ route('cms.site-users') }}">
             <div class="mb-4">
@@ -65,10 +70,14 @@
                     @endif
                 </td>
                 <td class="p-3 px-5 flex justify-end">
-                    <button type="button"
-                            class="button bg-gray-700 text-white text-xs w-20">
-                        {{ __('Edit') }}
-                    </button>
+                    <site-users :user="{{ json_encode($user, true) }}">
+                        <template v-slot:trigger>
+                            <button type="button"
+                                    class="button bg-gray-700 text-white text-xs w-20">
+                                {{ __('Edit') }}
+                            </button>
+                        </template>
+                    </site-users>
                 </td>
             </tr>
         @endforeach

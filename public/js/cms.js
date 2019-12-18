@@ -1884,6 +1884,328 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
+/***/ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/modules/SiteUsers.vue?vue&type=script&lang=js&":
+/*!*****************************************************************************************************************************************************************!*\
+  !*** ./node_modules/babel-loader/lib??ref--4-0!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/modules/SiteUsers.vue?vue&type=script&lang=js& ***!
+  \*****************************************************************************************************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+/* harmony default export */ __webpack_exports__["default"] = ({
+  props: {
+    user: null
+  },
+  data: function data() {
+    return {
+      modal: false,
+      buttonText: 'Create',
+      userData: {
+        id: null,
+        name: '',
+        email: '',
+        telephone: '',
+        mobile: '',
+        customer_code: '',
+        admin: 0,
+        can_order: 1
+      },
+      customers: []
+    };
+  },
+  methods: {
+    showModal: function showModal() {
+      if (this.user) {
+        this.buttonText = 'Edit';
+        this.userData = this.user;
+      }
+
+      this.modal = true;
+    },
+    storeUser: function storeUser() {
+      var _this = this;
+
+      var id = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : null;
+
+      if (id) {
+        return axios.patch('/cms/site-users/' + id, this.userData).then(function (response) {
+          return Vue.swal('Success', 'User has been updated', 'success');
+        })["catch"](function (response) {
+          return Vue.swal('Error', 'Unable to update user, please try again', 'error');
+        });
+      }
+
+      return axios.post('/cms/site-users', this.userData).then(function (response) {
+        _this.userData = response.data;
+        return Vue.swal('Success', 'New user has been created', 'success');
+      })["catch"](function (error) {
+        return Vue.swal('Error', error.response.data.errors[Object.keys(error.response.data.errors)[0]][0], 'error');
+      });
+    },
+    passwordReset: function passwordReset(email) {
+      console.log(email);
+      axios.post('/cms/site-users/password-reset', {
+        email: email
+      }).then(function (response) {
+        Vue.swal('Success', 'Password reset has been sent to ' + email, 'success');
+      })["catch"](function (response) {
+        Vue.swal('Error', 'Unable to send password reset, please try again', 'error');
+      });
+    },
+    listAdditionalCustomers: function listAdditionalCustomers() {
+      return this.customers;
+    },
+    addAdditionalCustomer: function addAdditionalCustomer() {
+      var _this2 = this;
+
+      Vue.swal({
+        title: 'Type in a customer code to add',
+        input: 'text',
+        showCancelButton: true,
+        inputValidator: function inputValidator(value) {
+          if (!value) {
+            return 'You need to enter a customer code.';
+          }
+
+          var code = value.toUpperCase(),
+              self = _this2,
+              id = _this2.user.id;
+          return axios.get('/cms/customer/validate?code=' + code).then(function (response) {
+            if (response.data.code) {
+              return axios.post('/cms/site-users/extra-customers', {
+                id: id,
+                code: response.data.code
+              }).then(function (response) {
+                if (response.data.success) {
+                  self.customers.push({
+                    id: response.data.id,
+                    customer_code: code
+                  });
+                } else {
+                  return response.data.errors.first;
+                }
+              })["catch"](function () {
+                return 'Unable to add user, please make sure it does not already exist for this customer';
+              });
+            } else {
+              return 'Customer not valid, please try again';
+            }
+          });
+        }
+      });
+    },
+    deleteAdditionalCustomer: function deleteAdditionalCustomer(index, code, id) {
+      var self = this;
+      Vue.swal({
+        title: 'Delete additional customer ' + code + ' ?',
+        text: 'Are you sure? This cannot be un-done.',
+        type: 'warning',
+        showCancelButton: true
+      }).then(function (response) {
+        if (response.value) {
+          return axios["delete"]('/cms/site-users/extra-customers', {
+            data: {
+              id: id
+            }
+          }).then(function (response) {
+            if (response.data) {
+              self.customers.splice(self.customers.indexOf(index), 1);
+            } else {
+              Vue.swal('Error', 'Unable to delete user customer', 'error');
+            }
+          });
+        }
+      });
+    },
+    deleteUser: function deleteUser(id) {
+      Vue.swal({
+        title: 'Delete User?',
+        text: 'Are you sure? This cannot be un-done.',
+        type: 'warning',
+        showCancelButton: true
+      }).then(function (response) {
+        if (response.value) {
+          return axios["delete"]('/cms/site-users/' + id).then(function (response) {
+            if (response.data.deleted) {
+              Vue.swal({
+                title: "Deleted",
+                text: "Site user has been successfully deleted",
+                type: "success"
+              }, function () {
+                this.reload();
+              });
+            } else {
+              Vue.swal('Error', 'Unable to delete user customer', 'error');
+            }
+          });
+        }
+      })["catch"](function (response) {
+        Vue.swal('Error', 'Unable to delete user customer', 'error');
+      });
+    },
+    reload: function reload() {
+      window.location.reload();
+    }
+  },
+  created: function created() {
+    this.customers = this.user ? this.user.customers : [];
+  }
+});
+
+/***/ }),
+
 /***/ "./node_modules/css-loader/index.js?!./node_modules/postcss-loader/src/index.js?!./node_modules/sweetalert2/dist/sweetalert2.min.css":
 /*!*******************************************************************************************************************************************!*\
   !*** ./node_modules/css-loader??ref--9-1!./node_modules/postcss-loader/src??ref--9-2!./node_modules/sweetalert2/dist/sweetalert2.min.css ***!
@@ -1897,6 +2219,25 @@ exports = module.exports = __webpack_require__(/*! ../../css-loader/lib/css-base
 
 // module
 exports.push([module.i, "@charset \"UTF-8\";\n\n.swal2-popup.swal2-toast{\n  flex-direction:row;\n  align-items:center;\n  width:auto;\n  padding:.625em;\n  overflow-y:hidden;\n  box-shadow:0 0 .625em #d9d9d9\n}\n\n.swal2-popup.swal2-toast .swal2-header{\n  flex-direction:row\n}\n\n.swal2-popup.swal2-toast .swal2-title{\n  flex-grow:1;\n  justify-content:flex-start;\n  margin:0 .6em;\n  font-size:1em\n}\n\n.swal2-popup.swal2-toast .swal2-footer{\n  margin:.5em 0 0;\n  padding:.5em 0 0;\n  font-size:.8em\n}\n\n.swal2-popup.swal2-toast .swal2-close{\n  position:static;\n  width:.8em;\n  height:.8em;\n  line-height:.8\n}\n\n.swal2-popup.swal2-toast .swal2-content{\n  justify-content:flex-start;\n  font-size:1em\n}\n\n.swal2-popup.swal2-toast .swal2-icon{\n  width:2em;\n  min-width:2em;\n  height:2em;\n  margin:0\n}\n\n.swal2-popup.swal2-toast .swal2-icon::before{\n  display:flex;\n  align-items:center;\n  font-size:2em;\n  font-weight:700\n}\n\n@media all and (-ms-high-contrast:none), (-ms-high-contrast:active){\n  .swal2-popup.swal2-toast .swal2-icon::before{\n    font-size:.25em\n  }\n}\n\n.swal2-popup.swal2-toast .swal2-icon.swal2-success .swal2-success-ring{\n  width:2em;\n  height:2em\n}\n\n.swal2-popup.swal2-toast .swal2-icon.swal2-error [class^=swal2-x-mark-line]{\n  top:.875em;\n  width:1.375em\n}\n\n.swal2-popup.swal2-toast .swal2-icon.swal2-error [class^=swal2-x-mark-line][class$=left]{\n  left:.3125em\n}\n\n.swal2-popup.swal2-toast .swal2-icon.swal2-error [class^=swal2-x-mark-line][class$=right]{\n  right:.3125em\n}\n\n.swal2-popup.swal2-toast .swal2-actions{\n  flex-basis:auto!important;\n  width:auto;\n  height:auto;\n  margin:0 .3125em\n}\n\n.swal2-popup.swal2-toast .swal2-styled{\n  margin:0 .3125em;\n  padding:.3125em .625em;\n  font-size:1em\n}\n\n.swal2-popup.swal2-toast .swal2-styled:focus{\n  box-shadow:0 0 0 .0625em #fff,0 0 0 .125em rgba(50,100,150,.4)\n}\n\n.swal2-popup.swal2-toast .swal2-success{\n  border-color:#a5dc86\n}\n\n.swal2-popup.swal2-toast .swal2-success [class^=swal2-success-circular-line]{\n  position:absolute;\n  width:1.6em;\n  height:3em;\n  transform:rotate(45deg);\n  border-radius:50%\n}\n\n.swal2-popup.swal2-toast .swal2-success [class^=swal2-success-circular-line][class$=left]{\n  top:-.8em;\n  left:-.5em;\n  transform:rotate(-45deg);\n  transform-origin:2em 2em;\n  border-radius:4em 0 0 4em\n}\n\n.swal2-popup.swal2-toast .swal2-success [class^=swal2-success-circular-line][class$=right]{\n  top:-.25em;\n  left:.9375em;\n  transform-origin:0 1.5em;\n  border-radius:0 4em 4em 0\n}\n\n.swal2-popup.swal2-toast .swal2-success .swal2-success-ring{\n  width:2em;\n  height:2em\n}\n\n.swal2-popup.swal2-toast .swal2-success .swal2-success-fix{\n  top:0;\n  left:.4375em;\n  width:.4375em;\n  height:2.6875em\n}\n\n.swal2-popup.swal2-toast .swal2-success [class^=swal2-success-line]{\n  height:.3125em\n}\n\n.swal2-popup.swal2-toast .swal2-success [class^=swal2-success-line][class$=tip]{\n  top:1.125em;\n  left:.1875em;\n  width:.75em\n}\n\n.swal2-popup.swal2-toast .swal2-success [class^=swal2-success-line][class$=long]{\n  top:.9375em;\n  right:.1875em;\n  width:1.375em\n}\n\n.swal2-popup.swal2-toast.swal2-show{\n  -webkit-animation:swal2-toast-show .5s;\n  animation:swal2-toast-show .5s\n}\n\n.swal2-popup.swal2-toast.swal2-hide{\n  -webkit-animation:swal2-toast-hide .1s forwards;\n  animation:swal2-toast-hide .1s forwards\n}\n\n.swal2-popup.swal2-toast .swal2-animate-success-icon .swal2-success-line-tip{\n  -webkit-animation:swal2-toast-animate-success-line-tip .75s;\n  animation:swal2-toast-animate-success-line-tip .75s\n}\n\n.swal2-popup.swal2-toast .swal2-animate-success-icon .swal2-success-line-long{\n  -webkit-animation:swal2-toast-animate-success-line-long .75s;\n  animation:swal2-toast-animate-success-line-long .75s\n}\n\n.swal2-container{\n  display:flex;\n  position:fixed;\n  z-index:1060;\n  top:0;\n  right:0;\n  bottom:0;\n  left:0;\n  flex-direction:row;\n  align-items:center;\n  justify-content:center;\n  padding:.625em;\n  overflow-x:hidden;\n  transition:background-color .1s;\n  background-color:transparent;\n  -webkit-overflow-scrolling:touch\n}\n\n.swal2-container.swal2-top{\n  align-items:flex-start\n}\n\n.swal2-container.swal2-top-left,.swal2-container.swal2-top-start{\n  align-items:flex-start;\n  justify-content:flex-start\n}\n\n.swal2-container.swal2-top-end,.swal2-container.swal2-top-right{\n  align-items:flex-start;\n  justify-content:flex-end\n}\n\n.swal2-container.swal2-center{\n  align-items:center\n}\n\n.swal2-container.swal2-center-left,.swal2-container.swal2-center-start{\n  align-items:center;\n  justify-content:flex-start\n}\n\n.swal2-container.swal2-center-end,.swal2-container.swal2-center-right{\n  align-items:center;\n  justify-content:flex-end\n}\n\n.swal2-container.swal2-bottom{\n  align-items:flex-end\n}\n\n.swal2-container.swal2-bottom-left,.swal2-container.swal2-bottom-start{\n  align-items:flex-end;\n  justify-content:flex-start\n}\n\n.swal2-container.swal2-bottom-end,.swal2-container.swal2-bottom-right{\n  align-items:flex-end;\n  justify-content:flex-end\n}\n\n.swal2-container.swal2-bottom-end>:first-child,.swal2-container.swal2-bottom-left>:first-child,.swal2-container.swal2-bottom-right>:first-child,.swal2-container.swal2-bottom-start>:first-child,.swal2-container.swal2-bottom>:first-child{\n  margin-top:auto\n}\n\n.swal2-container.swal2-grow-fullscreen>.swal2-modal{\n  display:flex!important;\n  flex:1;\n  align-self:stretch;\n  justify-content:center\n}\n\n.swal2-container.swal2-grow-row>.swal2-modal{\n  display:flex!important;\n  flex:1;\n  align-content:center;\n  justify-content:center\n}\n\n.swal2-container.swal2-grow-column{\n  flex:1;\n  flex-direction:column\n}\n\n.swal2-container.swal2-grow-column.swal2-bottom,.swal2-container.swal2-grow-column.swal2-center,.swal2-container.swal2-grow-column.swal2-top{\n  align-items:center\n}\n\n.swal2-container.swal2-grow-column.swal2-bottom-left,.swal2-container.swal2-grow-column.swal2-bottom-start,.swal2-container.swal2-grow-column.swal2-center-left,.swal2-container.swal2-grow-column.swal2-center-start,.swal2-container.swal2-grow-column.swal2-top-left,.swal2-container.swal2-grow-column.swal2-top-start{\n  align-items:flex-start\n}\n\n.swal2-container.swal2-grow-column.swal2-bottom-end,.swal2-container.swal2-grow-column.swal2-bottom-right,.swal2-container.swal2-grow-column.swal2-center-end,.swal2-container.swal2-grow-column.swal2-center-right,.swal2-container.swal2-grow-column.swal2-top-end,.swal2-container.swal2-grow-column.swal2-top-right{\n  align-items:flex-end\n}\n\n.swal2-container.swal2-grow-column>.swal2-modal{\n  display:flex!important;\n  flex:1;\n  align-content:center;\n  justify-content:center\n}\n\n.swal2-container:not(.swal2-top):not(.swal2-top-start):not(.swal2-top-end):not(.swal2-top-left):not(.swal2-top-right):not(.swal2-center-start):not(.swal2-center-end):not(.swal2-center-left):not(.swal2-center-right):not(.swal2-bottom):not(.swal2-bottom-start):not(.swal2-bottom-end):not(.swal2-bottom-left):not(.swal2-bottom-right):not(.swal2-grow-fullscreen)>.swal2-modal{\n  margin:auto\n}\n\n@media all and (-ms-high-contrast:none), (-ms-high-contrast:active){\n  .swal2-container .swal2-modal{\n    margin:0!important\n  }\n}\n\n.swal2-container.swal2-shown{\n  background-color:rgba(0,0,0,.4)\n}\n\n.swal2-popup{\n  display:none;\n  position:relative;\n  box-sizing:border-box;\n  flex-direction:column;\n  justify-content:center;\n  width:32em;\n  max-width:100%;\n  padding:1.25em;\n  border:none;\n  border-radius:.3125em;\n  background:#fff;\n  font-family:inherit;\n  font-size:1rem\n}\n\n.swal2-popup:focus{\n  outline:0\n}\n\n.swal2-popup.swal2-loading{\n  overflow-y:hidden\n}\n\n.swal2-header{\n  display:flex;\n  flex-direction:column;\n  align-items:center\n}\n\n.swal2-title{\n  position:relative;\n  max-width:100%;\n  margin:0 0 .4em;\n  padding:0;\n  color:#595959;\n  font-size:1.875em;\n  font-weight:600;\n  text-align:center;\n  text-transform:none;\n  word-wrap:break-word\n}\n\n.swal2-actions{\n  display:flex;\n  z-index:1;\n  flex-wrap:wrap;\n  align-items:center;\n  justify-content:center;\n  width:100%;\n  margin:1.25em auto 0\n}\n\n.swal2-actions:not(.swal2-loading) .swal2-styled[disabled]{\n  opacity:.4\n}\n\n.swal2-actions:not(.swal2-loading) .swal2-styled:hover{\n  background-image:linear-gradient(rgba(0,0,0,.1),rgba(0,0,0,.1))\n}\n\n.swal2-actions:not(.swal2-loading) .swal2-styled:active{\n  background-image:linear-gradient(rgba(0,0,0,.2),rgba(0,0,0,.2))\n}\n\n.swal2-actions.swal2-loading .swal2-styled.swal2-confirm{\n  box-sizing:border-box;\n  width:2.5em;\n  height:2.5em;\n  margin:.46875em;\n  padding:0;\n  -webkit-animation:swal2-rotate-loading 1.5s linear 0s infinite normal;\n  animation:swal2-rotate-loading 1.5s linear 0s infinite normal;\n  border:.25em solid transparent;\n  border-radius:100%;\n  border-color:transparent;\n  background-color:transparent!important;\n  color:transparent;\n  cursor:default;\n  -webkit-user-select:none;\n  -moz-user-select:none;\n  -ms-user-select:none;\n  user-select:none\n}\n\n.swal2-actions.swal2-loading .swal2-styled.swal2-cancel{\n  margin-right:30px;\n  margin-left:30px\n}\n\n.swal2-actions.swal2-loading :not(.swal2-styled).swal2-confirm::after{\n  content:\"\";\n  display:inline-block;\n  width:15px;\n  height:15px;\n  margin-left:5px;\n  -webkit-animation:swal2-rotate-loading 1.5s linear 0s infinite normal;\n  animation:swal2-rotate-loading 1.5s linear 0s infinite normal;\n  border:3px solid #999;\n  border-radius:50%;\n  border-right-color:transparent;\n  box-shadow:1px 1px 1px #fff\n}\n\n.swal2-styled{\n  margin:.3125em;\n  padding:.625em 2em;\n  box-shadow:none;\n  font-weight:500\n}\n\n.swal2-styled:not([disabled]){\n  cursor:pointer\n}\n\n.swal2-styled.swal2-confirm{\n  border:0;\n  border-radius:.25em;\n  background:initial;\n  background-color:#3085d6;\n  color:#fff;\n  font-size:1.0625em\n}\n\n.swal2-styled.swal2-cancel{\n  border:0;\n  border-radius:.25em;\n  background:initial;\n  background-color:#aaa;\n  color:#fff;\n  font-size:1.0625em\n}\n\n.swal2-styled:focus{\n  outline:0;\n  box-shadow:0 0 0 2px #fff,0 0 0 4px rgba(50,100,150,.4)\n}\n\n.swal2-styled::-moz-focus-inner{\n  border:0\n}\n\n.swal2-footer{\n  justify-content:center;\n  margin:1.25em 0 0;\n  padding:1em 0 0;\n  border-top:1px solid #eee;\n  color:#545454;\n  font-size:1em\n}\n\n.swal2-image{\n  max-width:100%;\n  margin:1.25em auto\n}\n\n.swal2-close{\n  position:absolute;\n  z-index:2;\n  top:0;\n  right:0;\n  justify-content:center;\n  width:1.2em;\n  height:1.2em;\n  padding:0;\n  overflow:hidden;\n  transition:color .1s ease-out;\n  border:none;\n  border-radius:0;\n  outline:initial;\n  background:0 0;\n  color:#ccc;\n  font-family:serif;\n  font-size:2.5em;\n  line-height:1.2;\n  cursor:pointer\n}\n\n.swal2-close:hover{\n  transform:none;\n  background:0 0;\n  color:#f27474\n}\n\n.swal2-content{\n  z-index:1;\n  justify-content:center;\n  margin:0;\n  padding:0;\n  color:#545454;\n  font-size:1.125em;\n  font-weight:400;\n  line-height:normal;\n  text-align:center;\n  word-wrap:break-word\n}\n\n.swal2-checkbox,.swal2-file,.swal2-input,.swal2-radio,.swal2-select,.swal2-textarea{\n  margin:1em auto\n}\n\n.swal2-file,.swal2-input,.swal2-textarea{\n  box-sizing:border-box;\n  width:100%;\n  transition:border-color .3s,box-shadow .3s;\n  border:1px solid #d9d9d9;\n  border-radius:.1875em;\n  background:inherit;\n  box-shadow:inset 0 1px 1px rgba(0,0,0,.06);\n  color:inherit;\n  font-size:1.125em\n}\n\n.swal2-file.swal2-inputerror,.swal2-input.swal2-inputerror,.swal2-textarea.swal2-inputerror{\n  border-color:#f27474!important;\n  box-shadow:0 0 2px #f27474!important\n}\n\n.swal2-file:focus,.swal2-input:focus,.swal2-textarea:focus{\n  border:1px solid #b4dbed;\n  outline:0;\n  box-shadow:0 0 3px #c4e6f5\n}\n\n.swal2-file::-webkit-input-placeholder,.swal2-input::-webkit-input-placeholder,.swal2-textarea::-webkit-input-placeholder{\n  color:#ccc\n}\n\n.swal2-file::-moz-placeholder,.swal2-input::-moz-placeholder,.swal2-textarea::-moz-placeholder{\n  color:#ccc\n}\n\n.swal2-file:-ms-input-placeholder,.swal2-input:-ms-input-placeholder,.swal2-textarea:-ms-input-placeholder{\n  color:#ccc\n}\n\n.swal2-file::-ms-input-placeholder,.swal2-input::-ms-input-placeholder,.swal2-textarea::-ms-input-placeholder{\n  color:#ccc\n}\n\n.swal2-file::placeholder,.swal2-input::placeholder,.swal2-textarea::placeholder{\n  color:#ccc\n}\n\n.swal2-range{\n  margin:1em auto;\n  background:inherit\n}\n\n.swal2-range input{\n  width:80%\n}\n\n.swal2-range output{\n  width:20%;\n  color:inherit;\n  font-weight:600;\n  text-align:center\n}\n\n.swal2-range input,.swal2-range output{\n  height:2.625em;\n  padding:0;\n  font-size:1.125em;\n  line-height:2.625em\n}\n\n.swal2-input{\n  height:2.625em;\n  padding:0 .75em\n}\n\n.swal2-input[type=number]{\n  max-width:10em\n}\n\n.swal2-file{\n  background:inherit;\n  font-size:1.125em\n}\n\n.swal2-textarea{\n  height:6.75em;\n  padding:.75em\n}\n\n.swal2-select{\n  min-width:50%;\n  max-width:100%;\n  padding:.375em .625em;\n  background:inherit;\n  color:inherit;\n  font-size:1.125em\n}\n\n.swal2-checkbox,.swal2-radio{\n  align-items:center;\n  justify-content:center;\n  background:inherit;\n  color:inherit\n}\n\n.swal2-checkbox label,.swal2-radio label{\n  margin:0 .6em;\n  font-size:1.125em\n}\n\n.swal2-checkbox input,.swal2-radio input{\n  margin:0 .4em\n}\n\n.swal2-validation-message{\n  display:none;\n  align-items:center;\n  justify-content:center;\n  padding:.625em;\n  overflow:hidden;\n  background:#f0f0f0;\n  color:#666;\n  font-size:1em;\n  font-weight:300\n}\n\n.swal2-validation-message::before{\n  content:\"!\";\n  display:inline-block;\n  width:1.5em;\n  min-width:1.5em;\n  height:1.5em;\n  margin:0 .625em;\n  border-radius:50%;\n  background-color:#f27474;\n  color:#fff;\n  font-weight:600;\n  line-height:1.5em;\n  text-align:center\n}\n\n.swal2-icon{\n  position:relative;\n  box-sizing:content-box;\n  justify-content:center;\n  width:5em;\n  height:5em;\n  margin:1.25em auto 1.875em;\n  border:.25em solid transparent;\n  border-radius:50%;\n  font-family:inherit;\n  line-height:5em;\n  cursor:default;\n  -webkit-user-select:none;\n  -moz-user-select:none;\n  -ms-user-select:none;\n  user-select:none\n}\n\n.swal2-icon::before{\n  display:flex;\n  align-items:center;\n  height:92%;\n  font-size:3.75em\n}\n\n.swal2-icon.swal2-error{\n  border-color:#f27474\n}\n\n.swal2-icon.swal2-error .swal2-x-mark{\n  position:relative;\n  flex-grow:1\n}\n\n.swal2-icon.swal2-error [class^=swal2-x-mark-line]{\n  display:block;\n  position:absolute;\n  top:2.3125em;\n  width:2.9375em;\n  height:.3125em;\n  border-radius:.125em;\n  background-color:#f27474\n}\n\n.swal2-icon.swal2-error [class^=swal2-x-mark-line][class$=left]{\n  left:1.0625em;\n  transform:rotate(45deg)\n}\n\n.swal2-icon.swal2-error [class^=swal2-x-mark-line][class$=right]{\n  right:1em;\n  transform:rotate(-45deg)\n}\n\n.swal2-icon.swal2-warning{\n  border-color:#facea8;\n  color:#f8bb86\n}\n\n.swal2-icon.swal2-warning::before{\n  content:\"!\"\n}\n\n.swal2-icon.swal2-info{\n  border-color:#9de0f6;\n  color:#3fc3ee\n}\n\n.swal2-icon.swal2-info::before{\n  content:\"i\"\n}\n\n.swal2-icon.swal2-question{\n  border-color:#c9dae1;\n  color:#87adbd\n}\n\n.swal2-icon.swal2-question::before{\n  content:\"?\"\n}\n\n.swal2-icon.swal2-question.swal2-arabic-question-mark::before{\n  content:\"\\61F\"\n}\n\n.swal2-icon.swal2-success{\n  border-color:#a5dc86\n}\n\n.swal2-icon.swal2-success [class^=swal2-success-circular-line]{\n  position:absolute;\n  width:3.75em;\n  height:7.5em;\n  transform:rotate(45deg);\n  border-radius:50%\n}\n\n.swal2-icon.swal2-success [class^=swal2-success-circular-line][class$=left]{\n  top:-.4375em;\n  left:-2.0635em;\n  transform:rotate(-45deg);\n  transform-origin:3.75em 3.75em;\n  border-radius:7.5em 0 0 7.5em\n}\n\n.swal2-icon.swal2-success [class^=swal2-success-circular-line][class$=right]{\n  top:-.6875em;\n  left:1.875em;\n  transform:rotate(-45deg);\n  transform-origin:0 3.75em;\n  border-radius:0 7.5em 7.5em 0\n}\n\n.swal2-icon.swal2-success .swal2-success-ring{\n  position:absolute;\n  z-index:2;\n  top:-.25em;\n  left:-.25em;\n  box-sizing:content-box;\n  width:100%;\n  height:100%;\n  border:.25em solid rgba(165,220,134,.3);\n  border-radius:50%\n}\n\n.swal2-icon.swal2-success .swal2-success-fix{\n  position:absolute;\n  z-index:1;\n  top:.5em;\n  left:1.625em;\n  width:.4375em;\n  height:5.625em;\n  transform:rotate(-45deg)\n}\n\n.swal2-icon.swal2-success [class^=swal2-success-line]{\n  display:block;\n  position:absolute;\n  z-index:2;\n  height:.3125em;\n  border-radius:.125em;\n  background-color:#a5dc86\n}\n\n.swal2-icon.swal2-success [class^=swal2-success-line][class$=tip]{\n  top:2.875em;\n  left:.875em;\n  width:1.5625em;\n  transform:rotate(45deg)\n}\n\n.swal2-icon.swal2-success [class^=swal2-success-line][class$=long]{\n  top:2.375em;\n  right:.5em;\n  width:2.9375em;\n  transform:rotate(-45deg)\n}\n\n.swal2-progress-steps{\n  align-items:center;\n  margin:0 0 1.25em;\n  padding:0;\n  background:inherit;\n  font-weight:600\n}\n\n.swal2-progress-steps li{\n  display:inline-block;\n  position:relative\n}\n\n.swal2-progress-steps .swal2-progress-step{\n  z-index:20;\n  width:2em;\n  height:2em;\n  border-radius:2em;\n  background:#3085d6;\n  color:#fff;\n  line-height:2em;\n  text-align:center\n}\n\n.swal2-progress-steps .swal2-progress-step.swal2-active-progress-step{\n  background:#3085d6\n}\n\n.swal2-progress-steps .swal2-progress-step.swal2-active-progress-step~.swal2-progress-step{\n  background:#add8e6;\n  color:#fff\n}\n\n.swal2-progress-steps .swal2-progress-step.swal2-active-progress-step~.swal2-progress-step-line{\n  background:#add8e6\n}\n\n.swal2-progress-steps .swal2-progress-step-line{\n  z-index:10;\n  width:2.5em;\n  height:.4em;\n  margin:0 -1px;\n  background:#3085d6\n}\n\n[class^=swal2]{\n  -webkit-tap-highlight-color:transparent\n}\n\n.swal2-show{\n  -webkit-animation:swal2-show .3s;\n  animation:swal2-show .3s\n}\n\n.swal2-show.swal2-noanimation{\n  -webkit-animation:none;\n  animation:none\n}\n\n.swal2-hide{\n  -webkit-animation:swal2-hide .15s forwards;\n  animation:swal2-hide .15s forwards\n}\n\n.swal2-hide.swal2-noanimation{\n  -webkit-animation:none;\n  animation:none\n}\n\n.swal2-rtl .swal2-close{\n  right:auto;\n  left:0\n}\n\n.swal2-animate-success-icon .swal2-success-line-tip{\n  -webkit-animation:swal2-animate-success-line-tip .75s;\n  animation:swal2-animate-success-line-tip .75s\n}\n\n.swal2-animate-success-icon .swal2-success-line-long{\n  -webkit-animation:swal2-animate-success-line-long .75s;\n  animation:swal2-animate-success-line-long .75s\n}\n\n.swal2-animate-success-icon .swal2-success-circular-line-right{\n  -webkit-animation:swal2-rotate-success-circular-line 4.25s ease-in;\n  animation:swal2-rotate-success-circular-line 4.25s ease-in\n}\n\n.swal2-animate-error-icon{\n  -webkit-animation:swal2-animate-error-icon .5s;\n  animation:swal2-animate-error-icon .5s\n}\n\n.swal2-animate-error-icon .swal2-x-mark{\n  -webkit-animation:swal2-animate-error-x-mark .5s;\n  animation:swal2-animate-error-x-mark .5s\n}\n\n@supports (-ms-accelerator:true){\n  .swal2-range input{\n    width:100%!important\n  }\n\n  .swal2-range output{\n    display:none\n  }\n}\n\n@media all and (-ms-high-contrast:none), (-ms-high-contrast:active){\n  .swal2-range input{\n    width:100%!important\n  }\n\n  .swal2-range output{\n    display:none\n  }\n}\n\n@-moz-document url-prefix(){\n  .swal2-close:focus{\n    outline:2px solid rgba(50,100,150,.4)\n  }\n}\n\n@-webkit-keyframes swal2-toast-show{\n  0%{\n    transform:translateY(-.625em) rotateZ(2deg)\n  }\n\n  33%{\n    transform:translateY(0) rotateZ(-2deg)\n  }\n\n  66%{\n    transform:translateY(.3125em) rotateZ(2deg)\n  }\n\n  100%{\n    transform:translateY(0) rotateZ(0)\n  }\n}\n\n@keyframes swal2-toast-show{\n  0%{\n    transform:translateY(-.625em) rotateZ(2deg)\n  }\n\n  33%{\n    transform:translateY(0) rotateZ(-2deg)\n  }\n\n  66%{\n    transform:translateY(.3125em) rotateZ(2deg)\n  }\n\n  100%{\n    transform:translateY(0) rotateZ(0)\n  }\n}\n\n@-webkit-keyframes swal2-toast-hide{\n  100%{\n    transform:rotateZ(1deg);\n    opacity:0\n  }\n}\n\n@keyframes swal2-toast-hide{\n  100%{\n    transform:rotateZ(1deg);\n    opacity:0\n  }\n}\n\n@-webkit-keyframes swal2-toast-animate-success-line-tip{\n  0%{\n    top:.5625em;\n    left:.0625em;\n    width:0\n  }\n\n  54%{\n    top:.125em;\n    left:.125em;\n    width:0\n  }\n\n  70%{\n    top:.625em;\n    left:-.25em;\n    width:1.625em\n  }\n\n  84%{\n    top:1.0625em;\n    left:.75em;\n    width:.5em\n  }\n\n  100%{\n    top:1.125em;\n    left:.1875em;\n    width:.75em\n  }\n}\n\n@keyframes swal2-toast-animate-success-line-tip{\n  0%{\n    top:.5625em;\n    left:.0625em;\n    width:0\n  }\n\n  54%{\n    top:.125em;\n    left:.125em;\n    width:0\n  }\n\n  70%{\n    top:.625em;\n    left:-.25em;\n    width:1.625em\n  }\n\n  84%{\n    top:1.0625em;\n    left:.75em;\n    width:.5em\n  }\n\n  100%{\n    top:1.125em;\n    left:.1875em;\n    width:.75em\n  }\n}\n\n@-webkit-keyframes swal2-toast-animate-success-line-long{\n  0%{\n    top:1.625em;\n    right:1.375em;\n    width:0\n  }\n\n  65%{\n    top:1.25em;\n    right:.9375em;\n    width:0\n  }\n\n  84%{\n    top:.9375em;\n    right:0;\n    width:1.125em\n  }\n\n  100%{\n    top:.9375em;\n    right:.1875em;\n    width:1.375em\n  }\n}\n\n@keyframes swal2-toast-animate-success-line-long{\n  0%{\n    top:1.625em;\n    right:1.375em;\n    width:0\n  }\n\n  65%{\n    top:1.25em;\n    right:.9375em;\n    width:0\n  }\n\n  84%{\n    top:.9375em;\n    right:0;\n    width:1.125em\n  }\n\n  100%{\n    top:.9375em;\n    right:.1875em;\n    width:1.375em\n  }\n}\n\n@-webkit-keyframes swal2-show{\n  0%{\n    transform:scale(.7)\n  }\n\n  45%{\n    transform:scale(1.05)\n  }\n\n  80%{\n    transform:scale(.95)\n  }\n\n  100%{\n    transform:scale(1)\n  }\n}\n\n@keyframes swal2-show{\n  0%{\n    transform:scale(.7)\n  }\n\n  45%{\n    transform:scale(1.05)\n  }\n\n  80%{\n    transform:scale(.95)\n  }\n\n  100%{\n    transform:scale(1)\n  }\n}\n\n@-webkit-keyframes swal2-hide{\n  0%{\n    transform:scale(1);\n    opacity:1\n  }\n\n  100%{\n    transform:scale(.5);\n    opacity:0\n  }\n}\n\n@keyframes swal2-hide{\n  0%{\n    transform:scale(1);\n    opacity:1\n  }\n\n  100%{\n    transform:scale(.5);\n    opacity:0\n  }\n}\n\n@-webkit-keyframes swal2-animate-success-line-tip{\n  0%{\n    top:1.1875em;\n    left:.0625em;\n    width:0\n  }\n\n  54%{\n    top:1.0625em;\n    left:.125em;\n    width:0\n  }\n\n  70%{\n    top:2.1875em;\n    left:-.375em;\n    width:3.125em\n  }\n\n  84%{\n    top:3em;\n    left:1.3125em;\n    width:1.0625em\n  }\n\n  100%{\n    top:2.8125em;\n    left:.875em;\n    width:1.5625em\n  }\n}\n\n@keyframes swal2-animate-success-line-tip{\n  0%{\n    top:1.1875em;\n    left:.0625em;\n    width:0\n  }\n\n  54%{\n    top:1.0625em;\n    left:.125em;\n    width:0\n  }\n\n  70%{\n    top:2.1875em;\n    left:-.375em;\n    width:3.125em\n  }\n\n  84%{\n    top:3em;\n    left:1.3125em;\n    width:1.0625em\n  }\n\n  100%{\n    top:2.8125em;\n    left:.875em;\n    width:1.5625em\n  }\n}\n\n@-webkit-keyframes swal2-animate-success-line-long{\n  0%{\n    top:3.375em;\n    right:2.875em;\n    width:0\n  }\n\n  65%{\n    top:3.375em;\n    right:2.875em;\n    width:0\n  }\n\n  84%{\n    top:2.1875em;\n    right:0;\n    width:3.4375em\n  }\n\n  100%{\n    top:2.375em;\n    right:.5em;\n    width:2.9375em\n  }\n}\n\n@keyframes swal2-animate-success-line-long{\n  0%{\n    top:3.375em;\n    right:2.875em;\n    width:0\n  }\n\n  65%{\n    top:3.375em;\n    right:2.875em;\n    width:0\n  }\n\n  84%{\n    top:2.1875em;\n    right:0;\n    width:3.4375em\n  }\n\n  100%{\n    top:2.375em;\n    right:.5em;\n    width:2.9375em\n  }\n}\n\n@-webkit-keyframes swal2-rotate-success-circular-line{\n  0%{\n    transform:rotate(-45deg)\n  }\n\n  5%{\n    transform:rotate(-45deg)\n  }\n\n  12%{\n    transform:rotate(-405deg)\n  }\n\n  100%{\n    transform:rotate(-405deg)\n  }\n}\n\n@keyframes swal2-rotate-success-circular-line{\n  0%{\n    transform:rotate(-45deg)\n  }\n\n  5%{\n    transform:rotate(-45deg)\n  }\n\n  12%{\n    transform:rotate(-405deg)\n  }\n\n  100%{\n    transform:rotate(-405deg)\n  }\n}\n\n@-webkit-keyframes swal2-animate-error-x-mark{\n  0%{\n    margin-top:1.625em;\n    transform:scale(.4);\n    opacity:0\n  }\n\n  50%{\n    margin-top:1.625em;\n    transform:scale(.4);\n    opacity:0\n  }\n\n  80%{\n    margin-top:-.375em;\n    transform:scale(1.15)\n  }\n\n  100%{\n    margin-top:0;\n    transform:scale(1);\n    opacity:1\n  }\n}\n\n@keyframes swal2-animate-error-x-mark{\n  0%{\n    margin-top:1.625em;\n    transform:scale(.4);\n    opacity:0\n  }\n\n  50%{\n    margin-top:1.625em;\n    transform:scale(.4);\n    opacity:0\n  }\n\n  80%{\n    margin-top:-.375em;\n    transform:scale(1.15)\n  }\n\n  100%{\n    margin-top:0;\n    transform:scale(1);\n    opacity:1\n  }\n}\n\n@-webkit-keyframes swal2-animate-error-icon{\n  0%{\n    transform:rotateX(100deg);\n    opacity:0\n  }\n\n  100%{\n    transform:rotateX(0);\n    opacity:1\n  }\n}\n\n@keyframes swal2-animate-error-icon{\n  0%{\n    transform:rotateX(100deg);\n    opacity:0\n  }\n\n  100%{\n    transform:rotateX(0);\n    opacity:1\n  }\n}\n\n@-webkit-keyframes swal2-rotate-loading{\n  0%{\n    transform:rotate(0)\n  }\n\n  100%{\n    transform:rotate(360deg)\n  }\n}\n\n@keyframes swal2-rotate-loading{\n  0%{\n    transform:rotate(0)\n  }\n\n  100%{\n    transform:rotate(360deg)\n  }\n}\n\nbody.swal2-shown:not(.swal2-no-backdrop):not(.swal2-toast-shown){\n  overflow:hidden\n}\n\nbody.swal2-height-auto{\n  height:auto!important\n}\n\nbody.swal2-no-backdrop .swal2-shown{\n  top:auto;\n  right:auto;\n  bottom:auto;\n  left:auto;\n  max-width:calc(100% - .625em * 2);\n  background-color:transparent\n}\n\nbody.swal2-no-backdrop .swal2-shown>.swal2-modal{\n  box-shadow:0 0 10px rgba(0,0,0,.4)\n}\n\nbody.swal2-no-backdrop .swal2-shown.swal2-top{\n  top:0;\n  left:50%;\n  transform:translateX(-50%)\n}\n\nbody.swal2-no-backdrop .swal2-shown.swal2-top-left,body.swal2-no-backdrop .swal2-shown.swal2-top-start{\n  top:0;\n  left:0\n}\n\nbody.swal2-no-backdrop .swal2-shown.swal2-top-end,body.swal2-no-backdrop .swal2-shown.swal2-top-right{\n  top:0;\n  right:0\n}\n\nbody.swal2-no-backdrop .swal2-shown.swal2-center{\n  top:50%;\n  left:50%;\n  transform:translate(-50%,-50%)\n}\n\nbody.swal2-no-backdrop .swal2-shown.swal2-center-left,body.swal2-no-backdrop .swal2-shown.swal2-center-start{\n  top:50%;\n  left:0;\n  transform:translateY(-50%)\n}\n\nbody.swal2-no-backdrop .swal2-shown.swal2-center-end,body.swal2-no-backdrop .swal2-shown.swal2-center-right{\n  top:50%;\n  right:0;\n  transform:translateY(-50%)\n}\n\nbody.swal2-no-backdrop .swal2-shown.swal2-bottom{\n  bottom:0;\n  left:50%;\n  transform:translateX(-50%)\n}\n\nbody.swal2-no-backdrop .swal2-shown.swal2-bottom-left,body.swal2-no-backdrop .swal2-shown.swal2-bottom-start{\n  bottom:0;\n  left:0\n}\n\nbody.swal2-no-backdrop .swal2-shown.swal2-bottom-end,body.swal2-no-backdrop .swal2-shown.swal2-bottom-right{\n  right:0;\n  bottom:0\n}\n\n@media print{\n  body.swal2-shown:not(.swal2-no-backdrop):not(.swal2-toast-shown){\n    overflow-y:scroll!important\n  }\n\n  body.swal2-shown:not(.swal2-no-backdrop):not(.swal2-toast-shown)>[aria-hidden=true]{\n    display:none\n  }\n\n  body.swal2-shown:not(.swal2-no-backdrop):not(.swal2-toast-shown) .swal2-container{\n    position:static!important\n  }\n}\n\nbody.swal2-toast-shown .swal2-container{\n  background-color:transparent\n}\n\nbody.swal2-toast-shown .swal2-container.swal2-shown{\n  background-color:transparent\n}\n\nbody.swal2-toast-shown .swal2-container.swal2-top{\n  top:0;\n  right:auto;\n  bottom:auto;\n  left:50%;\n  transform:translateX(-50%)\n}\n\nbody.swal2-toast-shown .swal2-container.swal2-top-end,body.swal2-toast-shown .swal2-container.swal2-top-right{\n  top:0;\n  right:0;\n  bottom:auto;\n  left:auto\n}\n\nbody.swal2-toast-shown .swal2-container.swal2-top-left,body.swal2-toast-shown .swal2-container.swal2-top-start{\n  top:0;\n  right:auto;\n  bottom:auto;\n  left:0\n}\n\nbody.swal2-toast-shown .swal2-container.swal2-center-left,body.swal2-toast-shown .swal2-container.swal2-center-start{\n  top:50%;\n  right:auto;\n  bottom:auto;\n  left:0;\n  transform:translateY(-50%)\n}\n\nbody.swal2-toast-shown .swal2-container.swal2-center{\n  top:50%;\n  right:auto;\n  bottom:auto;\n  left:50%;\n  transform:translate(-50%,-50%)\n}\n\nbody.swal2-toast-shown .swal2-container.swal2-center-end,body.swal2-toast-shown .swal2-container.swal2-center-right{\n  top:50%;\n  right:0;\n  bottom:auto;\n  left:auto;\n  transform:translateY(-50%)\n}\n\nbody.swal2-toast-shown .swal2-container.swal2-bottom-left,body.swal2-toast-shown .swal2-container.swal2-bottom-start{\n  top:auto;\n  right:auto;\n  bottom:0;\n  left:0\n}\n\nbody.swal2-toast-shown .swal2-container.swal2-bottom{\n  top:auto;\n  right:auto;\n  bottom:0;\n  left:50%;\n  transform:translateX(-50%)\n}\n\nbody.swal2-toast-shown .swal2-container.swal2-bottom-end,body.swal2-toast-shown .swal2-container.swal2-bottom-right{\n  top:auto;\n  right:0;\n  bottom:0;\n  left:auto\n}\n\nbody.swal2-toast-column .swal2-toast{\n  flex-direction:column;\n  align-items:stretch\n}\n\nbody.swal2-toast-column .swal2-toast .swal2-actions{\n  flex:1;\n  align-self:stretch;\n  height:2.2em;\n  margin-top:.3125em\n}\n\nbody.swal2-toast-column .swal2-toast .swal2-loading{\n  justify-content:center\n}\n\nbody.swal2-toast-column .swal2-toast .swal2-input{\n  height:2em;\n  margin:.3125em auto;\n  font-size:1em\n}\n\nbody.swal2-toast-column .swal2-toast .swal2-validation-message{\n  font-size:1em\n}", ""]);
+
+// exports
+
+
+/***/ }),
+
+/***/ "./node_modules/css-loader/index.js?!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/modules/SiteUsers.vue?vue&type=style&index=0&id=d557c96a&scoped=true&lang=css&":
+/*!************************************************************************************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/css-loader??ref--9-1!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src??ref--9-2!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/modules/SiteUsers.vue?vue&type=style&index=0&id=d557c96a&scoped=true&lang=css& ***!
+  \************************************************************************************************************************************************************************************************************************************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+exports = module.exports = __webpack_require__(/*! ../../../node_modules/css-loader/lib/css-base.js */ "./node_modules/css-loader/lib/css-base.js")(false);
+// imports
+
+
+// module
+exports.push([module.i, ".fade-enter-active[data-v-d557c96a],\n.fade-leave-active[data-v-d557c96a] {\n  transition: all 0.4s;\n}\n.fade-enter[data-v-d557c96a],\n.fade-leave-to[data-v-d557c96a] {\n  opacity: 0;\n}\n", ""]);
 
 // exports
 
@@ -2402,6 +2743,36 @@ process.umask = function() { return 0; };
 }(typeof self === "undefined" ? typeof global === "undefined" ? this : global : self));
 
 /* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./../webpack/buildin/global.js */ "./node_modules/webpack/buildin/global.js"), __webpack_require__(/*! ./../process/browser.js */ "./node_modules/process/browser.js")))
+
+/***/ }),
+
+/***/ "./node_modules/style-loader/index.js!./node_modules/css-loader/index.js?!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/modules/SiteUsers.vue?vue&type=style&index=0&id=d557c96a&scoped=true&lang=css&":
+/*!****************************************************************************************************************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/style-loader!./node_modules/css-loader??ref--9-1!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src??ref--9-2!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/modules/SiteUsers.vue?vue&type=style&index=0&id=d557c96a&scoped=true&lang=css& ***!
+  \****************************************************************************************************************************************************************************************************************************************************************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+
+var content = __webpack_require__(/*! !../../../node_modules/css-loader??ref--9-1!../../../node_modules/vue-loader/lib/loaders/stylePostLoader.js!../../../node_modules/postcss-loader/src??ref--9-2!../../../node_modules/vue-loader/lib??vue-loader-options!./SiteUsers.vue?vue&type=style&index=0&id=d557c96a&scoped=true&lang=css& */ "./node_modules/css-loader/index.js?!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/modules/SiteUsers.vue?vue&type=style&index=0&id=d557c96a&scoped=true&lang=css&");
+
+if(typeof content === 'string') content = [[module.i, content, '']];
+
+var transform;
+var insertInto;
+
+
+
+var options = {"hmr":true}
+
+options.transform = transform
+options.insertInto = undefined;
+
+var update = __webpack_require__(/*! ../../../node_modules/style-loader/lib/addStyles.js */ "./node_modules/style-loader/lib/addStyles.js")(content, options);
+
+if(content.locals) module.exports = content.locals;
+
+if(false) {}
 
 /***/ }),
 
@@ -5996,6 +6367,582 @@ var render = function() {
         2
       )
     ]
+  )
+}
+var staticRenderFns = []
+render._withStripped = true
+
+
+
+/***/ }),
+
+/***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/modules/SiteUsers.vue?vue&type=template&id=d557c96a&scoped=true&":
+/*!*********************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/modules/SiteUsers.vue?vue&type=template&id=d557c96a&scoped=true& ***!
+  \*********************************************************************************************************************************************************************************************************************/
+/*! exports provided: render, staticRenderFns */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "render", function() { return render; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return staticRenderFns; });
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c(
+    "div",
+    [
+      _c(
+        "div",
+        {
+          on: {
+            click: function($event) {
+              return _vm.showModal()
+            }
+          }
+        },
+        [_vm._t("trigger")],
+        2
+      ),
+      _vm._v(" "),
+      _c("Transition", { attrs: { name: "fade" } }, [
+        _vm.modal
+          ? _c(
+              "div",
+              {
+                staticClass:
+                  "fixed inset-0 w-full h-screen flex items-center justify-center bg-smoke-dark z-50"
+              },
+              [
+                _c(
+                  "div",
+                  {
+                    staticClass:
+                      "relative w-full max-w-2xl bg-white shadow-lg rounded-lg p-8 text-left"
+                  },
+                  [
+                    _c("div", { staticClass: "mb-3" }, [
+                      _c("label", [_vm._v("Name")]),
+                      _vm._v(" "),
+                      _c("input", {
+                        directives: [
+                          {
+                            name: "model",
+                            rawName: "v-model",
+                            value: _vm.userData.name,
+                            expression: "userData.name"
+                          }
+                        ],
+                        staticClass: "bg-gray-100",
+                        attrs: { placeholder: "Name" },
+                        domProps: { value: _vm.userData.name },
+                        on: {
+                          input: function($event) {
+                            if ($event.target.composing) {
+                              return
+                            }
+                            _vm.$set(_vm.userData, "name", $event.target.value)
+                          }
+                        }
+                      })
+                    ]),
+                    _vm._v(" "),
+                    _c("div", { staticClass: "mb-3" }, [
+                      _c("label", [_vm._v("Email Address")]),
+                      _vm._v(" "),
+                      _c("input", {
+                        directives: [
+                          {
+                            name: "model",
+                            rawName: "v-model",
+                            value: _vm.userData.email,
+                            expression: "userData.email"
+                          }
+                        ],
+                        staticClass: "bg-gray-100",
+                        attrs: { placeholder: "Email Address" },
+                        domProps: { value: _vm.userData.email },
+                        on: {
+                          input: function($event) {
+                            if ($event.target.composing) {
+                              return
+                            }
+                            _vm.$set(_vm.userData, "email", $event.target.value)
+                          }
+                        }
+                      })
+                    ]),
+                    _vm._v(" "),
+                    _c("div", { staticClass: "mb-3" }, [
+                      _c("div", { staticClass: "flex" }, [
+                        _c("div", { staticClass: "w-full relative mr-1" }, [
+                          _c("label", [_vm._v("Account Type")]),
+                          _vm._v(" "),
+                          _c(
+                            "select",
+                            {
+                              directives: [
+                                {
+                                  name: "model",
+                                  rawName: "v-model",
+                                  value: _vm.userData.admin,
+                                  expression: "userData.admin"
+                                }
+                              ],
+                              staticClass:
+                                "p-2 rounded border bg-gray-100 text-gray-600 appearance-none",
+                              attrs: { autocomplete: "off" },
+                              on: {
+                                change: function($event) {
+                                  var $$selectedVal = Array.prototype.filter
+                                    .call($event.target.options, function(o) {
+                                      return o.selected
+                                    })
+                                    .map(function(o) {
+                                      var val =
+                                        "_value" in o ? o._value : o.value
+                                      return val
+                                    })
+                                  _vm.$set(
+                                    _vm.userData,
+                                    "admin",
+                                    $event.target.multiple
+                                      ? $$selectedVal
+                                      : $$selectedVal[0]
+                                  )
+                                }
+                              }
+                            },
+                            [
+                              _c("option", { attrs: { value: "0" } }, [
+                                _vm._v("Normal User")
+                              ]),
+                              _vm._v(" "),
+                              _c("option", { attrs: { value: "1" } }, [
+                                _vm._v("Site Administrator")
+                              ])
+                            ]
+                          ),
+                          _vm._v(" "),
+                          _c(
+                            "div",
+                            {
+                              staticClass:
+                                "pointer-events-none absolute inset-y-0 right-0 flex items-center px-3 pt-6 text-gray-700"
+                            },
+                            [
+                              _c(
+                                "svg",
+                                {
+                                  staticClass: "fill-current h-4 w-4",
+                                  attrs: {
+                                    xmlns: "http://www.w3.org/2000/svg",
+                                    viewBox: "0 0 20 20"
+                                  }
+                                },
+                                [
+                                  _c("path", {
+                                    attrs: {
+                                      d:
+                                        "M9.293 12.95l.707.707L15.657 8l-1.414-1.414L10 10.828 5.757 6.586 4.343 8z"
+                                    }
+                                  })
+                                ]
+                              )
+                            ]
+                          )
+                        ]),
+                        _vm._v(" "),
+                        _c("div", { staticClass: "w-full relative ml-1" }, [
+                          _c("label", [_vm._v("Browse Only")]),
+                          _vm._v(" "),
+                          _c(
+                            "select",
+                            {
+                              directives: [
+                                {
+                                  name: "model",
+                                  rawName: "v-model",
+                                  value: _vm.userData.can_order,
+                                  expression: "userData.can_order"
+                                }
+                              ],
+                              staticClass:
+                                "p-2 rounded border bg-gray-100 text-gray-600 appearance-none",
+                              attrs: { autocomplete: "off" },
+                              on: {
+                                change: function($event) {
+                                  var $$selectedVal = Array.prototype.filter
+                                    .call($event.target.options, function(o) {
+                                      return o.selected
+                                    })
+                                    .map(function(o) {
+                                      var val =
+                                        "_value" in o ? o._value : o.value
+                                      return val
+                                    })
+                                  _vm.$set(
+                                    _vm.userData,
+                                    "can_order",
+                                    $event.target.multiple
+                                      ? $$selectedVal
+                                      : $$selectedVal[0]
+                                  )
+                                }
+                              }
+                            },
+                            [
+                              _c("option", { attrs: { value: "1" } }, [
+                                _vm._v("No")
+                              ]),
+                              _vm._v(" "),
+                              _c("option", { attrs: { value: "0" } }, [
+                                _vm._v("Yes")
+                              ])
+                            ]
+                          ),
+                          _vm._v(" "),
+                          _c(
+                            "div",
+                            {
+                              staticClass:
+                                "pointer-events-none absolute inset-y-0 right-0 flex items-center px-3 pt-6 text-gray-700"
+                            },
+                            [
+                              _c(
+                                "svg",
+                                {
+                                  staticClass: "fill-current h-4 w-4",
+                                  attrs: {
+                                    xmlns: "http://www.w3.org/2000/svg",
+                                    viewBox: "0 0 20 20"
+                                  }
+                                },
+                                [
+                                  _c("path", {
+                                    attrs: {
+                                      d:
+                                        "M9.293 12.95l.707.707L15.657 8l-1.414-1.414L10 10.828 5.757 6.586 4.343 8z"
+                                    }
+                                  })
+                                ]
+                              )
+                            ]
+                          )
+                        ])
+                      ])
+                    ]),
+                    _vm._v(" "),
+                    _c("div", { staticClass: "mb-3" }, [
+                      _c("label", [_vm._v("Customer Code")]),
+                      _vm._v(" "),
+                      _c("input", {
+                        directives: [
+                          {
+                            name: "model",
+                            rawName: "v-model",
+                            value: _vm.userData.customer_code,
+                            expression: "userData.customer_code"
+                          }
+                        ],
+                        staticClass: "bg-gray-100",
+                        attrs: { placeholder: "Customer Code" },
+                        domProps: { value: _vm.userData.customer_code },
+                        on: {
+                          input: function($event) {
+                            if ($event.target.composing) {
+                              return
+                            }
+                            _vm.$set(
+                              _vm.userData,
+                              "customer_code",
+                              $event.target.value
+                            )
+                          }
+                        }
+                      })
+                    ]),
+                    _vm._v(" "),
+                    _vm.userData.id && parseInt(_vm.userData.admin) !== 1
+                      ? _c("div", { staticClass: "mb-3" }, [
+                          _c("label", [_vm._v("Additional Customers")]),
+                          _vm._v(" "),
+                          _c(
+                            "table",
+                            {
+                              staticClass:
+                                "w-full text-sm bg-white rounded border"
+                            },
+                            [
+                              _c(
+                                "tbody",
+                                [
+                                  _c(
+                                    "tr",
+                                    {
+                                      staticClass:
+                                        "text-left border-b bg-gray-300 uppercase text-xs tracking-widest"
+                                    },
+                                    [
+                                      _c(
+                                        "th",
+                                        { staticClass: "font-semibold p-1" },
+                                        [_vm._v("Code")]
+                                      ),
+                                      _vm._v(" "),
+                                      _c(
+                                        "th",
+                                        { staticClass: "text-right p-1" },
+                                        [
+                                          _c(
+                                            "button",
+                                            {
+                                              staticClass:
+                                                "rounded leading-none text-white bg-gray-700 p-1 text-xs hover:opacity-75",
+                                              on: {
+                                                click: _vm.addAdditionalCustomer
+                                              }
+                                            },
+                                            [
+                                              _vm._v(
+                                                "\n                                    Add Customer\n                                "
+                                              )
+                                            ]
+                                          )
+                                        ]
+                                      )
+                                    ]
+                                  ),
+                                  _vm._v(" "),
+                                  _vm._l(
+                                    _vm.listAdditionalCustomers(),
+                                    function(customer, index) {
+                                      return _c(
+                                        "tr",
+                                        {
+                                          staticClass:
+                                            "border-b hover:bg-gray-100"
+                                        },
+                                        [
+                                          _c("td", { staticClass: "p-1" }, [
+                                            _vm._v(
+                                              _vm._s(customer.customer_code)
+                                            )
+                                          ]),
+                                          _vm._v(" "),
+                                          _c(
+                                            "td",
+                                            { staticClass: "p-1 text-right" },
+                                            [
+                                              _c(
+                                                "button",
+                                                {
+                                                  staticClass:
+                                                    "rounded leading-none border-2 border-red-600 text-red-600 bg-white p-1 text-xs hover:bg-red-600 hover:text-white",
+                                                  on: {
+                                                    click: function($event) {
+                                                      return _vm.deleteAdditionalCustomer(
+                                                        index,
+                                                        customer.customer_code,
+                                                        customer.id
+                                                      )
+                                                    }
+                                                  }
+                                                },
+                                                [
+                                                  _vm._v(
+                                                    "\n                                    Delete\n                                "
+                                                  )
+                                                ]
+                                              )
+                                            ]
+                                          )
+                                        ]
+                                      )
+                                    }
+                                  )
+                                ],
+                                2
+                              )
+                            ]
+                          ),
+                          _vm._v(" "),
+                          _vm.customers.length === 0
+                            ? _c(
+                                "div",
+                                { staticClass: "border text-center p-3" },
+                                [
+                                  _vm._v(
+                                    "\n                        No additional customers added\n                    "
+                                  )
+                                ]
+                              )
+                            : _vm._e()
+                        ])
+                      : _vm._e(),
+                    _vm._v(" "),
+                    !_vm.userData.id && parseInt(_vm.userData.admin) !== 1
+                      ? _c("div", { staticClass: "mb-3" }, [
+                          _c("label", [_vm._v("Additional Customers")]),
+                          _vm._v(" "),
+                          _c(
+                            "div",
+                            {
+                              staticClass:
+                                "border text-center p-3 text-gray-500 underline"
+                            },
+                            [
+                              _vm._v(
+                                "You must save the user before you can add extra customers\n                    "
+                              )
+                            ]
+                          )
+                        ])
+                      : _vm._e(),
+                    _vm._v(" "),
+                    _c("div", { staticClass: "mb-3" }, [
+                      _c("div", { staticClass: "flex" }, [
+                        _c("div", { staticClass: "mr-1" }, [
+                          _c("label", [_vm._v("Telephone")]),
+                          _vm._v(" "),
+                          _c("input", {
+                            directives: [
+                              {
+                                name: "model",
+                                rawName: "v-model",
+                                value: _vm.userData.telephone,
+                                expression: "userData.telephone"
+                              }
+                            ],
+                            staticClass: "bg-gray-100",
+                            attrs: { placeholder: "Telephone Number" },
+                            domProps: { value: _vm.userData.telephone },
+                            on: {
+                              input: function($event) {
+                                if ($event.target.composing) {
+                                  return
+                                }
+                                _vm.$set(
+                                  _vm.userData,
+                                  "telephone",
+                                  $event.target.value
+                                )
+                              }
+                            }
+                          })
+                        ]),
+                        _vm._v(" "),
+                        _c("div", { staticClass: "ml-1" }, [
+                          _c("label", [_vm._v("Mobile")]),
+                          _vm._v(" "),
+                          _c("input", {
+                            directives: [
+                              {
+                                name: "model",
+                                rawName: "v-model",
+                                value: _vm.userData.mobile,
+                                expression: "userData.mobile"
+                              }
+                            ],
+                            staticClass: "bg-gray-100",
+                            attrs: { placeholder: "Mobile Number" },
+                            domProps: { value: _vm.userData.mobile },
+                            on: {
+                              input: function($event) {
+                                if ($event.target.composing) {
+                                  return
+                                }
+                                _vm.$set(
+                                  _vm.userData,
+                                  "mobile",
+                                  $event.target.value
+                                )
+                              }
+                            }
+                          })
+                        ])
+                      ])
+                    ]),
+                    _vm._v(" "),
+                    _c("div", { staticClass: "mt-8 text-right" }, [
+                      _c(
+                        "button",
+                        {
+                          staticClass: "button button-danger",
+                          on: {
+                            click: function($event) {
+                              return _vm.reload()
+                            }
+                          }
+                        },
+                        [_vm._v("Exit")]
+                      ),
+                      _vm._v(" "),
+                      _vm.userData.id
+                        ? _c(
+                            "button",
+                            {
+                              staticClass: "button bg-red-600 text-white",
+                              on: {
+                                click: function($event) {
+                                  return _vm.deleteUser(_vm.userData.id)
+                                }
+                              }
+                            },
+                            [
+                              _vm._v(
+                                "Delete\n                        User\n                    "
+                              )
+                            ]
+                          )
+                        : _vm._e(),
+                      _vm._v(" "),
+                      _vm.userData.id
+                        ? _c(
+                            "button",
+                            {
+                              staticClass: "button bg-gray-500 text-white",
+                              on: {
+                                click: function($event) {
+                                  return _vm.passwordReset(_vm.userData.email)
+                                }
+                              }
+                            },
+                            [
+                              _vm._v(
+                                "Password\n                        Reset\n                    "
+                              )
+                            ]
+                          )
+                        : _vm._e(),
+                      _vm._v(" "),
+                      _c(
+                        "button",
+                        {
+                          staticClass: "button bg-gray-700 text-white w-32",
+                          on: {
+                            click: function($event) {
+                              return _vm.storeUser(_vm.userData.id)
+                            }
+                          }
+                        },
+                        [
+                          _vm._v(
+                            _vm._s(_vm.buttonText) + "\n                    "
+                          )
+                        ]
+                      )
+                    ])
+                  ]
+                )
+              ]
+            )
+          : _vm._e()
+      ])
+    ],
+    1
   )
 }
 var staticRenderFns = []
@@ -18180,6 +19127,7 @@ window.axios = __webpack_require__(/*! axios */ "./node_modules/axios/index.js")
 
 Vue.use(vue_sweetalert2__WEBPACK_IMPORTED_MODULE_0__["default"]);
 Vue.component('dropdown', __webpack_require__(/*! ./modules/Dropdown.vue */ "./resources/js/modules/Dropdown.vue")["default"]);
+Vue.component('site-users', __webpack_require__(/*! ./modules/SiteUsers.vue */ "./resources/js/modules/SiteUsers.vue")["default"]);
 window.Event = new Vue();
 window.App = new Vue({
   el: '#app',
@@ -18265,6 +19213,93 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "render", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_Dropdown_vue_vue_type_template_id_2b0659b7___WEBPACK_IMPORTED_MODULE_0__["render"]; });
 
 /* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_Dropdown_vue_vue_type_template_id_2b0659b7___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"]; });
+
+
+
+/***/ }),
+
+/***/ "./resources/js/modules/SiteUsers.vue":
+/*!********************************************!*\
+  !*** ./resources/js/modules/SiteUsers.vue ***!
+  \********************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _SiteUsers_vue_vue_type_template_id_d557c96a_scoped_true___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./SiteUsers.vue?vue&type=template&id=d557c96a&scoped=true& */ "./resources/js/modules/SiteUsers.vue?vue&type=template&id=d557c96a&scoped=true&");
+/* harmony import */ var _SiteUsers_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./SiteUsers.vue?vue&type=script&lang=js& */ "./resources/js/modules/SiteUsers.vue?vue&type=script&lang=js&");
+/* empty/unused harmony star reexport *//* harmony import */ var _SiteUsers_vue_vue_type_style_index_0_id_d557c96a_scoped_true_lang_css___WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./SiteUsers.vue?vue&type=style&index=0&id=d557c96a&scoped=true&lang=css& */ "./resources/js/modules/SiteUsers.vue?vue&type=style&index=0&id=d557c96a&scoped=true&lang=css&");
+/* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
+
+
+
+
+
+
+/* normalize component */
+
+var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_3__["default"])(
+  _SiteUsers_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__["default"],
+  _SiteUsers_vue_vue_type_template_id_d557c96a_scoped_true___WEBPACK_IMPORTED_MODULE_0__["render"],
+  _SiteUsers_vue_vue_type_template_id_d557c96a_scoped_true___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"],
+  false,
+  null,
+  "d557c96a",
+  null
+  
+)
+
+/* hot reload */
+if (false) { var api; }
+component.options.__file = "resources/js/modules/SiteUsers.vue"
+/* harmony default export */ __webpack_exports__["default"] = (component.exports);
+
+/***/ }),
+
+/***/ "./resources/js/modules/SiteUsers.vue?vue&type=script&lang=js&":
+/*!*********************************************************************!*\
+  !*** ./resources/js/modules/SiteUsers.vue?vue&type=script&lang=js& ***!
+  \*********************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_SiteUsers_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../node_modules/babel-loader/lib??ref--4-0!../../../node_modules/vue-loader/lib??vue-loader-options!./SiteUsers.vue?vue&type=script&lang=js& */ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/modules/SiteUsers.vue?vue&type=script&lang=js&");
+/* empty/unused harmony star reexport */ /* harmony default export */ __webpack_exports__["default"] = (_node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_SiteUsers_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__["default"]); 
+
+/***/ }),
+
+/***/ "./resources/js/modules/SiteUsers.vue?vue&type=style&index=0&id=d557c96a&scoped=true&lang=css&":
+/*!*****************************************************************************************************!*\
+  !*** ./resources/js/modules/SiteUsers.vue?vue&type=style&index=0&id=d557c96a&scoped=true&lang=css& ***!
+  \*****************************************************************************************************/
+/*! no static exports found */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _node_modules_style_loader_index_js_node_modules_css_loader_index_js_ref_9_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_9_2_node_modules_vue_loader_lib_index_js_vue_loader_options_SiteUsers_vue_vue_type_style_index_0_id_d557c96a_scoped_true_lang_css___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../node_modules/style-loader!../../../node_modules/css-loader??ref--9-1!../../../node_modules/vue-loader/lib/loaders/stylePostLoader.js!../../../node_modules/postcss-loader/src??ref--9-2!../../../node_modules/vue-loader/lib??vue-loader-options!./SiteUsers.vue?vue&type=style&index=0&id=d557c96a&scoped=true&lang=css& */ "./node_modules/style-loader/index.js!./node_modules/css-loader/index.js?!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/modules/SiteUsers.vue?vue&type=style&index=0&id=d557c96a&scoped=true&lang=css&");
+/* harmony import */ var _node_modules_style_loader_index_js_node_modules_css_loader_index_js_ref_9_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_9_2_node_modules_vue_loader_lib_index_js_vue_loader_options_SiteUsers_vue_vue_type_style_index_0_id_d557c96a_scoped_true_lang_css___WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_node_modules_style_loader_index_js_node_modules_css_loader_index_js_ref_9_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_9_2_node_modules_vue_loader_lib_index_js_vue_loader_options_SiteUsers_vue_vue_type_style_index_0_id_d557c96a_scoped_true_lang_css___WEBPACK_IMPORTED_MODULE_0__);
+/* harmony reexport (unknown) */ for(var __WEBPACK_IMPORT_KEY__ in _node_modules_style_loader_index_js_node_modules_css_loader_index_js_ref_9_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_9_2_node_modules_vue_loader_lib_index_js_vue_loader_options_SiteUsers_vue_vue_type_style_index_0_id_d557c96a_scoped_true_lang_css___WEBPACK_IMPORTED_MODULE_0__) if(__WEBPACK_IMPORT_KEY__ !== 'default') (function(key) { __webpack_require__.d(__webpack_exports__, key, function() { return _node_modules_style_loader_index_js_node_modules_css_loader_index_js_ref_9_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_9_2_node_modules_vue_loader_lib_index_js_vue_loader_options_SiteUsers_vue_vue_type_style_index_0_id_d557c96a_scoped_true_lang_css___WEBPACK_IMPORTED_MODULE_0__[key]; }) }(__WEBPACK_IMPORT_KEY__));
+ /* harmony default export */ __webpack_exports__["default"] = (_node_modules_style_loader_index_js_node_modules_css_loader_index_js_ref_9_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_9_2_node_modules_vue_loader_lib_index_js_vue_loader_options_SiteUsers_vue_vue_type_style_index_0_id_d557c96a_scoped_true_lang_css___WEBPACK_IMPORTED_MODULE_0___default.a); 
+
+/***/ }),
+
+/***/ "./resources/js/modules/SiteUsers.vue?vue&type=template&id=d557c96a&scoped=true&":
+/*!***************************************************************************************!*\
+  !*** ./resources/js/modules/SiteUsers.vue?vue&type=template&id=d557c96a&scoped=true& ***!
+  \***************************************************************************************/
+/*! exports provided: render, staticRenderFns */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_SiteUsers_vue_vue_type_template_id_d557c96a_scoped_true___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../node_modules/vue-loader/lib??vue-loader-options!./SiteUsers.vue?vue&type=template&id=d557c96a&scoped=true& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/modules/SiteUsers.vue?vue&type=template&id=d557c96a&scoped=true&");
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "render", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_SiteUsers_vue_vue_type_template_id_d557c96a_scoped_true___WEBPACK_IMPORTED_MODULE_0__["render"]; });
+
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_SiteUsers_vue_vue_type_template_id_d557c96a_scoped_true___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"]; });
 
 
 
