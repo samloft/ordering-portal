@@ -26,5 +26,11 @@ window.App = new Vue({
         viewportMeta.name = 'viewport';
         viewportMeta.content = 'width=device-width, initial-scale=1';
         document.head.appendChild(viewportMeta);
+    }
+});
+
+Vue.directive('uppercase', {
+    update(el) {
+        el.value = el.value.toUpperCase()
     },
 });

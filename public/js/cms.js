@@ -2121,7 +2121,7 @@ __webpack_require__.r(__webpack_exports__);
 
           var code = value.toUpperCase(),
               self = _this2,
-              id = _this2.user.id;
+              id = _this2.userData.id;
           return axios.get('/cms/customer/validate?code=' + code).then(function (response) {
             if (response.data.code) {
               return axios.post('/cms/site-users/extra-customers', {
@@ -6645,7 +6645,8 @@ var render = function() {
                             rawName: "v-model",
                             value: _vm.userData.customer_code,
                             expression: "userData.customer_code"
-                          }
+                          },
+                          { name: "uppercase", rawName: "v-uppercase" }
                         ],
                         staticClass: "bg-gray-100",
                         attrs: { placeholder: "Customer Code" },
@@ -19144,6 +19145,11 @@ window.App = new Vue({
     viewportMeta.name = 'viewport';
     viewportMeta.content = 'width=device-width, initial-scale=1';
     document.head.appendChild(viewportMeta);
+  }
+});
+Vue.directive('uppercase', {
+  update: function update(el) {
+    el.value = el.value.toUpperCase();
   }
 });
 

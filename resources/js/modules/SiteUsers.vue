@@ -62,7 +62,7 @@
 
                     <div class="mb-3">
                         <label>Customer Code</label>
-                        <input class="bg-gray-100" v-model="userData.customer_code" placeholder="Customer Code">
+                        <input class="bg-gray-100" v-model="userData.customer_code" v-uppercase placeholder="Customer Code">
                     </div>
 
                     <div v-if="userData.id && (parseInt(userData.admin) !== 1)" class="mb-3">
@@ -222,7 +222,7 @@
 
                         var code = value.toUpperCase(),
                             self = this,
-                            id = this.user.id;
+                            id = this.userData.id;
 
                         return axios.get('/cms/customer/validate?code=' + code).then(function (response) {
                             if (response.data.code) {
