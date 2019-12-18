@@ -61,7 +61,7 @@ jobs:
 
       - run:
           name: Create MySQL Database
-          command: mysql -h 127.0.0.1 -u root -e "CREATE DATABASE shop;"
+          command: mysql -h 127.0.0.1 -    u root -e "CREATE DATABASE shop;"
 
       - run:
           name: Migrate Database
@@ -77,7 +77,7 @@ jobs:
       - run: sudo mkdir -p $CIRCLE_TEST_REPORTS/phpunit
       - run: ./cc-test-reporter before-build
       - run: sudo ./vendor/bin/phpunit --coverage-clover clover.xml
-      - run: ./cc-test-reporter after-build -t clover -r '${CODECLIMATE}' --exit-code $?
+      - run: ./cc-test-reporter after-build -t clover -r '$CODECLIMATE' --exit-code $?
 
       - run:
           name: Merge to Staging
