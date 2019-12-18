@@ -280,20 +280,22 @@
                     if (response.value) {
                         return axios.delete('/cms/site-users/' + id).then(function (response) {
                             if (response.data.deleted) {
-                                Vue.swal({
+                                return Vue.swal({
                                     title: "Deleted",
                                     text: "Site user has been successfully deleted",
                                     type: "success"
-                                }, function () {
-                                    this.reload();
+                                }).then(function(response) {
+                                    if(response.value) {
+                                        return window.location.reload();
+                                    }
                                 });
                             } else {
-                                Vue.swal('Error', 'Unable to delete user customer', 'error');
+                                Vue.swal('Error', 'Unable to delete user', 'error');
                             }
                         });
                     }
                 }).catch(function (response) {
-                    Vue.swal('Error', 'Unable to delete user customer', 'error');
+                    Vue.swal('Error', 'Unable to delete user', 'error');
                 });
             },
             reload: function () {
