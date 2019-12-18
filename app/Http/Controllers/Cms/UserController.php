@@ -3,10 +3,11 @@
 namespace App\Http\Controllers\Cms;
 
 use App\Models\User;
+use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Str;
 use Illuminate\Contracts\View\Factory;
 use Illuminate\Http\JsonResponse;
-use Illuminate\Http\Request;
+use App\Mail\Welcome;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Password;
 use Illuminate\View\View;
@@ -40,7 +41,13 @@ class UserController extends Controller
             'api_token' => Str::random(60)
         ]);
 
-        return User::create(request()->all());
+        $user = User::create(request()->all());
+
+        if ($user) {
+            Mail::send(new Welcome($user));
+        }
+
+        return $user;
     }
 
     /**
