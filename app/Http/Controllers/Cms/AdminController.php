@@ -3,13 +3,16 @@
 namespace App\Http\Controllers\Cms;
 
 use App\Models\Admin;
+use App\Notifications\WelcomeAdminNotification;
 use Illuminate\Contracts\View\Factory;
 use App\Http\Controllers\Controller;
+use Illuminate\Notifications\Notifiable;
 use Illuminate\Support\Str;
 use Illuminate\View\View;
 
 class AdminController extends Controller
 {
+    Use Notifiable;
     /**
      * Displays a paginated list of all admin CMS users.
      *
@@ -38,7 +41,7 @@ class AdminController extends Controller
         $admin = Admin::create(request()->all());
 
         if ($admin) {
-            // Send password reset.
+            $admin->notify(new WelcomeAdminNotification($admin));
         }
 
         return $admin;

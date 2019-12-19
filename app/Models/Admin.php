@@ -6,7 +6,6 @@ use App\Notifications\AdminResetPasswordNotification;
 use Illuminate\Contracts\Pagination\LengthAwarePaginator;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
-use Notification;
 
 /**
  * App\Models\Admin
