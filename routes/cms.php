@@ -17,6 +17,10 @@ use Illuminate\Http\Request;
 
 Route::get('login', 'Auth\AdminController@showLoginForm')->name('cms.login');
 Route::post('login', 'Auth\AdminController@login')->name('cms.login.submit');
+Route::get('password/reset', 'Auth\AdminForgotPasswordController@showLinkRequestForm')->name('cms.forgot-password');
+Route::post('password/email', 'Auth\AdminForgotPasswordController@sendResetLinkEmail')->name('cms.password-email');
+Route::get('password/reset/{token}', 'Auth\AdminResetPasswordController@showResetForm')->name('cms.password.reset');
+Route::post('password/reset', 'Auth\AdminResetPasswordController@reset')->name('cms.password.update');
 
 Route::group(['middleware' => 'auth:admin'], static function () {
 

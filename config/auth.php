@@ -108,6 +108,12 @@ return [
             'table' => 'password_resets',
             'expire' => 60,
         ],
+
+        'cms_users' => [
+            'provider' => 'cms_users',
+            'table' => 'password_resets',
+            'expire' => 60,
+        ],
     ],
 
 ];

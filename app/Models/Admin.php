@@ -2,8 +2,11 @@
 
 namespace App\Models;
 
+use App\Notifications\AdminResetPasswordNotification;
 use Illuminate\Contracts\Pagination\LengthAwarePaginator;
 use Illuminate\Foundation\Auth\User as Authenticatable;
+use Illuminate\Notifications\Notifiable;
+use Notification;
 
 /**
  * App\Models\Admin
@@ -12,6 +15,8 @@ use Illuminate\Foundation\Auth\User as Authenticatable;
  */
 class Admin extends Authenticatable
 {
+    use Notifiable;
+
     protected $guard = 'admin';
     protected $table = 'cms_users';
 
@@ -55,5 +60,16 @@ class Admin extends Authenticatable
                 $query->orWhere('email', 'like', '%'.$search.'%');
             }
         })->orderBy('name')->paginate(10);
+    }
+
+    /**
+     * Send the password reset notification.
+     *
+     * @param  string  $token
+     * @return void
+     */
+    public function sendPasswordResetNotification($token): void
+    {
+        $this->notify(new AdminResetPasswordNotification($token));
     }
 }
