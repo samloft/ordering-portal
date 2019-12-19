@@ -101,7 +101,11 @@
             },
             storeUser: function (id) {
                 if (id) {
-                    return false;
+                    return axios.patch('/cms/admin-users/' + id, this.userData).then(response => {
+                        return Vue.swal('Success', 'User has been updated', 'success');
+                    }).catch(error => {
+                        return Vue.swal('Error', 'Unable to update user, please try again', 'error');
+                    });
                 }
 
                 return axios.post('/cms/admin-users', this.userData).then(response => {

@@ -49,6 +49,16 @@ class AdminController extends Controller
     }
 
     /**
+     * Update the given admin CMS user.
+     *
+     * @return int
+     */
+    public function update(): int
+    {
+        return Admin::where('id', request('id'))->update(request()->all());
+    }
+
+    /**
      * Delete a admin CMS user by ID.
      *
      * @param $id

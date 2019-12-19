@@ -50,6 +50,7 @@ Route::group(['middleware' => 'auth:admin'], static function () {
         Route::get('/', 'Cms\AdminController@index')->name('cms.admin-users');
         Route::post('/', 'Cms\AdminController@store')->name('cms.admin-users.store');
         Route::delete('{id}', 'Cms\AdminController@destroy')->name('cms.admin-users.destroy');
+        Route::patch('{id}', 'Cms\AdminController@update')->name('cms.admin-users.update');
     });
 
     Route::group(['prefix' => 'company-information'], static function () {

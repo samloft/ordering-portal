@@ -1942,7 +1942,11 @@ __webpack_require__.r(__webpack_exports__);
       var _this = this;
 
       if (id) {
-        return false;
+        return axios.patch('/cms/admin-users/' + id, this.userData).then(function (response) {
+          return Vue.swal('Success', 'User has been updated', 'success');
+        })["catch"](function (error) {
+          return Vue.swal('Error', 'Unable to update user, please try again', 'error');
+        });
       }
 
       return axios.post('/cms/admin-users', this.userData).then(function (response) {
