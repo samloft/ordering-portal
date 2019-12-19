@@ -6,6 +6,7 @@ use App\Models\Admin;
 use App\Notifications\WelcomeAdminNotification;
 use Illuminate\Contracts\View\Factory;
 use App\Http\Controllers\Controller;
+use Illuminate\Http\JsonResponse;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Support\Str;
 use Illuminate\View\View;
@@ -45,6 +46,19 @@ class AdminController extends Controller
         }
 
         return $admin;
+    }
+
+    /**
+     * Delete a admin CMS user by ID.
+     *
+     * @param $id
+     * @return \Illuminate\Http\JsonResponse
+     */
+    public function destroy($id): JsonResponse
+    {
+        $deleted = Admin::where('id', $id)->delete();
+
+        return response()->json(['deleted' => $deleted]);
     }
 
     /**

@@ -72,7 +72,32 @@
                 this.modal = true;
             },
             deleteUser: function (id) {
-
+                Vue.swal({
+                    title: 'Delete Admin User?',
+                    text: 'Are you sure? This cannot be un-done.',
+                    type: 'warning',
+                    showCancelButton: true,
+                }).then(response => {
+                    if (response.value) {
+                        return axios.delete('/cms/admin-users/' + id).then(function (response) {
+                            if (response.data.deleted) {
+                                return Vue.swal({
+                                    title: "Deleted",
+                                    text: "Admin user has been successfully deleted",
+                                    type: "success"
+                                }).then(response => {
+                                    if (response.value) {
+                                        return window.location.reload();
+                                    }
+                                });
+                            } else {
+                                Vue.swal('Error', 'Unable to delete user', 'error');
+                            }
+                        });
+                    }
+                }).catch(error => {
+                    Vue.swal('Error', 'Unable to delete admin user', 'error');
+                });
             },
             storeUser: function (id) {
                 if (id) {
