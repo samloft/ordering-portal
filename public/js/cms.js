@@ -1881,6 +1881,13 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   props: {
     user: null
@@ -1902,6 +1909,24 @@ __webpack_require__.r(__webpack_exports__);
       }
 
       this.modal = true;
+    },
+    deleteUser: function deleteUser(id) {},
+    storeUser: function storeUser(id) {
+      var _this = this;
+
+      if (id) {
+        return false;
+      }
+
+      return axios.post('/cms/admin-users', this.userData).then(function (response) {
+        _this.userData = response.data;
+        return Vue.swal('Success', 'New CMS admin has been created', 'success');
+      })["catch"](function (error) {
+        return Vue.swal('Error', error.response.data.errors[Object.keys(error.response.data.errors)[0]][0], 'error');
+      });
+    },
+    reload: function reload() {
+      window.location.reload();
     }
   }
 });
@@ -6543,7 +6568,56 @@ var render = function() {
                     ]),
                     _vm._v(" "),
                     _c("div", { staticClass: "mt-8 text-right" }, [
-                      _vm._v("\n                    Buttons\n                ")
+                      _c(
+                        "button",
+                        {
+                          staticClass: "button button-danger",
+                          on: {
+                            click: function($event) {
+                              return _vm.reload()
+                            }
+                          }
+                        },
+                        [_vm._v("Exit")]
+                      ),
+                      _vm._v(" "),
+                      _vm.userData.id
+                        ? _c(
+                            "button",
+                            {
+                              staticClass: "button bg-red-600 text-white",
+                              on: {
+                                click: function($event) {
+                                  return _vm.deleteUser(_vm.userData.id)
+                                }
+                              }
+                            },
+                            [
+                              _vm._v(
+                                "\n                        Delete User\n                    "
+                              )
+                            ]
+                          )
+                        : _vm._e(),
+                      _vm._v(" "),
+                      _c(
+                        "button",
+                        {
+                          staticClass: "button bg-gray-700 text-white w-32",
+                          on: {
+                            click: function($event) {
+                              return _vm.storeUser(_vm.userData.id)
+                            }
+                          }
+                        },
+                        [
+                          _vm._v(
+                            "\n                        " +
+                              _vm._s(this.userData.id ? "Edit" : "Create") +
+                              "\n                    "
+                          )
+                        ]
+                      )
                     ])
                   ]
                 )

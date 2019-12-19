@@ -14,7 +14,31 @@ class Admin extends Authenticatable
 {
     protected $guard = 'admin';
     protected $table = 'cms_users';
-    protected $hidden = ['password', 'remember_token'];
+
+    /**
+     * The attributes that are mass assignable.
+     *
+     * @var array
+     */
+    protected $fillable = [];
+
+    /**
+     * The attributes that are guarded from mass assignment.
+     *
+     * @var array
+     */
+    protected $guarded = ['id'];
+
+    /**
+     * The attributes that should be hidden for arrays.
+     *
+     * @var array
+     */
+    protected $hidden = [
+        'password',
+        'remember_token',
+        'api_token',
+    ];
 
     /**
      * Return all the admin users with optional search parameters.

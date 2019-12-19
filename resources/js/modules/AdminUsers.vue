@@ -20,7 +20,14 @@
                     </div>
 
                     <div class="mt-8 text-right">
-                        Buttons
+                        <button @click="reload()" class="button button-danger">Exit</button>
+                        <button v-if="userData.id" @click="deleteUser(userData.id)"
+                                class="button bg-red-600 text-white">
+                            Delete User
+                        </button>
+                        <button @click="storeUser(userData.id)" class="button bg-gray-700 text-white w-32">
+                            {{ this.userData.id ? 'Edit' : 'Create' }}
+                        </button>
                     </div>
                 </div>
             </div>
@@ -64,6 +71,25 @@
 
                 this.modal = true;
             },
+            deleteUser: function (id) {
+
+            },
+            storeUser: function (id) {
+                if (id) {
+                    return false;
+                }
+
+                return axios.post('/cms/admin-users', this.userData).then(response => {
+                    this.userData = response.data;
+
+                    return Vue.swal('Success', 'New CMS admin has been created', 'success');
+                }).catch(error => {
+                    return Vue.swal('Error', error.response.data.errors[Object.keys(error.response.data.errors)[0]][0], 'error');
+                });
+            },
+            reload: function () {
+                window.location.reload();
+            }
         }
     }
 </script>
