@@ -9,6 +9,7 @@ Vue.use(VueSweetalert2);
 Vue.component('dropdown', require('./modules/Dropdown.vue').default);
 Vue.component('admin-users', require('./modules/AdminUsers.vue').default);
 Vue.component('site-users', require('./modules/SiteUsers.vue').default);
+Vue.component('product-images', require('./modules/ProductImages.vue').default);
 
 window.Event = new Vue();
 

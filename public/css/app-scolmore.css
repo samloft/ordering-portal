@@ -13921,6 +13921,14 @@ select {
   opacity: 0.75;
 }
 
+.button:disabled {
+  opacity: 0.75;
+}
+
+.button:disabled:hover {
+  cursor: not-allowed;
+}
+
 .button-sm {
   padding: 0;
   font-size: 0.875rem;

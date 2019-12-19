@@ -21,7 +21,7 @@ class ProductImageController extends Controller
      */
     public function index()
     {
-        return view('cms.product-images.index');
+        return view('product-images.index');
     }
 
     /**

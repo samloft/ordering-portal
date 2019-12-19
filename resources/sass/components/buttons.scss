@@ -4,6 +4,14 @@
     &:hover {
         @apply .opacity-75;
     }
+
+    &:disabled {
+        @apply .opacity-75;
+
+        &:hover {
+            @apply .cursor-not-allowed;
+        }
+    }
 }
 
 .button-sm {
