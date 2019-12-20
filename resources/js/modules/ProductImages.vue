@@ -75,7 +75,7 @@
                         />
                     </label>
 
-                <div v-if="!uploadsCompleted" class="bg-gray-800 text-white rounded mt-5 p-5 flex text-center">
+                <div v-if="uploadsCompleted" class="bg-gray-800 text-white rounded mt-5 p-5 flex text-center">
                     <div class="font-semibold tracking-widest w-1/2">Uploaded: <span class="font-normal tracking-normal">{{ imagesUploaded }}</span></div>
                     <div class="font-semibold tracking-widest w-1/2">Failed: <span class="font-normal tracking-normal">{{ imagesFailed }}</span></div>
                 </div>

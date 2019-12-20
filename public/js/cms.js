@@ -7254,7 +7254,7 @@ var render = function() {
             ]
           ),
           _vm._v(" "),
-          !_vm.uploadsCompleted
+          _vm.uploadsCompleted
             ? _c(
                 "div",
                 {
