@@ -75,6 +75,11 @@
                         />
                     </label>
 
+                <div v-if="!uploadsCompleted" class="bg-gray-800 text-white rounded mt-5 p-5 flex text-center">
+                    <div class="font-semibold tracking-widest w-1/2">Uploaded: <span class="font-normal tracking-normal">{{ imagesUploaded }}</span></div>
+                    <div class="font-semibold tracking-widest w-1/2">Failed: <span class="font-normal tracking-normal">{{ imagesFailed }}</span></div>
+                </div>
+
                 <div v-if="uploading">
                     <table v-if="files.length > 0" class="mt-5 w-full text-md bg-white shadow rounded">
                         <thead>
@@ -129,7 +134,10 @@
                 checkComplete: false,
                 uploading: false,
                 fileList: [],
-                files: []
+                files: [],
+                imagesUploaded: 0,
+                imagesFailed: 0,
+                uploadsCompleted: false,
             }
         },
         methods: {
@@ -148,6 +156,10 @@
                 });
             },
             prepareUploads: function (files) {
+                this.uploadsCompleted = false;
+                this.imagesUploaded = 0;
+                this.imagesFailed = 0;
+
                 var re = /(?:\.([^.]+))?$/;
                 var status = 'pending';
 
@@ -175,7 +187,7 @@
                 this.uploadImages();
             },
             uploadImages: function() {
-                this.files.forEach(function (file) {
+                this.files.forEach(file => {
                     if (file.status === 'pending') {
                         file.status = 'uploading';
                         file.message = 'Uploading';
@@ -185,14 +197,18 @@
                                 'Content-Type': 'multipart/form-data'
                             }
                         }).then(response => {
+                            this.imagesUploaded++;
                             file.status = 'uploaded';
                             file.message = 'Completed';
                         }).catch(error => {
                             this.status = 'error';
-                            this.message = 'Failed to upload'
+                            this.message = 'Failed to upload';
+                            this.imagesFailed++;
                         });
                     }
                 });
+
+                this.uploadsCompleted = true;
             }
         }
     }

@@ -2149,6 +2149,11 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
@@ -2158,7 +2163,10 @@ __webpack_require__.r(__webpack_exports__);
       checkComplete: false,
       uploading: false,
       fileList: [],
-      files: []
+      files: [],
+      imagesUploaded: 0,
+      imagesFailed: 0,
+      uploadsCompleted: false
     };
   },
   methods: {
@@ -2179,6 +2187,9 @@ __webpack_require__.r(__webpack_exports__);
     prepareUploads: function prepareUploads(files) {
       var _this2 = this;
 
+      this.uploadsCompleted = false;
+      this.imagesUploaded = 0;
+      this.imagesFailed = 0;
       var re = /(?:\.([^.]+))?$/;
       var status = 'pending';
       this.uploading = true;
@@ -2203,9 +2214,9 @@ __webpack_require__.r(__webpack_exports__);
       this.uploadImages();
     },
     uploadImages: function uploadImages() {
-      this.files.forEach(function (file) {
-        var _this3 = this;
+      var _this3 = this;
 
+      this.files.forEach(function (file) {
         if (file.status === 'pending') {
           file.status = 'uploading';
           file.message = 'Uploading';
@@ -2214,14 +2225,17 @@ __webpack_require__.r(__webpack_exports__);
               'Content-Type': 'multipart/form-data'
             }
           }).then(function (response) {
+            _this3.imagesUploaded++;
             file.status = 'uploaded';
             file.message = 'Completed';
           })["catch"](function (error) {
             _this3.status = 'error';
             _this3.message = 'Failed to upload';
+            _this3.imagesFailed++;
           });
         }
       });
+      this.uploadsCompleted = true;
     }
   }
 });
@@ -7239,6 +7253,43 @@ var render = function() {
               })
             ]
           ),
+          _vm._v(" "),
+          !_vm.uploadsCompleted
+            ? _c(
+                "div",
+                {
+                  staticClass:
+                    "bg-gray-800 text-white rounded mt-5 p-5 flex text-center"
+                },
+                [
+                  _c(
+                    "div",
+                    { staticClass: "font-semibold tracking-widest w-1/2" },
+                    [
+                      _vm._v("Uploaded: "),
+                      _c(
+                        "span",
+                        { staticClass: "font-normal tracking-normal" },
+                        [_vm._v(_vm._s(_vm.imagesUploaded))]
+                      )
+                    ]
+                  ),
+                  _vm._v(" "),
+                  _c(
+                    "div",
+                    { staticClass: "font-semibold tracking-widest w-1/2" },
+                    [
+                      _vm._v("Failed: "),
+                      _c(
+                        "span",
+                        { staticClass: "font-normal tracking-normal" },
+                        [_vm._v(_vm._s(_vm.imagesFailed))]
+                      )
+                    ]
+                  )
+                ]
+              )
+            : _vm._e(),
           _vm._v(" "),
           _vm.uploading
             ? _c("div", [
