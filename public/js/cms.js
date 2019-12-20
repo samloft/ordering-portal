@@ -2087,24 +2087,140 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
       checkingImages: false,
       missingImages: [],
-      checkComplete: false
+      missingImagesCount: 0,
+      checkComplete: false,
+      uploading: false,
+      fileList: [],
+      files: []
     };
   },
   methods: {
     checkMissingImages: function checkMissingImages() {
       var _this = this;
 
+      this.missingImagesCount = 0;
       this.checkingImages = true;
       this.checkComplete = false;
+      this.missingImages = [];
       axios.get('/cms/product-images/missing').then(function (response) {
         _this.missingImages = response.data;
+        _this.missingImagesCount = response.data.length;
         _this.checkComplete = true;
         _this.checkingImages = false;
+      });
+    },
+    prepareUploads: function prepareUploads(files) {
+      var _this2 = this;
+
+      var re = /(?:\.([^.]+))?$/;
+      var status = 'pending';
+      this.uploading = true;
+      Array.from(files).forEach(function (file) {
+        if (re.exec(file.name)[1] === 'png') {
+          status = 'pending';
+        } else {
+          status = 'error';
+        }
+
+        var formData = new FormData();
+        formData.append('file', file);
+
+        _this2.files.push({
+          form: formData,
+          name: file.name,
+          size: App.humanFileSize(file.size, true),
+          status: status,
+          message: status === 'pending' ? 'Pending' : 'File must be png'
+        });
+      });
+      this.uploadImages();
+    },
+    uploadImages: function uploadImages() {
+      this.files.forEach(function (file) {
+        var _this3 = this;
+
+        if (file.status === 'pending') {
+          file.status = 'uploading';
+          file.message = 'Uploading';
+          axios.post('/cms/product-images', file.form, {
+            headers: {
+              'Content-Type': 'multipart/form-data'
+            }
+          }).then(function (response) {
+            file.status = 'uploaded';
+            file.message = 'Completed';
+          })["catch"](function (error) {
+            _this3.status = 'error';
+            _this3.message = 'Failed to upload';
+          });
+        }
       });
     }
   }
@@ -6921,6 +7037,64 @@ var render = function() {
             ]
           ),
           _vm._v(" "),
+          _c(
+            "div",
+            {
+              directives: [
+                {
+                  name: "show",
+                  rawName: "v-show",
+                  value: _vm.missingImagesCount > 0,
+                  expression: "missingImagesCount > 0"
+                }
+              ],
+              staticClass: "alert alert-info mt-5",
+              attrs: { role: "alert" }
+            },
+            [
+              _c(
+                "div",
+                { staticClass: "alert-body text-sm leading-none items-center" },
+                [
+                  _c(
+                    "svg",
+                    {
+                      staticClass: "alert-icon",
+                      attrs: {
+                        xmlns: "http://www.w3.org/2000/svg",
+                        viewBox: "0 0 24 24"
+                      }
+                    },
+                    [
+                      _c("path", {
+                        staticClass: "primary",
+                        attrs: { d: "M12 2a10 10 0 1 1 0 20 10 10 0 0 1 0-20z" }
+                      }),
+                      _vm._v(" "),
+                      _c("path", {
+                        staticClass: "secondary",
+                        attrs: {
+                          d:
+                            "M11 12a1 1 0 0 1 0-2h2a1 1 0 0 1 .96 1.27L12.33 17H13a1 1 0 0 1 0 2h-2a1 1 0 0 1-.96-1.27L11.67 12H11zm2-4a1.5 1.5 0 1 1 0-3 1.5 1.5 0 0 1 0 3z"
+                        }
+                      })
+                    ]
+                  ),
+                  _vm._v(" "),
+                  _c("div", [
+                    _c("p", { staticClass: "alert-text" }, [
+                      _vm._v("Currently "),
+                      _c("span", { staticClass: "font-medium" }, [
+                        _vm._v(_vm._s(_vm.missingImagesCount))
+                      ]),
+                      _vm._v(" images are missing...")
+                    ])
+                  ])
+                ]
+              )
+            ]
+          ),
+          _vm._v(" "),
           _c("div", { staticClass: "table-container" }, [
             _vm.missingImages.length > 0
               ? _c(
@@ -7003,7 +7177,155 @@ var render = function() {
       )
     ]),
     _vm._v(" "),
-    _vm._m(2)
+    _c("div", { staticClass: "w-2/3" }, [
+      _c(
+        "div",
+        {
+          staticClass:
+            "px-6 pt-4 pb-6 xl:px-10 xl:pt-8 xl:pb-8 bg-white rounded-lg shadow"
+        },
+        [
+          _c(
+            "h1",
+            {
+              staticClass: "uppercase tracking-widest mb-3 text-xl font-medium"
+            },
+            [
+              _vm._v(
+                "\n                    Upload product images\n                "
+              )
+            ]
+          ),
+          _vm._v(" "),
+          _c(
+            "label",
+            {
+              staticClass:
+                "flex flex-col items-center px-4 py-6 border-dashed border-4 border-gray-800 bg-gray-200 text-gray-800 rounded-lg shadow tracking-widest uppercase border border-blue cursor-pointer hover:opacity-75"
+            },
+            [
+              _c(
+                "svg",
+                {
+                  staticClass: "w-20 h-20",
+                  attrs: {
+                    fill: "currentColor",
+                    xmlns: "http://www.w3.org/2000/svg",
+                    viewBox: "0 0 20 20"
+                  }
+                },
+                [
+                  _c("path", {
+                    attrs: {
+                      d:
+                        "M16.88 9.1A4 4 0 0 1 16 17H5a5 5 0 0 1-1-9.9V7a3 3 0 0 1 4.52-2.59A4.98 4.98 0 0 1 17 8c0 .38-.04.74-.12 1.1zM11 11h3l-4-4-4 4h3v3h2v-3z"
+                    }
+                  })
+                ]
+              ),
+              _vm._v(" "),
+              _c("span", { staticClass: "mt-5 text-base leading-normal" }, [
+                _vm._v("Drag your file(s) here or click to browse")
+              ]),
+              _vm._v(" "),
+              _c("input", {
+                staticClass: "hidden",
+                attrs: { type: "file", multiple: "" },
+                on: {
+                  change: function($event) {
+                    return _vm.prepareUploads($event.target.files)
+                  }
+                }
+              })
+            ]
+          ),
+          _vm._v(" "),
+          _vm.uploading
+            ? _c("div", [
+                _vm.files.length > 0
+                  ? _c(
+                      "table",
+                      {
+                        staticClass:
+                          "mt-5 w-full text-md bg-white shadow rounded"
+                      },
+                      [
+                        _vm._m(2),
+                        _vm._v(" "),
+                        _c(
+                          "tbody",
+                          _vm._l(_vm.files, function(file) {
+                            return _c(
+                              "tr",
+                              { staticClass: "border-b hover:bg-gray-100" },
+                              [
+                                _c("td", { staticClass: "p-3 px-5" }, [
+                                  _vm._v(_vm._s(file.name))
+                                ]),
+                                _vm._v(" "),
+                                _c("td", { staticClass: "p-3 px-5" }, [
+                                  _c(
+                                    "span",
+                                    { staticClass: "badge badge-info" },
+                                    [_vm._v(_vm._s(file.size))]
+                                  )
+                                ]),
+                                _vm._v(" "),
+                                _c("td", { staticClass: "p-3 px-5" }, [
+                                  _c(
+                                    "div",
+                                    { staticClass: "flex items-start" },
+                                    [
+                                      _c(
+                                        "span",
+                                        {
+                                          staticClass:
+                                            "badge inline-block flex items-center",
+                                          class: [
+                                            file.status === "error"
+                                              ? "badge-danger"
+                                              : "",
+                                            file.status === "pending"
+                                              ? "badge-warning"
+                                              : "",
+                                            file.status === "uploading"
+                                              ? "badge-info"
+                                              : "",
+                                            file.status === "uploaded"
+                                              ? "badge-success"
+                                              : ""
+                                          ]
+                                        },
+                                        [
+                                          _c("span", {
+                                            class:
+                                              file.status === "uploading"
+                                                ? "loadingSpinner inline-block"
+                                                : ""
+                                          }),
+                                          _c(
+                                            "span",
+                                            { staticClass: "relative" },
+                                            [_vm._v(_vm._s(file.message))]
+                                          )
+                                        ]
+                                      )
+                                    ]
+                                  )
+                                ])
+                              ]
+                            )
+                          }),
+                          0
+                        )
+                      ]
+                    )
+                  : _vm._e()
+              ])
+            : _vm._e()
+        ]
+      )
+    ])
   ])
 }
 var staticRenderFns = [
@@ -7046,11 +7368,25 @@ var staticRenderFns = [
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "w-2/3" }, [
-      _c("div", {
-        staticClass:
-          "px-6 pt-4 pb-6 xl:px-10 xl:pt-8 xl:pb-8 bg-white rounded-lg shadow"
-      })
+    return _c("thead", [
+      _c(
+        "tr",
+        {
+          staticClass:
+            "text-left border-b bg-gray-300 uppercase text-sm tracking-widest"
+        },
+        [
+          _c("th", { staticClass: "font-semibold p-3 px-5" }, [
+            _vm._v("File Name")
+          ]),
+          _vm._v(" "),
+          _c("th", { staticClass: "font-semibold p-3 px-5" }, [_vm._v("Size")]),
+          _vm._v(" "),
+          _c("th", { staticClass: "font-semibold p-3 px-5" }, [
+            _vm._v("Status")
+          ])
+        ]
+      )
     ])
   }
 ]
@@ -19828,6 +20164,23 @@ window.App = new Vue({
   methods: {
     toggleNav: function toggleNav() {
       this.isBurgerActive = !this.isBurgerActive;
+    },
+    humanFileSize: function humanFileSize(bytes, si) {
+      var thresh = si ? 1000 : 1024;
+
+      if (Math.abs(bytes) < thresh) {
+        return bytes + ' B';
+      }
+
+      var units = si ? ['kB', 'MB', 'GB', 'TB', 'PB', 'EB', 'ZB', 'YB'] : ['KiB', 'MiB', 'GiB', 'TiB', 'PiB', 'EiB', 'ZiB', 'YiB'];
+      var u = -1;
+
+      do {
+        bytes /= thresh;
+        ++u;
+      } while (Math.abs(bytes) >= thresh && u < units.length - 1);
+
+      return bytes.toFixed(1) + ' ' + units[u];
     }
   },
   mounted: function mounted() {

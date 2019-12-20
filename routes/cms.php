@@ -75,7 +75,7 @@ Route::group(['middleware' => 'auth:admin'], static function () {
     Route::group(['prefix' => 'product-images'], static function () {
         Route::get('/', 'Cms\ProductImageController@index')->name('cms.product-images');
         Route::get('missing', 'Cms\ProductImageController@missingImages')->name('cms.product-images.missing');
-        //Route::post('store', 'Cms\ProductImageController@store')->name('cms.product-images.store');
+        Route::post('/', 'Cms\ProductImageController@store')->name('cms.product-images.store');
     });
 
     Route::group(['prefix' => 'customer'], static function() {

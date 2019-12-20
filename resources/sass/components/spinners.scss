@@ -11,6 +11,10 @@ button .loadingSpinner {
     @apply .ml-5 .absolute;
 }
 
+span .loadingSpinner {
+    @apply .mr-2 .content-center;
+}
+
 @keyframes loadingSpinner {
     from { transform: rotate(0deg)   }
     to   { transform: rotate(360deg) }

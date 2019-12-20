@@ -57,12 +57,8 @@ class ProductImageController extends Controller
     public function store(Request $request): JsonResponse
     {
         $image = $request->file('file');
-        $name = $image->getClientOriginalName();
-        $extension = $image->getClientOriginalExtension();
 
-        if ($extension !== 'png') {
-            return response()->json($name . ' must be a png', 400);
-        }
+        $name = $image->getClientOriginalName();
 
         $upload = Storage::disk('public')->put('product_images/' . $name, File::get($image));
 

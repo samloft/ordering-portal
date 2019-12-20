@@ -13702,6 +13702,11 @@ button .loadingSpinner {
   position: absolute;
 }
 
+span .loadingSpinner {
+  margin-right: 0.5rem;
+  align-content: center;
+}
+
 @keyframes loadingSpinner {
   from {
     transform: rotate(0deg);
