@@ -23,25 +23,12 @@ class SmallOrderCharge extends Model
     {
         if ($country) {
             $small_order = self::where('country', $country)->first();
-
-            if ($small_order) {
-                if ($order_value < $small_order->threshold) {
-                    return (int)$small_order->charge;
-                }
-
-                return 0;
-            }
         } else {
-            // Country with a null value is a 'Global' option to apply to any country.
             $small_order = self::where('country')->first();
+        }
 
-            if ($small_order) {
-                if ($order_value < $small_order->threshold) {
-                    return (int)$small_order->charge;
-                }
-            }
-
-            return 0;
+        if ($small_order && $order_value < $small_order->threshold) {
+            return (int) $small_order->charge;
         }
 
         return 0;
