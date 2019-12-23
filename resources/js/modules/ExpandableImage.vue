@@ -13,7 +13,9 @@
 
         </i>
 
-        <img v-bind="$attrs"/>
+        <div :class="expanded ? 'img-expanded' : 'img-list'">
+            <img v-bind="$attrs" :class="expanded ? 'img-expanded' : 'img-list'"/>
+        </div>
     </div>
 </template>
 
@@ -76,6 +78,25 @@
 </script>
 
 <style>
+    .img-list {
+        max-width: 8rem;
+        max-height: 8rem;
+    }
+
+    .img-list > img {
+        margin: 0 auto;
+        max-width: 8rem;
+        max-height: 8rem;
+    }
+
+    .img-expanded {
+        margin: 0 auto;
+    }
+
+    .img-expanded > img {
+        max-height: 800px;
+    }
+
     .expandable-image {
         transition: 0.50s opacity;
         cursor: zoom-in;

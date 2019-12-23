@@ -2573,6 +2573,8 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
@@ -3009,7 +3011,7 @@ exports = module.exports = __webpack_require__(/*! ../../../node_modules/css-loa
 
 
 // module
-exports.push([module.i, ".expandable-image {\n  transition: 0.50s opacity;\n  cursor: zoom-in;\n  min-width: 8rem;\n}\n.expandable-image.expanded {\n  position: fixed;\n  z-index: 999999;\n  top: 0;\n  left: 0;\n  width: 100%;\n  height: 100%;\n  background: black;\n  display: flex;\n  align-items: center;\n  opacity: 0;\n  padding-bottom: 0 !important;\n  cursor: default;\n}\n.expandable-image.expanded > img {\n  width: auto;\n  max-height: 70%;\n  margin: 0 auto;\n}\n.expandable-image.expanded > .close-button {\n  display: block;\n}\n.expandable-image .close-button {\n  position: fixed;\n  top: 10px;\n  right: 10px;\n  display: none;\n  cursor: pointer;\n}\n.expandable-image svg {\n  -webkit-filter: drop-shadow(1px 1px 1px rgba(0, 0, 0, 0.5));\n          filter: drop-shadow(1px 1px 1px rgba(0, 0, 0, 0.5));\n}\n.expandable-image svg path {\n  fill: #fff;\n}\n\n", ""]);
+exports.push([module.i, ".img-list {\n  max-width: 8rem;\n  max-height: 8rem;\n}\n.img-list > img {\n  margin: 0 auto;\n  max-width: 8rem;\n  max-height: 8rem;\n}\n.img-expanded {\n  margin: 0 auto;\n}\n.img-expanded > img {\n  max-height: 800px;\n}\n.expandable-image {\n  transition: 0.50s opacity;\n  cursor: zoom-in;\n  min-width: 8rem;\n}\n.expandable-image.expanded {\n  position: fixed;\n  z-index: 999999;\n  top: 0;\n  left: 0;\n  width: 100%;\n  height: 100%;\n  background: black;\n  display: flex;\n  align-items: center;\n  opacity: 0;\n  padding-bottom: 0 !important;\n  cursor: default;\n}\n.expandable-image.expanded > img {\n  width: auto;\n  max-height: 70%;\n  margin: 0 auto;\n}\n.expandable-image.expanded > .close-button {\n  display: block;\n}\n.expandable-image .close-button {\n  position: fixed;\n  top: 10px;\n  right: 10px;\n  display: none;\n  cursor: pointer;\n}\n.expandable-image svg {\n  -webkit-filter: drop-shadow(1px 1px 1px rgba(0, 0, 0, 0.5));\n          filter: drop-shadow(1px 1px 1px rgba(0, 0, 0, 0.5));\n}\n.expandable-image svg path {\n  fill: #fff;\n}\n\n", ""]);
 
 // exports
 
@@ -11574,7 +11576,17 @@ var render = function() {
         )
       ]),
       _vm._v(" "),
-      _c("img", _vm._b({}, "img", _vm.$attrs, false))
+      _c("div", { class: _vm.expanded ? "img-expanded" : "img-list" }, [
+        _c(
+          "img",
+          _vm._b(
+            { class: _vm.expanded ? "img-expanded" : "img-list" },
+            "img",
+            _vm.$attrs,
+            false
+          )
+        )
+      ])
     ]
   )
 }
