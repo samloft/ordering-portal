@@ -2154,6 +2154,13 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
@@ -2205,6 +2212,7 @@ __webpack_require__.r(__webpack_exports__);
 
         _this2.files.push({
           form: formData,
+          image: URL.createObjectURL(file),
           name: file.name,
           size: App.humanFileSize(file.size, true),
           status: status,
@@ -2237,6 +2245,19 @@ __webpack_require__.r(__webpack_exports__);
       });
       this.uploadsCompleted = true;
     }
+  },
+  mounted: function mounted() {
+    var self = this;
+    document.querySelector('#dropzone').addEventListener("dragleave", function (e) {
+      e.preventDefault();
+    });
+    document.querySelector('#dropzone').addEventListener("dragover", function (e) {
+      e.preventDefault();
+    });
+    document.querySelector('#dropzone').addEventListener("drop", function (e) {
+      e.preventDefault();
+      self.prepareUploads(e.dataTransfer.files);
+    });
   }
 });
 
@@ -2615,7 +2636,7 @@ exports = module.exports = __webpack_require__(/*! ../../../node_modules/css-loa
 
 
 // module
-exports.push([module.i, ".table-container {\n  max-height: 500px;\n  overflow: auto;\n}\n", ""]);
+exports.push([module.i, ".table-container {\n  max-height: 500px;\n  overflow: auto;\n}\n.image-table-container {\n  max-height: 700px;\n  overflow: auto;\n}\n", ""]);
 
 // exports
 
@@ -7215,7 +7236,8 @@ var render = function() {
             "label",
             {
               staticClass:
-                "flex flex-col items-center px-4 py-6 border-dashed border-4 border-gray-800 bg-gray-200 text-gray-800 rounded-lg shadow tracking-widest uppercase border border-blue cursor-pointer hover:opacity-75"
+                "flex flex-col items-center px-4 py-6 border-dashed border-4 border-gray-800 bg-gray-200 text-gray-800 rounded-lg shadow tracking-widest uppercase border border-blue cursor-pointer hover:opacity-75",
+              attrs: { id: "dropzone" }
             },
             [
               _c(
@@ -7292,7 +7314,7 @@ var render = function() {
             : _vm._e(),
           _vm._v(" "),
           _vm.uploading
-            ? _c("div", [
+            ? _c("div", { staticClass: "image-table-container" }, [
                 _vm.files.length > 0
                   ? _c(
                       "table",
@@ -7310,6 +7332,13 @@ var render = function() {
                               "tr",
                               { staticClass: "border-b hover:bg-gray-100" },
                               [
+                                _c("td", [
+                                  _c("img", {
+                                    staticClass: "h-8 mx-auto",
+                                    attrs: { src: file.image, alt: file.name }
+                                  })
+                                ]),
+                                _vm._v(" "),
                                 _c("td", { staticClass: "p-3 px-5" }, [
                                   _vm._v(_vm._s(file.name))
                                 ]),
@@ -7427,6 +7456,8 @@ var staticRenderFns = [
             "text-left border-b bg-gray-300 uppercase text-sm tracking-widest"
         },
         [
+          _c("th"),
+          _vm._v(" "),
           _c("th", { staticClass: "font-semibold p-3 px-5" }, [
             _vm._v("File Name")
           ]),

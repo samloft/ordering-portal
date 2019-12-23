@@ -62,7 +62,7 @@
                         Upload product images
                     </h1>
 
-                    <label
+                    <label id="dropzone"
                         class="flex flex-col items-center px-4 py-6 border-dashed border-4 border-gray-800 bg-gray-200 text-gray-800 rounded-lg shadow tracking-widest uppercase border border-blue cursor-pointer hover:opacity-75">
                         <svg class="w-20 h-20" fill="currentColor" xmlns="http://www.w3.org/2000/svg"
                              viewBox="0 0 20 20">
@@ -80,10 +80,11 @@
                     <div class="font-semibold tracking-widest w-1/2">Failed: <span class="font-normal tracking-normal">{{ imagesFailed }}</span></div>
                 </div>
 
-                <div v-if="uploading">
+                <div v-if="uploading" class="image-table-container">
                     <table v-if="files.length > 0" class="mt-5 w-full text-md bg-white shadow rounded">
                         <thead>
                         <tr class="text-left border-b bg-gray-300 uppercase text-sm tracking-widest">
+                            <th/>
                             <th class="font-semibold p-3 px-5">File Name</th>
                             <th class="font-semibold p-3 px-5">Size</th>
                             <th class="font-semibold p-3 px-5">Status</th>
@@ -91,6 +92,7 @@
                         </thead>
                         <tbody>
                         <tr v-for="file in files" class="border-b hover:bg-gray-100">
+                            <td><img class="h-8 mx-auto" :src="file.image" :alt="file.name"></td>
                             <td class="p-3 px-5">{{ file.name }}</td>
                             <td class="p-3 px-5"><span class="badge badge-info">{{ file.size }}</span></td>
                             <td class="p-3 px-5">
@@ -120,6 +122,11 @@
 <style>
     .table-container {
         max-height: 500px;
+        overflow: auto;
+    }
+
+    .image-table-container {
+        max-height: 700px;
         overflow: auto;
     }
 </style>
@@ -177,6 +184,7 @@
 
                     this.files.push({
                         form: formData,
+                        image: URL.createObjectURL(file),
                         name: file.name,
                         size: App.humanFileSize(file.size, true),
                         status: status,
@@ -210,6 +218,23 @@
 
                 this.uploadsCompleted = true;
             }
+        },
+        mounted() {
+            var self = this;
+
+            document.querySelector('#dropzone').addEventListener("dragleave", function (e) {
+                e.preventDefault();
+            });
+
+            document.querySelector('#dropzone').addEventListener("dragover", function (e) {
+                e.preventDefault();
+            });
+
+            document.querySelector('#dropzone').addEventListener("drop", function (e) {
+                e.preventDefault();
+
+                self.prepareUploads(e.dataTransfer.files);
+            });
         }
     }
 </script>
