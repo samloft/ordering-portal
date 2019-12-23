@@ -53,6 +53,12 @@ Route::group(['middleware' => 'auth:admin'], static function () {
         Route::post('/', 'Cms\CompanyDetailsController@store')->name('cms.company-information.store');
     });
 
+    Route::group(['prefix' => 'contacts'], static function() {
+        Route::get('/', 'Cms\ContactController@index')->name('cms.contacts');
+        Route::post('/', 'Cms\ContactController@store')->name('cms.contacts.show');
+        Route::delete('{id}', 'Cms\ContactController@destroy')->name('cms.contacts.show');
+    });
+
     //Route::group(['prefix' => 'home-links'], static function () {
     //    Route::get('/', 'Cms\HomeLinksController@index')->name('cms.home-links');
     //    Route::post('store', 'Cms\HomeLinksController@store')->name('cms.home-links.store');

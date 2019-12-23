@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers\Cms;
 
-use App\Models\Contact;
+use App\Models\Page;
 use Illuminate\Contracts\View\Factory;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Database\Eloquent\Model;
@@ -17,9 +17,9 @@ class ContactController extends Controller
      */
     public function index()
     {
-        $contacts = Contact::show();
+        $contacts = json_decode(Page::where('name', 'contact')->first()->description, true);
 
-        return view('cms.contacts.index', compact('contacts'));
+        return view('contacts.index', compact('contacts'));
     }
 
     /**
