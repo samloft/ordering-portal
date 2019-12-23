@@ -2,9 +2,11 @@
 ----
 
 [![CircleCI](https://img.shields.io/circleci/build/github/samloft/ordering-portal/development)](https://circleci.com/gh/samloft/ordering-portal)
-[![Maintainability](https://api.codeclimate.com/v1/badges/14aae2675520d94d559f/maintainability)](https://codeclimate.com/github/samloft/ordering-portal/maintainability)
-[![Test Coverage](https://api.codeclimate.com/v1/badges/14aae2675520d94d559f/test_coverage)](https://codeclimate.com/github/samloft/ordering-portal/test_coverage)
-![PHP Version](https://img.shields.io/badge/PHP-7.4-blue)
+![Code Climate technical debt](https://img.shields.io/codeclimate/tech-debt/samloft/ordering-portal)
+![Code Climate maintainability](https://img.shields.io/codeclimate/maintainability/samloft/ordering-portal)
+![Code Climate issues](https://img.shields.io/codeclimate/issues/samloft/ordering-portal)
+![Code Climate coverage](https://img.shields.io/codeclimate/coverage/samloft/ordering-portal)
+![PHP Version](https://img.shields.io/badge/dynamic/json?color=information&label=PHP&query=require.php&url=https%3A%2F%2Fraw.githubusercontent.com%2Fsamloft%2Fordering-portal%2Fdevelopment%2Fcomposer.json)
 ![Laravel Version](https://img.shields.io/badge/laravel-6.*-red)
 [![License](http://img.shields.io/:license-mit-blue.svg?style=flat-square)](http://badges.mit-license.org) 
 ![Version](https://img.shields.io/badge/dynamic/yaml?color=orange&label=version&query=version&suffix=fd&url=https%3A%2F%2Fapi.shop.devloft.co.uk%2Fversion)
