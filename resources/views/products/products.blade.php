@@ -12,7 +12,13 @@
         </div>
     @else
         @if ($sub_category_list)
-                <product-categories :categories="{{ json_encode($sub_category_list, true) }}"></product-categories>
+            <div class="flex flex-wrap -mx-3">
+                @foreach($sub_category_list['list'] as $category)
+                    <product-categories :category="{{ json_encode($category, true) }}" :current="{{ json_encode($sub_category_list['current'], true) }}"></product-categories>
+                @endforeach
+            </div>
+
+{{--            <product-categories :categories="{{ json_encode($sub_category_list, true) }}"></product-categories>--}}
         @endif
 
         @if ($products)
@@ -21,7 +27,8 @@
                     <div class="flex mb-2">
                         <div class="w-3/4">
                             <h2 class="font-semibold text-lg text-primary mb-2">
-                                <a href="/products/view/{{ encodeUrl($product->code) }}" class="hover:underline">{{ $product->name }}</a>
+                                <a href="/products/view/{{ encodeUrl($product->code) }}"
+                                   class="hover:underline">{{ $product->name }}</a>
                             </h2>
 
                             <div class="flex items-center">

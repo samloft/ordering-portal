@@ -125,6 +125,7 @@ class Category extends Model
                 ];
 
                 $sub_categories[trim($sub->$cat_level)] = [
+                    'key' => trim($sub->$cat_level),
                     'slug' => encodeUrl($sub->$cat_level),
                 ];
             }
