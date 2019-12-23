@@ -15,7 +15,7 @@ use App\Models\Product;
 
 Route::group(['middleware' => 'auth:api', 'prefix' => 'v1'], static function () {
     Route::get('user', static function() {
-        return request()->user();
+        return auth()->user();
     });
 
     Route::get('product', static function() {

@@ -76,7 +76,7 @@
                     </label>
 
                 <div v-if="uploadsCompleted" class="bg-gray-800 text-white rounded mt-5 p-5 flex text-center">
-                    <div class="font-semibold tracking-widest w-1/2">Uploaded: <span class="font-normal tracking-normal">{{ imagesUploaded }}</span></div>
+                    <div class="font-semibold tracking-widest w-1/2">Uploaded: <span class="font-normal tracking-normal">{{ imagesUploaded }} / {{ totalImages }}</span></div>
                     <div class="font-semibold tracking-widest w-1/2">Failed: <span class="font-normal tracking-normal">{{ imagesFailed }}</span></div>
                 </div>
 
@@ -142,6 +142,7 @@
                 uploading: false,
                 fileList: [],
                 files: [],
+                totalImages: 0,
                 imagesUploaded: 0,
                 imagesFailed: 0,
                 uploadsCompleted: false,
@@ -175,6 +176,8 @@
                 Array.from(files).forEach(file => {
                     if (re.exec(file.name)[1] === 'png') {
                         status = 'pending';
+
+                        this.totalImages++;
                     } else {
                         status = 'error';
                     }
