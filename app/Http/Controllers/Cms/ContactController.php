@@ -23,15 +23,6 @@ class ContactController extends Controller
     }
 
     /**
-     * @param $id
-     * @return Contact|Contact[]|Collection|Model
-     */
-    public function show($id)
-    {
-        return Contact::findOrFail($id);
-    }
-
-    /**
      * @return RedirectResponse
      */
     public function store(): RedirectResponse
@@ -60,7 +51,7 @@ class ContactController extends Controller
      */
     public function destroy($id): RedirectResponse
     {
-        $deleted = Contact::destroy($id);
+        $deleted = Contact::where('id', $id)->delete();
 
         return $deleted ? back()->with('success', 'Contact has been deleted') : back()->with('error', 'Unable to delete contact, please try again');
     }
