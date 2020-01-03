@@ -20,6 +20,7 @@ class SavedBasketController extends Controller
      * search parameters are passed, display results that match the search.
      *
      * @param Request $request
+     *
      * @return Factory|View
      */
     public function index(Request $request)
@@ -35,6 +36,7 @@ class SavedBasketController extends Controller
      * Display items for the given reference.
      *
      * @param Request $request
+     *
      * @return mixed
      */
     public function show(Request $request)
@@ -50,23 +52,24 @@ class SavedBasketController extends Controller
 
     /**
      * @param Request $request
+     *
      * @return ResponseFactory|Response
      */
     public function store(Request $request)
     {
         $current_basket = Basket::show();
         $basket_details = [];
-        $id = (string)Str::Uuid();
+        $id = (string) Str::Uuid();
 
         foreach ($current_basket['lines'] as $item) {
             $basket_details[] = [
-                'id' => $id,
+                'id'            => $id,
                 'customer_code' => auth()->user()->customer->code,
-                'user_id' => auth()->user()->id,
-                'reference' => $request->reference,
-                'product' => trim($item['product']),
-                'quantity' => $item['quantity'],
-                'created_at' => date('Y-m-d')
+                'user_id'       => auth()->user()->id,
+                'reference'     => $request->reference,
+                'product'       => trim($item['product']),
+                'quantity'      => $item['quantity'],
+                'created_at'    => date('Y-m-d'),
             ];
         }
 
@@ -79,6 +82,7 @@ class SavedBasketController extends Controller
      * Delete a given saved basket.
      *
      * @param Request $request
+     *
      * @return RedirectResponse
      */
     public function destroy(Request $request): RedirectResponse
@@ -100,6 +104,7 @@ class SavedBasketController extends Controller
      * Take a saved basket, and copy it into the actual basket.
      *
      * @param $id
+     *
      * @return RedirectResponse|Redirector
      */
     public function copyToBasket($id)
@@ -110,8 +115,8 @@ class SavedBasketController extends Controller
         foreach ($saved_basket as $line) {
             if ($line->price) {
                 $products[] = [
-                    'product' => $line->product,
-                    'quantity' => $line->quantity
+                    'product'  => $line->product,
+                    'quantity' => $line->quantity,
                 ];
             }
         }

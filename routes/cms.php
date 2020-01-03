@@ -53,7 +53,7 @@ Route::group(['middleware' => 'auth:admin'], static function () {
         Route::post('/', 'Cms\CompanyDetailsController@store')->name('cms.company-information.store');
     });
 
-    Route::group(['prefix' => 'contacts'], static function() {
+    Route::group(['prefix' => 'contacts'], static function () {
         Route::get('/', 'Cms\ContactController@index')->name('cms.contacts');
         Route::post('/', 'Cms\ContactController@store')->name('cms.contacts.show');
         Route::delete('{id}', 'Cms\ContactController@destroy')->name('cms.contacts.show');
@@ -77,17 +77,15 @@ Route::group(['middleware' => 'auth:admin'], static function () {
     //    Route::get('delete/{id}', 'Cms\ContactController@destroy')->name('cms.contacts.delete');
     //});
 
-
     Route::group(['prefix' => 'product-images'], static function () {
         Route::get('/', 'Cms\ProductImageController@index')->name('cms.product-images');
         Route::get('missing', 'Cms\ProductImageController@missingImages')->name('cms.product-images.missing');
         Route::post('/', 'Cms\ProductImageController@store')->name('cms.product-images.store');
     });
 
-    Route::group(['prefix' => 'customer'], static function() {
-        Route::get('validate', static function() {
+    Route::group(['prefix' => 'customer'], static function () {
+        Route::get('validate', static function () {
             return Customer::show(request('code'));
         });
     });
-
 });

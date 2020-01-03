@@ -19,7 +19,7 @@ class ProductTest extends TestCase
      */
     public function a_customer_can_see_products_on_their_price_list(): void
     {
-        $user = (new UserFactory)->withCustomer()->create();
+        $user = (new UserFactory())->withCustomer()->create();
 
         $this->signIn($user);
 
@@ -27,7 +27,7 @@ class ProductTest extends TestCase
 
         factory(Price::class)->create([
             'customer_code' => $user->customer->code,
-            'product' => $product->code,
+            'product'       => $product->code,
         ]);
 
         $this->get($product->path())->assertSee($product->description);
@@ -40,7 +40,7 @@ class ProductTest extends TestCase
      */
     public function a_customer_cannot_see_products_not_on_their_price_list(): void
     {
-        $user = (new UserFactory)->withCustomer()->create();
+        $user = (new UserFactory())->withCustomer()->create();
 
         $this->signIn($user);
 
@@ -48,7 +48,7 @@ class ProductTest extends TestCase
 
         factory(Price::class)->create([
             'customer_code' => 'ABC123',
-            'product' => $product->code,
+            'product'       => $product->code,
         ]);
 
         $this->get($product->path())->assertDontSee($product->description);

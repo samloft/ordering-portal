@@ -14,11 +14,11 @@ use App\Models\Product;
 */
 
 Route::group(['middleware' => 'auth:api', 'prefix' => 'v1'], static function () {
-    Route::get('user', static function() {
+    Route::get('user', static function () {
         return auth()->user();
     });
 
-    Route::get('product', static function() {
+    Route::get('product', static function () {
         return Product::details(request('product'));
     });
 });
@@ -27,9 +27,9 @@ Route::group(['middleware' => 'auth:api', 'prefix' => 'v1'], static function () 
  * API routes that require no authentication.
  */
 
-Route::get('version', static function() {
+Route::get('version', static function () {
     return [
-        'version' => Version::major() . '.' . Version::minor() . '.' . Version::patch(),
-        'build' => Version::build()
+        'version' => Version::major().'.'.Version::minor().'.'.Version::patch(),
+        'build'   => Version::build(),
     ];
 });

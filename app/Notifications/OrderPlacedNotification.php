@@ -3,10 +3,9 @@
 namespace App\Notifications;
 
 use Illuminate\Bus\Queueable;
+use Illuminate\Notifications\Messages\MailMessage;
 use Illuminate\Notifications\Messages\SlackMessage;
 use Illuminate\Notifications\Notification;
-use Illuminate\Contracts\Queue\ShouldQueue;
-use Illuminate\Notifications\Messages\MailMessage;
 
 class OrderPlacedNotification extends Notification
 {
@@ -19,7 +18,6 @@ class OrderPlacedNotification extends Notification
      */
     public function __construct()
     {
-
     }
 
     /**
@@ -39,14 +37,14 @@ class OrderPlacedNotification extends Notification
     {
         return (new SlackMessage())->from('Online Ordering')->to('#online-ordering')
             ->success()
-            ->content('[' . ucfirst(config('app.name')) . '] - Order has been placed')
+            ->content('['.ucfirst(config('app.name')).'] - Order has been placed')
             ->attachment(static function ($attachment) {
                 $attachment->title('Order Number 1322')
                     ->fields([
                         'OrderTrackingLine' => '12',
-                        'Amount' => '£1,234',
-                        'Customer' => 'SCO100',
-                        'Was Awesome' => ':-1:',
+                        'Amount'            => '£1,234',
+                        'Customer'          => 'SCO100',
+                        'Was Awesome'       => ':-1:',
                     ]);
             });
     }

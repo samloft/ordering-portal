@@ -50,7 +50,7 @@ class UploadController extends Controller
             if ($product_code && $product_qty > 0) {
                 $product = Product::show($product_code);
 
-                if (! $product || $product->not_sold === 'Y') {
+                if (!$product || $product->not_sold === 'Y') {
                     $errors++;
                     $error_message = 'Product not found';
                 }
@@ -63,22 +63,22 @@ class UploadController extends Controller
                 }
 
                 $order[] = [
-                    'product' => $product_code,
-                    'quantity' => $product_qty,
-                    'old_quantity' => $product_qty,
-                    'passed_price' => $product_price,
-                    'price' => $product->price ?? null,
+                    'product'           => $product_code,
+                    'quantity'          => $product_qty,
+                    'old_quantity'      => $product_qty,
+                    'passed_price'      => $product_price,
+                    'price'             => $product->price ?? null,
                     'price_match_error' => $price_match,
-                    'multiples' => $product->order_multiples ?? 1,
-                    'validation' => [
-                        'error' => $error_message,
+                    'multiples'         => $product->order_multiples ?? 1,
+                    'validation'        => [
+                        'error'   => $error_message,
                         'warning' => $warning_message,
                     ],
                 ];
             }
         }
 
-        if (! isset($order)) {
+        if (!isset($order)) {
             return back()->with('error', 'No products found, please check your file is formatted correctly...');
         }
 
@@ -86,7 +86,7 @@ class UploadController extends Controller
 
         foreach ($order as $product) {
             $key = $product['product'];
-            if (! array_key_exists($key, $merged)) {
+            if (!array_key_exists($key, $merged)) {
                 $merged[$key] = $product;
             } else {
                 $merged[$key]['quantity'] += (int) $product['quantity'];
@@ -107,30 +107,30 @@ class UploadController extends Controller
             }
 
             $product_lines[] = [
-                'product' => $product['product'],
-                'quantity' => $quantity,
-                'price' => $product['price'],
+                'product'           => $product['product'],
+                'quantity'          => $quantity,
+                'price'             => $product['price'],
                 'price_match_error' => $product['price_match_error'],
-                'passed_price' => $product['passed_price'],
-                'old_quantity' => $product['old_quantity'],
-                'multiples' => $product['multiples'],
-                'validation' => [
-                    'error' => $product['validation']['error'],
+                'passed_price'      => $product['passed_price'],
+                'old_quantity'      => $product['old_quantity'],
+                'multiples'         => $product['multiples'],
+                'validation'        => [
+                    'error'   => $product['validation']['error'],
                     'warning' => $warning,
                 ],
             ];
 
-            if (! $product['validation']['error']) {
+            if (!$product['validation']['error']) {
                 $upload[] = [
-                    'user_id' => auth()->user()->id,
+                    'user_id'       => auth()->user()->id,
                     'customer_code' => auth()->user()->customer->code,
-                    'product' => $product['product'],
-                    'quantity' => $quantity,
+                    'product'       => $product['product'],
+                    'quantity'      => $quantity,
                 ];
             }
         }
 
-        if (! OrderImport::store($upload)) {
+        if (!OrderImport::store($upload)) {
             return back()->with('error', 'An unknown error occurred, please try uploading again.');
         }
 

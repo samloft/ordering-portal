@@ -6,7 +6,7 @@ use Eloquent;
 use Illuminate\Database\Eloquent\Model;
 
 /**
- * App\Models\OrderImport
+ * App\Models\OrderImport.
  *
  * @mixin Eloquent
  */
@@ -26,6 +26,7 @@ class OrderImport extends Model
      * Adds an array of all validated products that have been uploaded from CSV.
      *
      * @param $lines
+     *
      * @return bool
      */
     public static function store($lines): bool

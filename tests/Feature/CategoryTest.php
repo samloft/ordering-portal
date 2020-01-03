@@ -5,9 +5,9 @@ namespace Tests\Feature;
 use App\Models\Category;
 use App\Models\Price;
 use App\Models\Product;
+use Illuminate\Foundation\Testing\RefreshDatabase;
 use Tests\Setup\UserFactory;
 use Tests\TestCase;
-use Illuminate\Foundation\Testing\RefreshDatabase;
 
 class CategoryTest extends TestCase
 {
@@ -20,7 +20,7 @@ class CategoryTest extends TestCase
      */
     public function a_user_can_see_a_category_if_it_has_products_on_price_list(): void
     {
-        $user = (new UserFactory)->withCustomer()->create();
+        $user = (new UserFactory())->withCustomer()->create();
 
         $this->signIn($user);
 
@@ -28,7 +28,7 @@ class CategoryTest extends TestCase
 
         factory(Price::class)->create([
             'customer_code' => $user->customer->code,
-            'product' => $product->code,
+            'product'       => $product->code,
         ]);
 
         $category = factory(Category::class)->create([
@@ -45,7 +45,7 @@ class CategoryTest extends TestCase
      */
     public function a_user_cannot_see_a_category_if_no_products_on_price_list(): void
     {
-        $user = (new UserFactory)->withCustomer()->create();
+        $user = (new UserFactory())->withCustomer()->create();
 
         $this->signIn($user);
 
@@ -53,7 +53,7 @@ class CategoryTest extends TestCase
 
         factory(Price::class)->create([
             'customer_code' => 'ABC123',
-            'product' => $product->code,
+            'product'       => $product->code,
         ]);
 
         $category = factory(Category::class)->create([

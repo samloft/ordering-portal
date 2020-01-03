@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Collection;
 
 /**
- * App\Models\DeliveryMethods
+ * App\Models\DeliveryMethods.
  *
  * @mixin Eloquent
  */
@@ -27,17 +27,18 @@ class DeliveryMethods extends Model
      * Get delivery details for the given ID.
      *
      * @param $id
+     *
      * @return array
      */
-    public static function details($id) : array
+    public static function details($id): array
     {
         $delivery_details = self::where('uuid', $id)->findOrFail();
 
         // Work out any calculations.
         return [
             'title' => $delivery_details->title,
-            'code' => $delivery_details->code,
-            'cost' => $delivery_details->price,
+            'code'  => $delivery_details->code,
+            'cost'  => $delivery_details->price,
         ];
     }
 }

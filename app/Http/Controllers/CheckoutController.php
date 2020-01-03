@@ -6,11 +6,10 @@ use App\Models\Address;
 use App\Models\Basket;
 use App\Models\DeliveryMethods;
 use App\Notifications\OrderPlacedNotification;
+use Auth;
 use Illuminate\Contracts\View\Factory;
-use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\View\View;
-use Auth;
 use Notification;
 
 class CheckoutController extends Controller
@@ -28,7 +27,7 @@ class CheckoutController extends Controller
         //Notification::route('slack', env('SLACK_HOOK'))
         //    ->notify(new OrderPlacedNotification());
 
-        if (! auth()->user()->can_order) {
+        if (!auth()->user()->can_order) {
             return redirect(route('basket'))->with('error', 'You do not have permission to place orders, if you believe this is in error, please contact the sames office');
         }
 
@@ -45,13 +44,14 @@ class CheckoutController extends Controller
      * Place the customers order.
      *
      * @param Request $request
+     *
      * @return \App\Http\Controllers\Array
      */
-    public function store(Request $request): Array
+    public function store(Request $request): array
     {
         $this->validation($request);
 
-        if (! $request->terms) {
+        if (!$request->terms) {
             return back()->with('error', 'You must accept the terms before you can place your order.')->withInput($request->all());
         }
 
@@ -59,16 +59,16 @@ class CheckoutController extends Controller
 
         $order_details = [
             'header' => [
-                'reference' => $request->reference,
-                'notes' => $request->notes,
-                'shipping' => $delivery,
-                'first_name' => $request->first_name,
-                'last_name' => $request->last_name,
-                'telephone' => $request->telephone,
+                'reference'         => $request->reference,
+                'notes'             => $request->notes,
+                'shipping'          => $delivery,
+                'first_name'        => $request->first_name,
+                'last_name'         => $request->last_name,
+                'telephone'         => $request->telephone,
                 'evening_telephone' => $request->evening_telephone,
-                'fax' => $request->fax,
-                'mobile' => $request->mobile,
-                'delivery_address' => session('address') ?: Address::getDefault()->getAttributes(),
+                'fax'               => $request->fax,
+                'mobile'            => $request->mobile,
+                'delivery_address'  => session('address') ?: Address::getDefault()->getAttributes(),
             ],
             'details' => Basket::show($delivery['cost']),
         ];
@@ -83,27 +83,26 @@ class CheckoutController extends Controller
 
     public function complete($order_number)
     {
-
     }
 
     public function generateOrderFile()
     {
-
     }
 
     /**
      * Validate checkout details.
      *
      * @param $request
+     *
      * @return mixed
      */
     public function validation($request)
     {
         return $request->validate([
-            'reference' => 'required',
-            'shipping' => 'required|exists:delivery_methods,uuid',
+            'reference'  => 'required',
+            'shipping'   => 'required|exists:delivery_methods,uuid',
             'first_name' => 'required',
-            'last_name' => 'required',
+            'last_name'  => 'required',
         ]);
     }
 }

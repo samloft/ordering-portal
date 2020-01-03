@@ -2,12 +2,10 @@
 
 namespace App\Http\Controllers\Cms;
 
+use App\Http\Controllers\Controller;
 use App\Models\Page;
 use Illuminate\Contracts\View\Factory;
-use Illuminate\Database\Eloquent\Collection;
-use Illuminate\Database\Eloquent\Model;
 use Illuminate\Http\RedirectResponse;
-use App\Http\Controllers\Controller;
 use Illuminate\View\View;
 
 class ContactController extends Controller
@@ -28,8 +26,8 @@ class ContactController extends Controller
     public function store(): RedirectResponse
     {
         $contact = [
-            'name' => request()->name,
-            'email' => request()->email
+            'name'  => request()->name,
+            'email' => request()->email,
         ];
 
         if (request()->id) {
@@ -47,6 +45,7 @@ class ContactController extends Controller
 
     /**
      * @param $id
+     *
      * @return RedirectResponse
      */
     public function destroy($id): RedirectResponse

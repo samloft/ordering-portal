@@ -7,16 +7,16 @@ use Faker\Generator as Faker;
 
 $factory->define(Product::class, static function (Faker $faker) {
     return [
-        'code' => $faker->randomNumber(8),
-        'type' => $faker->randomElement($array = ['P','B']),
-        'name' => $faker->text(20),
-        'uom' => 'EACH',
-        'trade_price' => $faker->randomFloat(2, 1, 100),
+        'code'            => $faker->randomNumber(8),
+        'type'            => $faker->randomElement($array = ['P', 'B']),
+        'name'            => $faker->text(20),
+        'uom'             => 'EACH',
+        'trade_price'     => $faker->randomFloat(2, 1, 100),
         'order_multiples' => $faker->randomElement($array = [1, 5]),
-        'description' => $faker->text(100),
-        'stock' => $faker->numberBetween(0, 1000),
-        'not_sold' => false,
-        'vat_flag' => 'S',
-        'packaging' => 1
+        'description'     => $faker->text(100),
+        'stock'           => $faker->numberBetween(0, 1000),
+        'not_sold'        => false,
+        'vat_flag'        => 'S',
+        'packaging'       => 1,
     ];
 });

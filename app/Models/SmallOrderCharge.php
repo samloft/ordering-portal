@@ -6,7 +6,7 @@ use Eloquent;
 use Illuminate\Database\Eloquent\Model;
 
 /**
- * App\Models\SmallOrderCharge
+ * App\Models\SmallOrderCharge.
  *
  * @mixin Eloquent
  */
@@ -17,6 +17,7 @@ class SmallOrderCharge extends Model
      *
      * @param $order_value
      * @param $country
+     *
      * @return int
      */
     public static function value($order_value, $country = null): int

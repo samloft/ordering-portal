@@ -3,7 +3,6 @@
 namespace App\Mail;
 
 use Illuminate\Bus\Queueable;
-use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Mail\Mailable;
 use Illuminate\Queue\SerializesModels;
 
@@ -34,7 +33,7 @@ class Contact extends Mailable
             ->subject('Ordering web-app contact ('.$this->request->subject.')')
             ->markdown('contact.email')
             ->with([
-                'message' => $this->request
+                'message' => $this->request,
             ]);
     }
 }

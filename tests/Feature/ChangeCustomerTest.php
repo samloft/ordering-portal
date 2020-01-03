@@ -3,7 +3,6 @@
 namespace Tests\Feature;
 
 use Illuminate\Foundation\Testing\RefreshDatabase;
-use Illuminate\Foundation\Testing\WithFaker;
 use Tests\Setup\CustomerFactory;
 use Tests\Setup\UserFactory;
 use Tests\TestCase;
@@ -19,7 +18,7 @@ class ChangeCustomerTest extends TestCase
      */
     public function a_user_can_see_change_customer_if_additional_customers_added(): void
     {
-        $user = (new UserFactory)->withCustomer()->withUserCustomers(2)->create();
+        $user = (new UserFactory())->withCustomer()->withUserCustomers(2)->create();
 
         $this->signIn($user);
 
@@ -33,7 +32,7 @@ class ChangeCustomerTest extends TestCase
      */
     public function a_user_cannot_see_change_customer_if_no_additional_customers_added(): void
     {
-        $user = (new UserFactory)->withCustomer()->create();
+        $user = (new UserFactory())->withCustomer()->create();
 
         $this->signIn($user);
 
@@ -47,7 +46,7 @@ class ChangeCustomerTest extends TestCase
      */
     public function a_user_can_see_change_customer_if_set_as_admin(): void
     {
-        $user = (new UserFactory)->withCustomer()->create([
+        $user = (new UserFactory())->withCustomer()->create([
             'admin' => true,
         ]);
 
@@ -63,7 +62,7 @@ class ChangeCustomerTest extends TestCase
      */
     public function a_user_with_additional_customers_can_change_customer(): void
     {
-        $user = (new UserFactory)->withCustomer()->withUserCustomers(2)->create();
+        $user = (new UserFactory())->withCustomer()->withUserCustomers(2)->create();
 
         $this->signIn($user);
 
@@ -85,9 +84,9 @@ class ChangeCustomerTest extends TestCase
      */
     public function a_user_cannot_change_customer_to_one_they_dont_have_access(): void
     {
-        $user = (new UserFactory)->withCustomer()->withUserCustomers(2)->create();
+        $user = (new UserFactory())->withCustomer()->withUserCustomers(2)->create();
 
-        $customer = (new CustomerFactory)->create([
+        $customer = (new CustomerFactory())->create([
             'code' => str_random(8),
         ]);
 
@@ -109,7 +108,7 @@ class ChangeCustomerTest extends TestCase
      */
     public function a_user_can_revert_to_default_customer(): void
     {
-        $user = (new UserFactory)->withCustomer()->withUserCustomers(2)->create();
+        $user = (new UserFactory())->withCustomer()->withUserCustomers(2)->create();
 
         $this->signIn($user);
 

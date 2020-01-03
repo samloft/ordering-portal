@@ -19,13 +19,13 @@ class AppServiceProvider extends ServiceProvider
     {
         Schema::defaultStringLength(191);
 
-        view()->composer('products.sidebar', static function($view) {
+        view()->composer('products.sidebar', static function ($view) {
             $view->with('category_list', Category::list());
         });
 
-        view()->composer(['layout.footer', 'contact.index'], static function($view) {
+        view()->composer(['layout.footer', 'contact.index'], static function ($view) {
             if (!Cache::has('company_details')) {
-                Cache::rememberForever('company_details', static function() {
+                Cache::rememberForever('company_details', static function () {
                     return GlobalSettings::where('key', 'company-details')->first()->value;
                 });
             }

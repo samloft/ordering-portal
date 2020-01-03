@@ -2,18 +2,17 @@
 
 namespace App\Models;
 
-use Eloquent;
-use Illuminate\Contracts\Pagination\LengthAwarePaginator;
-use Illuminate\Database\Eloquent\Builder;
-use Illuminate\Database\Eloquent\Relations\HasMany;
-use Illuminate\Notifications\Notifiable;
-use Illuminate\Foundation\Auth\User as Authenticatable;
-use Hash;
 use App\Traits\CustomerDetails;
+use Eloquent;
+use Hash;
+use Illuminate\Contracts\Pagination\LengthAwarePaginator;
+use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Foundation\Auth\User as Authenticatable;
+use Illuminate\Notifications\Notifiable;
 use Illuminate\Support\Collection;
 
 /**
- * App\Models\User
+ * App\Models\User.
  *
  * @mixin Eloquent
  */
@@ -95,6 +94,7 @@ class User extends Authenticatable
      * Return all the users/customers.
      *
      * @param $search
+     *
      * @return LengthAwarePaginator
      */
     public static function listAll($search): LengthAwarePaginator
@@ -122,6 +122,7 @@ class User extends Authenticatable
      * Return user details with any extra customers.
      *
      * @param $id
+     *
      * @return \Illuminate\Database\Eloquent\Builder|\Illuminate\Database\Eloquent\Model|object
      */
     public static function show($id)

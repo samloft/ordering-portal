@@ -10,7 +10,7 @@ use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\Cache;
 
 /**
- * App\Models\OrderTrackingLine
+ * App\Models\OrderTrackingLine.
  *
  * @mixin Eloquent
  */
@@ -29,6 +29,7 @@ class OrderTrackingLine extends Model
      * Get all the product lines for a order tracking header.
      *
      * @param $order_number
+     *
      * @return \Illuminate\Database\Eloquent\Builder[]|\Illuminate\Database\Eloquent\Collection|Builder[]|Collection
      */
     public static function show($order_number)
@@ -43,6 +44,7 @@ class OrderTrackingLine extends Model
      * Get all the current order lines (For copy to basket).
      *
      * @param $order_number
+     *
      * @return array
      */
     public static function copy($order_number): array

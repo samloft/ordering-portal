@@ -160,7 +160,6 @@ Route::group(['middleware' => ['auth', 'has.customer']], static function () {
         Route::get('/', 'ContactController@index')->name('contact');
         Route::post('/', 'ContactController@store')->name('contact.email');
     });
-
 });
 
 Auth::routes();

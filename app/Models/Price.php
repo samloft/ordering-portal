@@ -8,7 +8,7 @@ use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Database\Eloquent\Model;
 
 /**
- * App\Models\Price
+ * App\Models\Price.
  *
  * @mixin Eloquent
  */
@@ -33,6 +33,7 @@ class Price extends Model
      * Checks that a product is on a customers price list.
      *
      * @param $product_code
+     *
      * @return bool
      */
     public static function product($product_code): bool

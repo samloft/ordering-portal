@@ -3,11 +3,11 @@
 namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
-use Illuminate\Http\Request;
+use Auth;
 use Illuminate\Contracts\Auth\PasswordBroker;
 use Illuminate\Contracts\Auth\StatefulGuard;
 use Illuminate\Foundation\Auth\ResetsPasswords;
-use Auth;
+use Illuminate\Http\Request;
 use Password;
 
 class AdminResetPasswordController extends Controller
@@ -40,14 +40,15 @@ class AdminResetPasswordController extends Controller
      * Show the reset password form.
      *
      * @param \Illuminate\Http\Request $request
-     * @param string|null $token
+     * @param string|null              $token
+     *
      * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
      */
     public function showResetForm(Request $request, $token = null)
     {
         return view('authentication.passwords.reset', [
             'token' => $token,
-            'email' => $request->email
+            'email' => $request->email,
         ]);
     }
 

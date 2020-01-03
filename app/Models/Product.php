@@ -9,7 +9,7 @@ use Illuminate\Http\JsonResponse;
 use Storage;
 
 /**
- * App\Models\Product
+ * App\Models\Product.
  *
  * @mixin \Eloquent
  */
@@ -34,7 +34,7 @@ class Product extends Model
     {
         $image = str_replace('/', '^', $this->code).'.png';
 
-        if(Storage::disk('public')->exists('product_images/'.$image)) {
+        if (Storage::disk('public')->exists('product_images/'.$image)) {
             return asset('product_images/'.$image);
         }
 
@@ -69,6 +69,7 @@ class Product extends Model
      * Return all products for the given categories.
      *
      * @param $categories
+     *
      * @return mixed
      */
     public static function list($categories)
@@ -84,6 +85,7 @@ class Product extends Model
      * Get data for the given product code.
      *
      * @param $product_code
+     *
      * @return mixed
      */
     public static function show($product_code)
@@ -106,6 +108,7 @@ class Product extends Model
      * Take the search parameter and search on multiple columns.
      *
      * @param $search_term
+     *
      * @return mixed
      */
     public static function search($search_term)
@@ -121,6 +124,7 @@ class Product extends Model
      * Autocomplete for quick-buy input.
      *
      * @param $search
+     *
      * @return mixed
      */
     public static function autocomplete($search)
@@ -130,6 +134,7 @@ class Product extends Model
 
     /**
      * @param $product
+     *
      * @return \Illuminate\Http\JsonResponse
      */
     public static function details($product): JsonResponse
@@ -141,8 +146,8 @@ class Product extends Model
 
             return response()->json([
                 'product_code' => $product_details->code,
-                'description' => $product_details->name,
-                'image_file' => $image_check['found'] ? asset($image_check['image']) : null,
+                'description'  => $product_details->name,
+                'image_file'   => $image_check['found'] ? asset($image_check['image']) : null,
             ]);
         }
 
@@ -155,6 +160,7 @@ class Product extends Model
      * Take a list of products and return the first image that exists.
      *
      * @param $products
+     *
      * @return array
      */
     public static function checkImage($products): array

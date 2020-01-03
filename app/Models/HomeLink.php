@@ -4,14 +4,14 @@ namespace App\Models;
 
 use Eloquent;
 use Exception;
+use File;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Database\Eloquent\Model;
-use File;
 use Illuminate\Support\Str;
 use Storage;
 
 /**
- * App\Models\HomeLink
+ * App\Models\HomeLink.
  *
  * @mixin Eloquent
  */
@@ -21,6 +21,7 @@ class HomeLink extends Model
      * Return row for the given ID.
      *
      * @param $id
+     *
      * @return HomeLink|Model|object|null
      */
     public static function show($id)
@@ -32,22 +33,23 @@ class HomeLink extends Model
      * Create a new home link.
      *
      * @param $request
+     *
      * @return bool
      */
     public static function store($request): bool
     {
         $stored = static::storeLinkImage($request->file('image'), $request->type, $request->name);
 
-        if (! $stored['status']) {
+        if (!$stored['status']) {
             return false;
         }
 
         $data = [
-            'type' => $request->type,
-            'name' => $request->type.'-'.$request->name,
-            'link' => $request->link,
-            'position' => static::nextPosition($request->type),
-            'image' => $stored['name'],
+            'type'       => $request->type,
+            'name'       => $request->type.'-'.$request->name,
+            'link'       => $request->link,
+            'position'   => static::nextPosition($request->type),
+            'image'      => $stored['name'],
             'created_at' => date('Y-m-d H:i:s'),
             'updated_at' => date('Y-m-d H:i:s'),
         ];
@@ -59,19 +61,20 @@ class HomeLink extends Model
      * Update the given home link with new data.
      *
      * @param $request
+     *
      * @return bool
      */
     public static function edit($request): bool
     {
         $data = [
-            'link' => $request->link,
+            'link'       => $request->link,
             'updated_at' => date('Y-m-d H:i:s'),
         ];
 
         if ($request->image) {
             $stored = static::storeLinkImage($request->file('image'), $request->type, $request->name);
 
-            if (! $stored['status']) {
+            if (!$stored['status']) {
                 return false;
             }
 
@@ -88,6 +91,7 @@ class HomeLink extends Model
      * @param $image
      * @param $type
      * @param $name
+     *
      * @return array
      */
     public static function storeLinkImage($image, $type, $name): array
@@ -103,8 +107,10 @@ class HomeLink extends Model
      * Deletes the record with matching image for the given ID.
      *
      * @param array|\Illuminate\Support\Collection|int $id
-     * @return bool|int|null
+     *
      * @throws Exception
+     *
+     * @return bool|int|null
      */
     public static function destroy($id)
     {
@@ -139,6 +145,7 @@ class HomeLink extends Model
      * Alter positions from given array.
      *
      * @param $items
+     *
      * @return bool
      */
     public static function updatePositions($items): bool
@@ -155,6 +162,7 @@ class HomeLink extends Model
      * by 1 for the next position.
      *
      * @param $type
+     *
      * @return HomeLink|Model|int|object|null
      */
     public static function nextPosition($type)

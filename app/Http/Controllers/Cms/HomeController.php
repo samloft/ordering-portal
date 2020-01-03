@@ -5,7 +5,6 @@ namespace App\Http\Controllers\Cms;
 use App\Http\Controllers\Controller;
 use App\Models\OrderTrackingHeader;
 use App\Models\User;
-use Illuminate\Http\Response;
 
 class HomeController extends Controller
 {
@@ -22,8 +21,8 @@ class HomeController extends Controller
     public function index()
     {
         $stats = [
-            'users' => User::countAll(),
-            'orders-today' => OrderTrackingHeader::todayCount()
+            'users'        => User::countAll(),
+            'orders-today' => OrderTrackingHeader::todayCount(),
         ];
 
         return view('dashboard.index', compact('stats'));

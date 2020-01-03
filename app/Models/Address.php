@@ -8,7 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Collection;
 
 /**
- * App\Models\Address
+ * App\Models\Address.
  *
  * @mixin Eloquent
  */
@@ -26,6 +26,7 @@ class Address extends Model
 
     /**
      * @param $address_id
+     *
      * @return mixed
      */
     public static function details($address_id)
@@ -35,6 +36,7 @@ class Address extends Model
 
     /**
      * @param $address
+     *
      * @return mixed
      */
     public static function store($address)
@@ -54,6 +56,7 @@ class Address extends Model
     /**
      * @param $id
      * @param $address
+     *
      * @return mixed
      */
     public static function edit($id, $address)
@@ -81,6 +84,7 @@ class Address extends Model
 
     /**
      * @param $address_id
+     *
      * @return mixed
      */
     public static function setDefault($address_id)
@@ -88,7 +92,7 @@ class Address extends Model
         static::removeDefaults();
 
         return self::where('id', $address_id)->update([
-            'default' => 1
+            'default' => 1,
         ]);
     }
 
@@ -102,6 +106,7 @@ class Address extends Model
 
     /**
      * @param $address_id
+     *
      * @return mixed
      */
     public static function canEdit($address_id)
@@ -111,8 +116,10 @@ class Address extends Model
 
     /**
      * @param array|Collection|int $address_id
-     * @return int
+     *
      * @throws Exception
+     *
+     * @return int
      */
     public static function destroy($address_id): int
     {

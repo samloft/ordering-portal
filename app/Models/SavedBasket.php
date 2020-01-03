@@ -7,7 +7,7 @@ use Eloquent;
 use Illuminate\Database\Eloquent\Model;
 
 /**
- * App\Models\SavedBasket
+ * App\Models\SavedBasket.
  *
  * @mixin Eloquent
  */
@@ -21,6 +21,7 @@ class SavedBasket extends Model
      *
      * @param $search
      * @param $request
+     *
      * @return mixed
      */
     public static function list($search, $request)
@@ -30,7 +31,7 @@ class SavedBasket extends Model
                 ->where('customer_code', auth()->user()->customer->code)
                 ->when($request, static function ($query) use ($request) {
                     if ($request->reference) {
-                        $query->where('reference', 'like', '%' . $request->reference . '%');
+                        $query->where('reference', 'like', '%'.$request->reference.'%');
                     }
 
                     if ($request->date_from) {
@@ -59,6 +60,7 @@ class SavedBasket extends Model
      * Get the items for a saved basket by ID.
      *
      * @param $id
+     *
      * @return mixed
      */
     public static function show($id)
@@ -78,6 +80,7 @@ class SavedBasket extends Model
      * Add the array of items as a saved basket.
      *
      * @param $items
+     *
      * @return bool
      */
     public static function store($items): bool
@@ -89,6 +92,7 @@ class SavedBasket extends Model
      * Delete the saved basket by reference.
      *
      * @param $id
+     *
      * @return int
      */
     public static function destroy($id): int

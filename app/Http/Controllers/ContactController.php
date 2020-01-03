@@ -3,11 +3,11 @@
 namespace App\Http\Controllers;
 
 use App\Mail\Contact;
+use App\Models\Page;
 use Illuminate\Contracts\View\Factory;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\View\View;
 use Mail;
-use App\Models\Page;
 
 class ContactController extends Controller
 {
@@ -32,15 +32,15 @@ class ContactController extends Controller
     public function store(): RedirectResponse
     {
         request()->validate([
-            'to' => 'required',
-            'name' => 'required',
-            'email' => 'required',
-            'message' => 'required|min:5'
+            'to'      => 'required',
+            'name'    => 'required',
+            'email'   => 'required',
+            'message' => 'required|min:5',
         ]);
 
         Mail::to(request('to'))->send(new Contact(request()));
 
-        if(Mail::failures()) {
+        if (Mail::failures()) {
             return back()->with('error', 'Unable to your message, please try again');
         }
 
