@@ -27,7 +27,7 @@ class CheckoutController extends Controller
         //Notification::route('slack', env('SLACK_HOOK'))
         //    ->notify(new OrderPlacedNotification());
 
-        if (!auth()->user()->can_order) {
+        if (! auth()->user()->can_order) {
             return redirect(route('basket'))->with('error', 'You do not have permission to place orders, if you believe this is in error, please contact the sames office');
         }
 
@@ -51,7 +51,7 @@ class CheckoutController extends Controller
     {
         $this->validation($request);
 
-        if (!$request->terms) {
+        if (! $request->terms) {
             return back()->with('error', 'You must accept the terms before you can place your order.')->withInput($request->all());
         }
 

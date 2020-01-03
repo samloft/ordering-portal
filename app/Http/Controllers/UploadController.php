@@ -50,7 +50,7 @@ class UploadController extends Controller
             if ($product_code && $product_qty > 0) {
                 $product = Product::show($product_code);
 
-                if (!$product || $product->not_sold === 'Y') {
+                if (! $product || $product->not_sold === 'Y') {
                     $errors++;
                     $error_message = 'Product not found';
                 }
@@ -78,7 +78,7 @@ class UploadController extends Controller
             }
         }
 
-        if (!isset($order)) {
+        if (! isset($order)) {
             return back()->with('error', 'No products found, please check your file is formatted correctly...');
         }
 
@@ -86,7 +86,7 @@ class UploadController extends Controller
 
         foreach ($order as $product) {
             $key = $product['product'];
-            if (!array_key_exists($key, $merged)) {
+            if (! array_key_exists($key, $merged)) {
                 $merged[$key] = $product;
             } else {
                 $merged[$key]['quantity'] += (int) $product['quantity'];
@@ -120,7 +120,7 @@ class UploadController extends Controller
                 ],
             ];
 
-            if (!$product['validation']['error']) {
+            if (! $product['validation']['error']) {
                 $upload[] = [
                     'user_id'       => auth()->user()->id,
                     'customer_code' => auth()->user()->customer->code,
@@ -130,7 +130,7 @@ class UploadController extends Controller
             }
         }
 
-        if (!OrderImport::store($upload)) {
+        if (! OrderImport::store($upload)) {
             return back()->with('error', 'An unknown error occurred, please try uploading again.');
         }
 

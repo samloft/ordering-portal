@@ -87,7 +87,7 @@ class OrderTrackingController extends Controller
     {
         $authorized = OrderTrackingHeader::show(urldecode($order_number));
 
-        if (!$authorized) {
+        if (! $authorized) {
             return [
                 'pdf_exists' => false,
                 'error'      => 'You do not have permission to view this invoice',

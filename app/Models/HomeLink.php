@@ -40,7 +40,7 @@ class HomeLink extends Model
     {
         $stored = static::storeLinkImage($request->file('image'), $request->type, $request->name);
 
-        if (!$stored['status']) {
+        if (! $stored['status']) {
             return false;
         }
 
@@ -74,7 +74,7 @@ class HomeLink extends Model
         if ($request->image) {
             $stored = static::storeLinkImage($request->file('image'), $request->type, $request->name);
 
-            if (!$stored['status']) {
+            if (! $stored['status']) {
                 return false;
             }
 
