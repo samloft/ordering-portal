@@ -37,7 +37,7 @@ class ProductImageController extends Controller
         foreach ($product_list as $product) {
             $image = Product::checkImage(encodeUrl($product->product));
 
-            if (!$image['found']) {
+            if (! $image['found']) {
                 $missing_images[] = [
                     'product'   => $product->product,
                     'file_name' => str_replace('%2B', ' ', encodeUrl($product->product)).'.png',

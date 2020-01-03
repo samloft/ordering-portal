@@ -54,14 +54,14 @@ class BasketController extends Controller
 
         $product_details = Product::show($product);
 
-        if (!$product_details) {
+        if (! $product_details) {
             return response()->json([
                 'error'   => true,
                 'message' => 'The product you have entered does not exist.',
             ], 422);
         }
 
-        if (!(int) $quantity || (!$quantity) > 0) {
+        if (! (int) $quantity || (! $quantity) > 0) {
             return response()->json([
                 'error'   => true,
                 'message' => $quantity.' is not a valid quantity, please enter numeric values or more than 0 only.',

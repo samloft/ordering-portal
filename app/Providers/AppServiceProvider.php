@@ -24,7 +24,7 @@ class AppServiceProvider extends ServiceProvider
         });
 
         view()->composer(['layout.footer', 'contact.index'], static function ($view) {
-            if (!Cache::has('company_details')) {
+            if (! Cache::has('company_details')) {
                 Cache::rememberForever('company_details', static function () {
                     return GlobalSettings::where('key', 'company-details')->first()->value;
                 });
