@@ -5,7 +5,7 @@
         @include('products.sidebar')
 
         <div class="w-3/4">
-            @if (isset($categories))
+            @if ($categories['level_1'])
                 <div class="font-thin text-gray-700 mb-3">
                     @if ($categories['level_1'] === 'search')
                         <strong>{{ __('Search') }}</strong> <i class="fas fa-caret-right mx-2"></i> {{ $categories['query'] }}

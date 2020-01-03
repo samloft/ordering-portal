@@ -17,8 +17,6 @@
                     <product-categories :category="{{ json_encode($category, true) }}" :current="{{ json_encode($sub_category_list['current'], true) }}"></product-categories>
                 @endforeach
             </div>
-
-{{--            <product-categories :categories="{{ json_encode($sub_category_list, true) }}"></product-categories>--}}
         @endif
 
         @if ($products)
