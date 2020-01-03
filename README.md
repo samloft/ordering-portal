@@ -11,6 +11,7 @@
 [![License](http://img.shields.io/:license-mit-blue.svg?style=flat-square)](http://badges.mit-license.org) 
 ![Version](https://img.shields.io/badge/dynamic/yaml?color=orange&label=version&query=version&suffix=fd&url=https%3A%2F%2Fapi.shop.devloft.co.uk%2Fversion)
 ![Website Status](https://img.shields.io/website?down_color=red&down_message=Offline&up_color=green&up_message=Online&url=https%3A%2F%2Fshop.devloft.co.uk)
+![StyleCI](https://github.styleci.io/repos/167339096/shield)
 
 Ordering portal is ecommerce portal for a Sage ERP 1000 system, taking extracted data from Sage as syncs to populate the database for this system.
 This system is still highly under construction (Being worked on in spare time).
