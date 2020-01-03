@@ -1,11 +1,11 @@
 <?php
 
 /**
- *
  * Gets the VAT amount from a given value.
  *
  * @param int $value
  * @param int $vat_percent
+ *
  * @return float|int
  */
 function vatAmount($value = 0, $vat_percent = 20)
@@ -18,6 +18,7 @@ function vatAmount($value = 0, $vat_percent = 20)
  *
  * @param int $value
  * @param int $vat_percent
+ *
  * @return float|int
  */
 function vatIncluded($value = 0, $vat_percent = 20)

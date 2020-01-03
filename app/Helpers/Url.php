@@ -9,18 +9,18 @@
 function urlCharacters()
 {
     return [
-        '/' => '_',
-        ' ' => '+',
+        '/'   => '_',
+        ' '   => '+',
         '%2B' => '+',
     ];
 }
 
 /**
- *
  * Encode a URL and remove special characters from the urlCharacters() array.
- * For example links with: / replaced by ^
+ * For example links with: / replaced by ^.
  *
  * @param $url_string
+ *
  * @return string
  */
 function encodeUrl($url_string)
@@ -36,9 +36,10 @@ function encodeUrl($url_string)
 
 /**
  * Decode a URL, adding back in special characters from the urlCharacters() array (Flipped).
- * For example links with: ^ replaced with /
+ * For example links with: ^ replaced with /.
  *
  * @param $url_string
+ *
  * @return string
  */
 function decodeUrl($url_string)

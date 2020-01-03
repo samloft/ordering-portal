@@ -21,25 +21,25 @@ class CreateGlobalsTable extends Migration
         });
 
         DB::table('globals')->insert([
-            'key' => 'company-details',
+            'key'   => 'company-details',
             'value' => json_encode([
-                'line_1' => 'Address Line 1',
-                'line_2' => 'Address Line 2',
-                'line_3' => 'Address Line 3',
-                'line_4' => 'Address Line 4',
-                'line_5' => 'Address Line 5',
-                'postcode' => 'Postcode',
+                'line_1'    => 'Address Line 1',
+                'line_2'    => 'Address Line 2',
+                'line_3'    => 'Address Line 3',
+                'line_4'    => 'Address Line 4',
+                'line_5'    => 'Address Line 5',
+                'postcode'  => 'Postcode',
                 'telephone' => 'Telephone',
-                'email' => 'example@example.com',
-                'social' => [
-                    'facebook' => 'facebook-url',
-                    'twitter' => 'twitter-url',
-                    'linkedin' => 'linkedin-url',
+                'email'     => 'example@example.com',
+                'social'    => [
+                    'facebook'  => 'facebook-url',
+                    'twitter'   => 'twitter-url',
+                    'linkedin'  => 'linkedin-url',
                     'instagram' => 'instagram-url',
-                    'youtube' => 'youtube-url',
+                    'youtube'   => 'youtube-url',
                 ],
                 'apps' => [
-                    'apple' => 'apple-app-url',
+                    'apple'   => 'apple-app-url',
                     'android' => 'android-app-url',
                 ],
             ], true),

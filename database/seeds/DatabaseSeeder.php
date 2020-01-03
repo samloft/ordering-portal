@@ -1,15 +1,15 @@
 <?php
 
 use App\Models\Address;
+use App\Models\Category;
 use App\Models\CmsUser;
+use App\Models\Customer;
 use App\Models\ExpectedStock;
 use App\Models\OrderTrackingHeader;
 use App\Models\OrderTrackingLine;
-use App\Models\User;
-use App\Models\Category;
-use App\Models\Customer;
 use App\Models\Price;
 use App\Models\Product;
+use App\Models\User;
 use App\Models\UserCustomer;
 use Illuminate\Database\Seeder;
 
@@ -22,12 +22,12 @@ class DatabaseSeeder extends Seeder
      */
     public function run(): void
     {
-         //$this->call(CountriesTableSeeder::class);
+        //$this->call(CountriesTableSeeder::class);
 
         $user = factory(User::class)->create([
-            'email' => 'example@example.com',
-            'password' => bcrypt('password'),
-            'customer_code' => 'SCO100'
+            'email'         => 'example@example.com',
+            'password'      => bcrypt('password'),
+            'customer_code' => 'SCO100',
         ]);
 
         factory(Customer::class)->create(['code' => 'SCO100']);
@@ -45,13 +45,13 @@ class DatabaseSeeder extends Seeder
         });
 
         factory(CmsUser::class)->create([
-            'email' => 'example@example.com',
-            'password' => bcrypt('password')
+            'email'    => 'example@example.com',
+            'password' => bcrypt('password'),
         ]);
 
         factory(OrderTrackingHeader::class, 200)->create()->each(static function ($order) {
             factory(OrderTrackingLine::class)->create([
-                'order_no' => $order->order_no
+                'order_no' => $order->order_no,
             ]);
         });
     }

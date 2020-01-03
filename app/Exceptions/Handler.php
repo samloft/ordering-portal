@@ -4,14 +4,12 @@ namespace App\Exceptions;
 
 use Exception;
 use Illuminate\Auth\AuthenticationException;
-use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Illuminate\Foundation\Exceptions\Handler as ExceptionHandler;
 use Illuminate\Support\Arr;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
 class Handler extends ExceptionHandler
 {
-
     /**
      * A list of the exception types that are not reported.
      *
@@ -35,8 +33,10 @@ class Handler extends ExceptionHandler
      * Report or log an exception.
      *
      * @param \Exception $exception
-     * @return void
+     *
      * @throws \Exception
+     *
+     * @return void
      */
     public function report(Exception $exception)
     {
@@ -46,8 +46,9 @@ class Handler extends ExceptionHandler
     /**
      * Render an exception into an HTTP response.
      *
-     * @param  \Illuminate\Http\Request $request
-     * @param  \Exception $exception
+     * @param \Illuminate\Http\Request $request
+     * @param \Exception               $exception
+     *
      * @return \Illuminate\Http\Response
      */
     public function render($request, Exception $exception)
@@ -56,7 +57,7 @@ class Handler extends ExceptionHandler
 
         if ($exception instanceof NotFoundHttpException && $sub_domain === 'api') {
             return response()->json([
-                'message' => 'Not Found'
+                'message' => 'Not Found',
             ], 404);
         }
 
@@ -69,7 +70,7 @@ class Handler extends ExceptionHandler
 
         if ($sub_domain === 'api') {
             return response()->json([
-                'message' => 'Unauthenticated'
+                'message' => 'Unauthenticated',
             ], 401);
         }
 
@@ -83,6 +84,7 @@ class Handler extends ExceptionHandler
                 $login = 'login';
                 break;
         }
+
         return redirect()->guest(route($login));
     }
 }

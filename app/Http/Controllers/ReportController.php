@@ -29,6 +29,7 @@ class ReportController extends Controller
      * Generate a report based on the type & output.
      *
      * @param Request $request
+     *
      * @return RedirectResponse|Response|BinaryFileResponse|void
      */
     public function show(Request $request)
@@ -50,6 +51,7 @@ class ReportController extends Controller
      * Generate the back order report.
      *
      * @param $output
+     *
      * @return RedirectResponse|Response|BinaryFileResponse
      */
     public function backOrderReport($output)
@@ -170,6 +172,7 @@ class ReportController extends Controller
      * @param $lines
      * @param null $extra_headings
      * @param null $extra_lines
+     *
      * @return BinaryFileResponse
      */
     public function createCSV(

@@ -12,7 +12,7 @@ use Illuminate\Http\Response;
 use Storage;
 
 /**
- * App\Models\Basket
+ * App\Models\Basket.
  *
  * @mixin Eloquent
  */
@@ -43,10 +43,11 @@ class Basket extends Model
     }
 
     /**
-     * Return all basket lines based on customer code
+     * Return all basket lines based on customer code.
      *
-     * @param int $shipping_value
+     * @param int  $shipping_value
      * @param null $country
+     *
      * @return Basket[]|Collection
      */
     public static function show($shipping_value = 0, $country = null): array
@@ -89,15 +90,15 @@ class Basket extends Model
             }
 
             $product_lines[] = [
-                'product' => $line->product,
-                'name' => $line->name,
-                'uom' => $line->uom,
-                'stock' => $line->stock,
-                'image' => $image,
-                'quantity' => $line->quantity,
-                'discount' => 2,
-                'net_price' => $net_price,
-                'price' => currency(discount($net_price) * $line->quantity, 2),
+                'product'    => $line->product,
+                'name'       => $line->name,
+                'uom'        => $line->uom,
+                'stock'      => $line->stock,
+                'image'      => $image,
+                'quantity'   => $line->quantity,
+                'discount'   => 2,
+                'net_price'  => $net_price,
+                'price'      => currency(discount($net_price) * $line->quantity, 2),
                 'unit_price' => currency(discount($net_price)),
             ];
         }
@@ -106,15 +107,15 @@ class Basket extends Model
 
         return [
             'summary' => [
-                'goods_total' => currency($goods_total, 2),
-                'shipping' => currency($shipping_value, 2),
-                'sub_total' => currency($goods_total + $shipping_value, 2),
+                'goods_total'        => currency($goods_total, 2),
+                'shipping'           => currency($shipping_value, 2),
+                'sub_total'          => currency($goods_total + $shipping_value, 2),
                 'small_order_charge' => currency($small_order_charge, 2),
-                'vat' => currency(vatAmount($goods_total + $small_order_charge + $shipping_value), 2),
-                'total' => currency(vatIncluded($goods_total + $small_order_charge + $shipping_value), 2),
+                'vat'                => currency(vatAmount($goods_total + $small_order_charge + $shipping_value), 2),
+                'total'              => currency(vatIncluded($goods_total + $small_order_charge + $shipping_value), 2),
             ],
             'line_count' => count($product_lines),
-            'lines' => $product_lines,
+            'lines'      => $product_lines,
         ];
     }
 
@@ -122,6 +123,7 @@ class Basket extends Model
      * Add array of order lines into customers basket.
      *
      * @param $order_lines
+     *
      * @return mixed
      */
     public static function store($order_lines)
@@ -155,6 +157,7 @@ class Basket extends Model
      * Checks if a product already exists in the customers basket.
      *
      * @param $product_code
+     *
      * @return Basket|Model|object|null
      */
     public static function exists($product_code)
@@ -165,8 +168,9 @@ class Basket extends Model
     /**
      * Remove all items from the basket for the logged in customer.
      *
-     * @return bool|int|null
      * @throws Exception
+     *
+     * @return bool|int|null
      */
     public static function clear()
     {
@@ -177,6 +181,7 @@ class Basket extends Model
      * Delete an individual product line from the basket.
      *
      * @param $product
+     *
      * @return ResponseFactory|Response
      */
     public static function destroyLine($product)
@@ -189,6 +194,7 @@ class Basket extends Model
      *
      * @param $product
      * @param $quantity
+     *
      * @return int
      */
     public static function updateLine($product, $quantity): int
@@ -201,6 +207,7 @@ class Basket extends Model
      * order charge, if not return the charge else return 0.
      *
      * @param $value
+     *
      * @return int
      */
     public static function smallOrderCharge($value): int

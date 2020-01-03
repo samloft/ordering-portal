@@ -2,13 +2,12 @@
 
 namespace App\Http\Controllers\Cms;
 
+use App\Http\Controllers\Controller;
 use App\Models\HomeLink;
 use Exception;
-use Illuminate\Contracts\Filesystem\FileNotFoundException;
 use Illuminate\Contracts\View\Factory;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
-use App\Http\Controllers\Controller;
 use Illuminate\View\View;
 
 class HomeLinksController extends Controller
@@ -30,6 +29,7 @@ class HomeLinksController extends Controller
      * Create a new home link.
      *
      * @param Request $request
+     *
      * @return RedirectResponse
      */
     public function store(Request $request): RedirectResponse
@@ -49,6 +49,7 @@ class HomeLinksController extends Controller
      * Take the list of items and update the position based on the ID.
      *
      * @param Request $request
+     *
      * @return array
      */
     public function updatePositions(Request $request): array
@@ -59,8 +60,8 @@ class HomeLinksController extends Controller
             $row = json_decode($item, true);
 
             $link_items[] = [
-                'id' => (int)$row->id,
-                'position' => $row->position
+                'id'       => (int) $row->id,
+                'position' => $row->position,
             ];
         }
 
@@ -68,12 +69,12 @@ class HomeLinksController extends Controller
             $positions = HomeLink::updatePositions($link_items);
 
             return [
-                'success' => $positions
+                'success' => $positions,
             ];
         }
 
         return [
-            'success' => false
+            'success' => false,
         ];
     }
 
@@ -81,8 +82,10 @@ class HomeLinksController extends Controller
      * Deletes a home link with the given ID.
      *
      * @param $id
-     * @return RedirectResponse
+     *
      * @throws Exception
+     *
+     * @return RedirectResponse
      */
     public function destroy($id): RedirectResponse
     {

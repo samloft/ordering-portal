@@ -2,8 +2,8 @@
 
 namespace App\Providers;
 
-use Illuminate\Support\Facades\Route;
 use Illuminate\Foundation\Support\Providers\RouteServiceProvider as ServiceProvider;
+use Illuminate\Support\Facades\Route;
 
 class RouteServiceProvider extends ServiceProvider
 {
@@ -53,7 +53,7 @@ class RouteServiceProvider extends ServiceProvider
     }
 
     /**
-     * Define the "cms" routes for the application
+     * Define the "cms" routes for the application.
      *
      * These routes are on a sub-domain.
      *
@@ -82,9 +82,10 @@ class RouteServiceProvider extends ServiceProvider
     }
 
     /**
-     * Appends the given sub-domain to the main domain
+     * Appends the given sub-domain to the main domain.
      *
      * @param string $sub_domain
+     *
      * @return string
      */
     private function baseDomain(string $sub_domain = ''): string

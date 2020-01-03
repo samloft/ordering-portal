@@ -6,8 +6,8 @@ use App\Http\Controllers\Controller;
 use Illuminate\Foundation\Auth\SendsPasswordResetEmails;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
-use Password;
 use Illuminate\Validation\ValidationException;
+use Password;
 
 class ForgotPasswordController extends Controller
 {

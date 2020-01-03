@@ -2,15 +2,15 @@
 
 namespace App\Http\Controllers\Cms;
 
+use App\Http\Controllers\Controller;
 use App\Models\Price;
 use App\Models\Product;
+use File;
 use Illuminate\Contracts\View\Factory;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
-use App\Http\Controllers\Controller;
-use File;
-use Storage;
 use Illuminate\View\View;
+use Storage;
 
 class ProductImageController extends Controller
 {
@@ -39,8 +39,8 @@ class ProductImageController extends Controller
 
             if (!$image['found']) {
                 $missing_images[] = [
-                    'product' => $product->product,
-                    'file_name' => str_replace('%2B', ' ', encodeUrl($product->product)) . '.png'
+                    'product'   => $product->product,
+                    'file_name' => str_replace('%2B', ' ', encodeUrl($product->product)).'.png',
                 ];
             }
         }
@@ -52,6 +52,7 @@ class ProductImageController extends Controller
      * Upload product images.
      *
      * @param Request $request
+     *
      * @return JsonResponse
      */
     public function store(Request $request): JsonResponse
@@ -60,12 +61,12 @@ class ProductImageController extends Controller
 
         $name = $image->getClientOriginalName();
 
-        $upload = Storage::disk('public')->put('product_images/' . $name, File::get($image));
+        $upload = Storage::disk('public')->put('product_images/'.$name, File::get($image));
 
         if ($upload) {
             return response()->json('success');
         }
 
-        return response()->json('Failed to upload ' . $name, 400);
+        return response()->json('Failed to upload '.$name, 400);
     }
 }

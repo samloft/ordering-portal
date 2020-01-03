@@ -2,11 +2,11 @@
 
 namespace App\Http\Controllers\Auth;
 
+use App\Http\Controllers\Controller;
 use Auth;
 use Illuminate\Contracts\View\Factory;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
-use App\Http\Controllers\Controller;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Routing\Redirector;
 use Illuminate\Validation\ValidationException;
@@ -39,14 +39,16 @@ class AdminController extends Controller
 
     /**
      * @param Request $request
-     * @return RedirectResponse
+     *
      * @throws ValidationException
+     *
+     * @return RedirectResponse
      */
     public function login(Request $request): RedirectResponse
     {
         $this->validate($request, [
-            'email' => 'required|email',
-            'password' => 'required'
+            'email'    => 'required|email',
+            'password' => 'required',
         ]);
 
         if (Auth::guard('admin')->attempt(['email' => $request->email, 'password' => $request->password], $request->remember)) {
@@ -64,6 +66,5 @@ class AdminController extends Controller
         Auth::guard('admin')->logout();
 
         return redirect(route('cms.index'));
-
     }
 }

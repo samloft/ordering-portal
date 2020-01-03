@@ -4,7 +4,6 @@ namespace App\Http\Controllers;
 
 use App\Models\HomeLink;
 use App\Models\OrderTrackingLine;
-use Illuminate\Http\Response;
 
 class HomeController extends Controller
 {

@@ -8,7 +8,7 @@ use Illuminate\Database\Query\Builder;
 use Illuminate\Support\Collection;
 
 /**
- * App\Models\AccountSummary
+ * App\Models\AccountSummary.
  *
  * @mixin Eloquent
  */

@@ -6,7 +6,6 @@ use App\Models\Address;
 use App\Models\Countries;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Routing\Redirector;
-use Illuminate\Support\Facades\Input;
 
 class AddressController extends Controller
 {
@@ -67,6 +66,7 @@ class AddressController extends Controller
      * Show the form for editing the specified address.
      *
      * @param int $id
+     *
      * @return mixed
      */
     public function edit($id)
@@ -82,6 +82,7 @@ class AddressController extends Controller
      * Update the specified address in storage.
      *
      * @param $id
+     *
      * @return RedirectResponse
      */
     public function update($id): RedirectResponse
@@ -99,14 +100,16 @@ class AddressController extends Controller
      * Remove the specified address from storage.
      *
      * @param $id
-     * @return RedirectResponse
+     *
      * @throws \Exception
+     *
+     * @return RedirectResponse
      */
     public function destroy($id): RedirectResponse
     {
         $permission = Address::canEdit($id);
 
-        if (! $permission) {
+        if (!$permission) {
             return back()->with('error', 'You do not have permission to delete this address');
         }
 
@@ -116,7 +119,7 @@ class AddressController extends Controller
     }
 
     /**
-     * Set the address as the default for the customer
+     * Set the address as the default for the customer.
      *
      * @return RedirectResponse
      */
@@ -124,7 +127,7 @@ class AddressController extends Controller
     {
         $permission = Address::canEdit(request('id'));
 
-        if (! $permission) {
+        if (!$permission) {
             return back()->with('error', 'You do not have permission to edit this address');
         }
 
@@ -141,7 +144,7 @@ class AddressController extends Controller
         $address_id = request('id');
         $address = Address::details($address_id);
 
-        if (! $address) {
+        if (!$address) {
             return redirect(route('account.addresses'))->with('error', 'Address not found, please try again');
         }
 
@@ -160,34 +163,34 @@ class AddressController extends Controller
     {
         session([
             'address' => [
-                'address_id' => $address->id,
+                'address_id'      => $address->id,
                 'address_details' => [
                     'company_name' => $address->company_name,
-                    'address_2' => $address->address_line_2,
-                    'address_3' => $address->address_line_3,
-                    'address_4' => $address->address_line_4,
-                    'address_5' => $address->address_line_5,
-                    'postcode' => $address->post_code,
+                    'address_2'    => $address->address_line_2,
+                    'address_3'    => $address->address_line_3,
+                    'address_4'    => $address->address_line_4,
+                    'address_5'    => $address->address_line_5,
+                    'postcode'     => $address->post_code,
                 ],
             ],
         ]);
     }
 
     /**
-     * Perform validation on the address
+     * Perform validation on the address.
      *
      * @return mixed
      */
     public function validation()
     {
         return request()->validate([
-            'company_name' => 'required|min:2',
+            'company_name'   => 'required|min:2',
             'address_line_2' => 'required|min:2',
             'address_line_3' => 'required|min:2',
             'address_line_4' => 'nullable',
             'address_line_5' => 'nullable',
-            'country_id' => 'required|exists:countries,id',
-            'post_code' => 'required|min:3',
+            'country_id'     => 'required|exists:countries,id',
+            'post_code'      => 'required|min:3',
         ]);
     }
 }

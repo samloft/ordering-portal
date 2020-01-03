@@ -57,12 +57,13 @@ class LoginController extends Controller
      * not, log the user out displaying the message.
      *
      * @param Request $request
-     * @param User $user
+     * @param User    $user
+     *
      * @return RedirectResponse
      */
     protected function authenticated(Request $request, User $user): RedirectResponse
     {
-        if (! $user->customer) {
+        if (!$user->customer) {
             Session::remove('temp_customer');
 
             auth()->logout();

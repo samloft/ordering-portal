@@ -5,7 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Model;
 
 /**
- * App\Models\ExpectedStock
+ * App\Models\ExpectedStock.
  *
  * @mixin \Eloquent
  */
@@ -17,9 +17,10 @@ class ExpectedStock extends Model
     public $timestamps = false;
 
     /**
-     * Get all expected stock from the passed product code
+     * Get all expected stock from the passed product code.
      *
      * @param $product
+     *
      * @return mixed
      */
     public static function show($product)

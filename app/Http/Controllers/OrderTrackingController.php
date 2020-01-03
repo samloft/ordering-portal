@@ -31,6 +31,7 @@ class OrderTrackingController extends Controller
      * Show details for the given order number.
      *
      * @param $order_number
+     *
      * @return Factory|View
      */
     public function show($order_number)
@@ -41,12 +42,12 @@ class OrderTrackingController extends Controller
 
         foreach ($order->lines as $line) {
             $lines[] = [
-                'product' => trim($line->product),
+                'product'          => trim($line->product),
                 'long_description' => trim($line->long_description),
-                'line_qty' => trim($line->line_qty),
-                'net_price' => currency($line->net_price, 4),
-                'line_val' => currency($line->line_val, 2),
-                'purchasable' => $line->price ? true : false,
+                'line_qty'         => trim($line->line_qty),
+                'net_price'        => currency($line->net_price, 4),
+                'line_val'         => currency($line->line_val, 2),
+                'purchasable'      => $line->price ? true : false,
             ];
         }
 
@@ -66,7 +67,7 @@ class OrderTrackingController extends Controller
         $added_to_basket = Basket::store($order_lines);
 
         if ($added_to_basket) {
-            return redirect(route('basket'))->with('success', 'Order lines from order ' . decodeUrl($order_number) . ' have been added to your basket');
+            return redirect(route('basket'))->with('success', 'Order lines from order '.decodeUrl($order_number).' have been added to your basket');
         }
 
         return back()->with('error', 'An error occurred when copying this order to the basket, please try again');
@@ -79,6 +80,7 @@ class OrderTrackingController extends Controller
      * @param $order_number
      * @param $customer_order_number
      * @param bool $download
+     *
      * @return array
      */
     public function invoicePdf($order_number, $customer_order_number, $download = false): array
@@ -88,20 +90,20 @@ class OrderTrackingController extends Controller
         if (!$authorized) {
             return [
                 'pdf_exists' => false,
-                'error' => 'You do not have permission to view this invoice'
+                'error'      => 'You do not have permission to view this invoice',
             ];
         }
 
         $customer_code = urlencode(trim(auth()->user()->customer->customer_code));
 
-        $document_url = 'http://documents.scolmore.com/v1/dbwebq.exe?DbQCMD=LOGIN&DbQCMDNext=SEARCH&SID=36d4afe300&DbQuser=administrator&DbQPass=administrator&DOCID=' . env('V1_DOCID') . '&S0F=ARCH_USER&S0O=EQ&S0V=&S1F=ARCH_DATE&S1O=EQ&S1V=&S2F=DELIVERY_NOTE_NUMBER&S2O=EQ&S2V=' . $order_number . '&S3F=CUSTOMER_CODE&S3O=EQ&S3V=' . $customer_code . '&S4F=CUSTOMER_ORDER_NO&S4O=EQ&S4V=' . $customer_order_number;
+        $document_url = 'http://documents.scolmore.com/v1/dbwebq.exe?DbQCMD=LOGIN&DbQCMDNext=SEARCH&SID=36d4afe300&DbQuser=administrator&DbQPass=administrator&DOCID='.env('V1_DOCID').'&S0F=ARCH_USER&S0O=EQ&S0V=&S1F=ARCH_DATE&S1O=EQ&S1V=&S2F=DELIVERY_NOTE_NUMBER&S2O=EQ&S2V='.$order_number.'&S3F=CUSTOMER_CODE&S3O=EQ&S3V='.$customer_code.'&S4F=CUSTOMER_ORDER_NO&S4O=EQ&S4V='.$customer_order_number;
 
         $pdf_file = file_get_contents($document_url);
 
         if (preg_match('/^%PDF-1.4/', $pdf_file)) {
             if ($download) {
                 header('Content-type: application/pdf');
-                header('Content-disposition: attachment;filename='. str_replace('/', '_', urldecode($order_number) .'.pdf'));
+                header('Content-disposition: attachment;filename='.str_replace('/', '_', urldecode($order_number).'.pdf'));
 
                 echo $pdf_file;
             }

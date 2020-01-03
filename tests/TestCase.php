@@ -13,6 +13,7 @@ abstract class TestCase extends BaseTestCase
      * Create a user & sign them in.
      *
      * @param null $user
+     *
      * @return mixed|null
      */
     protected function signIn($user = null)

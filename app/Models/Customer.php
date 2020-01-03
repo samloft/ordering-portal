@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Model;
 
 /**
- * App\Models\Customer
+ * App\Models\Customer.
  *
  * @mixin Eloquent
  */
@@ -20,6 +20,7 @@ class Customer extends Model
      * Get customer details for the given customer code.
      *
      * @param $customer_code
+     *
      * @return Builder|Model|object|null
      */
     public static function show($customer_code)
@@ -31,13 +32,14 @@ class Customer extends Model
      * Autocomplete for customer input.
      *
      * @param $customer_search
+     *
      * @return \Illuminate\Http\JsonResponse|\Illuminate\Support\Collection
      */
     public static function autocomplete($customer_search)
     {
         if (auth()->user()->admin) {
             return self::select(['code', 'name'])
-                ->whereRaw('UPPER(code) like \'' . $customer_search . '%\'')
+                ->whereRaw('UPPER(code) like \''.$customer_search.'%\'')
                 ->orderBy('code')
                 ->limit(10)
                 ->get();

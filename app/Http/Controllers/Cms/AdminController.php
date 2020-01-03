@@ -2,10 +2,10 @@
 
 namespace App\Http\Controllers\Cms;
 
+use App\Http\Controllers\Controller;
 use App\Models\Admin;
 use App\Notifications\WelcomeAdminNotification;
 use Illuminate\Contracts\View\Factory;
-use App\Http\Controllers\Controller;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Support\Str;
@@ -13,7 +13,8 @@ use Illuminate\View\View;
 
 class AdminController extends Controller
 {
-    Use Notifiable;
+    use Notifiable;
+
     /**
      * Displays a paginated list of all admin CMS users.
      *
@@ -36,7 +37,7 @@ class AdminController extends Controller
         $this->validation();
 
         request()->merge([
-            'password' => bcrypt(Str::random(20))
+            'password' => bcrypt(Str::random(20)),
         ]);
 
         $admin = Admin::create(request()->all());
@@ -62,6 +63,7 @@ class AdminController extends Controller
      * Delete a admin CMS user by ID.
      *
      * @param $id
+     *
      * @return \Illuminate\Http\JsonResponse
      */
     public function destroy($id): JsonResponse
@@ -79,7 +81,7 @@ class AdminController extends Controller
     public function validation()
     {
         return request()->validate([
-            'name' => 'required',
+            'name'  => 'required',
             'email' => 'required|unique:cms_users,email',
         ]);
     }

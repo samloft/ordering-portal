@@ -2,8 +2,8 @@
 
 namespace Tests\Setup;
 
-use App\Models\User;
 use App\Models\Customer;
+use App\Models\User;
 use App\Models\UserCustomer;
 
 class UserFactory
@@ -31,6 +31,7 @@ class UserFactory
 
     /**
      * @param array $attributes
+     *
      * @return mixed
      */
     public function create($attributes = [])
@@ -44,11 +45,11 @@ class UserFactory
         if ($this->user_customers) {
             for ($count = 1; $count <= $this->user_customers; $count++) {
                 $customer = factory(Customer::class)->create([
-                    'code' => str_random(8)
+                    'code' => str_random(8),
                 ]);
 
                 factory(UserCustomer::class)->create([
-                    'user_id' => $user->id,
+                    'user_id'       => $user->id,
                     'customer_code' => $customer->code,
                 ]);
             }

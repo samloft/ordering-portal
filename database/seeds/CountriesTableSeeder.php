@@ -239,7 +239,7 @@ class CountriesTableSeeder extends Seeder
                 ['name' => 'YEMEN'],
                 ['name' => 'ZAMBIA'],
                 ['name' => 'ZIMBABWE'],
-                ['name' => 'NORTHERN IRELAND']
+                ['name' => 'NORTHERN IRELAND'],
             ]);
         } else {
             echo "\e[0;31;42mCounties table is not empty, not inserting\e[0m\n";

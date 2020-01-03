@@ -33,10 +33,10 @@ class AccountController extends Controller
     public function store(): RedirectResponse
     {
         $user = request()->validate([
-            'name' => 'required|min:2',
+            'name'      => 'required|min:2',
             'telephone' => 'nullable',
-            'mobile' => 'nullable',
-            'password' => 'sometimes|nullable|confirmed|min:6'
+            'mobile'    => 'nullable',
+            'password'  => 'sometimes|nullable|confirmed|min:6',
         ]);
 
         if ($user['password']) {
@@ -64,14 +64,14 @@ class AccountController extends Controller
         if (auth()->user()->admin !== 1) {
             $user_can_access = UserCustomer::check(request('customer'));
 
-            if (! $user_can_access) {
+            if (!$user_can_access) {
                 return abort(401);
             }
         }
 
         $customer = Customer::show(request('customer'));
 
-        if (! $customer) {
+        if (!$customer) {
             return back()->with('error', 'Customer code '.request('customer').' does not exist');
         }
 

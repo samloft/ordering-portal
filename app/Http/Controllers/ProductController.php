@@ -3,12 +3,9 @@
 namespace App\Http\Controllers;
 
 use App\Models\Category;
-use App\Models\ExpectedStock;
 use App\Models\HomeLink;
 use App\Models\Product;
-use App\models\ProductSpec;
 use Illuminate\Contracts\View\Factory;
-use Illuminate\Support\Facades\Input;
 use Illuminate\View\View;
 
 class ProductController extends Controller
@@ -17,11 +14,11 @@ class ProductController extends Controller
      * Product index, if categories are given, gets the sub categories.
      * If no sub categories for that level, display the products.
      *
-     * @param string $category_one [Optional]
-     * @param string $category_two [Optional]
+     * @param string $category_one   [Optional]
+     * @param string $category_two   [Optional]
      * @param string $category_three [Optional]
-     * @param string $category_four [Optional]
-     * @param string $category_five [Optional]
+     * @param string $category_four  [Optional]
+     * @param string $category_five  [Optional]
      *
      * @return Factory|View
      */
@@ -44,7 +41,7 @@ class ProductController extends Controller
 
         if ($categories['level_1'] !== null) {
             $products = Product::list($categories);
-            $sub_category_list['list'] = Category::subCategories($current_level, $categories['level_1'], $categories['level_' . $current_level]);
+            $sub_category_list['list'] = Category::subCategories($current_level, $categories['level_1'], $categories['level_'.$current_level]);
             $sub_category_list['current'] = $categories;
 
             return view('products.products', compact('categories', 'sub_category_list', 'products'));
@@ -59,6 +56,7 @@ class ProductController extends Controller
      * Product details page.
      *
      * @param $product_code
+     *
      * @return Factory|View
      */
     public function show($product_code)
@@ -79,7 +77,7 @@ class ProductController extends Controller
         if (isset($category_array[1]) && strpos($category_array[1], 'search') === 0) {
             $categories = [
                 'level_1' => 'search',
-                'query' => substr(decodeUrl($category_array[1]), 13)
+                'query'   => substr(decodeUrl($category_array[1]), 13),
             ];
         }
 
@@ -100,7 +98,7 @@ class ProductController extends Controller
 
         $categories = [
             'level_1' => 'search',
-            'query' => $search_term
+            'query'   => $search_term,
         ];
 
         return view('products.products', compact('products', 'categories', 'sub_category_list'));

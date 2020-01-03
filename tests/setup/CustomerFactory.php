@@ -8,6 +8,7 @@ class CustomerFactory
 {
     /**
      * @param array $attributes
+     *
      * @return mixed
      */
     public function create($attributes = [])

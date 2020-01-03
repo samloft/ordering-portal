@@ -11,7 +11,7 @@ $factory->define(Category::class, static function (Faker $faker) {
         'Category 2',
         'Category 3',
         'Category 4',
-        'Category 5'
+        'Category 5',
     ];
 
     return [

@@ -2,11 +2,11 @@
 
 namespace Tests\Feature;
 
+use Illuminate\Auth\Notifications\ResetPassword;
+use Illuminate\Foundation\Testing\RefreshDatabase;
+use Illuminate\Support\Facades\Notification;
 use Tests\Setup\UserFactory;
 use Tests\TestCase;
-use Illuminate\Foundation\Testing\RefreshDatabase;
-use Illuminate\Auth\Notifications\ResetPassword;
-use Illuminate\Support\Facades\Notification;
 
 class AuthTest extends TestCase
 {
@@ -36,7 +36,7 @@ class AuthTest extends TestCase
      */
     public function a_user_cannot_login_with_an_invalid_customer(): void
     {
-        $user = (new UserFactory)->create();
+        $user = (new UserFactory())->create();
 
         $this->signIn($user);
 
@@ -51,7 +51,7 @@ class AuthTest extends TestCase
      */
     public function a_user_can_login_with_a_valid_customer(): void
     {
-        $user = (new UserFactory)->withCustomer()->create();
+        $user = (new UserFactory())->withCustomer()->create();
 
         $this->signIn($user);
 
@@ -67,12 +67,12 @@ class AuthTest extends TestCase
      */
     public function a_user_can_remember_login(): void
     {
-        $user = (new UserFactory)->withCustomer()->create([
+        $user = (new UserFactory())->withCustomer()->create([
             'password' => bcrypt($password = 'password'),
         ]);
 
         $response = $this->post('/login', [
-            'email' => $user->email,
+            'email'    => $user->email,
             'password' => $password,
             'remember' => 'on',
         ]);
@@ -97,7 +97,7 @@ class AuthTest extends TestCase
 
         Notification::fake();
 
-        $user = (new UserFactory)->create();
+        $user = (new UserFactory())->create();
 
         $this->post('/password/email', [
             'email' => $user->email,

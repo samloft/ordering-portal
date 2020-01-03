@@ -2,14 +2,14 @@
 
 namespace App\Http\Controllers\Cms;
 
+use App\Http\Controllers\Controller;
+use App\Mail\Welcome;
 use App\Models\User;
-use Illuminate\Support\Facades\Mail;
-use Illuminate\Support\Str;
 use Illuminate\Contracts\View\Factory;
 use Illuminate\Http\JsonResponse;
-use App\Mail\Welcome;
-use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Password;
+use Illuminate\Support\Str;
 use Illuminate\View\View;
 
 class UserController extends Controller
@@ -37,8 +37,8 @@ class UserController extends Controller
         $this->validation();
 
         request()->merge([
-            'password' => bcrypt(Str::random(20)),
-            'api_token' => Str::random(60)
+            'password'  => bcrypt(Str::random(20)),
+            'api_token' => Str::random(60),
         ]);
 
         $user = User::create(request()->all());
@@ -64,6 +64,7 @@ class UserController extends Controller
      * Delete a user by ID.
      *
      * @param $id
+     *
      * @return \Illuminate\Http\JsonResponse
      */
     public function destroy($id): JsonResponse
@@ -94,8 +95,8 @@ class UserController extends Controller
     public function validation()
     {
         return request()->validate([
-            'name' => 'required',
-            'email' => 'required|unique:users,email',
+            'name'          => 'required',
+            'email'         => 'required|unique:users,email',
             'customer_code' => 'required|exists:customers,code',
         ]);
     }

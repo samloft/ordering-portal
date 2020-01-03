@@ -3,11 +3,11 @@
 namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
+use Auth;
 use Illuminate\Contracts\Auth\PasswordBroker;
 use Illuminate\Contracts\Auth\StatefulGuard;
-use Auth;
-use Password;
 use Illuminate\Foundation\Auth\SendsPasswordResetEmails;
+use Password;
 
 class AdminForgotPasswordController extends Controller
 {

@@ -1,8 +1,8 @@
 <?php
 
-use Illuminate\Support\Facades\Schema;
-use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
+use Illuminate\Database\Schema\Blueprint;
+use Illuminate\Support\Facades\Schema;
 
 class CreatePagesTable extends Migration
 {
@@ -21,27 +21,27 @@ class CreatePagesTable extends Migration
         });
 
         DB::table('pages')->insert([
-            'name' => 'terms-and-conditions',
+            'name'        => 'terms-and-conditions',
             'description' => 'Terms & Conditions will go here',
-            'created_at' => date('Y-m-d H:i:s'),
+            'created_at'  => date('Y-m-d H:i:s'),
         ]);
 
         DB::table('pages')->insert([
-            'name' => 'data-protection',
+            'name'        => 'data-protection',
             'description' => 'Data Protection will go here',
-            'created_at' => date('Y-m-d H:i:s'),
+            'created_at'  => date('Y-m-d H:i:s'),
         ]);
 
         DB::table('pages')->insert([
-            'name' => 'accessibility-policy',
+            'name'        => 'accessibility-policy',
             'description' => 'Accessibility Policy will go here',
-            'created_at' => date('Y-m-d H:i:s'),
+            'created_at'  => date('Y-m-d H:i:s'),
         ]);
 
         DB::table('pages')->insert([
-            'name' => 'contact',
+            'name'        => 'contact',
             'description' => json_encode([[
-                'name' => 'Site Development',
+                'name'  => 'Site Development',
                 'email' => 'sam@scolmore.com',
             ]]),
             'created_at' => date('Y-m-d H:i:s'),
