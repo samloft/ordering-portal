@@ -5,6 +5,7 @@ namespace App\Models;
 use Eloquent;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Support\Collection;
 
 /**
  * App\Models\Category.
@@ -16,6 +17,7 @@ class Category extends Model
     protected $primaryKey = 'product';
 
     public $incrementing = false;
+
     public $timestamps = false;
 
     /**
@@ -24,6 +26,15 @@ class Category extends Model
     public function prices(): HasMany
     {
         return $this->hasMany(Price::class, 'product', 'product');
+    }
+
+    /**
+     * @param $level
+     * @return \Illuminate\Support\Collection
+     */
+    public static function show($level): Collection
+    {
+        return self::select('level_'.$level)->where('level_'.$level, '!=', null)->groupBy('level_'.$level)->get();
     }
 
     /**
@@ -56,9 +67,9 @@ class Category extends Model
         foreach ($array as $key => $value) {
             $categories[] = [
                 'level' => 1,
-                'name'  => $key,
-                'url'   => encodeUrl($key),
-                'sub'   => [],
+                'name' => $key,
+                'url' => encodeUrl($key),
+                'sub' => [],
             ];
 
             end($categories);
@@ -68,9 +79,9 @@ class Category extends Model
                 if ($key1 !== '') {
                     $categories[$level_1]['sub'][] = [
                         'level' => 2,
-                        'name'  => $key1,
-                        'url'   => encodeUrl($key1),
-                        'sub'   => [],
+                        'name' => $key1,
+                        'url' => encodeUrl($key1),
+                        'sub' => [],
                     ];
                 }
 
@@ -81,8 +92,8 @@ class Category extends Model
                     if ($key2 !== '') {
                         $categories[$level_1]['sub'][$level_2]['sub'][] = [
                             'level' => 3,
-                            'name'  => $key2,
-                            'url'   => encodeUrl($key2),
+                            'name' => $key2,
+                            'url' => encodeUrl($key2),
                         ];
                     }
                 }
@@ -105,7 +116,9 @@ class Category extends Model
     {
         $sub_categories = [];
 
-        $subs = static::where('level_1', $main)->where('level_'.$level, $category)->whereHas('prices', static function ($query) {
+        $subs = static::where('level_1', $main)->where('level_'.$level, $category)->whereHas('prices', static function (
+            $query
+        ) {
             $query->where('customer_code', auth()->user()->customer->code);
         })->orderBy('level_'.$level)->orderBy('product')->get();
 
@@ -116,13 +129,13 @@ class Category extends Model
 
             if (isset($sub->$cat_level) && trim($sub->$cat_level) !== '') {
                 $products[] = [
-                    'product'      => encodeUrl($sub->product),
-                    'category'     => trim($sub->$cat_level),
+                    'product' => encodeUrl($sub->product),
+                    'category' => trim($sub->$cat_level),
                     'product_list' => [],
                 ];
 
                 $sub_categories[trim($sub->$cat_level)] = [
-                    'key'  => trim($sub->$cat_level),
+                    'key' => trim($sub->$cat_level),
                     'slug' => encodeUrl($sub->$cat_level),
                 ];
             }
@@ -143,5 +156,25 @@ class Category extends Model
         }
 
         return $sub_categories;
+    }
+
+    /**
+     * @param $level_1
+     * @param null $level_2
+     * @param null $level_3
+     *
+     * @return bool|\Illuminate\Support\Collection
+     */
+    public static function showLevels($level_1, $level_2 = null, $level_3 = null)
+    {
+        if ($level_1 && ! $level_2) {
+            return self::select('level_2')->where('level_1', $level_1)->groupBy('level_2')->get();
+        }
+
+        if ($level_2) {
+            return self::select('level_3')->where('level_1', $level_1)->where('level_2', $level_2)->groupBy('level_3')->get();
+        }
+
+        return false;
     }
 }

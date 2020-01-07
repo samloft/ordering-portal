@@ -111,7 +111,6 @@ class HomeLink extends Model
      *
      * @return bool|int|null
      * @throws Exception
-     *
      */
     public static function destroy($id)
     {

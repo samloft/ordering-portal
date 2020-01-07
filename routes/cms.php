@@ -1,5 +1,6 @@
 <?php
 
+use App\Models\Category;
 use App\Models\Customer;
 use App\Models\UserCustomer;
 
@@ -63,6 +64,11 @@ Route::group(['middleware' => 'auth:admin'], static function () {
         Route::get('/', 'Cms\HomeLinksController@index')->name('cms.home-links');
         Route::post('/', 'Cms\HomeLinksController@store')->name('cms.home-links.store');
         Route::patch('/update-positions', 'Cms\HomeLinksController@updatePositions')->name('cms.home-links.update');
+
+        Route::post('/categories/{level_1}/{level_2?}/{level_3?}', static function ($level_1, $level_2 = null, $level_3 = null) {
+            return Category::showLevels($level_1, $level_2, $level_3);
+        });
+
         Route::delete('{id}', 'Cms\HomeLinksController@destroy')->name('cms.home-links.delete');
 
         //Route::post('show', static function (Request $request) {

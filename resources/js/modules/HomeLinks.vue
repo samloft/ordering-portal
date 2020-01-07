@@ -51,12 +51,68 @@
                         <span v-text="errors.get('name')" class="text-sm text-red-600"/>
                     </div>
 
-                    <div class="mb-3">
-                        <label>Link Location <small class="italic text-gray-400">Without domain E.G /products/Click
-                            Smart/Module</small></label>
-                        <input class="bg-gray-100" v-model="linkData.url" placeholder="URL">
+                    <div class="relative mb-3">
+                        <label>URL <small>(Top Level)</small></label>
+                        <select @change="topSelected(linkData.topLevelValue)"
+                                class="p-2 rounded border bg-gray-100 text-gray-600 appearance-none"
+                                autocomplete="off"
+                                v-model="linkData.topLevelValue"
+                        >
+                            <option v-for="category in toplevel">{{ category.level_1 }}</option>
+                        </select>
+                        <div
+                            class="pointer-events-none absolute inset-y-0 right-0 flex items-center px-3 pt-6 text-gray-700">
+                            <svg class="fill-current h-4 w-4" xmlns="http://www.w3.org/2000/svg"
+                                 viewBox="0 0 20 20">
+                                <path
+                                    d="M9.293 12.95l.707.707L15.657 8l-1.414-1.414L10 10.828 5.757 6.586 4.343 8z"/>
+                            </svg>
+                        </div>
                         <span v-text="errors.get('url')" class="text-sm text-red-600"/>
                     </div>
+
+                    <div v-show="secondLevelValues" class="relative mb-3">
+                        <label>URL <small>(Second Level)</small></label>
+                        <select @change="secondSelected(linkData.topLevelValue, linkData.secondLevelValue)"
+                            class="p-2 rounded border bg-gray-100 text-gray-600 appearance-none"
+                            autocomplete="off"
+                        v-model="linkData.secondLevelValue">
+                            <option v-for="category in secondLevelValues">{{ category.level_2 }}</option>
+                        </select>
+                        <div
+                            class="pointer-events-none absolute inset-y-0 right-0 flex items-center px-3 pt-6 text-gray-700">
+                            <svg class="fill-current h-4 w-4" xmlns="http://www.w3.org/2000/svg"
+                                 viewBox="0 0 20 20">
+                                <path
+                                    d="M9.293 12.95l.707.707L15.657 8l-1.414-1.414L10 10.828 5.757 6.586 4.343 8z"/>
+                            </svg>
+                        </div>
+                    </div>
+
+                    <div v-show="thirdLevelValues" class="relative mb-3">
+                        <label>URL <small>(Third Level)</small></label>
+                        <select
+                            class="p-2 rounded border bg-gray-100 text-gray-600 appearance-none"
+                            autocomplete="off"
+                        v-model="linkData.thirdLevelValue">
+                            <option v-for="category in thirdLevelValues">{{ category.level_3 }}</option>
+                        </select>
+                        <div
+                            class="pointer-events-none absolute inset-y-0 right-0 flex items-center px-3 pt-6 text-gray-700">
+                            <svg class="fill-current h-4 w-4" xmlns="http://www.w3.org/2000/svg"
+                                 viewBox="0 0 20 20">
+                                <path
+                                    d="M9.293 12.95l.707.707L15.657 8l-1.414-1.414L10 10.828 5.757 6.586 4.343 8z"/>
+                            </svg>
+                        </div>
+                    </div>
+
+<!--                    <div class="mb-3">-->
+<!--                        <label>Link Location <small class="italic text-gray-400">Without domain E.G /products/Click-->
+<!--                            Smart/Module</small></label>-->
+<!--                        <input class="bg-gray-100" v-model="linkData.url" placeholder="URL">-->
+<!--                        <span v-text="errors.get('url')" class="text-sm text-red-600"/>-->
+<!--                    </div>-->
 
                     <div class="mb-3">
                         <label>Image File</label>
@@ -110,7 +166,10 @@
         components: {
             draggable
         },
-        props: ['list'],
+        props: {
+            list: Array,
+            toplevel: Array,
+        },
         data() {
             return {
                 errors: new Errors(),
@@ -119,7 +178,9 @@
                 dragging: false,
                 imageFile: null,
                 form: new FormData(),
-                categories: this.list
+                categories: this.list,
+                secondLevelValues: null,
+                thirdLevelValues: null,
             };
         },
         methods: {
@@ -129,9 +190,9 @@
                 });
 
                 axios.patch('/cms/home-links/update-positions', this.categories)
-                .catch(error => {
-                    Vue.swal('Error', 'Unable to update category positions, please try again', 'error');
-                });
+                    .catch(error => {
+                        Vue.swal('Error', 'Unable to update category positions, please try again', 'error');
+                    });
 
                 console.log(JSON.stringify(this.categories));
             },
@@ -147,11 +208,19 @@
                 this.linkData = {};
                 this.imageFile = null;
 
+                this.secondLevelValues = null;
+                this.thirdLevelValues = null;
+
                 this.newLink = true;
             },
             submit() {
                 this.form.append('name', this.linkData.name ? this.linkData.name : '');
-                this.form.append('url', this.linkData.url ? this.linkData.url : '');
+
+                var urlSegment = this.linkData.topLevelValue ? '/products/' + this.linkData.topLevelValue : '';
+                var urlSegment2 = this.linkData.secondLevelValue ? '/' + this.linkData.secondLevelValue : '';
+                var urlSegment3 = this.linkData.thirdLevelValue ? '/' + this.linkData.thirdLevelValue : '';
+
+                this.form.append('url', urlSegment + urlSegment2 + urlSegment3);
                 this.form.append('position', (this.categories.length + 1));
 
                 axios.post('/cms/home-links', this.form).then(response => {
@@ -182,6 +251,28 @@
                         })
                     }
                 });
+            },
+            topSelected(category) {
+                this.secondLevelValues = null;
+                this.linkData.secondLevelValue = '';
+                this.thirdLevelValues = null;
+                this.linkData.thirdLevelValue = '';
+
+                axios.post('/cms/home-links/categories/' + category).then(response => {
+                    this.secondLevelValues = response.data;
+                }).catch(error => {
+                    Vue.swal('Error', 'Unable to get categories', 'error');
+                })
+            },
+            secondSelected(category1, category2) {
+                this.thirdLevelValues = null;
+                this.linkData.thirdLevelValue = '';
+
+                axios.post('/cms/home-links/categories/' + category1 + '/' + category2).then(response => {
+                    this.thirdLevelValues = response.data;
+                }).catch(error => {
+                    Vue.swal('Error', 'Unable to get categories', 'error');
+                })
             }
         }
     };

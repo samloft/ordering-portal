@@ -13,7 +13,7 @@
                 </p>
             </div>
             <div class="w-3/4">
-                <home-links :list="{{ json_encode($categories->jsonSerialize(), true) }}"></home-links>
+                <home-links :topLevel="{{ json_encode($category_top_level, true) }}" :list="{{ json_encode($categories->jsonSerialize(), true) }}"></home-links>
             </div>
         </div>
     </div>

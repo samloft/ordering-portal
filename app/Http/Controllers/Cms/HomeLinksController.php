@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Cms;
 
 use App\Http\Controllers\Controller;
+use App\Models\Category;
 use App\Models\HomeLink;
 use Exception;
 use Illuminate\Contracts\View\Factory;
@@ -20,10 +21,11 @@ class HomeLinksController extends Controller
      */
     public function index()
     {
-        $adverts = HomeLink::adverts();
+        //$adverts = HomeLink::adverts();
+        $category_top_level = Category::show(1);
         $categories = HomeLink::categories();
 
-        return view('home-links.index', compact('adverts', 'categories'));
+        return view('home-links.index', compact('category_top_level', 'categories'));
     }
 
     /**

@@ -34,7 +34,7 @@ class AppServiceProvider extends ServiceProvider
             $view->with('company_details', json_decode(Cache::get('company_details'), true));
         });
 
-        view()->composer('home.categories', static function($view) {
+        view()->composer('home.categories', static function ($view) {
             $links = [
                 'categories' => HomeLink::categories(),
                 'adverts' => HomeLink::adverts(),

@@ -2,7 +2,6 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\HomeLink;
 use App\Models\OrderTrackingLine;
 
 class HomeController extends Controller
