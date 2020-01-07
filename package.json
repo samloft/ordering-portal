@@ -26,6 +26,7 @@
         "tailwindcss": "^1.1.4",
         "vue": "^2.6.11",
         "vue-flatpickr-component": "^8.1.5",
-        "vue-sweetalert2": "^2.1.5"
+        "vue-sweetalert2": "^2.1.5",
+        "vuedraggable": "^2.23.2"
     }
 }

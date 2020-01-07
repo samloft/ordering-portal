@@ -13,10 +13,6 @@ class HomeController extends Controller
     public function index()
     {
         $popular_products = OrderTrackingLine::popular();
-        //$links = [
-        //    'categories' => HomeLink::categories(),
-        //    'adverts' => HomeLink::adverts(),
-        //];
 
         return view('home.index', compact('popular_products'));
     }

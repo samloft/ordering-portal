@@ -4,6 +4,7 @@ namespace App\Providers;
 
 use App\Models\Category;
 use App\Models\GlobalSettings;
+use App\Models\HomeLink;
 use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\Schema;
 use Illuminate\Support\ServiceProvider;
@@ -31,6 +32,15 @@ class AppServiceProvider extends ServiceProvider
             }
 
             $view->with('company_details', json_decode(Cache::get('company_details'), true));
+        });
+
+        view()->composer('home.categories', static function($view) {
+            $links = [
+                'categories' => HomeLink::categories(),
+                'adverts' => HomeLink::adverts(),
+            ];
+
+            $view->with('links', $links);
         });
     }
 

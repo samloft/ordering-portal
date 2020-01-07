@@ -59,16 +59,16 @@ Route::group(['middleware' => 'auth:admin'], static function () {
         Route::delete('{id}', 'Cms\ContactController@destroy')->name('cms.contacts.show');
     });
 
-    //Route::group(['prefix' => 'home-links'], static function () {
-    //    Route::get('/', 'Cms\HomeLinksController@index')->name('cms.home-links');
-    //    Route::post('store', 'Cms\HomeLinksController@store')->name('cms.home-links.store');
-    //    Route::post('update', 'Cms\HomeLinksController@updatePositions')->name('cms.home-links.update');
-    //    Route::get('delete/{id}', 'Cms\HomeLinksController@destroy')->name('cms.home-links.delete');
-    //
-    //    Route::post('show', static function (Request $request) {
-    //        return HomeLink::show($request->id);
-    //    })->name('cms.home-links.show');
-    //});
+    Route::group(['prefix' => 'home-links'], static function () {
+        Route::get('/', 'Cms\HomeLinksController@index')->name('cms.home-links');
+        Route::post('/', 'Cms\HomeLinksController@store')->name('cms.home-links.store');
+        //Route::patch('/', 'Cms\HomeLinksController@updatePositions')->name('cms.home-links.update');
+        Route::delete('{id}', 'Cms\HomeLinksController@destroy')->name('cms.home-links.delete');
+
+        //Route::post('show', static function (Request $request) {
+        //    return HomeLink::show($request->id);
+        //})->name('cms.home-links.show');
+    });
 
     //Route::group(['prefix' => 'contacts'], static function () {
     //    Route::get('/', 'Cms\ContactController@index')->name('cms.contacts');

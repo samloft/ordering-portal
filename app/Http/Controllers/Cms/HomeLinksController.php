@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Models\HomeLink;
 use Exception;
 use Illuminate\Contracts\View\Factory;
+use Illuminate\Http\JsonResponse;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\View\View;
@@ -22,27 +23,38 @@ class HomeLinksController extends Controller
         $adverts = HomeLink::adverts();
         $categories = HomeLink::categories();
 
-        return view('cms.home-links.index', compact('adverts', 'categories'));
+        return view('home-links.index', compact('adverts', 'categories'));
     }
 
     /**
      * Create a new home link.
-     *
-     * @param Request $request
-     *
-     * @return RedirectResponse
      */
-    public function store(Request $request): RedirectResponse
+    public function store()
     {
-        if ($request->id) {
-            $store = HomeLink::edit($request);
+        request()->validate([
+            'name' => 'required',
+            'url' => 'required',
+            'file' => 'required|mimes:jpeg,jpg,png',
+        ]);
 
-            return $store ? back()->with('success', 'Home link has been updated') : back()->with('error', 'Unable to update home link, please try again');
+        //if (request()->id) {
+        //    $store = HomeLink::edit(request());
+        //
+        //    return $store ? back()->with('success', 'Home link has been updated') : back()->with('error', 'Unable to update home link, please try again');
+        //}
+
+        $home_link = HomeLink::store(request());
+
+        if ($home_link) {
+            return response()->json([
+                'created' => true,
+                'data' => $home_link
+            ]);
         }
 
-        $store = HomeLink::store($request);
-
-        return $store ? back()->with('success', 'New home link has been created') : back()->with('error', 'Unable to create new home link, please try again');
+        return response()->json([
+            'created' => false
+        ], 400);
     }
 
     /**
@@ -60,7 +72,7 @@ class HomeLinksController extends Controller
             $row = json_decode($item, true);
 
             $link_items[] = [
-                'id'       => (int) $row->id,
+                'id' => (int) $row->id,
                 'position' => $row->position,
             ];
         }
@@ -83,14 +95,20 @@ class HomeLinksController extends Controller
      *
      * @param $id
      *
+     * @return \Illuminate\Http\JsonResponse
      * @throws Exception
      *
-     * @return RedirectResponse
      */
-    public function destroy($id): RedirectResponse
+    public function destroy($id): JsonResponse
     {
-        $deleted = HomeLink::destroy($id);
+        if(HomeLink::destroy($id)) {
+            return response()->json([
+                'deleted' => true
+            ]);
+        }
 
-        return $deleted ? back()->with('success', 'Home link has been deleted') : back()->with('error', 'Unable to delete home link, please try again');
+        return response()->json([
+            'deleted' => false
+        ], 400);
     }
 }

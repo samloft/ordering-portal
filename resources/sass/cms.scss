@@ -69,3 +69,7 @@ body.modal-active {
     overflow-x: hidden;
     overflow-y: visible !important;
 }
+
+.ghost {
+    @apply .bg-gray-200 .border-2 .border-dotted .border-gray-600 .rounded;
+}

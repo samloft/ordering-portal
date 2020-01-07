@@ -17,6 +17,8 @@ use Storage;
  */
 class HomeLink extends Model
 {
+    protected $fillable = [];
+
     /**
      * Return row for the given ID.
      *
@@ -34,27 +36,26 @@ class HomeLink extends Model
      *
      * @param $request
      *
-     * @return bool
+     * @return \App\Models\HomeLink|bool
      */
-    public static function store($request): bool
+    public static function store($request)
     {
-        $stored = static::storeLinkImage($request->file('image'), $request->type, $request->name);
+        $stored = static::storeLinkImage($request->file('file'), 'link', $request->name);
 
         if (! $stored['status']) {
             return false;
         }
 
-        $data = [
-            'type'       => $request->type,
-            'name'       => $request->type.'-'.$request->name,
-            'link'       => $request->link,
-            'position'   => static::nextPosition($request->type),
-            'image'      => $stored['name'],
-            'created_at' => date('Y-m-d H:i:s'),
-            'updated_at' => date('Y-m-d H:i:s'),
-        ];
+        $category_link = new self;
 
-        return self::insert($data);
+        $category_link->type = 'link';
+        $category_link->name = 'link'.'-'.$request->name;
+        $category_link->link = $request->url;
+        $category_link->position = $request->position;
+        $category_link->image = $stored['name'];
+        $category_link->save();
+
+        return $category_link;
     }
 
     /**
@@ -67,7 +68,7 @@ class HomeLink extends Model
     public static function edit($request): bool
     {
         $data = [
-            'link'       => $request->link,
+            'link' => $request->link,
             'updated_at' => date('Y-m-d H:i:s'),
         ];
 
@@ -108,9 +109,9 @@ class HomeLink extends Model
      *
      * @param array|\Illuminate\Support\Collection|int $id
      *
+     * @return bool|int|null
      * @throws Exception
      *
-     * @return bool|int|null
      */
     public static function destroy($id)
     {
@@ -128,7 +129,7 @@ class HomeLink extends Model
      */
     public static function categories()
     {
-        return self::where('type', 'like', 'category%')->orderBy('position')->get();
+        return self::where('type', 'like', 'link%')->orderBy('position')->get();
     }
 
     /**
@@ -155,20 +156,5 @@ class HomeLink extends Model
         }
 
         return true;
-    }
-
-    /**
-     * Get the highest position for the given type and increment
-     * by 1 for the next position.
-     *
-     * @param $type
-     *
-     * @return HomeLink|Model|int|object|null
-     */
-    public static function nextPosition($type)
-    {
-        $max_position = static::select('position')->where('type', $type)->orderBy('position', 'desc')->first();
-
-        return $max_position ? ($max_position->position + 1) : 1;
     }
 }

@@ -67,9 +67,8 @@
             </h2>
 
             <div class="my-3">
-                <a href="#"
-                   class="mt-2 -mx-3 px-3 py-2 flex items-center justify-between text-sm font-medium text-gray-300 hover:bg-gray-200 hover:text-gray-700 rounded-lg"><span
-                        class="inline-flex">
+                <a href="{{ route('cms.home-links') }}" class="menu-item {{ activeMenu('cms.home-links') }}">
+                    <span class="inline-flex">
                         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"
                              class="h-6 w-6 fill-current text-gray-500 hover:text-gray-700">
                             <path
