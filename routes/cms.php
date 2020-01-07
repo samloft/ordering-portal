@@ -62,7 +62,7 @@ Route::group(['middleware' => 'auth:admin'], static function () {
     Route::group(['prefix' => 'home-links'], static function () {
         Route::get('/', 'Cms\HomeLinksController@index')->name('cms.home-links');
         Route::post('/', 'Cms\HomeLinksController@store')->name('cms.home-links.store');
-        //Route::patch('/', 'Cms\HomeLinksController@updatePositions')->name('cms.home-links.update');
+        Route::patch('/update-positions', 'Cms\HomeLinksController@updatePositions')->name('cms.home-links.update');
         Route::delete('{id}', 'Cms\HomeLinksController@destroy')->name('cms.home-links.delete');
 
         //Route::post('show', static function (Request $request) {

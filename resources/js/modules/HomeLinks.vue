@@ -128,6 +128,10 @@
                     item.position = key;
                 });
 
+                axios.patch('/cms/home-links/update-positions', this.categories)
+                .catch(error => {
+                    Vue.swal('Error', 'Unable to update category positions, please try again', 'error');
+                });
 
                 console.log(JSON.stringify(this.categories));
             },

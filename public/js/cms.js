@@ -2174,6 +2174,9 @@ function () {
       this.categories.forEach(function (item, key) {
         item.position = key;
       });
+      axios.patch('/cms/home-links/update-positions', this.categories)["catch"](function (error) {
+        Vue.swal('Error', 'Unable to update category positions, please try again', 'error');
+      });
       console.log(JSON.stringify(this.categories));
     },
     getImage: function getImage(image) {

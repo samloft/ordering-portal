@@ -37,57 +37,38 @@ class HomeLinksController extends Controller
             'file' => 'required|mimes:jpeg,jpg,png',
         ]);
 
-        //if (request()->id) {
-        //    $store = HomeLink::edit(request());
-        //
-        //    return $store ? back()->with('success', 'Home link has been updated') : back()->with('error', 'Unable to update home link, please try again');
-        //}
-
         $home_link = HomeLink::store(request());
 
         if ($home_link) {
             return response()->json([
                 'created' => true,
-                'data' => $home_link
+                'data' => $home_link,
             ]);
         }
 
         return response()->json([
-            'created' => false
+            'created' => false,
         ], 400);
     }
 
     /**
      * Take the list of items and update the position based on the ID.
      *
-     * @param Request $request
-     *
-     * @return array
+     * @return \Illuminate\Http\JsonResponse
      */
-    public function updatePositions(Request $request): array
+    public function updatePositions()
     {
-        $link_items = [];
+        $positions_updated = HomeLink::updatePositions(request()->all());
 
-        foreach ($request->items as $item) {
-            $row = json_decode($item, true);
-
-            $link_items[] = [
-                'id' => (int) $row->id,
-                'position' => $row->position,
-            ];
+        if ($positions_updated) {
+            return response()->json([
+                'updated' => true,
+            ]);
         }
 
-        if ($link_items) {
-            $positions = HomeLink::updatePositions($link_items);
-
-            return [
-                'success' => $positions,
-            ];
-        }
-
-        return [
-            'success' => false,
-        ];
+        return response()->json([
+            'updated' => false,
+        ], 400);
     }
 
     /**
@@ -101,14 +82,14 @@ class HomeLinksController extends Controller
      */
     public function destroy($id): JsonResponse
     {
-        if(HomeLink::destroy($id)) {
+        if (HomeLink::destroy($id)) {
             return response()->json([
-                'deleted' => true
+                'deleted' => true,
             ]);
         }
 
         return response()->json([
-            'deleted' => false
+            'deleted' => false,
         ], 400);
     }
 }
