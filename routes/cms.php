@@ -70,18 +70,11 @@ Route::group(['middleware' => 'auth:admin'], static function () {
         });
 
         Route::delete('{id}', 'Cms\HomeLinksController@destroy')->name('cms.home-links.delete');
-
-        //Route::post('show', static function (Request $request) {
-        //    return HomeLink::show($request->id);
-        //})->name('cms.home-links.show');
     });
 
-    //Route::group(['prefix' => 'contacts'], static function () {
-    //    Route::get('/', 'Cms\ContactController@index')->name('cms.contacts');
-    //    Route::post('/', 'Cms\ContactController@store')->name('cms.contacts.store');
-    //    Route::get('view/{id}', 'Cms\ContactController@show')->name('cms.contacts.show');
-    //    Route::get('delete/{id}', 'Cms\ContactController@destroy')->name('cms.contacts.delete');
-    //});
+    Route::group(['prefix' => 'discounts'], static function() {
+        Route::get('/', 'Cms\DiscountsController@index')->name('cms.discounts');
+    });
 
     Route::group(['prefix' => 'product-images'], static function () {
         Route::get('/', 'Cms\ProductImageController@index')->name('cms.product-images');

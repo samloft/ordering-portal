@@ -17,8 +17,6 @@
 
 <div id="app" class="flex flex-col min-h-screen w-full">
 
-    @include('cookieConsent::index')
-
     @include('layout.header')
 
     @include('layout.navigation')

@@ -8,8 +8,6 @@ use App\Models\HomeLink;
 use Exception;
 use Illuminate\Contracts\View\Factory;
 use Illuminate\Http\JsonResponse;
-use Illuminate\Http\RedirectResponse;
-use Illuminate\Http\Request;
 use Illuminate\View\View;
 
 class HomeLinksController extends Controller
@@ -80,7 +78,6 @@ class HomeLinksController extends Controller
      *
      * @return \Illuminate\Http\JsonResponse
      * @throws Exception
-     *
      */
     public function destroy($id): JsonResponse
     {

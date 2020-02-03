@@ -107,13 +107,6 @@
                         </div>
                     </div>
 
-<!--                    <div class="mb-3">-->
-<!--                        <label>Link Location <small class="italic text-gray-400">Without domain E.G /products/Click-->
-<!--                            Smart/Module</small></label>-->
-<!--                        <input class="bg-gray-100" v-model="linkData.url" placeholder="URL">-->
-<!--                        <span v-text="errors.get('url')" class="text-sm text-red-600"/>-->
-<!--                    </div>-->
-
                     <div class="mb-3">
                         <label>Image File</label>
                         <label

@@ -43,7 +43,8 @@
                     </span>
                 </a>
 
-                <a href="{{ route('cms.company-information') }}" class="menu-item {{ activeMenu('cms.company-information') }}">
+                <a href="{{ route('cms.company-information') }}"
+                   class="menu-item {{ activeMenu('cms.company-information') }}">
                     <span class="inline-flex">
                         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
                             <path
@@ -79,18 +80,17 @@
                 <a href="" class="menu-item">
                     <span class="inline-flex">
                         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
-                            <path d="M20 6a2 2 0 0 1 2 2v10a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V6c0-1.1.9-2 2-2h7.41l2 2H20zM4 6v12h16V8h-7.41l-2-2H4zm9 6h2a1 1 0 0 1 0 2h-2v2a1 1 0 0 1-2 0v-2H9a1 1 0 0 1 0-2h2v-2a1 1 0 0 1 2 0v2z"/></svg>
+                            <path
+                                d="M20 6a2 2 0 0 1 2 2v10a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V6c0-1.1.9-2 2-2h7.41l2 2H20zM4 6v12h16V8h-7.41l-2-2H4zm9 6h2a1 1 0 0 1 0 2h-2v2a1 1 0 0 1-2 0v-2H9a1 1 0 0 1 0-2h2v-2a1 1 0 0 1 2 0v2z"/></svg>
                         <span class="menu-title">Small Order Charge</span>
                     </span>
                 </a>
-                <a href="#"
-                   class="mt-2 -mx-3 px-3 py-2 flex items-center justify-between text-sm font-medium text-gray-300 hover:bg-gray-200 hover:text-gray-700 rounded-lg"><span
-                        class="inline-flex">
-                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"
-                             class="h-6 w-6 fill-current text-gray-500 hover:text-gray-700">
+                <a href="{{ route('cms.discounts') }}" class="menu-item {{ activeMenu('cms.discounts') }}">
+                    <span class="inline-flex">
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
                             <path
                                 d="M12 22a10 10 0 1 1 0-20 10 10 0 0 1 0 20zm0-2a8 8 0 1 0 0-16 8 8 0 0 0 0 16zm1-11v2h1a3 3 0 0 1 0 6h-1v1a1 1 0 0 1-2 0v-1H8a1 1 0 0 1 0-2h3v-2h-1a3 3 0 0 1 0-6h1V6a1 1 0 0 1 2 0v1h3a1 1 0 0 1 0 2h-3zm-2 0h-1a1 1 0 1 0 0 2h1V9zm2 6h1a1 1 0 0 0 0-2h-1v2z"/></svg>
-                        <span class="ml-2">Discounts</span>
+                        <span class="menu-title">Discounts</span>
                     </span>
                 </a>
                 <a href="#"
