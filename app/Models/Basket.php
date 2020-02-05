@@ -56,7 +56,7 @@ class Basket extends Model
                                                     basket.quantity as quantity, price, break1, price1, break2, price2,
                                                     break3, price3, name, uom, not_sold, stock')
             ->where('basket.customer_code', auth()->user()->customer->code)
-            ->where('user_id', auth()->user()->id)
+            ->where('basket.user_id', auth()->user()->id)
             ->join('prices', 'basket.product', '=', 'prices.product')
             ->where('prices.customer_code', auth()->user()->customer->code)
             ->join('products', 'basket.product', '=', 'products.code')
@@ -130,7 +130,7 @@ class Basket extends Model
             ],
             'line_count' => count($product_lines),
             'lines'      => $product_lines,
-            'potential_saving' => array_search(true, array_column($product_lines, 'potential_saving'), true) > 0,
+            'potential_saving' => in_array(true, array_column($product_lines, 'potential_saving'), false),
         ];
     }
 
@@ -177,7 +177,7 @@ class Basket extends Model
      */
     public static function exists($product_code)
     {
-        return self::where('customer_code', auth()->user()->customer->code)->where('product', $product_code)->first();
+        return self::where('customer_code', auth()->user()->customer->code)->where('user_id', auth()->user()->id)->where('product', $product_code)->first();
     }
 
     /**
@@ -189,7 +189,7 @@ class Basket extends Model
      */
     public static function clear()
     {
-        return self::where('customer_code', auth()->user()->customer->code)->delete();
+        return self::where('customer_code', auth()->user()->customer->code)->where('user_id', auth()->user()->id)->delete();
     }
 
     /**
