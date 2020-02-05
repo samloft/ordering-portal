@@ -6,6 +6,8 @@
 
 @section('content')
     <form method="POST" action="{{ route('password.update') }}">
+        @csrf
+
         <div class="input-group">
             <label for="email">{{ __('Email address') }}</label>
             <input type="email" id="email" class="form-input" name="email" value="{{ $email ?? old('email') }}"
@@ -18,8 +20,8 @@
         </div>
 
         <div class="input-group">
-            <label for="email">{{ __('Confirm password') }}</label>
-            <input type="email" id="email" class="form-input" name="password_confirmation" autocomplete="off" required>
+            <label for="confirm_password">{{ __('Confirm password') }}</label>
+            <input type="password" id="confirm_password" class="form-input" name="password_confirmation" autocomplete="off" required>
         </div>
 
         <button type="submit" class="button button-primary button-block">
