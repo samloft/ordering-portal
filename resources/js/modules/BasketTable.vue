@@ -1,5 +1,26 @@
 <template>
     <div>
+        <div v-if="potential_saving">
+            <div class="alert alert-warning" role="alert">
+                <div class="alert-body">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" class="alert-icon">
+                        <path class="primary" d="M12 2a10 10 0 1 1 0 20 10 10 0 0 1 0-20z"></path>
+                        <path class="secondary"
+                              d="M11 12a1 1 0 0 1 0-2h2a1 1 0 0 1 .96 1.27L12.33 17H13a1 1 0 0 1 0 2h-2a1 1 0 0 1-.96-1.27L11.67 12H11zm2-4a1.5 1.5 0 1 1 0-3 1.5 1.5 0 0 1 0 3z"></path>
+                    </svg>
+                    <div>
+                        <p class="alert-title">You have some potential savings, please review them below.</p>
+
+                        <ul class="mt-4 text-gray-600">
+                            <li v-for="product in items" v-if="product.potential_saving">
+                                {{ product.product }} - Add <span class="font-semibold">{{ product.next_bulk.qty_away }}</span> more for a potential saving of <span class="font-semibold">{{ product.next_bulk.saving }}</span>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+
         <table class="mb-5" v-if="(items.length > 0)">
             <thead>
             <tr>
@@ -33,8 +54,10 @@
                            @keyup.enter="updateProduct(product.product, product.quantity)"
                            autocomplete="off">
                     <div class="leading-none text-primary">
-                        <small class="cursor-pointer hover:underline" @click="updateProduct(product.product, product.quantity)">Update</small>
-                        <small class="cursor-pointer hover:underline" @click="removeProduct(product.product)">Remove</small>
+                        <small class="cursor-pointer hover:underline"
+                               @click="updateProduct(product.product, product.quantity)">Update</small>
+                        <small class="cursor-pointer hover:underline"
+                               @click="removeProduct(product.product)">Remove</small>
                     </div>
                 </td>
                 <td class="text-right">{{ product.price }}</td>
@@ -65,7 +88,8 @@
     export default {
         data() {
             return {
-                items: {}
+                items: {},
+                potential_saving: false,
             }
         },
         props: {
@@ -106,7 +130,7 @@
                     }
                 });
             },
-            updateProduct: function(product, quantity) {
+            updateProduct: function (product, quantity) {
                 if (!Number.isInteger(parseInt(quantity))) {
                     return Vue.swal('Error', 'Quantity must be a number, please fix this error and try again.', 'error');
                 }
@@ -114,24 +138,25 @@
                 axios.post('/basket/update-product', {
                     product: product,
                     qty: quantity
-                }).then(function() {
+                }).then(function () {
                     window.location.reload();
-                }).catch(function() {
+                }).catch(function () {
                     Vue.swal('Error', 'Unable to update product, please try again', 'error');
                 })
             },
-            removeProduct: function(product) {
+            removeProduct: function (product) {
                 axios.post('/basket/delete-product', {
                     product: product
-                }).then(function() {
+                }).then(function () {
                     window.location.reload();
-                }).catch(function() {
+                }).catch(function () {
                     Vue.swal('Error', 'Could not remove that product, please try again', 'error');
                 })
             }
         },
         mounted() {
-            this.items = this.products;
+            this.items = this.products.lines;
+            this.potential_saving = this.products.potential_saving;
 
             Event.$on('product-added', data => {
                 this.items = data.basket_details.lines;

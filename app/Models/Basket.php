@@ -69,15 +69,23 @@ class Basket extends Model
             switch (true) {
                 case ($line->quantity >= $line->break3) && ($line->price3 > 0):
                     $net_price = $line->price3;
+                    $next_bulk_qty = null;
+                    $next_bulk_saving = null;
                     break;
                 case ($line->quantity >= $line->break2) && ($line->price2 > 0):
                     $net_price = $line->price2;
+                    $next_bulk_qty = ($line->quantity >= ($line->break3 * 0.25)) ? ($line->break3 - $line->quantity) : null;
+                    $next_bulk_saving = $net_price - $line->price3;
                     break;
                 case ($line->quantity >= $line->break1) && ($line->price1 > 0):
                     $net_price = $line->price1;
+                    $next_bulk_qty = ($line->quantity >= ($line->break2 * 0.25)) ? ($line->break2 - $line->quantity) : null;
+                    $next_bulk_saving = $net_price - $line->price2;
                     break;
                 default:
+                    $next_bulk_qty = ($line->quantity >= ($line->break1 * 0.25)) ? ($line->break1 - $line->quantity) : null;
                     $net_price = $line->price;
+                    $next_bulk_saving = $net_price - $line->price1;
             }
 
             $goods_total += (discount($net_price) * $line->quantity);
@@ -97,9 +105,14 @@ class Basket extends Model
                 'image'      => $image,
                 'quantity'   => $line->quantity,
                 'discount'   => 2,
-                'net_price'  => discount($net_price),
+                'net_price'  => number_format(discount($net_price), 4),
                 'price'      => currency(discount($net_price) * $line->quantity, 2),
                 'unit_price' => currency(discount($net_price)),
+                'next_bulk'  => [
+                    'qty_away' => $next_bulk_qty,
+                    'saving' => currency($next_bulk_qty + $line->quantity * $next_bulk_saving, 2),
+                ],
+                'potential_saving' => $next_bulk_qty > 0,
             ];
         }
 
@@ -116,6 +129,7 @@ class Basket extends Model
             ],
             'line_count' => count($product_lines),
             'lines'      => $product_lines,
+            'potential_saving' => array_search(true, array_column($product_lines, 'potential_saving'), true) > 0,
         ];
     }
 

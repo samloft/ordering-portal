@@ -57,3 +57,15 @@
         @apply .text-blue-500;
     }
 }
+
+.alert-warning {
+    @apply .bg-yellow-100 .border-yellow-500 .text-yellow-500;
+
+    .primary {
+        @apply .text-yellow-200;
+    }
+
+    .secondary {
+        @apply .text-yellow-500;
+    }
+}

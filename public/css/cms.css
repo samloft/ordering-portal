@@ -13357,6 +13357,20 @@ body {
   color: #4299e1;
 }
 
+.alert-warning {
+  background-color: #fffff0;
+  border-color: #ecc94b;
+  color: #ecc94b;
+}
+
+.alert-warning .primary {
+  color: #fefcbf;
+}
+
+.alert-warning .secondary {
+  color: #ecc94b;
+}
+
 .auth .input-group {
   margin-bottom: 1.5rem;
 }

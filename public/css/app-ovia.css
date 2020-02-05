@@ -13943,6 +13943,20 @@ select {
   color: #4299e1;
 }
 
+.alert-warning {
+  background-color: #fffff0;
+  border-color: #ecc94b;
+  color: #ecc94b;
+}
+
+.alert-warning .primary {
+  color: #fefcbf;
+}
+
+.alert-warning .secondary {
+  color: #ecc94b;
+}
+
 table {
   border-radius: 0.25rem;
   width: 100%;

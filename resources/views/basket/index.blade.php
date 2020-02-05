@@ -14,7 +14,7 @@
 
     <div class="flex items-start justify-end mb-5">
         <div class="w-8/12">
-            <basket-table :products="{{ json_encode($basket['lines'], true) }}"></basket-table>
+            <basket-table :products="{{ json_encode($basket, true) }}"></basket-table>
         </div>
 
         <div class="w-4/12 ml-10">

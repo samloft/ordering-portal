@@ -2245,10 +2245,34 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
-      items: {}
+      items: {},
+      potential_saving: false
     };
   },
   props: {
@@ -2316,7 +2340,8 @@ __webpack_require__.r(__webpack_exports__);
   mounted: function mounted() {
     var _this = this;
 
-    this.items = this.products;
+    this.items = this.products.lines;
+    this.potential_saving = this.products.potential_saving;
     Event.$on('product-added', function (data) {
       _this.items = data.basket_details.lines;
 
@@ -10959,6 +10984,75 @@ var render = function() {
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
   return _c("div", [
+    _vm.potential_saving
+      ? _c("div", [
+          _c(
+            "div",
+            { staticClass: "alert alert-warning", attrs: { role: "alert" } },
+            [
+              _c("div", { staticClass: "alert-body" }, [
+                _c(
+                  "svg",
+                  {
+                    staticClass: "alert-icon",
+                    attrs: {
+                      xmlns: "http://www.w3.org/2000/svg",
+                      viewBox: "0 0 24 24"
+                    }
+                  },
+                  [
+                    _c("path", {
+                      staticClass: "primary",
+                      attrs: { d: "M12 2a10 10 0 1 1 0 20 10 10 0 0 1 0-20z" }
+                    }),
+                    _vm._v(" "),
+                    _c("path", {
+                      staticClass: "secondary",
+                      attrs: {
+                        d:
+                          "M11 12a1 1 0 0 1 0-2h2a1 1 0 0 1 .96 1.27L12.33 17H13a1 1 0 0 1 0 2h-2a1 1 0 0 1-.96-1.27L11.67 12H11zm2-4a1.5 1.5 0 1 1 0-3 1.5 1.5 0 0 1 0 3z"
+                      }
+                    })
+                  ]
+                ),
+                _vm._v(" "),
+                _c("div", [
+                  _c("p", { staticClass: "alert-title" }, [
+                    _vm._v(
+                      "You have some potential savings, please review them below."
+                    )
+                  ]),
+                  _vm._v(" "),
+                  _c(
+                    "ul",
+                    { staticClass: "mt-4 text-gray-600" },
+                    _vm._l(_vm.items, function(product) {
+                      return product.potential_saving
+                        ? _c("li", [
+                            _vm._v(
+                              "\n                            " +
+                                _vm._s(product.product) +
+                                " - Add "
+                            ),
+                            _c("span", { staticClass: "font-semibold" }, [
+                              _vm._v(_vm._s(product.next_bulk.qty_away))
+                            ]),
+                            _vm._v(" more for a potential saving of "),
+                            _c("span", { staticClass: "font-semibold" }, [
+                              _vm._v(_vm._s(product.next_bulk.saving))
+                            ])
+                          ])
+                        : _vm._e()
+                    }),
+                    0
+                  )
+                ])
+              ])
+            ]
+          )
+        ])
+      : _vm._e(),
+    _vm._v(" "),
     _vm.items.length > 0
       ? _c("table", { staticClass: "mb-5" }, [
           _vm._m(0),
