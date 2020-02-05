@@ -74,6 +74,7 @@ Route::group(['middleware' => 'auth:admin'], static function () {
 
     Route::group(['prefix' => 'discounts'], static function() {
         Route::get('/', 'Cms\DiscountsController@index')->name('cms.discounts');
+        Route::post('/', 'Cms\DiscountsController@globalStore')->name('cms.discounts.global-store');
     });
 
     Route::group(['prefix' => 'product-images'], static function () {
