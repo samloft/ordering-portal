@@ -38,8 +38,12 @@ class Handler extends ExceptionHandler
      *
      * @return void
      */
-    public function report(Exception $exception)
+    public function report(Exception $exception): void
     {
+        if (app()->bound('sentry') && $this->shouldReport($exception) && config('app.env') !== 'local') {
+            app('sentry')->captureException($exception);
+        }
+
         parent::report($exception);
     }
 
@@ -49,7 +53,7 @@ class Handler extends ExceptionHandler
      * @param \Illuminate\Http\Request $request
      * @param \Exception               $exception
      *
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Http\JsonResponse|\Illuminate\Http\Response
      */
     public function render($request, Exception $exception)
     {
@@ -64,6 +68,12 @@ class Handler extends ExceptionHandler
         return parent::render($request, $exception);
     }
 
+    /**
+     * @param \Illuminate\Http\Request $request
+     * @param \Illuminate\Auth\AuthenticationException $exception
+     *
+     * @return \Illuminate\Http\JsonResponse|\Illuminate\Http\RedirectResponse|\Symfony\Component\HttpFoundation\Response
+     */
     protected function unauthenticated($request, AuthenticationException $exception)
     {
         $sub_domain = Arr::first(explode('.', request()->getHost()));
