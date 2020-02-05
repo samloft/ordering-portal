@@ -75,16 +75,16 @@ class Basket extends Model
                     break;
                 case ($line->quantity >= $line->break2) && ($line->price2 > 0):
                     $net_price = $line->price2;
-                    $next_bulk_qty = ($line->quantity >= ($line->break3 * 0.25)) ? ($line->break3 - $line->quantity) : null;
+                    $next_bulk_qty = ($line->quantity >= ($line->break3 * 0.75)) ? ($line->break3 - $line->quantity) : null;
                     $next_bulk_saving = $net_price - $line->price3;
                     break;
                 case ($line->quantity >= $line->break1) && ($line->price1 > 0):
                     $net_price = $line->price1;
-                    $next_bulk_qty = ($line->quantity >= ($line->break2 * 0.25)) ? ($line->break2 - $line->quantity) : null;
+                    $next_bulk_qty = ($line->quantity >= ($line->break2 * 0.75)) ? ($line->break2 - $line->quantity) : null;
                     $next_bulk_saving = $net_price - $line->price2;
                     break;
                 default:
-                    $next_bulk_qty = ($line->quantity >= ($line->break1 * 0.25)) ? ($line->break1 - $line->quantity) : null;
+                    $next_bulk_qty = ($line->quantity >= ($line->break1 * 0.75)) ? ($line->break1 - $line->quantity) : null;
                     $net_price = $line->price;
                     $next_bulk_saving = $net_price - $line->price1;
             }
