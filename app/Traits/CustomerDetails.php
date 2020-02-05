@@ -19,10 +19,6 @@ trait CustomerDetails
             return $this->current_customer;
         }
 
-        if (Session::get('temp_customer')) {
-            return $this->current_customer = Customer::where('code', Session::get('temp_customer'))->first();
-        }
-
-        return $this->current_customer = Customer::where('code', auth()->user()->customer_code)->first();
+        return $this->current_customer = Customer::where('code', Session::get('temp_customer') ?: auth()->user()->customer_code)->with('discount')->first();
     }
 }

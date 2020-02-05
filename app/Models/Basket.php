@@ -97,7 +97,7 @@ class Basket extends Model
                 'image'      => $image,
                 'quantity'   => $line->quantity,
                 'discount'   => 2,
-                'net_price'  => $net_price,
+                'net_price'  => discount($net_price),
                 'price'      => currency(discount($net_price) * $line->quantity, 2),
                 'unit_price' => currency(discount($net_price)),
             ];

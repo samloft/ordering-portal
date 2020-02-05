@@ -2173,13 +2173,6 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
 //
 //
 //
-//
-//
-//
-//
-//
-//
-//
 
 
 var Errors =
@@ -11072,7 +11065,7 @@ var render = function() {
               }
             }
           },
-          [_vm._v("\n                New Category Home Link\n            ")]
+          [_vm._v("\n            New Category Home Link\n        ")]
         )
       ]),
       _vm._v(" "),

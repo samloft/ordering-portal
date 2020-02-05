@@ -27,7 +27,7 @@
                 </td>
                 <td><span class="badge badge-info">{{ product.uom.charAt(0).toUpperCase() + product.uom.substring(1).toLowerCase() }}</span>
                 </td>
-                <td class="text-right">{{ product.unit_price }}</td>
+                <td class="text-right">{{ product.net_price }}</td>
                 <td class="text-center">
                     <input name="line_qty" class="w-20 h-6 text-right bg-gray-100" v-model="product.quantity"
                            @keyup.enter="updateProduct(product.product, product.quantity)"

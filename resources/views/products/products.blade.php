@@ -65,7 +65,7 @@
                                     {{ __('Unit Price:') }}
                                 </div>
                                 <div class="col text-right">
-                                    {{ currency($product->price, 4) }}
+                                    {{ currency($product->prices->price, 4) }}
                                 </div>
                             </div>
                             <div class="flex justify-between">
@@ -73,7 +73,7 @@
                                     {{ __('Discount:') }}
                                 </div>
                                 <div class="col text-right">
-                                    {{ __('2%') }}
+                                    {{ discountPercent() }}
                                 </div>
                             </div>
                             <hr>
@@ -82,7 +82,7 @@
                                     <strong>{{ __('Net Price:') }}</strong>
                                 </div>
                                 <div class="col text-right">
-                                    <strong>{{ currency(($product->price * ((100 - 2) / 100)), 4) }}</strong>
+                                    <strong>{{ currency(discount($product->prices->price), 4) }}</strong>
                                 </div>
                             </div>
                             <hr>

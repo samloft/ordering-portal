@@ -75,10 +75,8 @@ class Product extends Model
     public static function list($categories)
     {
         return self::whereHas('prices')->whereHas('categories', static function ($query) use ($categories) {
-            $query->where('level_1', $categories['level_1'])
-                ->where('level_2', $categories['level_2'])
-                ->where('level_3', $categories['level_3']);
-        })->join('prices', 'products.code', '=', 'prices.product')->where('prices.customer_code', auth()->user()->customer->code)->paginate(10);
+            $query->where('level_1', $categories['level_1'])->where('level_2', $categories['level_2'])->where('level_3', $categories['level_3']);
+        })->with('prices')->paginate(10);
     }
 
     /**
@@ -90,18 +88,7 @@ class Product extends Model
      */
     public static function show($product_code)
     {
-        return self::select([
-            'products.code',
-            'name',
-            'description',
-            'uom',
-            'price',
-            'trade_price',
-            'stock',
-            'order_multiples',
-        ])->whereHas('prices')->where('products.code', $product_code)->leftJoin('prices', 'prices.product', 'products.code')
-            ->with('expectedStock')
-            ->first();
+        return self::where('code', $product_code)->whereHas('prices')->with(['prices', 'expectedStock'])->first();
     }
 
     /**
@@ -113,11 +100,9 @@ class Product extends Model
      */
     public static function search($search_term)
     {
-        return self::whereHas('prices')->where(static function ($query) use ($search_term) {
+        return self::where(static function ($query) use ($search_term) {
             $query->whereRaw('upper(products.code) LIKE \'%'.strtoupper($search_term).'%\'')->orWhereRaw('upper(name) LIKE \'%'.strtoupper($search_term).'%\'')->orWhereRaw('upper(description) LIKE \'%'.strtoupper($search_term).'%\'');
-        })->join('prices', 'products.code', '=', 'prices.product')
-            ->where('prices.customer_code', auth()->user()->customer->code)
-            ->paginate(10);
+        })->whereHas('prices')->paginate(10);
     }
 
     /**
@@ -146,8 +131,8 @@ class Product extends Model
 
             return response()->json([
                 'product_code' => $product_details->code,
-                'description'  => $product_details->name,
-                'image_file'   => $image_check['found'] ? asset($image_check['image']) : null,
+                'description' => $product_details->name,
+                'image_file' => $image_check['found'] ? asset($image_check['image']) : null,
             ]);
         }
 

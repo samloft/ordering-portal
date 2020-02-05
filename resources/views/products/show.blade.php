@@ -75,24 +75,28 @@
                             {{ __('Unit Price:') }}
                         </div>
                         <div class="col text-right">
-                            {{ currency($product->price, 4) }}
+                            {{ currency($product->prices->price, 4) }}
                         </div>
                     </div>
-                    <div class="flex justify-between">
-                        <div class="col text-left">
-                            {{ __('Discount:') }}
+
+                    @if((int) discountPercent() > 0)
+                        <div class="flex justify-between">
+                            <div class="col text-left">
+                                {{ __('Discount:') }}
+                            </div>
+                            <div class="col text-right">
+                                {{ discountPercent() }}
+                            </div>
                         </div>
-                        <div class="col text-right">
-                            {{ __('2%') }}
-                        </div>
-                    </div>
+                    @endif
+
                     <hr>
                     <div class="flex justify-between mt-1 mb-1">
                         <div class="col text-left">
                             <strong>{{ __('Net Price:') }}</strong>
                         </div>
                         <div class="col text-right">
-                            <strong>{{ currency(($product->price * ((100 - 2) / 100)), 4) }}</strong>
+                            <strong>{{ currency(discount($product->prices->price), 4) }}</strong>
                         </div>
                     </div>
                     <hr>

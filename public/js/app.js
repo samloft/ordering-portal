@@ -11014,7 +11014,7 @@ var render = function() {
                   ]),
                   _vm._v(" "),
                   _c("td", { staticClass: "text-right" }, [
-                    _vm._v(_vm._s(product.unit_price))
+                    _vm._v(_vm._s(product.net_price))
                   ]),
                   _vm._v(" "),
                   _c("td", { staticClass: "text-center" }, [
