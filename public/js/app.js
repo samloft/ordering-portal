@@ -2047,7 +2047,8 @@ __webpack_require__.r(__webpack_exports__);
       product: {},
       products: {},
       basketValue: 'Checking...',
-      basketItems: 0
+      basketItems: 0,
+      dropdown_message: ''
     };
   },
   methods: {
@@ -2089,6 +2090,15 @@ __webpack_require__.r(__webpack_exports__);
 
     var self = this;
     Event.$on('product-added', function (data) {
+      _this2.dropdown_message = 'Has been added to your basket';
+
+      _this2.dropdownBasket(data);
+
+      _this2.basketSummary();
+    });
+    Event.$on('product-updated', function (data) {
+      _this2.dropdown_message = 'Has been updated';
+
       _this2.dropdownBasket(data);
 
       _this2.basketSummary();
@@ -2268,11 +2278,26 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
       items: {},
-      potential_saving: false
+      potential_saving: false,
+      potential_saving_total: 0
     };
   },
   props: {
@@ -2314,18 +2339,18 @@ __webpack_require__.r(__webpack_exports__);
       });
     },
     updateProduct: function updateProduct(product, quantity) {
-      if (!Number.isInteger(parseInt(quantity))) {
-        return Vue.swal('Error', 'Quantity must be a number, please fix this error and try again.', 'error');
-      }
-
-      axios.post('/basket/update-product', {
-        product: product,
-        qty: quantity
-      }).then(function () {
-        window.location.reload();
-      })["catch"](function () {
-        Vue.swal('Error', 'Unable to update product, please try again', 'error');
-      });
+      App.addProductToBasket(product, quantity, true); // if (!Number.isInteger(parseInt(quantity))) {
+      //     return Vue.swal('Error', 'Quantity must be a number, please fix this error and try again.', 'error');
+      // }
+      //
+      // axios.post('/basket/update-product', {
+      //     product: product,
+      //     qty: quantity
+      // }).then(function () {
+      //     window.location.reload();
+      // }).catch(function () {
+      //     Vue.swal('Error', 'Unable to update product, please try again', 'error');
+      // })
     },
     removeProduct: function removeProduct(product) {
       axios.post('/basket/delete-product', {
@@ -2335,6 +2360,14 @@ __webpack_require__.r(__webpack_exports__);
       })["catch"](function () {
         Vue.swal('Error', 'Could not remove that product, please try again', 'error');
       });
+    },
+    allSavings: function allSavings() {
+      self = this;
+      this.items.forEach(function (product) {
+        if (product.potential_saving) {
+          self.updateProduct(product.product, product.next_bulk.qty_away + product.quantity);
+        }
+      });
     }
   },
   mounted: function mounted() {
@@ -2342,8 +2375,15 @@ __webpack_require__.r(__webpack_exports__);
 
     this.items = this.products.lines;
     this.potential_saving = this.products.potential_saving;
+    this.potential_saving_total = this.products.potential_saving_total;
     Event.$on('product-added', function (data) {
       _this.items = data.basket_details.lines;
+
+      _this.$forceUpdate();
+    });
+    Event.$on('product-updated', function (data) {
+      _this.items = data.basket_details.lines;
+      _this.potential_saving = data.basket_details.potential_saving;
 
       _this.$forceUpdate();
     });
@@ -10888,9 +10928,10 @@ var render = function() {
                 ])
               ]),
               _vm._v(" "),
-              _c("div", { staticClass: "basket-dropdown-message" }, [
-                _vm._v("Has been added to your basket")
-              ])
+              _c("div", {
+                staticClass: "basket-dropdown-message",
+                domProps: { textContent: _vm._s(_vm.dropdown_message) }
+              })
             ]
           )
         ])
@@ -11016,32 +11057,87 @@ var render = function() {
                   ]
                 ),
                 _vm._v(" "),
-                _c("div", [
-                  _c("p", { staticClass: "alert-title" }, [
-                    _vm._v(
-                      "You have some potential savings, please review them below."
-                    )
-                  ]),
+                _c("div", { staticClass: "w-full" }, [
+                  _c(
+                    "div",
+                    { staticClass: "flex justify-between items-center" },
+                    [
+                      _c("div", { staticClass: "alert-title" }, [
+                        _vm._v(
+                          "You have some savings, please review them below."
+                        )
+                      ]),
+                      _vm._v(" "),
+                      _c(
+                        "button",
+                        {
+                          staticClass:
+                            "bg-gray-700 p-2 text-white font-light tracking-wider rounded-lg hover:opacity-75 text-xs",
+                          on: {
+                            click: function($event) {
+                              return _vm.allSavings()
+                            }
+                          }
+                        },
+                        [
+                          _vm._v(
+                            "\n                            Action all savings of " +
+                              _vm._s(_vm.potential_saving_total) +
+                              "\n                        "
+                          )
+                        ]
+                      )
+                    ]
+                  ),
                   _vm._v(" "),
                   _c(
-                    "ul",
+                    "div",
                     { staticClass: "mt-4 text-gray-600" },
                     _vm._l(_vm.items, function(product) {
                       return product.potential_saving
-                        ? _c("li", [
-                            _vm._v(
-                              "\n                            " +
-                                _vm._s(product.product) +
-                                " - Add "
-                            ),
-                            _c("span", { staticClass: "font-semibold" }, [
-                              _vm._v(_vm._s(product.next_bulk.qty_away))
-                            ]),
-                            _vm._v(" more for a potential saving of "),
-                            _c("span", { staticClass: "font-semibold" }, [
-                              _vm._v(_vm._s(product.next_bulk.saving))
-                            ])
-                          ])
+                        ? _c(
+                            "div",
+                            {
+                              staticClass:
+                                "flex justify-between items-center mb-2"
+                            },
+                            [
+                              _c("div", [
+                                _vm._v(_vm._s(product.product) + " - Add "),
+                                _c("span", { staticClass: "font-semibold" }, [
+                                  _vm._v(_vm._s(product.next_bulk.qty_away))
+                                ]),
+                                _vm._v(
+                                  "\n                                more for a saving of "
+                                ),
+                                _c("span", { staticClass: "font-semibold" }, [
+                                  _vm._v(_vm._s(product.next_bulk.saving))
+                                ])
+                              ]),
+                              _vm._v(" "),
+                              _c(
+                                "button",
+                                {
+                                  staticClass:
+                                    "bg-gray-700 p-1 text-white font-light tracking-wider rounded-lg hover:opacity-75 text-xs",
+                                  on: {
+                                    click: function($event) {
+                                      _vm.updateProduct(
+                                        product.product,
+                                        product.next_bulk.qty_away +
+                                          product.quantity
+                                      )
+                                    }
+                                  }
+                                },
+                                [
+                                  _vm._v(
+                                    "\n                                Action saving\n                            "
+                                  )
+                                ]
+                              )
+                            ]
+                          )
                         : _vm._e()
                     }),
                     0
@@ -24357,15 +24453,22 @@ window.App = new Vue({
   },
   methods: {
     addProductToBasket: function addProductToBasket(product, quantity) {
+      var update = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : false;
       return axios.post('/basket/add-product', {
         product: product,
-        quantity: quantity
+        quantity: quantity,
+        update: update
       }).then(function (response) {
         if (response.data.message) {
           Vue.swal('Warning', response.data.message, 'warning');
         }
 
-        Event.$emit('product-added', response.data);
+        if (update) {
+          Event.$emit('product-updated', response.data);
+        } else {
+          Event.$emit('product-added', response.data);
+        }
+
         return true;
       })["catch"](function (error) {
         if (error.response) {

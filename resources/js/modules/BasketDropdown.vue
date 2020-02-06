@@ -48,7 +48,7 @@
                         </div>
                     </div>
 
-                    <div class="basket-dropdown-message">Has been added to your basket</div>
+                    <div class="basket-dropdown-message" v-text="dropdown_message"></div>
                 </div>
             </div>
         </div>
@@ -64,7 +64,8 @@
                 product: {},
                 products: {},
                 basketValue: 'Checking...',
-                basketItems: 0
+                basketItems: 0,
+                dropdown_message: '',
             }
         },
         methods: {
@@ -110,6 +111,13 @@
             var self = this;
 
             Event.$on('product-added', data => {
+                this.dropdown_message = 'Has been added to your basket';
+                this.dropdownBasket(data);
+                this.basketSummary();
+            });
+
+            Event.$on('product-updated', data => {
+                this.dropdown_message = 'Has been updated';
                 this.dropdownBasket(data);
                 this.basketSummary();
             });

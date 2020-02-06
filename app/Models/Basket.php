@@ -63,6 +63,7 @@ class Basket extends Model
             ->get();
 
         $goods_total = 0;
+        $potential_saving_total = 0;
         $product_lines = [];
 
         foreach ($lines as $line) {
@@ -115,6 +116,8 @@ class Basket extends Model
                 ],
                 'potential_saving' => $next_bulk_qty > 0,
             ];
+
+            $potential_saving_total += $next_bulk_qty + $line->quantity * $next_bulk_saving;
         }
 
         $small_order_charge = SmallOrderCharge::value($goods_total, $country);
@@ -131,6 +134,7 @@ class Basket extends Model
             'line_count' => count($product_lines),
             'lines'      => $product_lines,
             'potential_saving' => in_array(true, array_column($product_lines, 'potential_saving'), false),
+            'potential_saving_total' => currency($potential_saving_total, 2),
         ];
     }
 
@@ -138,10 +142,11 @@ class Basket extends Model
      * Add array of order lines into customers basket.
      *
      * @param $order_lines
+     * @param bool $update
      *
      * @return mixed
      */
-    public static function store($order_lines)
+    public static function store($order_lines, $update = false)
     {
         $user_id = auth()->user()->id;
         $customer_code = auth()->user()->customer->code;
@@ -158,7 +163,11 @@ class Basket extends Model
                 if ($product) {
                     $basket_quantity = $product->quantity;
 
-                    self::where('product', $line['product'])->update(['quantity' => $basket_quantity + $line['quantity']]);
+                    if ($update) {
+                        self::where('product', $line['product'])->update(['quantity' => $line['quantity']]);
+                    } else {
+                        self::where('product', $line['product'])->update(['quantity' => $basket_quantity + $line['quantity']]);
+                    }
                 } else {
                     self::insert($line);
                 }

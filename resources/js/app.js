@@ -31,17 +31,22 @@ window.App = new Vue({
         document.head.appendChild(viewportMeta);
     },
     methods: {
-        addProductToBasket: function (product, quantity) {
+        addProductToBasket: function (product, quantity, update = false) {
             return axios.post('/basket/add-product', {
                 product: product,
-                quantity: quantity
+                quantity: quantity,
+                update: update,
             })
                 .then(function (response) {
                     if (response.data.message) {
                         Vue.swal('Warning', response.data.message, 'warning');
                     }
 
-                    Event.$emit('product-added', response.data);
+                    if (update) {
+                        Event.$emit('product-updated', response.data);
+                    } else {
+                        Event.$emit('product-added', response.data);
+                    }
 
                     return true;
                 })

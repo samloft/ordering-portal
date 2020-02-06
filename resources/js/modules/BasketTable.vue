@@ -8,14 +8,28 @@
                         <path class="secondary"
                               d="M11 12a1 1 0 0 1 0-2h2a1 1 0 0 1 .96 1.27L12.33 17H13a1 1 0 0 1 0 2h-2a1 1 0 0 1-.96-1.27L11.67 12H11zm2-4a1.5 1.5 0 1 1 0-3 1.5 1.5 0 0 1 0 3z"></path>
                     </svg>
-                    <div>
-                        <p class="alert-title">You have some potential savings, please review them below.</p>
+                    <div class="w-full">
+                        <div class="flex justify-between items-center">
+                            <div class="alert-title">You have some savings, please review them below.</div>
+                            <button @click="allSavings()"
+                                class="bg-gray-700 p-2 text-white font-light tracking-wider rounded-lg hover:opacity-75 text-xs">
+                                Action all savings of {{ potential_saving_total }}
+                            </button>
+                        </div>
 
-                        <ul class="mt-4 text-gray-600">
-                            <li v-for="product in items" v-if="product.potential_saving">
-                                {{ product.product }} - Add <span class="font-semibold">{{ product.next_bulk.qty_away }}</span> more for a potential saving of <span class="font-semibold">{{ product.next_bulk.saving }}</span>
-                            </li>
-                        </ul>
+                        <div class="mt-4 text-gray-600">
+                            <div v-for="product in items" v-if="product.potential_saving"
+                                 class="flex justify-between items-center mb-2">
+                                <div>{{ product.product }} - Add <span class="font-semibold">{{ product.next_bulk.qty_away }}</span>
+                                    more for a saving of <span
+                                        class="font-semibold">{{ product.next_bulk.saving }}</span></div>
+                                <button
+                                    @click="updateProduct(product.product, (product.next_bulk.qty_away + product.quantity))"
+                                    class="bg-gray-700 p-1 text-white font-light tracking-wider rounded-lg hover:opacity-75 text-xs">
+                                    Action saving
+                                </button>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -90,6 +104,7 @@
             return {
                 items: {},
                 potential_saving: false,
+                potential_saving_total: 0,
             }
         },
         props: {
@@ -131,18 +146,19 @@
                 });
             },
             updateProduct: function (product, quantity) {
-                if (!Number.isInteger(parseInt(quantity))) {
-                    return Vue.swal('Error', 'Quantity must be a number, please fix this error and try again.', 'error');
-                }
-
-                axios.post('/basket/update-product', {
-                    product: product,
-                    qty: quantity
-                }).then(function () {
-                    window.location.reload();
-                }).catch(function () {
-                    Vue.swal('Error', 'Unable to update product, please try again', 'error');
-                })
+                App.addProductToBasket(product, quantity, true);
+                // if (!Number.isInteger(parseInt(quantity))) {
+                //     return Vue.swal('Error', 'Quantity must be a number, please fix this error and try again.', 'error');
+                // }
+                //
+                // axios.post('/basket/update-product', {
+                //     product: product,
+                //     qty: quantity
+                // }).then(function () {
+                //     window.location.reload();
+                // }).catch(function () {
+                //     Vue.swal('Error', 'Unable to update product, please try again', 'error');
+                // })
             },
             removeProduct: function (product) {
                 axios.post('/basket/delete-product', {
@@ -152,14 +168,31 @@
                 }).catch(function () {
                     Vue.swal('Error', 'Could not remove that product, please try again', 'error');
                 })
+            },
+            allSavings: function () {
+                self = this;
+
+                this.items.forEach(function(product) {
+                    if (product.potential_saving) {
+                        self.updateProduct(product.product, (product.next_bulk.qty_away + product.quantity))
+                    }
+                });
             }
         },
         mounted() {
             this.items = this.products.lines;
             this.potential_saving = this.products.potential_saving;
+            this.potential_saving_total = this.products.potential_saving_total;
 
             Event.$on('product-added', data => {
                 this.items = data.basket_details.lines;
+
+                this.$forceUpdate()
+            });
+
+            Event.$on('product-updated', data => {
+                this.items = data.basket_details.lines;
+                this.potential_saving = data.basket_details.potential_saving;
 
                 this.$forceUpdate()
             });
