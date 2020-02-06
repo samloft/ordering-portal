@@ -57,6 +57,10 @@
             Event.$on('product-added', data => {
                 this.updateSummary(data);
             });
+
+            Event.$on('product-updated', data => {
+                this.updateSummary(data);
+            });
         }
     }
 </script>

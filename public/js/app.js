@@ -2178,6 +2178,9 @@ __webpack_require__.r(__webpack_exports__);
     Event.$on('product-added', function (data) {
       _this.updateSummary(data);
     });
+    Event.$on('product-updated', function (data) {
+      _this.updateSummary(data);
+    });
   }
 });
 
@@ -2339,18 +2342,7 @@ __webpack_require__.r(__webpack_exports__);
       });
     },
     updateProduct: function updateProduct(product, quantity) {
-      App.addProductToBasket(product, quantity, true); // if (!Number.isInteger(parseInt(quantity))) {
-      //     return Vue.swal('Error', 'Quantity must be a number, please fix this error and try again.', 'error');
-      // }
-      //
-      // axios.post('/basket/update-product', {
-      //     product: product,
-      //     qty: quantity
-      // }).then(function () {
-      //     window.location.reload();
-      // }).catch(function () {
-      //     Vue.swal('Error', 'Unable to update product, please try again', 'error');
-      // })
+      App.addProductToBasket(product, quantity, true);
     },
     removeProduct: function removeProduct(product) {
       axios.post('/basket/delete-product', {
