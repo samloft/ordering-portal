@@ -13,7 +13,7 @@
                             <div class="alert-title">You have some savings, please review them below.</div>
                             <button @click="allSavings()"
                                 class="bg-gray-700 p-2 text-white font-light tracking-wider rounded-lg hover:opacity-75 text-xs">
-                                Action all savings of {{ potential_saving_total }}
+                                Action all savings of <span v-text="potential_saving_total"/>
                             </button>
                         </div>
 
@@ -174,6 +174,8 @@
 
             Event.$on('product-added', data => {
                 this.items = data.basket_details.lines;
+                this.potential_saving = data.basket_details.potential_saving;
+                this.potential_saving_total = data.basket_details.potential_saving_total;
 
                 this.$forceUpdate()
             });
@@ -181,6 +183,7 @@
             Event.$on('product-updated', data => {
                 this.items = data.basket_details.lines;
                 this.potential_saving = data.basket_details.potential_saving;
+                this.potential_saving_total = data.basket_details.potential_saving_total;
 
                 this.$forceUpdate()
             });

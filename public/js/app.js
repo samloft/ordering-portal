@@ -2370,12 +2370,15 @@ __webpack_require__.r(__webpack_exports__);
     this.potential_saving_total = this.products.potential_saving_total;
     Event.$on('product-added', function (data) {
       _this.items = data.basket_details.lines;
+      _this.potential_saving = data.basket_details.potential_saving;
+      _this.potential_saving_total = data.basket_details.potential_saving_total;
 
       _this.$forceUpdate();
     });
     Event.$on('product-updated', function (data) {
       _this.items = data.basket_details.lines;
       _this.potential_saving = data.basket_details.potential_saving;
+      _this.potential_saving_total = data.basket_details.potential_saving_total;
 
       _this.$forceUpdate();
     });
@@ -11073,10 +11076,13 @@ var render = function() {
                         },
                         [
                           _vm._v(
-                            "\n                            Action all savings of " +
-                              _vm._s(_vm.potential_saving_total) +
-                              "\n                        "
-                          )
+                            "\n                            Action all savings of "
+                          ),
+                          _c("span", {
+                            domProps: {
+                              textContent: _vm._s(_vm.potential_saving_total)
+                            }
+                          })
                         ]
                       )
                     ]

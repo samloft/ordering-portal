@@ -117,7 +117,9 @@ class Basket extends Model
                 'potential_saving' => $next_bulk_qty > 0,
             ];
 
-            $potential_saving_total += $next_bulk_qty + $line->quantity * $next_bulk_saving;
+            if ($next_bulk_qty > 0) {
+                $potential_saving_total += $next_bulk_qty + $line->quantity * $next_bulk_saving;
+            }
         }
 
         $small_order_charge = SmallOrderCharge::value($goods_total, $country);
