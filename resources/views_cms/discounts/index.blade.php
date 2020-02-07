@@ -40,29 +40,7 @@
                 </p>
             </div>
             <div class="w-3/4">
-                <table class="w-full text-md bg-white shadow-md rounded mb-4">
-                    <tbody>
-                    <tr class="text-left border-b bg-gray-300 uppercase text-sm tracking-widest">
-                        <th class="font-semibold p-2 px-5">{{ __('Customer Code') }}</th>
-                        <th class="font-semibold p-2 px-5">{{ __('Customer Name') }}</th>
-                        <th class="font-semibold p-2 px-5">{{ __('Discount Percent') }}</th>
-                        <th></th>
-                    </tr>
-                    <tr class="border-b hover:bg-gray-100">
-                        <td class="p-1 px-5">SCO100</td>
-                        <td class="p-1 px-5">SCOLMORE SAMPLE ACCOUNT</td>
-                        <td class="p-1 px-5">
-                            <span class="badge badge-info">1.2%</span>
-                        </td>
-                        <td class="p-1 px-5 flex justify-end">
-                            <button type="button"
-                                    class="button bg-gray-700 text-white text-xs w-20">
-                                {{ __('Edit') }}
-                            </button>
-                        </td>
-                    </tr>
-                    </tbody>
-                </table>
+                <customer-discounts :discounts="{{ json_encode($customer_discounts, true) }}"></customer-discounts>
             </div>
         </div>
     </div>

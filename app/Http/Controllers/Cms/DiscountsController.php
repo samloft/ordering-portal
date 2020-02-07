@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Cms;
 
 use App\Http\Controllers\Controller;
+use App\Models\CustomerDiscount;
 use App\Models\GlobalSettings;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Support\Facades\Cache;
@@ -15,8 +16,28 @@ class DiscountsController extends Controller
     public function index()
     {
         $global_discount = GlobalSettings::discount();
+        $customer_discounts = CustomerDiscount::show();
 
-        return view('discounts.index', compact('global_discount'));
+        return view('discounts.index', compact('global_discount', 'customer_discounts'));
+    }
+
+    /**
+     * @return bool|\Illuminate\Database\Eloquent\Builder|\Illuminate\Database\Eloquent\Model|object|void|null
+     */
+    public function store()
+    {
+        if (request('id')) {
+            request()->validate([
+                'percent' => 'required|numeric|gt:-1|lt:10',
+            ]);
+        } else {
+            request()->validate([
+                'customer_code' => 'unique:customer_discounts|exists:customers,code',
+                'percent' => 'required|numeric|gt:-1|lt:10',
+            ]);
+        }
+
+        return CustomerDiscount::store(request('customer_code'), request('percent'), request('id'));
     }
 
     /**
@@ -42,5 +63,13 @@ class DiscountsController extends Controller
         }
 
         return back()->with('error', 'Unable to update the global discount, please try again');
+    }
+
+    /**
+     * @return mixed
+     */
+    public function destroy()
+    {
+        return CustomerDiscount::where('id', request('id'))->delete();
     }
 }

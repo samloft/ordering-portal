@@ -14,6 +14,7 @@ class CreateCustomerDiscountsTable extends Migration
     public function up(): void
     {
         Schema::create('customer_discounts', static function (Blueprint $table) {
+            $table->bigIncrements('id');
             $table->string('customer_code');
             $table->float('percent');
             $table->timestamps();

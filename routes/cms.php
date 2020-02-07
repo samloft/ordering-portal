@@ -75,6 +75,8 @@ Route::group(['middleware' => 'auth:admin'], static function () {
     Route::group(['prefix' => 'discounts'], static function() {
         Route::get('/', 'Cms\DiscountsController@index')->name('cms.discounts');
         Route::post('/', 'Cms\DiscountsController@globalStore')->name('cms.discounts.global-store');
+        Route::post('customer', 'Cms\DiscountsController@store')->name('cms.discounts.customer-store');
+        Route::delete('customer/{id}', 'Cms\DiscountsController@destroy')->name('cms.discounts.customer-destroy');
     });
 
     Route::group(['prefix' => 'product-images'], static function () {
