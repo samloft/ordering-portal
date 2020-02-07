@@ -22,8 +22,20 @@ class GlobalSettings extends Model
      */
     public static function discount()
     {
-        return Cache::rememberForever('discount', static function() {
+        return Cache::rememberForever('discount', static function () {
             return self::where('key', 'discount')->first()->value;
+        });
+    }
+
+    /**
+     * Get the rules surrounding small order charges.
+     *
+     * @return mixed
+     */
+    public static function smallOrderCharge()
+    {
+        return Cache::rememberForever('small-order-charge', static function () {
+            return self::where('key', 'small-order-charge')->first()->value;
         });
     }
 }

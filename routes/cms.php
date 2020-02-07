@@ -65,14 +65,23 @@ Route::group(['middleware' => 'auth:admin'], static function () {
         Route::post('/', 'Cms\HomeLinksController@store')->name('cms.home-links.store');
         Route::patch('/update-positions', 'Cms\HomeLinksController@updatePositions')->name('cms.home-links.update');
 
-        Route::post('/categories/{level_1}/{level_2?}/{level_3?}', static function ($level_1, $level_2 = null, $level_3 = null) {
+        Route::post('/categories/{level_1}/{level_2?}/{level_3?}', static function (
+            $level_1,
+            $level_2 = null,
+            $level_3 = null
+        ) {
             return Category::showLevels($level_1, $level_2, $level_3);
         });
 
         Route::delete('{id}', 'Cms\HomeLinksController@destroy')->name('cms.home-links.delete');
     });
 
-    Route::group(['prefix' => 'discounts'], static function() {
+    Route::group(['prefix' => 'small-order'], static function () {
+        Route::get('/', 'Cms\SmallOrderChargeController@index')->name('cms.small-order');
+        Route::post('/', 'Cms\SmallOrderChargeController@update')->name('cms.small-order.update');
+    });
+
+    Route::group(['prefix' => 'discounts'], static function () {
         Route::get('/', 'Cms\DiscountsController@index')->name('cms.discounts');
         Route::post('/', 'Cms\DiscountsController@globalStore')->name('cms.discounts.global-store');
         Route::post('customer', 'Cms\DiscountsController@store')->name('cms.discounts.customer-store');
