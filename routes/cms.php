@@ -88,6 +88,10 @@ Route::group(['middleware' => 'auth:admin'], static function () {
         Route::delete('customer/{id}', 'Cms\DiscountsController@destroy')->name('cms.discounts.customer-destroy');
     });
 
+    Route::group(['prefix' => 'delivery-methods'], static function () {
+        Route::get('/', 'Cms\DeliveryMethodsController@index')->name('cms.delivery-methods');
+    });
+
     Route::group(['prefix' => 'product-images'], static function () {
         Route::get('/', 'Cms\ProductImageController@index')->name('cms.product-images');
         Route::get('missing', 'Cms\ProductImageController@missingImages')->name('cms.product-images.missing');
