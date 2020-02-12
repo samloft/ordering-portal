@@ -12,6 +12,8 @@
                     The small order charge is when an order is placed below an order threshold value of your choosing.
                 </p>
 
+                <hr class="mt-5">
+
                 <p class="text-gray-600 text-sm mt-3">
                     <span class="block font-semibold">Order Threshold</span> The value the small order charge will kick
                     it if
@@ -65,11 +67,11 @@
                                     name="exclude_delivery_charges"
                                     autocomplete="off">
                                 <option
-                                    value="1" {{ $small_order_rules['exclude_on_charge_delivery'] ? '' : 'selected' }}>
+                                    value="1" {{ $small_order_rules['exclude_on_charge_delivery'] === '1' ? '' : 'selected' }}>
                                     Yes
                                 </option>
                                 <option
-                                    value="0" {{ $small_order_rules['exclude_on_charge_delivery'] ? 'selected' : '' }}>
+                                    value="0" {{ $small_order_rules['exclude_on_charge_delivery'] === '0' ? 'selected' : '' }}>
                                     No
                                 </option>
                             </select>
@@ -89,10 +91,10 @@
                             <select class="mt-1 p-2 rounded border bg-gray-100 text-gray-600 appearance-none"
                                     name="exclude_collection"
                                     autocomplete="off">
-                                <option value="1" {{ $small_order_rules['exclude_on_collection'] ? '' : 'selected' }}>
+                                <option value="1" {{ $small_order_rules['exclude_on_collection'] === '1' ? '' : 'selected' }}>
                                     Yes
                                 </option>
-                                <option value="0" {{ $small_order_rules['exclude_on_collection'] ? 'selected' : '' }}>
+                                <option value="0" {{ $small_order_rules['exclude_on_collection'] === '0' ? 'selected' : '' }}>
                                     No
                                 </option>
                             </select>
