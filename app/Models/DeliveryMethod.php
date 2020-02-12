@@ -7,11 +7,11 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Collection;
 
 /**
- * App\Models\DeliveryMethods.
+ * App\Models\DeliveryMethod.
  *
  * @mixin Eloquent
  */
-class DeliveryMethods extends Model
+class DeliveryMethod extends Model
 {
     /**
      * Return all delivery methods ordered by cheapest > most expensive.

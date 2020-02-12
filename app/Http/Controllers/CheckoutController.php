@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Address;
 use App\Models\Basket;
-use App\Models\DeliveryMethods;
+use App\Models\DeliveryMethod;
 use App\Notifications\OrderPlacedNotification;
 use Auth;
 use Illuminate\Contracts\View\Factory;
@@ -22,7 +22,7 @@ class CheckoutController extends Controller
     public function index()
     {
         $basket = Basket::show();
-        $delivery_methods = DeliveryMethods::show();
+        $delivery_methods = DeliveryMethod::show();
 
         //Notification::route('slack', env('SLACK_HOOK'))
         //    ->notify(new OrderPlacedNotification());
@@ -55,7 +55,7 @@ class CheckoutController extends Controller
             return back()->with('error', 'You must accept the terms before you can place your order.')->withInput($request->all());
         }
 
-        $delivery = DeliveryMethods::details($request->shipping);
+        $delivery = DeliveryMethod::details($request->shipping);
 
         $order_details = [
             'header' => [

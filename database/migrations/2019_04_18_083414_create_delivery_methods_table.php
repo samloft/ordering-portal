@@ -11,14 +11,14 @@ class CreateDeliveryMethodsTable extends Migration
      *
      * @return void
      */
-    public function up()
+    public function up(): void
     {
-        Schema::create('delivery_methods', function (Blueprint $table) {
+        Schema::create('delivery_methods', static function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->uuid('uuid');
+            $table->string('code');
             $table->string('title');
             $table->string('identifier');
-            $table->string('code');
+            $table->integer('price_low');
             $table->integer('price');
             $table->timestamps();
         });
@@ -29,7 +29,7 @@ class CreateDeliveryMethodsTable extends Migration
      *
      * @return void
      */
-    public function down()
+    public function down(): void
     {
         Schema::dropIfExists('delivery_methods');
     }

@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Cms;
 
 use App\Http\Controllers\Controller;
+use App\Models\DeliveryMethod;
 use Illuminate\Http\Request;
 
 class DeliveryMethodsController extends Controller
@@ -12,6 +13,8 @@ class DeliveryMethodsController extends Controller
      */
     public function index()
     {
-        return view('delivery-methods.index');
+        $delivery_methods = DeliveryMethod::get();
+
+        return view('delivery-methods.index', compact('delivery_methods'));
     }
 }
