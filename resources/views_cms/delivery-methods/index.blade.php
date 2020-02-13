@@ -13,34 +13,35 @@
                 </p>
             </div>
             <div class="w-3/4">
-                <div class="text-right mb-5">
-                    <button class="button bg-gray-800 text-white">New delivery method</button>
-                </div>
+                <delivery-methods :delivery_methods="{{ json_encode($delivery_methods, true) }}"></delivery-methods>
+{{--                <div class="text-right mb-5">--}}
+{{--                    <button class="button bg-gray-800 text-white">New delivery method</button>--}}
+{{--                </div>--}}
 
-                <table class="w-full text-md bg-white shadow-md rounded mb-4">
-                    <tbody>
-                    <tr class="text-left border-b bg-gray-300 uppercase text-sm tracking-widest">
-                        <th class="font-semibold p-2 px-5">Code</th>
-                        <th class="font-semibold p-2 px-5">Title</th>
-                        <th class="font-semibold p-2 px-5">Price under small order</th>
-                        <th class="font-semibold p-2 px-5">Price over small order</th>
-                        <th></th>
-                    </tr>
-                    @foreach($delivery_methods as $delivery_method)
-                        <tr class="border-b">
-                            <td class="p-1 px-5">{{ $delivery_method->code }}</td>
-                            <td class="p-1 px-5">{{ $delivery_method->title }}</td>
-                            <td class="p-1 px-5 text-right"><span class="badge badge-info">{{ $delivery_method->price_low }}</span></td>
-                            <td class="p-1 px-5 text-right"><span class="badge badge-info">{{ $delivery_method->price }}</span></td>
-                            <td class="p-1 px-5 flex justify-end">
-                                <button type="button" class="button bg-gray-700 text-white text-xs w-20">
-                                    Edit
-                                </button>
-                            </td>
-                        </tr>
-                    @endforeach
-                    </tbody>
-                </table>
+{{--                <table class="w-full text-md bg-white shadow-md rounded mb-4">--}}
+{{--                    <tbody>--}}
+{{--                    <tr class="text-left border-b bg-gray-300 uppercase text-sm tracking-widest">--}}
+{{--                        <th class="font-semibold p-2 px-5">Code</th>--}}
+{{--                        <th class="font-semibold p-2 px-5">Title</th>--}}
+{{--                        <th class="font-semibold p-2 px-5">Price under small order</th>--}}
+{{--                        <th class="font-semibold p-2 px-5">Price over small order</th>--}}
+{{--                        <th></th>--}}
+{{--                    </tr>--}}
+{{--                    @foreach($delivery_methods as $delivery_method)--}}
+{{--                        <tr class="border-b">--}}
+{{--                            <td class="p-1 px-5">{{ $delivery_method->code }}</td>--}}
+{{--                            <td class="p-1 px-5">{{ $delivery_method->title }}</td>--}}
+{{--                            <td class="p-1 px-5 text-right"><span class="badge badge-info">{{ $delivery_method->price_low }}</span></td>--}}
+{{--                            <td class="p-1 px-5 text-right"><span class="badge badge-info">{{ $delivery_method->price }}</span></td>--}}
+{{--                            <td class="p-1 px-5 flex justify-end">--}}
+{{--                                <button type="button" class="button bg-gray-700 text-white text-xs w-20">--}}
+{{--                                    Edit--}}
+{{--                                </button>--}}
+{{--                            </td>--}}
+{{--                        </tr>--}}
+{{--                    @endforeach--}}
+{{--                    </tbody>--}}
+{{--                </table>--}}
             </div>
         </div>
     </div>

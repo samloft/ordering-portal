@@ -32,13 +32,51 @@ class DeliveryMethod extends Model
      */
     public static function details($id): array
     {
-        $delivery_details = self::where('uuid', $id)->findOrFail();
+        $delivery_details = self::where('id', $id)->findOrFail();
 
         // Work out any calculations.
         return [
             'title' => $delivery_details->title,
-            'code'  => $delivery_details->code,
-            'cost'  => $delivery_details->price,
+            'code' => $delivery_details->code,
+            'cost' => $delivery_details->price,
         ];
+    }
+
+    /**
+     * @param $request
+     *
+     * @return bool
+     */
+    public static function store($request): bool
+    {
+        $delivery = new self;
+
+        $delivery->code = $request->code;
+        $delivery->title = $request->title;
+        $delivery->identifier = $request->identifier;
+        $delivery->price_low = $request->price_low;
+        $delivery->price = $request->price;
+
+        return $delivery->save();
+    }
+
+    /**
+     * @param $request
+     *
+     * @return \App\Models\DeliveryMethod|\App\Models\DeliveryMethod[]|\Illuminate\Database\Eloquent\Collection|\Illuminate\Database\Eloquent\Model
+     */
+    public static function edit($request)
+    {
+        $delivery = self::findOrFail($request->id);
+
+        $delivery->update([
+            'code' => $request->code,
+            'title' => $request->title,
+            'identifier' => $request->identifier,
+            'price_low' => $request->price_low,
+            'price' => $request->price,
+        ]);
+
+        return $delivery;
     }
 }

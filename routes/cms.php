@@ -90,6 +90,8 @@ Route::group(['middleware' => 'auth:admin'], static function () {
 
     Route::group(['prefix' => 'delivery-methods'], static function () {
         Route::get('/', 'Cms\DeliveryMethodsController@index')->name('cms.delivery-methods');
+        Route::post('/', 'Cms\DeliveryMethodsController@store')->name('cms.delivery-methods.store');
+        Route::delete('{deliveryMethod}', 'Cms\DeliveryMethodsController@destroy')->name('cms.delivery-methods.delete');
     });
 
     Route::group(['prefix' => 'product-images'], static function () {
