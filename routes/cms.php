@@ -61,6 +61,10 @@ Route::group(['middleware' => 'auth:admin'], static function () {
         Route::delete('{contact}', 'Cms\ContactController@destroy')->name('cms.contacts.delete');
     });
 
+    Route::group(['prefix' => 'site-settings'], static function () {
+        Route::get('/', 'Cms\SiteSettingsController@index')->name('cms.site-settings');
+    });
+
     Route::group(['prefix' => 'home-links'], static function () {
         Route::get('/', 'Cms\HomeLinksController@index')->name('cms.home-links');
         Route::post('/', 'Cms\HomeLinksController@store')->name('cms.home-links.store');
