@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Cms;
 
 use App\Http\Controllers\Controller;
+use App\Models\GlobalSettings;
 
 class SiteSettingsController extends Controller
 {
@@ -11,6 +12,10 @@ class SiteSettingsController extends Controller
      */
     public function index()
     {
-        return view('site-settings.index');
+        $data = [
+            'maintenance' => json_decode(GlobalSettings::key('maintenance'), true)['enabled'],
+        ];
+
+        return view('site-settings.index', compact('data'));
     }
 }

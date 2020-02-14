@@ -2,6 +2,7 @@
 
 use App\Models\Category;
 use App\Models\Customer;
+use App\Models\GlobalSettings;
 use App\Models\UserCustomer;
 
 /*
@@ -63,6 +64,12 @@ Route::group(['middleware' => 'auth:admin'], static function () {
 
     Route::group(['prefix' => 'site-settings'], static function () {
         Route::get('/', 'Cms\SiteSettingsController@index')->name('cms.site-settings');
+
+        Route::patch('maintenance', static function () {
+            return GlobalSettings::where('key', 'maintenance')->update([
+                'value' => json_encode(['enabled' => request('enabled'), 'message' => request('message')], true)
+            ]);
+        })->name('cms.site-settings');
     });
 
     Route::group(['prefix' => 'home-links'], static function () {

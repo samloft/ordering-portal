@@ -38,4 +38,14 @@ class GlobalSettings extends Model
             return self::where('key', 'small-order-charge')->first()->value;
         });
     }
+
+    /**
+     * @param $key
+     *
+     * @return mixed
+     */
+    public static function key($key)
+    {
+        return self::where('key', $key)->first()->value;
+    }
 }

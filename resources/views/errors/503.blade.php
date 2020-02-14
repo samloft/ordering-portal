@@ -1,6 +1,6 @@
 @extends('errors.master')
 
-@section('title', 'Down for maintenance')
+@section('page.title', 'Down for maintenance')
 
 @section('content')
     <div class="flex h-screen w-full">

@@ -14,6 +14,7 @@ Vue.component('home-links', require('./modules/HomeLinks.vue').default);
 Vue.component('customer-discounts', require('./modules/CustomerDiscounts.vue').default);
 Vue.component('delivery-methods', require('./modules/DeliveryMethods.vue').default);
 Vue.component('contacts', require('./modules/Contacts.vue').default);
+Vue.component('maintenance', require('./modules/Maintenance.vue').default);
 
 window.Event = new Vue();
 

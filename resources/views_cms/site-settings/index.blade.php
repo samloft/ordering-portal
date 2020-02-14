@@ -5,9 +5,7 @@
 
 @section('content')
     <div class="px-6 pt-4 pb-6 xl:px-10 xl:pt-6 xl:pb-8 bg-white rounded-lg shadow">
-        <div class="text-right">
-            <button class="button bg-gray-800 text-white w-56">Enable site maintenance</button>
-        </div>
+        <maintenance :enabled="'{{ $data['maintenance'] }}'"></maintenance>
 
         <hr class="mt-3 mb-3">
 
