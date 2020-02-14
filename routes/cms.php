@@ -56,8 +56,9 @@ Route::group(['middleware' => 'auth:admin'], static function () {
 
     Route::group(['prefix' => 'contacts'], static function () {
         Route::get('/', 'Cms\ContactController@index')->name('cms.contacts');
-        Route::post('/', 'Cms\ContactController@store')->name('cms.contacts.show');
-        Route::delete('{id}', 'Cms\ContactController@destroy')->name('cms.contacts.show');
+        Route::post('/', 'Cms\ContactController@store')->name('cms.contacts.store');
+        Route::patch('{contact}', 'Cms\ContactController@update')->name('cms.contacts.update');
+        Route::delete('{contact}', 'Cms\ContactController@destroy')->name('cms.contacts.delete');
     });
 
     Route::group(['prefix' => 'home-links'], static function () {

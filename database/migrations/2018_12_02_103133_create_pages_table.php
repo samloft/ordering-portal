@@ -37,15 +37,6 @@ class CreatePagesTable extends Migration
             'description' => 'Accessibility Policy will go here',
             'created_at'  => date('Y-m-d H:i:s'),
         ]);
-
-        DB::table('pages')->insert([
-            'name'        => 'contact',
-            'description' => json_encode([[
-                'name'  => 'Site Development',
-                'email' => 'sam@scolmore.com',
-            ]]),
-            'created_at' => date('Y-m-d H:i:s'),
-        ]);
     }
 
     /**

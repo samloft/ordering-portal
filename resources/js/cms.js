@@ -13,6 +13,7 @@ Vue.component('product-images', require('./modules/ProductImages.vue').default);
 Vue.component('home-links', require('./modules/HomeLinks.vue').default);
 Vue.component('customer-discounts', require('./modules/CustomerDiscounts.vue').default);
 Vue.component('delivery-methods', require('./modules/DeliveryMethods.vue').default);
+Vue.component('contacts', require('./modules/Contacts.vue').default);
 
 window.Event = new Vue();
 

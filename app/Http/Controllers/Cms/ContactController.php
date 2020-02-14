@@ -3,8 +3,10 @@
 namespace App\Http\Controllers\Cms;
 
 use App\Http\Controllers\Controller;
+use App\Models\Contact;
 use App\Models\Page;
 use Illuminate\Contracts\View\Factory;
+use Illuminate\Http\JsonResponse;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\View\View;
 
@@ -15,43 +17,61 @@ class ContactController extends Controller
      */
     public function index()
     {
-        $contacts = json_decode(Page::where('name', 'contact')->first()->description, true);
+        $contacts = Contact::get();
 
         return view('contacts.index', compact('contacts'));
     }
 
     /**
-     * @return RedirectResponse
+     * @return \Illuminate\Http\JsonResponse
      */
-    public function store(): RedirectResponse
+    public function store(): JsonResponse
     {
-        $contact = [
-            'name'  => request()->name,
-            'email' => request()->email,
-        ];
+        $this->validation();
 
-        if (request()->id) {
-            $id = request()->id;
+        $contact = new Contact;
 
-            $updated = Contact::edit($id, $contact);
+        $contact->name = request('name');
+        $contact->email = request('email');
 
-            return $updated ? back()->with('success', 'Contact has been updated') : back()->with('error', 'Unable to update contact, please try again');
-        }
-
-        $store = Contact::store($contact);
-
-        return $store ? back()->with('success', 'New contact has been created') : back()->with('error', 'Unable to create new contact, please try again');
+        return response()->json($contact->save());
     }
 
     /**
-     * @param $id
+     * @param \App\Models\Contact $contact
      *
-     * @return RedirectResponse
+     * @return \Illuminate\Http\JsonResponse
      */
-    public function destroy($id): RedirectResponse
+    public function update(Contact $contact): JsonResponse
     {
-        $deleted = Contact::where('id', $id)->delete();
+        $this->validation();
 
-        return $deleted ? back()->with('success', 'Contact has been deleted') : back()->with('error', 'Unable to delete contact, please try again');
+        return response()->json($contact->update([
+            'name' => request('name'),
+            'email' => request('email'),
+        ]));
+    }
+
+    /**
+     * @param \App\Models\Contact $contact
+     *
+     * @return \Illuminate\Http\JsonResponse
+     *
+     * @throws \Exception
+     */
+    public function destroy(Contact $contact): JsonResponse
+    {
+        return response()->json($contact->delete());
+    }
+
+    /**
+     * @return array|bool|null
+     */
+    public function validation()
+    {
+        return request()->validate([
+            'name' => 'required',
+            'email' => 'required|email',
+        ]);
     }
 }
