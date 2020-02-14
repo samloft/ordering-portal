@@ -14,6 +14,8 @@ class SiteSettingsController extends Controller
     {
         $data = [
             'maintenance' => json_decode(GlobalSettings::key('maintenance'), true)['enabled'],
+            'countries' => json_decode(GlobalSettings::countries(), true),
+            'default_country' => GlobalSettings::key('default-country'),
         ];
 
         return view('site-settings.index', compact('data'));

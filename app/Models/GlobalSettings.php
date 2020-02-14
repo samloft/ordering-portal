@@ -48,4 +48,14 @@ class GlobalSettings extends Model
     {
         return self::where('key', $key)->first()->value;
     }
+
+    /**
+     * @return mixed
+     */
+    public static function countries()
+    {
+        return Cache::remember('countries', 1440, static function () {
+            return self::where('key', 'countries')->first()->value;
+        });
+    }
 }
