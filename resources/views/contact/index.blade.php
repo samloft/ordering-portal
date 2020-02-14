@@ -37,7 +37,7 @@
                         <label for="to">To:</label>
                         <select id="to" name="to">
                             @foreach($contacts as $contact)
-                                <option value="{{ $contact['email'] }}">{{ $contact['name'] }}</option>
+                                <option value="{{ $contact->email }}">{{ $contact->name }}</option>
                             @endforeach
                         </select>
                         <div
@@ -51,7 +51,7 @@
                     <div class="mb-2">
                         <label for="name">Name:</label>
                         <input id="name" name="name"
-                               value="{{ auth()->user() ? auth()->user()->first_name . ' ' . auth()->user()->last_name : '' }}">
+                               value="{{ auth()->user() ? auth()->user()->name : '' }}">
                     </div>
 
                     <div class="mb-2">

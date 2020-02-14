@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Mail\Contact;
-use App\Models\Page;
+use App\Models\Contact as ContactData;
 use Illuminate\Contracts\View\Factory;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\View\View;
@@ -18,7 +18,7 @@ class ContactController extends Controller
      */
     public function index()
     {
-        $contacts = json_decode(Page::where('name', 'contact')->first()->description, true);
+        $contacts = ContactData::get();
 
         return view('contact.index', compact('contacts'));
     }
@@ -32,7 +32,7 @@ class ContactController extends Controller
     public function store(): RedirectResponse
     {
         request()->validate([
-            'to'      => 'required',
+            'to'      => 'required|exists:contacts,email',
             'name'    => 'required',
             'email'   => 'required',
             'message' => 'required|min:5',
