@@ -2776,6 +2776,14 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
 
 
 var Errors =
@@ -2810,6 +2818,7 @@ function () {
     draggable: vuedraggable__WEBPACK_IMPORTED_MODULE_0___default.a
   },
   props: {
+    type: null,
     list: Array,
     toplevel: Array
   },
@@ -2832,12 +2841,11 @@ function () {
         item.position = key;
       });
       axios.patch('/cms/home-links/update-positions', this.categories)["catch"](function (error) {
-        Vue.swal('Error', 'Unable to update category positions, please try again', 'error');
+        Vue.swal('Error', 'Unable to update positions, please try again', 'error');
       });
-      console.log(JSON.stringify(this.categories));
     },
-    getImage: function getImage(image) {
-      return '/images/home-links/' + image;
+    getImage: function getImage(type, image) {
+      return '/images/' + type + '/' + image;
     },
     imageAdded: function imageAdded(file) {
       this.form.append('file', file);
@@ -2855,10 +2863,18 @@ function () {
       var _this = this;
 
       this.form.append('name', this.linkData.name ? this.linkData.name : '');
-      var urlSegment = this.linkData.topLevelValue ? '/products/' + this.linkData.topLevelValue : '';
-      var urlSegment2 = this.linkData.secondLevelValue ? '/' + this.linkData.secondLevelValue : '';
-      var urlSegment3 = this.linkData.thirdLevelValue ? '/' + this.linkData.thirdLevelValue : '';
-      this.form.append('url', urlSegment + urlSegment2 + urlSegment3);
+
+      if (this.type === 'Category Home Link') {
+        var urlSegment = this.linkData.topLevelValue ? '/products/' + this.linkData.topLevelValue : '';
+        var urlSegment2 = this.linkData.secondLevelValue ? '/' + this.linkData.secondLevelValue : '';
+        var urlSegment3 = this.linkData.thirdLevelValue ? '/' + this.linkData.thirdLevelValue : '';
+        this.form.append('type', 'category');
+        this.form.append('url', urlSegment + urlSegment2 + urlSegment3);
+      } else {
+        this.form.append('type', 'advert');
+        this.form.append('url', this.linkData.url);
+      }
+
       this.form.append('position', this.categories.length + 1);
       axios.post('/cms/home-links', this.form).then(function (response) {
         _this.newLink = false;
@@ -2870,9 +2886,11 @@ function () {
       });
     },
     removeCategory: function removeCategory(id) {
+      var _this2 = this;
+
       var vm = this;
       Vue.swal({
-        title: 'Delete Category Link?',
+        title: 'Delete ' + this.type + '?',
         text: 'Are you sure? This cannot be un-done.',
         type: 'warning',
         showCancelButton: true
@@ -2883,33 +2901,33 @@ function () {
               return item.id;
             }).indexOf(id);
             vm.categories.splice(i, 1);
-            return Vue.swal('Success', 'Category home link has been deleted', 'success');
+            return Vue.swal('Success', _this2.type + ' has been deleted', 'success');
           })["catch"](function (error) {
-            return Vue.swal('Error', 'Unable to delete category image, please try again', 'error');
+            return Vue.swal('Error', 'Unable to delete ' + _this2.type + ', please try again', 'error');
           });
         }
       });
     },
     topSelected: function topSelected(category) {
-      var _this2 = this;
+      var _this3 = this;
 
       this.secondLevelValues = null;
       this.linkData.secondLevelValue = '';
       this.thirdLevelValues = null;
       this.linkData.thirdLevelValue = '';
       axios.post('/cms/home-links/categories/' + category).then(function (response) {
-        _this2.secondLevelValues = response.data;
+        _this3.secondLevelValues = response.data;
       })["catch"](function (error) {
         Vue.swal('Error', 'Unable to get categories', 'error');
       });
     },
     secondSelected: function secondSelected(category1, category2) {
-      var _this3 = this;
+      var _this4 = this;
 
       this.thirdLevelValues = null;
       this.linkData.thirdLevelValue = '';
       axios.post('/cms/home-links/categories/' + category1 + '/' + category2).then(function (response) {
-        _this3.thirdLevelValues = response.data;
+        _this4.thirdLevelValues = response.data;
       })["catch"](function (error) {
         Vue.swal('Error', 'Unable to get categories', 'error');
       });
@@ -13576,7 +13594,7 @@ var render = function() {
               }
             }
           },
-          [_vm._v("\n            New Category Home Link\n        ")]
+          [_vm._v("\n            New " + _vm._s(_vm.type) + "\n        ")]
         )
       ]),
       _vm._v(" "),
@@ -13650,7 +13668,7 @@ var render = function() {
                           _c("img", {
                             staticClass: "mx-auto shadow",
                             attrs: {
-                              src: _vm.getImage(element.image),
+                              src: _vm.getImage(element.type, element.image),
                               alt: "Category Image"
                             }
                           })
@@ -13663,7 +13681,7 @@ var render = function() {
               )
             : _c("div", [
                 _c("h5", { staticClass: "text-center" }, [
-                  _vm._v("No category home links have been added")
+                  _vm._v("No " + _vm._s(_vm.type) + "s have been added")
                 ])
               ])
         ],
@@ -13719,285 +13737,338 @@ var render = function() {
                       })
                     ]),
                     _vm._v(" "),
-                    _c("div", { staticClass: "relative mb-3" }, [
-                      _c("label", [
-                        _vm._v("URL "),
-                        _c("small", [_vm._v("(Top Level)")])
-                      ]),
-                      _vm._v(" "),
-                      _c(
-                        "select",
-                        {
-                          directives: [
-                            {
-                              name: "model",
-                              rawName: "v-model",
-                              value: _vm.linkData.topLevelValue,
-                              expression: "linkData.topLevelValue"
-                            }
-                          ],
-                          staticClass:
-                            "p-2 rounded border bg-gray-100 text-gray-600 appearance-none",
-                          attrs: { autocomplete: "off" },
-                          on: {
-                            change: [
-                              function($event) {
-                                var $$selectedVal = Array.prototype.filter
-                                  .call($event.target.options, function(o) {
-                                    return o.selected
-                                  })
-                                  .map(function(o) {
-                                    var val = "_value" in o ? o._value : o.value
-                                    return val
-                                  })
-                                _vm.$set(
-                                  _vm.linkData,
-                                  "topLevelValue",
-                                  $event.target.multiple
-                                    ? $$selectedVal
-                                    : $$selectedVal[0]
-                                )
+                    _vm.type === "Category Home Link"
+                      ? _c("div", [
+                          _c("div", { staticClass: "relative mb-3" }, [
+                            _c("label", [
+                              _vm._v("URL "),
+                              _c("small", [_vm._v("(Top Level)")])
+                            ]),
+                            _vm._v(" "),
+                            _c(
+                              "select",
+                              {
+                                directives: [
+                                  {
+                                    name: "model",
+                                    rawName: "v-model",
+                                    value: _vm.linkData.topLevelValue,
+                                    expression: "linkData.topLevelValue"
+                                  }
+                                ],
+                                staticClass:
+                                  "p-2 rounded border bg-gray-100 text-gray-600 appearance-none",
+                                attrs: { autocomplete: "off" },
+                                on: {
+                                  change: [
+                                    function($event) {
+                                      var $$selectedVal = Array.prototype.filter
+                                        .call($event.target.options, function(
+                                          o
+                                        ) {
+                                          return o.selected
+                                        })
+                                        .map(function(o) {
+                                          var val =
+                                            "_value" in o ? o._value : o.value
+                                          return val
+                                        })
+                                      _vm.$set(
+                                        _vm.linkData,
+                                        "topLevelValue",
+                                        $event.target.multiple
+                                          ? $$selectedVal
+                                          : $$selectedVal[0]
+                                      )
+                                    },
+                                    function($event) {
+                                      return _vm.topSelected(
+                                        _vm.linkData.topLevelValue
+                                      )
+                                    }
+                                  ]
+                                }
                               },
-                              function($event) {
-                                return _vm.topSelected(
-                                  _vm.linkData.topLevelValue
+                              _vm._l(_vm.toplevel, function(category) {
+                                return _c("option", [
+                                  _vm._v(_vm._s(category.level_1))
+                                ])
+                              }),
+                              0
+                            ),
+                            _vm._v(" "),
+                            _c(
+                              "div",
+                              {
+                                staticClass:
+                                  "pointer-events-none absolute inset-y-0 right-0 flex items-center px-3 pt-6 text-gray-700"
+                              },
+                              [
+                                _c(
+                                  "svg",
+                                  {
+                                    staticClass: "fill-current h-4 w-4",
+                                    attrs: {
+                                      xmlns: "http://www.w3.org/2000/svg",
+                                      viewBox: "0 0 20 20"
+                                    }
+                                  },
+                                  [
+                                    _c("path", {
+                                      attrs: {
+                                        d:
+                                          "M9.293 12.95l.707.707L15.657 8l-1.414-1.414L10 10.828 5.757 6.586 4.343 8z"
+                                      }
+                                    })
+                                  ]
                                 )
+                              ]
+                            ),
+                            _vm._v(" "),
+                            _c("span", {
+                              staticClass: "text-sm text-red-600",
+                              domProps: {
+                                textContent: _vm._s(_vm.errors.get("url"))
                               }
-                            ]
-                          }
-                        },
-                        _vm._l(_vm.toplevel, function(category) {
-                          return _c("option", [
-                            _vm._v(_vm._s(category.level_1))
-                          ])
-                        }),
-                        0
-                      ),
-                      _vm._v(" "),
-                      _c(
-                        "div",
-                        {
-                          staticClass:
-                            "pointer-events-none absolute inset-y-0 right-0 flex items-center px-3 pt-6 text-gray-700"
-                        },
-                        [
+                            })
+                          ]),
+                          _vm._v(" "),
                           _c(
-                            "svg",
+                            "div",
                             {
-                              staticClass: "fill-current h-4 w-4",
-                              attrs: {
-                                xmlns: "http://www.w3.org/2000/svg",
-                                viewBox: "0 0 20 20"
-                              }
+                              directives: [
+                                {
+                                  name: "show",
+                                  rawName: "v-show",
+                                  value: _vm.secondLevelValues,
+                                  expression: "secondLevelValues"
+                                }
+                              ],
+                              staticClass: "relative mb-3"
                             },
                             [
-                              _c("path", {
-                                attrs: {
-                                  d:
-                                    "M9.293 12.95l.707.707L15.657 8l-1.414-1.414L10 10.828 5.757 6.586 4.343 8z"
+                              _c("label", [
+                                _vm._v("URL "),
+                                _c("small", [_vm._v("(Second Level)")])
+                              ]),
+                              _vm._v(" "),
+                              _c(
+                                "select",
+                                {
+                                  directives: [
+                                    {
+                                      name: "model",
+                                      rawName: "v-model",
+                                      value: _vm.linkData.secondLevelValue,
+                                      expression: "linkData.secondLevelValue"
+                                    }
+                                  ],
+                                  staticClass:
+                                    "p-2 rounded border bg-gray-100 text-gray-600 appearance-none",
+                                  attrs: { autocomplete: "off" },
+                                  on: {
+                                    change: [
+                                      function($event) {
+                                        var $$selectedVal = Array.prototype.filter
+                                          .call($event.target.options, function(
+                                            o
+                                          ) {
+                                            return o.selected
+                                          })
+                                          .map(function(o) {
+                                            var val =
+                                              "_value" in o ? o._value : o.value
+                                            return val
+                                          })
+                                        _vm.$set(
+                                          _vm.linkData,
+                                          "secondLevelValue",
+                                          $event.target.multiple
+                                            ? $$selectedVal
+                                            : $$selectedVal[0]
+                                        )
+                                      },
+                                      function($event) {
+                                        return _vm.secondSelected(
+                                          _vm.linkData.topLevelValue,
+                                          _vm.linkData.secondLevelValue
+                                        )
+                                      }
+                                    ]
+                                  }
+                                },
+                                _vm._l(_vm.secondLevelValues, function(
+                                  category
+                                ) {
+                                  return _c("option", [
+                                    _vm._v(_vm._s(category.level_2))
+                                  ])
+                                }),
+                                0
+                              ),
+                              _vm._v(" "),
+                              _c(
+                                "div",
+                                {
+                                  staticClass:
+                                    "pointer-events-none absolute inset-y-0 right-0 flex items-center px-3 pt-6 text-gray-700"
+                                },
+                                [
+                                  _c(
+                                    "svg",
+                                    {
+                                      staticClass: "fill-current h-4 w-4",
+                                      attrs: {
+                                        xmlns: "http://www.w3.org/2000/svg",
+                                        viewBox: "0 0 20 20"
+                                      }
+                                    },
+                                    [
+                                      _c("path", {
+                                        attrs: {
+                                          d:
+                                            "M9.293 12.95l.707.707L15.657 8l-1.414-1.414L10 10.828 5.757 6.586 4.343 8z"
+                                        }
+                                      })
+                                    ]
+                                  )
+                                ]
+                              )
+                            ]
+                          ),
+                          _vm._v(" "),
+                          _c(
+                            "div",
+                            {
+                              directives: [
+                                {
+                                  name: "show",
+                                  rawName: "v-show",
+                                  value: _vm.thirdLevelValues,
+                                  expression: "thirdLevelValues"
                                 }
-                              })
+                              ],
+                              staticClass: "relative mb-3"
+                            },
+                            [
+                              _c("label", [
+                                _vm._v("URL "),
+                                _c("small", [_vm._v("(Third Level)")])
+                              ]),
+                              _vm._v(" "),
+                              _c(
+                                "select",
+                                {
+                                  directives: [
+                                    {
+                                      name: "model",
+                                      rawName: "v-model",
+                                      value: _vm.linkData.thirdLevelValue,
+                                      expression: "linkData.thirdLevelValue"
+                                    }
+                                  ],
+                                  staticClass:
+                                    "p-2 rounded border bg-gray-100 text-gray-600 appearance-none",
+                                  attrs: { autocomplete: "off" },
+                                  on: {
+                                    change: function($event) {
+                                      var $$selectedVal = Array.prototype.filter
+                                        .call($event.target.options, function(
+                                          o
+                                        ) {
+                                          return o.selected
+                                        })
+                                        .map(function(o) {
+                                          var val =
+                                            "_value" in o ? o._value : o.value
+                                          return val
+                                        })
+                                      _vm.$set(
+                                        _vm.linkData,
+                                        "thirdLevelValue",
+                                        $event.target.multiple
+                                          ? $$selectedVal
+                                          : $$selectedVal[0]
+                                      )
+                                    }
+                                  }
+                                },
+                                _vm._l(_vm.thirdLevelValues, function(
+                                  category
+                                ) {
+                                  return _c("option", [
+                                    _vm._v(_vm._s(category.level_3))
+                                  ])
+                                }),
+                                0
+                              ),
+                              _vm._v(" "),
+                              _c(
+                                "div",
+                                {
+                                  staticClass:
+                                    "pointer-events-none absolute inset-y-0 right-0 flex items-center px-3 pt-6 text-gray-700"
+                                },
+                                [
+                                  _c(
+                                    "svg",
+                                    {
+                                      staticClass: "fill-current h-4 w-4",
+                                      attrs: {
+                                        xmlns: "http://www.w3.org/2000/svg",
+                                        viewBox: "0 0 20 20"
+                                      }
+                                    },
+                                    [
+                                      _c("path", {
+                                        attrs: {
+                                          d:
+                                            "M9.293 12.95l.707.707L15.657 8l-1.414-1.414L10 10.828 5.757 6.586 4.343 8z"
+                                        }
+                                      })
+                                    ]
+                                  )
+                                ]
+                              )
                             ]
                           )
-                        ]
-                      ),
-                      _vm._v(" "),
-                      _c("span", {
-                        staticClass: "text-sm text-red-600",
-                        domProps: { textContent: _vm._s(_vm.errors.get("url")) }
-                      })
-                    ]),
-                    _vm._v(" "),
-                    _c(
-                      "div",
-                      {
-                        directives: [
-                          {
-                            name: "show",
-                            rawName: "v-show",
-                            value: _vm.secondLevelValues,
-                            expression: "secondLevelValues"
-                          }
-                        ],
-                        staticClass: "relative mb-3"
-                      },
-                      [
-                        _c("label", [
-                          _vm._v("URL "),
-                          _c("small", [_vm._v("(Second Level)")])
-                        ]),
-                        _vm._v(" "),
-                        _c(
-                          "select",
-                          {
+                        ])
+                      : _c("div", { staticClass: "mb-3" }, [
+                          _c("label", [_vm._v("URL")]),
+                          _vm._v(" "),
+                          _c("input", {
                             directives: [
                               {
                                 name: "model",
                                 rawName: "v-model",
-                                value: _vm.linkData.secondLevelValue,
-                                expression: "linkData.secondLevelValue"
+                                value: _vm.linkData.url,
+                                expression: "linkData.url"
                               }
                             ],
-                            staticClass:
-                              "p-2 rounded border bg-gray-100 text-gray-600 appearance-none",
-                            attrs: { autocomplete: "off" },
+                            staticClass: "bg-gray-100",
+                            attrs: { placeholder: "URL" },
+                            domProps: { value: _vm.linkData.url },
                             on: {
-                              change: [
-                                function($event) {
-                                  var $$selectedVal = Array.prototype.filter
-                                    .call($event.target.options, function(o) {
-                                      return o.selected
-                                    })
-                                    .map(function(o) {
-                                      var val =
-                                        "_value" in o ? o._value : o.value
-                                      return val
-                                    })
-                                  _vm.$set(
-                                    _vm.linkData,
-                                    "secondLevelValue",
-                                    $event.target.multiple
-                                      ? $$selectedVal
-                                      : $$selectedVal[0]
-                                  )
-                                },
-                                function($event) {
-                                  return _vm.secondSelected(
-                                    _vm.linkData.topLevelValue,
-                                    _vm.linkData.secondLevelValue
-                                  )
+                              input: function($event) {
+                                if ($event.target.composing) {
+                                  return
                                 }
-                              ]
-                            }
-                          },
-                          _vm._l(_vm.secondLevelValues, function(category) {
-                            return _c("option", [
-                              _vm._v(_vm._s(category.level_2))
-                            ])
-                          }),
-                          0
-                        ),
-                        _vm._v(" "),
-                        _c(
-                          "div",
-                          {
-                            staticClass:
-                              "pointer-events-none absolute inset-y-0 right-0 flex items-center px-3 pt-6 text-gray-700"
-                          },
-                          [
-                            _c(
-                              "svg",
-                              {
-                                staticClass: "fill-current h-4 w-4",
-                                attrs: {
-                                  xmlns: "http://www.w3.org/2000/svg",
-                                  viewBox: "0 0 20 20"
-                                }
-                              },
-                              [
-                                _c("path", {
-                                  attrs: {
-                                    d:
-                                      "M9.293 12.95l.707.707L15.657 8l-1.414-1.414L10 10.828 5.757 6.586 4.343 8z"
-                                  }
-                                })
-                              ]
-                            )
-                          ]
-                        )
-                      ]
-                    ),
-                    _vm._v(" "),
-                    _c(
-                      "div",
-                      {
-                        directives: [
-                          {
-                            name: "show",
-                            rawName: "v-show",
-                            value: _vm.thirdLevelValues,
-                            expression: "thirdLevelValues"
-                          }
-                        ],
-                        staticClass: "relative mb-3"
-                      },
-                      [
-                        _c("label", [
-                          _vm._v("URL "),
-                          _c("small", [_vm._v("(Third Level)")])
-                        ]),
-                        _vm._v(" "),
-                        _c(
-                          "select",
-                          {
-                            directives: [
-                              {
-                                name: "model",
-                                rawName: "v-model",
-                                value: _vm.linkData.thirdLevelValue,
-                                expression: "linkData.thirdLevelValue"
-                              }
-                            ],
-                            staticClass:
-                              "p-2 rounded border bg-gray-100 text-gray-600 appearance-none",
-                            attrs: { autocomplete: "off" },
-                            on: {
-                              change: function($event) {
-                                var $$selectedVal = Array.prototype.filter
-                                  .call($event.target.options, function(o) {
-                                    return o.selected
-                                  })
-                                  .map(function(o) {
-                                    var val = "_value" in o ? o._value : o.value
-                                    return val
-                                  })
                                 _vm.$set(
                                   _vm.linkData,
-                                  "thirdLevelValue",
-                                  $event.target.multiple
-                                    ? $$selectedVal
-                                    : $$selectedVal[0]
+                                  "url",
+                                  $event.target.value
                                 )
                               }
                             }
-                          },
-                          _vm._l(_vm.thirdLevelValues, function(category) {
-                            return _c("option", [
-                              _vm._v(_vm._s(category.level_3))
-                            ])
                           }),
-                          0
-                        ),
-                        _vm._v(" "),
-                        _c(
-                          "div",
-                          {
-                            staticClass:
-                              "pointer-events-none absolute inset-y-0 right-0 flex items-center px-3 pt-6 text-gray-700"
-                          },
-                          [
-                            _c(
-                              "svg",
-                              {
-                                staticClass: "fill-current h-4 w-4",
-                                attrs: {
-                                  xmlns: "http://www.w3.org/2000/svg",
-                                  viewBox: "0 0 20 20"
-                                }
-                              },
-                              [
-                                _c("path", {
-                                  attrs: {
-                                    d:
-                                      "M9.293 12.95l.707.707L15.657 8l-1.414-1.414L10 10.828 5.757 6.586 4.343 8z"
-                                  }
-                                })
-                              ]
-                            )
-                          ]
-                        )
-                      ]
-                    ),
+                          _vm._v(" "),
+                          _c("span", {
+                            staticClass: "text-sm text-red-600",
+                            domProps: {
+                              textContent: _vm._s(_vm.errors.get("url"))
+                            }
+                          })
+                        ]),
                     _vm._v(" "),
                     _c("div", { staticClass: "mb-3" }, [
                       _c("label", [_vm._v("Image File")]),

@@ -2,7 +2,7 @@
     <div>
         <div class="text-right mb-5">
             <button @click="createNewLink()" class="button bg-gray-800 text-white">
-                New Category Home Link
+                New {{ type }}
             </button>
         </div>
 
@@ -30,13 +30,13 @@
                                     d="M8 6V4c0-1.1.9-2 2-2h4a2 2 0 0 1 2 2v2h5a1 1 0 0 1 0 2h-1v12a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V8H3a1 1 0 1 1 0-2h5zM6 8v12h12V8H6zm8-2V4h-4v2h4zm-4 4a1 1 0 0 1 1 1v6a1 1 0 0 1-2 0v-6a1 1 0 0 1 1-1zm4 0a1 1 0 0 1 1 1v6a1 1 0 0 1-2 0v-6a1 1 0 0 1 1-1z"/>
                             </svg>
                         </button>
-                        <img class="mx-auto shadow" :src="getImage(element.image)" alt="Category Image"/>
+                        <img class="mx-auto shadow" :src="getImage(element.type, element.image)" alt="Category Image"/>
                     </div>
                 </div>
             </draggable>
 
             <div v-else>
-                <h5 class="text-center">No category home links have been added</h5>
+                <h5 class="text-center">No {{ type }}s have been added</h5>
             </div>
         </div>
 
@@ -51,60 +51,68 @@
                         <span v-text="errors.get('name')" class="text-sm text-red-600"/>
                     </div>
 
-                    <div class="relative mb-3">
-                        <label>URL <small>(Top Level)</small></label>
-                        <select @change="topSelected(linkData.topLevelValue)"
+                    <div v-if="type === 'Category Home Link'">
+                        <div class="relative mb-3">
+                            <label>URL <small>(Top Level)</small></label>
+                            <select @change="topSelected(linkData.topLevelValue)"
+                                    class="p-2 rounded border bg-gray-100 text-gray-600 appearance-none"
+                                    autocomplete="off"
+                                    v-model="linkData.topLevelValue"
+                            >
+                                <option v-for="category in toplevel">{{ category.level_1 }}</option>
+                            </select>
+                            <div
+                                class="pointer-events-none absolute inset-y-0 right-0 flex items-center px-3 pt-6 text-gray-700">
+                                <svg class="fill-current h-4 w-4" xmlns="http://www.w3.org/2000/svg"
+                                     viewBox="0 0 20 20">
+                                    <path
+                                        d="M9.293 12.95l.707.707L15.657 8l-1.414-1.414L10 10.828 5.757 6.586 4.343 8z"/>
+                                </svg>
+                            </div>
+                            <span v-text="errors.get('url')" class="text-sm text-red-600"/>
+                        </div>
+
+                        <div v-show="secondLevelValues" class="relative mb-3">
+                            <label>URL <small>(Second Level)</small></label>
+                            <select @change="secondSelected(linkData.topLevelValue, linkData.secondLevelValue)"
+                                    class="p-2 rounded border bg-gray-100 text-gray-600 appearance-none"
+                                    autocomplete="off"
+                                    v-model="linkData.secondLevelValue">
+                                <option v-for="category in secondLevelValues">{{ category.level_2 }}</option>
+                            </select>
+                            <div
+                                class="pointer-events-none absolute inset-y-0 right-0 flex items-center px-3 pt-6 text-gray-700">
+                                <svg class="fill-current h-4 w-4" xmlns="http://www.w3.org/2000/svg"
+                                     viewBox="0 0 20 20">
+                                    <path
+                                        d="M9.293 12.95l.707.707L15.657 8l-1.414-1.414L10 10.828 5.757 6.586 4.343 8z"/>
+                                </svg>
+                            </div>
+                        </div>
+
+                        <div v-show="thirdLevelValues" class="relative mb-3">
+                            <label>URL <small>(Third Level)</small></label>
+                            <select
                                 class="p-2 rounded border bg-gray-100 text-gray-600 appearance-none"
                                 autocomplete="off"
-                                v-model="linkData.topLevelValue"
-                        >
-                            <option v-for="category in toplevel">{{ category.level_1 }}</option>
-                        </select>
-                        <div
-                            class="pointer-events-none absolute inset-y-0 right-0 flex items-center px-3 pt-6 text-gray-700">
-                            <svg class="fill-current h-4 w-4" xmlns="http://www.w3.org/2000/svg"
-                                 viewBox="0 0 20 20">
-                                <path
-                                    d="M9.293 12.95l.707.707L15.657 8l-1.414-1.414L10 10.828 5.757 6.586 4.343 8z"/>
-                            </svg>
+                                v-model="linkData.thirdLevelValue">
+                                <option v-for="category in thirdLevelValues">{{ category.level_3 }}</option>
+                            </select>
+                            <div
+                                class="pointer-events-none absolute inset-y-0 right-0 flex items-center px-3 pt-6 text-gray-700">
+                                <svg class="fill-current h-4 w-4" xmlns="http://www.w3.org/2000/svg"
+                                     viewBox="0 0 20 20">
+                                    <path
+                                        d="M9.293 12.95l.707.707L15.657 8l-1.414-1.414L10 10.828 5.757 6.586 4.343 8z"/>
+                                </svg>
+                            </div>
                         </div>
+                    </div>
+
+                    <div v-else class="mb-3">
+                        <label>URL</label>
+                        <input class="bg-gray-100" v-model="linkData.url" placeholder="URL">
                         <span v-text="errors.get('url')" class="text-sm text-red-600"/>
-                    </div>
-
-                    <div v-show="secondLevelValues" class="relative mb-3">
-                        <label>URL <small>(Second Level)</small></label>
-                        <select @change="secondSelected(linkData.topLevelValue, linkData.secondLevelValue)"
-                            class="p-2 rounded border bg-gray-100 text-gray-600 appearance-none"
-                            autocomplete="off"
-                        v-model="linkData.secondLevelValue">
-                            <option v-for="category in secondLevelValues">{{ category.level_2 }}</option>
-                        </select>
-                        <div
-                            class="pointer-events-none absolute inset-y-0 right-0 flex items-center px-3 pt-6 text-gray-700">
-                            <svg class="fill-current h-4 w-4" xmlns="http://www.w3.org/2000/svg"
-                                 viewBox="0 0 20 20">
-                                <path
-                                    d="M9.293 12.95l.707.707L15.657 8l-1.414-1.414L10 10.828 5.757 6.586 4.343 8z"/>
-                            </svg>
-                        </div>
-                    </div>
-
-                    <div v-show="thirdLevelValues" class="relative mb-3">
-                        <label>URL <small>(Third Level)</small></label>
-                        <select
-                            class="p-2 rounded border bg-gray-100 text-gray-600 appearance-none"
-                            autocomplete="off"
-                        v-model="linkData.thirdLevelValue">
-                            <option v-for="category in thirdLevelValues">{{ category.level_3 }}</option>
-                        </select>
-                        <div
-                            class="pointer-events-none absolute inset-y-0 right-0 flex items-center px-3 pt-6 text-gray-700">
-                            <svg class="fill-current h-4 w-4" xmlns="http://www.w3.org/2000/svg"
-                                 viewBox="0 0 20 20">
-                                <path
-                                    d="M9.293 12.95l.707.707L15.657 8l-1.414-1.414L10 10.828 5.757 6.586 4.343 8z"/>
-                            </svg>
-                        </div>
                     </div>
 
                     <div class="mb-3">
@@ -160,6 +168,7 @@
             draggable
         },
         props: {
+            type: null,
             list: Array,
             toplevel: Array,
         },
@@ -184,13 +193,11 @@
 
                 axios.patch('/cms/home-links/update-positions', this.categories)
                     .catch(error => {
-                        Vue.swal('Error', 'Unable to update category positions, please try again', 'error');
+                        Vue.swal('Error', 'Unable to update positions, please try again', 'error');
                     });
-
-                console.log(JSON.stringify(this.categories));
             },
-            getImage(image) {
-                return '/images/home-links/' + image;
+            getImage(type, image) {
+                return '/images/' + type + '/' + image;
             },
             imageAdded(file) {
                 this.form.append('file', file);
@@ -209,11 +216,19 @@
             submit() {
                 this.form.append('name', this.linkData.name ? this.linkData.name : '');
 
-                var urlSegment = this.linkData.topLevelValue ? '/products/' + this.linkData.topLevelValue : '';
-                var urlSegment2 = this.linkData.secondLevelValue ? '/' + this.linkData.secondLevelValue : '';
-                var urlSegment3 = this.linkData.thirdLevelValue ? '/' + this.linkData.thirdLevelValue : '';
+                if (this.type === 'Category Home Link') {
+                    var urlSegment = this.linkData.topLevelValue ? '/products/' + this.linkData.topLevelValue : '';
+                    var urlSegment2 = this.linkData.secondLevelValue ? '/' + this.linkData.secondLevelValue : '';
+                    var urlSegment3 = this.linkData.thirdLevelValue ? '/' + this.linkData.thirdLevelValue : '';
 
-                this.form.append('url', urlSegment + urlSegment2 + urlSegment3);
+                    this.form.append('type', 'category');
+                    this.form.append('url', urlSegment + urlSegment2 + urlSegment3);
+                } else {
+                    this.form.append('type', 'advert');
+                    this.form.append('url', this.linkData.url);
+                }
+
+
                 this.form.append('position', (this.categories.length + 1));
 
                 axios.post('/cms/home-links', this.form).then(response => {
@@ -228,7 +243,7 @@
                 var vm = this;
 
                 Vue.swal({
-                    title: 'Delete Category Link?',
+                    title: 'Delete ' + this.type + '?',
                     text: 'Are you sure? This cannot be un-done.',
                     type: 'warning',
                     showCancelButton: true,
@@ -238,9 +253,9 @@
                             let i = vm.categories.map(item => item.id).indexOf(id);
                             vm.categories.splice(i, 1);
 
-                            return Vue.swal('Success', 'Category home link has been deleted', 'success');
+                            return Vue.swal('Success', this.type + ' has been deleted', 'success');
                         }).catch(error => {
-                            return Vue.swal('Error', 'Unable to delete category image, please try again', 'error');
+                            return Vue.swal('Error', 'Unable to delete ' + this.type + ', please try again', 'error');
                         })
                     }
                 });

@@ -34,13 +34,13 @@ class HomeLink extends Model
     /**
      * Create a new home link.
      *
-     * @param $request
-     *
      * @return \App\Models\HomeLink|bool
+     *
+     * @throws \Illuminate\Contracts\Filesystem\FileNotFoundException
      */
-    public static function store($request)
+    public static function store()
     {
-        $stored = static::storeLinkImage($request->file('file'), 'link', $request->name);
+        $stored = static::storeLinkImage(request()->file('file'), request('type'), request('name'));
 
         if (! $stored['status']) {
             return false;
@@ -48,10 +48,10 @@ class HomeLink extends Model
 
         $category_link = new self;
 
-        $category_link->type = 'link';
-        $category_link->name = 'link'.'-'.$request->name;
-        $category_link->link = $request->url;
-        $category_link->position = $request->position;
+        $category_link->type = request('type');
+        $category_link->name = request('type').'-'.request('name');
+        $category_link->link = request('url');
+        $category_link->position = request('position');
         $category_link->image = $stored['name'];
         $category_link->save();
 
@@ -61,19 +61,19 @@ class HomeLink extends Model
     /**
      * Update the given home link with new data.
      *
-     * @param $request
-     *
      * @return bool
+     *
+     * @throws \Illuminate\Contracts\Filesystem\FileNotFoundException
      */
-    public static function edit($request): bool
+    public static function edit(): bool
     {
         $data = [
-            'link' => $request->link,
+            'link' => request('link'),
             'updated_at' => date('Y-m-d H:i:s'),
         ];
 
-        if ($request->image) {
-            $stored = static::storeLinkImage($request->file('image'), $request->type, $request->name);
+        if (request('image')) {
+            $stored = static::storeLinkImage(request()->file('image'), request('type'), request('name'));
 
             if (! $stored['status']) {
                 return false;
@@ -82,7 +82,7 @@ class HomeLink extends Model
             $data['image'] = $stored['image'];
         }
 
-        return self::where('id', $request->id)->update($data);
+        return self::where('id', request('id'))->update($data);
     }
 
     /**
@@ -94,12 +94,14 @@ class HomeLink extends Model
      * @param $name
      *
      * @return array
+     *
+     * @throws \Illuminate\Contracts\Filesystem\FileNotFoundException
      */
     public static function storeLinkImage($image, $type, $name): array
     {
         $extension = $image->getClientOriginalExtension();
         $image_name = $type.'-'.str::slug($name, '-').'.'.$extension;
-        $image_path = 'images/home-links/'.$image_name;
+        $image_path = 'images/'.$type.'/'.$image_name;
 
         return ['status' => Storage::disk('public')->put($image_path, File::get($image)), 'name' => $image_name];
     }
@@ -128,7 +130,7 @@ class HomeLink extends Model
      */
     public static function categories()
     {
-        return self::where('type', 'like', 'link%')->orderBy('position')->get();
+        return self::where('type', 'category')->orderBy('position')->get();
     }
 
     /**

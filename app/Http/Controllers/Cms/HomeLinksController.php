@@ -19,25 +19,27 @@ class HomeLinksController extends Controller
      */
     public function index()
     {
-        //$adverts = HomeLink::adverts();
+        $adverts = HomeLink::adverts();
         $category_top_level = Category::show(1);
         $categories = HomeLink::categories();
 
-        return view('home-links.index', compact('category_top_level', 'categories'));
+        return view('home-links.index', compact('category_top_level', 'categories', 'adverts'));
     }
 
     /**
      * Create a new home link.
+     *
+     * @return \Illuminate\Http\JsonResponse
      */
-    public function store()
+    public function store(): JsonResponse
     {
         request()->validate([
-            'name' => 'required',
+            'name' => 'required|unique:home_links',
             'url' => 'required',
             'file' => 'required|mimes:jpeg,jpg,png',
         ]);
 
-        $home_link = HomeLink::store(request());
+        $home_link = HomeLink::store();
 
         if ($home_link) {
             return response()->json([
@@ -56,7 +58,7 @@ class HomeLinksController extends Controller
      *
      * @return \Illuminate\Http\JsonResponse
      */
-    public function updatePositions()
+    public function updatePositions(): JsonResponse
     {
         $positions_updated = HomeLink::updatePositions(request()->all());
 

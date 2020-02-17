@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\OrderTrackingLine;
+use App\Models\HomeLink;
 
 class HomeController extends Controller
 {
@@ -11,8 +11,8 @@ class HomeController extends Controller
      */
     public function index()
     {
-        $popular_products = OrderTrackingLine::popular();
+        $adverts = HomeLink::adverts();
 
-        return view('home.index', compact('popular_products'));
+        return view('home.index', compact('adverts'));
     }
 }
