@@ -64,12 +64,13 @@ Route::group(['middleware' => 'auth:admin'], static function () {
 
     Route::group(['prefix' => 'site-settings'], static function () {
         Route::get('/', 'Cms\SiteSettingsController@index')->name('cms.site-settings');
+        Route::patch('/', 'Cms\SiteSettingsController@update')->name('cms.site-settings.update');
 
         Route::patch('maintenance', static function () {
             return GlobalSettings::where('key', 'maintenance')->update([
                 'value' => json_encode(['enabled' => request('enabled'), 'message' => request('message')], true)
             ]);
-        })->name('cms.site-settings');
+        })->name('cms.site-settings.maintenance');
     });
 
     Route::group(['prefix' => 'home-links'], static function () {

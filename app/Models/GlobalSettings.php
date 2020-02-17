@@ -15,6 +15,29 @@ class GlobalSettings extends Model
     protected $table = 'globals';
 
     /**
+     * Forget all the cache keys regarding site settings.
+     *
+     * @return void
+     */
+    public function forgetSettingsCache(): void
+    {
+        Cache::forget('site-announcement');
+        Cache::forget('google-maps-url');
+        Cache::forget('google-analytics-url');
+        Cache::forget('default-country');
+    }
+
+    /**
+     * @param $key
+     *
+     * @return mixed
+     */
+    public static function key($key)
+    {
+        return self::where('key', $key)->first()->value;
+    }
+
+    /**
      * Get the global site discount that will be used if there
      * is no override created for the customer.
      *
@@ -40,13 +63,13 @@ class GlobalSettings extends Model
     }
 
     /**
-     * @param $key
-     *
      * @return mixed
      */
-    public static function key($key)
+    public static function siteAnnouncement()
     {
-        return self::where('key', $key)->first()->value;
+        return Cache::rememberForever('site-announcement', static function () {
+            return self::where('key', 'site-announcement')->first()->value;
+        });
     }
 
     /**
@@ -57,5 +80,63 @@ class GlobalSettings extends Model
         return Cache::remember('countries', 1440, static function () {
             return self::where('key', 'countries')->first()->value;
         });
+    }
+
+    /**
+     * @return mixed
+     */
+    public static function defaultCountry()
+    {
+        return Cache::rememberForever('default-country', static function () {
+            return self::where('key', 'default-country')->first()->value;
+        });
+    }
+
+    /**
+     * @return mixed
+     */
+    public static function googleMapsUrl()
+    {
+        return Cache::rememberForever('google-maps-url', static function () {
+            return self::where('key', 'google-maps')->first()->value;
+        });
+    }
+
+    /**
+     * @return mixed
+     */
+    public static function googleAnalyticsUrl()
+    {
+        return Cache::rememberForever('google-analytics-url', static function () {
+            return self::where('key', 'google-analytics')->first()->value;
+        });
+    }
+
+    /**
+     * @return bool
+     */
+    public static function storeSiteSettings(): bool
+    {
+        $settings = new self();
+
+        $settings->forgetSettingsCache();
+
+        $settings::where('key', 'site-announcement')->update([
+            'value' => request('announcement') ?: '',
+        ]);
+
+        $settings::where('key', 'default-country')->update([
+            'value' => request('default_country'),
+        ]);
+
+        $settings::where('key', 'google-analytics')->update([
+            'value' => request('tracking_code') ?: '',
+        ]);
+
+        $settings::where('key', 'google-maps')->update([
+            'value' => request('google_maps') ?: '',
+        ]);
+
+        return true;
     }
 }
