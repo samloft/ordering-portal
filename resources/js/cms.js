@@ -15,6 +15,7 @@ Vue.component('customer-discounts', require('./modules/CustomerDiscounts.vue').d
 Vue.component('delivery-methods', require('./modules/DeliveryMethods.vue').default);
 Vue.component('contacts', require('./modules/Contacts.vue').default);
 Vue.component('maintenance', require('./modules/Maintenance.vue').default);
+Vue.component('category-images', require('./modules/CategoryImages.vue').default);
 
 window.Event = new Vue();
 

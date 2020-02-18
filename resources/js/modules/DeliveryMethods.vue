@@ -132,7 +132,7 @@
                 this.data = delivery_data;
 
                 this.editing = !!Object.keys(delivery_data).length > 0;
-                this.buttonText = Object.keys(delivery_data) > 0 ? 'Update' : 'Save';
+                this.buttonText = Object.keys(delivery_data).length > 0 ? 'Update' : 'Save';
 
                 this.modal = true;
             },
