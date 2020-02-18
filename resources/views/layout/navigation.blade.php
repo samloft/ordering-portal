@@ -6,7 +6,7 @@
         </div>
 
         <div class="menu-item">
-            <a href="{{ route('products') }}" class="{{ activeMenu('products') }}">{{ __('Product') }}</a>
+            <a href="{{ route('products') }}" class="{{ activeMenu('products') }}">{{ __('Products') }}</a>
         </div>
 
         <div class="menu-item">
