@@ -115,7 +115,7 @@
             </div>
         </div>
 
-        @if ($product->expectedStock)
+        @if (count($product->expectedStock) > 0)
             <h5 class="mb-3 font-semibold">Expected Stock</h5>
             <table class="table table-expected">
                 <thead>
