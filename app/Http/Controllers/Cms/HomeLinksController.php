@@ -9,6 +9,7 @@ use Exception;
 use Illuminate\Contracts\View\Factory;
 use Illuminate\Http\JsonResponse;
 use Illuminate\View\View;
+use Illuminate\Support\Facades\Storage;
 
 class HomeLinksController extends Controller
 {
@@ -30,6 +31,8 @@ class HomeLinksController extends Controller
      * Create a new home link.
      *
      * @return \Illuminate\Http\JsonResponse
+     *
+     * @throws \Illuminate\Contracts\Filesystem\FileNotFoundException
      */
     public function store(): JsonResponse
     {
@@ -83,7 +86,12 @@ class HomeLinksController extends Controller
      */
     public function destroy($id): JsonResponse
     {
-        if (HomeLink::destroy($id)) {
+        $link = HomeLink::findOrFail($id);
+
+        if ($link->delete()) {
+
+            Storage::disk('public')->delete('images/'.$link->type.'/'.$link->image);
+
             return response()->json([
                 'deleted' => true,
             ]);

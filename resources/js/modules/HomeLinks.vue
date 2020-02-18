@@ -23,7 +23,7 @@
                 >
                     <div class="bg-white p-8 relative cursor-move rounded-lg hover:opacity-75">
                         <button class="py-2 px-3 bg-red-400 text-white absolute right-0 rounded-l hover:bg-red-600"
-                                @click="removeCategory(element.id)">
+                                @click="removeCategory(element.id, element.type)">
                             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" class="fill-current"
                                  height="18" width="18">
                                 <path
@@ -239,7 +239,7 @@
                     this.categories.push(response.data.data);
                 }).catch(error => this.errors.record(error.response.data.errors));
             },
-            removeCategory(id) {
+            removeCategory(id, link_type) {
                 var vm = this;
 
                 Vue.swal({
@@ -249,7 +249,9 @@
                     showCancelButton: true,
                 }).then(response => {
                     if (response.value) {
-                        axios.delete('/cms/home-links/' + id).then(response => {
+                        axios.delete('/cms/home-links/' + id , {
+                            type: link_type
+                        }).then(response => {
                             let i = vm.categories.map(item => item.id).indexOf(id);
                             vm.categories.splice(i, 1);
 

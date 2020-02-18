@@ -2885,7 +2885,7 @@ function () {
         return _this.errors.record(error.response.data.errors);
       });
     },
-    removeCategory: function removeCategory(id) {
+    removeCategory: function removeCategory(id, link_type) {
       var _this2 = this;
 
       var vm = this;
@@ -2896,7 +2896,9 @@ function () {
         showCancelButton: true
       }).then(function (response) {
         if (response.value) {
-          axios["delete"]('/cms/home-links/' + id).then(function (response) {
+          axios["delete"]('/cms/home-links/' + id, {
+            type: link_type
+          }).then(function (response) {
             var i = vm.categories.map(function (item) {
               return item.id;
             }).indexOf(id);
@@ -13637,7 +13639,10 @@ var render = function() {
                                 "py-2 px-3 bg-red-400 text-white absolute right-0 rounded-l hover:bg-red-600",
                               on: {
                                 click: function($event) {
-                                  return _vm.removeCategory(element.id)
+                                  return _vm.removeCategory(
+                                    element.id,
+                                    element.type
+                                  )
                                 }
                               }
                             },

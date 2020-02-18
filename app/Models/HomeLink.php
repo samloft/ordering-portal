@@ -3,7 +3,6 @@
 namespace App\Models;
 
 use Eloquent;
-use Exception;
 use File;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Database\Eloquent\Model;
@@ -109,16 +108,15 @@ class HomeLink extends Model
     /**
      * Deletes the record with matching image for the given ID.
      *
-     * @param array|\Illuminate\Support\Collection|int $id
+     * @param $id
      *
      * @return bool|int|null
-     * @throws Exception
      */
     public static function destroy($id)
     {
-        $link = static::show($id);
-
-        Storage::disk('public')->delete('images/home-links/'.$link->image);
+        //$link = static::show($id);
+        //
+        //Storage::disk('public')->delete('images/'.request('type').'/'.$link->image);
 
         return self::where('id', $id)->delete();
     }
