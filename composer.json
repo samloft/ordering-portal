@@ -60,7 +60,8 @@
             "app/Helpers/OnlineDiscount.php",
             "app/Helpers/Vat.php",
             "app/Helpers/Url.php",
-            "app/Helpers/BulkDiscount.php"
+            "app/Helpers/BulkDiscount.php",
+            "app/Helpers/SmallOrderCharge.php"
         ]
     },
     "autoload-dev": {

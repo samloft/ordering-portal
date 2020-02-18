@@ -46,11 +46,10 @@ class Basket extends Model
      * Return all basket lines based on customer code.
      *
      * @param int  $shipping_value
-     * @param null $country
      *
      * @return Basket[]|Collection
      */
-    public static function show($shipping_value = 0, $country = null): array
+    public static function show($shipping_value = 0): array
     {
         $lines = static::selectRaw('basket.product as product, basket.customer_code as customer_code,
                                                     basket.quantity as quantity, price, break1, price1, break2, price2,
@@ -122,7 +121,7 @@ class Basket extends Model
             }
         }
 
-        $small_order_charge = SmallOrderCharge::value($goods_total, $country);
+        $small_order_charge = smallOrderCharge($goods_total);
 
         return [
             'summary' => [
@@ -228,19 +227,19 @@ class Basket extends Model
         return self::where('customer_code', auth()->user()->customer->code)->where('user_id', auth()->user()->id)->where('product', $product)->update(['quantity' => $quantity]);
     }
 
-    /**
-     * Check if the value of the order reaches the limit of the small
-     * order charge, if not return the charge else return 0.
-     *
-     * @param $value
-     *
-     * @return int
-     */
-    public static function smallOrderCharge($value): int
-    {
-        $small_order_limit = 200;
-        $small_order_charge = 10;
-
-        return $value > $small_order_limit ? 0 : $small_order_charge;
-    }
+    ///**
+    // * Check if the value of the order reaches the limit of the small
+    // * order charge, if not return the charge else return 0.
+    // *
+    // * @param $value
+    // *
+    // * @return int
+    // */
+    //public static function smallOrderCharge($value): int
+    //{
+    //    $small_order_limit = 200;
+    //    $small_order_charge = 10;
+    //
+    //    return $value > $small_order_limit ? 0 : $small_order_charge;
+    //}
 }
