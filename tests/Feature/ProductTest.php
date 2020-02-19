@@ -27,7 +27,7 @@ class ProductTest extends TestCase
 
         factory(Price::class)->create([
             'customer_code' => $user->customer->code,
-            'product'       => $product->code,
+            'product' => $product->code,
         ]);
 
         $this->get($product->path())->assertSee($product->description);
@@ -48,9 +48,47 @@ class ProductTest extends TestCase
 
         factory(Price::class)->create([
             'customer_code' => 'ABC123',
-            'product'       => $product->code,
+            'product' => $product->code,
         ]);
 
         $this->get($product->path())->assertDontSee($product->description);
+    }
+
+    /**
+     * @test
+     */
+    public function a_customer_can_search_for_a_product_on_their_price_list(): void
+    {
+        $user = (new UserFactory())->withCustomer()->create();
+
+        $this->signIn($user);
+
+        $product = factory(Product::class)->create();
+
+        factory(Price::class)->create([
+            'customer_code' => $user->customer->code,
+            'product' => $product->code,
+        ]);
+
+        $this->get(route('products.search', ['query' => $product->code]))->assertSee($product->code)->assertSee($product->description);
+    }
+
+    /**
+     * @test
+     */
+    public function a_customer_cannot_search_for_a_product_on_their_price_list(): void
+    {
+        $user = (new UserFactory())->withCustomer()->create();
+
+        $this->signIn($user);
+
+        $product = factory(Product::class)->create();
+
+        factory(Price::class)->create([
+            'customer_code' => 'ABC123',
+            'product' => $product->code,
+        ]);
+
+        $this->get(route('products.search', ['query' => $product->code]))->assertDontSee($product->description);
     }
 }
