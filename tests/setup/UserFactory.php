@@ -3,6 +3,7 @@
 namespace Tests\Setup;
 
 use App\Models\Customer;
+use App\Models\CustomerDiscount;
 use App\Models\User;
 use App\Models\UserCustomer;
 
@@ -11,6 +12,8 @@ class UserFactory
     protected $customer = 0;
 
     protected $user_customers;
+
+    protected $discount = false;
 
     /**
      * @return $this
@@ -25,6 +28,13 @@ class UserFactory
     public function withUserCustomers($count = 0): self
     {
         $this->user_customers = $count;
+
+        return $this;
+    }
+
+    public function withDiscount($discount = 0)
+    {
+        $this->discount = $discount;
 
         return $this;
     }
@@ -49,10 +59,17 @@ class UserFactory
                 ]);
 
                 factory(UserCustomer::class)->create([
-                    'user_id'       => $user->id,
+                    'user_id' => $user->id,
                     'customer_code' => $customer->code,
                 ]);
             }
+        }
+
+        if ($this->discount) {
+            factory(CustomerDiscount::class)->create([
+                'customer_code' => $user->customer_code,
+                'percent' => $this->discount,
+            ]);
         }
 
         return $user;
