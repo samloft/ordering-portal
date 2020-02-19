@@ -23,6 +23,9 @@ function currency($value = null, $decimals = 4)
         case 'USD':
             $currency_code = '$';
             break;
+        case 'AED':
+            $currency_code = 'د.إ';
+            break;
         default:
             $currency_code = '£';
     }
