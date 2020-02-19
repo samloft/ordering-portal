@@ -5,7 +5,6 @@ namespace App\Http\Controllers\Cms;
 use App\Http\Controllers\Controller;
 use App\Models\Category;
 use App\Models\CategoryImage;
-use Illuminate\Http\Request;
 
 class CategoryImagesController extends Controller
 {
