@@ -3,10 +3,10 @@
 namespace App\Http\Middleware;
 
 use App\Models\GlobalSettings;
+use Artisan;
+use Closure;
 use Illuminate\Foundation\Http\Exceptions\MaintenanceModeException;
 use Illuminate\Foundation\Http\Middleware\CheckForMaintenanceMode as Middleware;
-use Closure;
-use Artisan;
 use Symfony\Component\HttpFoundation\IpUtils;
 
 class CheckForMaintenanceMode extends Middleware
@@ -19,7 +19,6 @@ class CheckForMaintenanceMode extends Middleware
     protected $except = [
         'cms*',
     ];
-
 
     /**
      * @param \Illuminate\Http\Request $request
@@ -35,7 +34,7 @@ class CheckForMaintenanceMode extends Middleware
             Artisan::call('down --message="'.$maintenance['message'].'"');
         }
 
-        if (!$maintenance['enabled'] && $this->app->isDownForMaintenance()) {
+        if (! $maintenance['enabled'] && $this->app->isDownForMaintenance()) {
             Artisan::call('up');
         }
 

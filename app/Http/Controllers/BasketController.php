@@ -33,7 +33,6 @@ class BasketController extends Controller
      *
      * @return RedirectResponse
      * @throws Exception
-     *
      */
     public function clear(): RedirectResponse
     {

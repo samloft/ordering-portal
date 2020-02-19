@@ -13,11 +13,11 @@ function discountPercent()
 {
     // Check to see if a customer has an override discount.
     if (auth()->user()->customer->discount) {
-        return auth()->user()->customer->discount->percent . '%';
+        return auth()->user()->customer->discount->percent.'%';
     }
 
     // If no override return the global site discount.
-    return GlobalSettings::discount() . '%';
+    return GlobalSettings::discount().'%';
 }
 
 /**

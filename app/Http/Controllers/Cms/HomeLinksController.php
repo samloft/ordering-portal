@@ -8,8 +8,8 @@ use App\Models\HomeLink;
 use Exception;
 use Illuminate\Contracts\View\Factory;
 use Illuminate\Http\JsonResponse;
-use Illuminate\View\View;
 use Illuminate\Support\Facades\Storage;
+use Illuminate\View\View;
 
 class HomeLinksController extends Controller
 {
@@ -89,7 +89,6 @@ class HomeLinksController extends Controller
         $link = HomeLink::findOrFail($id);
 
         if ($link->delete()) {
-
             Storage::disk('public')->delete('images/'.$link->type.'/'.$link->image);
 
             return response()->json([
