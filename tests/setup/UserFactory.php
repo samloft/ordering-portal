@@ -40,9 +40,9 @@ class UserFactory
     /**
      * @param int $discount
      *
-     * @return \Tests\Setup\UserFactory
+     * @return $this
      */
-    public function withDiscount($discount = 0): UserFactory
+    public function withDiscount($discount = 0): self
     {
         $this->discount = $discount;
 
