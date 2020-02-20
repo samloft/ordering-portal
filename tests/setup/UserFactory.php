@@ -25,6 +25,11 @@ class UserFactory
         return $this;
     }
 
+    /**
+     * @param int $count
+     *
+     * @return $this
+     */
     public function withUserCustomers($count = 0): self
     {
         $this->user_customers = $count;
@@ -32,7 +37,12 @@ class UserFactory
         return $this;
     }
 
-    public function withDiscount($discount = 0)
+    /**
+     * @param int $discount
+     *
+     * @return \Tests\Setup\UserFactory
+     */
+    public function withDiscount($discount = 0): UserFactory
     {
         $this->discount = $discount;
 

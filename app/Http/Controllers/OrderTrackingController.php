@@ -66,7 +66,7 @@ class OrderTrackingController extends Controller
         $order_lines = OrderTrackingLine::copy(urldecode($order_number));
         $added_to_basket = Basket::store($order_lines);
 
-        if ($added_to_basket) {
+        if ($added_to_basket['basket_updated']) {
             return redirect(route('basket'))->with('success', 'Order lines from order '.decodeUrl($order_number).' have been added to your basket');
         }
 
