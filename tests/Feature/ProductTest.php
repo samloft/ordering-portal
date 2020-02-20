@@ -177,7 +177,49 @@ class ProductTest extends TestCase
             'product' => $product->code,
         ]);
 
-        $this->get(route('products.show', ['product' => $product->code]))->assertSee('Discount')
-        ->assertSee('2.0%');
+        $this->get(route('products.show', ['product' => $product->code]))->assertSee('Discount')->assertSee('2.0%');
+    }
+
+    /**
+     * @test
+     */
+    public function discount_is_correctly_removed_from_unit_price(): void
+    {
+        $user = (new UserFactory())->withCustomer()->withDiscount(2)->create();
+
+        $this->signIn($user);
+
+        $product = factory(Product::class)->create();
+
+        $product_price = factory(Price::class)->create([
+            'customer_code' => $user->customer->code,
+            'product' => $product->code,
+        ]);
+
+        $net_price = number_format($product_price->price * ((100 - 2) / 100), 4);
+
+        $this->get(route('products.show', ['product' => $product->code]))->assertSee('Discount')->assertSee($net_price);
+    }
+
+    /**
+     * @test
+     */
+    public function bulk_rates_shown_if_exist(): void
+    {
+        $user = (new UserFactory())->withCustomer()->withDiscount(2)->create();
+
+        $this->signIn($user);
+
+        $product = factory(Product::class)->create();
+
+        factory(Price::class)->create([
+            'customer_code' => $user->customer->code,
+            'product' => $product->code,
+            'price' => 100.00,
+            'price1' => 10.00,
+            'break1' => 100,
+        ]);
+
+        $this->get(route('products.show', ['product' => $product->code]))->assertSee('100')->assertSee('Discount %')->assertSee('90.00%');
     }
 }
