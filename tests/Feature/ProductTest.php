@@ -222,4 +222,44 @@ class ProductTest extends TestCase
 
         $this->get(route('products.show', ['product' => $product->code]))->assertSee('100')->assertSee('Discount %')->assertSee('90.00%');
     }
+
+    /**
+     * @test
+     */
+    public function qty_is_auto_populated_with_the_order_multiples_value(): void
+    {
+        $user = (new UserFactory())->withCustomer()->withDiscount(2)->create();
+
+        $this->signIn($user);
+
+        $product = factory(Product::class)->create([
+            'order_multiples' => 123456789,
+        ]);
+
+        factory(Price::class)->create([
+            'customer_code' => $user->customer->code,
+            'product' => $product->code,
+        ]);
+
+        $this->get(route('products.show', ['product' => $product->code]))->assertSee('123456789');
+    }
+
+    /**
+     * @test
+     */
+    public function coming_soon_image_shown_if_product_image_does_not_exist(): void
+    {
+        $user = (new UserFactory())->withCustomer()->withDiscount(2)->create();
+
+        $this->signIn($user);
+
+        $product = factory(Product::class)->create();
+
+        factory(Price::class)->create([
+            'customer_code' => $user->customer->code,
+            'product' => $product->code,
+        ]);
+
+        $this->get(route('products.show', ['product' => $product->code]))->assertSee('no-image.png');
+    }
 }
