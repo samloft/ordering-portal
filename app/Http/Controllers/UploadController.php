@@ -67,7 +67,7 @@ class UploadController extends Controller
                     'quantity'          => $product_qty,
                     'old_quantity'      => $product_qty,
                     'passed_price'      => $product_price,
-                    'price'             => $product->price ?? null,
+                    'price'             => $product->prices ? $product->prices->price : null,
                     'price_match_error' => $price_match,
                     'multiples'         => $product->order_multiples ?? 1,
                     'validation'        => [
