@@ -36,6 +36,8 @@
 
                 <div class="w-1/4">
                     @if ($product->prices->break1 > 0 || $product->prices->break2 > 0 || $product->prices->break3 > 0)
+                        <h5 class="text-gray-600 text-center uppercase tracking-widest">Bulk Rates</h5>
+
                         <table class="bulk-rates">
                             <thead>
                             <tr>

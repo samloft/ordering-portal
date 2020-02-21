@@ -43,19 +43,19 @@ table {
 }
 
 table.bulk-rates {
-    @apply .shadow-none .border-b-2 .border-brand-primary .mb-4;
+    @apply .shadow-none .mb-4;
 
     thead {
-        @apply .bg-white .text-xs ;
+        @apply .bg-white .text-xs;
 
         th {
-            @apply .text-black .p-0;
+            @apply .text-white .p-1;
         }
     }
 
     tbody {
         td {
-            @apply .p-0 .border-0 .text-sm;
+            @apply .p-1 .border-0 .text-sm .bg-gray-200;
         }
     }
 }
