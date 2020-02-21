@@ -13,7 +13,7 @@
 
         </i>
 
-        <div :class="expanded ? 'img-expanded' : 'img-list'">
+        <div :class="expanded ? 'img-expanded' : 'img-list'" class="mx-auto">
             <img v-bind="$attrs" :class="expanded ? 'img-expanded' : 'img-list'"/>
         </div>
     </div>

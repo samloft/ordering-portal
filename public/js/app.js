@@ -11764,17 +11764,24 @@ var render = function() {
         )
       ]),
       _vm._v(" "),
-      _c("div", { class: _vm.expanded ? "img-expanded" : "img-list" }, [
-        _c(
-          "img",
-          _vm._b(
-            { class: _vm.expanded ? "img-expanded" : "img-list" },
+      _c(
+        "div",
+        {
+          staticClass: "mx-auto",
+          class: _vm.expanded ? "img-expanded" : "img-list"
+        },
+        [
+          _c(
             "img",
-            _vm.$attrs,
-            false
+            _vm._b(
+              { class: _vm.expanded ? "img-expanded" : "img-list" },
+              "img",
+              _vm.$attrs,
+              false
+            )
           )
-        )
-      ])
+        ]
+      )
     ]
   )
 }
