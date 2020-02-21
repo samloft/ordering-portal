@@ -47,7 +47,7 @@ class BasketController extends Controller
      *
      * @return JsonResponse
      */
-    public function addProduct()
+    public function addProduct(): JsonResponse
     {
         $product = trim(request('product'));
         $quantity = trim(request('quantity'));
@@ -55,7 +55,7 @@ class BasketController extends Controller
 
         $product_details = Product::show($product);
 
-        if (! $product_details) {
+        if (! $product_details || $product_details->not_sold) {
             return response()->json([
                 'error' => true,
                 'message' => 'The product you have entered does not exist.',

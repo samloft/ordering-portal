@@ -14,7 +14,8 @@
         @if ($sub_category_list)
             <div class="flex flex-wrap -mx-3">
                 @foreach($sub_category_list['list'] as $category)
-                    <product-categories :category="{{ json_encode($category, true) }}" :current="{{ json_encode($sub_category_list['current'], true) }}"></product-categories>
+                    <product-categories :category="{{ json_encode($category, true) }}"
+                                        :current="{{ json_encode($sub_category_list['current'], true) }}"></product-categories>
                 @endforeach
             </div>
         @endif
@@ -25,8 +26,8 @@
                     <div class="flex mb-2">
                         <div class="w-3/4">
                             <h2 class="font-semibold text-lg text-primary mb-2">
-                                <a href="/products/view/{{ encodeUrl($product->code) }}"
-                                   class="hover:underline">{{ $product->name }}</a>
+                                <a class="flex items-center" href="/products/view/{{ encodeUrl($product->code) }}"
+                                   class="hover:underline">{{ $product->name }} @if($product->not_sold) <span class="badge badge-danger ml-3">Not Sold</span> @endif</a>
                             </h2>
 
                             <div class="flex items-center">
@@ -52,41 +53,43 @@
                         </div>
 
                         <div class="w-1/4">
-                            <div class="flex justify-between">
-                                <div class="col text-left">
-                                    {{ __('Trade Price:') }}
+                            @if(!$product->not_sold)
+                                <div class="flex justify-between">
+                                    <div class="col text-left">
+                                        {{ __('Trade Price:') }}
+                                    </div>
+                                    <div class="col text-right">
+                                        {{ currency($product->trade_price, 4) }}
+                                    </div>
                                 </div>
-                                <div class="col text-right">
-                                    {{ currency($product->trade_price, 4) }}
+                                <div class="flex justify-between">
+                                    <div class="col text-left">
+                                        {{ __('Unit Price:') }}
+                                    </div>
+                                    <div class="col text-right">
+                                        {{ currency($product->prices->price, 4) }}
+                                    </div>
                                 </div>
-                            </div>
-                            <div class="flex justify-between">
-                                <div class="col text-left">
-                                    {{ __('Unit Price:') }}
+                                <div class="flex justify-between">
+                                    <div class="col text-left">
+                                        {{ __('Discount:') }}
+                                    </div>
+                                    <div class="col text-right">
+                                        {{ discountPercent() }}
+                                    </div>
                                 </div>
-                                <div class="col text-right">
-                                    {{ currency($product->prices->price, 4) }}
+                                <hr>
+                                <div class="flex justify-between mt-1 mb-1">
+                                    <div class="col text-left">
+                                        <strong>{{ __('Net Price:') }}</strong>
+                                    </div>
+                                    <div class="col text-right">
+                                        <strong>{{ currency(discount($product->prices->price), 4) }}</strong>
+                                    </div>
                                 </div>
-                            </div>
-                            <div class="flex justify-between">
-                                <div class="col text-left">
-                                    {{ __('Discount:') }}
-                                </div>
-                                <div class="col text-right">
-                                    {{ discountPercent() }}
-                                </div>
-                            </div>
-                            <hr>
-                            <div class="flex justify-between mt-1 mb-1">
-                                <div class="col text-left">
-                                    <strong>{{ __('Net Price:') }}</strong>
-                                </div>
-                                <div class="col text-right">
-                                    <strong>{{ currency(discount($product->prices->price), 4) }}</strong>
-                                </div>
-                            </div>
-                            <hr>
-                            <add-basket :product="{{ json_encode($product, true) }}"></add-basket>
+                                <hr>
+                                <add-basket :product="{{ json_encode($product, true) }}"></add-basket>
+                            @endif
                         </div>
                     </div>
                     <div class="flex justify-between items-center">

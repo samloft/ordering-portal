@@ -9,7 +9,7 @@
             <div class="flex mb-2">
                 <div class="w-3/4">
                     <h2 class="font-semibold text-2xl text-primary mb-2">
-                        <a href="/products/view/{{ encodeUrl($product->code) }}">{{ $product->name }}</a>
+                        <a class="flex items-center" href="/products/view/{{ encodeUrl($product->code) }}">{{ $product->name }} @if($product->not_sold) <span class="badge badge-danger ml-3">Not Sold</span> @endif</a>
                     </h2>
 
                     <div class="flex">
@@ -35,74 +35,76 @@
                 </div>
 
                 <div class="w-1/4">
-                    @if ($product->prices->break1 > 0 || $product->prices->break2 > 0 || $product->prices->break3 > 0)
-                        <h5 class="text-gray-600 text-center uppercase tracking-widest">Bulk Rates</h5>
+                    @if(!$product->not_sold)
+                        @if ($product->prices->break1 > 0 || $product->prices->break2 > 0 || $product->prices->break3 > 0)
+                            <h5 class="text-gray-600 text-center uppercase tracking-widest">Bulk Rates</h5>
 
-                        <table class="bulk-rates">
-                            <thead>
-                            <tr>
-                                <th>Qty</th>
-                                <th>Discount %</th>
-                                <th class="text-right">Net Price</th>
-                            </tr>
-                            </thead>
-                            <tbody>
-                            @for ($i = 0; $i < 4; $i++)
-                                @php
-                                    $break = 'break' . $i; $price = 'price' . $i;
-                                @endphp
+                            <table class="bulk-rates">
+                                <thead>
+                                <tr>
+                                    <th>Qty</th>
+                                    <th>Discount %</th>
+                                    <th class="text-right">Net Price</th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                @for ($i = 0; $i < 4; $i++)
+                                    @php
+                                        $break = 'break' . $i; $price = 'price' . $i;
+                                    @endphp
 
-                                @if ($product->prices->$break > 0)
-                                    <tr>
-                                        <td>{{ $product->prices->$break }}</td>
-                                        <td>{{ bulkDiscount($product->prices->price, $product->prices->$price) }}</td>
-                                        <td class="text-right">{{ currency(discount($product->prices->$price), 4) }}</td>
-                                    </tr>
-                                @endif
-                            @endfor
-                            </tbody>
-                        </table>
-                    @endif
+                                    @if ($product->prices->$break > 0)
+                                        <tr>
+                                            <td>{{ $product->prices->$break }}</td>
+                                            <td>{{ bulkDiscount($product->prices->price, $product->prices->$price) }}</td>
+                                            <td class="text-right">{{ currency(discount($product->prices->$price), 4) }}</td>
+                                        </tr>
+                                    @endif
+                                @endfor
+                                </tbody>
+                            </table>
+                        @endif
 
-                    <div class="flex justify-between">
-                        <div class="col text-left">
-                            {{ __('Trade Price:') }}
-                        </div>
-                        <div class="col text-right">
-                            {{ currency($product->trade_price, 4) }}
-                        </div>
-                    </div>
-                    <div class="flex justify-between">
-                        <div class="col text-left">
-                            {{ __('Unit Price:') }}
-                        </div>
-                        <div class="col text-right">
-                            {{ currency($product->prices->price, 4) }}
-                        </div>
-                    </div>
-
-                    @if((int) discountPercent() > 0)
                         <div class="flex justify-between">
                             <div class="col text-left">
-                                {{ __('Discount:') }}
+                                {{ __('Trade Price:') }}
                             </div>
                             <div class="col text-right">
-                                {{ discountPercent() }}
+                                {{ currency($product->trade_price, 4) }}
                             </div>
                         </div>
-                    @endif
+                        <div class="flex justify-between">
+                            <div class="col text-left">
+                                {{ __('Unit Price:') }}
+                            </div>
+                            <div class="col text-right">
+                                {{ currency($product->prices->price, 4) }}
+                            </div>
+                        </div>
 
-                    <hr>
-                    <div class="flex justify-between mt-1 mb-1">
-                        <div class="col text-left">
-                            <strong>{{ __('Net Price:') }}</strong>
+                        @if((int) discountPercent() > 0)
+                            <div class="flex justify-between">
+                                <div class="col text-left">
+                                    {{ __('Discount:') }}
+                                </div>
+                                <div class="col text-right">
+                                    {{ discountPercent() }}
+                                </div>
+                            </div>
+                        @endif
+
+                        <hr>
+                        <div class="flex justify-between mt-1 mb-1">
+                            <div class="col text-left">
+                                <strong>{{ __('Net Price:') }}</strong>
+                            </div>
+                            <div class="col text-right">
+                                <strong>{{ currency(discount($product->prices->price), 4) }}</strong>
+                            </div>
                         </div>
-                        <div class="col text-right">
-                            <strong>{{ currency(discount($product->prices->price), 4) }}</strong>
-                        </div>
-                    </div>
-                    <hr>
-                    <add-basket :product="{{ json_encode($product, true) }}"></add-basket>
+                        <hr>
+                        <add-basket :product="{{ json_encode($product, true) }}"></add-basket>
+                    @endif
                 </div>
             </div>
             <div class="flex justify-end">
@@ -115,6 +117,18 @@
                     </div>
                 </div>
             </div>
+
+            @if(trim($product->note) !== '')
+                @if($product->note === 'Superseeded')
+                    <h3 class="text-red-600 tracking-wide font-semibold text-lg">Superseeded {!! $product->link1 ? 'by <a class="hover:underline" href="'.route('products.show', ['product' => trim($product->link1)]).'">'.trim($product->link1).'</a>' : '' !!}</h3>
+                @else
+                    <div class="bg-gray-200 mt-3 rounded p-6">
+                        <h5 class="font-semibold mb-3">Notes:</h5>
+
+                        <p>{{ $product->note }}</p>
+                    </div>
+                @endif
+            @endif
         </div>
 
         @if (count($product->expectedStock) > 0)
