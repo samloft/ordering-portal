@@ -124,14 +124,14 @@
         </div>
     </div>
 
-    <div class="bg-white rounded shadow-md p-3 mb-5 mr-2">
-        <h4 class="text-primary">{{ __('API Access') }}</h4>
+{{--    <div class="bg-white rounded shadow-md p-3 mb-5 mr-2">--}}
+{{--        <h4 class="text-primary">{{ __('API Access') }}</h4>--}}
 
-        <p>{{ __('Below is the unique API key to give you access to the online ordering portal API') }}</p>
+{{--        <p>{{ __('Below is the unique API key to give you access to the online ordering portal API') }}</p>--}}
 
-        <div class="flex justify-between items-center bg-gray-100 text-gray-600 mt-3 p-4 rounded">
-            <span id="api_token">{{ auth()->user()->api_token }}</span>
-            <span class="badge badge-info cursor-pointer" @click="copyToClipboard('api_token')">{{ __('Click to copy') }}</span>
-        </div>
-    </div>
+{{--        <div class="flex justify-between items-center bg-gray-100 text-gray-600 mt-3 p-4 rounded">--}}
+{{--            <span id="api_token">{{ auth()->user()->api_token }}</span>--}}
+{{--            <span class="badge badge-info cursor-pointer" @click="copyToClipboard('api_token')">{{ __('Click to copy') }}</span>--}}
+{{--        </div>--}}
+{{--    </div>--}}
 @endsection
