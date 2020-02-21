@@ -1,5 +1,5 @@
 table {
-    @apply .rounded .w-full .text-left .shadow;
+    @apply .rounded .w-full .text-left .shadow .border-collapse;
 
     thead {
         @apply .uppercase;
@@ -30,8 +30,12 @@ table {
             }
         }
 
+        tr {
+            @apply .bg-white;
+        }
+
         td {
-            @apply .bg-white .border-t .border-gray-300 .py-2 .px-4;
+            @apply .border-t .border-gray-300 .py-2 .px-4;
         }
     }
 

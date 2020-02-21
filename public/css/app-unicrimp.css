@@ -13922,6 +13922,7 @@ table {
   width: 100%;
   text-align: left;
   box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.1), 0 1px 2px 0 rgba(0, 0, 0, 0.06);
+  border-collapse: collapse;
 }
 
 table thead {
@@ -13959,8 +13960,11 @@ table tbody tr:last-child td:last-child {
   border-bottom-right-radius: 0.25rem;
 }
 
-table tbody td {
+table tbody tr {
   background-color: #fff;
+}
+
+table tbody td {
   border-top-width: 1px;
   border-color: #e2e8f0;
   padding-top: 0.5rem;

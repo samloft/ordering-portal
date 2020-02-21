@@ -60,7 +60,7 @@
     <h2 class="font-semibold tracking-widest mt-3 mb-3">{{ __('Search Results') }}</h2>
 
     @if(!$orders->isEmpty())
-        <table class="table table-striped table-hover">
+        <table class="table">
             <thead class="thead-dark">
             <tr>
                 <th>{{ __('Order Number') }}</th>
