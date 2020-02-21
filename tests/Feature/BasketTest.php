@@ -2,11 +2,11 @@
 
 namespace Tests\Feature;
 
+use App\Models\Price;
+use App\Models\Basket;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Tests\Setup\BasketFactory;
 use Tests\Setup\UserFactory;
-use App\Models\Price;
-use App\Models\Basket;
 use Tests\TestCase;
 
 class BasketTest extends TestCase
