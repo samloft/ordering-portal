@@ -9,7 +9,9 @@
             <div class="flex mb-2">
                 <div class="w-3/4">
                     <h2 class="font-semibold text-2xl text-primary mb-2">
-                        <a class="flex items-center" href="/products/view/{{ encodeUrl($product->code) }}">{{ $product->name }} @if($product->not_sold) <span class="badge badge-danger ml-3">Not Sold</span> @endif</a>
+                        <a class="flex items-center"
+                           href="/products/view/{{ encodeUrl($product->code) }}">{{ $product->name }} @if($product->not_sold)
+                                <span class="badge badge-danger ml-3">Not Sold</span> @endif</a>
                     </h2>
 
                     <div class="flex">
@@ -120,7 +122,8 @@
 
             @if(trim($product->note) !== '')
                 @if($product->note === 'Superseeded')
-                    <h3 class="text-red-600 tracking-wide font-semibold text-lg">Superseeded {!! $product->link1 ? 'by <a class="hover:underline" href="'.route('products.show', ['product' => trim($product->link1)]).'">'.trim($product->link1).'</a>' : '' !!}</h3>
+                    <h3 class="text-red-600 tracking-wide font-semibold text-lg">
+                        Superseeded {!! $product->link1 ? 'by <a class="hover:underline" href="'.route('products.show', ['product' => trim($product->link1)]).'">'.trim($product->link1).'</a>' : '' !!}</h3>
                 @else
                     <div class="bg-gray-200 mt-3 rounded p-6">
                         <h5 class="font-semibold mb-3">Notes:</h5>
@@ -129,6 +132,43 @@
                     </div>
                 @endif
             @endif
+
+            @if ($product->luckins_code)
+                <div class="flex items-center">
+                    <img class="w-24 mt-1 mr-3" src="{{ asset('images/luckins.png') }}"
+                         alt="Luckins">
+                    <div class="rounded border border-primary pl-1 pr-1">
+                        {{ $product->luckins_code }}
+                    </div>
+                </div>
+            @endif
+
+            <div class="mt-5">
+                @if($product->length)
+                    <div class="flex border-b border-primary mb-3">
+                        <div class="w-1/3 text-gray-400">Length (mm):</div>
+                        <div>{{ $product->length }}</div>
+                    </div>
+                @endif
+                @if($product->width)
+                    <div class="flex border-b border-primary mb-3">
+                        <div class="w-1/3 text-gray-400">Width (mm):</div>
+                        <div>{{ $product->width }}</div>
+                    </div>
+                @endif
+                @if($product->height)
+                    <div class="flex border-b border-primary mb-3">
+                        <div class="w-1/3 text-gray-400">Height (mm):</div>
+                        <div>{{ $product->height }}</div>
+                    </div>
+                @endif
+                    @if($product->net_weight)
+                        <div class="flex border-b border-primary mb-3">
+                            <div class="w-1/3 text-gray-400">Weight (kg):</div>
+                            <div>{{ $product->net_weight }}</div>
+                        </div>
+                    @endif
+            </div>
         </div>
 
         @if (count($product->expectedStock) > 0)
