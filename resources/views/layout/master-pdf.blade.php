@@ -89,10 +89,10 @@
 
 <div>
     <div>
-        <b>Account Code:</b>{{ Auth::user()->customer_code }}
+        <b>Account Code:</b> {{ Auth::user()->customer->code }}
     </div>
     <div>
-        <b>Customer:</b>{{ Auth::user()->customer->name }}
+        <b>Customer:</b> {{ Auth::user()->customer->name }}
     </div>
 </div>
 
