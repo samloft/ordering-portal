@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\AccountSummary;
+use App\Models\GlobalSettings;
 use App\Models\OrderTrackingHeader;
 use Barryvdh\DomPDF\Facade as PDF;
 use Carbon\Carbon;
@@ -60,7 +61,9 @@ class ReportController extends Controller
 
         if (count($back_orders) > 0) {
             if ($output === 'pdf') {
-                $pdf = PDF::loadView('reports.back-orders', compact('back_orders'));
+                $company_details = json_decode(GlobalSettings::key('company-details'), true);
+
+                $pdf = PDF::loadView('reports.back-orders', compact('back_orders', 'company_details'));
 
                 return $pdf->download('back_orders.pdf');
             }
@@ -115,7 +118,9 @@ class ReportController extends Controller
             $summary_lines['Total Outstanding'] = $total_outstanding;
 
             if ($output === 'pdf') {
-                $pdf = PDF::loadView('reports.account-summary', compact('invoice_lines', 'summary_lines'));
+                $company_details = json_decode(GlobalSettings::key('company-details'), true);
+
+                $pdf = PDF::loadView('reports.account-summary', compact('invoice_lines', 'summary_lines', 'company_details'));
 
                 return $pdf->download('account_summary.pdf');
             }
