@@ -15,12 +15,12 @@
 
         <form id="run-report" action="{{ route('reports.show') }}" method="post" class="m-0 ">
             <label class="checkbox flex items-center justify-center mb-1">
-                <input type="checkbox" class="form-checkbox" name="report" value="account_summary">
+                <input type="radio" class="form-checkbox" name="report" value="account_summary">
                 <span class="ml-2">{{ __('Account Summary') }}</span>
             </label>
 
             <label class="checkbox flex items-center justify-center">
-                <input type="checkbox" class="form-checkbox" name="report" value="back_orders">
+                <input type="radio" class="form-checkbox" name="report" value="back_orders">
                 <span class="ml-2">{{ __('Back Order History') }}</span>
             </label>
 
