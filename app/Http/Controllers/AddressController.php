@@ -83,8 +83,18 @@ class AddressController extends Controller
     public function edit($id)
     {
         $checkout = request('checkout');
-        $countries = Countries::show();
+        $country_list = json_decode(GlobalSettings::countries(), true);
         $address = Address::details($id);
+        $default_country = GlobalSettings::key('default-country');
+
+        $countries = [];
+
+        foreach($country_list as $country) {
+            $countries[] = [
+                'name' => $country['name'],
+                'default' => $country['name'] === $default_country,
+            ];
+        }
 
         return $address ? view('addresses.show', compact('countries', 'address', 'checkout')) : abort(404);
     }
@@ -148,11 +158,12 @@ class AddressController extends Controller
     /**
      * Selects a none default address for checkout.
      *
+     * @param $address_id
+     *
      * @return RedirectResponse|Redirector
      */
-    public function select()
+    public function select($address_id)
     {
-        $address_id = request('id');
         $address = Address::details($address_id);
 
         if (! $address) {

@@ -10706,7 +10706,10 @@ var render = function() {
                       [
                         _c(
                           "button",
-                          { staticClass: "btn btn-block btn-sm btn-blue mb-1" },
+                          {
+                            staticClass:
+                              "button button-primary button-block mb-1"
+                          },
                           [_vm._v("Select Address")]
                         )
                       ]

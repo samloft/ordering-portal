@@ -15,7 +15,7 @@
 
                         <a v-if="checkout" :href="'/account/addresses/select/' + address.id"
                            class="btn-link">
-                            <button class="btn btn-block btn-sm btn-blue mb-1">Select Address</button>
+                            <button class="button button-primary button-block mb-1">Select Address</button>
                         </a>
 
                         <div v-else>
