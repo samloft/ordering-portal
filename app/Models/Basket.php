@@ -190,7 +190,6 @@ class Basket extends Model
      *
      * @return bool|int|null
      * @throws Exception
-     *
      */
     public static function clear()
     {

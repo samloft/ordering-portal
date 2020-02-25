@@ -2,8 +2,8 @@
 
 namespace Tests\Feature;
 
-use App\Models\Price;
 use App\Models\Basket;
+use App\Models\Price;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Tests\Setup\BasketFactory;
 use Tests\Setup\UserFactory;

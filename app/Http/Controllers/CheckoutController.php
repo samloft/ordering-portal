@@ -6,12 +6,9 @@ use App\Models\Address;
 use App\Models\Basket;
 use App\Models\DeliveryMethod;
 use App\Models\GlobalSettings;
-use App\Notifications\OrderPlacedNotification;
 use Auth;
-use Illuminate\Contracts\View\Factory;
 use Illuminate\Http\Request;
 use Illuminate\View\View;
-use Notification;
 
 class CheckoutController extends Controller
 {
