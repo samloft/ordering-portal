@@ -61,6 +61,10 @@
             Event.$on('product-updated', data => {
                 this.updateSummary(data);
             });
+
+            Event.$on('delivery-updated', data => {
+                this.updateSummary({basket_details: data});
+            });
         }
     }
 </script>

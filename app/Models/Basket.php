@@ -45,11 +45,11 @@ class Basket extends Model
     /**
      * Return all basket lines based on customer code.
      *
-     * @param int $shipping_value
+     * @param null $shipping_code
      *
      * @return Basket[]|Collection
      */
-    public static function show($shipping_value = 0): array
+    public static function show($shipping_code = null): array
     {
         $lines = static::selectRaw('basket.product as product, basket.customer_code as customer_code,
                                                     basket.quantity as quantity, price, break1, price1, break2, price2,
@@ -115,7 +115,19 @@ class Basket extends Model
             }
         }
 
-        $small_order_charge = smallOrderCharge($goods_total);
+        if ($shipping_code) {
+            $delivery_method = DeliveryMethod::where('code', $shipping_code)->first();
+        } else {
+            $delivery_method = null;
+        }
+
+        $small_order_charge = smallOrderCharge($goods_total, $delivery_method);
+
+        if ($delivery_method) {
+            $shipping_value = $small_order_charge['charge'] > 0 ? $delivery_method->price_low : $delivery_method->price;
+        } else {
+            $shipping_value = 0;
+        }
 
         return [
             'summary' => [
@@ -124,7 +136,7 @@ class Basket extends Model
                 'sub_total' => currency($goods_total + $shipping_value, 2),
                 'small_order_charge' => currency($small_order_charge['charge'], 2),
                 'small_order_rules' => $small_order_charge,
-                'vat' => currency(vatAmount($goods_total + $small_order_charge['charge'] + $shipping_value), 2),
+                'vat' => currency($vat = vatAmount($goods_total + $small_order_charge['charge'] + $shipping_value), 2),
                 'total' => currency(vatIncluded($goods_total + $small_order_charge['charge'] + $shipping_value), 2),
             ],
             'line_count' => count($product_lines),
@@ -220,20 +232,4 @@ class Basket extends Model
     {
         return self::where('customer_code', auth()->user()->customer->code)->where('user_id', auth()->user()->id)->where('product', $product)->update(['quantity' => $quantity]);
     }
-
-    ///**
-    // * Check if the value of the order reaches the limit of the small
-    // * order charge, if not return the charge else return 0.
-    // *
-    // * @param $value
-    // *
-    // * @return int
-    // */
-    //public static function smallOrderCharge($value): int
-    //{
-    //    $small_order_limit = 200;
-    //    $small_order_charge = 10;
-    //
-    //    return $value > $small_order_limit ? 0 : $small_order_charge;
-    //}
 }

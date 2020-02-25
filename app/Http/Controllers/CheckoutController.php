@@ -19,8 +19,8 @@ class CheckoutController extends Controller
      */
     public function index()
     {
-        $basket = Basket::show();
         $delivery_methods = DeliveryMethod::show();
+        $basket = Basket::show(old('shipping') ?: 'HHH');
         $checkout_notice = GlobalSettings::checkoutNotice();
 
         if (! auth()->user()->can_order) {
@@ -41,9 +41,9 @@ class CheckoutController extends Controller
      *
      * @param Request $request
      *
-     * @return \App\Http\Controllers\Array
+     * @return array|\Illuminate\Http\RedirectResponse
      */
-    public function store(Request $request): array
+    public function store(Request $request)
     {
         $this->validation($request);
 
@@ -55,16 +55,16 @@ class CheckoutController extends Controller
 
         $order_details = [
             'header' => [
-                'reference'         => $request->reference,
-                'notes'             => $request->notes,
-                'shipping'          => $delivery,
-                'first_name'        => $request->first_name,
-                'last_name'         => $request->last_name,
-                'telephone'         => $request->telephone,
+                'reference' => $request->reference,
+                'notes' => $request->notes,
+                'shipping' => $delivery,
+                'first_name' => $request->first_name,
+                'last_name' => $request->last_name,
+                'telephone' => $request->telephone,
                 'evening_telephone' => $request->evening_telephone,
-                'fax'               => $request->fax,
-                'mobile'            => $request->mobile,
-                'delivery_address'  => session('address') ?: Address::getDefault()->getAttributes(),
+                'fax' => $request->fax,
+                'mobile' => $request->mobile,
+                'delivery_address' => session('address') ?: Address::getDefault()->getAttributes(),
             ],
             'details' => Basket::show($delivery['cost']),
         ];
@@ -95,10 +95,10 @@ class CheckoutController extends Controller
     public function validation($request)
     {
         return $request->validate([
-            'reference'  => 'required',
-            'shipping'   => 'required|exists:delivery_methods,uuid',
+            'reference' => 'required',
+            'shipping' => 'required|exists:delivery_methods,code',
             'first_name' => 'required',
-            'last_name'  => 'required',
+            'last_name' => 'required',
         ]);
     }
 }

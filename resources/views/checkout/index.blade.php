@@ -77,25 +77,31 @@
                                value="{{ old('notes') }}">
                     </div>
 
-                    <div class="flex items-center relative mb-3">
-                        <label for="shipping" class="w-1/2">{{ __('Shipping') }}</label>
-                        <select id="shipping" class="bg-gray-100" name="shipping" autocomplete="off">
-                            @foreach($delivery_methods as $delivery_method)
-                                <option value="{{ $delivery_method->uuid }}"
-                                        data-cost="{{ $delivery_method->price }}" {{ $delivery_method === old('shipping') ? 'selected' : '' }}>
-                                    {{ $delivery_method->title }}
-                                </option>
-                            @endforeach
-                        </select>
-                        <div
-                            class="pointer-events-none absolute inset-y-0 right-0 flex items-center px-3 text-gray-700">
-                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"
-                                 class="fill-current h-4 w-4">
-                                <path
-                                    d="M9.293 12.95l.707.707L15.657 8l-1.414-1.414L10 10.828 5.757 6.586 4.343 8z"></path>
-                            </svg>
-                        </div>
-                    </div>
+                    <delivery-method :delivery_methods="{{ json_encode($delivery_methods, true) }}"
+                                     old_delivery_method="{{ old('shipping') ?? 'HHH' }}"
+                                     goods_total="{{ $basket['summary']['goods_total'] }}"
+                                     small_order="{{ json_encode($basket['summary']['small_order_rules'], true) }}">
+                    </delivery-method>
+
+                    {{--                    <div class="flex items-center relative mb-3">--}}
+                    {{--                        <label for="shipping" class="w-1/2">{{ __('Shipping') }}</label>--}}
+                    {{--                        <select id="shipping" class="bg-gray-100" name="shipping" autocomplete="off">--}}
+                    {{--                            @foreach($delivery_methods as $delivery_method)--}}
+                    {{--                                <option value="{{ $delivery_method->uuid }}"--}}
+                    {{--                                        data-cost="{{ $delivery_method->price }}" {{ $delivery_method === old('shipping') ? 'selected' : '' }}>--}}
+                    {{--                                    {{ $delivery_method->title }}--}}
+                    {{--                                </option>--}}
+                    {{--                            @endforeach--}}
+                    {{--                        </select>--}}
+                    {{--                        <div--}}
+                    {{--                            class="pointer-events-none absolute inset-y-0 right-0 flex items-center px-3 text-gray-700">--}}
+                    {{--                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"--}}
+                    {{--                                 class="fill-current h-4 w-4">--}}
+                    {{--                                <path--}}
+                    {{--                                    d="M9.293 12.95l.707.707L15.657 8l-1.414-1.414L10 10.828 5.757 6.586 4.343 8z"></path>--}}
+                    {{--                            </svg>--}}
+                    {{--                        </div>--}}
+                    {{--                    </div>--}}
 
                     <h4 class="text-primary mt-3">{{ __('Contact Details') }}</h4>
 
@@ -130,7 +136,8 @@
                         <label class="checkbox flex items-center">
                             <input type="checkbox" name="terms" class="form-checkbox"
                                    value="{{ old('terms') ? 'checked' : '' }}" autocomplete="off">
-                            <span class="ml-2">I have read and agree to the <a href="{{ route('support.terms') }}" class="underline" target="_blank">terms & conditions</a></span>
+                            <span class="ml-2">I have read and agree to the <a href="{{ route('support.terms') }}"
+                                                                               class="underline" target="_blank">terms & conditions</a></span>
                         </label>
                     </div>
 

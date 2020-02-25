@@ -117,8 +117,11 @@
             });
 
             Event.$on('product-updated', data => {
-                this.dropdown_message = 'Has been updated';
-                this.dropdownBasket(data);
+                if(data.product) {
+                    this.dropdown_message = 'Has been updated';
+                    this.dropdownBasket(data);
+                }
+
                 this.basketSummary();
             });
 
