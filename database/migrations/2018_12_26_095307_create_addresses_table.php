@@ -22,7 +22,7 @@ class CreateAddressesTable extends Migration
             $table->string('address_line_3');
             $table->string('address_line_4')->nullable();
             $table->string('address_line_5')->nullable();
-            $table->integer('country_id');
+            $table->string('country');
             $table->string('post_code');
             $table->integer('default')->default(0);
             $table->timestamps();

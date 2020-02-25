@@ -42,6 +42,7 @@ class Address extends Model
     public static function store($address)
     {
         $address['customer_code'] = auth()->user()->customer->code;
+        $address['user_id'] = auth()->user()->id;
         $address['created_at'] = date('Y-m-d H:i:s');
 
         $create_address = self::insertGetId($address);

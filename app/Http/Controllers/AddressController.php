@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Address;
 use App\Models\Countries;
+use App\Models\GlobalSettings;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Routing\Redirector;
 
@@ -32,7 +33,17 @@ class AddressController extends Controller
     public function create()
     {
         $checkout = request('checkout');
-        $countries = Countries::show();
+        $country_list = json_decode(GlobalSettings::countries(), true);
+        $default_country = GlobalSettings::key('default-country');
+
+        $countries = [];
+
+        foreach($country_list as $country) {
+            $countries[] = [
+                'name' => $country['name'],
+                'default' => $country['name'] === $default_country,
+            ];
+        }
 
         return view('addresses.show', compact('countries', 'checkout'));
     }
@@ -189,7 +200,7 @@ class AddressController extends Controller
             'address_line_3' => 'required|min:2',
             'address_line_4' => 'nullable',
             'address_line_5' => 'nullable',
-            'country_id'     => 'required|exists:countries,id',
+            'country'     => 'required',
             'post_code'      => 'required|min:3',
         ]);
     }

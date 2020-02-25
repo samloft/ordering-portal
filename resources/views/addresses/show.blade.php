@@ -17,15 +17,15 @@
         <div class="bg-white rounded-lg shadow p-10 mb-5">
             @include('layout.alerts')
 
-{{--            <div id="text-error"></div>--}}
+            {{--            <div id="text-error"></div>--}}
 
-{{--            <div class="flex items-center">--}}
-{{--                <input name="postcode_lookup">--}}
-{{--                <button class="w-2/6 ml-2 button button-inverse">{{ __('Lookup Postcode') }}</button>--}}
-{{--            </div>--}}
-{{--            <div class="text-xs mb-5">--}}
-{{--                {{ __('You will still need to enter company name & address line 2 manually') }}--}}
-{{--            </div>--}}
+            {{--            <div class="flex items-center">--}}
+            {{--                <input name="postcode_lookup">--}}
+            {{--                <button class="w-2/6 ml-2 button button-inverse">{{ __('Lookup Postcode') }}</button>--}}
+            {{--            </div>--}}
+            {{--            <div class="text-xs mb-5">--}}
+            {{--                {{ __('You will still need to enter company name & address line 2 manually') }}--}}
+            {{--            </div>--}}
 
             <div class="flex items-center mb-3">
                 <label for="company_name" class="w-2/6">{{ __('Company Name') }} <span
@@ -65,11 +65,18 @@
 
             <div class="flex items-center mb-3 relative">
                 <label for="country_id" class="w-2/6">{{ __('Country') }} <span class="text-red-600">*</span></label>
-                <select id="country_id" class="bg-gray-100" name="country_id" autocomplete="off">
+                <select id="country_id" class="bg-gray-100" name="country" autocomplete="off">
                     @foreach ($countries as $country)
                         <option
-                            value="{{ $country->id }}" {{ old('country_id') ? ($country->id == old('country_id') ? 'selected' : '') : (isset($address) ? ($country->id == $address->country_id ? 'selected' : '') : '') }}>
-                            {{ $country->name }}
+                            value="{{ $country['name'] }}"
+                            @if(old('country') && $country['name'] === old('country'))
+                                selected
+                            @elseif(isset($address) && $country['name'] === $address['country'])
+                                selected
+                            @elseif($country['default'])
+                                selected
+                            @endif>
+                            {{ $country['name'] }}
                         </option>
                     @endforeach
                 </select>
