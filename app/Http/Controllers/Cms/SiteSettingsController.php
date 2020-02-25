@@ -16,6 +16,7 @@ class SiteSettingsController extends Controller
         $data = [
             'maintenance' => json_decode(GlobalSettings::key('maintenance'), true)['enabled'],
             'announcement' => GlobalSettings::siteAnnouncement(),
+            'checkout_notice' => GlobalSettings::checkoutNotice(),
             'countries' => json_decode(GlobalSettings::countries(), true),
             'default_country' => GlobalSettings::defaultCountry(),
             'google_analytics' => GlobalSettings::googleAnalyticsUrl(),

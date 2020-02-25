@@ -22,6 +22,7 @@ class GlobalSettings extends Model
     public function forgetSettingsCache(): void
     {
         Cache::forget('site-announcement');
+        Cache::forget('checkout-notice');
         Cache::forget('google-maps-url');
         Cache::forget('google-analytics-url');
         Cache::forget('default-country');
@@ -69,6 +70,16 @@ class GlobalSettings extends Model
     {
         return Cache::rememberForever('site-announcement', static function () {
             return self::where('key', 'site-announcement')->first()->value;
+        });
+    }
+
+    /**
+     * @return mixed
+     */
+    public static function checkoutNotice()
+    {
+        return Cache::rememberForever('checkout-notice', static function () {
+            return self::where('key', 'checkout-notice')->first()->value;
         });
     }
 
@@ -123,6 +134,10 @@ class GlobalSettings extends Model
 
         $settings::where('key', 'site-announcement')->update([
             'value' => request('announcement') ?: '',
+        ]);
+
+        $settings::where('key', 'checkout-notice')->update([
+            'value' => request('checkout_notice') ?: '',
         ]);
 
         $settings::where('key', 'default-country')->update([

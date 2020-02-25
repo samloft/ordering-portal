@@ -33,6 +33,23 @@
 
             <div class="flex">
                 <div class="w-1/4 mr-6">
+                    <h5 class="font-medium text-lg mb-2">Checkout Notice</h5>
+                    <p class="text-gray-600 text-sm">
+                        Enter a notice that will be displayed on the checkout page.
+                    </p>
+                </div>
+                <div class="w-3/4">
+                    <label for="checkout_notice" class="text-sm font-medium">Checkout Notice</label>
+                    <input id="checkout_notice" class="bg-gray-100 mt-1" value="{{ $data['checkout_notice'] }}"
+                           name="checkout_notice"
+                           placeholder="Enter a checkout notice">
+                </div>
+            </div>
+
+            <hr class="mt-3 mb-3">
+
+            <div class="flex">
+                <div class="w-1/4 mr-6">
                     <h5 class="font-medium text-lg mb-2">Default Country</h5>
                     <p class="text-gray-600 text-sm">
                         Select the default country that will be auto-selected when users create a new delivery address.

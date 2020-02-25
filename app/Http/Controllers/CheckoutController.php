@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Address;
 use App\Models\Basket;
 use App\Models\DeliveryMethod;
+use App\Models\GlobalSettings;
 use App\Notifications\OrderPlacedNotification;
 use Auth;
 use Illuminate\Contracts\View\Factory;
@@ -23,6 +24,7 @@ class CheckoutController extends Controller
     {
         $basket = Basket::show();
         $delivery_methods = DeliveryMethod::show();
+        $checkout_notice = GlobalSettings::checkoutNotice();
 
         if (! auth()->user()->can_order) {
             return redirect(route('basket'))->with('error', 'You do not have permission to place orders, if you believe this is in error, please contact the sames office');
@@ -34,7 +36,7 @@ class CheckoutController extends Controller
 
         $default_address = Address::getDefault();
 
-        return view('checkout.index', compact('default_address', 'basket', 'delivery_methods'));
+        return view('checkout.index', compact('default_address', 'basket', 'delivery_methods', 'checkout_notice'));
     }
 
     /**

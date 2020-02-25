@@ -35,7 +35,8 @@
                             <div>{{ $default_address->post_code }}</div>
                         </div>
                     @else
-                        <span class="text-red-400">{{ __('No default delivery address set, click below to add one.') }}</span>
+                        <span
+                            class="text-red-400">{{ __('No default delivery address set, click below to add one.') }}</span>
                     @endif
 
                     <div class="text-center mt-2 mb-2">
@@ -66,12 +67,14 @@
 
                     <div class="flex items-center mb-3">
                         <label for="reference" class="w-1/2">{{ __('Order Reference') }}</label>
-                        <input id="reference" class="bg-gray-100" name="reference" autocomplete="off" value="{{ old('reference') }}">
+                        <input id="reference" class="bg-gray-100" name="reference" autocomplete="off"
+                               value="{{ old('reference') }}">
                     </div>
 
                     <div class="flex items-center mb-3">
                         <label for="notes" class="w-1/2">{{ __('Order Notes') }}</label>
-                        <input id="notes" class="bg-gray-100" name="notes" autocomplete="off" value="{{ old('notes') }}">
+                        <input id="notes" class="bg-gray-100" name="notes" autocomplete="off"
+                               value="{{ old('notes') }}">
                     </div>
 
                     <div class="flex items-center relative mb-3">
@@ -131,19 +134,21 @@
                         </label>
                     </div>
 
-                    <div role="alert" class="alert alert-info">
-                        <div class="alert-body text-sm leading-none items-center">
-                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" class="alert-icon">
-                                <path d="M12 2a10 10 0 1 1 0 20 10 10 0 0 1 0-20z" class="primary"></path>
-                                <path
-                                    d="M11 12a1 1 0 0 1 0-2h2a1 1 0 0 1 .96 1.27L12.33 17H13a1 1 0 0 1 0 2h-2a1 1 0 0 1-.96-1.27L11.67 12H11zm2-4a1.5 1.5 0 1 1 0-3 1.5 1.5 0 0 1 0 3z"
-                                    class="secondary"></path>
-                            </svg>
-                            <div>
-                                <p class="alert-text">{{ __('Optional checkout note here... Like delivery cut-offs') }}</p>
+                    @if($checkout_notice)
+                        <div role="alert" class="alert alert-info">
+                            <div class="alert-body text-sm leading-none items-center">
+                                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" class="alert-icon">
+                                    <path d="M12 2a10 10 0 1 1 0 20 10 10 0 0 1 0-20z" class="primary"></path>
+                                    <path
+                                        d="M11 12a1 1 0 0 1 0-2h2a1 1 0 0 1 .96 1.27L12.33 17H13a1 1 0 0 1 0 2h-2a1 1 0 0 1-.96-1.27L11.67 12H11zm2-4a1.5 1.5 0 1 1 0-3 1.5 1.5 0 0 1 0 3z"
+                                        class="secondary"></path>
+                                </svg>
+                                <div>
+                                    <p class="alert-text">{{ $checkout_notice }}</p>
+                                </div>
                             </div>
                         </div>
-                    </div>
+                    @endif
                 </div>
             </div>
         </div>
