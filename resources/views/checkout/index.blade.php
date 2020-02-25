@@ -153,9 +153,22 @@
 
             <basket-summary :summary="{{ json_encode($basket['summary'], true) }}"></basket-summary>
 
-            <div class="text-xs">
-                {{ __('*orders below £200 attract a £10 small order charge, unless you are collecting your order.') }}
-            </div>
+            @if($basket['summary']['small_order_rules']['threshold'] > 0)
+                <div class="mt-3 text-xs">
+                    * orders below {{ currency($basket['summary']['small_order_rules']['threshold'], 0) }} attract
+                    a {{ currency($basket['summary']['small_order_rules']['charge'], 0) }}
+
+                    @if($basket['summary']['small_order_rules']['exclude_collection'] && $basket['summary']['small_order_rules']['exclude_charged_delivery'])
+                        small order charge, unless you are collecting your order or paying a delivery charge.
+                    @elseif ($basket['summary']['small_order_rules']['exclude_collection'])
+                        small order charge, unless you are collecting your order.
+                    @elseif ($basket['summary']['small_order_rules']['exclude_charged_delivery'])
+                        small order charge, unless you are paying a delivery charge.
+                    @else
+                        small order charge.
+                    @endif
+                </div>
+            @endif
         </div>
 
         <div class="flex justify-between">

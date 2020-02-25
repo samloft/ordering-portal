@@ -45,7 +45,7 @@ class Basket extends Model
     /**
      * Return all basket lines based on customer code.
      *
-     * @param int  $shipping_value
+     * @param int $shipping_value
      *
      * @return Basket[]|Collection
      */
@@ -53,13 +53,7 @@ class Basket extends Model
     {
         $lines = static::selectRaw('basket.product as product, basket.customer_code as customer_code,
                                                     basket.quantity as quantity, price, break1, price1, break2, price2,
-                                                    break3, price3, name, uom, not_sold, stock')
-            ->where('basket.customer_code', auth()->user()->customer->code)
-            ->where('basket.user_id', auth()->user()->id)
-            ->join('prices', 'basket.product', '=', 'prices.product')
-            ->where('prices.customer_code', auth()->user()->customer->code)
-            ->join('products', 'basket.product', '=', 'products.code')
-            ->get();
+                                                    break3, price3, name, uom, not_sold, stock')->where('basket.customer_code', auth()->user()->customer->code)->where('basket.user_id', auth()->user()->id)->join('prices', 'basket.product', '=', 'prices.product')->where('prices.customer_code', auth()->user()->customer->code)->join('products', 'basket.product', '=', 'products.code')->get();
 
         $goods_total = 0;
         $potential_saving_total = 0;
@@ -99,17 +93,17 @@ class Basket extends Model
             }
 
             $product_lines[] = [
-                'product'    => $line->product,
-                'name'       => $line->name,
-                'uom'        => $line->uom,
-                'stock'      => $line->stock,
-                'image'      => $image,
-                'quantity'   => $line->quantity,
-                'discount'   => 2,
-                'net_price'  => number_format(discount($net_price), 4),
-                'price'      => currency(discount($net_price) * $line->quantity, 2),
+                'product' => $line->product,
+                'name' => $line->name,
+                'uom' => $line->uom,
+                'stock' => $line->stock,
+                'image' => $image,
+                'quantity' => $line->quantity,
+                'discount' => 2,
+                'net_price' => number_format(discount($net_price), 4),
+                'price' => currency(discount($net_price) * $line->quantity, 2),
                 'unit_price' => currency(discount($net_price)),
-                'next_bulk'  => [
+                'next_bulk' => [
                     'qty_away' => $next_bulk_qty,
                     'saving' => currency($next_bulk_qty + $line->quantity * $next_bulk_saving, 2),
                 ],
@@ -125,15 +119,16 @@ class Basket extends Model
 
         return [
             'summary' => [
-                'goods_total'        => currency($goods_total, 2),
-                'shipping'           => currency($shipping_value, 2),
-                'sub_total'          => currency($goods_total + $shipping_value, 2),
-                'small_order_charge' => currency($small_order_charge, 2),
-                'vat'                => currency(vatAmount($goods_total + $small_order_charge + $shipping_value), 2),
-                'total'              => currency(vatIncluded($goods_total + $small_order_charge + $shipping_value), 2),
+                'goods_total' => currency($goods_total, 2),
+                'shipping' => currency($shipping_value, 2),
+                'sub_total' => currency($goods_total + $shipping_value, 2),
+                'small_order_charge' => currency($small_order_charge['charge'], 2),
+                'small_order_rules' => $small_order_charge,
+                'vat' => currency(vatAmount($goods_total + $small_order_charge['charge'] + $shipping_value), 2),
+                'total' => currency(vatIncluded($goods_total + $small_order_charge['charge'] + $shipping_value), 2),
             ],
             'line_count' => count($product_lines),
-            'lines'      => $product_lines,
+            'lines' => $product_lines,
             'potential_saving' => in_array(true, array_column($product_lines, 'potential_saving'), false),
             'potential_saving_total' => currency($potential_saving_total, 2),
         ];
@@ -193,9 +188,9 @@ class Basket extends Model
     /**
      * Remove all items from the basket for the logged in customer.
      *
+     * @return bool|int|null
      * @throws Exception
      *
-     * @return bool|int|null
      */
     public static function clear()
     {

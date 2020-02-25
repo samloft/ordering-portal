@@ -17,15 +17,12 @@ class CheckoutController extends Controller
     /**
      * Show the checkout page so a user can complete the order.
      *
-     * @return Factory|View
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\Http\RedirectResponse|\Illuminate\Routing\Redirector|\Illuminate\View\View
      */
     public function index()
     {
         $basket = Basket::show();
         $delivery_methods = DeliveryMethod::show();
-
-        //Notification::route('slack', env('SLACK_HOOK'))
-        //    ->notify(new OrderPlacedNotification());
 
         if (! auth()->user()->can_order) {
             return redirect(route('basket'))->with('error', 'You do not have permission to place orders, if you believe this is in error, please contact the sames office');
