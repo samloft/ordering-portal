@@ -11539,7 +11539,7 @@ var render = function() {
                   "button",
                   {
                     staticClass:
-                      "absolute inset-y-0 right-0 flex items-center px-3 text-gray-700",
+                      "absolute inset-y-0 right-0 flex items-center px-3 text-gray-700 hover:opacity-50",
                     attrs: { type: "submit" }
                   },
                   [

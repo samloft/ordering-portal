@@ -11,7 +11,7 @@
     <form class="w-100" action="{{ route('products.search') }}" method="get">
         <div class="relative">
             <input type="text" class="form-control" name="query" autocomplete="off" required>
-            <button class="absolute inset-y-0 right-0 flex items-center px-3 text-gray-600">
+            <button class="absolute inset-y-0 right-0 flex items-center px-3 text-gray-600 hover:opacity-50">
                 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" class="w-6 icon opacity-75">
                     <circle cx="10" cy="10" r="7" class="primary"></circle>
                     <path class="secondary"

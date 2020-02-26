@@ -5,7 +5,7 @@
             <div v-if="user.admin">
                 <div class="relative">
                     <input type="text" class="form-control" name="customer" autocomplete="off" v-model="customerSearch" v-on:blur="resultItems = []" @keyup="onKeyUp(customerSearch)" required>
-                    <button type="submit" class="absolute inset-y-0 right-0 flex items-center px-3 text-gray-700">
+                    <button type="submit" class="absolute inset-y-0 right-0 flex items-center px-3 text-gray-700 hover:opacity-50">
                         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" class="w-6 icon opacity-75">
                             <path class="primary"
                                   d="M12 13a3 3 0 0 1 3-3h4a3 3 0 0 1 3 3v3a1 1 0 0 1-1 1h-8a1 1 0 0 1-1-1 1 1 0 0 1-1 1H3a1 1 0 0 1-1-1v-3a3 3 0 0 1 3-3h4a3 3 0 0 1 3 3zM7 9a3 3 0 1 1 0-6 3 3 0 0 1 0 6zm10 0a3 3 0 1 1 0-6 3 3 0 0 1 0 6z"></path>
