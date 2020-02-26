@@ -6,13 +6,41 @@
 
         <div class="w-3/4">
             @if ($categories['level_1'])
-                <div class="font-thin text-gray-700 mb-3">
+                <div class="font-thin text-gray-700 mb-3 flex">
                     @if ($categories['level_1'] === 'search')
-                        <strong>{{ __('Search') }}</strong> <i class="fas fa-caret-right mx-2"></i> {{ $categories['query'] }}
+                        <strong>Search</strong>
+                        <svg class="mx-2 fill-current" width="14" height="24" viewBox="0 0 24 24" fill="none"
+                             xmlns="http://www.w3.org/2000/svg">
+                            <path d="M9 5L16 12L9 19" stroke-width="2" stroke-linecap="round"
+                                  stroke-linejoin="round"/>
+                        </svg>
+                        {{ $categories['query'] }}
                     @else
-                        {!! $categories['level_1'] ? '<a class="hover:underline" href="/products/'.$categories['level_1'].'">'.$categories['level_1'].'</a>' : '' !!}
-                        {!! $categories['level_2'] ? ' <i class="fas fa-caret-right mx-2"></i> <a class="hover:underline" href="/products/'.$categories['level_1'].'/'.$categories['level_2'].'">'.$categories['level_2'].'</a>' : '' !!}
-                        {!! $categories['level_3'] ? ' <i class="fas fa-caret-right mx-2"></i> ' . $categories['level_3'] : '' !!}
+                        @if($categories['level_1'])
+                            <a class="hover:underline"
+                               href="/products/{{ $categories['level_1'] }}">{{ $categories['level_1'] }}</a>
+                        @endif
+
+                        @if($categories['level_2'])
+                            <svg class="mx-2 fill-current" width="14" height="24" viewBox="0 0 24 24" fill="none"
+                                 xmlns="http://www.w3.org/2000/svg">
+                                <path d="M9 5L16 12L9 19" stroke-width="2" stroke-linecap="round"
+                                      stroke-linejoin="round"/>
+                            </svg>
+
+                            <a class="hover:underline"
+                               href="/products/{{ $categories['level_1'] }}/{{ $categories['level_2'] }}">{{ $categories['level_2'] }}</a>
+                        @endif
+
+                        @if($categories['level_3'])
+                            <svg class="mx-2 fill-current" width="14" height="24" viewBox="0 0 24 24" fill="none"
+                                 xmlns="http://www.w3.org/2000/svg">
+                                <path d="M9 5L16 12L9 19" stroke-width="2" stroke-linecap="round"
+                                      stroke-linejoin="round"/>
+                            </svg>
+
+                            {{ $categories['level_3'] }}
+                        @endif
                     @endif
                 </div>
             @endif
