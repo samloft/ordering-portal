@@ -2451,6 +2451,11 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
@@ -2829,6 +2834,18 @@ __webpack_require__.r(__webpack_exports__);
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 //
 //
 //
@@ -11518,7 +11535,43 @@ var render = function() {
                   }
                 }),
                 _vm._v(" "),
-                _vm._m(0),
+                _c(
+                  "button",
+                  {
+                    staticClass:
+                      "absolute inset-y-0 right-0 flex items-center px-3 text-gray-700",
+                    attrs: { type: "submit" }
+                  },
+                  [
+                    _c(
+                      "svg",
+                      {
+                        staticClass: "w-6 icon opacity-75",
+                        attrs: {
+                          xmlns: "http://www.w3.org/2000/svg",
+                          viewBox: "0 0 24 24"
+                        }
+                      },
+                      [
+                        _c("path", {
+                          staticClass: "primary",
+                          attrs: {
+                            d:
+                              "M12 13a3 3 0 0 1 3-3h4a3 3 0 0 1 3 3v3a1 1 0 0 1-1 1h-8a1 1 0 0 1-1-1 1 1 0 0 1-1 1H3a1 1 0 0 1-1-1v-3a3 3 0 0 1 3-3h4a3 3 0 0 1 3 3zM7 9a3 3 0 1 1 0-6 3 3 0 0 1 0 6zm10 0a3 3 0 1 1 0-6 3 3 0 0 1 0 6z"
+                          }
+                        }),
+                        _vm._v(" "),
+                        _c("path", {
+                          staticClass: "secondary",
+                          attrs: {
+                            d:
+                              "M12 13a3 3 0 1 1 0-6 3 3 0 0 1 0 6zm-3 1h6a3 3 0 0 1 3 3v3a1 1 0 0 1-1 1H7a1 1 0 0 1-1-1v-3a3 3 0 0 1 3-3z"
+                          }
+                        })
+                      ]
+                    )
+                  ]
+                ),
                 _vm._v(" "),
                 _c("div", { staticClass: "absolute -mt-2 w-full z-50" }, [
                   _c(
@@ -11638,22 +11691,7 @@ var render = function() {
     )
   ])
 }
-var staticRenderFns = [
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c(
-      "button",
-      {
-        staticClass:
-          "absolute inset-y-0 right-0 flex items-center px-3 text-gray-700",
-        attrs: { type: "submit" }
-      },
-      [_c("i", { staticClass: "fas fa-users text-gray-600" })]
-    )
-  }
-]
+var staticRenderFns = []
 render._withStripped = true
 
 
@@ -12045,8 +12083,34 @@ var render = function() {
       },
       [
         _c("label", { staticClass: "custom-file-label" }, [
-          _c("i", { staticClass: "fa fa-file-upload" }),
-          _vm._v(" Click here to select CSV file"),
+          _c(
+            "svg",
+            {
+              staticClass: "w-16 mx-auto icon-cloud-upload",
+              attrs: {
+                xmlns: "http://www.w3.org/2000/svg",
+                viewBox: "0 0 24 24"
+              }
+            },
+            [
+              _c("path", {
+                staticClass: "bg-primary fill-current opacity-50",
+                attrs: {
+                  d:
+                    "M18 14.97c0-.76-.3-1.51-.88-2.1l-3-3a3 3 0 0 0-4.24 0l-3 3A3 3 0 0 0 6 15a4 4 0 0 1-.99-7.88 5.5 5.5 0 0 1 10.86-.82A4.49 4.49 0 0 1 22 10.5a4.5 4.5 0 0 1-4 4.47z"
+                }
+              }),
+              _vm._v(" "),
+              _c("path", {
+                staticClass: "bg-primary fill-current",
+                attrs: {
+                  d:
+                    "M11 14.41V21a1 1 0 0 0 2 0v-6.59l1.3 1.3a1 1 0 0 0 1.4-1.42l-3-3a1 1 0 0 0-1.4 0l-3 3a1 1 0 0 0 1.4 1.42l1.3-1.3z"
+                }
+              })
+            ]
+          ),
+          _vm._v("\n            Click here to select CSV file"),
           _c("span", [_vm._v(_vm._s(_vm.fileName))])
         ]),
         _vm._v(" "),
@@ -12057,26 +12121,45 @@ var render = function() {
       ]
     ),
     _vm._v(" "),
-    _vm._m(0)
-  ])
-}
-var staticRenderFns = [
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "text-right" }, [
+    _c("div", { staticClass: "text-right" }, [
       _c(
         "button",
         { staticClass: "button button-primary", attrs: { id: "upload-order" } },
         [
           _vm._v("Upload Order\n            "),
-          _c("i", { staticClass: "fa fa-download" })
+          _c(
+            "svg",
+            {
+              staticClass: "w-5 ml-3 icon inline",
+              attrs: {
+                xmlns: "http://www.w3.org/2000/svg",
+                viewBox: "0 0 24 24"
+              }
+            },
+            [
+              _c("path", {
+                staticClass: "primary",
+                attrs: {
+                  d:
+                    "M8 4a1 1 0 0 1-1 1H5v10h2a2 2 0 0 1 2 2c0 1.1.9 2 2 2h2a2 2 0 0 0 2-2c0-1.1.9-2 2-2h2V5h-2a1 1 0 0 1 0-2h2a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5c0-1.1.9-2 2-2h2a1 1 0 0 1 1 1z"
+                }
+              }),
+              _vm._v(" "),
+              _c("path", {
+                staticClass: "secondary",
+                attrs: {
+                  d:
+                    "M11 6.41V13a1 1 0 0 0 2 0V6.41l1.3 1.3a1 1 0 0 0 1.4-1.42l-3-3a1 1 0 0 0-1.4 0l-3 3a1 1 0 0 0 1.4 1.42L11 6.4z"
+                }
+              })
+            ]
+          )
         ]
       )
     ])
-  }
-]
+  ])
+}
+var staticRenderFns = []
 render._withStripped = true
 
 
