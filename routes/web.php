@@ -56,6 +56,7 @@ Route::group(['middleware' => ['auth', 'has.customer']], static function () {
         Route::get('order/{order}', 'OrderTrackingController@show')->name('order-tracking.show');
         Route::get('copy', 'OrderTrackingController@copy')->name('order-tracking.copy-to-basket');
 
+        Route::get('order/{order}/pdf', 'OrderTrackingController@orderDetailsPDF')->name('order-tracking.pdf');
         Route::get('invoice/{order}/{customer_order}/{download?}', 'OrderTrackingController@invoicePdf')->name('order-tracking.invoice-pdf');
     });
 

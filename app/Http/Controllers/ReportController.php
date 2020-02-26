@@ -63,9 +63,7 @@ class ReportController extends Controller
             if ($output === 'pdf') {
                 $company_details = json_decode(GlobalSettings::key('company-details'), true);
 
-                $pdf = PDF::loadView('reports.back-orders', compact('back_orders', 'company_details'));
-
-                return $pdf->download('back_orders.pdf');
+                return PDF::loadView('reports.back-orders', compact('back_orders', 'company_details'))->download('back_orders.pdf');
             }
 
             if ($output === 'csv') {
@@ -120,9 +118,7 @@ class ReportController extends Controller
             if ($output === 'pdf') {
                 $company_details = json_decode(GlobalSettings::key('company-details'), true);
 
-                $pdf = PDF::loadView('reports.account-summary', compact('invoice_lines', 'summary_lines', 'company_details'));
-
-                return $pdf->download('account_summary.pdf');
+                return PDF::loadView('reports.account-summary', compact('invoice_lines', 'summary_lines', 'company_details'))->download('account_summary.pdf');
             }
 
             if ($output === 'csv') {
@@ -178,7 +174,7 @@ class ReportController extends Controller
      * @param null $extra_headings
      * @param null $extra_lines
      *
-     * @return BinaryFileResponse
+     * @return \Symfony\Component\HttpFoundation\BinaryFileResponse|\Symfony\Component\HttpFoundation\StreamedResponse
      */
     public function createCSV(
         $filename,
@@ -186,7 +182,7 @@ class ReportController extends Controller
         $lines,
         $extra_headings = null,
         $extra_lines = null
-    ): BinaryFileResponse {
+    ) {
         $callback = static function () use ($headings, $lines, $extra_headings, $extra_lines) {
             $handle = fopen('php://output', 'wb+');
             fputcsv($handle, $headings);

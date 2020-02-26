@@ -3,12 +3,13 @@
 namespace App\Http\Controllers;
 
 use App\Models\Basket;
+use App\Models\GlobalSettings;
 use App\Models\OrderTrackingHeader;
-use App\Models\OrderTrackingLine;
 use Illuminate\Contracts\View\Factory;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Routing\Redirector;
 use Illuminate\View\View;
+use Barryvdh\DomPDF\Facade as PDF;
 
 class OrderTrackingController extends Controller
 {
@@ -42,12 +43,12 @@ class OrderTrackingController extends Controller
 
         foreach ($order->lines as $line) {
             $lines[] = [
-                'product'          => trim($line->product),
+                'product' => trim($line->product),
                 'long_description' => trim($line->long_description),
-                'line_qty'         => trim($line->line_qty),
-                'net_price'        => currency($line->net_price, 4),
-                'line_val'         => currency($line->line_val, 2),
-                'purchasable'      => $line->price ? true : false,
+                'line_qty' => trim($line->line_qty),
+                'net_price' => currency($line->net_price, 4),
+                'line_val' => currency($line->line_val, 2),
+                'purchasable' => $line->price ? true : false,
             ];
         }
 
@@ -90,7 +91,7 @@ class OrderTrackingController extends Controller
         if (! $authorized) {
             return [
                 'pdf_exists' => false,
-                'error'      => 'You do not have permission to view this invoice',
+                'error' => 'You do not have permission to view this invoice',
             ];
         }
 
@@ -116,5 +117,17 @@ class OrderTrackingController extends Controller
         return [
             'pdf_exists' => false,
         ];
+    }
+
+    /**
+     * @param $order_number
+     * @return \Illuminate\Http\Response
+     */
+    public function orderDetailsPDF($order_number)
+    {
+        $order = OrderTrackingHeader::show(decodeUrl($order_number));
+        $company_details = json_decode(GlobalSettings::key('company-details'), true);
+
+        return PDF::loadView('order-tracking.pdf', compact('order', 'company_details'))->download($order_number.'.pdf');
     }
 }

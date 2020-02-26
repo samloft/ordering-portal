@@ -33,7 +33,9 @@
 
                 <div class="flex items-center">
                     <div class="font-semibold">{{ __('Status') }}</div>
-                    <div class="pl-2"><span class="badge badge-{{ str_replace(' ', '_', $order->status) }}">{{ $order->status }}</span></div>
+                    <div class="pl-2"><span
+                            class="badge badge-{{ str_replace(' ', '_', $order->status) }}">{{ $order->status }}</span>
+                    </div>
                 </div>
 
                 <div class="flex mt-4">
@@ -71,9 +73,12 @@
                 <button class="button button-primary">{{ __('Copy Order To Basket') }}</button>
             </a>
 
-            <order-invoice order="{{ urlencode(trim($order->order_no)) }}" customer_order="{{ urlencode(trim($order->customer_order_no)) }}"></order-invoice>
+            <order-invoice order="{{ urlencode(trim($order->order_no)) }}"
+                           customer_order="{{ urlencode(trim($order->customer_order_no)) }}"></order-invoice>
 
-            <button class="button button-primary">{{ __('Print Order Details') }}</button>
+            <a href="{{ route('order-tracking.pdf', ['order' => encodeUrl($order->order_no)]) }}">
+                <button class="button button-primary">{{ __('Print Order Details') }}</button>
+            </a>
         </div>
     </div>
 
