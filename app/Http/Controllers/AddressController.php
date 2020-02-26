@@ -38,7 +38,7 @@ class AddressController extends Controller
 
         $countries = [];
 
-        foreach($country_list as $country) {
+        foreach ($country_list as $country) {
             $countries[] = [
                 'name' => $country['name'],
                 'default' => $country['name'] === $default_country,
@@ -89,7 +89,7 @@ class AddressController extends Controller
 
         $countries = [];
 
-        foreach($country_list as $country) {
+        foreach ($country_list as $country) {
             $countries[] = [
                 'name' => $country['name'],
                 'default' => $country['name'] === $default_country,
@@ -122,9 +122,9 @@ class AddressController extends Controller
      *
      * @param $id
      *
+     * @return RedirectResponse
      * @throws \Exception
      *
-     * @return RedirectResponse
      */
     public function destroy($id): RedirectResponse
     {
@@ -185,14 +185,14 @@ class AddressController extends Controller
     {
         session([
             'address' => [
-                'address_id'      => $address->id,
+                'address_id' => $address->id,
                 'address_details' => [
                     'company_name' => $address->company_name,
-                    'address_2'    => $address->address_line_2,
-                    'address_3'    => $address->address_line_3,
-                    'address_4'    => $address->address_line_4,
-                    'address_5'    => $address->address_line_5,
-                    'postcode'     => $address->post_code,
+                    'address_2' => $address->address_line_2,
+                    'address_3' => $address->address_line_3,
+                    'address_4' => $address->address_line_4,
+                    'address_5' => $address->address_line_5,
+                    'postcode' => $address->post_code,
                 ],
             ],
         ]);
@@ -206,13 +206,13 @@ class AddressController extends Controller
     public function validation()
     {
         return request()->validate([
-            'company_name'   => 'required|min:2',
+            'company_name' => 'required|min:2',
             'address_line_2' => 'required|min:2',
             'address_line_3' => 'required|min:2',
             'address_line_4' => 'nullable',
             'address_line_5' => 'nullable',
-            'country'     => 'required',
-            'post_code'      => 'required|min:3',
+            'country' => 'required',
+            'post_code' => 'required|min:3',
         ]);
     }
 }
