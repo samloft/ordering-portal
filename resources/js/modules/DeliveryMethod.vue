@@ -2,7 +2,7 @@
     <div class="flex items-center relative mb-3">
         <label for="shipping" class="w-1/2">Shipping</label>
 
-        <select id="shipping" class="bg-gray-100" name="shipping" autocomplete="off" v-model="delivery_code"
+        <select id="shipping" name="shipping" autocomplete="off" v-model="delivery_code"
                 @change="deliveryUpdated()">
             <option v-for="delivery in deliveries" :value="delivery.code">
                 {{ delivery.title }} - {{ delivery.price === 0 ? 'FREE' : delivery.price.toFixed(2) }}

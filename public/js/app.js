@@ -11839,7 +11839,6 @@ var render = function() {
             expression: "delivery_code"
           }
         ],
-        staticClass: "bg-gray-100",
         attrs: { id: "shipping", name: "shipping", autocomplete: "off" },
         on: {
           change: [
