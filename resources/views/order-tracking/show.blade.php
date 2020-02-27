@@ -84,28 +84,30 @@
 
     <h2 class="font-semibold tracking-widest mt-3 mb-3">{{ __('Order Lines') }}</h2>
 
-    <table>
-        <thead>
-        <tr>
-            <th>{{ __('Product Code') }}</th>
-            <th>{{ __('Name') }}</th>
-            <th class="text-right">{{ __('Quantity') }}</th>
-            <th class="text-right">{{ __('Net Price') }}</th>
-            <th class="text-right">{{ __('Total Price') }}</th>
-        </tr>
-        </thead>
-        <tbody>
-        @foreach($order->lines as $line)
-            <tr class="{{ $line->price ?: 'bg-red-200' }}">
-                <td>{{ $line->product }}</td>
-                <td>{{ $line->long_description }}</td>
-                <td class="text-right">{{ $line->line_qty }}</td>
-                <td class="text-right">{{ currency($line->net_price) }}</td>
-                <td class="text-right">{{ currency($line->line_val) }}</td>
+    <div class="table-container">
+        <table>
+            <thead>
+            <tr>
+                <th>{{ __('Product Code') }}</th>
+                <th>{{ __('Name') }}</th>
+                <th class="text-right">{{ __('Quantity') }}</th>
+                <th class="text-right">{{ __('Net Price') }}</th>
+                <th class="text-right">{{ __('Total Price') }}</th>
             </tr>
-        @endforeach
-        </tbody>
-    </table>
+            </thead>
+            <tbody>
+            @foreach($order->lines as $line)
+                <tr class="{{ $line->price ?: 'bg-red-200' }}">
+                    <td>{{ $line->product }}</td>
+                    <td>{{ $line->long_description }}</td>
+                    <td class="text-right">{{ $line->line_qty }}</td>
+                    <td class="text-right">{{ currency($line->net_price) }}</td>
+                    <td class="text-right">{{ currency($line->line_val) }}</td>
+                </tr>
+            @endforeach
+            </tbody>
+        </table>
+    </div>
 
     <div class="text-right mt-1">
         <small class="text-red-600">* Products marked in red are no longer available for purchase.</small>
