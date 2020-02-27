@@ -15,7 +15,8 @@
 
         <form method="get" action="{{ route('order-tracking') }}">
             <label for="keyword">Keyword</label>
-            <input id="keyword" class="bg-gray-100" name="keyword" placeholder="E.G Order number or order reference" value="{{ request('keyword') }}">
+            <input id="keyword" name="keyword" placeholder="E.G Order number or order reference"
+                   value="{{ request('keyword') }}">
 
             <div class="flex mt-3 mb-3">
 
@@ -31,12 +32,18 @@
 
                 <div class="w-1/3 relative">
                     <label for="status">Status</label>
-                    <select id="status" class="bg-gray-100" name="status">
+                    <select id="status" name="status">
                         <option value="" {{ request('status') === '' ? 'selected' : '' }}>Any</option>
-                        <option value="In Progress" {{ request('status') === 'In Progress' ? 'selected' : '' }}>In Progress</option>
-                        <option value="Despatched"{{ request('status') === 'Despatched' ? 'selected' : '' }}>Despatched</option>
-                        <option value="Invoiced"{{ request('status') === 'Invoiced' ? 'selected' : '' }}>Invoiced</option>
-                        <option value="Cancelled"{{ request('status') === 'Cancelled' ? 'selected' : '' }}>Cancelled</option>
+                        <option value="In Progress" {{ request('status') === 'In Progress' ? 'selected' : '' }}>In
+                            Progress
+                        </option>
+                        <option value="Despatched"{{ request('status') === 'Despatched' ? 'selected' : '' }}>
+                            Despatched
+                        </option>
+                        <option value="Invoiced"{{ request('status') === 'Invoiced' ? 'selected' : '' }}>Invoiced
+                        </option>
+                        <option value="Cancelled"{{ request('status') === 'Cancelled' ? 'selected' : '' }}>Cancelled
+                        </option>
                     </select>
                     <div
                         class="pointer-events-none absolute inset-y-0 right-0 flex items-center px-3 text-gray-700 pt-6">
@@ -60,31 +67,33 @@
     <h2 class="font-semibold tracking-widest mt-3 mb-3">{{ __('Search Results') }}</h2>
 
     @if(!$orders->isEmpty())
-        <table class="table">
-            <thead class="thead-dark">
-            <tr>
-                <th>{{ __('Order Number') }}</th>
-                <th>{{ __('Reference') }}</th>
-                <th>{{ __('Status') }}</th>
-                <th>{{ __('Ordered') }}</th>
-                <th class="text-right">{{ __('Value') }}</th>
-            </tr>
-            </thead>
-            <tbody>
-            @foreach($orders as $order)
-                <tr class="cursor-pointer hover:bg-gray-200"
-                    onclick="window.location = '{{ route('order-tracking.show', [encodeUrl(trim($order->order_no))]) }}';">
-                    <td>{{ $order->order_no }}</td>
-                    <td>{{ $order->customer_order_no }}</td>
-                    <td><span
-                            class="badge badge-{{ str_replace(' ', '_', $order->status) }}">{{ $order->status }}</span>
-                    </td>
-                    <td>{{ \Carbon\Carbon::parse($order->date_received)->format('d/m/Y') }}</td>
-                    <td class="text-right">{{ currency($order->value, 2) }}</td>
+        <div class="table-container">
+            <table class="table">
+                <thead class="thead-dark">
+                <tr>
+                    <th>{{ __('Order Number') }}</th>
+                    <th>{{ __('Reference') }}</th>
+                    <th>{{ __('Status') }}</th>
+                    <th>{{ __('Ordered') }}</th>
+                    <th class="text-right">{{ __('Value') }}</th>
                 </tr>
-            @endforeach
-            </tbody>
-        </table>
+                </thead>
+                <tbody>
+                @foreach($orders as $order)
+                    <tr class="cursor-pointer hover:bg-gray-50"
+                        onclick="window.location = '{{ route('order-tracking.show', [encodeUrl(trim($order->order_no))]) }}';">
+                        <td>{{ $order->order_no }}</td>
+                        <td>{{ $order->customer_order_no }}</td>
+                        <td><span
+                                class="badge badge-{{ str_replace(' ', '_', $order->status) }}">{{ $order->status }}</span>
+                        </td>
+                        <td>{{ \Carbon\Carbon::parse($order->date_received)->format('d/m/Y') }}</td>
+                        <td class="text-right">{{ currency($order->value, 2) }}</td>
+                    </tr>
+                @endforeach
+                </tbody>
+            </table>
+        </div>
     @else
         <div class="bg-white rounded-lg shadow p-4 text-center">
             <h2 class="font-semibold tracking-widest">{{ __('No orders to display') }}</h2>

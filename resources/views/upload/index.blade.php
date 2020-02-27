@@ -4,9 +4,9 @@
 
 @section('content')
     <div class="w-full mb-5 text-center">
-        <h2 class="font-semibold tracking-widest">{{ __('Order Upload') }}</h2>
+        <h2 class="font-semibold tracking-widest">Order Upload</h2>
         <p class="font-thin">
-            {{ __('Upload your order for a faster ordering process') }}
+            Upload your order for a faster ordering process
         </p>
     </div>
 
@@ -15,9 +15,11 @@
 
         <div class="flex">
             <div class="w-1/3 pr-10">
-                Order Upload
+                <h3 class="text-lg leading-6 font-medium text-gray-900">
+                    Order Upload
+                </h3>
 
-                <p class="text-gray-500 text-sm mt-2">
+                <p class="mt-1 max-w-2xl text-sm leading-5 text-gray-500">
                     Upload your order with a simple CSV file, entering product code in column A and quantity in column B
                 </p>
             </div>

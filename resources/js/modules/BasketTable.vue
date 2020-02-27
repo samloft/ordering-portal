@@ -12,7 +12,7 @@
                         <div class="flex justify-between items-center">
                             <div class="alert-title">You have some savings, please review them below.</div>
                             <button @click="allSavings()"
-                                class="bg-gray-700 p-2 text-white font-light tracking-wider rounded-lg hover:opacity-75 text-xs">
+                                    class="bg-gray-700 p-2 text-white font-light tracking-wider rounded-lg hover:opacity-75 text-xs">
                                 Action all savings of <span v-text="potential_saving_total"/>
                             </button>
                         </div>
@@ -35,49 +35,53 @@
             </div>
         </div>
 
-        <table class="mb-5" v-if="(items.length > 0)">
-            <thead>
-            <tr>
-                <th>Product</th>
-                <th>Unit</th>
-                <th class="text-right">Net Price</th>
-                <th class="text-center">Quantity</th>
-                <th class="text-right">Total Price</th>
-            </tr>
-            </thead>
-            <tbody class="row-sm">
+        <div class="mb-5 table-container" v-if="(items.length > 0)">
+            <table>
+                <thead>
+                <tr>
+                    <th>Product</th>
+                    <th>Unit</th>
+                    <th class="text-right">Net Price</th>
+                    <th class="text-center">Quantity</th>
+                    <th class="text-right">Total Price</th>
+                </tr>
+                </thead>
+                <tbody class="">
 
-            <tr v-for="product in items" :class="(product.quantity > product.stock) ? 'bg-red-200' : ''">
-                <td>
-                    <div class="flex items-center">
-                        <img class="h-10 mr-2" :src="product.image" :alt="product.name">
-                        <h2 class="leading-none">
-                            <a :href="'/products/view/' + product.product">
-                                <span class="text-primary font-medium">{{ product.product }}</span>
-                                <br>
-                                <span class="text-xs">{{ product.name }}</span>
-                            </a>
-                        </h2>
-                    </div>
-                </td>
-                <td><span class="badge badge-info">{{ product.uom.charAt(0).toUpperCase() + product.uom.substring(1).toLowerCase() }}</span>
-                </td>
-                <td class="text-right">{{ product.net_price }}</td>
-                <td class="text-center">
-                    <input name="line_qty" class="w-20 h-6 text-right bg-gray-100" v-model="product.quantity"
-                           @keyup.enter="updateProduct(product.product, product.quantity)"
-                           autocomplete="off">
-                    <div class="leading-none text-primary">
-                        <small class="cursor-pointer hover:underline"
-                               @click="updateProduct(product.product, product.quantity)">Update</small>
-                        <small class="cursor-pointer hover:underline"
-                               @click="removeProduct(product.product)">Remove</small>
-                    </div>
-                </td>
-                <td class="text-right">{{ product.price }}</td>
-            </tr>
-            </tbody>
-        </table>
+                <tr v-for="product in items" :class="(product.quantity > product.stock) ? 'bg-red-200' : ''">
+                    <td>
+                        <div class="flex items-center">
+                            <img class="h-10 mr-3" :src="product.image" :alt="product.name">
+                            <h2 class="leading-none">
+                                <a :href="'/products/view/' + product.product">
+                                    <span class="text-primary font-medium">{{ product.product }}</span>
+                                    <br>
+                                    <span class="text-xs font-thin text-gray-600">{{ product.name }}</span>
+                                </a>
+                            </h2>
+                        </div>
+                    </td>
+                    <td><span class="badge badge-info">{{ product.uom.charAt(0).toUpperCase() + product.uom.substring(1).toLowerCase() }}</span>
+                    </td>
+                    <td class="text-right text-gray-500 text-sm">{{ product.net_price }}</td>
+                    <td class="text-center">
+                        <div class="flex flex-grow flex-col">
+                            <input name="line_qty" class="w-24 h-6 text-right bg-gray-100" v-model="product.quantity"
+                                   @keyup.enter="updateProduct(product.product, product.quantity)"
+                                   autocomplete="off">
+                            <div class="leading-none text-primary">
+                                <small class="cursor-pointer hover:underline"
+                                       @click="updateProduct(product.product, product.quantity)">Update</small>
+                                <small class="cursor-pointer hover:underline"
+                                       @click="removeProduct(product.product)">Remove</small>
+                            </div>
+                        </div>
+                    </td>
+                    <td class="text-right text-sm">{{ product.price }}</td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
 
         <div v-if="items.length === 0" class="bg-white rounded shadow-md p-6 text-center mb-5 text-2xl font-thin">
             Your basket is currently empty.
@@ -160,7 +164,7 @@
             allSavings: function () {
                 self = this;
 
-                this.items.forEach(function(product) {
+                this.items.forEach(function (product) {
                     if (product.potential_saving) {
                         self.updateProduct(product.product, (product.next_bulk.qty_away + product.quantity))
                     }

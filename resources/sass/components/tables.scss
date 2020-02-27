@@ -1,47 +1,65 @@
-table {
-    @apply .rounded .w-full .text-left .shadow .border-collapse;
+.table-container {
+    @apply .align-middle .inline-block .min-w-full .shadow .overflow-hidden .rounded-lg .border-b .border-gray-200;
 
-    thead {
-        @apply .uppercase;
+    table {
+        @apply .min-w-full;
 
         th {
-            @apply .bg-gray-600 .font-light .py-2 .px-4 .text-gray-300;
+            @apply .px-4 .py-3 .border-b .border-gray-200 .bg-gray-50 .text-left .text-xs .leading-loose .font-medium .text-gray-500 .uppercase .tracking-wider;
         }
 
-        th:first-child {
-            @apply .rounded-tl;
-        }
-
-        th:last-child {
-            @apply .rounded-tr;
-        }
-    }
-
-    tbody {
-        tr:last-child {
-            @apply .rounded-bl .rounded-br;
-
-            td:first-child {
-                @apply .rounded-bl;
-            }
-
-            td:last-child {
-                @apply .rounded-br;
-            }
-        }
-
-        tr {
+        tbody {
             @apply .bg-white;
+
+            td {
+                @apply .px-4 .py-4 .whitespace-no-wrap .border-b .border-gray-200;
+            }
         }
 
-        td {
-            @apply .border-t .border-gray-300 .py-2 .px-4;
-        }
-    }
+        //@apply .rounded .w-full .text-left .shadow .border-collapse;
+        //
+        //thead {
+        //    @apply .uppercase;
+        //
+        //    th {
+        //        @apply .bg-gray-600 .font-light .py-2 .px-4 .text-gray-300;
+        //    }
+        //
+        //    th:first-child {
+        //        @apply .rounded-tl;
+        //    }
+        //
+        //    th:last-child {
+        //        @apply .rounded-tr;
+        //    }
+        //}
+        //
+        //tbody {
+        //    tr:last-child {
+        //        @apply .rounded-bl .rounded-br;
+        //
+        //        td:first-child {
+        //            @apply .rounded-bl;
+        //        }
+        //
+        //        td:last-child {
+        //            @apply .rounded-br;
+        //        }
+        //    }
+        //
+        //    tr {
+        //        @apply .bg-white;
+        //    }
+        //
+        //    td {
+        //        @apply .border-t .border-gray-300 .py-2 .px-4;
+        //    }
+        //}
 
-    .row-sm {
-        td {
-            @apply .py-1;
+        .row-sm {
+            td {
+                @apply .py-1;
+            }
         }
     }
 }

@@ -1,6 +1,6 @@
 <template>
     <section>
-        <div class="relative bg-gray-100">
+        <div class="relative">
             <flat-pickr
                 v-model="date"
                 :config="config"

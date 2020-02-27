@@ -15,7 +15,7 @@
         </div>
 
         <div class="flex">
-            <div class="align-items-center">
+            <div class="flex items-center">
                 <span class="mr-2 text-gray-600">Qty:</span>
                 <input class="w-24 mr-2" value="1" v-model="quantity" @keyup.enter="submit()" autocomplete="off">
             </div>
@@ -38,7 +38,7 @@
             }
         },
         methods: {
-            submit: function() {
+            submit: function () {
                 App.addProductToBasket(this.keywordSearch, this.quantity).then(result => {
                     if (result) {
                         this.keywordSearch = '';

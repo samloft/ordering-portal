@@ -17,7 +17,7 @@
             <basket-table :products="{{ json_encode($basket, true) }}"></basket-table>
         </div>
 
-        <div class="w-4/12 ml-10">
+        <div class="w-4/12 ml-5">
             <div class="bg-white rounded shadow-md p-6 text-center mb-5">
                 <label class="font-medium">{{ __('Quick Buy') }}</label>
                 <quick-buy></quick-buy>

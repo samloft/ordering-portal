@@ -2302,6 +2302,10 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
@@ -2834,6 +2838,16 @@ __webpack_require__.r(__webpack_exports__);
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 //
 //
 //
@@ -11247,144 +11261,162 @@ var render = function() {
       : _vm._e(),
     _vm._v(" "),
     _vm.items.length > 0
-      ? _c("table", { staticClass: "mb-5" }, [
-          _vm._m(0),
-          _vm._v(" "),
-          _c(
-            "tbody",
-            { staticClass: "row-sm" },
-            _vm._l(_vm.items, function(product) {
-              return _c(
-                "tr",
-                { class: product.quantity > product.stock ? "bg-red-200" : "" },
-                [
-                  _c("td", [
-                    _c("div", { staticClass: "flex items-center" }, [
-                      _c("img", {
-                        staticClass: "h-10 mr-2",
-                        attrs: { src: product.image, alt: product.name }
-                      }),
-                      _vm._v(" "),
-                      _c("h2", { staticClass: "leading-none" }, [
-                        _c(
-                          "a",
-                          {
-                            attrs: { href: "/products/view/" + product.product }
-                          },
-                          [
-                            _c(
-                              "span",
-                              { staticClass: "text-primary font-medium" },
-                              [_vm._v(_vm._s(product.product))]
-                            ),
-                            _vm._v(" "),
-                            _c("br"),
-                            _vm._v(" "),
-                            _c("span", { staticClass: "text-xs" }, [
-                              _vm._v(_vm._s(product.name))
-                            ])
-                          ]
+      ? _c("div", { staticClass: "mb-5 table-container" }, [
+          _c("table", [
+            _vm._m(0),
+            _vm._v(" "),
+            _c(
+              "tbody",
+              {},
+              _vm._l(_vm.items, function(product) {
+                return _c(
+                  "tr",
+                  {
+                    class: product.quantity > product.stock ? "bg-red-200" : ""
+                  },
+                  [
+                    _c("td", [
+                      _c("div", { staticClass: "flex items-center" }, [
+                        _c("img", {
+                          staticClass: "h-10 mr-3",
+                          attrs: { src: product.image, alt: product.name }
+                        }),
+                        _vm._v(" "),
+                        _c("h2", { staticClass: "leading-none" }, [
+                          _c(
+                            "a",
+                            {
+                              attrs: {
+                                href: "/products/view/" + product.product
+                              }
+                            },
+                            [
+                              _c(
+                                "span",
+                                { staticClass: "text-primary font-medium" },
+                                [_vm._v(_vm._s(product.product))]
+                              ),
+                              _vm._v(" "),
+                              _c("br"),
+                              _vm._v(" "),
+                              _c(
+                                "span",
+                                {
+                                  staticClass: "text-xs font-thin text-gray-600"
+                                },
+                                [_vm._v(_vm._s(product.name))]
+                              )
+                            ]
+                          )
+                        ])
+                      ])
+                    ]),
+                    _vm._v(" "),
+                    _c("td", [
+                      _c("span", { staticClass: "badge badge-info" }, [
+                        _vm._v(
+                          _vm._s(
+                            product.uom.charAt(0).toUpperCase() +
+                              product.uom.substring(1).toLowerCase()
+                          )
                         )
                       ])
-                    ])
-                  ]),
-                  _vm._v(" "),
-                  _c("td", [
-                    _c("span", { staticClass: "badge badge-info" }, [
-                      _vm._v(
-                        _vm._s(
-                          product.uom.charAt(0).toUpperCase() +
-                            product.uom.substring(1).toLowerCase()
-                        )
-                      )
-                    ])
-                  ]),
-                  _vm._v(" "),
-                  _c("td", { staticClass: "text-right" }, [
-                    _vm._v(_vm._s(product.net_price))
-                  ]),
-                  _vm._v(" "),
-                  _c("td", { staticClass: "text-center" }, [
-                    _c("input", {
-                      directives: [
-                        {
-                          name: "model",
-                          rawName: "v-model",
-                          value: product.quantity,
-                          expression: "product.quantity"
-                        }
-                      ],
-                      staticClass: "w-20 h-6 text-right bg-gray-100",
-                      attrs: { name: "line_qty", autocomplete: "off" },
-                      domProps: { value: product.quantity },
-                      on: {
-                        keyup: function($event) {
-                          if (
-                            !$event.type.indexOf("key") &&
-                            _vm._k(
-                              $event.keyCode,
-                              "enter",
-                              13,
-                              $event.key,
-                              "Enter"
-                            )
-                          ) {
-                            return null
-                          }
-                          return _vm.updateProduct(
-                            product.product,
-                            product.quantity
-                          )
-                        },
-                        input: function($event) {
-                          if ($event.target.composing) {
-                            return
-                          }
-                          _vm.$set(product, "quantity", $event.target.value)
-                        }
-                      }
-                    }),
+                    ]),
                     _vm._v(" "),
-                    _c("div", { staticClass: "leading-none text-primary" }, [
-                      _c(
-                        "small",
-                        {
-                          staticClass: "cursor-pointer hover:underline",
+                    _c(
+                      "td",
+                      { staticClass: "text-right text-gray-500 text-sm" },
+                      [_vm._v(_vm._s(product.net_price))]
+                    ),
+                    _vm._v(" "),
+                    _c("td", { staticClass: "text-center" }, [
+                      _c("div", { staticClass: "flex flex-grow flex-col" }, [
+                        _c("input", {
+                          directives: [
+                            {
+                              name: "model",
+                              rawName: "v-model",
+                              value: product.quantity,
+                              expression: "product.quantity"
+                            }
+                          ],
+                          staticClass: "w-24 h-6 text-right bg-gray-100",
+                          attrs: { name: "line_qty", autocomplete: "off" },
+                          domProps: { value: product.quantity },
                           on: {
-                            click: function($event) {
+                            keyup: function($event) {
+                              if (
+                                !$event.type.indexOf("key") &&
+                                _vm._k(
+                                  $event.keyCode,
+                                  "enter",
+                                  13,
+                                  $event.key,
+                                  "Enter"
+                                )
+                              ) {
+                                return null
+                              }
                               return _vm.updateProduct(
                                 product.product,
                                 product.quantity
                               )
+                            },
+                            input: function($event) {
+                              if ($event.target.composing) {
+                                return
+                              }
+                              _vm.$set(product, "quantity", $event.target.value)
                             }
                           }
-                        },
-                        [_vm._v("Update")]
-                      ),
-                      _vm._v(" "),
-                      _c(
-                        "small",
-                        {
-                          staticClass: "cursor-pointer hover:underline",
-                          on: {
-                            click: function($event) {
-                              return _vm.removeProduct(product.product)
-                            }
-                          }
-                        },
-                        [_vm._v("Remove")]
-                      )
+                        }),
+                        _vm._v(" "),
+                        _c(
+                          "div",
+                          { staticClass: "leading-none text-primary" },
+                          [
+                            _c(
+                              "small",
+                              {
+                                staticClass: "cursor-pointer hover:underline",
+                                on: {
+                                  click: function($event) {
+                                    return _vm.updateProduct(
+                                      product.product,
+                                      product.quantity
+                                    )
+                                  }
+                                }
+                              },
+                              [_vm._v("Update")]
+                            ),
+                            _vm._v(" "),
+                            _c(
+                              "small",
+                              {
+                                staticClass: "cursor-pointer hover:underline",
+                                on: {
+                                  click: function($event) {
+                                    return _vm.removeProduct(product.product)
+                                  }
+                                }
+                              },
+                              [_vm._v("Remove")]
+                            )
+                          ]
+                        )
+                      ])
+                    ]),
+                    _vm._v(" "),
+                    _c("td", { staticClass: "text-right text-sm" }, [
+                      _vm._v(_vm._s(product.price))
                     ])
-                  ]),
-                  _vm._v(" "),
-                  _c("td", { staticClass: "text-right" }, [
-                    _vm._v(_vm._s(product.price))
-                  ])
-                ]
-              )
-            }),
-            0
-          )
+                  ]
+                )
+              }),
+              0
+            )
+          ])
         ])
       : _vm._e(),
     _vm._v(" "),
@@ -11716,7 +11748,7 @@ var render = function() {
   return _c("section", [
     _c(
       "div",
-      { staticClass: "relative bg-gray-100" },
+      { staticClass: "relative" },
       [
         _c("flat-pickr", {
           attrs: { config: _vm.config, name: _vm.input_name },
@@ -12074,50 +12106,52 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c("div", {}, [
+  return _c("div", [
     _c(
       "div",
       {
         staticClass:
-          "input-wrap border border-brand-primary rounded-lg p-5 mb-5 hover:bg-gray-100"
+          "flex justify-center px-6 pt-5 pb-6 border-2 border-gray-300 border-dashed rounded-md mb-5 relative"
       },
       [
-        _c("label", { staticClass: "custom-file-label" }, [
+        _c("div", { staticClass: "text-center" }, [
           _c(
             "svg",
             {
-              staticClass: "w-16 mx-auto icon-cloud-upload",
+              staticClass: "mx-auto h-12 w-12 text-gray-400",
               attrs: {
-                xmlns: "http://www.w3.org/2000/svg",
-                viewBox: "0 0 24 24"
+                stroke: "currentColor",
+                fill: "none",
+                viewBox: "0 0 48 48"
               }
             },
             [
               _c("path", {
-                staticClass: "bg-primary fill-current opacity-50",
                 attrs: {
                   d:
-                    "M18 14.97c0-.76-.3-1.51-.88-2.1l-3-3a3 3 0 0 0-4.24 0l-3 3A3 3 0 0 0 6 15a4 4 0 0 1-.99-7.88 5.5 5.5 0 0 1 10.86-.82A4.49 4.49 0 0 1 22 10.5a4.5 4.5 0 0 1-4 4.47z"
-                }
-              }),
-              _vm._v(" "),
-              _c("path", {
-                staticClass: "bg-primary fill-current",
-                attrs: {
-                  d:
-                    "M11 14.41V21a1 1 0 0 0 2 0v-6.59l1.3 1.3a1 1 0 0 0 1.4-1.42l-3-3a1 1 0 0 0-1.4 0l-3 3a1 1 0 0 0 1.4 1.42l1.3-1.3z"
+                    "M28 8H12a4 4 0 00-4 4v20m32-12v8m0 0v8a4 4 0 01-4 4H12a4 4 0 01-4-4v-4m32-4l-3.172-3.172a4 4 0 00-5.656 0L28 28M8 32l9.172-9.172a4 4 0 015.656 0L28 28m0 0l4 4m4-24h8m-4-4v8m-12 4h.02",
+                  "stroke-width": "2",
+                  "stroke-linecap": "round",
+                  "stroke-linejoin": "round"
                 }
               })
             ]
           ),
-          _vm._v("\n            Click here to select CSV file"),
-          _c("span", [_vm._v(_vm._s(_vm.fileName))])
-        ]),
-        _vm._v(" "),
-        _c("input", {
-          attrs: { type: "file", id: "order-file", name: "csv_file" },
-          on: { change: _vm.updateFileName }
-        })
+          _vm._v(" "),
+          _vm._m(0),
+          _vm._v(" "),
+          _c("p", { staticClass: "mt-1 text-xs font-thin text-gray-500" }, [
+            _vm._v(
+              "\n                " + _vm._s(_vm.fileName) + "\n            "
+            )
+          ]),
+          _vm._v(" "),
+          _c("input", {
+            staticClass: "absolute h-48 left-0 top-0 opacity-0",
+            attrs: { type: "file", id: "order-file", name: "csv_file" },
+            on: { change: _vm.updateFileName }
+          })
+        ])
       ]
     ),
     _vm._v(" "),
@@ -12159,7 +12193,25 @@ var render = function() {
     ])
   ])
 }
-var staticRenderFns = []
+var staticRenderFns = [
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("p", { staticClass: "mt-1 text-sm text-gray-600" }, [
+      _c(
+        "button",
+        {
+          staticClass:
+            "font-medium text-brand-primary hover:underline focus:outline-none focus:underline transition duration-150 ease-in-out",
+          attrs: { type: "button" }
+        },
+        [_vm._v("\n                    Upload a CSV file\n                ")]
+      ),
+      _vm._v("\n                or drag and drop\n            ")
+    ])
+  }
+]
 render._withStripped = true
 
 
@@ -12449,7 +12501,7 @@ var render = function() {
     ]),
     _vm._v(" "),
     _c("div", { staticClass: "flex" }, [
-      _c("div", { staticClass: "align-items-center" }, [
+      _c("div", { staticClass: "flex items-center" }, [
         _c("span", { staticClass: "mr-2 text-gray-600" }, [_vm._v("Qty:")]),
         _vm._v(" "),
         _c("input", {

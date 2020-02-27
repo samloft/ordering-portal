@@ -62,7 +62,7 @@
 }
 
 .input-wrap input[type=file] {
-    @pply .w-full;
+    @apply .w-full;
 
     position: absolute;
     height: 280px;
@@ -76,10 +76,15 @@
 }
 
 input, textarea {
-    @apply .rounded .border .p-2 .text-gray-600 .text-sm .w-full;
+    //@apply .rounded .border .p-2 .text-gray-600 .text-sm .w-full;
+    @apply .form-input .block w-full .transition .duration-150 .ease-in-out .text-sm .leading-5 .rounded-md .shadow-sm;
 }
 
 select {
-    @apply .rounded .border .p-2 .text-gray-600 .text-sm .w-full .appearance-none;
+    @apply .form-input .block w-full .transition .duration-150 .ease-in-out .text-sm .leading-5 .rounded-md .shadow-sm;
+}
+
+label {
+    @apply .block .text-sm .font-medium .leading-5 .text-gray-700 .mb-1;
 }
 

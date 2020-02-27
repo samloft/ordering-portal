@@ -1,4 +1,7 @@
 module.exports = {
+    plugins: [
+        require('@tailwindcss/ui'),
+    ],
     prefix: '',
     important: false,
     separator: ':',
@@ -222,6 +225,7 @@ module.exports = {
             none: '0',
             sm: '0.125rem',
             default: '0.25rem',
+            md: '0.375rem',
             lg: '0.5rem',
             full: '9999px',
         },
@@ -233,6 +237,8 @@ module.exports = {
             '8': '8px',
         },
         boxShadow: {
+            xs: '0 0 0 1px rgba(0, 0, 0, 0.05)',
+            sm: '0 1px 2px 0 rgba(0, 0, 0, 0.05)',
             default: '0 1px 3px 0 rgba(0, 0, 0, 0.1), 0 1px 2px 0 rgba(0, 0, 0, 0.06)',
             md: '0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06)',
             lg: '0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05)',
@@ -349,6 +355,14 @@ module.exports = {
             normal: '1.5',
             relaxed: '1.625',
             loose: '2',
+            '3': '.75rem',
+            '4': '1rem',
+            '5': '1.25rem',
+            '6': '1.5rem',
+            '7': '1.75rem',
+            '8': '2rem',
+            '9': '2.25rem',
+            '10': '2.5rem',
         },
         listStyleType: {
             none: 'none',
@@ -538,5 +552,4 @@ module.exports = {
         zIndex: ['responsive'],
     },
     corePlugins: {},
-    plugins: [],
 };
