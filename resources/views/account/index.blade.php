@@ -48,20 +48,20 @@
 
                     <div class="mb-3">
                         <label for="name" class="text-sm">{{ __('Name') }}</label>
-                        <input id="name" name="name" class="bg-gray-100"
+                        <input id="name" name="name"
                                value="{{ old('name') ?: auth()->user()->name }}">
                     </div>
 
                     <div class="mb-3">
                         <label for="password" class="text-sm">{{ __('Password') }}</label>
-                        <input id="password" name="password" class="bg-gray-100"
+                        <input id="password" name="password"
                                placeholder="************"
                                value="{{ old('password') }}">
                     </div>
 
                     <div class="mb-3">
                         <label for="password-confirm" class="text-sm">{{ __('Password Confirmation') }}</label>
-                        <input id="password-confirm" name="password_confirmation" class="bg-gray-100"
+                        <input id="password-confirm" name="password_confirmation"
                                placeholder="************"
                                value="{{ old('password') }}">
                     </div>
@@ -69,12 +69,12 @@
                     <div class="mb-3 flex">
                         <div class="mr-2 w-full">
                             <label for="telephone" class="text-sm">{{ __('Telephone') }}</label>
-                            <input id="telephone" name="telephone" class="bg-gray-100"
+                            <input id="telephone" name="telephone"
                                    value="{{ old('telephone') ?: auth()->user()->telephone }}">
                         </div>
                         <div class="ml-2 w-full">
                             <label for="mobile" class="text-sm">{{ __('mobile') }}</label>
-                            <input id="mobile" name="mobile" class="bg-gray-100"
+                            <input id="mobile" name="mobile"
                                    value="{{ old('mobile') ?: auth()->user()->mobile }}">
                         </div>
                     </div>
