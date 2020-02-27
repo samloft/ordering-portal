@@ -3,6 +3,15 @@
 @section('report.title', 'Back Order Items')
 
 @section('content')
+    <div>
+        <div>
+            <b>Account Code:</b> {{ Auth::user()->customer->code }}
+        </div>
+        <div>
+            <b>Customer:</b> {{ Auth::user()->customer->name }}
+        </div>
+    </div>
+
     <p class="table-heading">{{ __('Outstanding Items') }}</p>
 
     <div class="small-print">

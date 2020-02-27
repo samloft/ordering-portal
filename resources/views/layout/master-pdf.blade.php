@@ -4,22 +4,64 @@
 
     <style>
         body {
-            font-family: Arial, serif;
+            font-family: serif, Arial;
             font-size: 12px;
         }
 
         .row {
+            display: block;
             width: 100%;
+            position: relative;
+        }
+
+        .row::after {
+            content: "";
+            clear: both;
+            display: table;
+        }
+
+        .col-33 {
+            margin-right: 10px;
+            width: 33.33%;
+            display: inline-block;
+            float: left;
+        }
+
+        .col-66 {
+            margin-right: 10px;
+            width: 66.66%;
+            display: inline-block;
+            float: left;
         }
 
         .col {
-            text-align: right;
+            text-align: left;
             display: inline-block;
             width: 50%;
+            float: left;
+            position: relative;
+        }
+
+        col::after {
+            content: "";
+            clear: both;
+            display: table;
         }
 
         .mt-10 {
             margin-top: 10px;
+        }
+
+        .mt-20 {
+            margin-top: 20px;
+        }
+
+        .mb-10 {
+            margin-top: 10px;
+        }
+
+        .mb-20 {
+            margin-bottom: 20px;
         }
 
         .logo {
@@ -36,6 +78,10 @@
             border: 1px solid #000000;
             padding-left: 5px;
             padding-right: 5px;
+        }
+
+        td {
+            font-size: 10px;
         }
 
         h3.report-heading {
@@ -61,6 +107,20 @@
         .text-left {
             text-align: left !important;
         }
+
+        .clear-fix::after {
+            content: "";
+            clear: both;
+            display: table;
+        }
+
+        ul > div {
+            display: inline-block;
+        }
+
+        li {
+            list-style-type: none;
+        }
     </style>
 </head>
 
@@ -71,30 +131,21 @@
         <img src="{{ asset('images/logos/logo-'.config('app.name').'-dark.png') }}" alt="Image not found" class="logo">
     </div>
     <div class="col text-right">
-        <div>{{ str_replace(',', '', $company_details['line_1']) }}</div>
-        <div>{{ str_replace(',', '', $company_details['line_2']) }}</div>
-        <div>{{ str_replace(',', '', $company_details['line_3']) }}</div>
-        <div>{{ str_replace(',', '', $company_details['line_4']) }}</div>
-        <div>{{ str_replace(',', '', $company_details['line_5']) }}</div>
-        <div>{{ str_replace(',', '', $company_details['postcode']) }}</div>
+        {{ str_replace(',', '', $company_details['line_1']) }}<br>
+        {{ str_replace(',', '', $company_details['line_2']) }}<br>
+        {{ str_replace(',', '', $company_details['line_3']) }}<br>
+        {{ str_replace(',', '', $company_details['line_4']) }}<br>
+        {{ str_replace(',', '', $company_details['line_5']) }}<br>
+        {{ str_replace(',', '', $company_details['postcode']) }}<br>
 
         <div class="mt-10">
-            <div>{{ $company_details['telephone'] ? 'Tel: ' .  $company_details['telephone'] : '' }}</div>
-            <div>{{ $company_details['email'] ? 'Email: ' .  $company_details['email'] : '' }}</div>
+            {{ $company_details['telephone'] ? 'Tel: ' .  $company_details['telephone'] : '' }}<br>
+            {{ $company_details['email'] ? 'Email: ' .  $company_details['email'] : '' }}
         </div>
     </div>
 </div>
 
 <h3 class="report-heading">@yield('report.title')</h3>
-
-<div>
-    <div>
-        <b>Account Code:</b> {{ Auth::user()->customer->code }}
-    </div>
-    <div>
-        <b>Customer:</b> {{ Auth::user()->customer->name }}
-    </div>
-</div>
 
 @yield('content')
 
