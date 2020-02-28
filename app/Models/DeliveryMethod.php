@@ -24,22 +24,21 @@ class DeliveryMethod extends Model
     }
 
     /**
-     * Get delivery details for the given ID.
+     * Get delivery details for the given code.
      *
-     * @param $id
+     * @param $code
      *
-     * @return array
+     * @return \Illuminate\Database\Eloquent\Builder|\Illuminate\Database\Eloquent\Model
      */
-    public static function details($id): array
+    public static function details($code)
     {
-        $delivery_details = self::where('id', $id)->findOrFail();
+        return self::where('code', $code)->firstOrFail();
 
-        // Work out any calculations.
-        return [
-            'title' => $delivery_details->title,
-            'code' => $delivery_details->code,
-            'cost' => $delivery_details->price,
-        ];
+        //return [
+        //    'title' => $delivery_details->title,
+        //    'code' => $delivery_details->code,
+        //    'cost' => $delivery_details->price,
+        //];
     }
 
     /**

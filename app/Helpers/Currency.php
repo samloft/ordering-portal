@@ -34,3 +34,16 @@ function currency($value = null, $decimals = 4)
 
     return $currency_code.$value_output;
 }
+
+/**
+ * Remove and none numbers or commas or digits from a value and
+ * return it as a float.
+ *
+ * @param $value
+ *
+ * @return float
+ */
+function removeCurrencySymbol($value)
+{
+    return (float) preg_replace('/[^0-9,.]/', '', $value);
+}

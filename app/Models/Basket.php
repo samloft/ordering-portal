@@ -53,7 +53,13 @@ class Basket extends Model
     {
         $lines = static::selectRaw('basket.product as product, basket.customer_code as customer_code,
                                                     basket.quantity as quantity, price, break1, price1, break2, price2,
-                                                    break3, price3, name, uom, not_sold, stock')->where('basket.customer_code', auth()->user()->customer->code)->where('basket.user_id', auth()->user()->id)->join('prices', 'basket.product', '=', 'prices.product')->where('prices.customer_code', auth()->user()->customer->code)->join('products', 'basket.product', '=', 'products.code')->get();
+                                                    break3, price3, name, uom, not_sold, stock, type')
+            ->where('basket.customer_code', auth()->user()->customer->code)
+            ->where('basket.user_id', auth()->user()->id)
+            ->join('prices', 'basket.product', '=', 'prices.product')
+            ->where('prices.customer_code', auth()->user()->customer->code)
+            ->join('products', 'basket.product', '=', 'products.code')
+            ->get();
 
         $goods_total = 0;
         $potential_saving_total = 0;
@@ -94,18 +100,19 @@ class Basket extends Model
 
             $product_lines[] = [
                 'product' => $line->product,
+                'type' => $line->type,
                 'name' => $line->name,
                 'uom' => $line->uom,
                 'stock' => $line->stock,
                 'image' => $image,
                 'quantity' => $line->quantity,
-                'discount' => 2,
-                'net_price' => number_format(discount($net_price), 4),
-                'price' => currency(discount($net_price) * $line->quantity, 2),
-                'unit_price' => currency(discount($net_price)),
+                'discount' => discountPercent(),
+                'net_price' => currency(number_format(discount($net_price), 4)),
+                'price' => currency(discount($net_price) * $line->quantity),
+                'unit_price' => discount($net_price),
                 'next_bulk' => [
                     'qty_away' => $next_bulk_qty,
-                    'saving' => currency($next_bulk_qty + $line->quantity * $next_bulk_saving, 2),
+                    'saving' => ($next_bulk_qty + $line->quantity * $next_bulk_saving),
                 ],
                 'potential_saving' => $next_bulk_qty > 0,
             ];
@@ -116,7 +123,7 @@ class Basket extends Model
         }
 
         if ($shipping_code) {
-            $delivery_method = DeliveryMethod::where('code', $shipping_code)->first();
+            $delivery_method = DeliveryMethod::details($shipping_code);
         } else {
             $delivery_method = null;
         }
@@ -130,13 +137,18 @@ class Basket extends Model
         }
 
         return [
+            'currency' => currency(),
             'summary' => [
                 'goods_total' => currency($goods_total, 2),
-                'shipping' => currency($shipping_value, 2),
+                'shipping' => [
+                    'code' => $delivery_method->code ?? null,
+                    'identifier' => $delivery_method->identifier ?? null,
+                    'cost' => currency($shipping_value, 2),
+                ],
                 'sub_total' => currency($goods_total + $shipping_value, 2),
                 'small_order_charge' => currency($small_order_charge['charge'], 2),
                 'small_order_rules' => $small_order_charge,
-                'vat' => currency($vat = vatAmount($goods_total + $small_order_charge['charge'] + $shipping_value), 2),
+                'vat' => currency(vatAmount($goods_total + $small_order_charge['charge'] + $shipping_value), 2),
                 'total' => currency(vatIncluded($goods_total + $small_order_charge['charge'] + $shipping_value), 2),
             ],
             'line_count' => count($product_lines),

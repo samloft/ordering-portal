@@ -2154,7 +2154,7 @@ __webpack_require__.r(__webpack_exports__);
   data: function data() {
     return {
       goods_total: this.summary.goods_total,
-      shipping: this.summary.shipping,
+      shipping: this.summary.shipping.cost,
       sub_total: this.summary.sub_total,
       small_order_charge: this.summary.small_order_charge,
       vat: this.summary.vat,
@@ -2167,7 +2167,7 @@ __webpack_require__.r(__webpack_exports__);
   methods: {
     updateSummary: function updateSummary(data) {
       this.goods_total = data.basket_details.summary.goods_total;
-      this.shipping = data.basket_details.summary.shipping;
+      this.shipping = data.basket_details.summary.shipping.cost;
       this.sub_total = data.basket_details.summary.sub_total;
       this.small_order_charge = data.basket_details.summary.small_order_charge;
       this.vat = data.basket_details.summary.vat;

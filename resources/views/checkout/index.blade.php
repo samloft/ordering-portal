@@ -111,7 +111,7 @@
                     <div class="flex mb-3">
                         <label class="checkbox flex items-center">
                             <input type="checkbox" name="terms" class="form-checkbox"
-                                   value="{{ old('terms') ? 'checked' : '' }}" autocomplete="off">
+                                   {{ old('terms') ? 'checked' : '' }} autocomplete="off" >
                             <span class="ml-2">I have read and agree to the <a href="{{ route('support.terms') }}"
                                                                                class="underline" target="_blank">terms & conditions</a>
                             </span>

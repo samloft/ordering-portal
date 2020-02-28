@@ -6,8 +6,11 @@ use App\Models\Address;
 use App\Models\Basket;
 use App\Models\DeliveryMethod;
 use App\Models\GlobalSettings;
+use App\Models\OrderHeader;
+use App\Models\OrderLine;
 use Auth;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 use Illuminate\View\View;
 
 class CheckoutController extends Controller
@@ -39,66 +42,90 @@ class CheckoutController extends Controller
     /**
      * Place the customers order.
      *
-     * @param Request $request
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\Http\RedirectResponse|\Illuminate\View\View
      *
-     * @return array|\Illuminate\Http\RedirectResponse
+     * @throws \Throwable
      */
-    public function store(Request $request)
+    public function store()
     {
-        $this->validation($request);
+        $this->validation();
 
-        if (! $request->terms) {
-            return back()->with('error', 'You must accept the terms before you can place your order.')->withInput($request->all());
+        $delivery_address = session('address') ?: Address::getDefault();
+
+        if (! $delivery_address) {
+            return back()->with('error', 'You must select a delivery address')->withInput(request()->all());
         }
 
-        $delivery = DeliveryMethod::details($request->shipping);
+        $basket = Basket::show(request('shipping'));
 
-        $order_details = [
-            'header' => [
-                'reference' => $request->reference,
-                'notes' => $request->notes,
-                'shipping' => $delivery,
-                'first_name' => $request->first_name,
-                'last_name' => $request->last_name,
-                'telephone' => $request->telephone,
-                'evening_telephone' => $request->evening_telephone,
-                'fax' => $request->fax,
-                'mobile' => $request->mobile,
-                'delivery_address' => session('address') ?: Address::getDefault()->getAttributes(),
-            ],
-            'details' => Basket::show($delivery['cost']),
+        $order_number = 'B123456';
+
+        $header = [
+            'order_number' => $order_number,
+            'customer_code' => auth()->user()->customer->code,
+            'user_id' => auth()->id(),
+            'reference' => request('reference'),
+            'notes' => request('notes'),
+            'name' => request('name'),
+            'telephone' => request('telephone'),
+            'mobile' => request('mobile'),
+            'address_line_1' => $delivery_address['address_details']['company_name'],
+            'address_line_2' => $delivery_address['address_details']['address_2'],
+            'address_line_3' => $delivery_address['address_details']['address_3'],
+            'address_line_4' => $delivery_address['address_details']['address_4'],
+            'address_line_5' => $delivery_address['address_details']['postcode'],
+            'delivery_method' => $basket['summary']['shipping']['identifier'],
+            'delivery_code' => $basket['summary']['shipping']['code'],
+            'delivery_cost' => removeCurrencySymbol($basket['summary']['shipping']['cost']),
+            'small_order_charge' => removeCurrencySymbol($basket['summary']['small_order_charge']),
+            'value' => removeCurrencySymbol($basket['summary']['total']),
+            'imported' => false,
+            'created_at' => date('Y-m-d H:i:s'),
         ];
+
+        $lines = [];
+
+        foreach ($basket['lines'] as $line) {
+            $lines[] = [
+                'order_number' => $order_number,
+                'product' => $line['product'],
+                'description' => $line['name'],
+                'quantity' => $line['quantity'],
+                'stock_type' => $line['type'],
+                'price' => $line['unit_price'],
+                'total' => ($line['unit_price'] * $line['quantity']),
+                'created_at' => date('Y-m-d H:i:s'),
+            ];
+        }
+
+        DB::transaction(static function () use ($lines, $header) {
+            OrderLine::insert($lines);
+
+            OrderHeader::insert($header);
+
+            Basket::clear();
+        }, 5);
 
         // After checkout complete
         if (session('address')) {
             session()->forget('address');
         }
 
-        return $order_details;
-    }
-
-    public function complete($order_number)
-    {
-    }
-
-    public function generateOrderFile()
-    {
+        return view('checkout.completed', compact('order_number'));
     }
 
     /**
      * Validate checkout details.
      *
-     * @param $request
-     *
      * @return mixed
      */
-    public function validation($request)
+    public function validation()
     {
-        return $request->validate([
+        return request()->validate([
             'reference' => 'required',
             'shipping' => 'required|exists:delivery_methods,code',
-            'first_name' => 'required',
-            'last_name' => 'required',
+            'name' => 'required',
+            'terms' => 'accepted',
         ]);
     }
 }
