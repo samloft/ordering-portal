@@ -2,15 +2,15 @@
 
 namespace App\Notifications;
 
-use Illuminate\Bus\Queueable;
+use App\Models\GlobalSettings;
+use App\Models\OrderHeader;
 use Illuminate\Notifications\Messages\MailMessage;
 use Illuminate\Notifications\Messages\SlackMessage;
 use Illuminate\Notifications\Notification;
+use Barryvdh\DomPDF\Facade as PDF;
 
 class OrderPlacedNotification extends Notification
 {
-    use Queueable;
-
     public $order;
 
     public $user;
@@ -36,28 +36,8 @@ class OrderPlacedNotification extends Notification
      */
     public function via($notifiable): array
     {
-        //return ['mail', 'slack'];
         return ['mail'];
     }
-
-    ///**
-    // * @return \Illuminate\Notifications\Messages\SlackMessage
-    // */
-    //public function toSlack(): SlackMessage
-    //{
-    //    return (new SlackMessage())->from('Online Ordering')->to('#online-ordering')
-    //        ->success()
-    //        ->content('['.ucfirst(config('app.name')).'] - Order has been placed')
-    //        ->attachment(static function ($attachment) {
-    //            $attachment->title('Order Number 1322')
-    //                ->fields([
-    //                    'OrderTrackingLine' => '12',
-    //                    'Amount'            => '£1,234',
-    //                    'Customer'          => 'SCO100',
-    //                    'Was Awesome'       => ':-1:',
-    //                ]);
-    //        });
-    //}
 
     /**
      * Get the mail representation of the notification.
@@ -70,21 +50,16 @@ class OrderPlacedNotification extends Notification
     {
         //return (new MailMessage())->line('The introduction to the notification.')->action('Notification Action', url('/'))->line('Thank you for using our application!');
 
+        $order = OrderHeader::where('customer_code', auth()->user()->customer->code)->where('order_number', decodeUrl($this->order['order_number']))->firstOrFail();
+        $company_details = json_decode(GlobalSettings::key('company-details'), true);
+
+        $pdf = PDF::loadView('pdf.order', compact('order', 'company_details'))->output();
+
         return (new MailMessage())
+            ->subject('Ordering portal - Order Confirmation')
             ->greeting('Hello, '.$this->user->name)
             ->line('Thank you for your order.')
-            //->action('Create password', route('cms.password.reset', $this->token))
-            ->line('Some other stuff and things');
+            ->line('Some other stuff and things')
+            ->attachData($pdf, $this->order['order_number'].'.pdf');
     }
-
-    ///**
-    // * Get the array representation of the notification.
-    // *
-    // * @return array
-    // */
-    //public function toArray()
-    //{
-    //    return [
-    //    ];
-    //}
 }

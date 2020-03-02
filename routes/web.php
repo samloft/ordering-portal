@@ -154,6 +154,7 @@ Route::group(['middleware' => ['auth', 'has.customer']], static function () {
     Route::group(['prefix' => 'checkout'], static function () {
         Route::get('/', 'CheckoutController@index')->name('checkout');
         Route::post('order', 'CheckoutController@store')->name('checkout.order');
+        Route::get('confirmation', 'CheckoutController@confirmation')->name('checkout.confirmation');
     });
 
     /* Contact Page */

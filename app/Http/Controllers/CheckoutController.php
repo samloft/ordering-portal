@@ -9,10 +9,8 @@ use App\Models\GlobalSettings;
 use App\Models\OrderHeader;
 use App\Models\OrderLine;
 use App\Notifications\OrderPlacedNotification;
-use Auth;
-use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
-use Illuminate\View\View;
+use Barryvdh\DomPDF\Facade as PDF;
 
 class CheckoutController extends Controller
 {
@@ -114,6 +112,21 @@ class CheckoutController extends Controller
         }
 
         return view('checkout.completed', compact('order_number'));
+    }
+
+    /**
+     * @param $order_number
+     *
+     * @return mixed
+     */
+    public static function confirmation($order_number = null)
+    {
+        $order_number = $order_number ?? request('order_number');
+
+        $order = OrderHeader::where('customer_code', auth()->user()->customer->code)->where('order_number', decodeUrl($order_number))->firstOrFail();
+        $company_details = json_decode(GlobalSettings::key('company-details'), true);
+
+        return PDF::loadView('pdf.order', compact('order', 'company_details'))->download(decodeUrl($order_number).'.pdf');
     }
 
     /**
