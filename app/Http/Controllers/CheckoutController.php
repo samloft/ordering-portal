@@ -103,9 +103,9 @@ class CheckoutController extends Controller
             OrderHeader::insert($header);
 
             Basket::clear();
-
-            auth()->user()->notify(new OrderPlacedNotification($header));
         }, 5);
+
+        auth()->user()->notify(new OrderPlacedNotification($header));
 
         if (session('address')) {
             session()->forget('address');
