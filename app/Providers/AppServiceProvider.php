@@ -41,7 +41,6 @@ class AppServiceProvider extends ServiceProvider
         view()->composer('home.categories', static function ($view) {
             $links = [
                 'categories' => HomeLink::categories(),
-                'adverts' => HomeLink::adverts(),
             ];
 
             $view->with('links', $links);
