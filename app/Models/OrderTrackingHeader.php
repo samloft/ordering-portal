@@ -98,14 +98,4 @@ class OrderTrackingHeader extends Model
             ->groupBy('order_tracking_header.order_no', 'order_tracking_header.date_received', 'order_tracking_lines.product', 'order_tracking_lines.line_qty', 'order_tracking_lines.long_description')
             ->get();
     }
-
-    /**
-     * Count the count of all orders that have been placed today.
-     *
-     * @return int
-     */
-    public static function todayCount(): int
-    {
-        return self::where('date_received', Carbon::today())->count();
-    }
 }

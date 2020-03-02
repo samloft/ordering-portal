@@ -106,7 +106,6 @@ class CheckoutController extends Controller
             Basket::clear();
         }, 5);
 
-        // After checkout complete
         if (session('address')) {
             session()->forget('address');
         }

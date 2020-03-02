@@ -3,8 +3,9 @@
 namespace App\Http\Controllers\Cms;
 
 use App\Http\Controllers\Controller;
-use App\Models\OrderTrackingHeader;
+use App\Models\OrderHeader;
 use App\Models\User;
+use Carbon\Carbon;
 
 class HomeController extends Controller
 {
@@ -21,8 +22,9 @@ class HomeController extends Controller
     public function index()
     {
         $stats = [
-            'users'        => User::countAll(),
-            'orders-today' => OrderTrackingHeader::todayCount(),
+            'users' => User::countAll(),
+            'orders-today' => OrderHeader::where('created_at', Carbon::today())->count(),
+            'pending-orders' => OrderHeader::where('imported', false)->get(),
         ];
 
         return view('dashboard.index', compact('stats'));
