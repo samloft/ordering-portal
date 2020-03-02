@@ -63,7 +63,7 @@ class ReportController extends Controller
             if ($output === 'pdf') {
                 $company_details = json_decode(GlobalSettings::key('company-details'), true);
 
-                return PDF::loadView('reports.back-orders', compact('back_orders', 'company_details'))->download('back_orders.pdf');
+                return PDF::loadView('pdf.back-orders', compact('back_orders', 'company_details'))->download('back_orders.pdf');
             }
 
             if ($output === 'csv') {
@@ -118,7 +118,7 @@ class ReportController extends Controller
             if ($output === 'pdf') {
                 $company_details = json_decode(GlobalSettings::key('company-details'), true);
 
-                return PDF::loadView('reports.account-summary', compact('invoice_lines', 'summary_lines', 'company_details'))->download('account_summary.pdf');
+                return PDF::loadView('pdf.account-summary', compact('invoice_lines', 'summary_lines', 'company_details'))->download('account_summary.pdf');
             }
 
             if ($output === 'csv') {
