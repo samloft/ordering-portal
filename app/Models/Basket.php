@@ -194,7 +194,7 @@ class Basket extends Model
             }
         }
 
-        return ['basket_updated' => isset($product) ? true : false];
+        return ['basket_updated' => true];
     }
 
     /**

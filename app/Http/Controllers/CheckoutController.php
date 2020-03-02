@@ -8,6 +8,7 @@ use App\Models\DeliveryMethod;
 use App\Models\GlobalSettings;
 use App\Models\OrderHeader;
 use App\Models\OrderLine;
+use App\Notifications\OrderPlacedNotification;
 use Auth;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
@@ -104,6 +105,8 @@ class CheckoutController extends Controller
             OrderHeader::insert($header);
 
             Basket::clear();
+
+            auth()->user()->notify(new OrderPlacedNotification($header));
         }, 5);
 
         if (session('address')) {
