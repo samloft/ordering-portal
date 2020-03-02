@@ -58,7 +58,7 @@ class CheckoutController extends Controller
 
         $basket = Basket::show(request('shipping'));
 
-        $order_number = 'B123456';
+        $order_number = GlobalSettings::nextOrderNumber();
 
         $header = [
             'order_number' => $order_number,

@@ -154,4 +154,23 @@ class GlobalSettings extends Model
 
         return true;
     }
+
+    /**
+     * Get the next order number to be used.
+     *
+     * @return string
+     */
+    public static function nextOrderNumber(): string
+    {
+        $last_order_value = self::where('key', 'last-order')->first();
+
+        $order_prefix = substr($last_order_value->value, 0, 1);
+        $next_order = $order_prefix.str_pad(substr($last_order_value->value, 1) + 1, 6, '0', STR_PAD_LEFT);
+
+        $last_order_value->value = $next_order;
+        $last_order_value->save();
+
+
+        return $next_order;
+    }
 }
