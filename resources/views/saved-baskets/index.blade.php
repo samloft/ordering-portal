@@ -42,7 +42,7 @@
     <h2 class="font-semibold tracking-widest mt-3 mb-3">{{ __('Search Results') }}</h2>
 
     <div class="table-container">
-        <table>
+        <table class="table">
             <thead>
             <tr>
                 <th>Template Reference</th>
