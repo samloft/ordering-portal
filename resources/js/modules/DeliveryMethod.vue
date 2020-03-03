@@ -46,7 +46,6 @@
             this.delivery_code = this.old_delivery_method;
 
             this.delivery_methods.forEach(delivery => {
-                console.log(delivery);
                 let cost = parseFloat(this.goods_total) > this.small_order.threshold ? delivery.price_low : delivery.price;
 
                 this.deliveries.push({

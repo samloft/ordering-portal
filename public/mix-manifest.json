@@ -1,8 +1,8 @@
 {
-    "/js/app.js": "/js/app.js?id=9f43d8fc00c0b513f5ce",
-    "/css/app-scolmore.css": "/css/app-scolmore.css?id=e4fc0fd7dcec778d5dcf",
-    "/css/app-ovia.css": "/css/app-ovia.css?id=ee829841b81df1d9e89e",
-    "/css/app-unicrimp.css": "/css/app-unicrimp.css?id=6492b722d46df5c4ba94",
-    "/css/cms.css": "/css/cms.css?id=bf77c944cbab0dd3277d",
-    "/js/cms.js": "/js/cms.js?id=d96afa7d473e9e8c345d"
+    "/js/app.js": "/js/app.js",
+    "/css/app-scolmore.css": "/css/app-scolmore.css",
+    "/css/app-ovia.css": "/css/app-ovia.css",
+    "/css/app-unicrimp.css": "/css/app-unicrimp.css",
+    "/css/cms.css": "/css/cms.css",
+    "/js/cms.js": "/js/cms.js"
 }

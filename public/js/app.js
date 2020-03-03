@@ -2728,7 +2728,6 @@ __webpack_require__.r(__webpack_exports__);
 
     this.delivery_code = this.old_delivery_method;
     this.delivery_methods.forEach(function (delivery) {
-      console.log(delivery);
       var cost = parseFloat(_this.goods_total) > _this.small_order.threshold ? delivery.price_low : delivery.price;
 
       _this.deliveries.push({
