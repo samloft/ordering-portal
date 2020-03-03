@@ -10,9 +10,9 @@
                 <p class="mt-1 text-sm text-gray-600">
                     <button type="button"
                             class="font-medium text-brand-primary hover:underline focus:outline-none focus:underline transition duration-150 ease-in-out">
-                        Upload a CSV file
+                        Click to upload a CSV file
                     </button>
-                    or drag and drop
+                    or drag and drop one here
                 </p>
                 <p class="mt-1 text-xs font-thin text-gray-500">
                     {{ fileName }}

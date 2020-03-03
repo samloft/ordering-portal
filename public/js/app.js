@@ -1952,7 +1952,9 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
-      quantity: this.product.order_multiples
+      quantity: this.product.order_multiples,
+      buttonText: 'Add To Basket',
+      addingProduct: false
     };
   },
   props: {
@@ -1962,10 +1964,15 @@ __webpack_require__.r(__webpack_exports__);
     submit: function submit() {
       var _this = this;
 
+      this.buttonText = 'Adding Product';
+      this.addingProduct = true;
       App.addProductToBasket(this.product.code, this.quantity).then(function (result) {
         if (result) {
           _this.quantity = _this.product.order_multiples;
         }
+
+        _this.buttonText = 'Add To Basket';
+        _this.addingProduct = false;
       });
     }
   }
@@ -10885,6 +10892,8 @@ var render = function() {
       "button",
       {
         staticClass: "button button-primary",
+        attrs: { disabled: _vm.addingProduct },
+        domProps: { textContent: _vm._s(_vm.buttonText) },
         on: {
           click: function($event) {
             return _vm.submit()
@@ -12210,9 +12219,13 @@ var staticRenderFns = [
             "font-medium text-brand-primary hover:underline focus:outline-none focus:underline transition duration-150 ease-in-out",
           attrs: { type: "button" }
         },
-        [_vm._v("\n                    Upload a CSV file\n                ")]
+        [
+          _vm._v(
+            "\n                    Click to upload a CSV file\n                "
+          )
+        ]
       ),
-      _vm._v("\n                or drag and drop\n            ")
+      _vm._v("\n                or drag and drop one here\n            ")
     ])
   }
 ]

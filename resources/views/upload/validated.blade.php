@@ -29,51 +29,53 @@
             </div>
         @endif
 
-        <table>
-            <thead>
-            <tr>
-                <th>{{ __('Product') }}</th>
-                <th>{{ __('Quantity') }}</th>
-                <th class="text-right">{{ __('Status') }}</th>
-                @if($product_lines['prices_passed'])
-                    <th class="text-right">{{ __('Passed Price (Net)') }}</th>
-                    <th class="text-right">{{ __('Actual Price (Net)') }}</th>
-                @endif
-            </tr>
-            </thead>
-            <tbody>
-            @foreach ($product_lines as $line)
-                @if ($line['product'])
-                    <tr>
+        <div class="table-container">
+            <table>
+                <thead>
+                <tr>
+                    <th>{{ __('Product') }}</th>
+                    <th>{{ __('Quantity') }}</th>
+                    <th class="text-right">{{ __('Status') }}</th>
+                    @if($product_lines['prices_passed'])
+                        <th class="text-right">{{ __('Passed Price (Net)') }}</th>
+                        <th class="text-right">{{ __('Actual Price (Net)') }}</th>
+                    @endif
+                </tr>
+                </thead>
+                <tbody>
+                @foreach ($product_lines as $line)
+                    @if ($line['product'])
+                        <tr>
 
-                        <td class="{{ $line['validation']['error'] ? 'bg-danger' : ($line['validation']['warning'] ?? 'bg-warning') }}">
-                            {{ $line['product'] }}
-                        </td>
+                            <td class="{{ $line['validation']['error'] ? 'bg-danger' : ($line['validation']['warning'] ?? 'bg-warning') }}">
+                                {{ $line['product'] }}
+                            </td>
 
-                        <td class="text-right {{ $line['validation']['error'] ? 'bg-danger' : ($line['validation']['warning'] ?? 'bg-warning') }}">
-                            {{ $line['quantity'] }}
-                        </td>
+                            <td class="text-right {{ $line['validation']['error'] ? 'bg-danger' : ($line['validation']['warning'] ?? 'bg-warning') }}">
+                                {{ $line['quantity'] }}
+                            </td>
 
-                        <td class="text-right {{ $line['validation']['error'] ? 'bg-danger' : ($line['validation']['warning'] ?? 'bg-warning') }}">
-                            @if ($line['validation']['error'])
-                                <span class="badge badge-danger"><i class="fas fa-times-circle"></i> {{ $line['validation']['error'] }}</span>
-                            @elseif ($line['validation']['warning'])
-                                <span class="badge bade-warning"><i class="fas fa-exclamation-triangle"></i> {{ $line['validation']['warning'] }}</span>
-                            @else
-                                <span class="badge badge-success"><i class="text-success fas fa-check-circle"></i> Valid</span>
+                            <td class="text-right {{ $line['validation']['error'] ? 'bg-danger' : ($line['validation']['warning'] ?? 'bg-warning') }}">
+                                @if ($line['validation']['error'])
+                                    <span class="badge badge-danger"><i class="fas fa-times-circle"></i> {{ $line['validation']['error'] }}</span>
+                                @elseif ($line['validation']['warning'])
+                                    <span class="badge bade-warning"><i class="fas fa-exclamation-triangle"></i> {{ $line['validation']['warning'] }}</span>
+                                @else
+                                    <span class="badge badge-success"><i class="text-success fas fa-check-circle"></i> Valid</span>
+                                @endif
+                            </td>
+
+                            @if($product_lines['prices_passed'])
+                                <td class="text-right {{ $line['price_match_error'] ? 'bg-info' : '' }}">{{ $line['passed_price'] ?: '' }}</td>
+
+                                <td class="text-right {{ $line['price_match_error'] ? 'bg-info' : '' }}">{{ $line['price'] ?: '' }}</td>
                             @endif
-                        </td>
-
-                        @if($product_lines['prices_passed'])
-                            <td class="text-right {{ $line['price_match_error'] ? 'bg-info' : '' }}">{{ $line['passed_price'] ?: '' }}</td>
-
-                            <td class="text-right {{ $line['price_match_error'] ? 'bg-info' : '' }}">{{ $line['price'] ?: '' }}</td>
-                        @endif
-                    </tr>
-                @endif
-            @endforeach
-            </tbody>
-        </table>
+                        </tr>
+                    @endif
+                @endforeach
+                </tbody>
+            </table>
+        </div>
     </div>
 
     <div class="text-right mt-5">
