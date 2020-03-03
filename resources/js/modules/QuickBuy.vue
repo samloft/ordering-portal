@@ -19,9 +19,7 @@
                 <span class="mr-2 text-gray-600">Qty:</span>
                 <input class="w-24 mr-2" value="1" v-model="quantity" @keyup.enter="submit()" autocomplete="off">
             </div>
-            <button class="button button-primary flex-grow" @click="submit()" type="submit">
-                Add to basket
-            </button>
+            <button class="button button-primary flex-grow" @click="submit()" type="submit" v-text="buttonText" :disabled="addingProduct"/>
         </div>
     </div>
 </template>
@@ -35,16 +33,24 @@
                 keywordSearch: '',
                 resultItems: [],
                 placeHolderText: '',
+                buttonText: 'Add to basket',
+                addingProduct: false,
             }
         },
         methods: {
             submit: function () {
+                this.buttonText = 'Adding product';
+                this.addingProduct = true;
+
                 App.addProductToBasket(this.keywordSearch, this.quantity).then(result => {
                     if (result) {
                         this.keywordSearch = '';
                         this.quantity = 1;
                         this.$refs.product.focus();
                     }
+
+                    this.buttonText = 'Add to basket';
+                    this.addingProduct = false;
                 });
             },
             onSelected(name) {

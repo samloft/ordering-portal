@@ -3057,8 +3057,6 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
-//
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
@@ -3066,13 +3064,17 @@ __webpack_require__.r(__webpack_exports__);
       quantity: 1,
       keywordSearch: '',
       resultItems: [],
-      placeHolderText: ''
+      placeHolderText: '',
+      buttonText: 'Add to basket',
+      addingProduct: false
     };
   },
   methods: {
     submit: function submit() {
       var _this = this;
 
+      this.buttonText = 'Adding product';
+      this.addingProduct = true;
       App.addProductToBasket(this.keywordSearch, this.quantity).then(function (result) {
         if (result) {
           _this.keywordSearch = '';
@@ -3080,6 +3082,9 @@ __webpack_require__.r(__webpack_exports__);
 
           _this.$refs.product.focus();
         }
+
+        _this.buttonText = 'Add to basket';
+        _this.addingProduct = false;
       });
     },
     onSelected: function onSelected(name) {
@@ -12535,19 +12540,16 @@ var render = function() {
         })
       ]),
       _vm._v(" "),
-      _c(
-        "button",
-        {
-          staticClass: "button button-primary flex-grow",
-          attrs: { type: "submit" },
-          on: {
-            click: function($event) {
-              return _vm.submit()
-            }
+      _c("button", {
+        staticClass: "button button-primary flex-grow",
+        attrs: { type: "submit", disabled: _vm.addingProduct },
+        domProps: { textContent: _vm._s(_vm.buttonText) },
+        on: {
+          click: function($event) {
+            return _vm.submit()
           }
-        },
-        [_vm._v("\n            Add to basket\n        ")]
-      )
+        }
+      })
     ])
   ])
 }
