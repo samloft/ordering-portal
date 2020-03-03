@@ -60,7 +60,7 @@
         </div>
 
         <a href="{{ route('saved-baskets.copy', ['id' => $saved_basket->first()->id]) }}">
-            <button class="button button-primary">{{ __('Add to basket') }}</button>
+            <submit-button before-text="Add to basket" after-text="Adding to basket"></submit-button>
         </a>
     </div>
 @endsection
