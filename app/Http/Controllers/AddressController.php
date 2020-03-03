@@ -3,7 +3,6 @@
 namespace App\Http\Controllers;
 
 use App\Models\Address;
-use App\Models\Countries;
 use App\Models\GlobalSettings;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Routing\Redirector;
@@ -124,7 +123,6 @@ class AddressController extends Controller
      *
      * @return RedirectResponse
      * @throws \Exception
-     *
      */
     public function destroy($id): RedirectResponse
     {

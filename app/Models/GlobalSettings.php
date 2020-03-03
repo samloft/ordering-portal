@@ -170,7 +170,6 @@ class GlobalSettings extends Model
         $last_order_value->value = $next_order;
         $last_order_value->save();
 
-
         return $next_order;
     }
 }

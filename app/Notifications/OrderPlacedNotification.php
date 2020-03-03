@@ -4,10 +4,9 @@ namespace App\Notifications;
 
 use App\Models\GlobalSettings;
 use App\Models\OrderHeader;
-use Illuminate\Notifications\Messages\MailMessage;
-use Illuminate\Notifications\Messages\SlackMessage;
-use Illuminate\Notifications\Notification;
 use Barryvdh\DomPDF\Facade as PDF;
+use Illuminate\Notifications\Messages\MailMessage;
+use Illuminate\Notifications\Notification;
 
 class OrderPlacedNotification extends Notification
 {

@@ -6,12 +6,12 @@ use App\Models\Basket;
 use App\Models\GlobalSettings;
 use App\Models\OrderTrackingHeader;
 use App\Models\OrderTrackingLine;
+use Barryvdh\DomPDF\Facade as PDF;
 use Illuminate\Contracts\View\Factory;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Response;
 use Illuminate\Routing\Redirector;
 use Illuminate\View\View;
-use Barryvdh\DomPDF\Facade as PDF;
 
 class OrderTrackingController extends Controller
 {
