@@ -26,7 +26,9 @@
                     {{ __('Back') }}
                 </button>
 
-                <button class="button button-danger">{{ __('Delete Template') }}</button>
+                <a href="{{ route('saved-baskets.destroy', ['id' => $saved_basket->first()->id]) }}">
+                    <button class="button button-danger">{{ __('Delete Template') }}</button>
+                </a>
             </div>
         </div>
     </div>
