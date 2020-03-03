@@ -9,8 +9,8 @@ use App\Models\GlobalSettings;
 use App\Models\OrderHeader;
 use App\Models\OrderLine;
 use App\Notifications\OrderPlacedNotification;
-use Illuminate\Support\Facades\DB;
 use Barryvdh\DomPDF\Facade as PDF;
+use Illuminate\Support\Facades\DB;
 
 class CheckoutController extends Controller
 {
