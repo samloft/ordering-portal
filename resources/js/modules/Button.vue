@@ -1,6 +1,8 @@
 <template>
     <div>
-        <button @click="submit()" class="button button-primary" v-text="buttonText" :disabled="submitted"></button>
+        <button @click="submit()" class="button button-primary":disabled="submitted">
+            {{ buttonText }} <slot></slot>
+        </button>
     </div>
 </template>
 

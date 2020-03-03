@@ -2420,6 +2420,8 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
@@ -2941,6 +2943,14 @@ __webpack_require__.r(__webpack_exports__);
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
+//
+//
+//
+//
+//
+//
+//
+//
 //
 //
 //
@@ -11634,16 +11644,20 @@ var render = function() {
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
   return _c("div", [
-    _c("button", {
-      staticClass: "button button-primary",
-      attrs: { disabled: _vm.submitted },
-      domProps: { textContent: _vm._s(_vm.buttonText) },
-      on: {
-        click: function($event) {
-          return _vm.submit()
+    _c(
+      "button",
+      {
+        staticClass: "button button-primary",
+        attrs: { disabled: _vm.submitted },
+        on: {
+          click: function($event) {
+            return _vm.submit()
+          }
         }
-      }
-    })
+      },
+      [_vm._v("\n        " + _vm._s(_vm.buttonText) + " "), _vm._t("default")],
+      2
+    )
   ])
 }
 var staticRenderFns = []
@@ -12421,7 +12435,9 @@ var render = function() {
           _vm._v(" "),
           _c("p", { staticClass: "mt-1 text-xs font-thin text-gray-500" }, [
             _vm._v(
-              "\n                " + _vm._s(_vm.fileName) + "\n            "
+              "\n                    " +
+                _vm._s(_vm.fileName) +
+                "\n                "
             )
           ]),
           _vm._v(" "),
@@ -12434,42 +12450,51 @@ var render = function() {
       ]
     ),
     _vm._v(" "),
-    _c("div", { staticClass: "text-right" }, [
-      _c(
-        "button",
-        { staticClass: "button button-primary", attrs: { id: "upload-order" } },
-        [
-          _vm._v("Upload Order\n            "),
-          _c(
-            "svg",
-            {
-              staticClass: "w-5 ml-3 icon inline",
-              attrs: {
-                xmlns: "http://www.w3.org/2000/svg",
-                viewBox: "0 0 24 24"
-              }
-            },
-            [
-              _c("path", {
-                staticClass: "primary",
+    _c(
+      "div",
+      { staticClass: "text-right" },
+      [
+        _c(
+          "submit-button",
+          {
+            attrs: {
+              "before-text": "Upload Order",
+              "after-text": "Uploading Order"
+            }
+          },
+          [
+            _c(
+              "svg",
+              {
+                staticClass: "w-5 ml-3 icon inline",
                 attrs: {
-                  d:
-                    "M8 4a1 1 0 0 1-1 1H5v10h2a2 2 0 0 1 2 2c0 1.1.9 2 2 2h2a2 2 0 0 0 2-2c0-1.1.9-2 2-2h2V5h-2a1 1 0 0 1 0-2h2a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5c0-1.1.9-2 2-2h2a1 1 0 0 1 1 1z"
+                  xmlns: "http://www.w3.org/2000/svg",
+                  viewBox: "0 0 24 24"
                 }
-              }),
-              _vm._v(" "),
-              _c("path", {
-                staticClass: "secondary",
-                attrs: {
-                  d:
-                    "M11 6.41V13a1 1 0 0 0 2 0V6.41l1.3 1.3a1 1 0 0 0 1.4-1.42l-3-3a1 1 0 0 0-1.4 0l-3 3a1 1 0 0 0 1.4 1.42L11 6.4z"
-                }
-              })
-            ]
-          )
-        ]
-      )
-    ])
+              },
+              [
+                _c("path", {
+                  staticClass: "primary",
+                  attrs: {
+                    d:
+                      "M8 4a1 1 0 0 1-1 1H5v10h2a2 2 0 0 1 2 2c0 1.1.9 2 2 2h2a2 2 0 0 0 2-2c0-1.1.9-2 2-2h2V5h-2a1 1 0 0 1 0-2h2a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5c0-1.1.9-2 2-2h2a1 1 0 0 1 1 1z"
+                  }
+                }),
+                _vm._v(" "),
+                _c("path", {
+                  staticClass: "secondary",
+                  attrs: {
+                    d:
+                      "M11 6.41V13a1 1 0 0 0 2 0V6.41l1.3 1.3a1 1 0 0 0 1.4-1.42l-3-3a1 1 0 0 0-1.4 0l-3 3a1 1 0 0 0 1.4 1.42L11 6.4z"
+                  }
+                })
+              ]
+            )
+          ]
+        )
+      ],
+      1
+    )
   ])
 }
 var staticRenderFns = [
@@ -12487,11 +12512,13 @@ var staticRenderFns = [
         },
         [
           _vm._v(
-            "\n                    Click to upload a CSV file\n                "
+            "\n                        Click to upload a CSV file\n                    "
           )
         ]
       ),
-      _vm._v("\n                or drag and drop one here\n            ")
+      _vm._v(
+        "\n                    or drag and drop one here\n                "
+      )
     ])
   }
 ]
