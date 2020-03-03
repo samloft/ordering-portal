@@ -67,16 +67,16 @@
     <div class="flex justify-between mb-3 mt-3">
         <button class="button button-inverse" onclick="window.history.back();">{{ __('Back') }}</button>
 
-        <div>
-            <a
+        <div class="flex">
+            <a class="mr-2"
                 href="{{ route('order-tracking.copy-to-basket', ['order_number' => encodeUrl(trim($order->order_no))]) }}">
-                <button class="button button-primary">{{ __('Copy Order To Basket') }}</button>
+                <submit-button before-text="Copy Order To Basket" after-text="Copying Order To Basket"></submit-button>
             </a>
 
             <order-invoice order="{{ urlencode(trim($order->order_no)) }}"
                            customer_order="{{ urlencode(trim($order->customer_order_no)) }}"></order-invoice>
 
-            <a href="{{ route('order-tracking.pdf', ['order' => encodeUrl($order->order_no)]) }}">
+            <a class="ml-2" href="{{ route('order-tracking.pdf', ['order' => encodeUrl($order->order_no)]) }}">
                 <button class="button button-primary">{{ __('Print Order Details') }}</button>
             </a>
         </div>
