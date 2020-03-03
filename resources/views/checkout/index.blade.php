@@ -166,7 +166,7 @@
                     <button class="button button-secondary">Continue Shopping</button>
                 </a>
                 <a href="{{ route('basket') }}">
-                    <button class="button button-secondary">Return To basket'</button>
+                    <button class="button button-secondary">Return To basket</button>
                 </a>
             </div>
 
