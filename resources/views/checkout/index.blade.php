@@ -169,9 +169,8 @@
                     <button class="button button-secondary">Return To basket'</button>
                 </a>
             </div>
-            <div>
-                <button type="submit" class="button button-primary">Place Order</button>
-            </div>
+
+            <checkout></checkout>
         </div>
     </form>
 @endsection

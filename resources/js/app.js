@@ -20,6 +20,7 @@ Vue.component('product-categories', require('./modules/ProductCategories.vue').d
 Vue.component('account-address', require('./modules/AccountAddress.vue').default);
 Vue.component('order-invoice', require('./modules/OrderInvoice.vue').default);
 Vue.component('delivery-method', require('./modules/DeliveryMethod.vue').default);
+Vue.component('checkout', require('./modules/Checkout.vue').default);
 
 window.Event = new Vue();
 
