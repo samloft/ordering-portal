@@ -36,7 +36,6 @@
         methods: {
             deliveryUpdated() {
                 axios.get('/basket/summary/' + this.delivery_code).then(response => {
-                    console.log(response.data);
                     Event.$emit('delivery-updated', response.data);
                 }).catch(error => {
                     Vue.swal('Error', 'Unable to update order summary', 'error');

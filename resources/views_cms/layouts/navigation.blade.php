@@ -52,15 +52,6 @@
                         <span class="menu-title">Company Information</span>
                     </span>
                 </a>
-
-                <a href="{{ route('cms.contacts') }}" class="menu-item {{ activeMenu('cms.contacts') }}">
-                    <span class="inline-flex">
-                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
-                            <path
-                                d="M7 5H5v14h14V5h-2v10a1 1 0 0 1-1.45.9L12 14.11l-3.55 1.77A1 1 0 0 1 7 15V5zM5 3h14a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5c0-1.1.9-2 2-2zm4 2v8.38l2.55-1.27a1 1 0 0 1 .9 0L15 13.38V5H9z"/></svg>
-                        <span class="menu-title">Site Contacts</span>
-                    </span>
-                </a>
             </div>
 
             <h2 class="text-xs font-semibold text-gray-300 uppercase tracking-wide">
@@ -125,6 +116,21 @@
                             <path
                                 d="M4 4h16a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V6c0-1.1.9-2 2-2zm16 8.59V6H4v6.59l4.3-4.3a1 1 0 0 1 1.4 0l5.3 5.3 2.3-2.3a1 1 0 0 1 1.4 0l1.3 1.3zm0 2.82l-2-2-2.3 2.3a1 1 0 0 1-1.4 0L9 10.4l-5 5V18h16v-2.59zM15 10a1 1 0 1 1 0-2 1 1 0 0 1 0 2z"/></svg>
                         <span class="menu-title">Category Images</span>
+                    </span>
+                </a>
+            </div>
+
+            <h2 class="text-xs font-semibold text-gray-300 uppercase tracking-wide">
+                Pages
+            </h2>
+
+            <div class="my-3">
+                <a href="{{ route('cms.contacts') }}" class="menu-item {{ activeMenu('cms.contacts') }}">
+                    <span class="inline-flex">
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+                            <path
+                                d="M7 5H5v14h14V5h-2v10a1 1 0 0 1-1.45.9L12 14.11l-3.55 1.77A1 1 0 0 1 7 15V5zM5 3h14a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5c0-1.1.9-2 2-2zm4 2v8.38l2.55-1.27a1 1 0 0 1 .9 0L15 13.38V5H9z"/></svg>
+                        <span class="menu-title">Site Contacts</span>
                     </span>
                 </a>
             </div>

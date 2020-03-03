@@ -2717,7 +2717,6 @@ __webpack_require__.r(__webpack_exports__);
   methods: {
     deliveryUpdated: function deliveryUpdated() {
       axios.get('/basket/summary/' + this.delivery_code).then(function (response) {
-        console.log(response.data);
         Event.$emit('delivery-updated', response.data);
       })["catch"](function (error) {
         Vue.swal('Error', 'Unable to update order summary', 'error');
