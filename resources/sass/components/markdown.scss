@@ -1,0 +1,29 @@
+.markdown {
+    h1 {
+        @apply .mb-5 .font-semibold .text-xl .tracking-widest .underline;
+    }
+
+    h2 {
+        @apply .mb-5 .font-semibold .tracking-widest .underline;
+    }
+
+    ul {
+        @apply .ml-5;
+    }
+
+    li {
+        list-style-type: circle;
+    }
+
+    p {
+        @apply .mb-5;
+    }
+
+    a {
+        @apply .underline;
+    }
+
+    pre > code {
+        @apply .text-xs;
+    }
+}

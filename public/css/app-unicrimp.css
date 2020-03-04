@@ -27778,6 +27778,41 @@ h4 {
   padding-bottom: 0.25rem;
 }
 
+.markdown h1 {
+  margin-bottom: 1.25rem;
+  font-weight: 600;
+  font-size: 1.25rem;
+  letter-spacing: 0.1em;
+  text-decoration: underline;
+}
+
+.markdown h2 {
+  margin-bottom: 1.25rem;
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  text-decoration: underline;
+}
+
+.markdown ul {
+  margin-left: 1.25rem;
+}
+
+.markdown li {
+  list-style-type: circle;
+}
+
+.markdown p {
+  margin-bottom: 1.25rem;
+}
+
+.markdown a {
+  text-decoration: underline;
+}
+
+.markdown pre > code {
+  font-size: 0.75rem;
+}
+
 :root {
   --background-primary-color: rgba(234, 25, 33, 1.0);
   --background-primary-text: rgb(255, 255, 255);
