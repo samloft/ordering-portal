@@ -62,6 +62,14 @@ Route::group(['middleware' => 'auth:admin'], static function () {
         Route::delete('{contact}', 'Cms\ContactController@destroy')->name('cms.contacts.delete');
     });
 
+    Route::group(['prefix' => 'pages'], static function () {
+        Route::get('data-protection', 'Cms\PagesController@dataProtection')->name('cms.pages.data-protection');
+        Route::get('terms', 'Cms\PagesController@terms')->name('cms.pages.terms');
+        Route::get('accessibility', 'Cms\PagesController@accessibility')->name('cms.pages.accessibility');
+
+        Route::post('/', 'Cms\PagesController@store')->name('cms.pages.store');
+    });
+
     Route::group(['prefix' => 'site-settings'], static function () {
         Route::get('/', 'Cms\SiteSettingsController@index')->name('cms.site-settings');
         Route::patch('/', 'Cms\SiteSettingsController@update')->name('cms.site-settings.update');
