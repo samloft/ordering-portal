@@ -12,7 +12,7 @@ use Password;
 
 class AdminResetPasswordController extends Controller
 {
-    /**
+    /*
      * This will do all the heavy lifting
      * for resetting the password.
      */

@@ -63,7 +63,7 @@ class PagesController extends Controller
 
         $page->description = request('description');
 
-        if($page->save()) {
+        if ($page->save()) {
             return back()->with('success', 'Page has been updated');
         }
 
