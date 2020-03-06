@@ -27556,6 +27556,7 @@ label {
 }
 
 table.bulk-rates {
+  width: 100%;
   box-shadow: none;
   margin-bottom: 1rem;
 }
@@ -27566,8 +27567,17 @@ table.bulk-rates thead {
 }
 
 table.bulk-rates thead th {
-  color: #ffffff;
   padding: 0.25rem;
+  border-bottom-width: 1px;
+  border-color: #e5e7eb;
+  background-color: #f9fafb;
+  text-align: left;
+  font-size: 0.75rem;
+  line-height: 2;
+  font-weight: 500;
+  color: #6b7280;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
 }
 
 table.bulk-rates tbody td {

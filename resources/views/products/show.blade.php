@@ -9,9 +9,8 @@
             <div class="flex mb-2">
                 <div class="w-3/4">
                     <h2 class="font-semibold text-2xl text-primary mb-2">
-                        <a class="flex items-center"
-                           href="/products/view/{{ encodeUrl($product->code) }}">{{ $product->name }} @if($product->not_sold)
-                                <span class="badge badge-danger ml-3">Not Sold</span> @endif</a>
+                        {{ $product->name }} @if($product->not_sold) <span
+                            class="badge badge-danger ml-3">Not Sold</span> @endif
                     </h2>
 
                     <div class="flex">
@@ -162,33 +161,36 @@
                         <div>{{ $product->height }}</div>
                     </div>
                 @endif
-                    @if($product->net_weight)
-                        <div class="flex border-b border-primary mb-3">
-                            <div class="w-1/3 text-gray-400">Weight (kg):</div>
-                            <div>{{ $product->net_weight }}</div>
-                        </div>
-                    @endif
+                @if($product->net_weight)
+                    <div class="flex border-b border-primary mb-3">
+                        <div class="w-1/3 text-gray-400">Weight (kg):</div>
+                        <div>{{ $product->net_weight }}</div>
+                    </div>
+                @endif
             </div>
         </div>
 
         @if (count($product->expectedStock) > 0)
             <h5 class="mb-3 font-semibold">Expected Stock</h5>
-            <table class="table table-expected">
-                <thead>
-                <tr>
-                    <th class="text-center">Expected Date</th>
-                    <th class="text-center">Expected Quantity</th>
-                </tr>
-                </thead>
-                <tbody>
-                @foreach($product->expectedStock as $stock)
+
+            <div class="table-container">
+                <table class="table table-expected">
+                    <thead>
                     <tr>
-                        <td class="text-center">{{ $stock->due_date->format('d-m-Y') }}</td>
-                        <td class="text-center">{{ $stock->quantity }}</td>
+                        <th class="text-center">Expected Date</th>
+                        <th class="text-center">Expected Quantity</th>
                     </tr>
-                @endforeach
-                </tbody>
-            </table>
+                    </thead>
+                    <tbody>
+                    @foreach($product->expectedStock as $stock)
+                        <tr>
+                            <td class="text-center">{{ $stock->due_date->format('d-m-Y') }}</td>
+                            <td class="text-center">{{ $stock->quantity }}</td>
+                        </tr>
+                    @endforeach
+                    </tbody>
+                </table>
+            </div>
         @endif
     @else
         <div class="w-full rounded bg-white p-5 shadow mb-5 text-center">

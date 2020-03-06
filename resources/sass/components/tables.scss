@@ -65,13 +65,18 @@
 }
 
 table.bulk-rates {
-    @apply .shadow-none .mb-4;
+
+    @apply .w-full .shadow-none .mb-4;
 
     thead {
         @apply .bg-white .text-xs;
 
+        //th {
+        //    @apply .text-white .p-1;
+        //}
+
         th {
-            @apply .text-white .p-1;
+            @apply .p-1 .border-b .border-gray-200 .bg-gray-50 .text-left .text-xs .leading-loose .font-medium .text-gray-500 .uppercase .tracking-wider;
         }
     }
 
