@@ -2,6 +2,7 @@
 
 namespace App\Exceptions;
 
+use Throwable;
 use Exception;
 use Illuminate\Auth\AuthenticationException;
 use Illuminate\Foundation\Exceptions\Handler as ExceptionHandler;
@@ -32,13 +33,13 @@ class Handler extends ExceptionHandler
     /**
      * Report or log an exception.
      *
-     * @param \Exception $exception
+     * @param  \Throwable  $exception
      *
-     * @throws \Exception
+     * @throws \Throwable
      *
      * @return void
      */
-    public function report(Exception $exception): void
+    public function report(Throwable $exception): void
     {
         if (app()->bound('sentry') && $this->shouldReport($exception) && config('app.env') !== 'local') {
             app('sentry')->captureException($exception);
@@ -51,11 +52,11 @@ class Handler extends ExceptionHandler
      * Render an exception into an HTTP response.
      *
      * @param \Illuminate\Http\Request $request
-     * @param \Exception               $exception
+     * @param  \Throwable  $exception
      *
      * @return \Illuminate\Http\JsonResponse|\Illuminate\Http\Response
      */
-    public function render($request, Exception $exception)
+    public function render($request, Throwable $exception)
     {
         $sub_domain = Arr::first(explode('.', request()->getHost()));
 
