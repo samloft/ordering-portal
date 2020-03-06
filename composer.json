@@ -23,7 +23,8 @@
         "maatwebsite/excel": "^3.1",
         "pragmarx/version": "^0.2.8",
         "predis/predis": "^1.1",
-        "sentry/sentry-laravel": "1.6.1"
+        "sentry/sentry-laravel": "1.6.1",
+        "laravel/ui": "^2.0"
     },
     "require-dev": {
         "barryvdh/laravel-debugbar": "^3.2",
