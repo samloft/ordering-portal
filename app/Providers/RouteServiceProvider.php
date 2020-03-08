@@ -49,7 +49,7 @@ class RouteServiceProvider extends ServiceProvider
      */
     protected function mapWebRoutes(): void
     {
-        Route::domain($this->baseDomain())->middleware('web')->namespace($this->namespace)->group(base_path('routes/web.php'));
+        Route::middleware('web')->namespace($this->namespace)->group(base_path('routes/web.php'));
     }
 
     /**
