@@ -2072,6 +2072,12 @@ __webpack_require__.r(__webpack_exports__);
     mouseOut: function mouseOut() {
       this.dropdown = false;
     },
+    closeIfClickedOutside: function closeIfClickedOutside(event) {
+      if (!event.target.closest('.basket-dropdown')) {
+        this.dropdown = false;
+        document.removeEventListener('click', this.closeIfClickedOutside);
+      }
+    },
     dropdownBasket: function dropdownBasket(data) {
       var _this = this;
 
@@ -2090,6 +2096,13 @@ __webpack_require__.r(__webpack_exports__);
           self.basketItems = response.data.line_count;
         }
       });
+    }
+  },
+  watch: {
+    dropdown: function dropdown(_dropdown) {
+      if (_dropdown) {
+        document.addEventListener('click', this.closeIfClickedOutside);
+      }
     }
   },
   mounted: function mounted() {

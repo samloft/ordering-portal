@@ -86,6 +86,12 @@
             mouseOut: function () {
                 this.dropdown = false;
             },
+            closeIfClickedOutside(event) {
+                if (!event.target.closest('.basket-dropdown')) {
+                    this.dropdown = false;
+                    document.removeEventListener('click', this.closeIfClickedOutside);
+                }
+            },
             dropdownBasket: function (data) {
                 this.dropdown = false;
                 this.alert = true;
@@ -105,6 +111,13 @@
                             self.basketItems = response.data.line_count;
                         }
                     });
+            }
+        },
+        watch: {
+            dropdown(dropdown) {
+                if (dropdown) {
+                    document.addEventListener('click', this.closeIfClickedOutside);
+                }
             }
         },
         mounted() {
