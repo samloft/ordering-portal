@@ -26,6 +26,10 @@ Route::group(['middleware' => 'auth:admin'], static function () {
     Route::post('logout', 'Auth\AdminController@logout')->name('cms.logout');
     Route::get('/', 'Cms\HomeController@index')->name('cms.index');
 
+    Route::group(['prefix' => 'orders'], static function () {
+        Route::get('/', 'Cms\OrdersController@index')->name('cms.orders');
+    });
+
     Route::group(['prefix' => 'site-users'], static function () {
         Route::get('/', 'Cms\UserController@index')->name('cms.site-users');
         Route::post('/', 'Cms\UserController@store')->name('cms.site-users.store');
