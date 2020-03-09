@@ -26,6 +26,7 @@ class GlobalSettings extends Model
         Cache::forget('google-maps-url');
         Cache::forget('google-analytics-url');
         Cache::forget('default-country');
+        Cache::forget('v1-docid');
     }
 
     /**
@@ -124,6 +125,16 @@ class GlobalSettings extends Model
     }
 
     /**
+     * @return mixed
+     */
+    public static function versionOneDocId()
+    {
+        return Cache::rememberForever('v1-docid', static function () {
+            return self::where('key', 'v1-docid')->first()->value;
+        });
+    }
+
+    /**
      * @return bool
      */
     public static function storeSiteSettings(): bool
@@ -150,6 +161,10 @@ class GlobalSettings extends Model
 
         $settings::where('key', 'google-maps')->update([
             'value' => request('google_maps') ?: '',
+        ]);
+
+        $settings::where('key', 'v1-docid')->update([
+            'value' => request('v1_docid') ?: '',
         ]);
 
         return true;

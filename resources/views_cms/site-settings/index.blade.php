@@ -113,6 +113,23 @@
 
             <hr class="mt-3 mb-3">
 
+            <div class="flex">
+                <div class="w-1/4 mr-6">
+                    <h5 class="font-medium text-lg mb-2">VersionOne</h5>
+                    <p class="text-gray-600 text-sm">
+                        Set the DOCID for the versionone document that should be looked for (Sales Invoice for the company).
+                    </p>
+                </div>
+                <div class="w-3/4">
+                    <label for="v1_docid" class="text-sm font-medium">V1 DocID</label>
+                    <input id="v1_docid" class="bg-gray-100 mt-1" value="{{ $data['v1_docid'] }}"
+                           name="v1_docid"
+                           placeholder="V1 DocID">
+                </div>
+            </div>
+
+            <hr class="mt-3 mb-3">
+
             <div class="text-right mt-5">
                 <button type="submit" class="button bg-gray-800 text-white">Save settings</button>
             </div>

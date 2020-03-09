@@ -21,6 +21,7 @@ class SiteSettingsController extends Controller
             'default_country' => GlobalSettings::defaultCountry(),
             'google_analytics' => GlobalSettings::googleAnalyticsUrl(),
             'google_maps' => GlobalSettings::googleMapsUrl(),
+            'v1_docid' => GlobalSettings::versionOneDocId(),
         ];
 
         return view('site-settings.index', compact('data'));
