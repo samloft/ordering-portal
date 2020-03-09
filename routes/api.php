@@ -29,7 +29,6 @@ Route::group(['middleware' => 'auth:api', 'prefix' => 'v1'], static function () 
 
 Route::get('version', static function () {
     return [
-        'version' => Version::major().'.'.Version::minor().'.'.Version::patch(),
-        'build'   => Version::build(),
+        'foo' => 'bar'
     ];
 });

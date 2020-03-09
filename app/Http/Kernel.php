@@ -38,7 +38,7 @@ class Kernel extends HttpKernel
         ],
 
         'api' => [
-            \Barryvdh\Cors\HandleCors::class,
+            \Fruitcake\Cors\HandleCors::class,
             'throttle:60,1',
             'bindings',
         ],
@@ -62,7 +62,6 @@ class Kernel extends HttpKernel
         'throttle'      => \Illuminate\Routing\Middleware\ThrottleRequests::class,
         'verified'      => \Illuminate\Auth\Middleware\EnsureEmailIsVerified::class,
         'admin'         => \App\Http\Middleware\SiteAdmin::class,
-        //'cms.admin'     => \App\Http\Middleware\CmsAdmin::class,
         'has.customer'  => \App\Http\Middleware\HasCustomer::class,
     ];
 
