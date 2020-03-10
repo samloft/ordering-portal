@@ -20,6 +20,8 @@ class AppServiceProvider extends ServiceProvider
     {
         Schema::defaultStringLength(191);
 
+        config(['app.name' => \Hyn\Tenancy\Facades\TenancyFacade::website()->uuid ?? null]);
+
         view()->composer('layout.master', static function ($view) {
             $view->with('announcement', GlobalSettings::siteAnnouncement());
         });

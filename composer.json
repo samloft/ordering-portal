@@ -39,7 +39,9 @@
     },
     "extra": {
         "laravel": {
-            "dont-discover": []
+            "dont-discover": [
+                "hyn/multi-tenant"
+            ]
         }
     },
     "autoload": {
