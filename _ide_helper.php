@@ -3,7 +3,7 @@
 
 /**
  * A helper file for Laravel 5, to provide autocomplete information to your IDE
- * Generated for Laravel 7.0.8 on 2020-03-09 16:10:59.
+ * Generated for Laravel 7.0.8 on 2020-03-10 11:03:50.
  *
  * This file should not be included in your code, only analyzed by your IDE!
  *
@@ -16112,6 +16112,144 @@ namespace Facade\Ignition\Facades {
  
 }
 
+namespace Hyn\Tenancy\Facades { 
+
+    /**
+     * 
+     *
+     */ 
+    class TenancyFacade {
+        
+        /**
+         * 
+         *
+         * @static 
+         */ 
+        public static function installed()
+        {
+                        /** @var \Hyn\Tenancy\Environment $instance */
+                        return $instance->installed();
+        }
+        
+        /**
+         * 
+         *
+         * @static 
+         */ 
+        public static function identifyHostname()
+        {
+                        /** @var \Hyn\Tenancy\Environment $instance */
+                        return $instance->identifyHostname();
+        }
+        
+        /**
+         * Get or set the current hostname.
+         *
+         * @param \Hyn\Tenancy\Hostname|null $hostname
+         * @return \Hyn\Tenancy\Hostname|null 
+         * @static 
+         */ 
+        public static function hostname($hostname = null)
+        {
+                        /** @var \Hyn\Tenancy\Environment $instance */
+                        return $instance->hostname($hostname);
+        }
+        
+        /**
+         * 
+         *
+         * @static 
+         */ 
+        public static function website()
+        {
+                        /** @var \Hyn\Tenancy\Environment $instance */
+                        return $instance->website();
+        }
+        
+        /**
+         * Get or set current tenant.
+         *
+         * @param \Hyn\Tenancy\Website|null $website
+         * @return \Hyn\Tenancy\Tenant|null 
+         * @static 
+         */ 
+        public static function tenant($website = null)
+        {
+                        /** @var \Hyn\Tenancy\Environment $instance */
+                        return $instance->tenant($website);
+        }
+        
+        /**
+         * 
+         *
+         * @param $command
+         * @param null $handler
+         * @return mixed 
+         * @static 
+         */ 
+        public static function dispatch($command, $handler = null)
+        {
+                        /** @var \Hyn\Tenancy\Environment $instance */
+                        return $instance->dispatch($command, $handler);
+        }
+        
+        /**
+         * 
+         *
+         * @param \Hyn\Tenancy\AbstractEvent $event
+         * @param array $payload
+         * @return array|null 
+         * @static 
+         */ 
+        public static function emitEvent($event, $payload = [])
+        {
+                        /** @var \Hyn\Tenancy\Environment $instance */
+                        return $instance->emitEvent($event, $payload);
+        }
+        
+        /**
+         * Register a custom macro.
+         *
+         * @param string $name
+         * @param object|callable $macro
+         * @return void 
+         * @static 
+         */ 
+        public static function macro($name, $macro)
+        {
+                        \Hyn\Tenancy\Environment::macro($name, $macro);
+        }
+        
+        /**
+         * Mix another object into the class.
+         *
+         * @param object $mixin
+         * @param bool $replace
+         * @return void 
+         * @throws \ReflectionException
+         * @static 
+         */ 
+        public static function mixin($mixin, $replace = true)
+        {
+                        \Hyn\Tenancy\Environment::mixin($mixin, $replace);
+        }
+        
+        /**
+         * Checks if macro is registered.
+         *
+         * @param string $name
+         * @return bool 
+         * @static 
+         */ 
+        public static function hasMacro($name)
+        {
+                        return \Hyn\Tenancy\Environment::hasMacro($name);
+        }
+         
+    }
+ 
+}
+
 namespace Maatwebsite\Excel\Facades { 
 
     /**
@@ -19260,6 +19398,8 @@ namespace  {
     class Debugbar extends \Barryvdh\Debugbar\Facade {}
 
     class Flare extends \Facade\Ignition\Facades\Flare {}
+
+    class Tenancy extends \Hyn\Tenancy\Facades\TenancyFacade {}
 
     class Excel extends \Maatwebsite\Excel\Facades\Excel {}
  
