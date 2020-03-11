@@ -4,6 +4,8 @@ use App\Models\Category;
 use App\Models\Customer;
 use App\Models\GlobalSettings;
 use App\Models\UserCustomer;
+use Hyn\Tenancy\Environment;
+use Hyn\Tenancy\Models\Hostname;
 
 /*
 |--------------------------------------------------------------------------
@@ -79,8 +81,9 @@ Route::group(['middleware' => 'auth:admin'], static function () {
         Route::patch('/', 'Cms\SiteSettingsController@update')->name('cms.site-settings.update');
 
         Route::patch('maintenance', static function () {
-            return GlobalSettings::where('key', 'maintenance')->update([
-                'value' => json_encode(['enabled' => request('enabled'), 'message' => request('message')], true),
+            return Hostname::where('website_id', app(Environment::class)->tenant()->id)->update([
+                'under_maintenance_since' => request('enabled') ? date('Y-m-d H:i:s') : null,
+                'maintenance_message' => request('enabled') ? request('message') : null,
             ]);
         })->name('cms.site-settings.maintenance');
     });
