@@ -45,7 +45,7 @@
                                 @if ($url)
                                     <a href="{{ $url }}">
                                         <img class="h-8 mr-1 ml-1 hover:opacity-75" alt="{{ $name }}"
-                                             src="{{ asset('images/'.$name.'.png') }}">
+                                             src="{{ asset('images/'.config('app.name').'/'.$name.'.png') }}">
                                     </a>
                                 @endif
                             @endforeach
