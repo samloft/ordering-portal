@@ -2,7 +2,6 @@
 
 use App\Models\Category;
 use App\Models\Customer;
-use App\Models\GlobalSettings;
 use App\Models\UserCustomer;
 use Hyn\Tenancy\Environment;
 use Hyn\Tenancy\Models\Hostname;

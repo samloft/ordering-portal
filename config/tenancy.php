@@ -20,7 +20,7 @@ use Hyn\Tenancy\Models\Website;
 
 return [
     /**
-     * Random key used for tenant database user password
+     * Random key used for tenant database user password.
      */
     'key' => env('TENANCY_KEY', env('APP_KEY')),
 
@@ -37,7 +37,7 @@ return [
         'hostname' => Hostname::class,
 
         // Must implement \Hyn\Tenancy\Contracts\Website
-        'website' => Website::class
+        'website' => Website::class,
     ],
     /**
      * The package middleware. Removing a middleware here will disable it.
@@ -234,8 +234,8 @@ return [
          * @warn specify a valid fully qualified class name.
          */
         'tenant-seed-class' => false,
-//      eg an admin seeder under `app/Seeders/AdminSeeder.php`:
-//        'tenant-seed-class' => App\Seeders\AdminSeeder::class,
+        //      eg an admin seeder under `app/Seeders/AdminSeeder.php`:
+        //        'tenant-seed-class' => App\Seeders\AdminSeeder::class,
 
         /**
          * Automatically generate a tenant database based on the random id of the
@@ -301,10 +301,10 @@ return [
          * @info Useful for overriding the connection of third party packages.
          */
         'force-tenant-connection-of-models' => [
-//            App\User::class
+            //            App\User::class
         ],
         'force-system-connection-of-models' => [
-//            App\User::class
+            //            App\User::class
         ],
     ],
 
@@ -412,6 +412,6 @@ return [
              * make it override the global views. Disable by setting to false.
              */
             'override-global' => true,
-        ]
-    ]
+        ],
+    ],
 ];

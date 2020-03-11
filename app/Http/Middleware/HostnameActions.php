@@ -2,9 +2,9 @@
 
 namespace App\Http\Middleware;
 
+use Closure;
 use Hyn\Tenancy\Contracts\CurrentHostname;
 use Illuminate\Http\Request;
-use Closure;
 
 class HostnameActions extends \Hyn\Tenancy\Middleware\HostnameActions
 {

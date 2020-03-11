@@ -23,7 +23,7 @@ trait MutatesTinkerCommand
     public function __construct()
     {
         parent::__construct();
-        $this->setName('tenancy:' . $this->getName());
+        $this->setName('tenancy:'.$this->getName());
         $this->websites = app(WebsiteRepository::class);
         $this->connection = app(Connection::class);
     }
@@ -38,10 +38,10 @@ trait MutatesTinkerCommand
     public function handle()
     {
         $website_id = $this->option('website_id');
-        try{
+        try {
             $website = $this->websites->query()->where('id', $website_id)->firstOrFail();
             $this->connection->set($website);
-            $this->info('Running Tinker on website_id: ' . $website_id);
+            $this->info('Running Tinker on website_id: '.$website_id);
 
             parent::handle();
 

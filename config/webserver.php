@@ -41,7 +41,7 @@ return [
              *
              * @default 443
              */
-            'https' => 443
+            'https' => 443,
         ],
 
         /**
@@ -68,7 +68,7 @@ return [
              * Location where vhost configuration files can be found.
              */
             'vhost-files' => [
-                '/etc/apache2/sites-enabled/'
+                '/etc/apache2/sites-enabled/',
             ],
 
             /**
@@ -91,9 +91,9 @@ return [
                  *
                  * @info set to null to disable reloading.
                  */
-                'reload' => 'apache2ctl graceful'
-            ]
-        ]
+                'reload' => 'apache2ctl graceful',
+            ],
+        ],
     ],
 
     /**
@@ -127,7 +127,7 @@ return [
              *
              * @default 443
              */
-            'https' => 443
+            'https' => 443,
         ],
 
         /**
@@ -154,7 +154,7 @@ return [
              * Location where vhost configuration files can be found.
              */
             'vhost-files' => [
-                '/etc/nginx/sites-enabled/'
+                '/etc/nginx/sites-enabled/',
             ],
 
             /**
@@ -177,8 +177,8 @@ return [
                  *
                  * @info set to null to disable reloading.
                  */
-                'reload' => '/etc/init.d/nginx reload'
-            ]
-        ]
-    ]
+                'reload' => '/etc/init.d/nginx reload',
+            ],
+        ],
+    ],
 ];
