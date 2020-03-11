@@ -14,13 +14,13 @@ use App\Models\Product;
 */
 
 Route::group(['middleware' => 'auth:api', 'prefix' => 'v1'], static function () {
-    Route::get('user', static function () {
-        return auth()->user();
-    });
-
-    Route::get('product', static function () {
-        return Product::details(request('product'));
-    });
+    //Route::get('user', static function () {
+    //    return auth()->user();
+    //});
+    //
+    //Route::get('product', static function () {
+    //    return Product::details(request('product'));
+    //});
 });
 
 /*
@@ -28,7 +28,7 @@ Route::group(['middleware' => 'auth:api', 'prefix' => 'v1'], static function () 
  */
 
 Route::get('version', static function () {
-    return [
-        'foo' => 'bar'
-    ];
+    //return [
+    //    'foo' => 'bar'
+    //];
 });
