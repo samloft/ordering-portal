@@ -26,9 +26,3 @@ Route::group(['middleware' => 'auth:api', 'prefix' => 'v1'], static function () 
 /*
  * API routes that require no authentication.
  */
-
-Route::get('version', static function () {
-    //return [
-    //    'foo' => 'bar'
-    //];
-});
