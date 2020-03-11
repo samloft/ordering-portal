@@ -1,10 +1,24 @@
-<div class="md:flex min-h-screen">
-    <div class="w-full md:w-1/2 bg-white flex items-center justify-center ">
-        <div class="max-w-sm m-8">
-            <div class="text-black text-5xl md:text-15xl font-black">404</div>
-            <div class="w-16 h-1 bg-purple-light my-3 md:my-6"></div>
-            <p class="text-grey-darker text-2xl md:text-3xl font-light mb-8 leading-normal">Sorry, the page you are looking for could not be found.</p>
-            <button class="bg-transparent text-grey-darkest font-bold uppercase tracking-wide py-3 px-6 border-2 border-grey-light hover:border-grey rounded-lg">Go Home</button>
+@extends('errors.master')
+
+@section('page.title', 'Page not found')
+
+@section('content')
+    <div class="flex h-screen w-full">
+        <div class="text-center text-gray-800 m-auto w-full">
+            <h1 style="font-size: 14rem;" class="font-extrabold">
+                <span class="text-gray-800">4</span><span class="text-gray-500">0</span><span
+                    class="text-gray-800">4</span>
+            </h1>
+
+            <h1 class="text-3xl mb-10">Oops, we can't seem to find the page you're looking for.</h1>
+
+            <div class="bg-gray-800 text-white p-16 mb-10">
+                Click on the button below to go back to safety
+            </div>
+
+            <a href="/">
+                <button class="button bg-gray-800 text-white">Go home</button>
+            </a>
         </div>
     </div>
-</div>
+@endsection
