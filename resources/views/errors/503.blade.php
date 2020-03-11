@@ -14,9 +14,9 @@
 
             <h1 class="text-5xl mb-10">Sorry, we're down for maintenance</h1>
 
-            @if(json_decode(file_get_contents(storage_path('framework/down')), true)['message'])
+            @if(app(\Hyn\Tenancy\Environment::class)->hostname()->maintenance_message)
                 <div class="bg-gray-800 text-white p-16 mb-10">
-                    {{ json_decode(file_get_contents(storage_path('framework/down')), true)['message'] }}
+                    {{ app(\Hyn\Tenancy\Environment::class)->hostname()->maintenance_message }}
                 </div>
             @endif
 

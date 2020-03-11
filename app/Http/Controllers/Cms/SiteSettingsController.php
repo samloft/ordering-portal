@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Cms;
 
 use App\Http\Controllers\Controller;
 use App\Models\GlobalSettings;
+use Hyn\Tenancy\Environment;
 use Illuminate\Http\RedirectResponse;
 
 class SiteSettingsController extends Controller
@@ -14,7 +15,8 @@ class SiteSettingsController extends Controller
     public function index()
     {
         $data = [
-            'maintenance' => json_decode(GlobalSettings::key('maintenance'), true)['enabled'],
+            //'maintenance' => json_decode(GlobalSettings::key('maintenance'), true)['enabled'],
+            'maintenance' => app(Environment::class)->hostname()->under_maintenance_since,
             'announcement' => GlobalSettings::siteAnnouncement(),
             'checkout_notice' => GlobalSettings::checkoutNotice(),
             'countries' => json_decode(GlobalSettings::countries(), true),
