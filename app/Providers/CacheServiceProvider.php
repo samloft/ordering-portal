@@ -2,10 +2,10 @@
 
 namespace App\Providers;
 
-use Illuminate\Support\Facades\Cache;
-use Illuminate\Cache\RedisStore;
-use Illuminate\Support\ServiceProvider;
 use DB;
+use Illuminate\Cache\RedisStore;
+use Illuminate\Support\Facades\Cache;
+use Illuminate\Support\ServiceProvider;
 
 class CacheServiceProvider extends ServiceProvider
 {

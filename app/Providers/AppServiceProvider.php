@@ -6,10 +6,10 @@ use App\Models\Category;
 use App\Models\GlobalSettings;
 use App\Models\HomeLink;
 use Hyn\Tenancy\Facades\TenancyFacade;
+use Hyn\Tenancy\Middleware\HostnameActions;
 use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\Schema;
 use Illuminate\Support\ServiceProvider;
-use Hyn\Tenancy\Middleware\HostnameActions;
 
 class AppServiceProvider extends ServiceProvider
 {
@@ -22,7 +22,7 @@ class AppServiceProvider extends ServiceProvider
     {
         Schema::defaultStringLength(191);
 
-        $this->app->singleton(HostnameActions::class, static function() {
+        $this->app->singleton(HostnameActions::class, static function () {
             return new \App\Http\Middleware\HostnameActions(redirect());
         });
 
