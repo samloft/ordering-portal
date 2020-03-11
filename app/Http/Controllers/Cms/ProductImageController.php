@@ -61,7 +61,7 @@ class ProductImageController extends Controller
 
         $name = $image->getClientOriginalName();
 
-        $upload = Storage::disk('public')->put('product_images/'.$name, File::get($image));
+        $upload = Storage::disk('public')->put(config('app.name').'/product_images/'.$name, File::get($image));
 
         if ($upload) {
             return response()->json('success');

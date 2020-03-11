@@ -5,9 +5,11 @@ namespace App\Providers;
 use App\Models\Category;
 use App\Models\GlobalSettings;
 use App\Models\HomeLink;
+use Hyn\Tenancy\Facades\TenancyFacade;
 use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\Schema;
 use Illuminate\Support\ServiceProvider;
+use Hyn\Tenancy\Middleware\HostnameActions;
 
 class AppServiceProvider extends ServiceProvider
 {
@@ -20,7 +22,11 @@ class AppServiceProvider extends ServiceProvider
     {
         Schema::defaultStringLength(191);
 
-        config(['app.name' => \Hyn\Tenancy\Facades\TenancyFacade::website()->uuid ?? null]);
+        $this->app->singleton(HostnameActions::class, static function() {
+            return new \App\Http\Middleware\HostnameActions(redirect());
+        });
+
+        config(['app.name' => TenancyFacade::website()->uuid ?? null]);
 
         view()->composer('layout.master', static function ($view) {
             $view->with('announcement', GlobalSettings::siteAnnouncement());

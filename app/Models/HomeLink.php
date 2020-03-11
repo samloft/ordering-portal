@@ -100,7 +100,7 @@ class HomeLink extends Model
     {
         $extension = $image->getClientOriginalExtension();
         $image_name = $type.'-'.str::slug($name, '-').'.'.$extension;
-        $image_path = 'images/'.$type.'/'.$image_name;
+        $image_path = config('app.name').'/images/'.$type.'/'.$image_name;
 
         return ['status' => Storage::disk('public')->put($image_path, File::get($image)), 'name' => $image_name];
     }

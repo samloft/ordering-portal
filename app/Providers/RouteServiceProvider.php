@@ -61,11 +61,6 @@ class RouteServiceProvider extends ServiceProvider
      */
     protected function mapCmsRoutes(): void
     {
-        //Route::domain($this->baseDomain('cms'))
-        //    ->middleware('web')
-        //    ->namespace($this->namespace)
-        //    ->group(base_path('routes/cms.php'));
-
         Route::prefix('cms')->middleware('web')->namespace($this->namespace)->group(base_path('routes/cms.php'));
     }
 
@@ -76,24 +71,8 @@ class RouteServiceProvider extends ServiceProvider
      *
      * @return void
      */
-    protected function mapApiRoutes()
+    protected function mapApiRoutes(): void
     {
         Route::prefix('api')->middleware('api')->namespace($this->namespace)->group(base_path('routes/api.php'));
-    }
-
-    /**
-     * Appends the given sub-domain to the main domain.
-     *
-     * @param string $sub_domain
-     *
-     * @return string
-     */
-    private function baseDomain(string $sub_domain = ''): string
-    {
-        if (strlen($sub_domain) > 0) {
-            $sub_domain = "{$sub_domain}.";
-        }
-
-        return $sub_domain.config('app.base_domain');
     }
 }
