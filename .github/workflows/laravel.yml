@@ -35,12 +35,12 @@ jobs:
         uses: aliencube/microsoft-teams-actions@v0.8.0
         with:
           webhook-uri: ${{ secrets.TEAMS_WEBHOOK }}
-          title: <Message Title>
-          summary: <Message Summary>
-          text: <Message Text>
-          theme-color: <Message Theme Color>
-          sections: '[{ "activityTitle": "hello world" }, { ... }]'
-          actions: '[{ "@type": "OpenUri", "name": "lorem ipsum", "targets": [{ "os": "default", "uri": "https://localhost" }] }, { ... }]'
+          title: 'A title'
+          summary: 'A message'
+          text: 'some text'
+#          theme-color: <Message Theme Color>
+          sections: '[{ "activityImage": "https://github.githubassets.com/images/modules/logos_page/GitHub-Mark.png", "activityTitle": "GitHub Action invoked",  "activitySubtitle": "Event triggered by ${{ github.event.head_commit.author.name }}", "activityText": "Commit message: [${{ github.event.head_commit.message}}](${{ github.event.head_commit.url }})" }]'
+          actions: '[{ "@type": "OpenUri", "name": "View Commit", "targets": [{ "os": "default", "uri": "${{ github.event.head_commit.url }}" }] }]'
 
 #      - name: Merge into staging
 #        if: github.ref == 'refs/heads/development'
