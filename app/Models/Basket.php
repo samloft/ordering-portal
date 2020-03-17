@@ -112,7 +112,7 @@ class Basket extends Model
                 'unit_price' => discount($net_price),
                 'next_bulk' => [
                     'qty_away' => $next_bulk_qty,
-                    'saving' => ($next_bulk_qty + $line->quantity * $next_bulk_saving),
+                    'saving' => currency($next_bulk_qty + $line->quantity * $next_bulk_saving, 2),
                 ],
                 'potential_saving' => $next_bulk_qty > 0,
             ];

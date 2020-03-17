@@ -2373,6 +2373,10 @@ __webpack_require__.r(__webpack_exports__);
       });
     },
     updateProduct: function updateProduct(product, quantity) {
+      if (parseInt(quantity) === 0) {
+        return this.removeProduct(product);
+      }
+
       App.addProductToBasket(product, quantity, true);
     },
     removeProduct: function removeProduct(product) {
@@ -11409,7 +11413,7 @@ var render = function() {
                     _c("td", [
                       _c("div", { staticClass: "flex items-center" }, [
                         _c("img", {
-                          staticClass: "h-10 mr-3",
+                          staticClass: "w-15 mr-3",
                           attrs: { src: product.image, alt: product.name }
                         }),
                         _vm._v(" "),

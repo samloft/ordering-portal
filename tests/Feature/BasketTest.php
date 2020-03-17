@@ -102,6 +102,6 @@ class BasketTest extends TestCase
             'quantity' => 450,
         ]);
 
-        $this->get(route('basket'))->assertSee('potential_saving&quot;:true');
+        $this->get(route('basket'))->assertSee('"potential_saving":true');
     }
 }

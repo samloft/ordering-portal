@@ -164,13 +164,9 @@ return [
         Illuminate\Validation\ValidationServiceProvider::class,
         Illuminate\View\ViewServiceProvider::class,
 
-        App\Providers\CacheServiceProvider::class,
-
         /*
          * Package Service Providers...
          */
-        Hyn\Tenancy\Providers\TenancyProvider::class,
-        Hyn\Tenancy\Providers\WebserverProvider::class,
 
         /*
          * Application Service Providers...
