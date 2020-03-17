@@ -43,7 +43,7 @@
                 </tr>
                 </thead>
                 <tbody>
-                @foreach ($product_lines as $line)
+                @foreach ($product_lines['lines'] as $line)
                     @if ($line['product'])
                         <tr>
 

@@ -94,7 +94,7 @@ class UploadController extends Controller
             }
         }
 
-        $product_lines = [];
+        $product_lines['lines'] = [];
 
         foreach ($merged as $product) {
             if ($product['quantity'] % $product['multiples'] !== 0) {
@@ -106,7 +106,7 @@ class UploadController extends Controller
                 $warning = null;
             }
 
-            $product_lines[] = [
+            $product_lines['lines'][] = [
                 'product'           => $product['product'],
                 'quantity'          => $quantity,
                 'price'             => $product['price'],
