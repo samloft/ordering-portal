@@ -31,6 +31,17 @@ jobs:
           DB_CONNECTION: sqlite
         run: vendor/bin/phpunit
 
+      - name: Send a message to Microsoft Teams
+        uses: aliencube/microsoft-teams-actions@v0.8.0
+        with:
+          webhook-uri: ${{ secrets.TEAMS_WEBHOOK }}
+          title: <Message Title>
+          summary: <Message Summary>
+          text: <Message Text>
+          theme-color: <Message Theme Color>
+          sections: '[{ "activityTitle": "hello world" }, { ... }]'
+          actions: '[{ "@type": "OpenUri", "name": "lorem ipsum", "targets": [{ "os": "default", "uri": "https://localhost" }] }, { ... }]'
+
 #      - name: Merge into staging
 #        if: github.ref == 'refs/heads/development'
 #        run: git merge staging
