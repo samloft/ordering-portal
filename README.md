@@ -1,7 +1,7 @@
 # Ordering Portal
 ----
 
-![Laravel](https://github.com/samloft/ordering-portal/workflows/Laravel/badge.svg?branch=development)
+![Laravel Build](https://github.com/samloft/ordering-portal/workflows/Laravel-build/badge.svg?branch=development)
 ![Code Climate technical debt](https://img.shields.io/codeclimate/tech-debt/samloft/ordering-portal)
 ![Code Climate maintainability](https://img.shields.io/codeclimate/maintainability/samloft/ordering-portal)
 ![Code Climate issues](https://img.shields.io/codeclimate/issues/samloft/ordering-portal)
