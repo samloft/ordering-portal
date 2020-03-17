@@ -29,6 +29,8 @@ class OrderUploadTest extends TestCase
      */
     public function a_valid_csv_file_works(): void
     {
+        $this->withoutExceptionHandling();
+
         $user = (new UserFactory())->withCustomer()->create();
 
         $this->signIn($user);
