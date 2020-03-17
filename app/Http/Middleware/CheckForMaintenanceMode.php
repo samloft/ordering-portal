@@ -29,7 +29,7 @@ class CheckForMaintenanceMode extends Middleware
      */
     public function handle($request, Closure $next)
     {
-        if (!App::environment('testing')) {
+        if (! App::environment('testing')) {
             $maintenance = json_decode(GlobalSettings::key('maintenance'), true);
 
             if ($maintenance['enabled'] && ! $this->app->isDownForMaintenance()) {

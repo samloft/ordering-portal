@@ -2,8 +2,8 @@
 
 use App\Models\Category;
 use App\Models\Customer;
-use App\Models\UserCustomer;
 use App\Models\GlobalSettings;
+use App\Models\UserCustomer;
 
 /*
 |--------------------------------------------------------------------------
