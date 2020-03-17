@@ -123,6 +123,7 @@ class OrderTrackingController extends Controller
 
     /**
      * @param $order_number
+     *
      * @return \Illuminate\Http\Response
      */
     public function orderDetailsPDF($order_number): Response

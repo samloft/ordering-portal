@@ -9,7 +9,6 @@ use Barryvdh\DomPDF\Facade as PDF;
 use Carbon\Carbon;
 use Illuminate\Contracts\View\Factory;
 use Illuminate\Http\RedirectResponse;
-use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 use Illuminate\View\View;
 use Symfony\Component\HttpFoundation\BinaryFileResponse;
@@ -29,19 +28,18 @@ class ReportController extends Controller
     /**
      * Generate a report based on the type & output.
      *
-     * @param Request $request
-     *
      * @return RedirectResponse|Response|BinaryFileResponse|void
      */
-    public function show(Request $request)
+    public function show()
     {
-        $output = $request->output;
+        $output = request('output');
+        $report = request('report');
 
-        if ($request->report === 'back_orders') {
+        if ($report === 'back_orders') {
             return $this->backOrderReport($output);
         }
 
-        if ($request->report === 'account_summary') {
+        if ($report === 'account_summary') {
             return $this->accountSummaryReport($output);
         }
 
@@ -96,6 +94,11 @@ class ReportController extends Controller
         return back()->with('error', 'You dont currently have any back orders to display');
     }
 
+    /**
+     * @param $output
+     *
+     * @return \Illuminate\Http\RedirectResponse|\Illuminate\Http\Response|\Symfony\Component\HttpFoundation\BinaryFileResponse|\Symfony\Component\HttpFoundation\StreamedResponse
+     */
     public function accountSummaryReport($output)
     {
         ini_set('memory_limit', '256M');

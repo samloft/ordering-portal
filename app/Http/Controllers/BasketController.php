@@ -9,7 +9,6 @@ use Illuminate\Contracts\Routing\ResponseFactory;
 use Illuminate\Contracts\View\Factory;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\RedirectResponse;
-use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 use Illuminate\View\View;
 use Storage;
@@ -119,39 +118,12 @@ class BasketController extends Controller
     /**
      * Remove a product line from the basket by product code.
      *
-     * @param Request $request
-     *
      * @return ResponseFactory|Response
      */
-    public function removeProduct(Request $request)
+    public function removeProduct()
     {
-        $removed = Basket::destroyLine($request->product);
+        $removed = Basket::destroyLine(request('product'));
 
         return $removed ? response(200) : response(500);
     }
-
-    ///**
-    // * Update the basket quantity for the given product.
-    // *
-    // * @param Request $request
-    // *
-    // * @return ResponseFactory|Response
-    // */
-    //public function updateProductQuantity(Request $request)
-    //{
-    //    $product = trim(request('product'));
-    //    $quantity = trim(request('quantity'));
-    //
-    //    $product_details = Product::show($product);
-    //
-    //    if ($quantity % $product_details->order_multiples !== 0) {
-    //        $old_quantity = $quantity;
-    //        $quantity = (int) ceil((int) $quantity / $product_details->order_multiples) * $product_details->order_multiples;
-    //        $warning = 'Quantity not in multiples of '.$product_details->order_multiples.'. Increased from '.$old_quantity.' to '.$quantity.'.';
-    //    }
-    //
-    //    $updated = Basket::updateLine($request->product, $quantity);
-    //
-    //    return $updated ? response(200) : response(500);
-    //}
 }
