@@ -1,7 +1,7 @@
 # Ordering Portal
 ----
 
-[![CircleCI](https://img.shields.io/circleci/build/github/samloft/ordering-portal/development)](https://circleci.com/gh/samloft/ordering-portal)
+![Laravel](https://github.com/samloft/ordering-portal/workflows/Laravel/badge.svg?branch=development)
 ![Code Climate technical debt](https://img.shields.io/codeclimate/tech-debt/samloft/ordering-portal)
 ![Code Climate maintainability](https://img.shields.io/codeclimate/maintainability/samloft/ordering-portal)
 ![Code Climate issues](https://img.shields.io/codeclimate/issues/samloft/ordering-portal)
