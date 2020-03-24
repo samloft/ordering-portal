@@ -36,8 +36,8 @@ class PagesTest extends TestCase
     }
 
     /**
-     * @test
-     */
+ * @test
+ */
     public function data_protection_shows_the_correct_data_on_cms(): void
     {
         $user = factory(Admin::class)->create();
@@ -57,5 +57,29 @@ class PagesTest extends TestCase
         $this->signIn($user);
 
         $this->get(route('support.data'))->assertSee('Data Protection will go here');
+    }
+
+    /**
+     * @test
+     */
+    public function accessibility_policy_shows_the_correct_data_on_cms(): void
+    {
+        $user = factory(Admin::class)->create();
+
+        $this->adminSignIn($user);
+
+        $this->get(route('cms.pages.accessibility'))->assertSee('Accessibility Policy will go here');
+    }
+
+    /**
+     * @test
+     */
+    public function accessibility_policy_shows_the_correct_data_on_website(): void
+    {
+        $user = (new UserFactory())->withCustomer()->create();
+
+        $this->signIn($user);
+
+        $this->get(route('support.accessibility'))->assertSee('Accessibility Policy will go here');
     }
 }
