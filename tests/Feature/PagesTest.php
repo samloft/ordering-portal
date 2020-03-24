@@ -34,4 +34,28 @@ class PagesTest extends TestCase
 
         $this->get(route('support.terms'))->assertSee('Terms & Conditions will go here');
     }
+
+    /**
+     * @test
+     */
+    public function data_protection_shows_the_correct_data_on_cms(): void
+    {
+        $user = factory(Admin::class)->create();
+
+        $this->adminSignIn($user);
+
+        $this->get(route('cms.pages.data-protection'))->assertSee('Data Protection will go here');
+    }
+
+    /**
+     * @test
+     */
+    public function data_protection_shows_the_correct_data_on_website(): void
+    {
+        $user = (new UserFactory())->withCustomer()->create();
+
+        $this->signIn($user);
+
+        $this->get(route('support.data'))->assertSee('Data Protection will go here');
+    }
 }
