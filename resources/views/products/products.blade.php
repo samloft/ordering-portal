@@ -100,14 +100,16 @@
                                         {{ currency($product->prices->price, 4) }}
                                     </div>
                                 </div>
-                                <div class="flex justify-between">
-                                    <div class="col text-left">
-                                        {{ __('Discount:') }}
+                                @if((int) discountPercent() > 0)
+                                    <div class="flex justify-between">
+                                        <div class="col text-left">
+                                            {{ __('Discount:') }}
+                                        </div>
+                                        <div class="col text-right">
+                                            {{ discountPercent() }}
+                                        </div>
                                     </div>
-                                    <div class="col text-right">
-                                        {{ discountPercent() }}
-                                    </div>
-                                </div>
+                                @endif
                                 <hr>
                                 <div class="flex justify-between mt-1 mb-1">
                                     <div class="col text-left">
