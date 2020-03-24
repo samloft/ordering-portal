@@ -68,10 +68,13 @@
         <button class="button button-inverse" onclick="window.history.back();">{{ __('Back') }}</button>
 
         <div class="flex">
-            <a class="mr-2"
-               href="{{ route('order-tracking.copy-to-basket', ['order_number' => encodeUrl(trim($order->order_no))]) }}">
-                <submit-button before-text="Copy Order To Basket" after-text="Copying Order To Basket"></submit-button>
-            </a>
+            @if(count($lines) > 0)
+                <a class="mr-2"
+                   href="{{ route('order-tracking.copy-to-basket', ['order_number' => encodeUrl(trim($order->order_no))]) }}">
+                    <submit-button before-text="Copy Order To Basket"
+                                   after-text="Copying Order To Basket"></submit-button>
+                </a>
+            @endif
 
             <order-invoice order="{{ urlencode(trim($order->order_no)) }}"
                            customer_order="{{ urlencode(trim($order->customer_order_no)) }}"></order-invoice>
