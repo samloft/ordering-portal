@@ -2220,6 +2220,7 @@ var Errors = /*#__PURE__*/function () {
   data: function data() {
     return {
       errors: new Errors(),
+      form: new FormData(),
       images: {},
       imageFile: null,
       categories: {},
@@ -2252,15 +2253,57 @@ var Errors = /*#__PURE__*/function () {
       });
     },
     showModal: function showModal() {
-      this.imageData = {};
+      this.imageData = {
+        level_1: '',
+        level_2: '',
+        level_3: ''
+      };
       this.modal = true;
     },
     closeModal: function closeModal() {
       window.location.reload();
     },
-    imageAdded: function imageAdded(image) {},
-    submit: function submit() {},
-    destroy: function destroy(id) {}
+    imageAdded: function imageAdded(image) {
+      this.form.append('file', image);
+      this.imageFile = URL.createObjectURL(image);
+    },
+    submit: function submit() {
+      var _this3 = this;
+
+      this.form.append('level_1', this.imageData.level_1);
+      this.form.append('level_2', this.imageData.level_2);
+      this.form.append('level_3', this.imageData.level_3);
+      axios.post('/cms/category-images/store', this.form).then(function (response) {
+        Vue.swal('Success', 'New category override image has been created', 'success');
+      })["catch"](function (error) {
+        if (error.response.data.errors) {
+          return _this3.errors.record(error.response.data.errors);
+        }
+
+        return Vue.swal('Error', 'An unknown error occurred', 'error');
+      });
+    },
+    destroy: function destroy(id) {
+      var vm = this;
+      Vue.swal({
+        title: 'Delete image override?',
+        text: 'Are you sure? This cannot be un-done.',
+        icon: 'warning',
+        showCancelButton: true
+      }).then(function (response) {
+        if (response.value) {
+          axios["delete"]('/cms/category-images/' + id).then(function (response) {
+            var i = vm.images.map(function (item) {
+              return item.id;
+            }).indexOf(id);
+            vm.images.splice(i, 1);
+            return Vue.swal('Success', 'Category override has been deleted', 'success');
+          })["catch"](function (error) {
+            return Vue.swal('Error', 'Unable to delete category override, please try again', 'error');
+          });
+        }
+      });
+    }
   },
   mounted: function mounted() {
     this.images = this.category_images;
@@ -12994,11 +13037,18 @@ var render = function() {
                     _vm._l(_vm.images, function(image) {
                       return _c(
                         "tr",
-                        { staticClass: "border-b hover:bg-gray-100" },
+                        {
+                          key: image.id,
+                          staticClass: "border-b hover:bg-gray-100"
+                        },
                         [
                           _c("td", { staticClass: "p-3 px-5" }, [
                             _c("img", {
-                              attrs: { src: image.image, alt: image.image }
+                              staticClass: "h-16",
+                              attrs: {
+                                src: "/category_images/" + image.image,
+                                alt: image.image
+                              }
                             })
                           ]),
                           _vm._v(" "),
@@ -13014,26 +13064,22 @@ var render = function() {
                             _vm._v(_vm._s(image.level_3))
                           ]),
                           _vm._v(" "),
-                          _c(
-                            "td",
-                            { staticClass: "p-3 px-5 flex justify-end" },
-                            [
-                              _c(
-                                "button",
-                                {
-                                  staticClass:
-                                    "button bg-red-600 text-white text-xs w-20",
-                                  attrs: { type: "button" },
-                                  on: {
-                                    click: function($event) {
-                                      return _vm.destroy(image.id)
-                                    }
+                          _c("td", { staticClass: "p-3 px-5 text-right" }, [
+                            _c(
+                              "button",
+                              {
+                                staticClass:
+                                  "button bg-red-600 text-white text-xs w-20",
+                                attrs: { type: "button" },
+                                on: {
+                                  click: function($event) {
+                                    return _vm.destroy(image.id)
                                   }
-                                },
-                                [_vm._v("Delete\n                    ")]
-                              )
-                            ]
-                          )
+                                }
+                              },
+                              [_vm._v("Delete\n                    ")]
+                            )
+                          ])
                         ]
                       )
                     })
@@ -13154,7 +13200,9 @@ var render = function() {
                       _vm._v(" "),
                       _c("span", {
                         staticClass: "text-sm text-red-600",
-                        domProps: { textContent: _vm._s(_vm.errors.get("url")) }
+                        domProps: {
+                          textContent: _vm._s(_vm.errors.get("level_1"))
+                        }
                       })
                     ]),
                     _vm._v(" "),
@@ -13404,7 +13452,7 @@ var render = function() {
                     _vm._v(" "),
                     _vm.imageFile
                       ? _c("img", {
-                          staticClass: "mb-3 shadow mx-auto",
+                          staticClass: "mb-3 shadow mx-auto h-48",
                           attrs: { src: _vm.imageFile, alt: "Image Upload" }
                         })
                       : _vm._e(),

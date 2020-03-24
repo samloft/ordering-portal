@@ -146,6 +146,9 @@ class Category extends Model
         foreach ($sub_categories as $key => $value) {
             $count = 0;
 
+            $override = CategoryImage::show($value['key']);
+            $sub_categories[$key]['override'] = $override ?: null;
+
             foreach ($products as $product) {
                 if (($product['category'] === $key) && $count <= 4) {
                     // Grab the first 4 products and add them to the array (For category images).

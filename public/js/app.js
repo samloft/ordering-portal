@@ -3182,26 +3182,24 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
           while (1) {
             switch (_context.prev = _context.next) {
               case 0:
-                console.log(override, products);
-
                 if (!override) {
-                  _context.next = 5;
+                  _context.next = 4;
                   break;
                 }
 
-                return _context.abrupt("return", override);
+                return _context.abrupt("return", this.productImageUrl = '/category_images/' + override);
 
-              case 5:
+              case 4:
                 return _context.abrupt("return", axios.get('/category/image/' + products).then(function (response) {
                   return _this.productImageUrl = response.data.image;
                 }));
 
-              case 6:
+              case 5:
               case "end":
                 return _context.stop();
             }
           }
-        }, _callee);
+        }, _callee, this);
       }));
 
       function imageUrl(_x, _x2) {

@@ -69,10 +69,8 @@
         },
         methods: {
             imageUrl: async function (override, products) {
-                console.log(override, products);
-
                 if (override) {
-                    return override;
+                    return this.productImageUrl = '/category_images/' + override;
                 } else {
                     return axios.get('/category/image/' + products)
                         .then(response => {

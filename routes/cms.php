@@ -127,6 +127,8 @@ Route::group(['middleware' => 'auth:admin'], static function () {
 
     Route::group(['prefix' => 'category-images'], static function () {
         Route::get('/', 'Cms\CategoryImagesController@index')->name('cms.category-images');
+        Route::delete('{id}', 'Cms\CategoryImagesController@destroy')->name('cms.category-images.destroy');
+        Route::post('store', 'Cms\CategoryImagesController@store')->name('cms.category-images.store');
     });
 
     Route::group(['prefix' => 'customer'], static function () {
