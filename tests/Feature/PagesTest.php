@@ -36,8 +36,8 @@ class PagesTest extends TestCase
     }
 
     /**
- * @test
- */
+     * @test
+     */
     public function data_protection_shows_the_correct_data_on_cms(): void
     {
         $user = factory(Admin::class)->create();
@@ -81,5 +81,28 @@ class PagesTest extends TestCase
         $this->signIn($user);
 
         $this->get(route('support.accessibility'))->assertSee('Accessibility Policy will go here');
+    }
+
+    /**
+     * @test
+     */
+    public function terms_can_be_updated(): void
+    {
+        $admin = factory(Admin::class)->create();
+        $this->adminSignIn($admin);
+
+        $user = (new UserFactory())->withCustomer()->create();
+        $this->signIn($user);
+
+        $terms = [
+            'name' => 'terms-and-conditions',
+            'description' => 'NEW TERMS',
+        ];
+
+        $this->post(route('cms.pages.store'), $terms);
+
+        $this->assertDatabaseHas('pages', $terms);
+
+        $this->get(route('support.terms'))->assertSee('NEW TERMS');
     }
 }
