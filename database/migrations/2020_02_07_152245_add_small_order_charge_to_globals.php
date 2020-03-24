@@ -14,8 +14,8 @@ class AddSmallOrderChargeToGlobals extends Migration
         DB::table('globals')->insert([
             'key' => 'small-order-charge',
             'value' => json_encode([
-                'threshold' => '',
-                'charge' => '',
+                'threshold' => 0,
+                'charge' => 0,
                 'exclude_on_charge_delivery' => false,
                 'exclude_on_collection' => false,
             ], true),

@@ -33,12 +33,6 @@ class DeliveryMethod extends Model
     public static function details($code)
     {
         return self::where('code', $code)->first();
-
-        //return [
-        //    'title' => $delivery_details->title,
-        //    'code' => $delivery_details->code,
-        //    'cost' => $delivery_details->price,
-        //];
     }
 
     /**

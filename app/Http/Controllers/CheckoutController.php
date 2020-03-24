@@ -26,7 +26,7 @@ class CheckoutController extends Controller
         $checkout_notice = GlobalSettings::checkoutNotice();
 
         if (! auth()->user()->can_order) {
-            return redirect(route('basket'))->with('error', 'You do not have permission to place orders, if you believe this is in error, please contact the sames office');
+            return redirect(route('basket'))->with('error', 'You do not have permission to place orders, if you believe this is in error, please contact the sales office');
         }
 
         if ($basket['line_count'] === 0) {
