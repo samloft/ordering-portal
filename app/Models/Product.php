@@ -102,7 +102,7 @@ class Product extends Model
     {
         return self::where(static function ($query) use ($search_term) {
             $query->whereRaw('upper(products.code) LIKE \'%'.strtoupper($search_term).'%\'')->orWhereRaw('upper(name) LIKE \'%'.strtoupper($search_term).'%\'')->orWhereRaw('upper(description) LIKE \'%'.strtoupper($search_term).'%\'');
-        })->whereHas('prices')->paginate(10);
+        })->whereHas('prices')->with('prices')->paginate(10);
     }
 
     /**
