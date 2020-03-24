@@ -30,18 +30,18 @@ class SavedBasket extends Model
             return self::select(['id', 'reference', 'created_at'])
                 ->where('customer_code', auth()->user()->customer->code)
                 ->when($request, static function ($query) use ($request) {
-                    if ($request->reference) {
-                        $query->where('reference', 'like', '%'.$request->reference.'%');
+                    if ($request['reference']) {
+                        $query->where('reference', 'like', '%'.$request['reference'].'%');
                     }
 
-                    if ($request->date_from) {
-                        $date_from = Carbon::createFromFormat('d/m/Y', $request->date_from)->format('Y-m-d');
+                    if ($request['date_from']) {
+                        $date_from = Carbon::createFromFormat('d/m/Y', $request['date_from'])->format('Y-m-d');
 
                         $query->where('created_at', '>=', $date_from);
                     }
 
-                    if ($request->date_to) {
-                        $date_to = Carbon::createFromFormat('d/m/Y', $request->date_to)->format('Y-m-d');
+                    if ($request['date_to']) {
+                        $date_to = Carbon::createFromFormat('d/m/Y', $request['date_to'])->format('Y-m-d');
 
                         $query->where('created_at', '<=', $date_to);
                     }

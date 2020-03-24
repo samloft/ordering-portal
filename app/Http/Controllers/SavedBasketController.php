@@ -19,17 +19,15 @@ class SavedBasketController extends Controller
      * Display all saved baskets for the current user, if
      * search parameters are passed, display results that match the search.
      *
-     * @param Request $request
-     *
      * @return Factory|View
      */
-    public function index(Request $request)
+    public function index()
     {
-        $search = $request ? true : false;
+        $search = request()->all() ? true : false;
 
-        $saved_baskets = SavedBasket::list($search, $request);
+        $saved_baskets = SavedBasket::list($search, request()->all());
 
-        return view('saved-baskets.index', compact('saved_baskets'));
+        return view('saved-baskets.index', compact('saved_baskets', 'search'));
     }
 
     /**
