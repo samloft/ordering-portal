@@ -69,7 +69,7 @@
 
         <div class="flex">
             <a class="mr-2"
-                href="{{ route('order-tracking.copy-to-basket', ['order_number' => encodeUrl(trim($order->order_no))]) }}">
+               href="{{ route('order-tracking.copy-to-basket', ['order_number' => encodeUrl(trim($order->order_no))]) }}">
                 <submit-button before-text="Copy Order To Basket" after-text="Copying Order To Basket"></submit-button>
             </a>
 
@@ -84,50 +84,38 @@
 
     <h2 class="font-semibold tracking-widest mt-3 mb-3">{{ __('Order Lines') }}</h2>
 
-    <div class="table-container">
-        <table>
-            <thead>
-            <tr>
-                <th>{{ __('Product Code') }}</th>
-                <th>{{ __('Name') }}</th>
-                <th class="text-right">{{ __('Quantity') }}</th>
-                <th class="text-right">{{ __('Net Price') }}</th>
-                <th class="text-right">{{ __('Total Price') }}</th>
-            </tr>
-            </thead>
-            <tbody>
-            @foreach($order->lines as $line)
-                <tr class="{{ $line->price ?: 'bg-red-200' }}">
-                    <td>{{ $line->product }}</td>
-                    <td>{{ $line->long_description }}</td>
-                    <td class="text-right">{{ $line->line_qty }}</td>
-                    <td class="text-right">{{ currency($line->net_price) }}</td>
-                    <td class="text-right">{{ currency($line->line_val) }}</td>
-                </tr>
-            @endforeach
-            </tbody>
-        </table>
-    </div>
-
-    <div class="text-right mt-1">
-        <small class="text-red-600">* Products marked in red are no longer available for purchase.</small>
-    </div>
-
     @if(count($lines) === 0)
-        <h3 class="text-center text-lg font-semibold">No order lines to display.</h3>
+        <div class="bg-white rounded-lg shadow p-4">
+            <h3 class="text-center text-lg font-semibold">No order lines to display.</h3>
+        </div>
+    @else
+        <div class="table-container">
+            <table>
+                <thead>
+                <tr>
+                    <th>{{ __('Product Code') }}</th>
+                    <th>{{ __('Name') }}</th>
+                    <th class="text-right">{{ __('Quantity') }}</th>
+                    <th class="text-right">{{ __('Net Price') }}</th>
+                    <th class="text-right">{{ __('Total Price') }}</th>
+                </tr>
+                </thead>
+                <tbody>
+                @foreach($order->lines as $line)
+                    <tr class="{{ $line->price ?: 'bg-red-200' }}">
+                        <td>{{ $line->product }}</td>
+                        <td>{{ $line->long_description }}</td>
+                        <td class="text-right">{{ $line->line_qty }}</td>
+                        <td class="text-right">{{ currency($line->net_price) }}</td>
+                        <td class="text-right">{{ currency($line->line_val) }}</td>
+                    </tr>
+                @endforeach
+                </tbody>
+            </table>
+        </div>
+
+        <div class="text-right mt-1">
+            <small class="text-red-600">* Products marked in red are no longer available for purchase.</small>
+        </div>
     @endif
 @endsection
-
-{{--@section('scripts')--}}
-{{--    <script>--}}
-{{--        $.get('/order-tracking/invoice/{{ urlencode(trim($order->order_no)) }}/{{ urlencode(trim($order->customer_order_no)) }}/').done(function (response) {--}}
-{{--            if (response.pdf_exists) {--}}
-{{--                $('#invoice-download')--}}
-{{--                    .attr('href', '/order-tracking/invoice/{{ urlencode(trim($order->order_no)) }}/{{ urlencode(trim($order->customer_order_no)) }}/true')--}}
-{{--                    .removeClass('d-none');--}}
-{{--            }--}}
-{{--        }).fail(function (response) {--}}
-{{--            return console.log(response);--}}
-{{--        });--}}
-{{--    </script>--}}
-{{--@endsection--}}
