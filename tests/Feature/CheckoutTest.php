@@ -124,7 +124,7 @@ class CheckoutTest extends TestCase
             'reference' => 'test',
             'name' => $user->name,
             'shipping' => $shipping->code,
-            'terms' => 'on'
+            'terms' => 'on',
         ]))->assertSee('Order Completed');
     }
 }
