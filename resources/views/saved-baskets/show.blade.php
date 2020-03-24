@@ -46,7 +46,7 @@
             </thead>
             <tbody>
             @foreach($saved_basket as $item)
-                <tr {{ !$item->price ? 'class=text-danger' : '' }}>
+                <tr class="{{ !$item->price ? 'bg-red-200' : '' }}">
                     <td>{{ $item->product }}</td>
                     <td>{{ $item->name ?: 'Not Available' }}</td>
                     <td class="text-right">{{ $item->quantity }}</td>
