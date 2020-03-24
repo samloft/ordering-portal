@@ -3207,7 +3207,10 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
       }
 
       return imageUrl;
-    }()
+    }(),
+    buildUrl: function buildUrl() {
+      return '/products/' + (this.current.level_1 ? this.current.level_1.replace('/', '_') + '/' : '') + (this.current.level_2 ? this.current.level_2.replace('/', '_') + '/' : '') + this.category.key.replace('/', '_');
+    }
   },
   mounted: function mounted() {
     this.imageUrl(this.category.override, this.category.product_list);
@@ -12743,166 +12746,154 @@ var render = function() {
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
   return _c("div", { staticClass: "w-1/5 px-3" }, [
-    _c(
-      "a",
-      {
-        attrs: {
-          href:
-            "/products/" +
-            (_vm.current.level_1 ? _vm.current.level_1 + "/" : "") +
-            (_vm.current.level_2 ? _vm.current.level_2 + "/" : "") +
-            _vm.category.key
-        }
-      },
-      [
-        _c(
-          "div",
-          {
-            staticClass:
-              "bg-white relative text-center rounded-lg mb-6 shadow-md hover:shadow-lg"
-          },
-          [
-            _c("div", { staticClass: "h-40" }, [
-              _vm.productImageUrl
-                ? _c("img", {
-                    staticClass: "h-32 mx-auto",
-                    attrs: { alt: _vm.category.key, src: _vm.productImageUrl }
-                  })
-                : _c(
-                    "div",
-                    { staticClass: "flex items-center justify-center h-full" },
-                    [
-                      _c(
-                        "svg",
-                        {
-                          attrs: {
-                            height: "10",
-                            viewBox: "0 0 120 30",
-                            xmlns: "http://www.w3.org/2000/svg",
-                            fill: "rgba(113, 128, 150, 1.0)"
-                          }
-                        },
-                        [
-                          _c(
-                            "circle",
-                            { attrs: { cx: "15", cy: "15", r: "15" } },
-                            [
-                              _c("animate", {
-                                attrs: {
-                                  attributeName: "r",
-                                  from: "15",
-                                  to: "15",
-                                  begin: "0s",
-                                  dur: "0.8s",
-                                  values: "15;9;15",
-                                  calcMode: "linear",
-                                  repeatCount: "indefinite"
-                                }
-                              }),
-                              _vm._v(" "),
-                              _c("animate", {
-                                attrs: {
-                                  attributeName: "fill-opacity",
-                                  from: "1",
-                                  to: "1",
-                                  begin: "0s",
-                                  dur: "0.8s",
-                                  values: "1;.5;1",
-                                  calcMode: "linear",
-                                  repeatCount: "indefinite"
-                                }
-                              })
-                            ]
-                          ),
-                          _vm._v(" "),
-                          _c(
-                            "circle",
-                            {
+    _c("a", { attrs: { href: _vm.buildUrl() } }, [
+      _c(
+        "div",
+        {
+          staticClass:
+            "bg-white relative text-center rounded-lg mb-6 shadow-md hover:shadow-lg"
+        },
+        [
+          _c("div", { staticClass: "h-40" }, [
+            _vm.productImageUrl
+              ? _c("img", {
+                  staticClass: "h-32 mx-auto",
+                  attrs: { alt: _vm.category.key, src: _vm.productImageUrl }
+                })
+              : _c(
+                  "div",
+                  { staticClass: "flex items-center justify-center h-full" },
+                  [
+                    _c(
+                      "svg",
+                      {
+                        attrs: {
+                          height: "10",
+                          viewBox: "0 0 120 30",
+                          xmlns: "http://www.w3.org/2000/svg",
+                          fill: "rgba(113, 128, 150, 1.0)"
+                        }
+                      },
+                      [
+                        _c(
+                          "circle",
+                          { attrs: { cx: "15", cy: "15", r: "15" } },
+                          [
+                            _c("animate", {
                               attrs: {
-                                cx: "60",
-                                cy: "15",
-                                r: "9",
-                                "fill-opacity": "0.3"
+                                attributeName: "r",
+                                from: "15",
+                                to: "15",
+                                begin: "0s",
+                                dur: "0.8s",
+                                values: "15;9;15",
+                                calcMode: "linear",
+                                repeatCount: "indefinite"
                               }
-                            },
-                            [
-                              _c("animate", {
-                                attrs: {
-                                  attributeName: "r",
-                                  from: "9",
-                                  to: "9",
-                                  begin: "0s",
-                                  dur: "0.8s",
-                                  values: "9;15;9",
-                                  calcMode: "linear",
-                                  repeatCount: "indefinite"
-                                }
-                              }),
-                              _vm._v(" "),
-                              _c("animate", {
-                                attrs: {
-                                  attributeName: "fill-opacity",
-                                  from: "0.5",
-                                  to: "0.5",
-                                  begin: "0s",
-                                  dur: "0.8s",
-                                  values: ".5;1;.5",
-                                  calcMode: "linear",
-                                  repeatCount: "indefinite"
-                                }
-                              })
-                            ]
-                          ),
-                          _vm._v(" "),
-                          _c(
-                            "circle",
-                            { attrs: { cx: "105", cy: "15", r: "15" } },
-                            [
-                              _c("animate", {
-                                attrs: {
-                                  attributeName: "r",
-                                  from: "15",
-                                  to: "15",
-                                  begin: "0s",
-                                  dur: "0.8s",
-                                  values: "15;9;15",
-                                  calcMode: "linear",
-                                  repeatCount: "indefinite"
-                                }
-                              }),
-                              _vm._v(" "),
-                              _c("animate", {
-                                attrs: {
-                                  attributeName: "fill-opacity",
-                                  from: "1",
-                                  to: "1",
-                                  begin: "0s",
-                                  dur: "0.8s",
-                                  values: "1;.5;1",
-                                  calcMode: "linear",
-                                  repeatCount: "indefinite"
-                                }
-                              })
-                            ]
-                          )
-                        ]
-                      )
-                    ]
-                  )
-            ]),
-            _vm._v(" "),
-            _c(
-              "div",
-              {
-                staticClass:
-                  "absolute inset-x-0 bottom-0 bg-gray-200 rounded-b-lg py-2 text-xs"
-              },
-              [_c("span", [_vm._v(_vm._s(_vm.category.key))])]
-            )
-          ]
-        )
-      ]
-    )
+                            }),
+                            _vm._v(" "),
+                            _c("animate", {
+                              attrs: {
+                                attributeName: "fill-opacity",
+                                from: "1",
+                                to: "1",
+                                begin: "0s",
+                                dur: "0.8s",
+                                values: "1;.5;1",
+                                calcMode: "linear",
+                                repeatCount: "indefinite"
+                              }
+                            })
+                          ]
+                        ),
+                        _vm._v(" "),
+                        _c(
+                          "circle",
+                          {
+                            attrs: {
+                              cx: "60",
+                              cy: "15",
+                              r: "9",
+                              "fill-opacity": "0.3"
+                            }
+                          },
+                          [
+                            _c("animate", {
+                              attrs: {
+                                attributeName: "r",
+                                from: "9",
+                                to: "9",
+                                begin: "0s",
+                                dur: "0.8s",
+                                values: "9;15;9",
+                                calcMode: "linear",
+                                repeatCount: "indefinite"
+                              }
+                            }),
+                            _vm._v(" "),
+                            _c("animate", {
+                              attrs: {
+                                attributeName: "fill-opacity",
+                                from: "0.5",
+                                to: "0.5",
+                                begin: "0s",
+                                dur: "0.8s",
+                                values: ".5;1;.5",
+                                calcMode: "linear",
+                                repeatCount: "indefinite"
+                              }
+                            })
+                          ]
+                        ),
+                        _vm._v(" "),
+                        _c(
+                          "circle",
+                          { attrs: { cx: "105", cy: "15", r: "15" } },
+                          [
+                            _c("animate", {
+                              attrs: {
+                                attributeName: "r",
+                                from: "15",
+                                to: "15",
+                                begin: "0s",
+                                dur: "0.8s",
+                                values: "15;9;15",
+                                calcMode: "linear",
+                                repeatCount: "indefinite"
+                              }
+                            }),
+                            _vm._v(" "),
+                            _c("animate", {
+                              attrs: {
+                                attributeName: "fill-opacity",
+                                from: "1",
+                                to: "1",
+                                begin: "0s",
+                                dur: "0.8s",
+                                values: "1;.5;1",
+                                calcMode: "linear",
+                                repeatCount: "indefinite"
+                              }
+                            })
+                          ]
+                        )
+                      ]
+                    )
+                  ]
+                )
+          ]),
+          _vm._v(" "),
+          _c(
+            "div",
+            {
+              staticClass:
+                "absolute inset-x-0 bottom-0 bg-gray-200 rounded-b-lg py-2 text-xs"
+            },
+            [_c("span", [_vm._v(_vm._s(_vm.category.key))])]
+          )
+        ]
+      )
+    ])
   ])
 }
 var staticRenderFns = []
