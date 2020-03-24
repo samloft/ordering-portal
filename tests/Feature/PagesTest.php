@@ -103,6 +103,52 @@ class PagesTest extends TestCase
 
         $this->assertDatabaseHas('pages', $terms);
 
-        $this->get(route('support.terms'))->assertSee('NEW TERMS');
+        $this->get(route('support.terms'))->assertSee($terms['description']);
+    }
+
+    /**
+     * @test
+     */
+    public function data_protection_can_be_updated(): void
+    {
+        $admin = factory(Admin::class)->create();
+        $this->adminSignIn($admin);
+
+        $user = (new UserFactory())->withCustomer()->create();
+        $this->signIn($user);
+
+        $data_protection = [
+            'name' => 'data-protection',
+            'description' => 'NEW DATA PROTECTION',
+        ];
+
+        $this->post(route('cms.pages.store'), $data_protection);
+
+        $this->assertDatabaseHas('pages', $data_protection);
+
+        $this->get(route('support.data'))->assertSee($data_protection['description']);
+    }
+
+    /**
+     * @test
+     */
+    public function accessibility_policy_can_be_updated(): void
+    {
+        $admin = factory(Admin::class)->create();
+        $this->adminSignIn($admin);
+
+        $user = (new UserFactory())->withCustomer()->create();
+        $this->signIn($user);
+
+        $accessibility_policy = [
+            'name' => 'accessibility-policy',
+            'description' => 'NEW ACCESSIBILITY POLICY',
+        ];
+
+        $this->post(route('cms.pages.store'), $accessibility_policy);
+
+        $this->assertDatabaseHas('pages', $accessibility_policy);
+
+        $this->get(route('support.accessibility'))->assertSee($accessibility_policy['description']);
     }
 }
