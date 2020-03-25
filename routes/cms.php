@@ -131,6 +131,11 @@ Route::group(['middleware' => 'auth:admin'], static function () {
         Route::post('store', 'Cms\CategoryImagesController@store')->name('cms.category-images.store');
     });
 
+    Route::group(['prefix' => 'product-data'], static function () {
+        Route::get('/', 'Cms\ProductDataController@index')->name('cms.product-data');
+        Route::patch('/', 'Cms\ProductDataController@store')->name('cms.product-data.update');
+    });
+
     Route::group(['prefix' => 'customer'], static function () {
         Route::get('validate', static function () {
             return Customer::show(request('code'));

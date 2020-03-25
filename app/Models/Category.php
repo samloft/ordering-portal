@@ -180,4 +180,25 @@ class Category extends Model
 
         return false;
     }
+
+    /**
+     * @return mixed
+     */
+    public static function brand()
+    {
+        return self::select([
+            'level_1',
+        ])->whereHas('prices', static function ($query) {
+            $query->where('customer_code', auth()->user()->customer->code);
+        })->groupBy('level_1')->get();
+    }
+
+    public static function range($brand)
+    {
+        return self::select([
+            'level_2',
+        ])->where('level_1', $brand)->whereHas('prices', static function ($query) {
+                $query->where('customer_code', auth()->user()->customer->code);
+            })->groupBy('level_2')->get();
+    }
 }

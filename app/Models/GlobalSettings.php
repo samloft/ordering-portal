@@ -187,4 +187,14 @@ class GlobalSettings extends Model
 
         return $next_order;
     }
+
+    /**
+     * @return mixed
+     */
+    public static function productData()
+    {
+        return Cache::rememberForever('product-data', static function () {
+            return json_decode(self::where('key', 'product-data')->first()->value, true);
+        });
+    }
 }

@@ -22,6 +22,7 @@ Vue.component('order-invoice', require('./modules/OrderInvoice.vue').default);
 Vue.component('delivery-method', require('./modules/DeliveryMethod.vue').default);
 Vue.component('checkout', require('./modules/Checkout.vue').default);
 Vue.component('submit-button', require('./modules/Button.vue').default);
+Vue.component('product-data', require('./modules/ProductData.vue').default);
 
 window.Event = new Vue();
 

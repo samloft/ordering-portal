@@ -12,6 +12,7 @@
 */
 
 use App\Models\Basket;
+use App\Models\Category;
 use App\Models\Customer;
 use Illuminate\Http\Request;
 
@@ -102,6 +103,12 @@ Route::group(['middleware' => ['auth', 'has.customer']], static function () {
      */
     Route::group(['prefix' => 'product-data'], static function () {
         Route::get('/', 'ProductDataController@index')->name('product-data');
+        Route::get('/range/{brand}', static function($brand) {
+            return Category::range($brand);
+        });
+
+        Route::get('prices', 'ProductDataController@prices')->name('product-data.prices');
+        Route::get('data', 'ProductDataController@data')->name('product-data.data');
     });
 
     /*

@@ -28,14 +28,20 @@ class Product extends Model
     }
 
     /**
+     * @param bool $blank
+     *
      * @return string
      */
-    public function image(): string
+    public function image($blank = false): string
     {
         $image = str_replace('/', '^', $this->code).'.png';
 
         if (Storage::disk('public')->exists('product_images/'.$image)) {
             return asset('product_images/'.$image);
+        }
+
+        if ($blank) {
+            return '';
         }
 
         return asset('images/no-image.png');

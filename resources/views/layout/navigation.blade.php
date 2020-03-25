@@ -25,9 +25,11 @@
             <a href="{{ route('reports') }}" class="{{ activeMenu('reports') }}">Reports</a>
         </div>
 
-        <div class="menu-item">
-            <a href="{{ route('product-data') }}" class="{{ activeMenu('product-data') }}">Product Data</a>
-        </div>
+        @if ($product_data['data'] || $product_data['prices'])
+            <div class="menu-item">
+                <a href="{{ route('product-data') }}" class="{{ activeMenu('product-data') }}">Product Data</a>
+            </div>
+        @endif
 
     </div>
 </nav>

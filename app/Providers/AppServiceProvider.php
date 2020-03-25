@@ -20,14 +20,12 @@ class AppServiceProvider extends ServiceProvider
     {
         Schema::defaultStringLength(191);
 
-        //$this->app->singleton(HostnameActions::class, static function () {
-        //    return new \App\Http\Middleware\HostnameActions(redirect());
-        //});
-
-        //config(['app.name' => TenancyFacade::website()->uuid ?? null]);
-
         view()->composer('layout.master', static function ($view) {
             $view->with('announcement', GlobalSettings::siteAnnouncement());
+        });
+
+        view()->composer('layout.navigation', static function ($view) {
+            $view->with('product_data', GlobalSettings::productData());
         });
 
         view()->composer('products.sidebar', static function ($view) {
