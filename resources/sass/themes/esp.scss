@@ -1,0 +1,64 @@
+@import '../app';
+
+:root {
+    --background-primary-color: rgba(234, 25, 33, 1.0);
+    --background-primary-text: rgb(255, 255, 255);
+    --button-primary-color: rgba(234, 25, 33, 1.0);
+    --button-primary-text: rgb(255, 255, 255);
+
+    --background-invert-color: rgb(171, 15, 37);
+    --background-invert-text: rgb(255, 255, 255);
+
+    --button-secondary-color: rgba(234, 25, 33, 1.0);
+    --button-secondary-text: rgb(255, 255, 255);
+    --button-inverse-color: rgba(234, 25, 33, 1.0);
+    --button-inverse-text: rgb(255, 255, 255);
+
+    --primary-text: rgba(234, 25, 33, 1.0);
+}
+
+header {
+    background-color: rgb(255, 255, 255) !important;
+}
+
+nav.menu-wrapper {
+    background-color: rgba(82, 82, 81, 1.0) !important;
+}
+
+.categories-nav {
+    a {
+        @apply .py-2 .px-2 .block;
+    }
+
+    .active {
+        @apply .font-medium;
+    }
+
+    .top-level {
+        @apply .shadow;
+    }
+
+    .top-level:first-of-type {
+        @apply .rounded-t-lg;
+    }
+
+    .top-level:last-of-type {
+        @apply .rounded-b-lg;
+    }
+
+    .sub-categories {
+        @apply .bg-white .text-sm;
+    }
+
+    .top-level:nth-child(odd) {
+        background-color: rgb(215, 221, 221);
+    }
+
+    .top-level:nth-child(even) {
+        background-color: rgb(228, 232, 231);
+    }
+}
+
+footer {
+    background-color: rgba(82, 82, 81, 1.0) !important;
+}
