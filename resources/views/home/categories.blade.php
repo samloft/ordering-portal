@@ -4,7 +4,7 @@
             <div class="w-1/5 px-3 mb-5">
                 <a href="{{ $category['link'] }}">
                     <img class="rounded shadow"
-                         src="{{ \Illuminate\Support\Facades\Storage::url('/images/category/'.$category['image']) }}"
+                         src="{{ \Illuminate\Support\Facades\Storage::disk('public')->url('/images/category/'.$category['image']) }}"
                          alt="{{ $category['name'] }}"/>
                 </a>
             </div>
