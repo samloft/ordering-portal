@@ -243,6 +243,7 @@
                 this.form.append('download-file', file);
             },
             createNewLink() {
+                this.form = new FormData;
                 this.errors = new Errors;
                 this.linkData = {};
                 this.imageFile = null;
