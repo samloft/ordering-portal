@@ -11,5 +11,5 @@
         @endforeach
     </div>
 @else
-    <h3 class="text-center">{{ __('No category images have been added.') }}</h3>
+    <h3 class="text-center">No category images have been added.</h3>
 @endif

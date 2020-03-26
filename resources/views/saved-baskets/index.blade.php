@@ -4,9 +4,9 @@
 
 @section('content')
     <div class="w-full mb-5 text-center">
-        <h2 class="font-semibold tracking-widest">{{ __('Saved Baskets') }}</h2>
+        <h2 class="font-semibold tracking-widest">Saved Baskets</h2>
         <p class="font-thin">
-            {{ __('View your saved baskets or create new ones for easy repeat orders') }}
+            View your saved baskets or create new ones for easy repeat orders
         </p>
     </div>
 
@@ -32,14 +32,14 @@
 
             <div class="text-center mt-6">
                 <a href="{{ route('saved-baskets') }}">
-                    <button type="button" class="button button-danger w-40">{{ __('Reset') }}</button>
+                    <button type="button" class="button button-danger w-40">Reset</button>
                 </a>
-                <button class="button button-primary w-40">{{ __('Search') }}</button>
+                <button class="button button-primary w-40">Search</button>
             </div>
         </form>
     </div>
 
-    <h2 class="font-semibold tracking-widest mt-3 mb-3">{{ __('Search Results') }}</h2>
+    <h2 class="font-semibold tracking-widest mt-3 mb-3">Search Results</h2>
 
     @if(count($saved_baskets) > 0)
         <div class="table-container">
@@ -60,7 +60,7 @@
                         <td class="text-right">
                             <a href="{{ route('saved-baskets.destroy', ['id' => $basket->id]) }}">
                                 <button id="saved_basket__delete" class="button button-sm button-danger">
-                                    {{ __('Delete Template') }}
+                                    Delete Template
                                 </button>
                             </a>
                         </td>

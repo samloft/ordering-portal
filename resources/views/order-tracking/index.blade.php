@@ -5,9 +5,9 @@
 @section('content')
 
     <div class="w-full mb-5 text-center">
-        <h2 class="font-semibold tracking-widest">{{ __('Order Tracking') }}</h2>
+        <h2 class="font-semibold tracking-widest">Order Tracking</h2>
         <p class="font-thin">
-            {{ __('Check the current status of your orders') }}
+            Check the current status of your orders
         </p>
     </div>
 
@@ -57,25 +57,25 @@
 
             <div class="text-center mt-6">
                 <a href="{{ route('order-tracking') }}">
-                    <button type="button" class="button button-danger w-40">{{ __('Reset') }}</button>
+                    <button type="button" class="button button-danger w-40">Reset</button>
                 </a>
-                <button class="button button-primary w-40">{{ __('Search') }}</button>
+                <button class="button button-primary w-40">Search</button>
             </div>
         </form>
     </div>
 
-    <h2 class="font-semibold tracking-widest mt-3 mb-3">{{ __('Search Results') }}</h2>
+    <h2 class="font-semibold tracking-widest mt-3 mb-3">Search Results</h2>
 
     @if(!$orders->isEmpty())
         <div class="table-container">
             <table class="table">
                 <thead class="thead-dark">
                 <tr>
-                    <th>{{ __('Order Number') }}</th>
-                    <th>{{ __('Reference') }}</th>
-                    <th>{{ __('Status') }}</th>
-                    <th>{{ __('Ordered') }}</th>
-                    <th class="text-right">{{ __('Value') }}</th>
+                    <th>Order Number</th>
+                    <th>Reference</th>
+                    <th>Status</th>
+                    <th>Ordered</th>
+                    <th class="text-right">Value</th>
                 </tr>
                 </thead>
                 <tbody>
@@ -96,7 +96,7 @@
         </div>
     @else
         <div class="bg-white rounded-lg shadow p-4 text-center">
-            <h2 class="font-semibold tracking-widest">{{ __('No orders to display') }}</h2>
+            <h2 class="font-semibold tracking-widest">No orders to display</h2>
         </div>
     @endif
 

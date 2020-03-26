@@ -67,7 +67,7 @@
                     </div>
 
                     <div class="text-right">
-                        <button class="button button-primary">{{ __('Submit') }}</button>
+                        <button class="button button-primary">Submit</button>
                     </div>
                 </form>
             </div>

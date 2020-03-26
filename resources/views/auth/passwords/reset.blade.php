@@ -9,29 +9,29 @@
         <input type="hidden" name="token" value="{{ $token }}">
 
         <div class="input-group">
-            <label for="email">{{ __('Email address') }}</label>
+            <label for="email">Email address</label>
             <input type="email" id="email" class="form-input" name="email" value="{{ $email ?? old('email') }}"
                    autocomplete="off" required autofocus>
         </div>
 
         <div class="input-group">
-            <label for="password">{{ __('Password') }}</label>
+            <label for="password">Password</label>
             <input type="password" id="password" class="form-input" name="password" autocomplete="off" required>
         </div>
 
         <div class="input-group">
-            <label for="confirm_password">{{ __('Confirm password') }}</label>
+            <label for="confirm_password">Confirm password</label>
             <input type="password" id="confirm_password" class="form-input" name="password_confirmation" autocomplete="off" required>
         </div>
 
         <button type="submit" class="button button-primary button-block">
-            {{ __('Reset Password') }}
+            Reset Password
         </button>
     </form>
 
     <div class="text-center mt-4">
         <a href="/" class="button-link">
-            {{ __('Cancel') }}
+            Cancel
         </a>
     </div>
 @endsection

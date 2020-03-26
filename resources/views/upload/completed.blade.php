@@ -4,9 +4,9 @@
 
 @section('content')
     <div class="w-full mb-5 text-center">
-        <h2 class="font-semibold tracking-widest">{{ __('Upload Completed') }}</h2>
+        <h2 class="font-semibold tracking-widest">Upload Completed</h2>
         <p class="font-thin">
-            {{ __('Your order upload has been completed') }}
+            Your order upload has been completed
         </p>
     </div>
 
@@ -20,19 +20,19 @@
             </div>
 
             <p>
-                {{ __('Your order has been successfully imported into the basket, you can now continue adding to
-                this basket if you wish.') }}
+                Your order has been successfully imported into the basket, you can now continue adding to
+                this basket if you wish.
             </p>
 
             <div class="mt-4">
                 <a href="{{ route('upload') }}" class="btn-link mr-2">
-                    <button class="button button-inverse">{{ __('Upload another order') }}</button>
+                    <button class="button button-inverse">Upload another order</button>
                 </a>
                 <a href="{{ route('products') }}" class="btn-link mr-2">
-                    <button class="button button-secondary">{{ __('Add products to order') }}</button>
+                    <button class="button button-secondary">Add products to order</button>
                 </a>
                 <a href="{{ route('basket') }}" class="btn-link">
-                    <button class="button button-primary">{{ __('View your basket') }}</button>
+                    <button class="button button-primary">View your basket</button>
                 </a>
             </div>
         </div>

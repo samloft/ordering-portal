@@ -1,12 +1,12 @@
 <div class="w-1/4 pr-5 sidebar">
     @if (auth()->user()->admin || count(auth()->user()->customers) > 0)
-        <h4>{{ __('Change Customer') }}</h4>
+        <h4>Change Customer</h4>
 
         <customer-switch :user="{{ json_encode(auth()->user()->load('customers'), true) }}"></customer-switch>
 
     @endif
 
-    <h4>{{ __('Search') }}</h4>
+    <h4>Search</h4>
 
     <form class="w-100" action="{{ route('products.search') }}" method="get">
         <div class="relative">
@@ -21,11 +21,11 @@
         </div>
     </form>
 
-    <h4>{{ __('Quick Buy') }}</h4>
+    <h4>Quick Buy</h4>
 
     <quick-buy class="mb-4"></quick-buy>
 
-    <h4>{{ __('Categories') }}</h4>
+    <h4>Categories</h4>
 
     <ul class="categories-nav">
         @foreach($category_list as $key => $category)

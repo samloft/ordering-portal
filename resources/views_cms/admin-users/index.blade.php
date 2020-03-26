@@ -8,7 +8,7 @@
         <admin-users>
             <template v-slot:trigger>
                 <button class="button bg-gray-700 text-white">
-                    {{ __('Create Admin User') }}
+                    Create Admin User
                 </button>
             </template>
         </admin-users>
@@ -18,7 +18,7 @@
 
         <form class="m-0" method="get" action="{{ route('cms.admin-users') }}">
             <div class="mb-4">
-                <label class="text-sm font-medium">{{ __('Keyword Search') }}</label>
+                <label class="text-sm font-medium">Keyword Search</label>
                 <input class="bg-gray-100 mt-1"
                        value="{{ old('search') }}"
                        name="search"
@@ -27,9 +27,9 @@
 
             <div class="text-center mt-6">
                 <a href="{{ route('cms.admin-users') }}">
-                    <button type="button" class="button button-danger w-40">{{ __('Reset') }}</button>
+                    <button type="button" class="button button-danger w-40">Reset</button>
                 </a>
-                <button class="button bg-gray-700 text-white w-40">{{ __('Search') }}</button>
+                <button class="button bg-gray-700 text-white w-40">Search</button>
             </div>
         </form>
     </div>
@@ -37,8 +37,8 @@
     <table class="w-full text-md bg-white shadow-md rounded mb-4">
         <tbody>
         <tr class="text-left border-b bg-gray-300 uppercase text-sm tracking-widest">
-            <th class="font-semibold p-3 px-5">{{ __('Name') }}</th>
-            <th class="font-semibold p-3 px-5">{{ __('Email') }}</th>
+            <th class="font-semibold p-3 px-5">Name</th>
+            <th class="font-semibold p-3 px-5">Email</th>
             <th></th>
         </tr>
         @foreach($users as $user)
@@ -54,7 +54,7 @@
                         <template v-slot:trigger>
                             <button type="button"
                                     class="button bg-gray-700 text-white text-xs w-20">
-                                {{ __('Edit') }}
+                                Edit
                             </button>
                         </template>
                     </admin-users>

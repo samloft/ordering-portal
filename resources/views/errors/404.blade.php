@@ -6,8 +6,9 @@
     <div class="flex h-screen w-full">
         <div class="text-center text-gray-800 m-auto w-full">
             <h1 style="font-size: 14rem;" class="font-extrabold">
-                <span class="text-gray-800">4</span><span class="text-gray-500">0</span><span
-                    class="text-gray-800">4</span>
+                <span class="text-gray-800">4</span>
+                <span class="text-gray-500">0</span>
+                <span class="text-gray-800">4</span>
             </h1>
 
             <h1 class="text-3xl mb-10">Oops, we can't seem to find the page you're looking for.</h1>

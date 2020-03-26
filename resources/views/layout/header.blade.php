@@ -54,9 +54,9 @@
                         </div>
                     </template>
 
-                    <a href="{{ route('account') }}" class="dropdown-menu-item">{{ __('My account') }}</a>
+                    <a href="{{ route('account') }}" class="dropdown-menu-item">My account</a>
                     <a href="#" class="dropdown-menu-item"
-                       onclick="document.querySelector('#logout').submit()">{{ __('Logout') }}</a>
+                       onclick="document.querySelector('#logout').submit()">Logout</a>
 
                     <form id="logout" method="POST" class="hidden" action="{{ route('logout') }}"></form>
                 </dropdown>

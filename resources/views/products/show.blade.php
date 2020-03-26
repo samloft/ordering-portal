@@ -21,12 +21,12 @@
 
                         <div class="pl-3 pr-10 flex-0 text-lg">
                             <h5 class="mb-3">
-                                {{ __('Product Code: ') }}
+                                Product Code:
                                 <div id="product-code"
                                      class="font-semibold text-primary">{{ $product->code }}</div>
                             </h5>
                             <h5 class="mb-3">
-                                {{ __('Unit Type: ') }}
+                                Unit Type:
                                 <div class="font-semibold text-primary">{{ $product->uom }}</div>
                             </h5>
 
@@ -68,7 +68,7 @@
 
                         <div class="flex justify-between">
                             <div class="col text-left">
-                                {{ __('Trade Price:') }}
+                                Trade Price:
                             </div>
                             <div class="col text-right">
                                 {{ currency($product->trade_price, 4) }}
@@ -76,7 +76,7 @@
                         </div>
                         <div class="flex justify-between">
                             <div class="col text-left">
-                                {{ __('Unit Price:') }}
+                                Unit Price:
                             </div>
                             <div class="col text-right">
                                 {{ currency($product->prices->price, 4) }}
@@ -86,7 +86,7 @@
                         @if((int) discountPercent() > 0)
                             <div class="flex justify-between">
                                 <div class="col text-left">
-                                    {{ __('Discount:') }}
+                                    Discount:
                                 </div>
                                 <div class="col text-right">
                                     {{ discountPercent() }}
@@ -97,7 +97,7 @@
                         <hr>
                         <div class="flex justify-between mt-1 mb-1">
                             <div class="col text-left">
-                                <strong>{{ __('Net Price:') }}</strong>
+                                <strong>Net Price:</strong>
                             </div>
                             <div class="col text-right">
                                 <strong>{{ currency(discount($product->prices->price), 4) }}</strong>
@@ -111,7 +111,7 @@
             <div class="flex justify-end">
                 <div class="block">
                     <div class="text-xxs bg-gray-600 text-white pl-1 pr-1 rounded-t">
-                        {{ __('Stock Level') }}
+                        Stock Level
                     </div>
                     <div class="text-center bg-gray-200 p-1 text-xs rounded-b">
                         {{ $product->stock }}
@@ -194,9 +194,9 @@
         @endif
     @else
         <div class="w-full rounded bg-white p-5 shadow mb-5 text-center">
-            <h2 class="font-semibold tracking-widest">{{ __('Product not found') }}</h2>
+            <h2 class="font-semibold tracking-widest">Product not found</h2>
             <p class="font-thin">
-                {{ __('No product was found for this code') }}
+                No product was found for this code
             </p>
         </div>
     @endif

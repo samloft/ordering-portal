@@ -7,9 +7,9 @@
     <div class="px-6 pt-4 pb-6 xl:px-10 xl:pt-6 xl:pb-8 bg-white rounded-lg shadow">
         <div class="flex">
             <div class="w-1/4 mr-6">
-                <h5 class="font-medium text-lg mb-2">{{ __('Global default discount') }}</h5>
+                <h5 class="font-medium text-lg mb-2">Global default discount</h5>
                 <p class="text-gray-600 text-sm">
-                    {{ __('This is the global site discount percentage, any customers that do not have an override below will have this discount applied them.') }}
+                    This is the global site discount percentage, any customers that do not have an override below will have this discount applied them.
                 </p>
             </div>
             <div class="w-3/4">
@@ -17,14 +17,14 @@
 
                 <form method="post" action="{{ route('cms.discounts.global-store') }}">
                     <div class="mb-4">
-                        <label class="text-sm font-medium">{{ __('Global Discount Percent') }}</label>
+                        <label class="text-sm font-medium">Global Discount Percent</label>
                         <input class="bg-gray-100 mt-1" value="{{ $global_discount }}"
                                name="global_discount"
                                placeholder="Discount Percentage e.g 2">
                     </div>
 
                     <div class="text-right mt-5">
-                        <button class="button bg-gray-800 text-white">{{ __('Update global discount') }}</button>
+                        <button class="button bg-gray-800 text-white">Update global discount</button>
                     </div>
                 </form>
             </div>
@@ -34,9 +34,9 @@
 
         <div class="flex">
             <div class="w-1/4 mr-6">
-                <h5 class="font-medium text-lg mb-2">{{ __('Discount overrides') }}</h5>
+                <h5 class="font-medium text-lg mb-2">Discount overrides</h5>
                 <p class="text-gray-600 text-sm">
-                    {{ __('Any customers that should not use the global discount need to be added here with their own customer discount percentage.') }}
+                    Any customers that should not use the global discount need to be added here with their own customer discount percentage.
                 </p>
             </div>
             <div class="w-3/4">

@@ -19,7 +19,7 @@
                 <img class="logo" src="{{ asset('images/logos/logo-' . config('app.name') . '-dark.png') }}"
                      alt="{{ config('app.name') }}">
 
-                <h1>{{ __('Ordering Portal') }}</h1>
+                <h1>Ordering Portal</h1>
             </a>
 
             <h1 class="title">
@@ -39,9 +39,9 @@
                      alt="{{ config('app.name') }}">
             </a>
 
-            <h1>{{ __('Welcome to our ordering portal.') }}</h1>
+            <h1>Welcome to our ordering portal.</h1>
 
-            <p>{{ __('The updated site now incorporates a number of improved features that allow users to access new information directly and more easily.') }}</p>
+            <p>The updated site now incorporates a number of improved features that allow users to access new information directly and more easily.</p>
         </div>
     </main>
 </div>

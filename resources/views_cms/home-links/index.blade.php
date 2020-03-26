@@ -7,9 +7,9 @@
     <div class="px-6 pt-4 pb-6 xl:px-10 xl:pt-6 xl:pb-8 bg-white rounded-lg shadow">
         <div class="flex">
             <div class="w-1/4 mr-6">
-                <h5 class="font-medium text-lg mb-2">{{ __('Category Links') }}</h5>
+                <h5 class="font-medium text-lg mb-2">Category Links</h5>
                 <p class="text-gray-600 text-sm">
-                    {{ __('Category links that will link users directly to the given category level(s)') }}
+                    Category links that will link users directly to the given category level(s)
                 </p>
             </div>
             <div class="w-3/4">
@@ -21,7 +21,7 @@
 
         <div class="flex">
             <div class="w-1/4 mr-6">
-                <h5 class="font-medium text-lg mb-2">{{ __('Advertisements') }}</h5>
+                <h5 class="font-medium text-lg mb-2">Advertisements</h5>
                 <p class="text-gray-600 text-sm">
                     Advertisements are the images that are displayed down the left had side of the category home links on the home page.
                 </p>

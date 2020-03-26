@@ -4,9 +4,9 @@
 
 @section('content')
     <div class="w-full mb-5 text-center">
-        <h2 class="font-semibold tracking-widest">{{ __('Review Order') }}</h2>
+        <h2 class="font-semibold tracking-widest">Review Order</h2>
         <p class="font-thin">
-            {{ __('Review your order and re-order by copying to basket.') }}
+            Review your order and re-order by copying to basket.
         </p>
     </div>
 
@@ -17,39 +17,39 @@
         <div class="flex text-left mt-4 items-center">
             <div class="w-1/2">
                 <div class="flex">
-                    <div class="font-semibold">{{ __('Order Number') }}</div>
+                    <div class="font-semibold">Order Number</div>
                     <div class="pl-2">{{ $order->order_no }}</div>
                 </div>
 
                 <div class="flex">
-                    <div class="font-semibold">{{ __('Your Reference') }}</div>
+                    <div class="font-semibold">Your Reference</div>
                     <div class="pl-2">{{ $order->customer_order_no }}</div>
                 </div>
 
                 <div class="flex">
-                    <div class="font-semibold">{{ __('Delivery Service') }}</div>
+                    <div class="font-semibold">Delivery Service</div>
                     <div class="pl-2">{{ $order->delivery_service }}</div>
                 </div>
 
                 <div class="flex items-center">
-                    <div class="font-semibold">{{ __('Status') }}</div>
+                    <div class="font-semibold">Status</div>
                     <div class="pl-2"><span
                             class="badge badge-{{ str_replace(' ', '_', $order->status) }}">{{ $order->status }}</span>
                     </div>
                 </div>
 
                 <div class="flex mt-4">
-                    <div class="font-semibold">{{ __('Net Value') }}</div>
+                    <div class="font-semibold">Net Value</div>
                     <div class="pl-2">{{ currency($order->value, 2) }}</div>
                 </div>
 
                 <div class="flex">
-                    <div class="font-semibold">{{ __('VAT Value') }}</div>
+                    <div class="font-semibold">VAT Value</div>
                     <div class="pl-2">{{ currency($order->vat_value, 2) }}</div>
                 </div>
 
                 <div class="flex">
-                    <div class="font-semibold">{{ __('Total Value') }}</div>
+                    <div class="font-semibold">Total Value</div>
                     <div class="pl-2">{{ currency(($order->value + $order->vat_value), 2) }}</div>
                 </div>
             </div>
@@ -65,7 +65,7 @@
     </div>
 
     <div class="flex justify-between mb-3 mt-3">
-        <button class="button button-inverse" onclick="window.history.back();">{{ __('Back') }}</button>
+        <button class="button button-inverse" onclick="window.history.back();">Back</button>
 
         <div class="flex">
             @if(count($lines) > 0)
@@ -80,12 +80,12 @@
                            customer_order="{{ urlencode(trim($order->customer_order_no)) }}"></order-invoice>
 
             <a class="ml-2" href="{{ route('order-tracking.pdf', ['order' => encodeUrl($order->order_no)]) }}">
-                <button class="button button-primary">{{ __('Print Order Details') }}</button>
+                <button class="button button-primary">Print Order Details</button>
             </a>
         </div>
     </div>
 
-    <h2 class="font-semibold tracking-widest mt-3 mb-3">{{ __('Order Lines') }}</h2>
+    <h2 class="font-semibold tracking-widest mt-3 mb-3">Order Lines</h2>
 
     @if(count($lines) === 0)
         <div class="bg-white rounded-lg shadow p-4">
@@ -96,11 +96,11 @@
             <table>
                 <thead>
                 <tr>
-                    <th>{{ __('Product Code') }}</th>
-                    <th>{{ __('Name') }}</th>
-                    <th class="text-right">{{ __('Quantity') }}</th>
-                    <th class="text-right">{{ __('Net Price') }}</th>
-                    <th class="text-right">{{ __('Total Price') }}</th>
+                    <th>Product Code</th>
+                    <th>Name</th>
+                    <th class="text-right">Quantity</th>
+                    <th class="text-right">Net Price</th>
+                    <th class="text-right">Total Price</th>
                 </tr>
                 </thead>
                 <tbody>

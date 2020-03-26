@@ -26,7 +26,7 @@
                 </template>
 
                 <a href="#" class="block no-underline text-sm leading-loose rounded-lg px-2 py-1 hover:bg-gray-600"
-                   onclick="document.querySelector('#logout').submit()">{{ __('Logout') }}</a>
+                   onclick="document.querySelector('#logout').submit()">Logout</a>
 
                 <form id="logout" method="POST" action="{{ route('cms.logout') }}"></form>
             </dropdown>

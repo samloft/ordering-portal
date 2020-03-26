@@ -12,21 +12,21 @@
         </div>
     </div>
 
-    <p class="table-heading">{{ __('Outstanding Items') }}</p>
+    <p class="table-heading">Outstanding Items</p>
 
     <div class="small-print">
-        {{ __('The table below lists all items you have ordered that are on back order, please note there is a delay of up to 24 hours in the accuracy of our data.') }}
+        The table below lists all items you have ordered that are on back order, please note there is a delay of up to 24 hours in the accuracy of our data.
     </div>
 
     <table>
         <thead>
         <tr>
-            <th>{{ __('Order No.') }}</th>
-            <th>{{ __('Product Code') }}</th>
-            <th class="description">{{ __('Description') }}</th>
-            <th>{{ __('Ordered') }}</th>
-            <th class="outstanding">{{ __('Outstanding') }}</th>
-            <th>{{ __('Next Expecting') }}</th>
+            <th>Order No.</th>
+            <th>Product Code</th>
+            <th class="description">Description</th>
+            <th>Ordered</th>
+            <th class="outstanding">Outstanding</th>
+            <th>Next Expecting</th>
         </tr>
         </thead>
         <tbody>
