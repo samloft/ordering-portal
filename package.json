@@ -25,6 +25,7 @@
         "postcss-custom-properties": "^9.1.1",
         "postcss-import": "^12.0.1",
         "tailwindcss": "^1.2.0",
+        "turbolinks": "^5.2.0",
         "vue": "^2.6.11",
         "vue-flatpickr-component": "^8.1.5",
         "vue-sweetalert2": "^3.0.3",

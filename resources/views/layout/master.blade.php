@@ -9,8 +9,8 @@
     <link href="{{ mix('css/app-'.config('app.name').'.css') }}" rel="stylesheet">
 
     @yield ('styles')
-
-    <script src="https://unpkg.com/turbolinks"></script>
+    
+    <script src="{{ asset('js/turbo-links.js') }}"></script>
 </head>
 
 <body>
