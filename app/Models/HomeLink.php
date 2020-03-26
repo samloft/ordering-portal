@@ -110,9 +110,9 @@ class HomeLink extends Model
      */
     public static function destroy($id)
     {
-        //$link = static::show($id);
-        //
-        //Storage::disk('public')->delete('images/'.request('type').'/'.$link->image);
+        $link = static::show($id);
+
+        Storage::disk('public')->delete('images/'.request('type').'/'.$link->image);
 
         return self::where('id', $id)->delete();
     }
