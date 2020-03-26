@@ -21,7 +21,7 @@
             <div>{{ vat }}</div>
         </div>
         <hr class="mt-2 mb-2">
-        <div class="flex justify-between text-lg mb-2">
+        <div class="flex justify-between text-lg mb-2 font-semibold">
             <div>Order Total</div>
             <div>{{ total }}</div>
         </div>

@@ -11653,11 +11653,15 @@ var render = function() {
     _vm._v(" "),
     _c("hr", { staticClass: "mt-2 mb-2" }),
     _vm._v(" "),
-    _c("div", { staticClass: "flex justify-between text-lg mb-2" }, [
-      _c("div", [_vm._v("Order Total")]),
-      _vm._v(" "),
-      _c("div", [_vm._v(_vm._s(_vm.total))])
-    ])
+    _c(
+      "div",
+      { staticClass: "flex justify-between text-lg mb-2 font-semibold" },
+      [
+        _c("div", [_vm._v("Order Total")]),
+        _vm._v(" "),
+        _c("div", [_vm._v(_vm._s(_vm.total))])
+      ]
+    )
   ])
 }
 var staticRenderFns = []
