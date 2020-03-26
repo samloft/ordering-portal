@@ -3,13 +3,15 @@
 @section('page.title', 'Contact Us')
 
 @section('content')
-    <div class="map">
-        <iframe width="100%" height="300" id="gmap_canvas"
-                src="https://maps.google.com/maps?q=Scolmore%20international&t=&z=15&ie=UTF8&iwloc=&output=embed"
-                frameborder="0"
-                class="mb-3">
-        </iframe>
-    </div>
+    @if($map)
+        <div class="map">
+            <iframe width="100%" height="300" id="gmap_canvas"
+                    src="{{ $map }}"
+                    frameborder="0"
+                    class="mb-3">
+            </iframe>
+        </div>
+    @endif
 
     @include('layout.alerts')
 
