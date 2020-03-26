@@ -166,7 +166,7 @@ class Product extends Model
             if ($exists) {
                 return [
                     'found' => true,
-                    'image' => 'product_images/'.$product,
+                    'image' => '/product_images/'.$product,
                 ];
             }
         }
