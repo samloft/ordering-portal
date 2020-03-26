@@ -30,5 +30,19 @@
                 <home-links :list="{{ json_encode($adverts, true) }}" :topLevel="[]" :type="'Advertisement'"></home-links>
             </div>
         </div>
+
+        <hr class="mt-3 mb-3">
+
+        <div class="flex">
+            <div class="w-1/4 mr-6">
+                <h5 class="font-medium text-lg mb-2">Banners</h5>
+                <p class="text-gray-600 text-sm">
+                   Banners are displayed above category images, these can either point to a URL or a file.
+                </p>
+            </div>
+            <div class="w-3/4">
+                <home-links :list="{{ json_encode($banners, true) }}" :topLevel="[]" type="Banner"></home-links>
+            </div>
+        </div>
     </div>
 @endsection

@@ -1,3 +1,17 @@
+@if (count($links['banners']) > 0)
+    <div class="flex flex-wrap">
+        @foreach($links['banners'] as $banner)
+            <div class="{{ $banner['style'] }} mb-3 {{ $banner['style'] === 'w-1/2' ? 'px-3' : '' }}">
+                <a href="{{ $banner['file'] ? \Illuminate\Support\Facades\Storage::disk('public')->url('/files/'.$banner['file']) : $banner['link'] }}">
+                    <img class="shadow mx-auto"
+                         src="{{ \Illuminate\Support\Facades\Storage::disk('public')->url('/images/banner/'.$banner['image']) }}"
+                         alt="{{ $banner['name'] }}">
+                </a>
+            </div>
+        @endforeach
+    </div>
+@endif
+
 @if (count($links['categories']) > 0)
     <div class="flex flex-wrap">
         @foreach($links['categories'] as $category)

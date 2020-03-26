@@ -46,11 +46,22 @@ class HomeLink extends Model
 
         $category_link = new self;
 
+        if (request()->file('download-file')) {
+            $file_stored = static::storeDownloadFile(request()->file('download-file'));
+
+            if (! $file_stored['status']) {
+                return false;
+            }
+
+            $category_link->file = $file_stored['name'];
+        }
+
         $category_link->type = request('type');
         $category_link->name = request('type').'-'.request('name');
         $category_link->link = request('url');
         $category_link->position = request('position');
         $category_link->image = $stored['name'];
+        $category_link->style = request('style');
         $category_link->save();
 
         return $category_link;
@@ -102,6 +113,21 @@ class HomeLink extends Model
     }
 
     /**
+     * @param $file
+     *
+     * @return array
+     */
+    public static function storeDownloadFile($file): array
+    {
+        $name = $file->getClientOriginalName();
+
+        return [
+            'status' => Storage::disk('public')->put('/files/'.$name, File::get($file)),
+            'name' => $name,
+        ];
+    }
+
+    /**
      * Deletes the record with matching image for the given ID.
      *
      * @param $id
@@ -135,6 +161,14 @@ class HomeLink extends Model
     public static function adverts()
     {
         return self::where('type', 'advert')->orderBy('position', 'asc')->get();
+    }
+
+    /**
+     * @return \Illuminate\Database\Eloquent\Builder[]|\Illuminate\Database\Eloquent\Collection
+     */
+    public static function banners()
+    {
+        return self::where('type', 'banner')->orderBy('position', 'asc')->get();
     }
 
     /**

@@ -17,7 +17,8 @@
                 v-if="list.length > 0"
             >
                 <div
-                    class="w-1/5 px-3 my-3"
+                    class="px-3 my-3"
+                    :class="type === 'Banner' ? element.style : 'w-1/5'"
                     v-for="element in categories"
                     :key="element.position"
                 >
@@ -115,6 +116,41 @@
                         <span v-text="errors.get('url')" class="text-sm text-red-600"/>
                     </div>
 
+                    <div v-if="type === 'Banner'">
+                        <div class="flex items-center mb-3">
+                            <h4 class="flex-shrink-0 pr-4 bg-white text-sm leading-5 tracking-wider font-semibold uppercase text-gray-600">
+                                OR
+                            </h4>
+                            <div class="flex-1 border-t-2 border-gray-200"></div>
+                        </div>
+
+                        <div class="mb-3">
+                            <label>File</label>
+                            <input type="file" @change="fileAdded($event.target.files[0])" class="bg-gray-100" placeholder="Select a file">
+                            <span v-text="errors.get('file')" class="text-sm text-red-600"/>
+                        </div>
+
+                        <div class="relative mb-3">
+                            <label>Style</label>
+                            <select class="p-2 rounded border bg-gray-100 text-gray-600 appearance-none"
+                                    autocomplete="off"
+                                    v-model="linkData.style"
+                            >
+                                <option value="w-full">Full Width</option>
+                                <option value="w-1/2">Half Width</option>
+                            </select>
+                            <div
+                                class="pointer-events-none absolute inset-y-0 right-0 flex items-center px-3 pt-6 text-gray-700">
+                                <svg class="fill-current h-4 w-4" xmlns="http://www.w3.org/2000/svg"
+                                     viewBox="0 0 20 20">
+                                    <path
+                                        d="M9.293 12.95l.707.707L15.657 8l-1.414-1.414L10 10.828 5.757 6.586 4.343 8z"/>
+                                </svg>
+                            </div>
+                            <span v-text="errors.get('style')" class="text-sm text-red-600"/>
+                        </div>
+                    </div>
+
                     <div class="mb-3">
                         <label>Image File</label>
                         <label
@@ -131,7 +167,7 @@
                         <span v-text="errors.get('file')" class="text-sm text-red-600"/>
                     </div>
 
-                    <img v-if="imageFile" :src="imageFile" class="mb-3 shadow mx-auto" alt="Image Upload"/>
+                    <img v-if="imageFile" :src="imageFile" class="mb-3 shadow mx-auto max-h-64" alt="Image Upload"/>
 
                     <div class="mt-8 text-right">
                         <button @click="newLink = false" class="button button-danger">Cancel</button>
@@ -203,6 +239,9 @@
                 this.form.append('file', file);
                 this.imageFile = URL.createObjectURL(file);
             },
+            fileAdded(file) {
+                this.form.append('download-file', file);
+            },
             createNewLink() {
                 this.errors = new Errors;
                 this.linkData = {};
@@ -223,9 +262,13 @@
 
                     this.form.append('type', 'category');
                     this.form.append('url', urlSegment + urlSegment2 + urlSegment3);
-                } else {
+                } else if (this.type === 'Advertisement') {
                     this.form.append('type', 'advert');
                     this.form.append('url', this.linkData.url);
+                } else if (this.type === 'Banner') {
+                    this.form.append('type', 'banner');
+                    this.form.append('style', this.linkData.style);
+                    this.form.append('url', this.linkData.url ? this.linkData.url : 'file');
                 }
 
 

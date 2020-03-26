@@ -44,6 +44,7 @@ class AppServiceProvider extends ServiceProvider
 
         view()->composer('home.categories', static function ($view) {
             $links = [
+                'banners' => HomeLink::banners(),
                 'categories' => HomeLink::categories(),
             ];
 

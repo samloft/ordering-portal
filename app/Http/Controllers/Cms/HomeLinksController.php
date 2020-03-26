@@ -23,8 +23,9 @@ class HomeLinksController extends Controller
         $adverts = HomeLink::adverts();
         $category_top_level = Category::show(1);
         $categories = HomeLink::categories();
+        $banners = HomeLink::banners();
 
-        return view('home-links.index', compact('category_top_level', 'categories', 'adverts'));
+        return view('home-links.index', compact('category_top_level', 'categories', 'adverts', 'banners'));
     }
 
     /**
