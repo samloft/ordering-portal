@@ -31965,19 +31965,21 @@ h4 {
 }
 
 :root {
-  --background-primary-color: rgba(49, 49, 49, 1.0);
+  --background-primary-color: rgb(6, 70, 106);
   --background-primary-text: rgb(255, 255, 255);
-  --background-invert-color: rgba(92, 93, 95, 1.0);
+  --button-primary-color: rgb(8, 54, 84);
+  --button-primary-text: rgb(255, 255, 255);
+  --background-invert-color: rgb(6, 38, 58);
   --background-invert-text: rgb(255, 255, 255);
-  --button-primary-color: rgba(200, 220, 105, 1.0);
-  --button-primary-text: rgb(0, 0, 0);
-  --button-secondary-color: rgba(130, 202, 156, 1.0);
-  --button-secondary-text: rgb(0, 0, 0);
-  --button-inverse-color:rgba(128, 208, 216, 1.0);
-  --button-inverse-text: rgb(0, 0, 0);
-  --icon-primary: rgba(130, 202, 156, 1.0);
-  --icon-secondary: rgba(155, 239, 188, 0.63);
-  --primary-text: rgba(128, 208, 216, 1.0);
+  --button-secondary-color: rgb(8, 54, 84);
+  --button-secondary-text: rgb(255, 255, 255);
+  --button-inverse-color: rgb(8, 54, 84);
+  --button-inverse-text: rgb(255, 255, 255);
+  --primary-text: rgb(8, 54, 84);
+}
+
+img.logo {
+  height: 80px;
 }
 
 .categories-nav a {
@@ -32011,32 +32013,24 @@ h4 {
   font-size: 0.875rem;
 }
 
-.categories-nav .top-level:nth-child(1) {
-  background-color: #fef56c;
+.categories-nav .top-level:nth-child(odd) {
+  background-color: #c6dbe7;
 }
 
-.categories-nav .top-level:nth-child(2) {
-  background-color: #e5eb8b;
+.categories-nav .top-level:nth-child(even) {
+  background-color: #aac9db;
 }
 
-.categories-nav .top-level:nth-child(3) {
-  background-color: #c6e09f;
+footer {
+  background-color: #083654 !important;
 }
 
-.categories-nav .top-level:nth-child(4) {
-  background-color: #a7d8b8;
+.pagination ul .active a {
+  color: white !important;
 }
 
-.categories-nav .top-level:nth-child(5) {
-  background-color: #82ceca;
-}
-
-.categories-nav .top-level:nth-child(6) {
-  background-color: #68b9c4;
-}
-
-.categories-nav .top-level:nth-child(7) {
-  background-color: #00bac6;
+.icon .secondary {
+  fill: #06466a !important;
 }
 
 @media (min-width: 640px){
