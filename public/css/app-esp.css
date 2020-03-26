@@ -31999,6 +31999,16 @@ nav.menu-wrapper {
   background-color: #525251 !important;
 }
 
+nav.menu-wrapper .menu .menu-item a.active {
+  background-color: white !important;
+  color: #525251 !important;
+}
+
+nav.menu-wrapper .menu .menu-item a:hover {
+  background-color: white !important;
+  color: #525251 !important;
+}
+
 .categories-nav a {
   padding-top: 0.5rem;
   padding-bottom: 0.5rem;
