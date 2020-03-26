@@ -8,7 +8,6 @@ use App\Models\Product;
 use File;
 use Illuminate\Contracts\View\Factory;
 use Illuminate\Http\JsonResponse;
-use Illuminate\Http\Request;
 use Illuminate\View\View;
 use Storage;
 
@@ -51,15 +50,12 @@ class ProductImageController extends Controller
     /**
      * Upload product images.
      *
-     * @param Request $request
-     *
      * @return JsonResponse
      *
-     * @throws \Illuminate\Contracts\Filesystem\FileNotFoundException
      */
-    public function store(Request $request): JsonResponse
+    public function store(): JsonResponse
     {
-        $image = $request->file('file');
+        $image = request()->file('file');
 
         $name = $image->getClientOriginalName();
 
