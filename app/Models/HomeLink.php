@@ -35,7 +35,6 @@ class HomeLink extends Model
      *
      * @return \App\Models\HomeLink|bool
      *
-     * @throws \Illuminate\Contracts\Filesystem\FileNotFoundException
      */
     public static function store()
     {
@@ -61,8 +60,6 @@ class HomeLink extends Model
      * Update the given home link with new data.
      *
      * @return bool
-     *
-     * @throws \Illuminate\Contracts\Filesystem\FileNotFoundException
      */
     public static function edit(): bool
     {
@@ -94,13 +91,12 @@ class HomeLink extends Model
      *
      * @return array
      *
-     * @throws \Illuminate\Contracts\Filesystem\FileNotFoundException
      */
     public static function storeLinkImage($image, $type, $name): array
     {
         $extension = $image->getClientOriginalExtension();
         $image_name = $type.'-'.str::slug($name, '-').'.'.$extension;
-        $image_path = config('app.name').'/images/'.$type.'/'.$image_name;
+        $image_path = '/images/'.$type.'/'.$image_name;
 
         return ['status' => Storage::disk('public')->put($image_path, File::get($image)), 'name' => $image_name];
     }
