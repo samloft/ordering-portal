@@ -9,6 +9,8 @@
     <link href="{{ mix('css/app-'.config('app.name').'.css') }}" rel="stylesheet">
 
     @yield ('styles')
+
+    <script src="https://unpkg.com/turbolinks"></script>
 </head>
 
 <body>
@@ -58,7 +60,6 @@
     </div>
 
     @include('layout.footer')
-
 </div>
 
 <script type="text/javascript" src="{{ mix('js/app.js') }}"></script>
