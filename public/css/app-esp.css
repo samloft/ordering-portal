@@ -31978,8 +31978,21 @@ h4 {
   --primary-text: rgba(234, 25, 33, 1.0);
 }
 
+main.auth .auth-details {
+  background-color: #525251 !important;
+}
+
 header {
   background-color: white !important;
+}
+
+header .header-summary {
+  background-color: #8b989c !important;
+}
+
+header .header-summary .button {
+  background-color: #fffffe !important;
+  color: #b9c3c3 !important;
 }
 
 nav.menu-wrapper {
