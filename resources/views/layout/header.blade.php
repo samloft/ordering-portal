@@ -41,8 +41,10 @@
                                 </svg>
                             </div>
                             <div class="md:block ml-2 text-left">
-                                <span class="text-sm mr-1 font-thin">{{ auth()->user()->name }}</span>
-                                <div class="font-light">My Account</div>
+                                <span class="text-sm mr-1 font-thin font-medium block">{{ auth()->user()->name }}</span>
+                                <span class="text-xs mr-1 font-thin block leading-tight">{{ auth()->user()->customer->code }}</span>
+                                <span class="text-xs mr-1 font-thin block leading-tight">{{ auth()->user()->customer->name }}</span>
+{{--                                <div class="font-light">My Account</div>--}}
                             </div>
                             <div>
                                 <svg class="fill-current h-4 w-4 block opacity-50 ml-2"
