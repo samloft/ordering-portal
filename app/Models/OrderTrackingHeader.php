@@ -3,7 +3,6 @@
 namespace App\Models;
 
 use Carbon\Carbon;
-use Eloquent;
 use Illuminate\Contracts\Pagination\LengthAwarePaginator;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\HasMany;
@@ -13,7 +12,33 @@ use Illuminate\Support\Collection;
 /**
  * App\Models\OrderTrackingHeader.
  *
- * @mixin Eloquent
+ * @mixin \Eloquent
+ *
+ * @property string $order_no
+ * @property string $base_order
+ * @property string $customer_order_no
+ * @property string $status
+ * @property string $type
+ * @property string $customer_code
+ * @property string $invoice_customer
+ * @property \Illuminate\Support\Carbon $date_received
+ * @property \Illuminate\Support\Carbon $date_required
+ * @property \Illuminate\Support\Carbon $date_despatched
+ * @property \Illuminate\Support\Carbon $date_invoiced
+ * @property string $invoice_no
+ * @property string $delivery_address1
+ * @property string $delivery_address2
+ * @property string $delivery_address3
+ * @property string $delivery_address4
+ * @property string $delivery_address5
+ * @property float $value
+ * @property string $invoice_address_1
+ * @property string $invoice_address_2
+ * @property string $invoice_address_3
+ * @property string $invoice_address_4
+ * @property string $consignment
+ * @property float $vat_value
+ * @property string $delivery_service
  */
 class OrderTrackingHeader extends Model
 {
