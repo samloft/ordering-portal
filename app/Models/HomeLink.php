@@ -2,7 +2,6 @@
 
 namespace App\Models;
 
-use Eloquent;
 use File;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Database\Eloquent\Model;
@@ -10,25 +9,24 @@ use Illuminate\Support\Str;
 use Storage;
 
 /**
- * App\Models\HomeLink.
+ * App\Models\HomeLink
  *
- * @mixin Eloquent
+ * @mixin \Eloquent
+ *
+ * @property int $id
+ * @property string $type
+ * @property string $name
+ * @property string $image
+ * @property string $link
+ * @property string $file
+ * @property int $position
+ * @property string $style
+ * @property \Illuminate\Support\Carbon $created_at
+ * @property \Illuminate\Support\Carbon $updated_at
  */
 class HomeLink extends Model
 {
     protected $fillable = [];
-
-    /**
-     * Return row for the given ID.
-     *
-     * @param $id
-     *
-     * @return HomeLink|Model|object|null
-     */
-    public static function show($id)
-    {
-        return self::where('id', $id)->first();
-    }
 
     /**
      * Create a new home link.
@@ -64,31 +62,6 @@ class HomeLink extends Model
         $category_link->save();
 
         return $category_link;
-    }
-
-    /**
-     * Update the given home link with new data.
-     *
-     * @return bool
-     */
-    public static function edit(): bool
-    {
-        $data = [
-            'link' => request('link'),
-            'updated_at' => date('Y-m-d H:i:s'),
-        ];
-
-        if (request('image')) {
-            $stored = static::storeLinkImage(request()->file('image'), request('type'), request('name'));
-
-            if (! $stored['status']) {
-                return false;
-            }
-
-            $data['image'] = $stored['image'];
-        }
-
-        return self::where('id', request('id'))->update($data);
     }
 
     /**
@@ -131,18 +104,20 @@ class HomeLink extends Model
      * @param $id
      *
      * @return bool|int|null
+     *
+     * @throws \Exception
      */
     public static function destroy($id)
     {
-        $link = static::show($id);
+        $link = self::findOrFail($id);
 
         Storage::disk('public')->delete('images/'.request('type').'/'.$link->image);
 
-        return self::where('id', $id)->delete();
+        return $link->delete();
     }
 
     /**
-     * Return all the category links for the home page.
+     * List all the home links of type category.
      *
      * @return HomeLink[]|Collection
      */
@@ -152,7 +127,7 @@ class HomeLink extends Model
     }
 
     /**
-     * Return all the advert links for the home page.
+     * List all the home links of type advert.
      *
      * @return HomeLink[]|Collection
      */
@@ -162,6 +137,8 @@ class HomeLink extends Model
     }
 
     /**
+     * List all the home links of type banner.
+     *
      * @return \Illuminate\Database\Eloquent\Builder[]|\Illuminate\Database\Eloquent\Collection
      */
     public static function banners()
@@ -179,7 +156,10 @@ class HomeLink extends Model
     public static function updatePositions($items): bool
     {
         foreach ($items as $item) {
-            self::where('id', $item['id'])->update(['position' => $item['position']]);
+            $link = self::findOrFail($item['id']);
+
+            $link->position = $item['position'];
+            $link->save();
         }
 
         return true;
