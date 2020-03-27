@@ -30,7 +30,7 @@ class ProductImageController extends Controller
      */
     public function missingImages(): array
     {
-        $product_list = Price::productList();
+        $product_list = Price::products();
         $missing_images = [];
 
         foreach ($product_list as $product) {
