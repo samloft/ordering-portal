@@ -64,32 +64,6 @@ class User extends Authenticatable
         return $this->hasMany(UserCustomer::class);
     }
 
-    ///**
-    // * Create/update a site user.
-    // *
-    // * @param $user_details
-    // * @return mixed
-    // */
-    //public static function store($user_details)
-    //{
-    //    $user_details['customer_code'] = strtoupper($user_details['customer_code']);
-    //
-    //    if ($user_details['id']) {
-    //        if ($user_details['password']) {
-    //            $user_details['password'] = Hash::make($user_details['password']);
-    //        } else {
-    //            $user_details = array_filter($user_details);
-    //        }
-    //
-    //        return self::where('id', $user_details['id'])->update($user_details);
-    //    }
-    //
-    //    $user_details['password'] = Hash::make($user_details['password']);
-    //    $user_details['created_at'] = date('Y-m-d H:i:s');
-    //
-    //    return self::insert($user_details);
-    //}
-
     /**
      * Return all the users/customers.
      *
@@ -99,7 +73,7 @@ class User extends Authenticatable
      */
     public static function listAll($search): LengthAwarePaginator
     {
-        return self::where(static function ($query) use ($search) {
+        return self::where(static function (Eloquent $query) use ($search) {
             if ($search) {
                 $query->where('name', 'like', '%'.$search.'%');
                 $query->orWhere('email', 'like', '%'.$search.'%');
@@ -129,15 +103,4 @@ class User extends Authenticatable
     {
         return self::where('id', $id)->with('customers')->first();
     }
-
-    ///**
-    // * Delete the given user by ID.
-    // *
-    // * @param array|Collection|int $id
-    // * @return int|mixed
-    // */
-    //public static function destroy($id)
-    //{
-    //    return self::where('id', $id)->delete();
-    //}
 }

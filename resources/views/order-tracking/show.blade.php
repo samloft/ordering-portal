@@ -79,7 +79,7 @@
             <order-invoice order="{{ urlencode(trim($order->order_no)) }}"
                            customer_order="{{ urlencode(trim($order->customer_order_no)) }}"></order-invoice>
 
-            <a class="ml-2" href="{{ route('order-tracking.pdf', ['order' => encodeUrl($order->order_no)]) }}">
+            <a class="ml-2" href="{{ route('order-tracking.pdf', ['order' => encodeUrl($order->order_no)]) }}" target="_blank">
                 <button class="button button-primary">Print Order Details</button>
             </a>
         </div>

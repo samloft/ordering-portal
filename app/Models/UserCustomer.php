@@ -24,8 +24,7 @@ class UserCustomer extends Model
      */
     public static function check($customer_code)
     {
-        return self::where('customer_code', $customer_code)
-            ->where('user_id', auth()->user()->id)->first();
+        return self::where('customer_code', $customer_code)->where('user_id', auth()->user()->id)->first();
     }
 
     /**
@@ -47,35 +46,32 @@ class UserCustomer extends Model
      */
     public static function store(): JsonResponse
     {
-        //$id = request('id');
-        //$customer = request('customer');
-
         request()->validate([
             'code' => 'required|unique:user_customers,customer_code,NULL,id,user_id,'.request('id'),
         ]);
 
         $extra_customer = [
-            'user_id'       => request('id'),
+            'user_id' => request('id'),
             'customer_code' => request('code'),
-            'created_at'    => date('Y-m-d H:i:s'),
-            'updated_at'    => date('Y-m-d H:i:s'),
+            'created_at' => date('Y-m-d H:i:s'),
+            'updated_at' => date('Y-m-d H:i:s'),
         ];
 
         $created = self::insertGetId($extra_customer);
 
         if ($created) {
             return response()->json([
-                'success'       => true,
-                'errors'        => [],
-                'id'            => $created,
+                'success' => true,
+                'errors' => [],
+                'id' => $created,
                 'customer_code' => $extra_customer['customer_code'],
             ]);
         }
 
         return response()->json([
-            'success'       => false,
-            'errors'        => ['Unable to add extra customer, please try again'],
-            'id'            => null,
+            'success' => false,
+            'errors' => ['Unable to add extra customer, please try again'],
+            'id' => null,
             'customer_code' => null,
         ], 422);
     }

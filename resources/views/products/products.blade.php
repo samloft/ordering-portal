@@ -26,7 +26,7 @@
                     <div class="flex mb-2">
                         <div class="w-3/4">
                             <h2 class="font-semibold text-lg text-primary mb-2">
-                                <a class="flex items-center" href="/products/view/{{ encodeUrl($product->code) }}"
+                                <a class="flex items-center" href="{{ $product->path() }}"
                                    class="hover:underline">{{ $product->name }} @if($product->not_sold) <span
                                         class="badge badge-danger ml-3">Not Sold</span> @endif</a>
                             </h2>

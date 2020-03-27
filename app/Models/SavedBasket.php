@@ -14,6 +14,7 @@ use Illuminate\Database\Eloquent\Model;
 class SavedBasket extends Model
 {
     public $incrementing = false;
+
     public $timestamps = [];
 
     /**
@@ -27,9 +28,12 @@ class SavedBasket extends Model
     public static function list($search, $request)
     {
         if ($search) {
-            return self::select(['id', 'reference', 'created_at'])
-                ->where('customer_code', auth()->user()->customer->code)
-                ->when($request, static function ($query) use ($request) {
+            return self::select([
+                'id',
+                'reference',
+                'created_at',
+            ])->where('customer_code', auth()->user()->customer->code)->when($request, static function (Eloquent $query
+                ) use ($request) {
                     if ($request['reference']) {
                         $query->where('reference', 'like', '%'.$request['reference'].'%');
                     }
@@ -45,15 +49,18 @@ class SavedBasket extends Model
 
                         $query->where('created_at', '<=', $date_to);
                     }
-                })
-                ->groupBy(['id', 'reference', 'created_at'])
-                ->paginate(10);
+                })->groupBy(['id', 'reference', 'created_at'])->paginate(10);
         }
 
-        return self::select(['id', 'reference', 'created_at'])
-            ->where('customer_code', auth()->user()->customer->code)
-            ->groupBy(['id', 'reference', 'created_at'])
-            ->paginate(10);
+        return self::select([
+            'id',
+            'reference',
+            'created_at',
+        ])->where('customer_code', auth()->user()->customer->code)->groupBy([
+                'id',
+                'reference',
+                'created_at',
+            ])->paginate(10);
     }
 
     /**
@@ -65,15 +72,20 @@ class SavedBasket extends Model
      */
     public static function show($id)
     {
-        return self::select(['saved_baskets.product', 'name', 'quantity', 'id', 'reference', 'prices.price', 'created_at'])
-            ->where('saved_baskets.customer_code', auth()->user()->customer->code)
-            ->where('id', $id)
-            ->leftJoin('products', 'products.code', 'saved_baskets.product')
-            ->leftJoin('prices', static function ($join) {
+        return self::select([
+            'saved_baskets.product',
+            'name',
+            'quantity',
+            'id',
+            'reference',
+            'prices.price',
+            'created_at',
+        ])->where('saved_baskets.customer_code', auth()->user()->customer->code)->where('id', $id)->leftJoin('products', 'products.code', 'saved_baskets.product')->leftJoin('prices', static function (
+                $join
+            ) {
                 $join->on('prices.product', 'saved_baskets.product');
                 $join->where('prices.customer_code', auth()->user()->customer->code);
-            })
-            ->get();
+            })->get();
     }
 
     /**
@@ -97,8 +109,6 @@ class SavedBasket extends Model
      */
     public static function destroy($id): int
     {
-        return self::where('customer_code', auth()->user()->customer->code)
-            ->where('id', $id)
-            ->delete();
+        return self::where('customer_code', auth()->user()->customer->code)->where('id', $id)->delete();
     }
 }
