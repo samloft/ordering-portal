@@ -13,6 +13,21 @@ use Illuminate\Notifications\Notifiable;
  * App\Models\User.
  *
  * @mixin Eloquent
+ *
+ * @property int $id
+ * @property string $customer_code
+ * @property string $email
+ * @property string $password
+ * @property \Illuminate\Support\Carbon $password_updated
+ * @property string $remember_token
+ * @property string $name
+ * @property string $telephone
+ * @property string $mobile
+ * @property int $admin
+ * @property int $can_order
+ * @property stirng $api_token
+ * @property \Illuminate\Support\Carbon $created_at
+ * @property \Illuminate\Support\Carbon $updated_at
  */
 class User extends Authenticatable
 {
@@ -45,6 +60,8 @@ class User extends Authenticatable
     ];
 
     /**
+     * Return the delivery addresses for the current user.
+     *
      * @return HasMany
      */
     public function addresses(): HasMany
@@ -63,13 +80,13 @@ class User extends Authenticatable
     }
 
     /**
-     * Return all the users/customers.
+     * Return all the users/customers with optional search parameters.
      *
      * @param $search
      *
      * @return LengthAwarePaginator
      */
-    public static function listAll($search): LengthAwarePaginator
+    public static function list($search): LengthAwarePaginator
     {
         return self::where(static function ($query) use ($search) {
             if ($search) {
@@ -78,16 +95,6 @@ class User extends Authenticatable
                 $query->orWhere('customer_code', 'like', '%'.$search.'%');
             }
         })->orderBy('name')->with('customers')->paginate(10);
-    }
-
-    /**
-     * Return a count of all the current users.
-     *
-     * @return int
-     */
-    public static function countAll(): int
-    {
-        return self::count();
     }
 
     /**

@@ -22,7 +22,7 @@ class HomeController extends Controller
     public function index()
     {
         $stats = [
-            'users' => User::countAll(),
+            'users' => User::count(),
             'orders-today' => OrderHeader::where('created_at', Carbon::today())->count(),
             'pending-orders' => OrderHeader::where('imported', false)->orderBy('created_at', 'asc')->get(),
         ];

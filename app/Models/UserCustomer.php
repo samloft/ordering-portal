@@ -9,13 +9,13 @@ use Illuminate\Support\Collection;
 /**
  * App\Models\UserCustomer.
  *
+ * @mixin \Eloquent
+ *
  * @property int $id
  * @property int $user_id
  * @property string $customer_code
  * @property \Illuminate\Support\Carbon $created_at
  * @property \Illuminate\Support\Carbon $updated_at
- *
- * @mixin \Eloquent
  */
 class UserCustomer extends Model
 {
