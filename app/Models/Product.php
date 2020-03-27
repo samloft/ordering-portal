@@ -37,7 +37,6 @@ use Storage;
  * @property int $width
  * @property int $height
  * @property string $luckins_code
- *
  */
 class Product extends Model
 {

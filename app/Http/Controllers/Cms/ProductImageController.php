@@ -51,7 +51,6 @@ class ProductImageController extends Controller
      * Upload product images.
      *
      * @return JsonResponse
-     *
      */
     public function store(): JsonResponse
     {
