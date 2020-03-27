@@ -3,9 +3,9 @@ const mix = require('laravel-mix');
 mix.options({
     processCssUrls: false,
     postCss: [
-        // require('postcss-import'),
+        require('postcss-import'),
         require('tailwindcss')('tailwind.config.js'),
-        // require('postcss-custom-properties')
+        require('postcss-custom-properties')
     ]
 });
 

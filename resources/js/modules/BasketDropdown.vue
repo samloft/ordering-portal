@@ -4,7 +4,7 @@
             <div class="relative">
                 <span v-if="basketItems > 0" class="badge-basket">{{ basketItems }}</span>
                 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"
-                     class="w-10 icon icon-shopping-cart">
+                     class="w-10 h-10 icon icon-shopping-cart">
                     <path class="primary"
                           d="M7 4h14a1 1 0 0 1 .9 1.45l-4 8a1 1 0 0 1-.9.55H7a1 1 0 0 1-1-1V5a1 1 0 0 1 1-1z"/>
                     <path class="secondary"

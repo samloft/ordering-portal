@@ -10,7 +10,7 @@
     }
 
     .alert-icon {
-        @apply .w-8 .mr-4 .my-1;
+        @apply .w-8 .h-8 .mr-4 .my-1;
     }
 
     .alert-title {
@@ -50,11 +50,11 @@
     @apply .bg-blue-100 .border-blue-500 .text-blue-500;
 
     .primary {
-        @apply .text-blue-200;
+        @apply .text-blue-200 .fill-current;
     }
 
     .secondary {
-        @apply .text-blue-500;
+        @apply .text-blue-500 .fill-current;
     }
 }
 
