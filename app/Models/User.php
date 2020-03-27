@@ -73,7 +73,7 @@ class User extends Authenticatable
      */
     public static function listAll($search): LengthAwarePaginator
     {
-        return self::where(static function (Eloquent $query) use ($search) {
+        return self::where(static function ($query) use ($search) {
             if ($search) {
                 $query->where('name', 'like', '%'.$search.'%');
                 $query->orWhere('email', 'like', '%'.$search.'%');

@@ -43,10 +43,10 @@ class OrderTrackingHeader extends Model
     public static function list($search, $request): LengthAwarePaginator
     {
         if ($search) {
-            return self::where('customer_code', auth()->user()->customer->code)->when($request, static function (Eloquent $query
+            return self::where('customer_code', auth()->user()->customer->code)->when($request, static function ($query
             ) use ($request) {
                 if ($request->keyword) {
-                    $query->where(static function (Eloquent $query) use ($request) {
+                    $query->where(static function ($query) use ($request) {
                         $query->where('order_no', 'like', '%'.$request->keyword.'%')->orWhere('customer_order_no', 'like', '%'.$request->keyword.'%');
                     });
                 }

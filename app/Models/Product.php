@@ -6,12 +6,11 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Storage;
-use Eloquent;
 
 /**
  * App\Models\Product.
  *
- * @mixin Eloquent
+ * @mixin \Eloquent
  *
  * @property string $code
  * @property string $type
