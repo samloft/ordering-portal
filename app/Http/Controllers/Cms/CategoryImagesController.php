@@ -5,10 +5,10 @@ namespace App\Http\Controllers\Cms;
 use App\Http\Controllers\Controller;
 use App\Models\Category;
 use App\Models\CategoryImage;
-use Illuminate\Http\JsonResponse;
-use Storage;
 use File;
+use Illuminate\Http\JsonResponse;
 use Illuminate\Support\Facades\Cache;
+use Storage;
 
 class CategoryImagesController extends Controller
 {

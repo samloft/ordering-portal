@@ -18,7 +18,6 @@ class ProductDataController extends Controller
         $product_data = GlobalSettings::productData();
 
         if ($product_data['data'] || $product_data['prices']) {
-
             $brands = $product_data['prices'] ? Category::brand() : [];
 
             return view('product-data.index', compact('product_data', 'brands'));

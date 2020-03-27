@@ -1,8 +1,6 @@
 <?php
 
 use Illuminate\Database\Migrations\Migration;
-use Illuminate\Database\Schema\Blueprint;
-use Illuminate\Support\Facades\Schema;
 
 class AddMaintenanceToGlobalsTable extends Migration
 {
@@ -17,7 +15,7 @@ class AddMaintenanceToGlobalsTable extends Migration
             'key' => 'maintenance',
             'value' => json_encode([
                 'enabled' => false,
-                'message' => ''
+                'message' => '',
             ], true),
             'created_at' => date('Y-m-d H:i:s'),
         ]);

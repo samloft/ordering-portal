@@ -34,7 +34,6 @@ class HomeLink extends Model
      * Create a new home link.
      *
      * @return \App\Models\HomeLink|bool
-     *
      */
     public static function store()
     {
@@ -101,7 +100,6 @@ class HomeLink extends Model
      * @param $name
      *
      * @return array
-     *
      */
     public static function storeLinkImage($image, $type, $name): array
     {
