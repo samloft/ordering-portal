@@ -1,6 +1,6 @@
 <template>
     <div>
-        <form method="POST" action="/account/customer/change" ref="changeCustomer">
+        <form method="POST" action="/account/customer/change" ref="changeCustomer" class="m-0">
 
             <div v-if="user.admin">
                 <div class="relative">

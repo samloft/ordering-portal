@@ -6,9 +6,9 @@
 
     @endif
 
-    <h4>Search</h4>
+    <h4 class="mt-4">Search</h4>
 
-    <form class="w-100" action="{{ route('products.search') }}" method="get">
+    <form class="w-100" action="{{ route('products.search') }}" method="get" class="m-0">
         <div class="relative">
             <input type="text" class="form-control" name="query" autocomplete="off" required>
             <button class="absolute inset-y-0 right-0 flex items-center px-3 text-gray-600 hover:opacity-50">
@@ -21,11 +21,11 @@
         </div>
     </form>
 
-    <h4>Quick Buy</h4>
+    <h4 class="mt-4">Quick Buy</h4>
 
-    <quick-buy class="mb-4"></quick-buy>
+    <quick-buy></quick-buy>
 
-    <h4>Categories</h4>
+    <h4 class="mt-4">Categories</h4>
 
     <ul class="categories-nav">
         @foreach($category_list as $key => $category)
