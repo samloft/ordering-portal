@@ -170,7 +170,7 @@ class AddressController extends Controller
 
         $this->tempAddress($address);
 
-        return redirect(route('checkout'));
+        return redirect(route('checkout', ['account' => true]));
     }
 
     /**

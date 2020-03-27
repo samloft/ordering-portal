@@ -25,7 +25,7 @@
     @endif
 
     <div class="flex justify-between">
-        <a href="{{ $checkout ? route('checkout') : route('account') }}">
+        <a href="{{ $checkout ? route('checkout', ['account' => true]) : route('account') }}">
             <button class="button button-inverse">Cancel</button>
         </a>
         <a href="@if($checkout) {{ route('account.address.create', ['checkout' => $checkout]) }} @else {{ route('account.address.create') }} @endif">

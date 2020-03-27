@@ -17,12 +17,12 @@
 
                     @if (session('address'))
                         <div class="w-3/4 text-center bg-gray-200 p-4 rounded mx-auto">
-                            <div>{{ session('address.address_details.company_name') }}</div>
-                            <div>{{ session('address.address_details.address_2') }}</div>
-                            <div>{{ session('address.address_details.address_3') }}</div>
-                            <div>{{ session('address.address_details.address_4') }}</div>
-                            <div>{{ session('address.address_details.address_5') }}</div>
-                            <div>{{ session('address.address_details.postcode') }}</div>
+                            <div>{{ session('address.company_name') }}</div>
+                            <div>{{ session('address.address_line_2') }}</div>
+                            <div>{{ session('address.address_line_3') }}</div>
+                            <div>{{ session('address.address_line_4') }}</div>
+                            <div>{{ session('address.address_line_5') }}</div>
+                            <div>{{ session('address.post_code') }}</div>
                         </div>
                     @elseif ($default_address)
                         <div class="w-3/4 text-center bg-gray-200 p-4 rounded mx-auto">
@@ -174,11 +174,12 @@
         </div>
     </form>
 
-    <small-order-notice
-        threshold="{{ $basket['summary']['small_order_rules']['threshold'] }}"
-        charge="{{ $basket['summary']['small_order_rules']['charge'] }}"
-        goods-total="{{ preg_replace('/[^0-9.]/', '', $basket['summary']['goods_total']) }}"
-        message="@if($basket['summary']['small_order_rules']['exclude_collection'] && $basket['summary']['small_order_rules']['exclude_charged_delivery'])
+    @if(!$account)
+        <small-order-notice
+            threshold="{{ $basket['summary']['small_order_rules']['threshold'] }}"
+            charge="{{ $basket['summary']['small_order_rules']['charge'] }}"
+            goods-total="{{ preg_replace('/[^0-9.]/', '', $basket['summary']['goods_total']) }}"
+            message="@if($basket['summary']['small_order_rules']['exclude_collection'] && $basket['summary']['small_order_rules']['exclude_charged_delivery'])
                 small order charge, unless you are collecting your order or paying a delivery charge.
             @elseif ($basket['summary']['small_order_rules']['exclude_collection'])
                 small order charge, unless you are collecting your order.
@@ -187,7 +188,8 @@
             @else
                 small order charge.
             @endif"
-        currency="{{ currencySymbol() }}"
-        validation-errors="{{ !$errors->isEmpty() }}"
-    ></small-order-notice>
+            currency="{{ currencySymbol() }}"
+            validation-errors="{{ !$errors->isEmpty() }}"
+        ></small-order-notice>
+    @endif
 @endsection

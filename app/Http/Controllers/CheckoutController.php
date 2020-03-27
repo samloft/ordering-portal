@@ -22,8 +22,9 @@ class CheckoutController extends Controller
     public function index()
     {
         $delivery_methods = DeliveryMethod::show();
-        $basket = Basket::show(old('shipping') ?: 'HHH');
+        $basket = Basket::show(old('shipping') ?: 'HHHH');
         $checkout_notice = GlobalSettings::checkoutNotice();
+        $account = request('account');
 
         if (! auth()->user()->can_order) {
             return redirect(route('basket'))->with('error', 'You do not have permission to place orders, if you believe this is in error, please contact the sales office');
@@ -35,7 +36,7 @@ class CheckoutController extends Controller
 
         $default_address = Address::getDefault();
 
-        return view('checkout.index', compact('default_address', 'basket', 'delivery_methods', 'checkout_notice'));
+        return view('checkout.index', compact('default_address', 'basket', 'delivery_methods', 'checkout_notice', 'account'));
     }
 
     /**
