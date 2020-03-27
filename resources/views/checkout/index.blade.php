@@ -187,7 +187,7 @@
             @else
                 small order charge.
             @endif"
-        currency="{{ currency() }}"
+        currency="{{ currencySymbol() }}"
         validation-errors="{{ !$errors->isEmpty() }}"
     ></small-order-notice>
 @endsection

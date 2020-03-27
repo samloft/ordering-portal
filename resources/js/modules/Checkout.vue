@@ -7,7 +7,7 @@
                 <div class="absolute inset-0 bg-gray-500 opacity-75"></div>
             </div>
 
-            <div class="bg-white rounded-lg px-4 pt-5 pb-4 overflow-hidden shadow-xl transform transition-all sm:max-w-sm sm:w-full sm:p-6">
+            <div class="bg-white z-50 rounded-lg px-4 pt-5 pb-4 overflow-hidden shadow-xl transform transition-all sm:max-w-sm sm:w-full sm:p-6">
                 <div>
                     <div class="mx-auto flex items-center justify-center h-24 w-24 rounded-full bg-green-100">
                         <svg class="h-12 w-12 text-green-600" stroke="currentColor" fill="none" viewBox="0 0 24 24">

@@ -11,6 +11,28 @@
  */
 function currency($value = null, $decimals = 4)
 {
+    $currency_code = currencySymbol();
+
+    $value_output = $value ? number_format($value, $decimals) : number_format(0, 2);
+
+    return $currency_code.$value_output;
+}
+
+/**
+ * Remove and none numbers or commas or digits from a value and
+ * return it as a float.
+ *
+ * @param $value
+ *
+ * @return float
+ */
+function removeCurrencySymbol($value)
+{
+    return (float) preg_replace('/[^0-9.]/', '', $value);
+}
+
+function currencySymbol()
+{
     $currency = auth()->user()->currency;
 
     switch ($currency) {
@@ -30,20 +52,5 @@ function currency($value = null, $decimals = 4)
             $currency_code = '£';
     }
 
-    $value_output = $value ? number_format($value, $decimals) : '';
-
-    return $currency_code.$value_output;
-}
-
-/**
- * Remove and none numbers or commas or digits from a value and
- * return it as a float.
- *
- * @param $value
- *
- * @return float
- */
-function removeCurrencySymbol($value)
-{
-    return (float) preg_replace('/[^0-9.]/', '', $value);
+    return $currency_code;
 }
