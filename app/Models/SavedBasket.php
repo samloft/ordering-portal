@@ -3,13 +3,20 @@
 namespace App\Models;
 
 use Carbon\Carbon;
-use Eloquent;
 use Illuminate\Database\Eloquent\Model;
 
 /**
  * App\Models\SavedBasket.
  *
- * @mixin Eloquent
+ * @mixin \Eloquent
+ *
+ * @property string $id
+ * @property string $customer_code
+ * @property int $user_id
+ * @property string $reference
+ * @property string $product
+ * @property int $quantity
+ * @property \Illuminate\Support\Carbon $created_at
  */
 class SavedBasket extends Model
 {
@@ -18,7 +25,7 @@ class SavedBasket extends Model
     public $timestamps = [];
 
     /**
-     * Return the results for the customers saved baskets.
+     * Return the results for the customers saved baskets, with optional search.
      *
      * @param $search
      * @param $request
