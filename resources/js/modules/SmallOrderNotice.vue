@@ -38,7 +38,7 @@
                                     <p class="text-sm leading-5 text-gray-500">
                                         You only need to add
                                         <span
-                                            class="font-semibold">{{ currency + (threshold - goodsTotal) }}</span>
+                                            class="font-semibold">{{ currency + (threshold - goodsTotal).toFixed(2) }}</span>
                                         worth of products to avoid this charge.
                                     </p>
                                 </div>
