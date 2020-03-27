@@ -85,7 +85,7 @@
                         <td>{{ $order->order_no }}</td>
                         <td>{{ $order->customer_order_no }}</td>
                         <td><span
-                                class="badge badge-{{ str_replace(' ', '_', $order->status) }}">{{ $order->status }}</span>
+                                class="badge badge-{{ str_replace(' ', '_', strtolower($order->status)) }}">{{ $order->status }}</span>
                         </td>
                         <td>{{ \Carbon\Carbon::parse($order->date_received)->format('d/m/Y') }}</td>
                         <td class="text-right">{{ currency($order->value, 2) }}</td>
