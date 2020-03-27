@@ -34,7 +34,7 @@
                 <div class="flex items-center">
                     <div class="font-semibold">Status</div>
                     <div class="pl-2"><span
-                            class="badge badge-{{ str_replace(' ', '_', $order->status) }}">{{ $order->status }}</span>
+                            class="badge badge-{{ str_replace(' ', '_', strtolower($order->status)) }}">{{ $order->status }}</span>
                     </div>
                 </div>
 
