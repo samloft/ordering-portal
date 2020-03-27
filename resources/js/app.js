@@ -23,6 +23,8 @@ Vue.component('delivery-method', require('./modules/DeliveryMethod.vue').default
 Vue.component('checkout', require('./modules/Checkout.vue').default);
 Vue.component('submit-button', require('./modules/Button.vue').default);
 Vue.component('product-data', require('./modules/ProductData.vue').default);
+Vue.component('small-order-notice', require('./modules/SmallOrderNotice.vue').default);
+Vue.component('fade-transition', require('./modules/FadeTransition.vue').default);
 
 window.Event = new Vue();
 

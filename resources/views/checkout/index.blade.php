@@ -111,7 +111,7 @@
                     <div class="flex mb-3">
                         <label class="checkbox flex items-center">
                             <input type="checkbox" name="terms" class="form-checkbox"
-                                   {{ old('terms') ? 'checked' : '' }} autocomplete="off" >
+                                   {{ old('terms') ? 'checked' : '' }} autocomplete="off">
                             <span class="ml-2">I have read and agree to the <a href="{{ route('support.terms') }}"
                                                                                class="underline" target="_blank">terms & conditions</a>
                             </span>
@@ -173,4 +173,21 @@
             <checkout></checkout>
         </div>
     </form>
+
+    <small-order-notice
+        threshold="{{ $basket['summary']['small_order_rules']['threshold'] }}"
+        charge="{{ $basket['summary']['small_order_rules']['charge'] }}"
+        goods-total="{{ preg_replace('/[^0-9.]/', '', $basket['summary']['goods_total']) }}"
+        message="@if($basket['summary']['small_order_rules']['exclude_collection'] && $basket['summary']['small_order_rules']['exclude_charged_delivery'])
+                small order charge, unless you are collecting your order or paying a delivery charge.
+            @elseif ($basket['summary']['small_order_rules']['exclude_collection'])
+                small order charge, unless you are collecting your order.
+            @elseif ($basket['summary']['small_order_rules']['exclude_charged_delivery'])
+                small order charge, unless you are paying a delivery charge.
+            @else
+                small order charge.
+            @endif"
+        currency="{{ currency() }}"
+        validation-errors="{{ !$errors->isEmpty() }}"
+    ></small-order-notice>
 @endsection
