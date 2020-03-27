@@ -34,22 +34,22 @@ class SavedBasket extends Model
                 'created_at',
             ])->where('customer_code', auth()->user()->customer->code)->when($request, static function (Eloquent $query
                 ) use ($request) {
-                    if ($request['reference']) {
-                        $query->where('reference', 'like', '%'.$request['reference'].'%');
-                    }
+                if ($request['reference']) {
+                    $query->where('reference', 'like', '%'.$request['reference'].'%');
+                }
 
-                    if ($request['date_from']) {
-                        $date_from = Carbon::createFromFormat('d/m/Y', $request['date_from'])->format('Y-m-d');
+                if ($request['date_from']) {
+                    $date_from = Carbon::createFromFormat('d/m/Y', $request['date_from'])->format('Y-m-d');
 
-                        $query->where('created_at', '>=', $date_from);
-                    }
+                    $query->where('created_at', '>=', $date_from);
+                }
 
-                    if ($request['date_to']) {
-                        $date_to = Carbon::createFromFormat('d/m/Y', $request['date_to'])->format('Y-m-d');
+                if ($request['date_to']) {
+                    $date_to = Carbon::createFromFormat('d/m/Y', $request['date_to'])->format('Y-m-d');
 
-                        $query->where('created_at', '<=', $date_to);
-                    }
-                })->groupBy(['id', 'reference', 'created_at'])->paginate(10);
+                    $query->where('created_at', '<=', $date_to);
+                }
+            })->groupBy(['id', 'reference', 'created_at'])->paginate(10);
         }
 
         return self::select([
@@ -57,10 +57,10 @@ class SavedBasket extends Model
             'reference',
             'created_at',
         ])->where('customer_code', auth()->user()->customer->code)->groupBy([
-                'id',
-                'reference',
-                'created_at',
-            ])->paginate(10);
+            'id',
+            'reference',
+            'created_at',
+        ])->paginate(10);
     }
 
     /**
@@ -83,9 +83,9 @@ class SavedBasket extends Model
         ])->where('saved_baskets.customer_code', auth()->user()->customer->code)->where('id', $id)->leftJoin('products', 'products.code', 'saved_baskets.product')->leftJoin('prices', static function (
                 $join
             ) {
-                $join->on('prices.product', 'saved_baskets.product');
-                $join->where('prices.customer_code', auth()->user()->customer->code);
-            })->get();
+            $join->on('prices.product', 'saved_baskets.product');
+            $join->where('prices.customer_code', auth()->user()->customer->code);
+        })->get();
     }
 
     /**

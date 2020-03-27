@@ -2,11 +2,11 @@
 
 namespace App\Models;
 
+use Eloquent;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Storage;
-use Eloquent;
 
 /**
  * App\Models\Product.
@@ -38,7 +38,6 @@ use Eloquent;
  * @property int $width
  * @property int $height
  * @property string $luckins_code
- *
  */
 class Product extends Model
 {
