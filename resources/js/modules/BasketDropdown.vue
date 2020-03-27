@@ -18,7 +18,7 @@
         </div>
 
         <div @mouseenter="mouseOver" @mouseleave="mouseOut">
-            <slot name="basket_button"/>
+            <slot name="basket-button"/>
 
             <div class="absolute pt-4">
                 <div v-show="dropdown" class="basket-dropdown">
@@ -51,6 +51,10 @@
                     <div class="basket-dropdown-message" v-text="dropdown_message"></div>
                 </div>
             </div>
+        </div>
+
+        <div v-if="basketItems">
+            <slot name="checkout-button"/>
         </div>
     </div>
 </template>
@@ -123,19 +127,19 @@
         mounted() {
             var self = this;
 
-            Event.$on('product-added', function(data) {
-                this.dropdown_message = 'Has been added to your basket';
-                this.dropdownBasket(data);
-                this.basketSummary();
+            Event.$on('product-added', function (data) {
+                self.dropdown_message = 'Has been added to your basket';
+                self.dropdownBasket(data);
+                self.basketSummary();
             });
 
-            Event.$on('product-updated', function(data) {
-                if(data.product) {
-                    this.dropdown_message = 'Has been updated';
-                    this.dropdownBasket(data);
+            Event.$on('product-updated', function (data) {
+                if (data.product) {
+                    self.dropdown_message = 'Has been updated';
+                    self.dropdownBasket(data);
                 }
 
-                this.basketSummary();
+                self.basketSummary();
             });
 
             this.basketSummary();

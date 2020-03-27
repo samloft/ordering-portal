@@ -18,16 +18,18 @@
                 <div class="flex md:flex md:items-center mr-2">
 
                     <basket-dropdown>
-                        <template v-slot:basket_button>
+                        <template v-slot:basket-button>
                             <a href="{{ route('basket') }}">
                                 <button class="button button-secondary mr-2">Basket</button>
                             </a>
                         </template>
-                    </basket-dropdown>
 
-                    <a href="{{ route('checkout') }}">
-                        <button class="button button-primary">Checkout</button>
-                    </a>
+                        <template v-slot:checkout-button>
+                            <a href="{{ route('checkout') }}">
+                                <button class="button button-primary">Checkout</button>
+                            </a>
+                        </template>
+                    </basket-dropdown>
                 </div>
 
                 <dropdown align="right">
