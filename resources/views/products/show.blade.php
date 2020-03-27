@@ -143,25 +143,25 @@
             @endif
 
             <div class="mt-5">
-                @if($product->length)
+                @if($product->length > 0)
                     <div class="flex border-b border-primary mb-3">
                         <div class="w-1/3 text-gray-400">Length (mm):</div>
                         <div>{{ $product->length }}</div>
                     </div>
                 @endif
-                @if($product->width)
+                @if($product->width > 0)
                     <div class="flex border-b border-primary mb-3">
                         <div class="w-1/3 text-gray-400">Width (mm):</div>
                         <div>{{ $product->width }}</div>
                     </div>
                 @endif
-                @if($product->height)
+                @if($product->height > 0)
                     <div class="flex border-b border-primary mb-3">
                         <div class="w-1/3 text-gray-400">Height (mm):</div>
                         <div>{{ $product->height }}</div>
                     </div>
                 @endif
-                @if($product->net_weight)
+                @if($product->net_weight > 0)
                     <div class="flex border-b border-primary mb-3">
                         <div class="w-1/3 text-gray-400">Weight (kg):</div>
                         <div>{{ $product->net_weight }}</div>
