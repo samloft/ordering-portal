@@ -8,7 +8,7 @@
 
         <form class="m-0" method="get" action="">
             <div class="mb-4">
-                <label class="text-sm font-medium">Keyword Search'</label>
+                <label class="text-sm font-medium">Keyword Search</label>
                 <input class="bg-gray-100 mt-1"
                        value="{{ old('search') }}"
                        name="search"
@@ -23,6 +23,8 @@
             </div>
         </form>
     </div>
+
+    @include('layout.alerts')
 
     <div class="flex flex-col">
         <div class="-my-2 py-2 overflow-x-auto sm:-mx-6 sm:px-6 lg:-mx-8 lg:px-8">
@@ -55,19 +57,19 @@
                                 <div class="text-sm leading-5 text-gray-500">{{ $order->customer_code }}</div>
                             </td>
                             <td class="px-6 py-4 whitespace-no-wrap border-b border-gray-200">
-                                <div class="text-sm leading-5 text-gray-500">{{ $order->value }}</div>
+                                <div class="text-sm leading-5 text-gray-500">{{ currency($order->value, 2) }}</div>
                             </td>
                             <td class="px-6 py-4 whitespace-no-wrap border-b border-gray-200">
-              <span class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-green-100 text-green-800">
-                {{ $order->delivery_method }}
-              </span>
+                              <span class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-green-100 text-green-800">
+                                {{ $order->delivery_method }}
+                              </span>
                             </td>
                             <td class="px-6 py-4 whitespace-no-wrap border-b border-gray-200 text-sm leading-5 text-gray-500">
                                 {{ \Carbon\Carbon::parse($order->created_at)->format('d-m-Y H:i:s') }}
                             </td>
                             <td class="px-6 py-4 whitespace-no-wrap text-right border-b border-gray-200 text-sm leading-5 font-medium">
-                                <a href="#"
-                                   class="text-indigo-600 hover:text-indigo-900 focus:outline-none focus:underline">Edit</a>
+                                <a href="{{ route('cms.orders.import', ['order_number' => $order->order_number]) }}"
+                                   class="text-indigo-600 hover:text-indigo-900 focus:outline-none focus:underline">Re-Import</a>
                             </td>
                         </tr>
                     @endforeach

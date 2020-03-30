@@ -36,6 +36,10 @@ class OrderHeader extends Model
 {
     protected $table = 'order_header';
 
+    public $incrementing = false;
+
+    public $primaryKey = 'order_number';
+
     /**
      * The attributes that are mass assignable.
      *

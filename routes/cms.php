@@ -28,6 +28,7 @@ Route::group(['middleware' => 'auth:admin'], static function () {
 
     Route::group(['prefix' => 'orders'], static function () {
         Route::get('/', 'Cms\OrdersController@index')->name('cms.orders');
+        Route::get('re-import/{order_number}', 'Cms\OrdersController@markForImport')->name('cms.orders.import');
     });
 
     Route::group(['prefix' => 'site-users'], static function () {
