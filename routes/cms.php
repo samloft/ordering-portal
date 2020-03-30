@@ -120,6 +120,10 @@ Route::group(['middleware' => 'auth:admin'], static function () {
         Route::delete('{deliveryMethod}', 'Cms\DeliveryMethodsController@destroy')->name('cms.delivery-methods.delete');
     });
 
+    Route::group(['prefix' => 'promotions'], static function () {
+        Route::get('/', 'Cms\PromotionController@index')->name('cms.promotions');
+    });
+
     Route::group(['prefix' => 'product-images'], static function () {
         Route::get('/', 'Cms\ProductImageController@index')->name('cms.product-images');
         Route::get('missing', 'Cms\ProductImageController@missingImages')->name('cms.product-images.missing');
