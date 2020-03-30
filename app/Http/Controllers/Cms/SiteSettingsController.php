@@ -22,6 +22,7 @@ class SiteSettingsController extends Controller
             'google_analytics' => GlobalSettings::googleAnalyticsUrl(),
             'google_maps' => GlobalSettings::googleMapsUrl(),
             'v1_docid' => GlobalSettings::versionOneDocId(),
+            'last_order' => GlobalSettings::where('key', 'last-order')->first()->value,
         ];
 
         return view('site-settings.index', compact('data'));
@@ -32,6 +33,10 @@ class SiteSettingsController extends Controller
      */
     public function update(): RedirectResponse
     {
+        request()->validate([
+            'last_order' => 'required|regex:/^[A-Z]{1}[0-9]{6}$/'
+        ]);
+
         GlobalSettings::storeSiteSettings();
 
         return back()->with('success', 'Site settings have been updated');

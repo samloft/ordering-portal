@@ -30,6 +30,8 @@ class GlobalSettings extends Model
     }
 
     /**
+     * Get a global setting based on key.
+     *
      * @param $key
      *
      * @return mixed
@@ -167,6 +169,10 @@ class GlobalSettings extends Model
             'value' => request('v1_docid') ?: '',
         ]);
 
+        $settings::where('key', 'last-order')->update([
+            'value' => request('last_order')
+        ]);
+
         return true;
     }
 
@@ -177,7 +183,7 @@ class GlobalSettings extends Model
      */
     public static function nextOrderNumber(): string
     {
-        $last_order_value = self::where('key', 'last-order')->first();
+        $last_order_value = self::where('key', 'last-order')->firstOrFail();
 
         $order_prefix = substr($last_order_value->value, 0, 1);
         $next_order = $order_prefix.str_pad(substr($last_order_value->value, 1) + 1, 6, '0', STR_PAD_LEFT);
@@ -189,6 +195,8 @@ class GlobalSettings extends Model
     }
 
     /**
+     * Check to see if product data or net prices downloads should be displayed on the site.
+     *
      * @return mixed
      */
     public static function productData()
