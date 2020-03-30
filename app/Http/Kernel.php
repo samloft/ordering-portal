@@ -2,6 +2,7 @@
 
 namespace App\Http;
 
+use App\Http\Middleware\BrowserMiddleware;
 use App\Http\Middleware\SetTurboLinksHeader;
 use Illuminate\Foundation\Http\Kernel as HttpKernel;
 
@@ -37,6 +38,7 @@ class Kernel extends HttpKernel
             \App\Http\Middleware\VerifyCsrfToken::class,
             \Illuminate\Routing\Middleware\SubstituteBindings::class,
             SetTurboLinksHeader::class,
+            BrowserMiddleware::class,
         ],
 
         'api' => [

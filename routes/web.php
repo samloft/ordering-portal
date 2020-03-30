@@ -173,7 +173,9 @@ Route::group(['middleware' => ['auth', 'has.customer']], static function () {
 
 Auth::routes();
 
-Route::get('new-products', 'Auth\LoginController@loginContent')->name('login.content');
+Route::get('not-supported', static function() {
+    return view('errors.not-supported');
+})->name('not-supported');
 
 Route::fallback(static function () {
     return view('errors.404');
