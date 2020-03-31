@@ -37,10 +37,14 @@ class UserCustomer extends Model
      * @param array|Collection|int $id
      *
      * @return int
+     *
+     * @throws \Exception
      */
     public static function destroy($id): int
     {
-        return self::where('id', $id)->delete();
+        $user_customer = self::findOrFail($id);
+
+        return $user_customer->delete();
     }
 
     /**
@@ -54,29 +58,18 @@ class UserCustomer extends Model
             'code' => 'required|unique:user_customers,customer_code,NULL,id,user_id,'.request('id'),
         ]);
 
-        $extra_customer = [
-            'user_id' => request('id'),
-            'customer_code' => request('code'),
-            'created_at' => date('Y-m-d H:i:s'),
-            'updated_at' => date('Y-m-d H:i:s'),
-        ];
+        $user_customer = new self;
 
-        $created = self::insertGetId($extra_customer);
+        $user_customer->user_id = request('id');
+        $user_customer->customer_code = request('code');
 
-        if ($created) {
-            return response()->json([
-                'success' => true,
-                'errors' => [],
-                'id' => $created,
-                'customer_code' => $extra_customer['customer_code'],
-            ]);
-        }
+        $created = $user_customer->save();
 
         return response()->json([
-            'success' => false,
-            'errors' => ['Unable to add extra customer, please try again'],
-            'id' => null,
-            'customer_code' => null,
-        ], 422);
+            'success' => $created,
+            'errors' => [$created ? '' : 'Unable to add extra customer, please try again'],
+            'id' => $user_customer->id ?? null,
+            'customer_code' => $user_customer->customer_code ?? null,
+        ], $created ? 200 : 422);
     }
 }
