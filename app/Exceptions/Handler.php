@@ -54,14 +54,6 @@ class Handler extends ExceptionHandler
      */
     public function render($request, Throwable $exception)
     {
-        $sub_domain = Arr::first(explode('.', request()->getHost()));
-
-        if ($exception instanceof NotFoundHttpException && $sub_domain === 'api') {
-            return response()->json([
-                'message' => 'Not Found',
-            ], 404);
-        }
-
         return parent::render($request, $exception);
     }
 
@@ -73,14 +65,6 @@ class Handler extends ExceptionHandler
      */
     protected function unauthenticated($request, AuthenticationException $exception)
     {
-        $sub_domain = Arr::first(explode('.', request()->getHost()));
-
-        if ($sub_domain === 'api') {
-            return response()->json([
-                'message' => 'Unauthenticated',
-            ], 401);
-        }
-
         $guard = arr::get($exception->guards(), 0);
 
         if ($guard === 'admin') {
