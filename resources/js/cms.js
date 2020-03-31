@@ -16,6 +16,8 @@ Vue.component('delivery-methods', require('./modules/DeliveryMethods.vue').defau
 Vue.component('contacts', require('./modules/Contacts.vue').default);
 Vue.component('maintenance', require('./modules/Maintenance.vue').default);
 Vue.component('category-images', require('./modules/CategoryImages.vue').default);
+Vue.component('promotions', require('./modules/Promotions.vue').default);
+Vue.component('fade-transition', require('./modules/FadeTransition.vue').default);
 
 window.Event = new Vue();
 
