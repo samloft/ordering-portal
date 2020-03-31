@@ -10,6 +10,15 @@ use Illuminate\Support\Collection;
  * App\Models\DeliveryMethod.
  *
  * @mixin Eloquent
+ *
+ * @property int $id
+ * @property string $code
+ * @property string $title
+ * @property string $identifier
+ * @property int $price_low
+ * @property int $price
+ * @property \Illuminate\Support\Carbon $created_at
+ * @property \Illuminate\Support\Carbon $updated_at
  */
 class DeliveryMethod extends Model
 {

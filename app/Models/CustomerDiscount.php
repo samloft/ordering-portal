@@ -9,6 +9,11 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
  * App\Models\CustomerDiscount.
  *
  * @mixin Eloquent
+ *
+ * @property string $customer_code
+ * @property float $percent
+ * @property \Illuminate\Support\Carbon $created_at
+ * @property \Illuminate\Support\Carbon $updated_at
  */
 class CustomerDiscount extends Model
 {

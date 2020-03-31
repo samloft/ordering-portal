@@ -11,6 +11,14 @@ use Illuminate\Notifications\Notifiable;
  * App\Models\Admin.
  *
  * @mixin \Eloquent
+ *
+ * @property int $id
+ * @property string $name
+ * @property string $email
+ * @property string $password
+ * @property string $remember_token
+ * @property \Illuminate\Support\Carbon $created_at
+ * @property \Illuminate\Support\Carbon $updated_at
  */
 class Admin extends Authenticatable
 {

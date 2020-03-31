@@ -9,6 +9,14 @@ use Illuminate\Support\Facades\Cache;
  * App\Models\CategoryImage.
  *
  * @mixin \Eloquent
+ *
+ * @property int $id
+ * @property string $image
+ * @property string $level_1
+ * @property string $level_2
+ * @property string $level_3
+ * @property \Illuminate\Support\Carbon $created_at
+ * @property \Illuminate\Support\Carbon $updated_at
  */
 class CategoryImage extends Model
 {

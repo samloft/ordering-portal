@@ -11,6 +11,14 @@ use Illuminate\Support\Collection;
  * App\Models\AccountSummary.
  *
  * @mixin Eloquent
+ *
+ * @property string $customer_code
+ * @property string $item_no
+ * @property string $reference
+ * @property \Illuminate\Support\Carbon $dated
+ * @property \Illuminate\Support\Carbon $due_date
+ * @property float $unall_curr_amount
+ * @property string $age
  */
 class AccountSummary extends Model
 {

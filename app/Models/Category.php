@@ -11,6 +11,13 @@ use Illuminate\Support\Collection;
  * App\Models\Category.
  *
  * @mixin Eloquent
+ *
+ * @property string $product
+ * @property string $level_1
+ * @property string $level_2
+ * @property string $level_3
+ * @property string $level_4
+ * @property string $level_5
  */
 class Category extends Model
 {
