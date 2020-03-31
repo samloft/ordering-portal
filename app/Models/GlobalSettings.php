@@ -9,6 +9,12 @@ use Illuminate\Support\Facades\Cache;
  * App\Models\GlobalSettings.
  *
  * @mixin \Eloquent
+ *
+ * @property int $id
+ * @property string $key
+ * @property string $value
+ * @property \Illuminate\Support\Carbon $created_at
+ * @property \Illuminate\Support\Carbon $updated_at
  */
 class GlobalSettings extends Model
 {
