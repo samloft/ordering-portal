@@ -70,35 +70,25 @@
             </div>
         </div>
 
-        <div v-if="downloading"
-             class="fixed bottom-0 inset-x-0 px-4 pb-6 sm:inset-0 sm:p-0 sm:flex sm:items-center sm:justify-center">
-            <div class="fixed inset-0 transition-opacity">
-                <div class="absolute inset-0 bg-gray-500 opacity-75"></div>
+        <modal v-if="downloading">
+            <div class="mx-auto flex items-center justify-center h-12 w-12 rounded-full bg-green-100">
+                <svg width="32" height="32" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path
+                        d="M8 16C5.23858 16 3 13.7614 3 11C3 8.55154 4.75992 6.51413 7.08376 6.08376C7.51412 3.75992 9.55154 2 12 2C14.4485 2 16.4859 3.75992 16.9162 6.08376C19.2401 6.51413 21 8.55154 21 11C21 13.7614 18.7614 16 16 16M9 19L12 22M12 22L15 19M12 22V10"
+                        stroke="#4A5568" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
             </div>
-
-            <div
-                class="bg-white rounded-lg px-4 pt-5 pb-4 overflow-hidden shadow-xl transform transition-all sm:max-w-sm sm:w-full sm:p-6">
-                <div>
-                    <div class="mx-auto flex items-center justify-center h-12 w-12 rounded-full bg-green-100">
-                        <svg width="32" height="32" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                            <path
-                                d="M8 16C5.23858 16 3 13.7614 3 11C3 8.55154 4.75992 6.51413 7.08376 6.08376C7.51412 3.75992 9.55154 2 12 2C14.4485 2 16.4859 3.75992 16.9162 6.08376C19.2401 6.51413 21 8.55154 21 11C21 13.7614 18.7614 16 16 16M9 19L12 22M12 22L15 19M12 22V10"
-                                stroke="#4A5568" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-                        </svg>
-                    </div>
-                    <div class="mt-3 text-center sm:mt-5">
-                        <h3 class="text-lg leading-6 font-medium text-gray-900">
-                            Preparing download.....
-                        </h3>
-                        <div class="mt-2">
-                            <p class="text-sm leading-5 text-gray-500">
-                                Please wait while we crunch the data and prepare your download.
-                            </p>
-                        </div>
-                    </div>
+            <div class="mt-3 text-center sm:mt-5">
+                <h3 class="text-lg leading-6 font-medium text-gray-900">
+                    Preparing download.....
+                </h3>
+                <div class="mt-2">
+                    <p class="text-sm leading-5 text-gray-500">
+                        Please wait while we crunch the data and prepare your download.
+                    </p>
                 </div>
             </div>
-        </div>
+        </modal>
     </div>
 </template>
 
