@@ -21,7 +21,7 @@ class CheckoutController extends Controller
      */
     public function index()
     {
-        $delivery_methods = DeliveryMethod::show();
+        $delivery_methods = DeliveryMethod::orderBy('price')->get();
         $basket = Basket::show(old('shipping') ?: 'HHHH');
         $checkout_notice = GlobalSettings::checkoutNotice();
         $account = request('account');

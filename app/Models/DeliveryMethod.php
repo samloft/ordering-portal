@@ -4,7 +4,6 @@ namespace App\Models;
 
 use Eloquent;
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Support\Collection;
 
 /**
  * App\Models\DeliveryMethod.
@@ -23,16 +22,6 @@ use Illuminate\Support\Collection;
 class DeliveryMethod extends Model
 {
     /**
-     * Return all delivery methods ordered by cheapest > most expensive.
-     *
-     * @return Collection
-     */
-    public static function show(): Collection
-    {
-        return self::orderBy('price')->get();
-    }
-
-    /**
      * Get delivery details for the given code.
      *
      * @param $code
@@ -45,6 +34,8 @@ class DeliveryMethod extends Model
     }
 
     /**
+     * Store a new delivery method in the database.
+     *
      * @param $request
      *
      * @return bool
@@ -63,6 +54,8 @@ class DeliveryMethod extends Model
     }
 
     /**
+     * Edit an existing delivery method.
+     *
      * @param $request
      *
      * @return \App\Models\DeliveryMethod|\App\Models\DeliveryMethod[]|\Illuminate\Database\Eloquent\Collection|\Illuminate\Database\Eloquent\Model
