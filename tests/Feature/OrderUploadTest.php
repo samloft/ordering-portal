@@ -60,4 +60,18 @@ class OrderUploadTest extends TestCase
             'quantity' => 200,
         ]);
     }
+
+    /**
+     * @test
+     */
+    public function upload_with_prices_shows_price_match(): void
+    {
+        $user = (new UserFactory())->withCustomer()->create();
+
+        $this->signIn($user);
+
+        $products = (new ProductFactory())->withPrices($user->customer->code)->create();
+
+        $this->post(route('upload-validate'), ['csv_file' => $file = UploadedFile::fake()->createwithContent('test.csv', $products->first()->code.',200,2.24')])->assertStatus(200)->assertSee('Passed Price');
+    }
 }

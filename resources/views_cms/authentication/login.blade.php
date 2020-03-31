@@ -18,10 +18,10 @@
                    placeholder="**************" required>
         </div>
         <div class="mb-6">
-            <label class="block font-thin inline">
-                <input class="mr-2 leading-tight w-3" name="remember"
+            <label class="flex items-center">
+                <input class="form-checkbox" name="remember"
                        type="checkbox" {{ old('remember') ? 'checked' : '' }}>
-                <span class="text-sm">Keep me signed in</span>
+                <span class="ml-2 text-sm">Keep me signed in</span>
             </label>
         </div>
         <div class="flex">

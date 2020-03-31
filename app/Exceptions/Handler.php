@@ -2,11 +2,11 @@
 
 namespace App\Exceptions;
 
-use Exception;
 use Illuminate\Auth\AuthenticationException;
 use Illuminate\Foundation\Exceptions\Handler as ExceptionHandler;
 use Illuminate\Support\Arr;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
+use Throwable;
 
 class Handler extends ExceptionHandler
 {
@@ -32,18 +32,14 @@ class Handler extends ExceptionHandler
     /**
      * Report or log an exception.
      *
-     * @param \Exception $exception
+     * @param Throwable $exception
      *
-     * @throws \Exception
+     * @throws Throwable
      *
      * @return void
      */
-    public function report(Exception $exception): void
+    public function report(Throwable $exception)
     {
-        if (app()->bound('sentry') && $this->shouldReport($exception) && config('app.env') !== 'local') {
-            app('sentry')->captureException($exception);
-        }
-
         parent::report($exception);
     }
 
@@ -51,20 +47,13 @@ class Handler extends ExceptionHandler
      * Render an exception into an HTTP response.
      *
      * @param \Illuminate\Http\Request $request
-     * @param \Exception               $exception
+     * @param Throwable $exception
      *
-     * @return \Illuminate\Http\JsonResponse|\Illuminate\Http\Response
+     * @return \Illuminate\Http\JsonResponse|\Illuminate\Http\Response|\Symfony\Component\HttpFoundation\Response
+     * @throws \Throwable
      */
-    public function render($request, Exception $exception)
+    public function render($request, Throwable $exception)
     {
-        $sub_domain = Arr::first(explode('.', request()->getHost()));
-
-        if ($exception instanceof NotFoundHttpException && $sub_domain === 'api') {
-            return response()->json([
-                'message' => 'Not Found',
-            ], 404);
-        }
-
         return parent::render($request, $exception);
     }
 
@@ -76,23 +65,12 @@ class Handler extends ExceptionHandler
      */
     protected function unauthenticated($request, AuthenticationException $exception)
     {
-        $sub_domain = Arr::first(explode('.', request()->getHost()));
-
-        if ($sub_domain === 'api') {
-            return response()->json([
-                'message' => 'Unauthenticated',
-            ], 401);
-        }
-
         $guard = arr::get($exception->guards(), 0);
 
-        switch ($guard) {
-            case 'admin':
-                $login = 'cms.login';
-                break;
-            default:
-                $login = 'login';
-                break;
+        if ($guard === 'admin') {
+            $login = 'cms.login';
+        } else {
+            $login = 'login';
         }
 
         return redirect()->guest(route($login));

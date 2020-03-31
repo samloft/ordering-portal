@@ -22,7 +22,7 @@ class UserController extends Controller
     public function index()
     {
         $search = request('search');
-        $site_users = User::listAll($search);
+        $site_users = User::list($search);
 
         return view('site-users.index', compact('site_users'));
     }

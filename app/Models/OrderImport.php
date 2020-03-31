@@ -2,13 +2,17 @@
 
 namespace App\Models;
 
-use Eloquent;
 use Illuminate\Database\Eloquent\Model;
 
 /**
- * App\Models\OrderImport.
+ * App\Models\OrderImport
  *
- * @mixin Eloquent
+ * @mixin \Eloquent
+ *
+ * @property int $user_id
+ * @property string $customer_code
+ * @property string $product
+ * @property int $quantity
  */
 class OrderImport extends Model
 {
@@ -20,18 +24,6 @@ class OrderImport extends Model
     public static function clearDown()
     {
         return static::where('user_id', auth()->user()->id)->where('customer_code', auth()->user()->customer->code)->delete();
-    }
-
-    /**
-     * Adds an array of all validated products that have been uploaded from CSV.
-     *
-     * @param $lines
-     *
-     * @return bool
-     */
-    public static function store($lines): bool
-    {
-        return static::insert($lines);
     }
 
     /**

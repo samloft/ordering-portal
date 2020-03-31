@@ -8,4 +8,116 @@
 
     --button-primary-color: rgba(2, 163, 218, 1.0);
     --button-primary-text: rgb(255, 255, 255);
+    --button-secondary-color: rgba(2, 163, 218, 1.0);
+    --button-secondary-text: rgb(255, 255, 255);
+    --button-inverse-color: rgba(2, 163, 218, 1.0);
+    --button-inverse-text: rgb(255, 255, 255);
+
+    --primary-text: rgba(2, 163, 218, 1.0);
+}
+
+footer {
+    background-color: rgba(82, 82, 81, 1.0) !important;
+}
+
+.categories-nav {
+    .active {
+        @apply .font-medium;
+    }
+
+    .sub-categories {
+        @apply .bg-white .text-sm;
+    }
+
+    .top-level {
+        a {
+            @apply .py-2 .px-2 .block .border-b .border-black;
+
+            &:before {
+                display: inline-block;
+                content: "";
+                margin-right: 10px;
+                width: 0;
+                height: 0;
+                border-style: solid;
+                border-width: 0 0 15px 15px;
+            }
+
+            &:before {
+                border-color: transparent transparent rgba(2, 163, 218, 1.0) transparent;
+            }
+        }
+    }
+
+    .amenity {
+        a {
+            &:before {
+                border-color: transparent transparent rgba(54, 109, 146, 1.0) transparent;
+            }
+        }
+    }
+
+    .commercial {
+        a {
+            &:before {
+                border-color: transparent transparent rgba(253, 191, 92, 1.0) transparent;
+            }
+        }
+    }
+
+    .controls {
+        a {
+            &:before {
+                border-color: transparent transparent rgba(233, 77, 57, 1.0) transparent;
+            }
+        }
+    }
+
+    .domestic {
+        a {
+            &:before {
+                border-color: transparent transparent rgba(185, 207, 0, 1.0) transparent;
+            }
+        }
+    }
+
+    .floodlighting {
+        a {
+            &:before {
+                border-color: transparent transparent rgba(95, 92, 103, 1.0) transparent;
+            }
+        }
+    }
+
+    .industrial {
+        a {
+            &:before {
+                border-color: transparent transparent rgba(162, 92, 162, 1.0) transparent;
+            }
+        }
+    }
+
+    .utility {
+        a {
+            &:before {
+                border-color: transparent transparent rgba(225, 25, 62, 1.0) transparent;
+            }
+        }
+    }
+
+    .emergency {
+        a {
+            &:before {
+                border-color: transparent transparent rgba(30, 167, 127, 1.0) transparent;
+            }
+        }
+    }
+
+    .marketing {
+        a {
+            &:before {
+                border-color: transparent transparent rgba(2, 163, 218, 1.0) transparent;
+            }
+        }
+    }
 }

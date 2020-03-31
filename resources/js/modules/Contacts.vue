@@ -24,46 +24,29 @@
             </tbody>
         </table>
 
-        <Transition name="fade">
-            <div v-if="modal"
-                 class="fixed inset-0 w-full h-screen flex items-center justify-center bg-smoke-dark z-50">
-                <div class="relative w-full max-w-2xl bg-white shadow-lg rounded-lg p-8 text-left">
-                    <div class="mb-3">
-                        <label for="delivery_code">Display Name</label>
-                        <input id="delivery_code" class="bg-gray-100" v-model="data.name"
-                               placeholder="Name to display on the dropdown">
-                        <span v-text="errors.get('name')" class="block text-sm text-red-600"/>
-                    </div>
-
-                    <div class="mb-3">
-                        <label for="delivery_title">Email</label>
-                        <input id="delivery_title" class="bg-gray-100" v-model="data.email"
-                               placeholder="Email Address">
-                        <span v-text="errors.get('email')" class="block text-sm text-red-600"/>
-                    </div>
-
-                    <div class="text-right">
-                        <button @click="closeModal()" class="button button-danger">Exit</button>
-                        <button v-show="editing" @click="destroy(data.id)" class="button bg-red-600 text-white">Delete</button>
-                        <button @click="save(data)" class="button bg-gray-700 text-white w-32" v-text="buttonText"/>
-                    </div>
-                </div>
+        <modal v-if="modal">
+            <div class="mb-3">
+                <label for="delivery_code">Display Name</label>
+                <input id="delivery_code" class="bg-gray-100" v-model="data.name"
+                       placeholder="Name to display on the dropdown">
+                <span v-text="errors.get('name')" class="block text-sm text-red-600"/>
             </div>
-        </Transition>
+
+            <div class="mb-3">
+                <label for="delivery_title">Email</label>
+                <input id="delivery_title" class="bg-gray-100" v-model="data.email"
+                       placeholder="Email Address">
+                <span v-text="errors.get('email')" class="block text-sm text-red-600"/>
+            </div>
+
+            <div class="text-right">
+                <button @click="closeModal()" class="button button-danger">Exit</button>
+                <button v-show="editing" @click="destroy(data.id)" class="button bg-red-600 text-white">Delete</button>
+                <button @click="save(data)" class="button bg-gray-700 text-white w-32" v-text="buttonText"/>
+            </div>
+        </modal>
     </div>
 </template>
-
-<style scoped>
-    .fade-enter-active,
-    .fade-leave-active {
-        transition: all 0.4s;
-    }
-
-    .fade-enter,
-    .fade-leave-to {
-        opacity: 0;
-    }
-</style>
 
 <script>
     class Errors {

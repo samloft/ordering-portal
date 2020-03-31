@@ -2,16 +2,20 @@
 
 namespace App\Models;
 
-use Eloquent;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Http\JsonResponse;
-use Illuminate\Http\Request;
 use Illuminate\Support\Collection;
 
 /**
  * App\Models\UserCustomer.
  *
- * @mixin Eloquent
+ * @mixin \Eloquent
+ *
+ * @property int $id
+ * @property int $user_id
+ * @property string $customer_code
+ * @property \Illuminate\Support\Carbon $created_at
+ * @property \Illuminate\Support\Carbon $updated_at
  */
 class UserCustomer extends Model
 {
@@ -24,8 +28,7 @@ class UserCustomer extends Model
      */
     public static function check($customer_code)
     {
-        return self::where('customer_code', $customer_code)
-            ->where('user_id', auth()->user()->id)->first();
+        return self::where('customer_code', $customer_code)->where('user_id', auth()->user()->id)->first();
     }
 
     /**
@@ -34,10 +37,14 @@ class UserCustomer extends Model
      * @param array|Collection|int $id
      *
      * @return int
+     *
+     * @throws \Exception
      */
     public static function destroy($id): int
     {
-        return self::where('id', $id)->delete();
+        $user_customer = self::findOrFail($id);
+
+        return $user_customer->delete();
     }
 
     /**
@@ -47,36 +54,22 @@ class UserCustomer extends Model
      */
     public static function store(): JsonResponse
     {
-        //$id = request('id');
-        //$customer = request('customer');
-
         request()->validate([
             'code' => 'required|unique:user_customers,customer_code,NULL,id,user_id,'.request('id'),
         ]);
 
-        $extra_customer = [
-            'user_id'       => request('id'),
-            'customer_code' => request('code'),
-            'created_at'    => date('Y-m-d H:i:s'),
-            'updated_at'    => date('Y-m-d H:i:s'),
-        ];
+        $user_customer = new self;
 
-        $created = self::insertGetId($extra_customer);
+        $user_customer->user_id = request('id');
+        $user_customer->customer_code = request('code');
 
-        if ($created) {
-            return response()->json([
-                'success'       => true,
-                'errors'        => [],
-                'id'            => $created,
-                'customer_code' => $extra_customer['customer_code'],
-            ]);
-        }
+        $created = $user_customer->save();
 
         return response()->json([
-            'success'       => false,
-            'errors'        => ['Unable to add extra customer, please try again'],
-            'id'            => null,
-            'customer_code' => null,
-        ], 422);
+            'success' => $created,
+            'errors' => [$created ? '' : 'Unable to add extra customer, please try again'],
+            'id' => $user_customer->id ?? null,
+            'customer_code' => $user_customer->customer_code ?? null,
+        ], $created ? 200 : 422);
     }
 }

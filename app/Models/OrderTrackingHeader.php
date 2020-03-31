@@ -3,7 +3,6 @@
 namespace App\Models;
 
 use Carbon\Carbon;
-use Eloquent;
 use Illuminate\Contracts\Pagination\LengthAwarePaginator;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\HasMany;
@@ -13,7 +12,33 @@ use Illuminate\Support\Collection;
 /**
  * App\Models\OrderTrackingHeader.
  *
- * @mixin Eloquent
+ * @mixin \Eloquent
+ *
+ * @property string $order_no
+ * @property string $base_order
+ * @property string $customer_order_no
+ * @property string $status
+ * @property string $type
+ * @property string $customer_code
+ * @property string $invoice_customer
+ * @property \Illuminate\Support\Carbon $date_received
+ * @property \Illuminate\Support\Carbon $date_required
+ * @property \Illuminate\Support\Carbon $date_despatched
+ * @property \Illuminate\Support\Carbon $date_invoiced
+ * @property string $invoice_no
+ * @property string $delivery_address1
+ * @property string $delivery_address2
+ * @property string $delivery_address3
+ * @property string $delivery_address4
+ * @property string $delivery_address5
+ * @property float $value
+ * @property string $invoice_address_1
+ * @property string $invoice_address_2
+ * @property string $invoice_address_3
+ * @property string $invoice_address_4
+ * @property string $consignment
+ * @property float $vat_value
+ * @property string $delivery_service
  */
 class OrderTrackingHeader extends Model
 {
@@ -22,6 +47,8 @@ class OrderTrackingHeader extends Model
     public $timestamps = false;
 
     /**
+     * Return all the lines for the order.
+     *
      * @return HasMany
      */
     public function lines(): HasMany
@@ -42,7 +69,7 @@ class OrderTrackingHeader extends Model
     {
         if ($search) {
             return self::where('customer_code', auth()->user()->customer->code)->when($request, static function ($query
-                ) use ($request) {
+            ) use ($request) {
                 if ($request->keyword) {
                     $query->where(static function ($query) use ($request) {
                         $query->where('order_no', 'like', '%'.$request->keyword.'%')->orWhere('customer_order_no', 'like', '%'.$request->keyword.'%');
@@ -89,13 +116,9 @@ class OrderTrackingHeader extends Model
      */
     public static function backOrders()
     {
-        return self::selectRaw('order_tracking_header.order_no, order_tracking_header.date_received, order_tracking_lines.product, order_tracking_lines.line_qty, order_tracking_lines.long_description, MIN(expected_stock.due_date) as due_date')
-            ->leftJoin('order_tracking_lines', 'order_tracking_header.order_no', '=', 'order_tracking_lines.order_no')
-            ->leftJoin('expected_stock', 'order_tracking_lines.product', '=', 'expected_stock.product')
-            ->where('customer_code', auth()->user()->customer->code)->whereNotIn('status', ['Invoiced', 'Cancelled'])
-            ->where('order_tracking_header.order_no', 'like', '%/%')
-            ->where('order_tracking_lines.product', 'not like', '%M19%')
-            ->groupBy('order_tracking_header.order_no', 'order_tracking_header.date_received', 'order_tracking_lines.product', 'order_tracking_lines.line_qty', 'order_tracking_lines.long_description')
-            ->get();
+        return self::selectRaw('order_tracking_header.order_no, order_tracking_header.date_received, order_tracking_lines.product, order_tracking_lines.line_qty, order_tracking_lines.long_description, MIN(expected_stock.due_date) as due_date')->leftJoin('order_tracking_lines', 'order_tracking_header.order_no', '=', 'order_tracking_lines.order_no')->leftJoin('expected_stock', 'order_tracking_lines.product', '=', 'expected_stock.product')->where('customer_code', auth()->user()->customer->code)->whereNotIn('status', [
+            'Invoiced',
+            'Cancelled',
+        ])->where('order_tracking_header.order_no', 'like', '%/%')->where('order_tracking_lines.product', 'not like', '%M19%')->groupBy('order_tracking_header.order_no', 'order_tracking_header.date_received', 'order_tracking_lines.product', 'order_tracking_lines.line_qty', 'order_tracking_lines.long_description')->get();
     }
 }

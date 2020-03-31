@@ -3,21 +3,29 @@
 namespace App\Models;
 
 use Carbon\Carbon;
-use Eloquent;
 use Illuminate\Database\Eloquent\Model;
 
 /**
  * App\Models\SavedBasket.
  *
- * @mixin Eloquent
+ * @mixin \Eloquent
+ *
+ * @property string $id
+ * @property string $customer_code
+ * @property int $user_id
+ * @property string $reference
+ * @property string $product
+ * @property int $quantity
+ * @property \Illuminate\Support\Carbon $created_at
  */
 class SavedBasket extends Model
 {
     public $incrementing = false;
+
     public $timestamps = [];
 
     /**
-     * Return the results for the customers saved baskets.
+     * Return the results for the customers saved baskets, with optional search.
      *
      * @param $search
      * @param $request
@@ -27,33 +35,39 @@ class SavedBasket extends Model
     public static function list($search, $request)
     {
         if ($search) {
-            return self::select(['id', 'reference', 'created_at'])
-                ->where('customer_code', auth()->user()->customer->code)
-                ->when($request, static function ($query) use ($request) {
-                    if ($request->reference) {
-                        $query->where('reference', 'like', '%'.$request->reference.'%');
-                    }
+            return self::select([
+                'id',
+                'reference',
+                'created_at',
+            ])->where('customer_code', auth()->user()->customer->code)->when($request, static function (Eloquent $query
+                ) use ($request) {
+                if ($request['reference']) {
+                    $query->where('reference', 'like', '%'.$request['reference'].'%');
+                }
 
-                    if ($request->date_from) {
-                        $date_from = Carbon::createFromFormat('d/m/Y', $request->date_from)->format('Y-m-d');
+                if ($request['date_from']) {
+                    $date_from = Carbon::createFromFormat('d/m/Y', $request['date_from'])->format('Y-m-d');
 
-                        $query->where('created_at', '>=', $date_from);
-                    }
+                    $query->where('created_at', '>=', $date_from);
+                }
 
-                    if ($request->date_to) {
-                        $date_to = Carbon::createFromFormat('d/m/Y', $request->date_to)->format('Y-m-d');
+                if ($request['date_to']) {
+                    $date_to = Carbon::createFromFormat('d/m/Y', $request['date_to'])->format('Y-m-d');
 
-                        $query->where('created_at', '<=', $date_to);
-                    }
-                })
-                ->groupBy(['id', 'reference', 'created_at'])
-                ->paginate(10);
+                    $query->where('created_at', '<=', $date_to);
+                }
+            })->groupBy(['id', 'reference', 'created_at'])->paginate(10);
         }
 
-        return self::select(['id', 'reference', 'created_at'])
-            ->where('customer_code', auth()->user()->customer->code)
-            ->groupBy(['id', 'reference', 'created_at'])
-            ->paginate(10);
+        return self::select([
+            'id',
+            'reference',
+            'created_at',
+        ])->where('customer_code', auth()->user()->customer->code)->groupBy([
+            'id',
+            'reference',
+            'created_at',
+        ])->paginate(10);
     }
 
     /**
@@ -65,15 +79,20 @@ class SavedBasket extends Model
      */
     public static function show($id)
     {
-        return self::select(['saved_baskets.product', 'name', 'quantity', 'id', 'reference', 'prices.price', 'created_at'])
-            ->where('saved_baskets.customer_code', auth()->user()->customer->code)
-            ->where('id', $id)
-            ->leftJoin('products', 'products.code', 'saved_baskets.product')
-            ->leftJoin('prices', static function ($join) {
-                $join->on('prices.product', 'saved_baskets.product');
-                $join->where('prices.customer_code', auth()->user()->customer->code);
-            })
-            ->get();
+        return self::select([
+            'saved_baskets.product',
+            'name',
+            'quantity',
+            'id',
+            'reference',
+            'prices.price',
+            'created_at',
+        ])->where('saved_baskets.customer_code', auth()->user()->customer->code)->where('id', $id)->leftJoin('products', 'products.code', 'saved_baskets.product')->leftJoin('prices', static function (
+                $join
+            ) {
+            $join->on('prices.product', 'saved_baskets.product');
+            $join->where('prices.customer_code', auth()->user()->customer->code);
+        })->get();
     }
 
     /**
@@ -97,8 +116,6 @@ class SavedBasket extends Model
      */
     public static function destroy($id): int
     {
-        return self::where('customer_code', auth()->user()->customer->code)
-            ->where('id', $id)
-            ->delete();
+        return self::where('customer_code', auth()->user()->customer->code)->where('id', $id)->delete();
     }
 }

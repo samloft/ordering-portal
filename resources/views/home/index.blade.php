@@ -4,8 +4,10 @@
 
 @section('content')
     <div class="flex">
+        @if(count($adverts) > 0)
             @include('home.adverts')
-        <div class="w-3/4">
+        @endif
+        <div class="{{ count($adverts) > 0 ? 'w-3/4' : 'w-full' }}">
             @include('home.categories')
         </div>
     </div>

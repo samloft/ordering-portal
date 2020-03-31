@@ -4,17 +4,30 @@ namespace App\Models;
 
 use App\Traits\CustomerDetails;
 use Eloquent;
-use Hash;
 use Illuminate\Contracts\Pagination\LengthAwarePaginator;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
-use Illuminate\Support\Collection;
 
 /**
  * App\Models\User.
  *
  * @mixin Eloquent
+ *
+ * @property int $id
+ * @property string $customer_code
+ * @property string $email
+ * @property string $password
+ * @property \Illuminate\Support\Carbon $password_updated
+ * @property string $remember_token
+ * @property string $name
+ * @property string $telephone
+ * @property string $mobile
+ * @property int $admin
+ * @property int $can_order
+ * @property stirng $api_token
+ * @property \Illuminate\Support\Carbon $created_at
+ * @property \Illuminate\Support\Carbon $updated_at
  */
 class User extends Authenticatable
 {
@@ -47,6 +60,8 @@ class User extends Authenticatable
     ];
 
     /**
+     * Return the delivery addresses for the current user.
+     *
      * @return HasMany
      */
     public function addresses(): HasMany
@@ -64,40 +79,14 @@ class User extends Authenticatable
         return $this->hasMany(UserCustomer::class);
     }
 
-    ///**
-    // * Create/update a site user.
-    // *
-    // * @param $user_details
-    // * @return mixed
-    // */
-    //public static function store($user_details)
-    //{
-    //    $user_details['customer_code'] = strtoupper($user_details['customer_code']);
-    //
-    //    if ($user_details['id']) {
-    //        if ($user_details['password']) {
-    //            $user_details['password'] = Hash::make($user_details['password']);
-    //        } else {
-    //            $user_details = array_filter($user_details);
-    //        }
-    //
-    //        return self::where('id', $user_details['id'])->update($user_details);
-    //    }
-    //
-    //    $user_details['password'] = Hash::make($user_details['password']);
-    //    $user_details['created_at'] = date('Y-m-d H:i:s');
-    //
-    //    return self::insert($user_details);
-    //}
-
     /**
-     * Return all the users/customers.
+     * Return all the users/customers with optional search parameters.
      *
      * @param $search
      *
      * @return LengthAwarePaginator
      */
-    public static function listAll($search): LengthAwarePaginator
+    public static function list($search): LengthAwarePaginator
     {
         return self::where(static function ($query) use ($search) {
             if ($search) {
@@ -106,16 +95,6 @@ class User extends Authenticatable
                 $query->orWhere('customer_code', 'like', '%'.$search.'%');
             }
         })->orderBy('name')->with('customers')->paginate(10);
-    }
-
-    /**
-     * Return a count of all the current users.
-     *
-     * @return int
-     */
-    public static function countAll(): int
-    {
-        return self::count();
     }
 
     /**
@@ -129,15 +108,4 @@ class User extends Authenticatable
     {
         return self::where('id', $id)->with('customers')->first();
     }
-
-    ///**
-    // * Delete the given user by ID.
-    // *
-    // * @param array|Collection|int $id
-    // * @return int|mixed
-    // */
-    //public static function destroy($id)
-    //{
-    //    return self::where('id', $id)->delete();
-    //}
 }

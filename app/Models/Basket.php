@@ -15,6 +15,11 @@ use Storage;
  * App\Models\Basket.
  *
  * @mixin Eloquent
+ *
+ * @property int $user_id
+ * @property string $customer_code
+ * @property string $product
+ * @property int $quantity
  */
 class Basket extends Model
 {
@@ -112,7 +117,7 @@ class Basket extends Model
                 'unit_price' => discount($net_price),
                 'next_bulk' => [
                     'qty_away' => $next_bulk_qty,
-                    'saving' => ($next_bulk_qty + $line->quantity * $next_bulk_saving),
+                    'saving' => currency($next_bulk_qty + $line->quantity * $next_bulk_saving, 2),
                 ],
                 'potential_saving' => $next_bulk_qty > 0,
             ];

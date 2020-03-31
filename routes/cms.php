@@ -28,6 +28,7 @@ Route::group(['middleware' => 'auth:admin'], static function () {
 
     Route::group(['prefix' => 'orders'], static function () {
         Route::get('/', 'Cms\OrdersController@index')->name('cms.orders');
+        Route::get('re-import/{order_number}', 'Cms\OrdersController@markForImport')->name('cms.orders.import');
     });
 
     Route::group(['prefix' => 'site-users'], static function () {
@@ -119,6 +120,10 @@ Route::group(['middleware' => 'auth:admin'], static function () {
         Route::delete('{deliveryMethod}', 'Cms\DeliveryMethodsController@destroy')->name('cms.delivery-methods.delete');
     });
 
+    Route::group(['prefix' => 'promotions'], static function () {
+        Route::get('/', 'Cms\PromotionController@index')->name('cms.promotions');
+    });
+
     Route::group(['prefix' => 'product-images'], static function () {
         Route::get('/', 'Cms\ProductImageController@index')->name('cms.product-images');
         Route::get('missing', 'Cms\ProductImageController@missingImages')->name('cms.product-images.missing');
@@ -127,6 +132,13 @@ Route::group(['middleware' => 'auth:admin'], static function () {
 
     Route::group(['prefix' => 'category-images'], static function () {
         Route::get('/', 'Cms\CategoryImagesController@index')->name('cms.category-images');
+        Route::delete('{id}', 'Cms\CategoryImagesController@destroy')->name('cms.category-images.destroy');
+        Route::post('store', 'Cms\CategoryImagesController@store')->name('cms.category-images.store');
+    });
+
+    Route::group(['prefix' => 'product-data'], static function () {
+        Route::get('/', 'Cms\ProductDataController@index')->name('cms.product-data');
+        Route::patch('/', 'Cms\ProductDataController@store')->name('cms.product-data.update');
     });
 
     Route::group(['prefix' => 'customer'], static function () {

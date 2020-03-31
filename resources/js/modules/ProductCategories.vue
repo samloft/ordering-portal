@@ -1,6 +1,6 @@
 <template>
     <div class="w-1/5 px-3">
-        <a :href="'/products/' + (current.level_1 ? current.level_1 + '/' : '') + (current.level_2 ? current.level_2 + '/' : '') + category.key">
+        <a :href="buildUrl()">
             <div class="bg-white relative text-center rounded-lg mb-6 shadow-md hover:shadow-lg">
                 <div class="h-40">
                     <img v-if="productImageUrl"
@@ -69,16 +69,17 @@
         },
         methods: {
             imageUrl: async function (override, products) {
-                console.log(override, products);
-
                 if (override) {
-                    return override;
+                    return this.productImageUrl = '/category_images/' + override;
                 } else {
                     return axios.get('/category/image/' + products)
                         .then(response => {
                             return this.productImageUrl = response.data.image;
                         });
                 }
+            },
+            buildUrl: function() {
+                return '/products/' + (this.current.level_1 ? this.current.level_1.replace('/', '_') + '/' : '') + (this.current.level_2 ? this.current.level_2.replace('/', '_') + '/' : '') + this.category.key.replace('/', '_');
             }
         },
         mounted() {

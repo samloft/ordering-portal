@@ -51,7 +51,7 @@
                 <tr v-for="product in items" :class="(product.quantity > product.stock) ? 'bg-red-200' : ''">
                     <td>
                         <div class="flex items-center">
-                            <img class="h-10 mr-3" :src="product.image" :alt="product.name">
+                            <img class="w-15 mr-3" :src="product.image" :alt="product.name">
                             <h2 class="leading-none">
                                 <a :href="'/products/view/' + product.product">
                                     <span class="text-primary font-medium">{{ product.product }}</span>
@@ -150,6 +150,10 @@
                 });
             },
             updateProduct: function (product, quantity) {
+                if (parseInt(quantity) === 0) {
+                    return this.removeProduct(product);
+                }
+
                 App.addProductToBasket(product, quantity, true);
             },
             removeProduct: function (product) {

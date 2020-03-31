@@ -17,12 +17,12 @@
 
                     @if (session('address'))
                         <div class="w-3/4 text-center bg-gray-200 p-4 rounded mx-auto">
-                            <div>{{ session('address.address_details.company_name') }}</div>
-                            <div>{{ session('address.address_details.address_2') }}</div>
-                            <div>{{ session('address.address_details.address_3') }}</div>
-                            <div>{{ session('address.address_details.address_4') }}</div>
-                            <div>{{ session('address.address_details.address_5') }}</div>
-                            <div>{{ session('address.address_details.postcode') }}</div>
+                            <div>{{ session('address.company_name') }}</div>
+                            <div>{{ session('address.address_line_2') }}</div>
+                            <div>{{ session('address.address_line_3') }}</div>
+                            <div>{{ session('address.address_line_4') }}</div>
+                            <div>{{ session('address.address_line_5') }}</div>
+                            <div>{{ session('address.post_code') }}</div>
                         </div>
                     @elseif ($default_address)
                         <div class="w-3/4 text-center bg-gray-200 p-4 rounded mx-auto">
@@ -77,7 +77,7 @@
                     </div>
 
                     <delivery-method :delivery_methods="{{ json_encode($delivery_methods, true) }}"
-                                     old_delivery_method="{{ old('shipping') ?? 'HHH' }}"
+                                     old_delivery_method="{{ old('shipping') ?? 'HHHH' }}"
                                      goods_total="{{ $basket['summary']['goods_total'] }}"
                                      small_order="{{ json_encode($basket['summary']['small_order_rules'], true) }}">
                     </delivery-method>
@@ -111,7 +111,7 @@
                     <div class="flex mb-3">
                         <label class="checkbox flex items-center">
                             <input type="checkbox" name="terms" class="form-checkbox"
-                                   {{ old('terms') ? 'checked' : '' }} autocomplete="off" >
+                                   {{ old('terms') ? 'checked' : '' }} autocomplete="off">
                             <span class="ml-2">I have read and agree to the <a href="{{ route('support.terms') }}"
                                                                                class="underline" target="_blank">terms & conditions</a>
                             </span>
@@ -173,4 +173,23 @@
             <checkout></checkout>
         </div>
     </form>
+
+    @if(!$account)
+        <small-order-notice
+            threshold="{{ $basket['summary']['small_order_rules']['threshold'] }}"
+            charge="{{ $basket['summary']['small_order_rules']['charge'] }}"
+            goods-total="{{ preg_replace('/[^0-9.]/', '', $basket['summary']['goods_total']) }}"
+            message="@if($basket['summary']['small_order_rules']['exclude_collection'] && $basket['summary']['small_order_rules']['exclude_charged_delivery'])
+                small order charge, unless you are collecting your order or paying a delivery charge.
+            @elseif ($basket['summary']['small_order_rules']['exclude_collection'])
+                small order charge, unless you are collecting your order.
+            @elseif ($basket['summary']['small_order_rules']['exclude_charged_delivery'])
+                small order charge, unless you are paying a delivery charge.
+            @else
+                small order charge.
+            @endif"
+            currency="{{ currencySymbol() }}"
+            validation-errors="{{ !$errors->isEmpty() }}"
+        ></small-order-notice>
+    @endif
 @endsection

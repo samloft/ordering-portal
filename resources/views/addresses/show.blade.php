@@ -17,54 +17,44 @@
         <div class="bg-white rounded-lg shadow p-10 mb-5">
             @include('layout.alerts')
 
-            {{--            <div id="text-error"></div>--}}
-
-            {{--            <div class="flex items-center">--}}
-            {{--                <input name="postcode_lookup">--}}
-            {{--                <button class="w-2/6 ml-2 button button-inverse">{{ __('Lookup Postcode') }}</button>--}}
-            {{--            </div>--}}
-            {{--            <div class="text-xs mb-5">--}}
-            {{--                {{ __('You will still need to enter company name & address line 2 manually') }}--}}
-            {{--            </div>--}}
-
             <div class="flex items-center mb-3">
-                <label for="company_name" class="w-2/6">{{ __('Company Name') }} <span
+                <label for="company_name" class="w-2/6">Company Name <span
                         class="text-red-600">*</span></label>
-                <input id="company_name" class="bg-gray-100" placeholder="{{ __('Company Name') }}"
+                <input id="company_name" class="bg-gray-100" placeholder="Company Name"
                        value="{{ $address->company_name ?? old('company_name') ?: auth()->user()->customer->customer_name }}"
                        name="company_name">
             </div>
 
             <div class="flex items-center mb-3">
-                <label for="address_line_2" class="w-2/6">{{ __('Address Line 2') }} <span class="text-red-600">*</span></label>
-                <input id="address_line_2" class="bg-gray-100" placeholder="{{ __('Address Line 2') }}"
+                <label for="address_line_2" class="w-2/6">Address Line 2 <span class="text-red-600">*</span></label>
+                <input id="address_line_2" class="bg-gray-100" placeholder="Address Line 2"
                        name="address_line_2"
                        value="{{ old('address_line_2') ?: $address->address_line_2 ?? null }}">
             </div>
 
             <div class="flex items-center mb-3">
-                <label for="address_line_3" class="w-2/6">{{ __('Address Line 3') }} <span class="text-red-600">*</span></label>
-                <input id="address_line_3" class="bg-gray-100" placeholder="{{ __('Address Line 3') }}"
+                <label for="address_line_3" class="w-2/6">Address Line 3 <span class="text-red-600">*</span></label>
+                <input id="address_line_3" class="bg-gray-100" placeholder="Address Line 3"
                        name="address_line_3"
                        value="{{ old('address_line_3') ?: $address->address_line_3 ?? null }}">
             </div>
 
             <div class="flex items-center mb-3">
-                <label for="address_line_4" class="w-2/6">{{ __('Address Line 4') }}</label>
-                <input id="address_line_4" class="bg-gray-100" placeholder="{{ __('Address Line 4') }}"
+                <label for="address_line_4" class="w-2/6">Address Line 4</label>
+                <input id="address_line_4" class="bg-gray-100" placeholder="Address Line 4"
                        name="address_line_4"
                        value="{{ old('address_line_4') ?: $address->address_line_4 ?? null }}">
             </div>
 
             <div class="flex items-center mb-3">
-                <label for="address_line_5" class="w-2/6">{{ __('Address Line 5') }}</label>
-                <input id="address_line_5" class="bg-gray-100" placeholder="{{ __('Address Line 5') }}"
+                <label for="address_line_5" class="w-2/6">Address Line 5</label>
+                <input id="address_line_5" class="bg-gray-100" placeholder="Address Line 5"
                        name="address_line_5"
                        value="{{ old('address_line_5') ?: $address->address_line_5 ?? null }}">
             </div>
 
             <div class="flex items-center mb-3 relative">
-                <label for="country_id" class="w-2/6">{{ __('Country') }} <span class="text-red-600">*</span></label>
+                <label for="country_id" class="w-2/6">Country <span class="text-red-600">*</span></label>
                 <select id="country_id" class="bg-gray-100" name="country" autocomplete="off">
                     @foreach ($countries as $country)
                         <option
@@ -89,14 +79,14 @@
             </div>
 
             <div class="flex items-center mb-3">
-                <label for="post_code" class="w-2/6">{{ __('Postcode') }} <span class="text-red-600">*</span></label>
-                <input id="post_code" class="bg-gray-100" placeholder="{{ __('Postcode') }}" name="post_code"
+                <label for="post_code" class="w-2/6">Postcode <span class="text-red-600">*</span></label>
+                <input id="post_code" class="bg-gray-100" placeholder="Postcode" name="post_code"
                        value="{{ old('post_code') ?: $address->post_code ?? null }}">
             </div>
 
             <div class="flex justify-end">
                 <label class="checkbox flex items-center">
-                    <span class="mr-2">{{ __('Default Address?') }}</span>
+                    <span class="mr-2">Default Address?</span>
                     <input type="checkbox" class="form-checkbox"
                            name="default"
                            {{ old('postcode') ? 'checked' : (isset($address) ? ($address->default === 1 ? 'checked' : '') : '') }} autocomplete="off">
@@ -106,7 +96,7 @@
 
         <div class="flex justify-between">
             <a href="{{ route('account.addresses') }}">
-                <button type="button" class="button button-danger">{{ __('Cancel') }}</button>
+                <button type="button" class="button button-danger">Cancel</button>
             </a>
 
             <div>
@@ -117,23 +107,3 @@
 
     </form>
 @endsection
-
-{{--@section('scripts')--}}
-{{--    <script>--}}
-{{--        $('#postcode-lookup').on('click', function (e) {--}}
-{{--            e.preventDefault();--}}
-{{--            $('#text-error').empty();--}}
-
-{{--            let postcode = $('input[name="postcode_lookup"]').val();--}}
-
-{{--            $.get('https://api.postcodes.io/postcodes/' + postcode).done(function (response) {--}}
-{{--                $('input[name="post_code"]').val(response.result.postcode);--}}
-{{--                $('input[name="address_line_3"]').val(response.result.parish.replace(', unparished area', ''));--}}
-{{--                $('input[name="address_line_4"]').val(response.result.admin_county);--}}
-{{--                $('input[name="address_line_5"]').val(response.result.region);--}}
-{{--            }).fail(function () {--}}
-{{--                $('#text-error').text('Invalid Postcode');--}}
-{{--            });--}}
-{{--        });--}}
-{{--    </script>--}}
-{{--@endsection--}}

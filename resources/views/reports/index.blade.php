@@ -4,9 +4,9 @@
 
 @section('content')
     <div class="w-full mb-5 text-center">
-        <h2 class="font-semibold tracking-widest">{{ __('Reports') }}</h2>
+        <h2 class="font-semibold tracking-widest">Reports</h2>
         <p class="font-thin">
-            {{ __('Select a report and output type you would like to download.') }}
+            Select a report and output type you would like to download.
         </p>
     </div>
 
@@ -16,19 +16,19 @@
         <form id="run-report" action="{{ route('reports.show') }}" method="post" class="m-0 ">
             <label class="checkbox flex items-center justify-center mb-1">
                 <input type="radio" class="form-checkbox" name="report" value="account_summary">
-                <span class="ml-2">{{ __('Account Summary') }}</span>
+                <span class="ml-2">Account Summary</span>
             </label>
 
             <label class="checkbox flex items-center justify-center">
                 <input type="radio" class="form-checkbox" name="report" value="back_orders">
-                <span class="ml-2">{{ __('Back Order History') }}</span>
+                <span class="ml-2">Back Order History</span>
             </label>
 
             <div class="relative mt-3 w-40 mx-auto">
-                <label for="output">{{ __('Output As') }} </label>
+                <label for="output">Output As </label>
                 <select class="w-full p-2 rounded border text-gray-600 appearance-none" name="output">
-                    <option value="pdf">{{ __('PDF') }}</option>
-                    <option value="csv">{{ __('CSV') }}</option>
+                    <option value="pdf">PDF</option>
+                    <option value="csv">CSV</option>
                 </select>
 
                 <div class="pointer-events-none absolute inset-y-0 right-0 flex items-center px-3 pt-6 text-gray-700">
@@ -38,7 +38,7 @@
                 </div>
             </div>
 
-            <button class="button button-primary mt-5">{{ __('Run Report') }}</button>
+            <button class="button button-primary mt-5">Run Report</button>
         </form>
     </div>
 @endsection

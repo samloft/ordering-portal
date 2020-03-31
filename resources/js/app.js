@@ -4,6 +4,8 @@ window.axios = require('axios');
 import VueSweetalert2 from "vue-sweetalert2";
 import 'sweetalert2/dist/sweetalert2.min.css';
 
+require('es6-promise').polyfill();
+
 Vue.use(VueSweetalert2);
 
 Vue.component('dropdown', require('./modules/Dropdown.vue').default);
@@ -22,6 +24,10 @@ Vue.component('order-invoice', require('./modules/OrderInvoice.vue').default);
 Vue.component('delivery-method', require('./modules/DeliveryMethod.vue').default);
 Vue.component('checkout', require('./modules/Checkout.vue').default);
 Vue.component('submit-button', require('./modules/Button.vue').default);
+Vue.component('product-data', require('./modules/ProductData.vue').default);
+Vue.component('small-order-notice', require('./modules/SmallOrderNotice.vue').default);
+Vue.component('fade-transition', require('./modules/FadeTransition.vue').default);
+Vue.component('modal', require('./modules/Modal.vue').default);
 
 window.Event = new Vue();
 

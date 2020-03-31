@@ -2,15 +2,23 @@
 
 namespace App\Models;
 
-use Eloquent;
-use Illuminate\Database\Eloquent\Builder;
-use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Collection;
 
 /**
  * App\Models\Price.
  *
- * @mixin Eloquent
+ * @mixin \Eloquent
+ *
+ * @property string $customer_code
+ * @property string $product
+ * @property float $price
+ * @property int $break1
+ * @property float $price1
+ * @property int $break2
+ * @property float $price2
+ * @property int $break3
+ * @property float $price3
  */
 class Price extends Model
 {
@@ -24,32 +32,8 @@ class Price extends Model
      *
      * @return \Illuminate\Support\Collection
      */
-    public static function productList(): \Illuminate\Support\Collection
+    public static function products(): Collection
     {
         return self::select('product')->where('product', 'not like', '%*%')->distinct()->orderBy('product')->get();
-    }
-
-    /**
-     * Checks that a product is on a customers price list.
-     *
-     * @param $product_code
-     *
-     * @return bool
-     */
-    public static function product($product_code): bool
-    {
-        $exists = self::where('customer_code', auth()->user()->customer->code)->where('product', $product_code)->first();
-
-        return $exists ? true : false;
-    }
-
-    /**
-     * Join product specs on the customer prices (Product they can buy).
-     *
-     * @return Builder[]|Collection
-     */
-    public static function productPrices()
-    {
-        return static::where('customer_code', auth()->user()->customer->code)->join('products', 'prices.product', '=', 'products.product')->get();
     }
 }

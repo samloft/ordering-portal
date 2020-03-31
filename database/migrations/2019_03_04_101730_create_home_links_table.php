@@ -11,15 +11,17 @@ class CreateHomeLinksTable extends Migration
      *
      * @return void
      */
-    public function up()
+    public function up(): void
     {
-        Schema::create('home_links', function (Blueprint $table) {
+        Schema::create('home_links', static function (Blueprint $table) {
             $table->increments('id');
             $table->string('type');
             $table->string('name')->unique();
             $table->string('image');
-            $table->string('link');
+            $table->string('link')->nullable();
+            $table->string('file')->nullable();
             $table->integer('position');
+            $table->string('style')->nullable();
             $table->timestamps();
         });
     }
@@ -29,7 +31,7 @@ class CreateHomeLinksTable extends Migration
      *
      * @return void
      */
-    public function down()
+    public function down(): void
     {
         Schema::dropIfExists('home_links');
     }

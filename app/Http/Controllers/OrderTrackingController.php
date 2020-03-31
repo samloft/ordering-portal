@@ -99,7 +99,7 @@ class OrderTrackingController extends Controller
 
         $customer_code = urlencode(trim(auth()->user()->customer->customer_code));
 
-        $document_url = 'http://documents.scolmore.com/v1/dbwebq.exe?DbQCMD=LOGIN&DbQCMDNext=SEARCH&SID=36d4afe300&DbQuser=administrator&DbQPass=administrator&DOCID='.env('V1_DOCID').'&S0F=ARCH_USER&S0O=EQ&S0V=&S1F=ARCH_DATE&S1O=EQ&S1V=&S2F=DELIVERY_NOTE_NUMBER&S2O=EQ&S2V='.$order_number.'&S3F=CUSTOMER_CODE&S3O=EQ&S3V='.$customer_code.'&S4F=CUSTOMER_ORDER_NO&S4O=EQ&S4V='.$customer_order_number;
+        $document_url = 'http://documents.scolmore.com/v1/dbwebq.exe?DbQCMD=LOGIN&DbQCMDNext=SEARCH&SID=36d4afe300&DbQuser=administrator&DbQPass=administrator&DOCID='.GlobalSettings::versionOneDocId().'&S0F=ARCH_USER&S0O=EQ&S0V=&S1F=ARCH_DATE&S1O=EQ&S1V=&S2F=DELIVERY_NOTE_NUMBER&S2O=EQ&S2V='.$order_number.'&S3F=CUSTOMER_CODE&S3O=EQ&S3V='.$customer_code.'&S4F=CUSTOMER_ORDER_NO&S4O=EQ&S4V='.$customer_order_number;
 
         $pdf_file = file_get_contents($document_url);
 
@@ -123,6 +123,7 @@ class OrderTrackingController extends Controller
 
     /**
      * @param $order_number
+     *
      * @return \Illuminate\Http\Response
      */
     public function orderDetailsPDF($order_number): Response

@@ -11,6 +11,20 @@ use Illuminate\Support\Collection;
  * App\Models\Address.
  *
  * @mixin Eloquent
+ *
+ * @property int $id
+ * @property string $customer_code
+ * @property int $user_id
+ * @property string $company_name
+ * @property string $address_line_2
+ * @property string $address_line_3
+ * @property string $address_line_4
+ * @property string $address_line_5
+ * @property string $country
+ * @property stirng $post_code
+ * @property int $default
+ * @property \Illuminate\Support\Carbon $created_at
+ * @property \Illuminate\Support\Carbon $updated_at
  */
 class Address extends Model
 {

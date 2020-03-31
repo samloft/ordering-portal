@@ -21,12 +21,13 @@ class CheckoutController extends Controller
      */
     public function index()
     {
-        $delivery_methods = DeliveryMethod::show();
-        $basket = Basket::show(old('shipping') ?: 'HHH');
+        $delivery_methods = DeliveryMethod::orderBy('price')->get();
+        $basket = Basket::show(old('shipping') ?: 'HHHH');
         $checkout_notice = GlobalSettings::checkoutNotice();
+        $account = request('account');
 
         if (! auth()->user()->can_order) {
-            return redirect(route('basket'))->with('error', 'You do not have permission to place orders, if you believe this is in error, please contact the sames office');
+            return redirect(route('basket'))->with('error', 'You do not have permission to place orders, if you believe this is in error, please contact the sales office');
         }
 
         if ($basket['line_count'] === 0) {
@@ -35,7 +36,7 @@ class CheckoutController extends Controller
 
         $default_address = Address::getDefault();
 
-        return view('checkout.index', compact('default_address', 'basket', 'delivery_methods', 'checkout_notice'));
+        return view('checkout.index', compact('default_address', 'basket', 'delivery_methods', 'checkout_notice', 'account'));
     }
 
     /**
@@ -68,11 +69,11 @@ class CheckoutController extends Controller
             'name' => request('name'),
             'telephone' => request('telephone'),
             'mobile' => request('mobile'),
-            'address_line_1' => $delivery_address['address_details']['company_name'],
-            'address_line_2' => $delivery_address['address_details']['address_2'],
-            'address_line_3' => $delivery_address['address_details']['address_3'],
-            'address_line_4' => $delivery_address['address_details']['address_4'],
-            'address_line_5' => $delivery_address['address_details']['postcode'],
+            'address_line_1' => $delivery_address['company_name'],
+            'address_line_2' => $delivery_address['address_line_2'],
+            'address_line_3' => $delivery_address['address_line_3'],
+            'address_line_4' => $delivery_address['address_line_4'],
+            'address_line_5' => $delivery_address['post_code'],
             'delivery_method' => $basket['summary']['shipping']['identifier'],
             'delivery_code' => $basket['summary']['shipping']['code'],
             'delivery_cost' => removeCurrencySymbol($basket['summary']['shipping']['cost']),

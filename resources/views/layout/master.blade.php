@@ -1,3 +1,4 @@
+<!DOCTYPE html>
 <html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
 <head>
     <meta charset="utf-8">
@@ -9,6 +10,8 @@
     <link href="{{ mix('css/app-'.config('app.name').'.css') }}" rel="stylesheet">
 
     @yield ('styles')
+
+    <script src="{{ asset('js/turbo-links.js') }}"></script>
 </head>
 
 <body>
@@ -44,10 +47,10 @@
                               d="M11 12a1 1 0 0 1 0-2h2a1 1 0 0 1 .96 1.27L12.33 17H13a1 1 0 0 1 0 2h-2a1 1 0 0 1-.96-1.27L11.67 12H11zm2-4a1.5 1.5 0 1 1 0-3 1.5 1.5 0 0 1 0 3z"></path>
                     </svg>
                     <div>
-                        <p class="alert-title">{{ __('Notice!') }}</p>
+                        <p class="alert-title">Notice!</p>
                         <p class="alert-text">
-                            {!! __('You are currently assuming the customer code: <span class="font-semibold">' . session('temp_customer') . '</span>.
-               Your actual Customer Code is <span class="font-semibold">' . auth()->user()->customer_code . '</span>. Please <a href="' . route('customer.change.revert') . '" class="underline">click here</a> to revert back to your default Customer Code.') !!}
+                            You are currently assuming the customer code: <span class="font-semibold"> {{ session('temp_customer') }}</span>.
+               Your actual Customer Code is <span class="font-semibold">{{ auth()->user()->customer_code }}</span>. Please <a href="{{ route('customer.change.revert') }}" class="underline">click here</a> to revert back to your default Customer Code.
                         </p>
                     </div>
                 </div>
@@ -58,7 +61,6 @@
     </div>
 
     @include('layout.footer')
-
 </div>
 
 <script type="text/javascript" src="{{ mix('js/app.js') }}"></script>

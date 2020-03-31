@@ -8,7 +8,6 @@ use App\Models\Product;
 use File;
 use Illuminate\Contracts\View\Factory;
 use Illuminate\Http\JsonResponse;
-use Illuminate\Http\Request;
 use Illuminate\View\View;
 use Storage;
 
@@ -31,7 +30,7 @@ class ProductImageController extends Controller
      */
     public function missingImages(): array
     {
-        $product_list = Price::productList();
+        $product_list = Price::products();
         $missing_images = [];
 
         foreach ($product_list as $product) {
@@ -51,13 +50,11 @@ class ProductImageController extends Controller
     /**
      * Upload product images.
      *
-     * @param Request $request
-     *
      * @return JsonResponse
      */
-    public function store(Request $request): JsonResponse
+    public function store(): JsonResponse
     {
-        $image = $request->file('file');
+        $image = request()->file('file');
 
         $name = $image->getClientOriginalName();
 

@@ -19,29 +19,25 @@ class SavedBasketController extends Controller
      * Display all saved baskets for the current user, if
      * search parameters are passed, display results that match the search.
      *
-     * @param Request $request
-     *
      * @return Factory|View
      */
-    public function index(Request $request)
+    public function index()
     {
-        $search = $request ? true : false;
+        $search = request()->all() ? true : false;
 
-        $saved_baskets = SavedBasket::list($search, $request);
+        $saved_baskets = SavedBasket::list($search, request()->all());
 
-        return view('saved-baskets.index', compact('saved_baskets'));
+        return view('saved-baskets.index', compact('saved_baskets', 'search'));
     }
 
     /**
      * Display items for the given reference.
      *
-     * @param Request $request
-     *
      * @return mixed
      */
-    public function show(Request $request)
+    public function show()
     {
-        $saved_basket = SavedBasket::show($request->id);
+        $saved_basket = SavedBasket::show(request('id'));
 
         if (count($saved_basket) > 0) {
             return view('saved-baskets.show', compact('saved_basket'));
@@ -51,11 +47,9 @@ class SavedBasketController extends Controller
     }
 
     /**
-     * @param Request $request
-     *
      * @return ResponseFactory|Response
      */
-    public function store(Request $request)
+    public function store()
     {
         $current_basket = Basket::show();
         $basket_details = [];
@@ -66,7 +60,7 @@ class SavedBasketController extends Controller
                 'id'            => $id,
                 'customer_code' => auth()->user()->customer->code,
                 'user_id'       => auth()->user()->id,
-                'reference'     => $request->reference,
+                'reference'     => request('reference'),
                 'product'       => trim($item['product']),
                 'quantity'      => $item['quantity'],
                 'created_at'    => date('Y-m-d'),
@@ -87,8 +81,8 @@ class SavedBasketController extends Controller
      */
     public function destroy(Request $request): RedirectResponse
     {
-        if ($request->id) {
-            $deleted = SavedBasket::destroy($request->id);
+        if (request('id')) {
+            $deleted = SavedBasket::destroy(request('id'));
         } else {
             $deleted = false;
         }

@@ -17,11 +17,11 @@ class CreatePricesTable extends Migration
             $table->string('customer_code');
             $table->string('product');
             $table->float('price');
-            $table->float('break1')->nullable();
+            $table->integer('break1')->nullable();
             $table->float('price1')->nullable();
-            $table->float('break2')->nullable();
+            $table->integer('break2')->nullable();
             $table->float('price2')->nullable();
-            $table->float('break3')->nullable();
+            $table->integer('break3')->nullable();
             $table->float('price3')->nullable();
 
             $table->primary(['customer_code', 'product']);

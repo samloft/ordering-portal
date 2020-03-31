@@ -34,37 +34,31 @@
             <h4 class="text-center text-xl underline">No customer discount overrides have been added yet.</h4>
         </div>
 
-        <Transition name="fade">
-            <div
-                v-if="customer_discount_modal"
-                class="fixed inset-0 w-full h-screen flex items-center justify-center bg-smoke-dark z-50">
-                <div class="relative w-full max-w-2xl bg-white shadow-lg rounded-lg p-8 text-left">
-                    <div class="mb-3">
-                        <label>Customer Code</label>
-                        <input class="bg-gray-100" v-model="data.customer_code" placeholder="Customer Code"
-                               :readonly="editing" v-uppercase>
-                        <span v-text="errors.get('customer_code')" class="text-sm text-red-600"/>
-                    </div>
-
-                    <div class="mb-3">
-                        <label>Discount Percent</label>
-                        <input class="bg-gray-100" v-model="data.percent" placeholder="Discount Percent (Number only)">
-                        <span v-text="errors.get('percent')" class="text-sm text-red-600"/>
-                    </div>
-
-                    <div class="mt-8 text-right">
-                        <button @click="cancel()" class="button button-danger">Cancel</button>
-                        <button v-if="data.id" @click="destroy(data.id)"
-                                class="button bg-red-600 text-white">
-                            Delete override
-                        </button>
-                        <button @click="save(data.id)" class="button bg-gray-700 text-white w-32">
-                            Save
-                        </button>
-                    </div>
-                </div>
+        <modal v-if="customer_discount_modal">
+            <div class="mb-3">
+                <label>Customer Code</label>
+                <input class="bg-gray-100" v-model="data.customer_code" placeholder="Customer Code"
+                       :readonly="editing" v-uppercase>
+                <span v-text="errors.get('customer_code')" class="text-sm text-red-600"/>
             </div>
-        </Transition>
+
+            <div class="mb-3">
+                <label>Discount Percent</label>
+                <input class="bg-gray-100" v-model="data.percent" placeholder="Discount Percent (Number only)">
+                <span v-text="errors.get('percent')" class="text-sm text-red-600"/>
+            </div>
+
+            <div class="mt-8 text-right">
+                <button @click="cancel()" class="button button-danger">Cancel</button>
+                <button v-if="data.id" @click="destroy(data.id)"
+                        class="button bg-red-600 text-white">
+                    Delete override
+                </button>
+                <button @click="save(data.id)" class="button bg-gray-700 text-white w-32">
+                    Save
+                </button>
+            </div>
+        </modal>
     </div>
 </template>
 

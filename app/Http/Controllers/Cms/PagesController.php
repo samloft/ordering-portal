@@ -59,7 +59,7 @@ class PagesController extends Controller
      */
     public function store(): RedirectResponse
     {
-        $page = Page::where('name', request('key'))->firstOrFail();
+        $page = Page::where('name', request('name'))->firstOrFail();
 
         $page->description = request('description');
 

@@ -9,6 +9,12 @@ use Illuminate\Support\Facades\Cache;
  * App\Models\GlobalSettings.
  *
  * @mixin \Eloquent
+ *
+ * @property int $id
+ * @property string $key
+ * @property string $value
+ * @property \Illuminate\Support\Carbon $created_at
+ * @property \Illuminate\Support\Carbon $updated_at
  */
 class GlobalSettings extends Model
 {
@@ -26,9 +32,12 @@ class GlobalSettings extends Model
         Cache::forget('google-maps-url');
         Cache::forget('google-analytics-url');
         Cache::forget('default-country');
+        Cache::forget('v1-docid');
     }
 
     /**
+     * Get a global setting based on key.
+     *
      * @param $key
      *
      * @return mixed
@@ -124,6 +133,16 @@ class GlobalSettings extends Model
     }
 
     /**
+     * @return mixed
+     */
+    public static function versionOneDocId()
+    {
+        return Cache::rememberForever('v1-docid', static function () {
+            return self::where('key', 'v1-docid')->first()->value;
+        });
+    }
+
+    /**
      * @return bool
      */
     public static function storeSiteSettings(): bool
@@ -152,6 +171,14 @@ class GlobalSettings extends Model
             'value' => request('google_maps') ?: '',
         ]);
 
+        $settings::where('key', 'v1-docid')->update([
+            'value' => request('v1_docid') ?: '',
+        ]);
+
+        $settings::where('key', 'last-order')->update([
+            'value' => request('last_order')
+        ]);
+
         return true;
     }
 
@@ -162,7 +189,7 @@ class GlobalSettings extends Model
      */
     public static function nextOrderNumber(): string
     {
-        $last_order_value = self::where('key', 'last-order')->first();
+        $last_order_value = self::where('key', 'last-order')->firstOrFail();
 
         $order_prefix = substr($last_order_value->value, 0, 1);
         $next_order = $order_prefix.str_pad(substr($last_order_value->value, 1) + 1, 6, '0', STR_PAD_LEFT);
@@ -171,5 +198,17 @@ class GlobalSettings extends Model
         $last_order_value->save();
 
         return $next_order;
+    }
+
+    /**
+     * Check to see if product data or net prices downloads should be displayed on the site.
+     *
+     * @return mixed
+     */
+    public static function productData()
+    {
+        return Cache::rememberForever('product-data', static function () {
+            return json_decode(self::where('key', 'product-data')->first()->value, true);
+        });
     }
 }

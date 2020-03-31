@@ -170,7 +170,7 @@ class AddressController extends Controller
 
         $this->tempAddress($address);
 
-        return redirect(route('checkout'));
+        return redirect(route('checkout', ['account' => true]));
     }
 
     /**
@@ -184,14 +184,12 @@ class AddressController extends Controller
         session([
             'address' => [
                 'address_id' => $address->id,
-                'address_details' => [
-                    'company_name' => $address->company_name,
-                    'address_2' => $address->address_line_2,
-                    'address_3' => $address->address_line_3,
-                    'address_4' => $address->address_line_4,
-                    'address_5' => $address->address_line_5,
-                    'postcode' => $address->post_code,
-                ],
+                'company_name' => $address->company_name,
+                'address_line_2' => $address->address_line_2,
+                'address_line_3' => $address->address_line_3,
+                'address_line_4' => $address->address_line_4,
+                'address_line_5' => $address->address_line_5,
+                'post_code' => $address->post_code,
             ],
         ]);
     }

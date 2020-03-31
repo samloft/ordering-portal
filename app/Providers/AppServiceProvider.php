@@ -24,6 +24,10 @@ class AppServiceProvider extends ServiceProvider
             $view->with('announcement', GlobalSettings::siteAnnouncement());
         });
 
+        view()->composer('layout.navigation', static function ($view) {
+            $view->with('product_data', GlobalSettings::productData());
+        });
+
         view()->composer('products.sidebar', static function ($view) {
             $view->with('category_list', Category::list());
         });
@@ -40,6 +44,7 @@ class AppServiceProvider extends ServiceProvider
 
         view()->composer('home.categories', static function ($view) {
             $links = [
+                'banners' => HomeLink::banners(),
                 'categories' => HomeLink::categories(),
             ];
 

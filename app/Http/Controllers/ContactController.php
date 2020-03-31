@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Mail\Contact;
 use App\Models\Contact as ContactData;
+use App\Models\GlobalSettings;
 use Illuminate\Contracts\View\Factory;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\View\View;
@@ -19,8 +20,9 @@ class ContactController extends Controller
     public function index()
     {
         $contacts = ContactData::get();
+        $map = GlobalSettings::googleMapsUrl();
 
-        return view('contact.index', compact('contacts'));
+        return view('contact.index', compact('contacts', 'map'));
     }
 
     /**

@@ -29,7 +29,7 @@
                     <span class="inline-flex">
                         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
                             <path
-                                  d="M17 16a3 3 0 1 1-2.83 2H9.83a3 3 0 1 1-5.62-.1A3 3 0 0 1 5 12V4H3a1 1 0 1 1 0-2h3a1 1 0 0 1 1 1v1h14a1 1 0 0 1 .9 1.45l-4 8a1 1 0 0 1-.9.55H5a1 1 0 0 0 0 2h12zM7 12h9.38l3-6H7v6zm0 8a1 1 0 1 0 0-2 1 1 0 0 0 0 2zm10 0a1 1 0 1 0 0-2 1 1 0 0 0 0 2z"/>
+                                d="M17 16a3 3 0 1 1-2.83 2H9.83a3 3 0 1 1-5.62-.1A3 3 0 0 1 5 12V4H3a1 1 0 1 1 0-2h3a1 1 0 0 1 1 1v1h14a1 1 0 0 1 .9 1.45l-4 8a1 1 0 0 1-.9.55H5a1 1 0 0 0 0 2h12zM7 12h9.38l3-6H7v6zm0 8a1 1 0 1 0 0-2 1 1 0 0 0 0 2zm10 0a1 1 0 1 0 0-2 1 1 0 0 0 0 2z"/>
                         </svg>
                         <span class="menu-title">Orders</span>
                     </span>
@@ -114,6 +114,15 @@
                         <span class="ml-2">Delivery Methods</span>
                     </span>
                 </a>
+                <a href="{{ route('cms.promotions') }}"
+                   class="menu-item {{ activeMenu('cms.promotions') }}">
+                    <span class="inline-flex">
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path
+                                class="heroicon-ui"
+                                d="M7.7 6.3L9 7.58l4.3-4.3a1 1 0 0 1 1.4 1.42L10.42 9l4.3 4.3a1 1 0 0 1-1.42 1.4L9 10.42l-1.3 1.3a3 3 0 1 1-1.4-1.42L7.58 9l-1.3-1.3a3 3 0 1 1 1.42-1.4zM21 8a1 1 0 0 1 1 1v1a1 1 0 0 1-2 0 1 1 0 0 1 0-2h1zM4 20a1 1 0 0 1 0 2H3a1 1 0 0 1-1-1v-1a1 1 0 0 1 2 0zm17 2h-1a1 1 0 0 1 0-2 1 1 0 0 1 2 0v1a1 1 0 0 1-1 1zM14 8h2a1 1 0 0 1 0 2h-2a1 1 0 0 1 0-2zm7 5a1 1 0 0 1 1 1v2a1 1 0 0 1-2 0v-2a1 1 0 0 1 1-1zm-7 7h2a1 1 0 0 1 0 2h-2a1 1 0 0 1 0-2zm-6 0h2a1 1 0 0 1 0 2H8a1 1 0 0 1 0-2zm-2.3-6.3a1 1 0 1 0-1.4-1.4 1 1 0 0 0 1.4 1.4zM5 6a1 1 0 1 0 0-2 1 1 0 0 0 0 2z"/></svg>
+                        <span class="ml-2">Promotions</span>
+                    </span>
+                </a>
                 <a href="{{ route('cms.product-images') }}" class="menu-item {{ activeMenu('cms.product-images') }}">
                     <span class="inline-flex">
                         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
@@ -128,6 +137,17 @@
                             <path
                                 d="M4 4h16a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V6c0-1.1.9-2 2-2zm16 8.59V6H4v6.59l4.3-4.3a1 1 0 0 1 1.4 0l5.3 5.3 2.3-2.3a1 1 0 0 1 1.4 0l1.3 1.3zm0 2.82l-2-2-2.3 2.3a1 1 0 0 1-1.4 0L9 10.4l-5 5V18h16v-2.59zM15 10a1 1 0 1 1 0-2 1 1 0 0 1 0 2z"/></svg>
                         <span class="menu-title">Category Images</span>
+                    </span>
+                </a>
+
+                <a href="{{ route('cms.product-data') }}" class="menu-item {{ activeMenu('cms.product-data') }}">
+                    <span class="inline-flex">
+                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path
+                            d="M12 4V5M18 16H20M14 16H12V20M12 9V12M12 12H12.01M12 12H16.01M16 20H20M4 12H8M20 12H20.01M5 8H7C7.55228 8 8 7.55228 8 7V5C8 4.44772 7.55228 4 7 4H5C4.44772 4 4 4.44772 4 5V7C4 7.55228 4.44772 8 5 8ZM17 8H19C19.5523 8 20 7.55228 20 7V5C20 4.44772 19.5523 4 19 4H17C16.4477 4 16 4.44772 16 5V7C16 7.55228 16.4477 8 17 8ZM5 20H7C7.55228 20 8 19.5523 8 19V17C8 16.4477 7.55228 16 7 16H5C4.44772 16 4 16.4477 4 17V19C4 19.5523 4.44772 20 5 20Z"
+                            stroke="#4A5568" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                        </svg>
+                        <span class="menu-title">Product Data</span>
                     </span>
                 </a>
             </div>

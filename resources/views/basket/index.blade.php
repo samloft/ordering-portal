@@ -4,9 +4,9 @@
 
 @section('content')
     <div class="w-full mb-5 text-center">
-        <h2 class="font-semibold tracking-widest">{{ __('Basket') }}</h2>
+        <h2 class="font-semibold tracking-widest">Basket</h2>
         <p class="font-thin">
-            {{ __('View your basket.') }}
+            View your basket.
         </p>
     </div>
 
@@ -19,7 +19,7 @@
 
         <div class="w-4/12 ml-5">
             <div class="bg-white rounded shadow-md p-6 text-center mb-5">
-                <label class="font-medium">{{ __('Quick Buy') }}</label>
+                <label class="font-medium">Quick Buy</label>
                 <quick-buy></quick-buy>
             </div>
 
@@ -45,7 +45,7 @@
 
                 <a href="{{ route('checkout') }}">
                     <button class="flex justify-between button button-primary button-block mt-6 text-left">
-                        {{ __('Checkout') }}
+                        Checkout
                         <span class="ml-auto">🛒</span>
                     </button>
                 </a>
@@ -59,8 +59,8 @@
                               d="M11 12a1 1 0 0 1 0-2h2a1 1 0 0 1 .96 1.27L12.33 17H13a1 1 0 0 1 0 2h-2a1 1 0 0 1-.96-1.27L11.67 12H11zm2-4a1.5 1.5 0 1 1 0-3 1.5 1.5 0 0 1 0 3z"></path>
                     </svg>
                     <div>
-                        <p class="alert-title">{{ __('Please Note:') }}</p>
-                        <p class="alert-text">{{ __('Lines marked in red have a chance of going onto backorder.') }}</p>
+                        <p class="alert-title">Please Note:</p>
+                        <p class="alert-text">Lines marked in red have a chance of going onto backorder.</p>
                     </div>
                 </div>
             </div>

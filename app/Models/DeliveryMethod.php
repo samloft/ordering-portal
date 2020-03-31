@@ -4,25 +4,23 @@ namespace App\Models;
 
 use Eloquent;
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Support\Collection;
 
 /**
  * App\Models\DeliveryMethod.
  *
  * @mixin Eloquent
+ *
+ * @property int $id
+ * @property string $code
+ * @property string $title
+ * @property string $identifier
+ * @property int $price_low
+ * @property int $price
+ * @property \Illuminate\Support\Carbon $created_at
+ * @property \Illuminate\Support\Carbon $updated_at
  */
 class DeliveryMethod extends Model
 {
-    /**
-     * Return all delivery methods ordered by cheapest > most expensive.
-     *
-     * @return Collection
-     */
-    public static function show(): Collection
-    {
-        return self::orderBy('price')->get();
-    }
-
     /**
      * Get delivery details for the given code.
      *
@@ -32,16 +30,12 @@ class DeliveryMethod extends Model
      */
     public static function details($code)
     {
-        return self::where('code', $code)->firstOrFail();
-
-        //return [
-        //    'title' => $delivery_details->title,
-        //    'code' => $delivery_details->code,
-        //    'cost' => $delivery_details->price,
-        //];
+        return self::where('code', $code)->first();
     }
 
     /**
+     * Store a new delivery method in the database.
+     *
      * @param $request
      *
      * @return bool
@@ -60,6 +54,8 @@ class DeliveryMethod extends Model
     }
 
     /**
+     * Edit an existing delivery method.
+     *
      * @param $request
      *
      * @return \App\Models\DeliveryMethod|\App\Models\DeliveryMethod[]|\Illuminate\Database\Eloquent\Collection|\Illuminate\Database\Eloquent\Model

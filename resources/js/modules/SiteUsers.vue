@@ -4,152 +4,133 @@
             <slot name="trigger"/>
         </div>
 
-        <Transition name="fade">
-            <div
-                v-if="modal"
-                class="fixed inset-0 w-full h-screen flex items-center justify-center bg-smoke-dark z-50">
-                <div class="relative w-full max-w-2xl bg-white shadow-lg rounded-lg p-8 text-left">
-                    <div class="mb-3">
-                        <label>Name</label>
-                        <input class="bg-gray-100" v-model="userData.name" placeholder="Name">
-                    </div>
+        <modal v-if="modal">
+            <div class="mb-3">
+                <label>Name</label>
+                <input class="bg-gray-100" v-model="userData.name" placeholder="Name">
+            </div>
 
-                    <div class="mb-3">
-                        <label>Email Address</label>
-                        <input class="bg-gray-100" v-model="userData.email" placeholder="Email Address">
-                    </div>
+            <div class="mb-3">
+                <label>Email Address</label>
+                <input class="bg-gray-100" v-model="userData.email" placeholder="Email Address">
+            </div>
 
-                    <div class="mb-3">
-                        <div class="flex">
-                            <div class="w-full relative mr-1">
-                                <label id="">Account Type</label>
-                                <select v-model="userData.admin"
-                                        class="p-2 rounded border bg-gray-100 text-gray-600 appearance-none"
-                                        autocomplete="off">
-                                    <option value="0">Normal User</option>
-                                    <option value="1">Site Administrator</option>
-                                </select>
-                                <div
-                                    class="pointer-events-none absolute inset-y-0 right-0 flex items-center px-3 pt-6 text-gray-700">
-                                    <svg class="fill-current h-4 w-4" xmlns="http://www.w3.org/2000/svg"
-                                         viewBox="0 0 20 20">
-                                        <path
-                                            d="M9.293 12.95l.707.707L15.657 8l-1.414-1.414L10 10.828 5.757 6.586 4.343 8z"/>
-                                    </svg>
-                                </div>
-                            </div>
-
-                            <div class="w-full relative ml-1">
-                                <label>Browse Only</label>
-                                <select v-model="userData.can_order"
-                                        class="p-2 rounded border bg-gray-100 text-gray-600 appearance-none"
-                                        autocomplete="off">
-                                    <option value="1">No</option>
-                                    <option value="0">Yes</option>
-                                </select>
-                                <div
-                                    class="pointer-events-none absolute inset-y-0 right-0 flex items-center px-3 pt-6 text-gray-700">
-                                    <svg class="fill-current h-4 w-4" xmlns="http://www.w3.org/2000/svg"
-                                         viewBox="0 0 20 20">
-                                        <path
-                                            d="M9.293 12.95l.707.707L15.657 8l-1.414-1.414L10 10.828 5.757 6.586 4.343 8z"/>
-                                    </svg>
-                                </div>
-                            </div>
+            <div class="mb-3">
+                <div class="flex">
+                    <div class="w-full relative mr-1">
+                        <label id="">Account Type</label>
+                        <select v-model="userData.admin"
+                                class="p-2 rounded border bg-gray-100 text-gray-600 appearance-none"
+                                autocomplete="off">
+                            <option value="0">Normal User</option>
+                            <option value="1">Site Administrator</option>
+                        </select>
+                        <div
+                            class="pointer-events-none absolute inset-y-0 right-0 flex items-center px-3 pt-6 text-gray-700">
+                            <svg class="fill-current h-4 w-4" xmlns="http://www.w3.org/2000/svg"
+                                 viewBox="0 0 20 20">
+                                <path
+                                    d="M9.293 12.95l.707.707L15.657 8l-1.414-1.414L10 10.828 5.757 6.586 4.343 8z"/>
+                            </svg>
                         </div>
                     </div>
 
-                    <div class="mb-3">
-                        <label>Customer Code</label>
-                        <input class="bg-gray-100" v-model="userData.customer_code" v-uppercase
-                               placeholder="Customer Code">
-                    </div>
-
-                    <div v-if="userData.id && (parseInt(userData.admin) !== 1)" class="mb-3">
-                        <label>Additional Customers</label>
-                        <table class="w-full text-sm bg-white rounded border">
-                            <tbody>
-                            <tr class="text-left border-b bg-gray-300 uppercase text-xs tracking-widest">
-                                <th class="font-semibold p-1">Code</th>
-                                <th class="text-right p-1">
-                                    <button @click="addAdditionalCustomer"
-                                            class="rounded leading-none text-white bg-gray-700 p-1 text-xs hover:opacity-75">
-                                        Add Customer
-                                    </button>
-                                </th>
-                            </tr>
-                            <tr v-for="(customer, index) in listAdditionalCustomers()"
-                                class="border-b hover:bg-gray-100">
-                                <td class="p-1">{{ customer.customer_code }}</td>
-                                <td class="p-1 text-right">
-                                    <button
-                                        @click="deleteAdditionalCustomer(index, customer.customer_code, customer.id)"
-                                        class="rounded leading-none border-2 border-red-600 text-red-600 bg-white p-1 text-xs hover:bg-red-600 hover:text-white">
-                                        Delete
-                                    </button>
-                                </td>
-                            </tr>
-                            </tbody>
-                        </table>
-
-                        <div v-if="customers.length === 0" class="border text-center p-3">
-                            No additional customers added
+                    <div class="w-full relative ml-1">
+                        <label>Browse Only</label>
+                        <select v-model="userData.can_order"
+                                class="p-2 rounded border bg-gray-100 text-gray-600 appearance-none"
+                                autocomplete="off">
+                            <option value="1">No</option>
+                            <option value="0">Yes</option>
+                        </select>
+                        <div
+                            class="pointer-events-none absolute inset-y-0 right-0 flex items-center px-3 pt-6 text-gray-700">
+                            <svg class="fill-current h-4 w-4" xmlns="http://www.w3.org/2000/svg"
+                                 viewBox="0 0 20 20">
+                                <path
+                                    d="M9.293 12.95l.707.707L15.657 8l-1.414-1.414L10 10.828 5.757 6.586 4.343 8z"/>
+                            </svg>
                         </div>
-                    </div>
-
-                    <div v-if="!userData.id && (parseInt(userData.admin) !== 1)" class="mb-3">
-                        <label>Additional Customers</label>
-                        <div class="border text-center p-3 text-gray-500 underline">You must save the user before you
-                            can add extra customers
-                        </div>
-                    </div>
-
-                    <div class="mb-3">
-                        <div class="flex">
-                            <div class="mr-1">
-                                <label>Telephone</label>
-                                <input class="bg-gray-100" v-model="userData.telephone" placeholder="Telephone Number">
-                            </div>
-
-                            <div class="ml-1">
-                                <label>Mobile</label>
-                                <input class="bg-gray-100" v-model="userData.mobile" placeholder="Mobile Number">
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="mt-8 text-right">
-                        <button @click="reload()" class="button button-danger">Exit</button>
-                        <button v-if="userData.id" @click="deleteUser(userData.id)"
-                                class="button bg-red-600 text-white">Delete
-                            User
-                        </button>
-                        <button v-if="userData.id" @click="passwordReset(userData.email)"
-                                class="button bg-gray-500 text-white">Password
-                            Reset
-                        </button>
-                        <button @click="storeUser(userData.id)" class="button bg-gray-700 text-white w-32">
-                            {{ this.userData.id ? 'Edit' : 'Create' }}
-                        </button>
                     </div>
                 </div>
             </div>
-        </Transition>
+
+            <div class="mb-3">
+                <label>Customer Code</label>
+                <input class="bg-gray-100" v-model="userData.customer_code" v-uppercase
+                       placeholder="Customer Code">
+            </div>
+
+            <div v-if="userData.id && (parseInt(userData.admin) !== 1)" class="mb-3">
+                <label>Additional Customers</label>
+                <table class="w-full text-sm bg-white rounded border">
+                    <tbody>
+                    <tr class="text-left border-b bg-gray-300 uppercase text-xs tracking-widest">
+                        <th class="font-semibold p-1">Code</th>
+                        <th class="text-right p-1">
+                            <button @click="addAdditionalCustomer"
+                                    class="rounded leading-none text-white bg-gray-700 p-1 text-xs hover:opacity-75">
+                                Add Customer
+                            </button>
+                        </th>
+                    </tr>
+                    <tr v-for="(customer, index) in listAdditionalCustomers()"
+                        class="border-b hover:bg-gray-100">
+                        <td class="p-1">{{ customer.customer_code }}</td>
+                        <td class="p-1 text-right">
+                            <button
+                                @click="deleteAdditionalCustomer(index, customer.customer_code, customer.id)"
+                                class="rounded leading-none border-2 border-red-600 text-red-600 bg-white p-1 text-xs hover:bg-red-600 hover:text-white">
+                                Delete
+                            </button>
+                        </td>
+                    </tr>
+                    </tbody>
+                </table>
+
+                <div v-if="customers.length === 0" class="border text-center p-3">
+                    No additional customers added
+                </div>
+            </div>
+
+            <div v-if="!userData.id && (parseInt(userData.admin) !== 1)" class="mb-3">
+                <label>Additional Customers</label>
+                <div class="border text-center p-3 text-gray-500 underline">You must save the user before you
+                    can add extra customers
+                </div>
+            </div>
+
+            <div class="mb-3">
+                <div class="flex">
+                    <div class="mr-1">
+                        <label>Telephone</label>
+                        <input class="bg-gray-100" v-model="userData.telephone" placeholder="Telephone Number">
+                    </div>
+
+                    <div class="ml-1">
+                        <label>Mobile</label>
+                        <input class="bg-gray-100" v-model="userData.mobile" placeholder="Mobile Number">
+                    </div>
+                </div>
+            </div>
+
+            <div class="mt-8 text-right">
+                <button @click="reload()" class="button button-danger">Exit</button>
+                <button v-if="userData.id" @click="deleteUser(userData.id)"
+                        class="button bg-red-600 text-white">Delete
+                    User
+                </button>
+                <button v-if="userData.id" @click="passwordReset(userData.email)"
+                        class="button bg-gray-500 text-white">Password
+                    Reset
+                </button>
+                <button @click="storeUser(userData.id)" class="button bg-gray-700 text-white w-32">
+                    {{ this.userData.id ? 'Edit' : 'Create' }}
+                </button>
+            </div>
+        </modal>
     </div>
 </template>
-
-
-<style scoped>
-    .fade-enter-active,
-    .fade-leave-active {
-        transition: all 0.4s;
-    }
-
-    .fade-enter,
-    .fade-leave-to {
-        opacity: 0;
-    }
-</style>
 
 <script>
     export default {

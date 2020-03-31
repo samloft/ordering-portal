@@ -8,6 +8,10 @@ use Illuminate\Database\Eloquent\Model;
  * App\Models\ExpectedStock.
  *
  * @mixin \Eloquent
+ *
+ * @property string $product
+ * @property int $quantity
+ * @property \Illuminate\Support\Carbon $due_date
  */
 class ExpectedStock extends Model
 {

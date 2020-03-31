@@ -11,6 +11,21 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
  * App\Models\Customer.
  *
  * @mixin Eloquent
+ *
+ * @property string $code
+ * @property string $name
+ * @property string $address_line_1
+ * @property string $address_line_2
+ * @property string $city
+ * @property string $country
+ * @property string $post_code
+ * @property string $invoice_name
+ * @property string $invoice_address_line_1
+ * @property string $invoice_address_line_2
+ * @property string $invoice_city
+ * @property string $invoice_postcode
+ * @property string $vat_flag
+ * @property string $currency
  */
 class Customer extends Model
 {

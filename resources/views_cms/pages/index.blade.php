@@ -22,7 +22,7 @@
                 @include('layout.alerts')
 
                 <form action="{{ route('cms.pages.store') }}" method="post">
-                    <input name="key" value="{{ $data['key'] }}" hidden>
+                    <input name="name" value="{{ $data['key'] }}" hidden>
 
                     <textarea id="page" name="description" rows="30"
                               class="form-textarea block w-full transition duration-150 ease-in-out sm:text-sm sm:leading-5">{{ $data['data'] }}</textarea>

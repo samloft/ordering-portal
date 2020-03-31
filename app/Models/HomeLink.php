@@ -2,7 +2,6 @@
 
 namespace App\Models;
 
-use Eloquent;
 use File;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Database\Eloquent\Model;
@@ -10,32 +9,29 @@ use Illuminate\Support\Str;
 use Storage;
 
 /**
- * App\Models\HomeLink.
+ * App\Models\HomeLink
  *
- * @mixin Eloquent
+ * @mixin \Eloquent
+ *
+ * @property int $id
+ * @property string $type
+ * @property string $name
+ * @property string $image
+ * @property string $link
+ * @property string $file
+ * @property int $position
+ * @property string $style
+ * @property \Illuminate\Support\Carbon $created_at
+ * @property \Illuminate\Support\Carbon $updated_at
  */
 class HomeLink extends Model
 {
     protected $fillable = [];
 
     /**
-     * Return row for the given ID.
-     *
-     * @param $id
-     *
-     * @return HomeLink|Model|object|null
-     */
-    public static function show($id)
-    {
-        return self::where('id', $id)->first();
-    }
-
-    /**
      * Create a new home link.
      *
      * @return \App\Models\HomeLink|bool
-     *
-     * @throws \Illuminate\Contracts\Filesystem\FileNotFoundException
      */
     public static function store()
     {
@@ -47,41 +43,25 @@ class HomeLink extends Model
 
         $category_link = new self;
 
+        if (request()->file('download-file')) {
+            $file_stored = static::storeDownloadFile(request()->file('download-file'));
+
+            if (! $file_stored['status']) {
+                return false;
+            }
+
+            $category_link->file = $file_stored['name'];
+        }
+
         $category_link->type = request('type');
         $category_link->name = request('type').'-'.request('name');
         $category_link->link = request('url');
         $category_link->position = request('position');
         $category_link->image = $stored['name'];
+        $category_link->style = request('style');
         $category_link->save();
 
         return $category_link;
-    }
-
-    /**
-     * Update the given home link with new data.
-     *
-     * @return bool
-     *
-     * @throws \Illuminate\Contracts\Filesystem\FileNotFoundException
-     */
-    public static function edit(): bool
-    {
-        $data = [
-            'link' => request('link'),
-            'updated_at' => date('Y-m-d H:i:s'),
-        ];
-
-        if (request('image')) {
-            $stored = static::storeLinkImage(request()->file('image'), request('type'), request('name'));
-
-            if (! $stored['status']) {
-                return false;
-            }
-
-            $data['image'] = $stored['image'];
-        }
-
-        return self::where('id', request('id'))->update($data);
     }
 
     /**
@@ -93,16 +73,29 @@ class HomeLink extends Model
      * @param $name
      *
      * @return array
-     *
-     * @throws \Illuminate\Contracts\Filesystem\FileNotFoundException
      */
     public static function storeLinkImage($image, $type, $name): array
     {
         $extension = $image->getClientOriginalExtension();
         $image_name = $type.'-'.str::slug($name, '-').'.'.$extension;
-        $image_path = 'images/'.$type.'/'.$image_name;
+        $image_path = '/images/'.$type.'/'.$image_name;
 
         return ['status' => Storage::disk('public')->put($image_path, File::get($image)), 'name' => $image_name];
+    }
+
+    /**
+     * @param $file
+     *
+     * @return array
+     */
+    public static function storeDownloadFile($file): array
+    {
+        $name = $file->getClientOriginalName();
+
+        return [
+            'status' => Storage::disk('public')->put('/files/'.$name, File::get($file)),
+            'name' => $name,
+        ];
     }
 
     /**
@@ -111,18 +104,20 @@ class HomeLink extends Model
      * @param $id
      *
      * @return bool|int|null
+     *
+     * @throws \Exception
      */
     public static function destroy($id)
     {
-        //$link = static::show($id);
-        //
-        //Storage::disk('public')->delete('images/'.request('type').'/'.$link->image);
+        $link = self::findOrFail($id);
 
-        return self::where('id', $id)->delete();
+        Storage::disk('public')->delete('images/'.request('type').'/'.$link->image);
+
+        return $link->delete();
     }
 
     /**
-     * Return all the category links for the home page.
+     * List all the home links of type category.
      *
      * @return HomeLink[]|Collection
      */
@@ -132,13 +127,23 @@ class HomeLink extends Model
     }
 
     /**
-     * Return all the advert links for the home page.
+     * List all the home links of type advert.
      *
      * @return HomeLink[]|Collection
      */
     public static function adverts()
     {
         return self::where('type', 'advert')->orderBy('position', 'asc')->get();
+    }
+
+    /**
+     * List all the home links of type banner.
+     *
+     * @return \Illuminate\Database\Eloquent\Builder[]|\Illuminate\Database\Eloquent\Collection
+     */
+    public static function banners()
+    {
+        return self::where('type', 'banner')->orderBy('position', 'asc')->get();
     }
 
     /**
@@ -151,7 +156,10 @@ class HomeLink extends Model
     public static function updatePositions($items): bool
     {
         foreach ($items as $item) {
-            self::where('id', $item['id'])->update(['position' => $item['position']]);
+            $link = self::findOrFail($item['id']);
+
+            $link->position = $item['position'];
+            $link->save();
         }
 
         return true;

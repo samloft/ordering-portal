@@ -11,6 +11,13 @@ use Illuminate\Support\Collection;
  * App\Models\Category.
  *
  * @mixin Eloquent
+ *
+ * @property string $product
+ * @property string $level_1
+ * @property string $level_2
+ * @property string $level_3
+ * @property string $level_4
+ * @property string $level_5
  */
 class Category extends Model
 {
@@ -146,6 +153,9 @@ class Category extends Model
         foreach ($sub_categories as $key => $value) {
             $count = 0;
 
+            $override = CategoryImage::show($value['key']);
+            $sub_categories[$key]['override'] = $override ?: null;
+
             foreach ($products as $product) {
                 if (($product['category'] === $key) && $count <= 4) {
                     // Grab the first 4 products and add them to the array (For category images).
@@ -176,5 +186,26 @@ class Category extends Model
         }
 
         return false;
+    }
+
+    /**
+     * @return mixed
+     */
+    public static function brand()
+    {
+        return self::select([
+            'level_1',
+        ])->whereHas('prices', static function ($query) {
+            $query->where('customer_code', auth()->user()->customer->code);
+        })->groupBy('level_1')->get();
+    }
+
+    public static function range($brand)
+    {
+        return self::select([
+            'level_2',
+        ])->where('level_1', $brand)->whereHas('prices', static function ($query) {
+            $query->where('customer_code', auth()->user()->customer->code);
+        })->groupBy('level_2')->get();
     }
 }

@@ -3,10 +3,8 @@
 namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
+use Illuminate\Contracts\Auth\PasswordBroker;
 use Illuminate\Foundation\Auth\SendsPasswordResetEmails;
-use Illuminate\Http\RedirectResponse;
-use Illuminate\Http\Request;
-use Illuminate\Validation\ValidationException;
 use Password;
 
 class ForgotPasswordController extends Controller
@@ -34,25 +32,13 @@ class ForgotPasswordController extends Controller
         $this->middleware('guest');
     }
 
-    ///**
-    // * @param Request $request
-    // * @return RedirectResponse
-    // * @throws ValidationException
-    // */
-    //public function sendResetLinkEmail(Request $request)
-    //{
-    //    $this->validate($request, ['username' => 'required'], ['username.required' => 'Please enter your username.']);
-    //
-    //    $response = $this->broker()->sendResetLink(
-    //        $request->only('username')
-    //    );
-    //
-    //    if ($response === Password::RESET_LINK_SENT) {
-    //        return back()->with('status', trans($response));
-    //    }
-    //
-    //    return back()->withErrors(
-    //        ['email' => trans($response)]
-    //    );
-    //}
+    /**
+     * Get the broker to be used during password reset.
+     *
+     * @return \Illuminate\Contracts\Auth\PasswordBroker
+     */
+    protected function broker(): PasswordBroker
+    {
+        return Password::broker('users');
+    }
 }

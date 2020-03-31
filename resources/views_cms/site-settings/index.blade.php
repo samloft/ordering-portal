@@ -113,6 +113,41 @@
 
             <hr class="mt-3 mb-3">
 
+            <div class="flex">
+                <div class="w-1/4 mr-6">
+                    <h5 class="font-medium text-lg mb-2">VersionOne</h5>
+                    <p class="text-gray-600 text-sm">
+                        Set the DOCID for the versionone document that should be looked for (Sales Invoice for the company).
+                    </p>
+                </div>
+                <div class="w-3/4">
+                    <label for="v1_docid" class="text-sm font-medium">V1 DocID</label>
+                    <input id="v1_docid" class="bg-gray-100 mt-1" value="{{ $data['v1_docid'] }}"
+                           name="v1_docid"
+                           placeholder="V1 DocID">
+                </div>
+            </div>
+
+            <hr class="mt-3 mb-3">
+
+            <div class="flex">
+                <div class="w-1/4 mr-6">
+                    <h5 class="font-medium text-lg mb-2">Last Order Number</h5>
+                    <p class="text-gray-600 text-sm">
+                        Sets the last used order number, this means the next order placed will be this order incremented by 1.
+                    </p>
+                </div>
+                <div class="w-3/4">
+                    <label for="last-order-number" class="text-sm font-medium">Last Order</label>
+                    <input id="last-order-number" class="bg-gray-100 mt-1" value="{{ $data['last_order'] }}"
+                           name="last_order"
+                           placeholder="Last Order Number">
+                    <span class="text-xs">* Only accepts 1 letter followed by 6 numbers</span>
+                </div>
+            </div>
+
+            <hr class="mt-3 mb-3">
+
             <div class="text-right mt-5">
                 <button type="submit" class="button bg-gray-800 text-white">Save settings</button>
             </div>

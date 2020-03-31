@@ -76,28 +76,6 @@
                 <li>THINGS</li>
                 <li>STUFF</li>
             </ul>
-
-            {{--            <div style="display: inline-block">--}}
-            {{--                <div style="width: 200px; display: inline-block">Goods</div>--}}
-            {{--                <div style="display: inline-block">{{ currency($order->value, 2) }}</div>--}}
-            {{--            </div>--}}
-
-            {{--            <div class="row">--}}
-            {{--                <div class="col">Goods</div>--}}
-            {{--                <div class="col text-right">{{ currency($order->value, 2) }}</div>--}}
-            {{--            </div>--}}
-            {{--            <div class="row">--}}
-            {{--                <div class="col">Delivery</div>--}}
-            {{--                <div class="col text-right">SOON</div>--}}
-            {{--            </div>--}}
-            {{--            <div class="row">--}}
-            {{--                <div class="col">VAT</div>--}}
-            {{--                <div class="col text-right">SOON</div>--}}
-            {{--            </div>--}}
-            {{--            <div class="row">--}}
-            {{--                <div class="col">Total</div>--}}
-            {{--                <div class="col text-right">SOON</div>--}}
-            {{--            </div>--}}
         </div>
     </div>
 @endsection

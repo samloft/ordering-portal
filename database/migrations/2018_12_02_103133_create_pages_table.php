@@ -27,7 +27,7 @@ class CreatePagesTable extends Migration
         ]);
 
         DB::table('pages')->insert([
-            'name'        => 'pages',
+            'name'        => 'data-protection',
             'description' => 'Data Protection will go here',
             'created_at'  => date('Y-m-d H:i:s'),
         ]);

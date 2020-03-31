@@ -1,0 +1,68 @@
+@import '../app';
+
+:root {
+    --background-primary-color: rgb(6, 70, 106);
+    --background-primary-text: rgb(255, 255, 255);
+    --button-primary-color: rgb(8, 54, 84);
+    --button-primary-text: rgb(255, 255, 255);
+
+    --background-invert-color: rgb(6, 38, 58);
+    --background-invert-text: rgb(255, 255, 255);
+
+    --button-secondary-color: rgb(8, 54, 84);
+    --button-secondary-text: rgb(255, 255, 255);
+    --button-inverse-color: rgb(8, 54, 84);
+    --button-inverse-text: rgb(255, 255, 255);
+
+    --primary-text: rgb(8, 54, 84);
+}
+
+img.logo {
+    height: 80px;
+}
+
+.categories-nav {
+    a {
+        @apply .py-2 .px-2 .block;
+    }
+
+    .active {
+        @apply .font-medium;
+    }
+
+    .top-level {
+        @apply .shadow;
+    }
+
+    .top-level:first-of-type {
+        @apply .rounded-t-lg;
+    }
+
+    .top-level:last-of-type {
+        @apply .rounded-b-lg;
+    }
+
+    .sub-categories {
+        @apply .bg-white .text-sm;
+    }
+
+    .top-level:nth-child(odd) {
+        background-color: rgb(198, 219, 231);
+    }
+
+    .top-level:nth-child(even) {
+        background-color: rgb(170, 201, 219);
+    }
+}
+
+footer {
+    background-color: rgb(8, 54, 84) !important;
+}
+
+.pagination ul .active a {
+    color: rgb(255, 255, 255) !important;
+}
+
+.icon .secondary {
+    fill: rgb(6, 70, 106) !important;
+}

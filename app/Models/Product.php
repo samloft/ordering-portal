@@ -5,13 +5,38 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
-use Illuminate\Http\JsonResponse;
 use Storage;
 
 /**
  * App\Models\Product.
  *
  * @mixin \Eloquent
+ *
+ * @property string $code
+ * @property string $type
+ * @property string $name
+ * @property string $uom
+ * @property float $trade_price
+ * @property int $order_multiples
+ * @property string $description
+ * @property string $note
+ * @property string $link1
+ * @property string $link2
+ * @property string $link3
+ * @property int $not_sold
+ * @property int $stock
+ * @property string $vat_flag
+ * @property int $packaging
+ * @property int $obsolete
+ * @property string $product_barcode
+ * @property string $inner_barcode
+ * @property string $outer_barcode
+ * @property float $gross_weight
+ * @property float $net_weight
+ * @property int $length
+ * @property int $width
+ * @property int $height
+ * @property string $luckins_code
  */
 class Product extends Model
 {
@@ -20,28 +45,43 @@ class Product extends Model
     public $timestamps = false;
 
     /**
+     * Get the products URL path.
+     *
      * @return string
      */
     public function path(): string
     {
-        return "/products/view/{$this->code}";
+        return '/products/view/'.encodeUrl($this->code);
     }
 
     /**
+     * Check to see if an image exists for a product, if not
+     * return a default "Image Soon" image.
+     *
+     * @param bool $blank
+     *
      * @return string
      */
-    public function image(): string
+    public function image($blank = false): string
     {
+        // Products that have a forward slash in them need to have the image files with a ^ instead.
         $image = str_replace('/', '^', $this->code).'.png';
 
         if (Storage::disk('public')->exists('product_images/'.$image)) {
-            return asset('product_images/'.$image);
+            return asset('/product_images/'.$image);
+        }
+
+        // If $blank is passed, it means we dont want any image returned.
+        if ($blank) {
+            return '';
         }
 
         return asset('images/no-image.png');
     }
 
     /**
+     * Get the price for the product based on the current logged in users customer code.
+     *
      * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
      */
     public function prices(): BelongsTo
@@ -50,6 +90,8 @@ class Product extends Model
     }
 
     /**
+     * Get the categories that a product belongs to.
+     *
      * @return BelongsTo
      */
     public function categories(): BelongsTo
@@ -58,6 +100,8 @@ class Product extends Model
     }
 
     /**
+     * Get the expected stock for the product.
+     *
      * @return \Illuminate\Database\Eloquent\Relations\HasMany
      */
     public function expectedStock(): HasMany
@@ -80,7 +124,7 @@ class Product extends Model
     }
 
     /**
-     * Get data for the given product code.
+     * Get data for the given product code, with it's price information and expected stock.
      *
      * @param $product_code
      *
@@ -88,7 +132,7 @@ class Product extends Model
      */
     public static function show($product_code)
     {
-        return self::where('code', $product_code)->whereHas('prices')->with(['prices', 'expectedStock'])->first();
+        return self::where('code', $product_code)->whereHas('prices')->with('prices')->with('expectedStock')->first();
     }
 
     /**
@@ -102,7 +146,7 @@ class Product extends Model
     {
         return self::where(static function ($query) use ($search_term) {
             $query->whereRaw('upper(products.code) LIKE \'%'.strtoupper($search_term).'%\'')->orWhereRaw('upper(name) LIKE \'%'.strtoupper($search_term).'%\'')->orWhereRaw('upper(description) LIKE \'%'.strtoupper($search_term).'%\'');
-        })->whereHas('prices')->paginate(10);
+        })->whereHas('prices')->with('prices')->paginate(10);
     }
 
     /**
@@ -115,30 +159,6 @@ class Product extends Model
     public static function autocomplete($search)
     {
         return self::select('code')->whereHas('prices')->whereRaw('UPPER(code) like \''.strtoupper($search).'%\'')->orderBy('code', 'asc')->limit(10)->get();
-    }
-
-    /**
-     * @param $product
-     *
-     * @return \Illuminate\Http\JsonResponse
-     */
-    public static function details($product): JsonResponse
-    {
-        $product_details = self::where('code', $product)->first();
-
-        if ($product_details) {
-            $image_check = self::checkImage($product_details->product);
-
-            return response()->json([
-                'product_code' => $product_details->code,
-                'description' => $product_details->name,
-                'image_file' => $image_check['found'] ? asset($image_check['image']) : null,
-            ]);
-        }
-
-        return response()->json([
-            'message' => 'Product not found',
-        ], 404);
     }
 
     /**

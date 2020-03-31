@@ -4,9 +4,9 @@
 
 @section('content')
     <div class="w-full mb-5 text-center">
-        <h2 class="font-semibold tracking-widest">{{ __('Saved Baskets') }}</h2>
+        <h2 class="font-semibold tracking-widest">Saved Baskets</h2>
         <p class="font-thin">
-            {{ __('View your saved baskets or create new ones for easy repeat orders') }}
+            View your saved baskets or create new ones for easy repeat orders
         </p>
     </div>
 
@@ -32,42 +32,54 @@
 
             <div class="text-center mt-6">
                 <a href="{{ route('saved-baskets') }}">
-                    <button type="button" class="button button-danger w-40">{{ __('Reset') }}</button>
+                    <button type="button" class="button button-danger w-40">Reset</button>
                 </a>
-                <button class="button button-primary w-40">{{ __('Search') }}</button>
+                <button class="button button-primary w-40">Search</button>
             </div>
         </form>
     </div>
 
-    <h2 class="font-semibold tracking-widest mt-3 mb-3">{{ __('Search Results') }}</h2>
+    <h2 class="font-semibold tracking-widest mt-3 mb-3">Search Results</h2>
 
-    <div class="table-container">
-        <table class="table">
-            <thead>
-            <tr>
-                <th>Template Reference</th>
-                <th>Saved Date</th>
-                <th class="text-right">Delete Template</th>
-            </tr>
-            </thead>
-            <tbody>
-            @foreach($saved_baskets as $basket)
-                <tr class="cursor-pointer hover:bg-gray-50"
-                    onclick="window.location = '{{ route('saved-baskets.show', ['id' => $basket->id]) }}';">
-                    <td class="align-middle">{{ $basket->reference }}</td>
-                    <td class="align-middle">{{ date('d/m/Y', strtotime($basket->created_at)) }}</td>
-                    <td class="text-right">
-                        <a href="{{ route('saved-baskets.destroy', ['id' => $basket->id]) }}">
-                            <button id="saved_basket__delete" class="button button-sm button-danger">
-                                {{ __('Delete Template') }}
-                            </button>
-                        </a>
-                    </td>
+    @if(count($saved_baskets) > 0)
+        <div class="table-container">
+            <table class="table">
+                <thead>
+                <tr>
+                    <th>Template Reference</th>
+                    <th>Saved Date</th>
+                    <th class="text-right">Delete Template</th>
                 </tr>
-            @endforeach
-            </tbody>
-        </table>
-    </div>
+                </thead>
+                <tbody>
+                @foreach($saved_baskets as $basket)
+                    <tr class="cursor-pointer hover:bg-gray-50"
+                        onclick="window.location = '{{ route('saved-baskets.show', ['id' => $basket->id]) }}';">
+                        <td class="align-middle">{{ $basket->reference }}</td>
+                        <td class="align-middle">{{ date('d/m/Y', strtotime($basket->created_at)) }}</td>
+                        <td class="text-right">
+                            <a href="{{ route('saved-baskets.destroy', ['id' => $basket->id]) }}">
+                                <button id="saved_basket__delete" class="button button-sm button-danger">
+                                    Delete Template
+                                </button>
+                            </a>
+                        </td>
+                    </tr>
+                @endforeach
+                </tbody>
+            </table>
+        </div>
 
-    {{ $saved_baskets->appends($_GET)->links('layout.pagination') }}
+        {{ $saved_baskets->appends($_GET)->links('layout.pagination') }}
+
+    @elseif(!$search)
+        <div class="bg-white rounded-lg shadow p-4">
+            <h3 class="text-center text-lg font-semibold">You currently have now saved baskets, add items to your basket
+                and click "Save Basket" on the basket page to create one.</h3>
+        </div>
+    @else
+        <div class="bg-white rounded-lg shadow p-4">
+            <h3 class="text-center text-lg font-semibold">No saved baskets found for that search</h3>
+        </div>
+    @endif
 @endsection
