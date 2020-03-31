@@ -29,73 +29,56 @@
             </tbody>
         </table>
 
-        <Transition name="fade">
-            <div v-if="modal"
-                 class="fixed inset-0 w-full h-screen flex items-center justify-center bg-smoke-dark z-50">
-                <div class="relative w-full max-w-2xl bg-white shadow-lg rounded-lg p-8 text-left">
-                    <div class="mb-3">
-                        <label for="delivery_code">Delivery Code</label>
-                        <input id="delivery_code" class="bg-gray-100" v-model="data.code"
-                               placeholder="Delivery Code E.G M1994">
-                        <span v-text="errors.get('code')" class="block text-sm text-red-600"/>
-                    </div>
-
-                    <div class="mb-3">
-                        <label for="delivery_title">Delivery Title</label>
-                        <input id="delivery_title" class="bg-gray-100" v-model="data.title"
-                               placeholder="Delivery title (What the user sees on checkout)">
-                        <span v-text="errors.get('title')" class="block text-sm text-red-600"/>
-                    </div>
-
-                    <div class="mb-3">
-                        <label for="delivery_identifier">Identifier</label>
-                        <input id="delivery_identifier" class="bg-gray-100" v-model="data.identifier"
-                               placeholder="Delivery identifier (What is displayed on the order)">
-                        <span v-text="errors.get('identifier')" class="block text-sm text-red-600"/>
-                        <small>The text that is displayed on the description for the order</small>
-                    </div>
-
-                    <div class="mb-3">
-                        <label for="price">Price Below Small Order</label>
-                        <input id="price" class="bg-gray-100" v-model="data.price"
-                               placeholder="Price below small order">
-                        <span v-text="errors.get('price')" class="block text-sm text-red-600"/>
-                        <small>The price that will be payed if the order is <span class="font-semibold">BELOW</span> the
-                            small order threshold E.G 25</small>
-                    </div>
-
-                    <div class="mb-3">
-                        <label for="price_low">Price Over Small Order</label>
-                        <input id="price_low" class="bg-gray-100" v-model="data.price_low"
-                               placeholder="Price over small order">
-                        <span v-text="errors.get('price_low')" class="block text-sm text-red-600"/>
-                        <small>The price that will be payed if the order is <span class="font-semibold">OVER</span> the
-                            small order threshold E.G 20</small>
-                    </div>
-
-                    <div class="text-right">
-                        <button @click="closeModal()" class="button button-danger">Exit</button>
-                        <button v-show="editing" @click="destroy(data.id)" class="button bg-red-600 text-white">Delete
-                        </button>
-                        <button @click="save()" class="button bg-gray-700 text-white w-32" v-text="buttonText"/>
-                    </div>
-                </div>
+        <modal v-if="modal">
+            <div class="mb-3">
+                <label for="delivery_code">Delivery Code</label>
+                <input id="delivery_code" class="bg-gray-100" v-model="data.code"
+                       placeholder="Delivery Code E.G M1994">
+                <span v-text="errors.get('code')" class="block text-sm text-red-600"/>
             </div>
-        </Transition>
+
+            <div class="mb-3">
+                <label for="delivery_title">Delivery Title</label>
+                <input id="delivery_title" class="bg-gray-100" v-model="data.title"
+                       placeholder="Delivery title (What the user sees on checkout)">
+                <span v-text="errors.get('title')" class="block text-sm text-red-600"/>
+            </div>
+
+            <div class="mb-3">
+                <label for="delivery_identifier">Identifier</label>
+                <input id="delivery_identifier" class="bg-gray-100" v-model="data.identifier"
+                       placeholder="Delivery identifier (What is displayed on the order)">
+                <span v-text="errors.get('identifier')" class="block text-sm text-red-600"/>
+                <small>The text that is displayed on the description for the order</small>
+            </div>
+
+            <div class="mb-3">
+                <label for="price">Price Below Small Order</label>
+                <input id="price" class="bg-gray-100" v-model="data.price"
+                       placeholder="Price below small order">
+                <span v-text="errors.get('price')" class="block text-sm text-red-600"/>
+                <small>The price that will be payed if the order is <span class="font-semibold">BELOW</span> the
+                    small order threshold E.G 25</small>
+            </div>
+
+            <div class="mb-3">
+                <label for="price_low">Price Over Small Order</label>
+                <input id="price_low" class="bg-gray-100" v-model="data.price_low"
+                       placeholder="Price over small order">
+                <span v-text="errors.get('price_low')" class="block text-sm text-red-600"/>
+                <small>The price that will be payed if the order is <span class="font-semibold">OVER</span> the
+                    small order threshold E.G 20</small>
+            </div>
+
+            <div class="text-right">
+                <button @click="closeModal()" class="button button-danger">Exit</button>
+                <button v-show="editing" @click="destroy(data.id)" class="button bg-red-600 text-white">Delete
+                </button>
+                <button @click="save()" class="button bg-gray-700 text-white w-32" v-text="buttonText"/>
+            </div>
+        </modal>
     </div>
 </template>
-
-<style scoped>
-    .fade-enter-active,
-    .fade-leave-active {
-        transition: all 0.4s;
-    }
-
-    .fade-enter,
-    .fade-leave-to {
-        opacity: 0;
-    }
-</style>
 
 <script>
     class Errors {

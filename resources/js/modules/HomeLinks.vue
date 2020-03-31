@@ -41,141 +41,136 @@
             </div>
         </div>
 
-        <Transition name="fade">
-            <div
-                v-if="newLink"
-                class="fixed inset-0 w-full h-screen flex items-center justify-center bg-smoke-dark z-50">
-                <div class="relative w-full max-w-2xl bg-white shadow-lg rounded-lg p-8 text-left">
-                    <div class="mb-3">
-                        <label>Name</label>
-                        <input class="bg-gray-100" v-model="linkData.name" placeholder="Name">
-                        <span v-text="errors.get('name')" class="text-sm text-red-600"/>
+        <modal v-if="newLink">
+            <div class="mb-3">
+                <label>Name</label>
+                <input class="bg-gray-100" v-model="linkData.name" placeholder="Name">
+                <span v-text="errors.get('name')" class="text-sm text-red-600"/>
+            </div>
+
+            <div v-if="type === 'Category Home Link'">
+                <div class="relative mb-3">
+                    <label>URL <small>(Top Level)</small></label>
+                    <select @change="topSelected(linkData.topLevelValue)"
+                            class="p-2 rounded border bg-gray-100 text-gray-600 appearance-none"
+                            autocomplete="off"
+                            v-model="linkData.topLevelValue"
+                    >
+                        <option v-for="category in toplevel">{{ category.level_1 }}</option>
+                    </select>
+                    <div
+                        class="pointer-events-none absolute inset-y-0 right-0 flex items-center px-3 pt-6 text-gray-700">
+                        <svg class="fill-current h-4 w-4" xmlns="http://www.w3.org/2000/svg"
+                             viewBox="0 0 20 20">
+                            <path
+                                d="M9.293 12.95l.707.707L15.657 8l-1.414-1.414L10 10.828 5.757 6.586 4.343 8z"/>
+                        </svg>
                     </div>
+                    <span v-text="errors.get('url')" class="text-sm text-red-600"/>
+                </div>
 
-                    <div v-if="type === 'Category Home Link'">
-                        <div class="relative mb-3">
-                            <label>URL <small>(Top Level)</small></label>
-                            <select @change="topSelected(linkData.topLevelValue)"
-                                    class="p-2 rounded border bg-gray-100 text-gray-600 appearance-none"
-                                    autocomplete="off"
-                                    v-model="linkData.topLevelValue"
-                            >
-                                <option v-for="category in toplevel">{{ category.level_1 }}</option>
-                            </select>
-                            <div
-                                class="pointer-events-none absolute inset-y-0 right-0 flex items-center px-3 pt-6 text-gray-700">
-                                <svg class="fill-current h-4 w-4" xmlns="http://www.w3.org/2000/svg"
-                                     viewBox="0 0 20 20">
-                                    <path
-                                        d="M9.293 12.95l.707.707L15.657 8l-1.414-1.414L10 10.828 5.757 6.586 4.343 8z"/>
-                                </svg>
-                            </div>
-                            <span v-text="errors.get('url')" class="text-sm text-red-600"/>
-                        </div>
-
-                        <div v-show="secondLevelValues" class="relative mb-3">
-                            <label>URL <small>(Second Level)</small></label>
-                            <select @change="secondSelected(linkData.topLevelValue, linkData.secondLevelValue)"
-                                    class="p-2 rounded border bg-gray-100 text-gray-600 appearance-none"
-                                    autocomplete="off"
-                                    v-model="linkData.secondLevelValue">
-                                <option v-for="category in secondLevelValues">{{ category.level_2 }}</option>
-                            </select>
-                            <div
-                                class="pointer-events-none absolute inset-y-0 right-0 flex items-center px-3 pt-6 text-gray-700">
-                                <svg class="fill-current h-4 w-4" xmlns="http://www.w3.org/2000/svg"
-                                     viewBox="0 0 20 20">
-                                    <path
-                                        d="M9.293 12.95l.707.707L15.657 8l-1.414-1.414L10 10.828 5.757 6.586 4.343 8z"/>
-                                </svg>
-                            </div>
-                        </div>
-
-                        <div v-show="thirdLevelValues" class="relative mb-3">
-                            <label>URL <small>(Third Level)</small></label>
-                            <select
-                                class="p-2 rounded border bg-gray-100 text-gray-600 appearance-none"
-                                autocomplete="off"
-                                v-model="linkData.thirdLevelValue">
-                                <option v-for="category in thirdLevelValues">{{ category.level_3 }}</option>
-                            </select>
-                            <div
-                                class="pointer-events-none absolute inset-y-0 right-0 flex items-center px-3 pt-6 text-gray-700">
-                                <svg class="fill-current h-4 w-4" xmlns="http://www.w3.org/2000/svg"
-                                     viewBox="0 0 20 20">
-                                    <path
-                                        d="M9.293 12.95l.707.707L15.657 8l-1.414-1.414L10 10.828 5.757 6.586 4.343 8z"/>
-                                </svg>
-                            </div>
-                        </div>
+                <div v-show="secondLevelValues" class="relative mb-3">
+                    <label>URL <small>(Second Level)</small></label>
+                    <select @change="secondSelected(linkData.topLevelValue, linkData.secondLevelValue)"
+                            class="p-2 rounded border bg-gray-100 text-gray-600 appearance-none"
+                            autocomplete="off"
+                            v-model="linkData.secondLevelValue">
+                        <option v-for="category in secondLevelValues">{{ category.level_2 }}</option>
+                    </select>
+                    <div
+                        class="pointer-events-none absolute inset-y-0 right-0 flex items-center px-3 pt-6 text-gray-700">
+                        <svg class="fill-current h-4 w-4" xmlns="http://www.w3.org/2000/svg"
+                             viewBox="0 0 20 20">
+                            <path
+                                d="M9.293 12.95l.707.707L15.657 8l-1.414-1.414L10 10.828 5.757 6.586 4.343 8z"/>
+                        </svg>
                     </div>
+                </div>
 
-                    <div v-else class="mb-3">
-                        <label>URL</label>
-                        <input class="bg-gray-100" v-model="linkData.url" placeholder="URL">
-                        <span v-text="errors.get('url')" class="text-sm text-red-600"/>
-                    </div>
-
-                    <div v-if="type === 'Banner'">
-                        <div class="flex items-center mb-3">
-                            <h4 class="flex-shrink-0 pr-4 bg-white text-sm leading-5 tracking-wider font-semibold uppercase text-gray-600">
-                                OR
-                            </h4>
-                            <div class="flex-1 border-t-2 border-gray-200"></div>
-                        </div>
-
-                        <div class="mb-3">
-                            <label>File</label>
-                            <input type="file" @change="fileAdded($event.target.files[0])" class="bg-gray-100" placeholder="Select a file">
-                            <span v-text="errors.get('file')" class="text-sm text-red-600"/>
-                        </div>
-
-                        <div class="relative mb-3">
-                            <label>Style</label>
-                            <select class="p-2 rounded border bg-gray-100 text-gray-600 appearance-none"
-                                    autocomplete="off"
-                                    v-model="linkData.style"
-                            >
-                                <option value="w-full">Full Width</option>
-                                <option value="w-1/2">Half Width</option>
-                            </select>
-                            <div
-                                class="pointer-events-none absolute inset-y-0 right-0 flex items-center px-3 pt-6 text-gray-700">
-                                <svg class="fill-current h-4 w-4" xmlns="http://www.w3.org/2000/svg"
-                                     viewBox="0 0 20 20">
-                                    <path
-                                        d="M9.293 12.95l.707.707L15.657 8l-1.414-1.414L10 10.828 5.757 6.586 4.343 8z"/>
-                                </svg>
-                            </div>
-                            <span v-text="errors.get('style')" class="text-sm text-red-600"/>
-                        </div>
-                    </div>
-
-                    <div class="mb-3">
-                        <label>Image File</label>
-                        <label
-                            class="flex items-center justify-center p-2 bg-gray-800 text-gray-100 rounded-lg shadow border border-blue cursor-pointer hover:opacity-75">
-                            <svg class="w-6 h-6" fill="currentColor" xmlns="http://www.w3.org/2000/svg"
-                                 viewBox="0 0 20 20">
-                                <path
-                                    d="M16.88 9.1A4 4 0 0 1 16 17H5a5 5 0 0 1-1-9.9V7a3 3 0 0 1 4.52-2.59A4.98 4.98 0 0 1 17 8c0 .38-.04.74-.12 1.1zM11 11h3l-4-4-4 4h3v3h2v-3z"/>
-                            </svg>
-                            <span class="ml-4 font-thin uppercase tracking-widest">Select a image</span>
-                            <input type='file' class="hidden" accept="image/*"
-                                   @change="imageAdded($event.target.files[0])"/>
-                        </label>
-                        <span v-text="errors.get('file')" class="text-sm text-red-600"/>
-                    </div>
-
-                    <img v-if="imageFile" :src="imageFile" class="mb-3 shadow mx-auto max-h-64" alt="Image Upload"/>
-
-                    <div class="mt-8 text-right">
-                        <button @click="newLink = false" class="button button-danger">Cancel</button>
-                        <button @click="submit()" class="button bg-gray-800 text-white">Create</button>
+                <div v-show="thirdLevelValues" class="relative mb-3">
+                    <label>URL <small>(Third Level)</small></label>
+                    <select
+                        class="p-2 rounded border bg-gray-100 text-gray-600 appearance-none"
+                        autocomplete="off"
+                        v-model="linkData.thirdLevelValue">
+                        <option v-for="category in thirdLevelValues">{{ category.level_3 }}</option>
+                    </select>
+                    <div
+                        class="pointer-events-none absolute inset-y-0 right-0 flex items-center px-3 pt-6 text-gray-700">
+                        <svg class="fill-current h-4 w-4" xmlns="http://www.w3.org/2000/svg"
+                             viewBox="0 0 20 20">
+                            <path
+                                d="M9.293 12.95l.707.707L15.657 8l-1.414-1.414L10 10.828 5.757 6.586 4.343 8z"/>
+                        </svg>
                     </div>
                 </div>
             </div>
-        </Transition>
+
+            <div v-else class="mb-3">
+                <label>URL</label>
+                <input class="bg-gray-100" v-model="linkData.url" placeholder="URL">
+                <span v-text="errors.get('url')" class="text-sm text-red-600"/>
+            </div>
+
+            <div v-if="type === 'Banner'">
+                <div class="flex items-center mb-3">
+                    <h4 class="flex-shrink-0 pr-4 bg-white text-sm leading-5 tracking-wider font-semibold uppercase text-gray-600">
+                        OR
+                    </h4>
+                    <div class="flex-1 border-t-2 border-gray-200"></div>
+                </div>
+
+                <div class="mb-3">
+                    <label>File</label>
+                    <input type="file" @change="fileAdded($event.target.files[0])" class="bg-gray-100"
+                           placeholder="Select a file">
+                    <span v-text="errors.get('file')" class="text-sm text-red-600"/>
+                </div>
+
+                <div class="relative mb-3">
+                    <label>Style</label>
+                    <select class="p-2 rounded border bg-gray-100 text-gray-600 appearance-none"
+                            autocomplete="off"
+                            v-model="linkData.style"
+                    >
+                        <option value="w-full">Full Width</option>
+                        <option value="w-1/2">Half Width</option>
+                    </select>
+                    <div
+                        class="pointer-events-none absolute inset-y-0 right-0 flex items-center px-3 pt-6 text-gray-700">
+                        <svg class="fill-current h-4 w-4" xmlns="http://www.w3.org/2000/svg"
+                             viewBox="0 0 20 20">
+                            <path
+                                d="M9.293 12.95l.707.707L15.657 8l-1.414-1.414L10 10.828 5.757 6.586 4.343 8z"/>
+                        </svg>
+                    </div>
+                    <span v-text="errors.get('style')" class="text-sm text-red-600"/>
+                </div>
+            </div>
+
+            <div class="mb-3">
+                <label>Image File</label>
+                <label
+                    class="flex items-center justify-center p-2 bg-gray-800 text-gray-100 rounded-lg shadow border border-blue cursor-pointer hover:opacity-75">
+                    <svg class="w-6 h-6" fill="currentColor" xmlns="http://www.w3.org/2000/svg"
+                         viewBox="0 0 20 20">
+                        <path
+                            d="M16.88 9.1A4 4 0 0 1 16 17H5a5 5 0 0 1-1-9.9V7a3 3 0 0 1 4.52-2.59A4.98 4.98 0 0 1 17 8c0 .38-.04.74-.12 1.1zM11 11h3l-4-4-4 4h3v3h2v-3z"/>
+                    </svg>
+                    <span class="ml-4 font-thin uppercase tracking-widest">Select a image</span>
+                    <input type='file' class="hidden" accept="image/*"
+                           @change="imageAdded($event.target.files[0])"/>
+                </label>
+                <span v-text="errors.get('file')" class="text-sm text-red-600"/>
+            </div>
+
+            <img v-if="imageFile" :src="imageFile" class="mb-3 shadow mx-auto max-h-64" alt="Image Upload"/>
+
+            <div class="mt-8 text-right">
+                <button @click="newLink = false" class="button button-danger">Cancel</button>
+                <button @click="submit()" class="button bg-gray-800 text-white">Create</button>
+            </div>
+        </modal>
     </div>
 </template>
 
@@ -293,7 +288,7 @@
                     showCancelButton: true,
                 }).then(response => {
                     if (response.value) {
-                        axios.delete('/cms/home-links/' + id , {
+                        axios.delete('/cms/home-links/' + id, {
                             type: link_type
                         }).then(response => {
                             let i = vm.categories.map(item => item.id).indexOf(id);

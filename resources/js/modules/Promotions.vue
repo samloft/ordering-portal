@@ -61,36 +61,21 @@
             No promotions have been added yet.
         </div>
 
-        <fade-transition>
-            <div v-if="modal"
-                 class="fixed bottom-0 inset-x-0 px-4 pb-4 sm:inset-0 sm:flex sm:items-center sm:justify-center z-50">
-                <div class="fixed inset-0 transition-opacity">
-                    <div class="absolute inset-0 bg-gray-500 opacity-75"></div>
-                </div>
-
-                <div
-                    class="bg-white rounded-lg px-4 pt-5 pb-4 overflow-hidden shadow-xl transform transition-all sm:max-w-lg sm:w-full sm:p-6">
-                    <div class="mt-3 text-center sm:mt-0 sm:ml-4 sm:text-left">
-                        <h3 class="text-lg leading-6 font-medium text-gray-900 mb-3">
-                            Product Promotion
-                        </h3>
-                        <div class="mb-3">
-                            <label for="product">Product Code</label>
-                            <input id="product" class="bg-gray-100" v-model="data.product"
-                                   placeholder="Product code that customers need to buy">
-                            <span v-text="errors.get('product')" class="block text-sm text-red-600"/>
-                        </div>
-                    </div>
-
-                    <div class="text-right mt-3">
-                        <button @click="modal = false" class="button button-danger">Exit</button>
-                        <!--                        <button v-show="editing" @click="destroy(data.id)" class="button bg-red-600 text-white">Delete-->
-                        <!--                        </button>-->
-                        <button class="button bg-gray-700 text-white w-32">Save</button>
-                    </div>
-                </div>
+        <modal v-if="modal" title="Product Promotion">
+            <div class="mb-3">
+                <label for="product">Product Code</label>
+                <input id="product" class="bg-gray-100" v-model="data.product"
+                       placeholder="Product code that customers need to buy">
+                <span v-text="errors.get('product')" class="block text-sm text-red-600"/>
             </div>
-        </fade-transition>
+
+            <div class="text-right mt-3">
+                <button @click="modal = false" class="button button-danger">Exit</button>
+                <!--                        <button v-show="editing" @click="destroy(data.id)" class="button bg-red-600 text-white">Delete-->
+                <!--                        </button>-->
+                <button class="button bg-gray-700 text-white w-32">Save</button>
+            </div>
+        </modal>
     </div>
 </template>
 

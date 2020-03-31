@@ -27,6 +27,7 @@ Vue.component('submit-button', require('./modules/Button.vue').default);
 Vue.component('product-data', require('./modules/ProductData.vue').default);
 Vue.component('small-order-notice', require('./modules/SmallOrderNotice.vue').default);
 Vue.component('fade-transition', require('./modules/FadeTransition.vue').default);
+Vue.component('modal', require('./modules/Modal.vue').default);
 
 window.Event = new Vue();
 
