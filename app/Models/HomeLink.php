@@ -9,7 +9,7 @@ use Illuminate\Support\Str;
 use Storage;
 
 /**
- * App\Models\HomeLink
+ * App\Models\HomeLink.
  *
  * @mixin \Eloquent
  *

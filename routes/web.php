@@ -191,7 +191,7 @@ Route::fallback(static function () {
 });
 
 Route::get('product_images/{image}', static function ($image) {
-    if(\Storage::disk('s3')->exists($image)) {
+    if (\Storage::disk('s3')->exists($image)) {
         return response()->make(\Storage::disk('s3')->get($image), 200, [
             'content-disposition' => 'inline',
             'Content-Type' => 'image/png',

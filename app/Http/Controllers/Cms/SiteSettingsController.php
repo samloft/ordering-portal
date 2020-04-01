@@ -34,7 +34,7 @@ class SiteSettingsController extends Controller
     public function update(): RedirectResponse
     {
         request()->validate([
-            'last_order' => 'required|regex:/^[A-Z]{1}[0-9]{6}$/'
+            'last_order' => 'required|regex:/^[A-Z]{1}[0-9]{6}$/',
         ]);
 
         GlobalSettings::storeSiteSettings();
