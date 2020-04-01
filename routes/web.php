@@ -190,7 +190,7 @@ Route::fallback(static function () {
     return view('errors.404');
 });
 
-Route::get('product_images_test/{image}', static function ($image) {
+Route::get('product_images/{image}', static function ($image) {
     if(\Storage::disk('s3')->exists($image)) {
         return response()->make(\Storage::disk('s3')->get($image), 200, [
             'content-disposition' => 'inline',

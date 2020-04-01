@@ -60,7 +60,7 @@ class ProductImageController extends Controller
 
         $name = $image->getClientOriginalName();
 
-        $upload = Storage::disk('s3')->put($name, File::get($image));
+        $upload = Storage::put($name, File::get($image));
 
         if ($upload) {
             return response()->json('success');
