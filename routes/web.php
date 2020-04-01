@@ -93,9 +93,18 @@ Route::group(['middleware' => ['auth', 'has.customer']], static function () {
      * Support pages
      */
     Route::group(['prefix' => 'support'], static function () {
-        Route::get('terms-and-conditions', ['uses' => 'SupportController@index', 'page' => 'terms-and-conditions'])->name('support.terms');
-        Route::get('accessibility-policy', ['uses' => 'SupportController@index', 'page' => 'accessibility-policy'])->name('support.accessibility');
-        Route::get('data-protection', ['uses' => 'SupportController@index', 'page' => 'data-protection'])->name('support.data');
+        Route::get('terms-and-conditions', [
+            'uses' => 'SupportController@index',
+            'page' => 'terms-and-conditions',
+        ])->name('support.terms');
+        Route::get('accessibility-policy', [
+            'uses' => 'SupportController@index',
+            'page' => 'accessibility-policy',
+        ])->name('support.accessibility');
+        Route::get('data-protection', [
+            'uses' => 'SupportController@index',
+            'page' => 'data-protection',
+        ])->name('support.data');
     });
 
     /*
@@ -173,10 +182,21 @@ Route::group(['middleware' => ['auth', 'has.customer']], static function () {
 
 Auth::routes();
 
-Route::get('not-supported', static function() {
+Route::get('not-supported', static function () {
     return view('errors.not-supported');
 })->name('not-supported');
 
 Route::fallback(static function () {
     return view('errors.404');
+});
+
+Route::get('product_images/{image}', static function ($image) {
+    if(\Storage::disk('s3')->exists($image)) {
+        return response()->make(\Storage::disk('s3')->get($image), 200, [
+            'content-disposition' => 'inline',
+            'Content-Type' => 'image/png',
+        ]);
+    }
+
+    abort(404);
 });

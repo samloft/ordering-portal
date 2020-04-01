@@ -30,6 +30,8 @@ class ProductImageController extends Controller
      */
     public function missingImages(): array
     {
+        ini_set('max_execution_time', 300);
+
         $product_list = Price::products();
         $missing_images = [];
 
@@ -38,7 +40,7 @@ class ProductImageController extends Controller
 
             if (! $image['found']) {
                 $missing_images[] = [
-                    'product'   => $product->product,
+                    'product' => $product->product,
                     'file_name' => str_replace('%2B', ' ', encodeUrl($product->product)).'.png',
                 ];
             }
@@ -51,6 +53,8 @@ class ProductImageController extends Controller
      * Upload product images.
      *
      * @return JsonResponse
+     *
+     * @throws \Illuminate\Contracts\Filesystem\FileNotFoundException
      */
     public function store(): JsonResponse
     {
@@ -58,7 +62,7 @@ class ProductImageController extends Controller
 
         $name = $image->getClientOriginalName();
 
-        $upload = Storage::disk('public')->put('product_images/'.$name, File::get($image));
+        $upload = Storage::put($name, File::get($image));
 
         if ($upload) {
             return response()->json('success');

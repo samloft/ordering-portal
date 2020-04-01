@@ -67,8 +67,8 @@ class Product extends Model
         // Products that have a forward slash in them need to have the image files with a ^ instead.
         $image = str_replace('/', '^', $this->code).'.png';
 
-        if (Storage::disk('public')->exists('product_images/'.$image)) {
-            return asset('/product_images/'.$image);
+        if (Storage::exists($image)) {
+            return Storage::url($image);
         }
 
         // If $blank is passed, it means we dont want any image returned.
@@ -175,12 +175,12 @@ class Product extends Model
         foreach ($products as $product) {
             $product = str_replace(['%2B', '+'], ' ', encodeUrl($product)).'.png';
 
-            $exists = Storage::disk('public')->exists('product_images/'.$product);
+            $exists = Storage::exists($product);
 
             if ($exists) {
                 return [
                     'found' => true,
-                    'image' => '/product_images/'.$product,
+                    'image' => Storage::url($product),
                 ];
             }
         }

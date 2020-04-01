@@ -161,6 +161,15 @@
 
                     this.checkComplete = true;
                     this.checkingImages = false;
+                }).catch(error => {
+                    this.checkingImages = false;
+                    this.checkComplete = true;
+
+                    if(error.response.status === 504) {
+                        return Vue.swal('error', 'The request timed out', 'error');
+                    }
+
+                    return Vue.swal('error', 'An error occurred, unable to check missing images');
                 });
             },
             prepareUploads: function (files) {
