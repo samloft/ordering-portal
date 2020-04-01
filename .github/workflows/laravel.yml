@@ -42,7 +42,11 @@ jobs:
 
   merge-staging:
 
+    runs-on: ubuntu-latest
+
     steps:
+      - uses: actions/checkout@v2
+
       - name: Checkout Staging
         run: git checkout staging
 
