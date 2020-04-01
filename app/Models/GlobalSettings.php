@@ -176,7 +176,7 @@ class GlobalSettings extends Model
         ]);
 
         $settings::where('key', 'last-order')->update([
-            'value' => request('last_order')
+            'value' => request('last_order'),
         ]);
 
         return true;
