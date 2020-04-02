@@ -130,7 +130,7 @@ class Product extends Model
     {
         return self::whereHas('prices')->whereHas('categories', static function ($query) use ($categories) {
             $query->where('level_1', $categories['level_1'])->where('level_2', $categories['level_2'])->where('level_3', $categories['level_3']);
-        })->with('prices')->paginate(10);
+        })->where('not_sold', false)->with('prices')->paginate(10);
     }
 
     /**
