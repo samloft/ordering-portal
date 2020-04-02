@@ -59,9 +59,9 @@ class Product extends Model
      *
      * @return string
      */
-    public function localImagePath(): string
+    public function remoteImagePath(): string
     {
-        return '/product_images/'.encodeUrl($this->code);
+        return config('app.url').'/product_images/'.encodeUrl($this->code).'.png';
     }
 
     /**

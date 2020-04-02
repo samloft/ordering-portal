@@ -40,7 +40,7 @@ class ProductDataExport extends ExportStyling implements FromCollection, WithHea
                 'Outer Length (mm)' => $result->length,
                 'Outer Width (mm)' => $result->width,
                 'Outer Height (mm)' => $result->height,
-                'Image URL' => $result->localImagePath(),
+                'Image URL' => $result->remoteImagePath(),
             ];
         }
 
