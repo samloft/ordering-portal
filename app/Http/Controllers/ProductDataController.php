@@ -2,8 +2,8 @@
 
 namespace App\Http\Controllers;
 
-use App\Exports\ProductDataExport;
-use App\Exports\ProductPricesExport;
+use App\Exports\ProductDataExcel;
+use App\Exports\ProductPricesExcel;
 use App\Models\Category;
 use App\Models\GlobalSettings;
 use Maatwebsite\Excel\Facades\Excel;
@@ -36,7 +36,7 @@ class ProductDataController extends Controller
     {
         ini_set('memory_limit', '256M');
 
-        return Excel::download(new ProductPricesExport(request('brand'), request('range')), 'product-net-prices.xlsx');
+        return Excel::download(new ProductPricesExcel(request('brand'), request('range')), 'product-net-prices.xlsx');
     }
 
     /**
@@ -49,6 +49,6 @@ class ProductDataController extends Controller
     {
         ini_set('memory_limit', '256M');
 
-        return Excel::download(new ProductDataExport, 'product-data.xlsx');
+        return Excel::download(new ProductDataExcel, 'product-data.xlsx');
     }
 }

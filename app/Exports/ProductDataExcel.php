@@ -9,7 +9,7 @@ use Maatwebsite\Excel\Concerns\WithColumnFormatting;
 use Maatwebsite\Excel\Concerns\WithHeadings;
 use PhpOffice\PhpSpreadsheet\Style\NumberFormat;
 
-class ProductDataExport extends ExportStyling implements FromCollection, WithHeadings, WithColumnFormatting
+class ProductDataExcel extends ExcelStyling implements FromCollection, WithHeadings, WithColumnFormatting
 {
     /**
      * @return \Illuminate\Support\Collection

@@ -7,14 +7,14 @@ use Illuminate\Support\Collection;
 use Maatwebsite\Excel\Concerns\FromCollection;
 use Maatwebsite\Excel\Concerns\WithHeadings;
 
-class ProductPricesExport extends ExportStyling implements FromCollection, WithHeadings
+class ProductPricesExcel extends ExcelStyling implements FromCollection, WithHeadings
 {
     protected $brand;
 
     protected $range;
 
     /**
-     * ProductDataExport constructor.
+     * ProductDataExcel constructor.
      *
      * @param $brand
      * @param $range

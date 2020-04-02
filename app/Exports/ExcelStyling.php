@@ -8,7 +8,7 @@ use Maatwebsite\Excel\Events\AfterSheet;
 use PhpOffice\PhpSpreadsheet\Style\Border;
 use PhpOffice\PhpSpreadsheet\Style\Fill;
 
-class ExportStyling implements ShouldAutoSize, WithEvents
+class ExcelStyling implements ShouldAutoSize, WithEvents
 {
     /**
      * @return array

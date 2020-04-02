@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Exports\BackOrderExport;
 use App\Models\AccountSummary;
 use App\Models\GlobalSettings;
 use App\Models\OrderTrackingHeader;
@@ -12,6 +13,7 @@ use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Response;
 use Illuminate\View\View;
 use Symfony\Component\HttpFoundation\BinaryFileResponse;
+use Maatwebsite\Excel\Facades\Excel;
 
 class ReportController extends Controller
 {
@@ -65,29 +67,7 @@ class ReportController extends Controller
             }
 
             if ($output === 'csv') {
-                $headings = [
-                    'Order Number',
-                    'Product',
-                    'Description',
-                    'Ordered',
-                    'Outstanding',
-                    'Next Expecting',
-                ];
-
-                $lines = [];
-
-                foreach ($back_orders as $back_order) {
-                    $lines[] = [
-                        $back_order->order_no,
-                        $back_order->product,
-                        $back_order->long_description,
-                        Carbon::parse($back_order->date_received)->format('d-m-Y'),
-                        $back_order->line_qty,
-                        $back_order->due_date ? Carbon::parse($back_order->due_date)->format('d-m-Y') : 'Unknown',
-                    ];
-                }
-
-                return $this->createCSV('back_orders.csv', $headings, $lines);
+                return Excel::download(new BackOrderExport(), 'back-orders.csv');
             }
         }
 
