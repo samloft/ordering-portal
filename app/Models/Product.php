@@ -55,6 +55,16 @@ class Product extends Model
     }
 
     /**
+     * Get the local product image route.
+     *
+     * @return string
+     */
+    public function localImagePath(): string
+    {
+        return '/product_images/'.encodeUrl($this->code);
+    }
+
+    /**
      * Check to see if an image exists for a product, if not
      * return a default "Image Soon" image.
      *

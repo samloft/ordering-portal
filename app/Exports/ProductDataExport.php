@@ -28,8 +28,8 @@ class ProductDataExport extends ExportStyling implements FromCollection, WithHea
                 'Category Level 1' => $result->categories->level_1 ?? null,
                 'Category Level 2' => $result->categories->level_2 ?? null,
                 'Category Level 3' => $result->categories->level_3 ?? null,
-                'Outer Box Quantity' => 'TODO',
-                'Inner Box Quantity' => 'TODO',
+                'Outer Box Quantity' => $result->outer_box_qty,
+                'Inner Box Quantity' => $result->order_multiples,
                 'Luckins Code' => $result->luckins_code,
                 'Trade Price' => $result->trade_price,
                 'Product Barcode' => $result->product_barcode,
@@ -40,7 +40,7 @@ class ProductDataExport extends ExportStyling implements FromCollection, WithHea
                 'Outer Length (mm)' => $result->length,
                 'Outer Width (mm)' => $result->width,
                 'Outer Height (mm)' => $result->height,
-                'Image URL' => $result->image(true),
+                'Image URL' => $result->localImagePath(),
             ];
         }
 

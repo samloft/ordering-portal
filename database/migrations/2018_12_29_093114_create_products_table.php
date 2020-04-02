@@ -20,6 +20,7 @@ class CreateProductsTable extends Migration
             $table->char('uom');
             $table->float('trade_price');
             $table->integer('order_multiples');
+            $table->integer('outer_box_qty')->nullable();
             $table->char('description');
             $table->char('note')->nullable();
             $table->string('link1')->nullable();
