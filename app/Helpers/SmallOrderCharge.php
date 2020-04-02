@@ -34,6 +34,7 @@ function smallOrderCharge($order_value, $delivery = null)
     }
 
     return [
+        'original' => $small_order_data,
         'threshold' => $small_order_data['threshold'],
         'charge' => $charge,
         'exclude_collection' => $small_order_data['exclude_on_collection'],

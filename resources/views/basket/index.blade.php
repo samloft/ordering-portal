@@ -26,10 +26,10 @@
             <div class="bg-white rounded shadow-md p-6 mb-5">
                 <basket-summary :summary="{{ json_encode($basket['summary'], true) }}"></basket-summary>
 
-                @if($basket['summary']['small_order_rules']['threshold'] > 0)
+                @if($basket['summary']['small_order_rules']['original']['threshold'] > 0)
                     <div class="mt-3 text-xs">
                         * orders below {{ currency($basket['summary']['small_order_rules']['threshold'], 0) }} attract
-                        a {{ currency($basket['summary']['small_order_rules']['charge'], 0) }}
+                        a {{ currency($basket['summary']['small_order_rules']['original']['charge'], 0) }}
 
                         @if($basket['summary']['small_order_rules']['exclude_collection'] && $basket['summary']['small_order_rules']['exclude_charged_delivery'])
                             small order charge, unless you are collecting your order or paying a delivery charge.
