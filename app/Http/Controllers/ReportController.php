@@ -110,29 +110,29 @@ class ReportController extends Controller
             $summary_lines['total-outstanding'] = $total_outstanding;
 
             $summary_line[] = [
-                isset($summary_lines['total-outstanding']) ? number_format($summary_lines['total-outstanding'], 2) : '0.00',
-                isset($summary_lines['not-due']) ? number_format($summary_lines['not-due'], 2) : '0.00',
-                isset($summary_lines['overdue-up-to-30-day']) ? number_format($summary_lines['overdue-up-to-30-day'], 2) : '0.00',
-                isset($summary_lines['overdue-up-to-60-days']) ? number_format($summary_lines['overdue-up-to-60-days'], 2) : '0.00',
-                isset($summary_lines['over-60-days-overdue']) ? number_format($summary_lines['over-60-days-overdue'], 2) : '0.00',
+                'total-outstanding' => isset($summary_lines['total-outstanding']) ? number_format($summary_lines['total-outstanding'], 2) : '0.00',
+                'not-due' => isset($summary_lines['not-due']) ? number_format($summary_lines['not-due'], 2) : '0.00',
+                'overdue-up-to-30-day' => isset($summary_lines['overdue-up-to-30-day']) ? number_format($summary_lines['overdue-up-to-30-day'], 2) : '0.00',
+                'overdue-up-to-60-days' => isset($summary_lines['overdue-up-to-60-days']) ? number_format($summary_lines['overdue-up-to-60-days'], 2) : '0.00',
+                'over-60-days-overdue' => isset($summary_lines['over-60-days-overdue']) ? number_format($summary_lines['over-60-days-overdue'], 2) : '0.00',
             ];
 
             $lines = [];
 
             foreach ($invoice_lines as $invoice_line) {
                 $lines[] = [
-                    $invoice_line->item_no,
-                    $invoice_line->reference,
-                    Carbon::parse($invoice_line->dated)->format('d-m-Y'),
-                    Carbon::parse($invoice_line->due_date)->format('d-m-Y'),
-                    $invoice_line->unall_curr_amount,
+                    'item_no' => $invoice_line->item_no,
+                    'reference' => $invoice_line->reference,
+                    'dated' => Carbon::parse($invoice_line->dated)->format('d-m-Y'),
+                    'due_date' => Carbon::parse($invoice_line->due_date)->format('d-m-Y'),
+                    'amount' => $invoice_line->unall_curr_amount,
                 ];
             }
 
             if ($output === 'pdf') {
                 $company_details = json_decode(GlobalSettings::key('company-details'), true);
 
-                return PDF::loadView('pdf.account-summary', compact('invoice_lines', 'summary_lines', 'company_details'))->download('account_summary.pdf');
+                return PDF::loadView('pdf.account-summary', compact('lines', 'summary_line', 'company_details'))->download('account_summary.pdf');
             }
 
             if ($output === 'csv') {

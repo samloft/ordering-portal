@@ -26,13 +26,13 @@
             <th>Due Date</th>
             <th>Amount</th>
         </tr>
-        @foreach($invoice_lines as $invoice_line)
+        @foreach($lines as $line)
             <tr>
-                <td>{{ $invoice_line->item_no }}</td>
-                <td>{{ $invoice_line->reference }}</td>
-                <td>{{ \Carbon\Carbon::parse($invoice_line->dated)->format('d-m-Y') }}</td>
-                <td>{{ \Carbon\Carbon::parse($invoice_line->due_date)->format('d-m-Y') }}</td>
-                <td class="text-right">{{ $invoice_line->unall_curr_amount }}</td>
+                <td>{{ $line['item_no'] }}</td>
+                <td>{{ $line['reference'] }}</td>
+                <td>{{ $line['dated'] }}</td>
+                <td>{{ $line['due_date'] }}</td>
+                <td class="text-right">{{ $line['amount'] }}</td>
             </tr>
         @endforeach
     </table>
@@ -52,11 +52,11 @@
             <th>Overdue over 60 days</th>
         </tr>
         <tr>
-            <td class="text-right">{{ $summary_lines['Total Outstanding'] ?? 0 }}</td>
-            <td class="text-right">{{ $summary_lines['Not due'] ?? 0 }}</td>
-            <td class="text-right">{{ $summary_lines['Overdue up to 30 day'] ?? 0 }}</td>
-            <td class="text-right">{{ $summary_lines['Overdue up to 60 days'] ?? 0 }}</td>
-            <td class="text-right">{{ $summary_lines['Over 60 days overdue'] ?? 0 }}</td>
+            <td class="text-right">{{ $summary_line[0]['total-outstanding'] ?? 0 }}</td>
+            <td class="text-right">{{ $summary_line[0]['not-due'] ?? 0 }}</td>
+            <td class="text-right">{{ $summary_line[0]['overdue-up-to-30-day'] ?? 0 }}</td>
+            <td class="text-right">{{ $summary_line[0]['overdue-up-to-60-days'] ?? 0 }}</td>
+            <td class="text-right">{{ $summary_line[0]['over-60-days-overdue'] ?? 0 }}</td>
         </tr>
     </table>
 @endsection
