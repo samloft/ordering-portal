@@ -32,6 +32,8 @@ class HomeLink extends Model
      * Create a new home link.
      *
      * @return \App\Models\HomeLink|bool
+     *
+     * @throws \Illuminate\Contracts\Filesystem\FileNotFoundException
      */
     public static function store()
     {
@@ -73,27 +75,31 @@ class HomeLink extends Model
      * @param $name
      *
      * @return array
+     *
+     * @throws \Illuminate\Contracts\Filesystem\FileNotFoundException
      */
     public static function storeLinkImage($image, $type, $name): array
     {
         $extension = $image->getClientOriginalExtension();
         $image_name = $type.'-'.str::slug($name, '-').'.'.$extension;
-        $image_path = '/images/'.$type.'/'.$image_name;
+        $image_path = '/'.config('app.name').'/'.$type.'/'.$image_name;
 
-        return ['status' => Storage::disk('public')->put($image_path, File::get($image)), 'name' => $image_name];
+        return ['status' => Storage::put($image_path, File::get($image)), 'name' => $image_name];
     }
 
     /**
      * @param $file
      *
      * @return array
+     *
+     * @throws \Illuminate\Contracts\Filesystem\FileNotFoundException
      */
     public static function storeDownloadFile($file): array
     {
         $name = $file->getClientOriginalName();
 
         return [
-            'status' => Storage::disk('public')->put('/files/'.$name, File::get($file)),
+            'status' => Storage::put('/'.config('app.name').'/files/'.$name, File::get($file)),
             'name' => $name,
         ];
     }
@@ -111,7 +117,7 @@ class HomeLink extends Model
     {
         $link = self::findOrFail($id);
 
-        Storage::disk('public')->delete('images/'.request('type').'/'.$link->image);
+        Storage::delete('/'.config('app.name').'/images/'.request('type').'/'.$link->image);
 
         return $link->delete();
     }

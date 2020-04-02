@@ -13,7 +13,7 @@
                 </p>
             </div>
             <div class="w-3/4">
-                <home-links :topLevel="{{ json_encode($category_top_level, true) }}" :list="{{ json_encode($categories->jsonSerialize(), true) }}" :type="'Category Home Link'"></home-links>
+                <home-links company="{{ config('app.name') }}" s3="{{ config('app.s3_url') }}" :topLevel="{{ json_encode($category_top_level, true) }}" :list="{{ json_encode($categories->jsonSerialize(), true) }}" :type="'Category Home Link'"></home-links>
             </div>
         </div>
 
@@ -27,7 +27,7 @@
                 </p>
             </div>
             <div class="w-3/4">
-                <home-links :list="{{ json_encode($adverts, true) }}" :topLevel="[]" :type="'Advertisement'"></home-links>
+                <home-links company="{{ config('app.name') }}" s3="{{ config('app.s3_url') }}" :list="{{ json_encode($adverts, true) }}" :topLevel="[]" :type="'Advertisement'"></home-links>
             </div>
         </div>
 
@@ -41,7 +41,7 @@
                 </p>
             </div>
             <div class="w-3/4">
-                <home-links :list="{{ json_encode($banners, true) }}" :topLevel="[]" type="Banner"></home-links>
+                <home-links company="{{ config('app.name') }}" s3="{{ config('app.s3_url') }}" :list="{{ json_encode($banners, true) }}" :topLevel="[]" type="Banner"></home-links>
             </div>
         </div>
     </div>

@@ -202,6 +202,8 @@
             type: null,
             list: Array,
             toplevel: Array,
+            company: null,
+            s3: null,
         },
         data() {
             return {
@@ -228,7 +230,7 @@
                     });
             },
             getImage(type, image) {
-                return '/images/' + type + '/' + image;
+                return this.s3 + this.company + '/' + type + '/' + image;
             },
             imageAdded(file) {
                 this.form.append('file', file);
