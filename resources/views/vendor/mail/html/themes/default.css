@@ -112,8 +112,7 @@ img {
 /* Logo */
 
 .logo {
-    height: 75px;
-    width: 75px;
+    height: 78px;
 }
 
 /* Body */
@@ -206,6 +205,10 @@ img {
 .content-cell {
     max-width: 100vw;
     padding: 32px;
+}
+
+.footer .content-cell {
+    font-size: 11px;
 }
 
 /* Buttons */
