@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Exports\AccountSummaryExport;
 use App\Exports\BackOrderExport;
 use App\Models\AccountSummary;
 use App\Models\GlobalSettings;
@@ -11,6 +12,7 @@ use Carbon\Carbon;
 use Illuminate\Contracts\View\Factory;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Response;
+use Illuminate\Support\Str;
 use Illuminate\View\View;
 use Symfony\Component\HttpFoundation\BinaryFileResponse;
 use Maatwebsite\Excel\Facades\Excel;
@@ -31,6 +33,9 @@ class ReportController extends Controller
      * Generate a report based on the type & output.
      *
      * @return RedirectResponse|Response|BinaryFileResponse|void
+     *
+     * @throws \PhpOffice\PhpSpreadsheet\Exception
+     * @throws \PhpOffice\PhpSpreadsheet\Writer\Exception
      */
     public function show()
     {
@@ -54,6 +59,9 @@ class ReportController extends Controller
      * @param $output
      *
      * @return RedirectResponse|Response|BinaryFileResponse
+     *
+     * @throws \PhpOffice\PhpSpreadsheet\Exception
+     * @throws \PhpOffice\PhpSpreadsheet\Writer\Exception
      */
     public function backOrderReport($output)
     {
@@ -67,7 +75,7 @@ class ReportController extends Controller
             }
 
             if ($output === 'csv') {
-                return Excel::download(new BackOrderExport(), 'back-orders.csv');
+                return Excel::download(new BackOrderExport($back_orders), 'back-orders.csv', \Maatwebsite\Excel\Excel::CSV);
             }
         }
 
@@ -78,6 +86,9 @@ class ReportController extends Controller
      * @param $output
      *
      * @return \Illuminate\Http\RedirectResponse|\Illuminate\Http\Response|\Symfony\Component\HttpFoundation\BinaryFileResponse|\Symfony\Component\HttpFoundation\StreamedResponse
+     *
+     * @throws \PhpOffice\PhpSpreadsheet\Exception
+     * @throws \PhpOffice\PhpSpreadsheet\Writer\Exception
      */
     public function accountSummaryReport($output)
     {
@@ -91,12 +102,32 @@ class ReportController extends Controller
             $total_outstanding = 0;
 
             foreach ($summary as $key => $value) {
-                $summary_lines[$value->age] = $value->price;
+                $summary_lines[Str::slug(strtolower($value->age))] = $value->price;
 
                 $total_outstanding += $value->price;
             }
 
-            $summary_lines['Total Outstanding'] = $total_outstanding;
+            $summary_lines['total-outstanding'] = $total_outstanding;
+
+            $summary_line[] = [
+                isset($summary_lines['total-outstanding']) ? number_format($summary_lines['total-outstanding'], 2) : '0.00',
+                isset($summary_lines['not-due']) ? number_format($summary_lines['not-due'], 2) : '0.00',
+                isset($summary_lines['overdue-up-to-30-day']) ? number_format($summary_lines['overdue-up-to-30-day'], 2) : '0.00',
+                isset($summary_lines['overdue-up-to-60-days']) ? number_format($summary_lines['overdue-up-to-60-days'], 2) : '0.00',
+                isset($summary_lines['over-60-days-overdue']) ? number_format($summary_lines['over-60-days-overdue'], 2) : '0.00',
+            ];
+
+            $lines = [];
+
+            foreach ($invoice_lines as $invoice_line) {
+                $lines[] = [
+                    $invoice_line->item_no,
+                    $invoice_line->reference,
+                    Carbon::parse($invoice_line->dated)->format('d-m-Y'),
+                    Carbon::parse($invoice_line->due_date)->format('d-m-Y'),
+                    $invoice_line->unall_curr_amount,
+                ];
+            }
 
             if ($output === 'pdf') {
                 $company_details = json_decode(GlobalSettings::key('company-details'), true);
@@ -105,92 +136,10 @@ class ReportController extends Controller
             }
 
             if ($output === 'csv') {
-                $summary_headings = [
-                    'Total Outstanding',
-                    'Not Due',
-                    'Overdue up to 30 days',
-                    'Overdue up to 60 days',
-                    'Overdue over 60 days',
-                ];
-
-                $summary_line[] = [
-                    $summary_lines['Total Outstanding'] ?? 0,
-                    $summary_lines['Not due'] ?? 0,
-                    $summary_lines['Overdue up to 30 day'] ?? 0,
-                    $summary_lines['Overdue up to 60 days'] ?? 0,
-                    $summary_lines['Over 60 days overdue'] ?? 0,
-                ];
-
-                $invoice_headings = [
-                    'Invoice No.',
-                    'Order No.',
-                    'Invoice Date',
-                    'Due Date',
-                    'Amount',
-                ];
-
-                $lines = [];
-
-                foreach ($invoice_lines as $invoice_line) {
-                    $lines[] = [
-                        $invoice_line->item_no,
-                        $invoice_line->reference,
-                        Carbon::parse($invoice_line->dated)->format('d-m-Y'),
-                        Carbon::parse($invoice_line->due_date)->format('d-m-Y'),
-                        $invoice_line->unall_curr_amount,
-                    ];
-                }
-
-                return $this->createCSV('account_summary.csv', $summary_headings, $summary_line, $invoice_headings, $lines);
+                return Excel::download(new AccountSummaryExport($summary_line, $lines), 'account-summary.csv', \Maatwebsite\Excel\Excel::CSV);
             }
         }
 
         return back()->with('error', 'You dont currently have an order summary to display.');
-    }
-
-    /**
-     * Create a CSV file from the passed headings and lines array.
-     *
-     * @param $filename
-     * @param $headings
-     * @param $lines
-     * @param null $extra_headings
-     * @param null $extra_lines
-     *
-     * @return \Symfony\Component\HttpFoundation\BinaryFileResponse|\Symfony\Component\HttpFoundation\StreamedResponse
-     */
-    public function createCSV(
-        $filename,
-        $headings,
-        $lines,
-        $extra_headings = null,
-        $extra_lines = null
-    ) {
-        $callback = static function () use ($headings, $lines, $extra_headings, $extra_lines) {
-            $handle = fopen('php://output', 'wb+');
-            fputcsv($handle, $headings);
-
-            foreach ($lines as $line) {
-                fputcsv($handle, $line);
-            }
-
-            if ($extra_headings) {
-                fputcsv($handle, $extra_headings);
-            }
-
-            if ($extra_lines) {
-                foreach ($extra_lines as $extra_line) {
-                    fputcsv($handle, $extra_line);
-                }
-            }
-
-            fclose($handle);
-        };
-
-        $headers = [
-            'Content-Type' => 'text/css',
-        ];
-
-        return response()->streamDownload($callback, $filename, $headers);
     }
 }

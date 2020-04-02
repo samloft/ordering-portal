@@ -6,10 +6,21 @@ use Carbon\Carbon;
 use Illuminate\Support\Collection;
 use Maatwebsite\Excel\Concerns\FromCollection;
 use Maatwebsite\Excel\Concerns\WithHeadings;
-use App\Models\OrderTrackingHeader;
 
 class BackOrderExport implements FromCollection, WithHeadings
 {
+    protected $back_orders;
+
+    /**
+     * AccountSummaryExport constructor.
+     *
+     * @param $back_orders
+     */
+    public function __construct($back_orders)
+    {
+        $this->back_orders = $back_orders;
+    }
+
     /**
      * @return \Illuminate\Support\Collection
      */
@@ -17,7 +28,7 @@ class BackOrderExport implements FromCollection, WithHeadings
     {
         $orders = [];
 
-        $results = OrderTrackingHeader::backOrders();
+        $results = $this->back_orders;
 
         foreach ($results as $result) {
             $orders[] = [
