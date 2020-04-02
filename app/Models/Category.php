@@ -36,6 +36,14 @@ class Category extends Model
     }
 
     /**
+     * @return HasMany
+     */
+    public function notSoldProducts(): HasMany
+    {
+        return $this->hasMany(Product::class, 'code', 'product')->where('not_sold', true);
+    }
+
+    /**
      * @param $level
      * @return \Illuminate\Support\Collection
      */
@@ -59,7 +67,7 @@ class Category extends Model
             'level_5',
         ])->whereHas('prices', static function ($query) {
             $query->where('customer_code', auth()->user()->customer->code);
-        })->groupBy('level_1', 'level_2', 'level_3', 'level_4', 'level_5')->get();
+        })->doesntHave('notSoldProducts')->groupBy('level_1', 'level_2', 'level_3', 'level_4', 'level_5')->get();
 
         $array = [];
 
@@ -127,7 +135,7 @@ class Category extends Model
             $query
         ) {
             $query->where('customer_code', auth()->user()->customer->code);
-        })->orderBy('level_'.$level)->orderBy('product')->get();
+        })->doesntHave('notSoldProducts')->orderBy('level_'.$level)->orderBy('product')->get();
 
         $products = [];
 
