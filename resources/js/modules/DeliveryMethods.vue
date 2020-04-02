@@ -16,9 +16,9 @@
             <tr class="border-b" v-for="deliveryMethod in delivery_methods">
                 <td class="p-1 px-5">{{ deliveryMethod.code }}</td>
                 <td class="p-1 px-5">{{ deliveryMethod.title }}</td>
-                <td class="p-1 px-5 text-right"><span class="badge badge-info">{{ deliveryMethod.price_low }}</span>
+                <td class="p-1 px-5 text-right"><span class="badge badge-info">{{ deliveryMethod.price }}</span>
                 </td>
-                <td class="p-1 px-5 text-right"><span class="badge badge-info">{{ deliveryMethod.price }}</span></td>
+                <td class="p-1 px-5 text-right"><span class="badge badge-info">{{ deliveryMethod.price_low }}</span></td>
                 <td class="p-1 px-5 flex justify-end">
                     <button @click="showModal(deliveryMethod)" type="button"
                             class="button bg-gray-700 text-white text-xs w-20">
