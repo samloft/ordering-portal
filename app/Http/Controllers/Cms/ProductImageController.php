@@ -30,7 +30,7 @@ class ProductImageController extends Controller
      */
     public function missingImages(): array
     {
-        ini_set('max_execution_time', 300);
+        ini_set('max_execution_time', 0);
 
         $product_list = Price::products();
         $missing_images = [];
