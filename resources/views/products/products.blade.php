@@ -15,7 +15,9 @@
             <div class="flex flex-wrap -mx-3">
                 @foreach($sub_category_list['list'] as $category)
                     <product-categories :category="{{ json_encode($category, true) }}"
-                                        :current="{{ json_encode($sub_category_list['current'], true) }}"></product-categories>
+                                        :current="{{ json_encode($sub_category_list['current'], true) }}"
+                                        company="{{ config('app.name') }}"
+                                        s3="{{ config('app.s3_url') }}"></product-categories>
                 @endforeach
             </div>
         @endif

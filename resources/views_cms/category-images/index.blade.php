@@ -13,7 +13,7 @@
                 </p>
             </div>
             <div class="w-3/4">
-                <category-images :top_categories="{{ json_encode($category_top_level, true) }}" :category_images="{{ json_encode($images, true) }}"></category-images>
+                <category-images company="{{ config('app.name') }}" s3="{{ config('app.s3_url') }}" :top_categories="{{ json_encode($category_top_level, true) }}" :category_images="{{ json_encode($images, true) }}"></category-images>
             </div>
         </div>
     </div>

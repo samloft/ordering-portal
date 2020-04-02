@@ -17,7 +17,7 @@
                 </tr>
                 <tr v-for="image in images" class="border-b hover:bg-gray-100" :key="image.id">
                     <td class="p-3 px-5">
-                        <img :src="'/category_images/' + image.image" :alt="image.image" class="h-16">
+                        <img :src="s3 + company + '/category_images/' + image.image" :alt="image.image" class="h-16">
                     </td>
                     <td class="p-3 px-5">{{ image.level_1 }}</td>
                     <td class="p-3 px-5">{{ image.level_2 }}</td>
@@ -140,6 +140,8 @@
         props: {
             category_images: {},
             top_categories: {},
+            company: null,
+            s3: null,
         },
         data() {
             return {

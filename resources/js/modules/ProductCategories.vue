@@ -66,11 +66,13 @@
         props: {
             category: {},
             current: null,
+            company: null,
+            s3: null,
         },
         methods: {
             imageUrl: async function (override, products) {
                 if (override) {
-                    return this.productImageUrl = '/category_images/' + override;
+                    return this.productImageUrl = this.s3 + this.company + '/category_images/' + override;
                 } else {
                     return axios.get('/category/image/' + products)
                         .then(response => {

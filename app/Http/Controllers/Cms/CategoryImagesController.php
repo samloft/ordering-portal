@@ -44,7 +44,7 @@ class CategoryImagesController extends Controller
         $category_image->level_3 = request('level_3');
         $category_image->image = $name;
 
-        Storage::disk('public')->put('category_images/'.$name, File::get($image));
+        Storage::put(config('app.name').'/category_images/'.$name, File::get($image));
 
         $category_image->save();
 
@@ -68,7 +68,7 @@ class CategoryImagesController extends Controller
     {
         $category_image = CategoryImage::findOrFail($id);
 
-        Storage::disk('public')->delete('category_images/'.$category_image->image);
+        Storage::delete(config('app.name').'/category_images/'.$category_image->image);
 
         $deleted = $category_image->delete();
 
