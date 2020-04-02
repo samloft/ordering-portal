@@ -3,7 +3,7 @@
         <div class="mb-5">
             <a href="{{ $advert->link }}" target="_blank">
                 <img class="shadow w-64"
-                     src="{{ \Illuminate\Support\Facades\Storage::disk('public')->url('/images/advert/'.$advert->image) }}">
+                     src="{{ \Illuminate\Support\Facades\Storage::url('/images/advert/'.$advert->image) }}">
             </a>
         </div>
     @endforeach

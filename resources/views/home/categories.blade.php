@@ -2,9 +2,9 @@
     <div class="flex flex-wrap">
         @foreach($links['banners'] as $banner)
             <div class="{{ $banner['style'] }} mb-3 {{ $banner['style'] === 'w-1/2' ? 'px-3' : '' }}">
-                <a href="{{ $banner['file'] ? \Illuminate\Support\Facades\Storage::disk('public')->url('/files/'.$banner['file']) : $banner['link'] }}">
+                <a href="{{ $banner['file'] ? \Illuminate\Support\Facades\Storage::url('/files/'.$banner['file']) : $banner['link'] }}">
                     <img class="shadow mx-auto"
-                         src="{{ \Illuminate\Support\Facades\Storage::disk('public')->url('/images/banner/'.$banner['image']) }}"
+                         src="{{ \Illuminate\Support\Facades\Storage::url('/images/banner/'.$banner['image']) }}"
                          alt="{{ $banner['name'] }}">
                 </a>
             </div>
@@ -18,7 +18,7 @@
             <div class="w-1/5 px-3 mb-5">
                 <a href="{{ $category['link'] }}">
                     <img class="rounded shadow"
-                         src="{{ \Illuminate\Support\Facades\Storage::disk('public')->url('/images/category/'.$category['image']) }}"
+                         src="{{ \Illuminate\Support\Facades\Storage::url('/images/category/'.$category['image']) }}"
                          alt="{{ $category['name'] }}"/>
                 </a>
             </div>
