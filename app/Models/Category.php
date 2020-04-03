@@ -49,7 +49,7 @@ class Category extends Model
      */
     public static function show($level): Collection
     {
-        return self::select('level_'.$level)->where('level_'.$level, '!=', null)->groupBy('level_'.$level)->get();
+        return self::select('level_'.$level)->where('level_'.$level, '!=', null)->where('level_1', '!=', '')->groupBy('level_'.$level)->get();
     }
 
     /**
@@ -179,11 +179,10 @@ class Category extends Model
     /**
      * @param $level_1
      * @param null $level_2
-     * @param null $level_3
      *
      * @return bool|\Illuminate\Support\Collection
      */
-    public static function showLevels($level_1, $level_2 = null, $level_3 = null)
+    public static function showLevels($level_1, $level_2 = null)
     {
         if ($level_1 && ! $level_2) {
             return self::select('level_2')->where('level_1', $level_1)->groupBy('level_2')->get();
