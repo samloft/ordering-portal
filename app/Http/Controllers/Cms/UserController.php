@@ -57,7 +57,7 @@ class UserController extends Controller
      */
     public function update(): int
     {
-        return User::where('id', request('id'))->update(request()->all());
+        return User::findOrFail(request('id'))->update(request()->except('customers'));
     }
 
     /**
