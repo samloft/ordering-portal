@@ -22,7 +22,7 @@ class UserCustomer extends Model
 {
     use LogsActivity;
 
-    protected static $logAttributes = ['*'];
+    protected static $logAttributes = ['id', 'user_id', 'customer_code'];
 
     /**
      * Check that a user has access to a customer.

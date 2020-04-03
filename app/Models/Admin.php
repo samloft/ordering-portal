@@ -24,10 +24,9 @@ use Spatie\Activitylog\Traits\LogsActivity;
 class Admin extends Authenticatable
 {
     use Notifiable;
-
     use LogsActivity;
 
-    protected static $logAttributes = ['*'];
+    protected static $logAttributes = ['id', 'name', 'email'];
 
     protected $guard = 'admin';
 

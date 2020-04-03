@@ -20,7 +20,7 @@ class Page extends Model
 {
     use LogsActivity;
 
-    protected static $logAttributes = ['*'];
+    protected static $logAttributes = ['name', 'description'];
 
     /**
      * Return details for the passed page name.

@@ -20,7 +20,7 @@ class Contact extends Model
 {
     use LogsActivity;
 
-    protected static $logAttributes = ['*'];
+    protected static $logAttributes = ['id', 'name', 'email'];
 
     protected $fillable = ['name', 'email'];
 }

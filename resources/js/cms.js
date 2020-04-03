@@ -19,6 +19,7 @@ Vue.component('category-images', require('./modules/CategoryImages.vue').default
 Vue.component('promotions', require('./modules/Promotions.vue').default);
 Vue.component('fade-transition', require('./modules/FadeTransition.vue').default);
 Vue.component('modal', require('./modules/Modal.vue').default);
+Vue.component('log-view', require('./modules/LogModal.vue').default);
 
 window.Event = new Vue();
 

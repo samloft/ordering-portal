@@ -23,7 +23,7 @@ class CategoryImage extends Model
 {
     use LogsActivity;
 
-    protected static $logAttributes = ['*'];
+    protected static $logAttributes = ['id', 'image', 'level_1', 'level_2', 'level_3'];
 
     /**
      * @param $category

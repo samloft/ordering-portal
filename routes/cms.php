@@ -146,4 +146,8 @@ Route::group(['middleware' => 'auth:admin'], static function () {
             return Customer::show(request('code'));
         });
     });
+
+    Route::group(['prefix' => 'activity'], static function () {
+        Route::get('/', 'Cms\ActivityController@index')->name('cms.activity');
+    });
 });

@@ -29,7 +29,7 @@ class HomeLink extends Model
 {
     use LogsActivity;
 
-    protected static $logAttributes = ['*'];
+    protected static $logAttributes = ['id', 'type', 'name', 'image', 'link', 'file', 'position', 'style'];
 
     protected $fillable = [];
 

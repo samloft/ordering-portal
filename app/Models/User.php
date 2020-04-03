@@ -36,7 +36,16 @@ class User extends Authenticatable
     use CustomerDetails;
     use LogsActivity;
 
-    protected static $logAttributes = ['*'];
+    protected static $logAttributes = [
+        'id',
+        'customer_code',
+        'email',
+        'name',
+        'telephone',
+        'mobile',
+        'admin',
+        'can_order',
+    ];
 
     /**
      * The attributes that are mass assignable.

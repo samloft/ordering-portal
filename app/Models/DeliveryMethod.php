@@ -24,7 +24,7 @@ class DeliveryMethod extends Model
 {
     use LogsActivity;
 
-    protected static $logAttributes = ['*'];
+    protected static $logAttributes = ['id', 'code', 'title', 'identifier', 'price_low', 'price'];
 
     /**
      * Get delivery details for the given code.

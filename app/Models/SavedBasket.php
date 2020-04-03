@@ -4,7 +4,6 @@ namespace App\Models;
 
 use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Model;
-use Spatie\Activitylog\Traits\LogsActivity;
 
 /**
  * App\Models\SavedBasket.
@@ -21,10 +20,6 @@ use Spatie\Activitylog\Traits\LogsActivity;
  */
 class SavedBasket extends Model
 {
-    use LogsActivity;
-
-    protected static $logAttributes = ['*'];
-
     public $incrementing = false;
 
     public $timestamps = [];
@@ -45,7 +40,7 @@ class SavedBasket extends Model
                 'reference',
                 'created_at',
             ])->where('customer_code', auth()->user()->customer->code)->when($request, static function (Eloquent $query
-                ) use ($request) {
+            ) use ($request) {
                 if ($request['reference']) {
                     $query->where('reference', 'like', '%'.$request['reference'].'%');
                 }
@@ -93,8 +88,8 @@ class SavedBasket extends Model
             'prices.price',
             'created_at',
         ])->where('saved_baskets.customer_code', auth()->user()->customer->code)->where('id', $id)->leftJoin('products', 'products.code', 'saved_baskets.product')->leftJoin('prices', static function (
-                $join
-            ) {
+            $join
+        ) {
             $join->on('prices.product', 'saved_baskets.product');
             $join->where('prices.customer_code', auth()->user()->customer->code);
         })->get();

@@ -31,7 +31,19 @@ class Address extends Model
 {
     use LogsActivity;
 
-    protected static $logAttributes = ['*'];
+    protected static $logAttributes = [
+        'id',
+        'customer_code',
+        'user_id',
+        'company_name',
+        'address_line_2',
+        'address_line_3',
+        'address_line_4',
+        'address_line_5',
+        'country',
+        'post_code',
+        'default',
+    ];
 
     protected $guarded = [];
 
@@ -137,9 +149,9 @@ class Address extends Model
     /**
      * @param array|Collection|int $address_id
      *
+     * @return int
      * @throws Exception
      *
-     * @return int
      */
     public static function destroy($address_id): int
     {

@@ -20,7 +20,7 @@ class CustomerDiscount extends Model
 {
     use LogsActivity;
 
-    protected static $logAttributes = ['*'];
+    protected static $logAttributes = ['customer_code', 'percent'];
 
     /**
      * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
