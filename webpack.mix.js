@@ -1,11 +1,13 @@
 const mix = require('laravel-mix');
 
+require('laravel-mix-purgecss');
+
 mix.options({
     processCssUrls: false,
     postCss: [
         require('postcss-import'),
         require('tailwindcss')('tailwind.config.js'),
-        require('postcss-custom-properties')
+        require('postcss-custom-properties'),
     ]
 });
 
@@ -20,7 +22,6 @@ mix.options({
  |
  */
 
-// mix.sass('resources/sass/app.scss', 'public/css')
 mix.sass('resources/sass/themes/scolmore.scss', 'public/css/app-scolmore.css')
     .sass('resources/sass/themes/ovia.scss', 'public/css/app-ovia.css')
     .sass('resources/sass/themes/unicrimp.scss', 'public/css/app-unicrimp.css')
@@ -30,4 +31,18 @@ mix.sass('resources/sass/themes/scolmore.scss', 'public/css/app-scolmore.css')
     .sass('resources/sass/cms.scss', 'public/css/cms.css')
     .js('resources/js/app.js', 'public/js')
     .js('resources/js/cms.js', 'public/js')
-    .version();
+    .version()
+    .purgeCss({
+        enabled: mix.inProduction(),
+        folders: [
+            'src',
+            'templates',
+        ],
+        extensions: [
+            'html',
+            'js',
+            'php',
+            'vue'
+        ],
+        whitelistPatterns: [/badge/, /flatpickr/]
+    });
