@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Spatie\Activitylog\Traits\LogsActivity;
 
 /**
  * App\Models\CustomerDiscount.
@@ -17,6 +18,10 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
  */
 class CustomerDiscount extends Model
 {
+    use LogsActivity;
+
+    protected static $logAttributes = ['*'];
+
     /**
      * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
      */

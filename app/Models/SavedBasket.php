@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Model;
+use Spatie\Activitylog\Traits\LogsActivity;
 
 /**
  * App\Models\SavedBasket.
@@ -20,6 +21,10 @@ use Illuminate\Database\Eloquent\Model;
  */
 class SavedBasket extends Model
 {
+    use LogsActivity;
+
+    protected static $logAttributes = ['*'];
+
     public $incrementing = false;
 
     public $timestamps = [];

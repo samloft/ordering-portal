@@ -5,6 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Support\Collection;
+use Spatie\Activitylog\Traits\LogsActivity;
 
 /**
  * App\Models\UserCustomer.
@@ -19,6 +20,10 @@ use Illuminate\Support\Collection;
  */
 class UserCustomer extends Model
 {
+    use LogsActivity;
+
+    protected static $logAttributes = ['*'];
+
     /**
      * Check that a user has access to a customer.
      *

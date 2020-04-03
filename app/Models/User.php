@@ -8,6 +8,7 @@ use Illuminate\Contracts\Pagination\LengthAwarePaginator;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
+use Spatie\Activitylog\Traits\LogsActivity;
 
 /**
  * App\Models\User.
@@ -33,6 +34,9 @@ class User extends Authenticatable
 {
     use Notifiable;
     use CustomerDetails;
+    use LogsActivity;
+
+    protected static $logAttributes = ['*'];
 
     /**
      * The attributes that are mass assignable.

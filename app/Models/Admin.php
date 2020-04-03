@@ -6,6 +6,7 @@ use App\Notifications\AdminResetPasswordNotification;
 use Illuminate\Contracts\Pagination\LengthAwarePaginator;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
+use Spatie\Activitylog\Traits\LogsActivity;
 
 /**
  * App\Models\Admin.
@@ -24,7 +25,12 @@ class Admin extends Authenticatable
 {
     use Notifiable;
 
+    use LogsActivity;
+
+    protected static $logAttributes = ['*'];
+
     protected $guard = 'admin';
+
     protected $table = 'cms_users';
 
     /**

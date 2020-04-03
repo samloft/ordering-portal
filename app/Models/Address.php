@@ -6,6 +6,7 @@ use Eloquent;
 use Exception;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Collection;
+use Spatie\Activitylog\Traits\LogsActivity;
 
 /**
  * App\Models\Address.
@@ -28,6 +29,10 @@ use Illuminate\Support\Collection;
  */
 class Address extends Model
 {
+    use LogsActivity;
+
+    protected static $logAttributes = ['*'];
+
     protected $guarded = [];
 
     /**

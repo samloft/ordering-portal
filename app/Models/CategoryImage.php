@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\Cache;
+use Spatie\Activitylog\Traits\LogsActivity;
 
 /**
  * App\Models\CategoryImage.
@@ -20,6 +21,10 @@ use Illuminate\Support\Facades\Cache;
  */
 class CategoryImage extends Model
 {
+    use LogsActivity;
+
+    protected static $logAttributes = ['*'];
+
     /**
      * @param $category
      * @return mixed

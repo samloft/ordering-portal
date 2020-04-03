@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\Cache;
+use Spatie\Activitylog\Traits\LogsActivity;
 
 /**
  * App\Models\GlobalSettings.
@@ -18,6 +19,10 @@ use Illuminate\Support\Facades\Cache;
  */
 class GlobalSettings extends Model
 {
+    use LogsActivity;
+
+    protected static $logAttributes = ['*'];
+
     protected $table = 'globals';
 
     /**

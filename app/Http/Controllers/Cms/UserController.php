@@ -37,7 +37,7 @@ class UserController extends Controller
         $this->validation();
 
         request()->merge([
-            'password'  => bcrypt(Str::random(20)),
+            'password' => bcrypt(Str::random(20)),
             'api_token' => Str::random(60),
         ]);
 
@@ -57,6 +57,8 @@ class UserController extends Controller
      */
     public function update(): int
     {
+        //$this->validation();
+
         return User::findOrFail(request('id'))->update(request()->except('customers'));
     }
 
@@ -95,8 +97,8 @@ class UserController extends Controller
     public function validation()
     {
         return request()->validate([
-            'name'          => 'required',
-            'email'         => 'required|unique:users,email',
+            'name' => 'required',
+            'email' => 'required|unique:users,email',
             'customer_code' => 'required|exists:customers,code',
         ]);
     }

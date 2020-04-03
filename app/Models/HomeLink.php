@@ -6,6 +6,7 @@ use File;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Str;
+use Spatie\Activitylog\Traits\LogsActivity;
 use Storage;
 
 /**
@@ -26,6 +27,10 @@ use Storage;
  */
 class HomeLink extends Model
 {
+    use LogsActivity;
+
+    protected static $logAttributes = ['*'];
+
     protected $fillable = [];
 
     /**

@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Eloquent;
 use Illuminate\Database\Eloquent\Model;
+use Spatie\Activitylog\Traits\LogsActivity;
 
 /**
  * App\Models\DeliveryMethod.
@@ -21,6 +22,10 @@ use Illuminate\Database\Eloquent\Model;
  */
 class DeliveryMethod extends Model
 {
+    use LogsActivity;
+
+    protected static $logAttributes = ['*'];
+
     /**
      * Get delivery details for the given code.
      *
