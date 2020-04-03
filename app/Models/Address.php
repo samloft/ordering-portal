@@ -151,7 +151,6 @@ class Address extends Model
      *
      * @return int
      * @throws Exception
-     *
      */
     public static function destroy($address_id): int
     {
