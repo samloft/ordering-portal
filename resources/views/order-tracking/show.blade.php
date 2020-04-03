@@ -54,12 +54,21 @@
                 </div>
             </div>
 
-            <div class="w-1/2 text-center bg-gray-200 p-4 rounded">
-                <div>{{ $order->delivery_address1 }}</div>
-                <div>{{ $order->delivery_address2 }}</div>
-                <div>{{ $order->delivery_address3 }}</div>
-                <div>{{ $order->delivery_address4 }}</div>
-                <div>{{ $order->delivery_address5 }}</div>
+            <div class="w-1/2">
+                <div class="text-center bg-gray-200 p-4 rounded">
+                    <div>{{ $order->delivery_address1 }}</div>
+                    <div>{{ $order->delivery_address2 }}</div>
+                    <div>{{ $order->delivery_address3 }}</div>
+                    <div>{{ $order->delivery_address4 }}</div>
+                    <div>{{ $order->delivery_address5 }}</div>
+                </div>
+
+                @if($order->original && $order->original->notes)
+                    <div class="mt-3 p-4 border border-gray-300 border-dashed rounded">
+                        <h5 class="mb-1 font-medium">Notes:</h5>
+                        <p>{{ $order->original->notes }}</p>
+                    </div>
+                @endif
             </div>
         </div>
     </div>
@@ -79,7 +88,8 @@
             <order-invoice order="{{ urlencode(trim($order->order_no)) }}"
                            customer_order="{{ urlencode(trim($order->customer_order_no)) }}"></order-invoice>
 
-            <a class="ml-2" href="{{ route('order-tracking.pdf', ['order' => encodeUrl($order->order_no)]) }}" target="_blank">
+            <a class="ml-2" href="{{ route('order-tracking.pdf', ['order' => encodeUrl($order->order_no)]) }}"
+               target="_blank">
                 <button class="button button-primary">Print Order Details</button>
             </a>
         </div>

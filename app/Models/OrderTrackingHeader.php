@@ -6,6 +6,7 @@ use Carbon\Carbon;
 use Illuminate\Contracts\Pagination\LengthAwarePaginator;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Database\Eloquent\Relations\HasOne;
 use Illuminate\Database\Query\Builder;
 use Illuminate\Support\Collection;
 
@@ -54,6 +55,16 @@ class OrderTrackingHeader extends Model
     public function lines(): HasMany
     {
         return $this->hasMany(OrderTrackingLine::class, 'order_no', 'order_no')->orderBy('order_line_no');
+    }
+
+    /**
+     * Get the original placed order for things like order notes.
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\HasOne
+     */
+    public function original(): HasOne
+    {
+        return $this->hasOne(OrderHeader::class, 'order_number', 'order_no');
     }
 
     /**
@@ -106,7 +117,7 @@ class OrderTrackingHeader extends Model
      */
     public static function show($order)
     {
-        return self::where('customer_code', auth()->user()->customer->code)->where('order_no', $order)->with('lines')->firstOrFail();
+        return self::where('customer_code', auth()->user()->customer->code)->where('order_no', $order)->with('lines')->with('original')->firstOrFail();
     }
 
     /**
