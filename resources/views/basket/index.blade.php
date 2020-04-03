@@ -27,7 +27,7 @@
                 <basket-summary :summary="{{ json_encode($basket['summary'], true) }}"></basket-summary>
 
                 @if($basket['summary']['small_order_rules']['original']['threshold'] > 0)
-                    <div class="mt-3 text-xs">
+                    <div class="mt-3 text-xs text-gray-400 leading-tight">
                         * orders below {{ currency($basket['summary']['small_order_rules']['threshold'], 0) }} attract
                         a {{ currency($basket['summary']['small_order_rules']['original']['charge'], 0) }}
 
@@ -42,6 +42,10 @@
                         @endif
                     </div>
                 @endif
+
+                <div class="mt-3 text-xs text-gray-400 leading-tight">
+                    † Stock levels are only accurate at the time the product is first added to the basket.
+                </div>
 
                 <a href="{{ route('checkout') }}">
                     <button class="flex justify-between button button-primary button-block mt-6 text-left">
