@@ -8,11 +8,13 @@
             <div class="mb-3">
                 <label>Name</label>
                 <input class="bg-gray-100" v-model="userData.name" placeholder="Name">
+                <span v-text="errors.get('name')" class="text-sm text-red-600"/>
             </div>
 
             <div class="mb-3">
                 <label>Email Address</label>
                 <input class="bg-gray-100" v-model="userData.email" placeholder="Email Address">
+                <span v-text="errors.get('email')" class="text-sm text-red-600"/>
             </div>
 
             <div class="mb-3">
@@ -59,6 +61,7 @@
                 <label>Customer Code</label>
                 <input class="bg-gray-100" v-model="userData.customer_code" v-uppercase
                        placeholder="Customer Code">
+                <span v-text="errors.get('customer_code')" class="text-sm text-red-600"/>
             </div>
 
             <div v-if="userData.id && (parseInt(userData.admin) !== 1)" class="mb-3">
@@ -133,6 +136,22 @@
 </template>
 
 <script>
+    class Errors {
+        constructor() {
+            this.errors = {};
+        }
+
+        get(field) {
+            if (this.errors[field]) {
+                return this.errors[field][0];
+            }
+        }
+
+        record(errors) {
+            this.errors = errors;
+        }
+    }
+
     export default {
         props: {
             user: null,
@@ -150,7 +169,8 @@
                     admin: 0,
                     can_order: 1,
                 },
-                customers: []
+                customers: [],
+                errors: new Errors(),
             }
         },
         methods: {
@@ -162,10 +182,16 @@
                 this.modal = true;
             },
             storeUser: function (id = null) {
+                this.errors = new Errors();
+
                 if (id) {
                     return axios.patch('/cms/site-users/' + id, this.userData).then(response => {
                         return Vue.swal('Success', 'User has been updated', 'success');
                     }).catch(error => {
+                        if (error.response.data.errors) {
+                            this.errors.record(error.response.data.errors);
+                        }
+
                         return Vue.swal('Error', 'Unable to update user, please try again', 'error');
                     });
                 }
@@ -175,6 +201,10 @@
 
                     return Vue.swal('Success', 'New user has been created', 'success');
                 }).catch(error => {
+                    if (error.response.data.errors) {
+                        this.errors.record(error.response.data.errors);
+                    }
+
                     return Vue.swal('Error', error.response.data.errors[Object.keys(error.response.data.errors)[0]][0], 'error');
                 });
             },

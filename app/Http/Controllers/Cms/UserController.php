@@ -57,7 +57,7 @@ class UserController extends Controller
      */
     public function update(): int
     {
-        //$this->validation();
+        $this->validation();
 
         return User::findOrFail(request('id'))->update(request()->except('customers'));
     }
@@ -98,7 +98,7 @@ class UserController extends Controller
     {
         return request()->validate([
             'name' => 'required',
-            'email' => 'required|unique:users,email',
+            'email' => 'required|unique:users,email,'.request('id'),
             'customer_code' => 'required|exists:customers,code',
         ]);
     }
