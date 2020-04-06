@@ -23,7 +23,7 @@
     export default {
         props: {
             input_name: String,
-            old_value: String
+            old_value: String,
         },
         name: 'date-picker',
         data() {

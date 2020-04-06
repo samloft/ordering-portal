@@ -1,0 +1,21 @@
+.multi-select-wrapper {
+    @apply .form-input .p-2 .bg-gray-100 #{!important};
+
+    .search-wrapper div {
+        @apply .border-none .bg-gray-100 #{!important};
+    }
+
+    input {
+        @apply .shadow-none .text-sm .bg-gray-100 .p-0 .border-none #{!important};
+    }
+
+    .pill {
+        @apply .flex .items-center .bg-gray-200 .rounded .border .border-gray-400 .text-gray-600 .text-xs .pl-2 .pr-2 .mr-1 .mb-1;
+
+        svg {
+            &:hover {
+                @apply .cursor-pointer .opacity-50;
+            }
+        }
+    }
+}

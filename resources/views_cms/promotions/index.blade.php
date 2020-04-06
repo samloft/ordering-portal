@@ -14,7 +14,11 @@
                 </p>
             </div>
             <div class="w-3/4">
-                <promotions :promotions="[]"></promotions>
+                <promotions :promotions="[]"
+                            :buying_groups="{{ json_encode($buying_groups->toArray(), true) }}"
+                            :price_lists="{{ json_encode($price_lists->toArray(), true) }}"
+                            :discount_codes="{{ json_encode($discount_codes->toArray(), true) }}">
+                </promotions>
             </div>
         </div>
     </div>

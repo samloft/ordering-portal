@@ -30,6 +30,8 @@ class CreateCustomersTable extends Migration
             $table->string('vat_flag')->default('SS');
             $table->string('currency')->default('GBP');
             $table->string('buying_group')->nullable();
+            $table->string('price_list')->nullable();
+            $table->string('discount_code')->nullable();
 
             $table->primary('code');
             $table->index('code');

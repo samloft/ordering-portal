@@ -6,6 +6,7 @@ use Eloquent;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Support\Collection;
 
 /**
  * App\Models\Customer.
@@ -27,6 +28,8 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
  * @property string $vat_flag
  * @property string $currency
  * @property string $buying_group
+ * @property string $price_list
+ * @property string $discount_code
  */
 class Customer extends Model
 {
@@ -71,5 +74,29 @@ class Customer extends Model
         }
 
         return response()->json('Access Denied', 401);
+    }
+
+    /**
+     * @return \Illuminate\Support\Collection
+     */
+    public static function buyingGroups(): Collection
+    {
+        return self::select('buying_group')->where('buying_group', '!=', '')->groupBy('buying_group')->get();
+    }
+
+    /**
+     * @return \Illuminate\Support\Collection
+     */
+    public static function priceLists(): Collection
+    {
+        return self::select('price_list')->where('price_list', '!=', '')->groupBy('price_list')->get();
+    }
+
+    /**
+     * @return \Illuminate\Support\Collection
+     */
+    public static function discountCodes(): Collection
+    {
+        return self::select('discount_code')->where('discount_code', '!=', '')->groupBy('discount_code')->get();
     }
 }

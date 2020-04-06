@@ -29,6 +29,7 @@
         "tailwindcss": "^1.2.0",
         "vue": "^2.6.11",
         "vue-flatpickr-component": "^8.1.5",
+        "vue-simple-multi-select": "^1.0.4",
         "vue-sweetalert2": "^3.0.3",
         "vuedraggable": "^2.23.2"
     }

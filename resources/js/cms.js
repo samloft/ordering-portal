@@ -3,6 +3,7 @@ window.axios = require('axios');
 
 import VueSweetalert2 from "vue-sweetalert2";
 import 'sweetalert2/dist/sweetalert2.min.css';
+import VueMultiSelect from "vue-simple-multi-select";
 
 Vue.use(VueSweetalert2);
 
@@ -20,6 +21,8 @@ Vue.component('promotions', require('./modules/Promotions.vue').default);
 Vue.component('fade-transition', require('./modules/FadeTransition.vue').default);
 Vue.component('modal', require('./modules/Modal.vue').default);
 Vue.component('log-view', require('./modules/LogModal.vue').default);
+Vue.component('date-picker', require('./modules/DatePicker.vue').default);
+Vue.component('multi-select', require('./modules/MultiSelect.vue').default);
 
 window.Event = new Vue();
 
