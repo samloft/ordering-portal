@@ -26,6 +26,7 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
  * @property string $invoice_postcode
  * @property string $vat_flag
  * @property string $currency
+ * @property string $buying_group
  */
 class Customer extends Model
 {

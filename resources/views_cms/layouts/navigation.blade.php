@@ -218,4 +218,4 @@
             </div>
         </div>
     </nav>
-</div><?php
+</div>

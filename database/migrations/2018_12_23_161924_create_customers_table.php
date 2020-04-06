@@ -29,6 +29,7 @@ class CreateCustomersTable extends Migration
             $table->string('invoice_postcode')->nullable();
             $table->string('vat_flag')->default('SS');
             $table->string('currency')->default('GBP');
+            $table->string('buying_group')->nullable();
 
             $table->primary('code');
             $table->index('code');
