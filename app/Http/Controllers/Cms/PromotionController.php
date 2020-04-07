@@ -25,6 +25,8 @@ class PromotionController extends Controller
     }
 
     /**
+     * Create a new promotion.
+     *
      * @return bool
      */
     public function store(): bool
@@ -37,6 +39,8 @@ class PromotionController extends Controller
     }
 
     /**
+     * Update a promotion by the passed ID.
+     *
      * @param $id
      *
      * @return bool
@@ -51,6 +55,23 @@ class PromotionController extends Controller
     }
 
     /**
+     * Delete a promotion with the passed ID.
+     *
+     * @param $id
+     * @return bool|null
+     *
+     * @throws \Exception
+     */
+    public function destroy($id): ?bool
+    {
+        $promotion = Promotion::findOrFail($id);
+
+        return $promotion->delete();
+    }
+
+    /**
+     * Validate all the data passed for a promotion.
+     *
      * @return array|bool|null
      */
     public function validation()

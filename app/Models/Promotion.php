@@ -2,10 +2,10 @@
 
 namespace App\Models;
 
+use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Spatie\Activitylog\Traits\LogsActivity;
-use Carbon\Carbon;
 
 /**
  * App\Models\Product.
@@ -60,6 +60,8 @@ class Promotion extends Model
     protected static $logFillable = true;
 
     /**
+     * Set the format that is received for the start date
+     *
      * @param $value
      *
      * @throws \Exception
@@ -70,6 +72,8 @@ class Promotion extends Model
     }
 
     /**
+     * Set the format that is received for the end date.
+     *
      * @param $value
      *
      * @throws \Exception
@@ -80,6 +84,8 @@ class Promotion extends Model
     }
 
     /**
+     * Return (paginate) all promotions that have not yet ended.
+     *
      * @return \Illuminate\Database\Eloquent\Builder[]|\Illuminate\Database\Eloquent\Collection
      */
     public static function notExpired()

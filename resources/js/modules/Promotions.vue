@@ -359,18 +359,29 @@
                 });
             },
             destroy: function (id) {
-                axios.delete('/cms/promotions/' + id).then(function (response) {
-                    return Vue.swal({
-                        title: "Success",
-                        text: "Promotion has been deleted",
-                        icon: "success"
-                    }).then(response => {
-                        if (response.value) {
-                            return window.location.reload();
-                        }
-                    });
-                }).catch(function (error) {
-                    return Vue.swal('Error', 'Unable to delete promotion, please try again');
+                Vue.swal({
+                    title: 'Delete User?',
+                    text: 'Are you sure? This cannot be un-done.',
+                    icon: 'warning',
+                    showCancelButton: true,
+                }).then(response => {
+                    if (response.value) {
+                        return axios.delete('/cms/promotions/' + id).then(function (response) {
+                            return Vue.swal({
+                                title: "Success",
+                                text: "Promotion has been deleted",
+                                icon: "success"
+                            }).then(response => {
+                                if (response.value) {
+                                    return window.location.reload();
+                                }
+                            });
+                        }).catch(function (error) {
+                            return Vue.swal('Error', 'Unable to delete promotion, please try again');
+                        });
+                    }
+                }).catch(error => {
+                    return Vue.swal('Error', 'Unable to delete promotion', 'error');
                 });
             }
         },
