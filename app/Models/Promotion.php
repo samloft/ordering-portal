@@ -31,7 +31,6 @@ use Spatie\Activitylog\Traits\LogsActivity;
 class Promotion extends Model
 {
     use SoftDeletes;
-
     use LogsActivity;
 
     protected $fillable = [
