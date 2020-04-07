@@ -17,6 +17,7 @@ use Carbon\Carbon;
  * @property string $promotion_product
  * @property int $promotion_qty
  * @property string $claim_type
+ * @property int $max_claims
  * @property string $restrictions
  * @property string $buying_groups
  * @property string $price_lists
@@ -39,6 +40,7 @@ class Promotion extends Model
         'promotion_product',
         'promotion_qty',
         'claim_type',
+        'max_claims',
         'restrictions',
         'buying_groups',
         'price_lists',
@@ -51,6 +53,8 @@ class Promotion extends Model
         'buying_groups' => 'array',
         'price_lists' => 'array',
         'discount_codes' => 'array',
+        'start_date' => 'date:d-m-Y',
+        'end_date' => 'date:d-m-Y',
     ];
 
     protected static $logFillable = true;
@@ -73,5 +77,13 @@ class Promotion extends Model
     public function setEndDateAttribute($value): void
     {
         $this->attributes['end_date'] = $value ? (new Carbon($value))->format('Y-m-d') : null;
+    }
+
+    /**
+     * @return \Illuminate\Database\Eloquent\Builder[]|\Illuminate\Database\Eloquent\Collection
+     */
+    public static function notExpired()
+    {
+        return self::where('end_date', null)->orWhere('end_date', '>=', Carbon::now()->format('Y-m-d'))->get();
     }
 }

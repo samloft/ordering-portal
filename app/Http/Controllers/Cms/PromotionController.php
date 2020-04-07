@@ -16,11 +16,12 @@ class PromotionController extends Controller
      */
     public function index()
     {
+        $promotions = Promotion::notExpired();
         $buying_groups = Customer::buyingGroups();
         $price_lists = Customer::priceLists();
         $discount_codes = Customer::discountCodes();
 
-        return view('promotions.index', compact('buying_groups', 'price_lists', 'discount_codes'));
+        return view('promotions.index', compact('promotions', 'buying_groups', 'price_lists', 'discount_codes'));
     }
 
     /**
@@ -36,6 +37,20 @@ class PromotionController extends Controller
     }
 
     /**
+     * @param $id
+     *
+     * @return bool
+     */
+    public function edit($id): bool
+    {
+        $this->validation();
+
+        $promotion = Promotion::findOrFail($id);
+
+        return $promotion->update(request()->all());
+    }
+
+    /**
      * @return array|bool|null
      */
     public function validation()
@@ -45,6 +60,7 @@ class PromotionController extends Controller
             'product_qty' => 'required|integer',
             'promotion_product' => 'required|exists:products,code',
             'promotion_qty' => 'required|integer',
+            'max_claims' => 'integer|nullable',
             'claim_type' => 'required',
             'buying_groups' => Rule::requiredIf(request('restrictions') === 'buying_group'),
             'start_date' => 'required|date',

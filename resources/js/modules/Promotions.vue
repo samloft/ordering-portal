@@ -4,7 +4,7 @@
             <button @click="openModal()" class="button bg-gray-800 text-white">New promotion</button>
         </div>
 
-        <div v-if="data.length > 0" class="flex flex-col">
+        <div v-if="promotions.length > 0" class="flex flex-col">
             <div class="-my-2 py-2 overflow-x-auto sm:-mx-6 sm:px-6 lg:-mx-8 lg:px-8">
                 <div
                     class="align-middle inline-block min-w-full shadow overflow-hidden sm:rounded-lg border-b border-gray-200">
@@ -15,39 +15,54 @@
                                 Product
                             </th>
                             <th class="px-6 py-3 border-b border-gray-200 bg-gray-200 text-left text-xs leading-4 font-medium text-gray-500 uppercase tracking-wider">
-                                Qty
-                            </th>
-                            <th class="px-6 py-3 border-b border-gray-200 bg-gray-200 text-left text-xs leading-4 font-medium text-gray-500 uppercase tracking-wider">
                                 Promo Product
                             </th>
                             <th class="px-6 py-3 border-b border-gray-200 bg-gray-200 text-left text-xs leading-4 font-medium text-gray-500 uppercase tracking-wider">
-                                Promo Qty
+                                Restriction
                             </th>
                             <th class="px-6 py-3 border-b border-gray-200 bg-gray-200 text-left text-xs leading-4 font-medium text-gray-500 uppercase tracking-wider">
                                 Claimable
+                            </th>
+                            <th class="px-6 py-3 border-b border-gray-200 bg-gray-200 text-left text-xs leading-4 font-medium text-gray-500 uppercase tracking-wider">
+                                Starts
+                            </th>
+                            <th class="px-6 py-3 border-b border-gray-200 bg-gray-200 text-left text-xs leading-4 font-medium text-gray-500 uppercase tracking-wider">
+                                Ends
                             </th>
                             <th class="px-6 py-3 border-b border-gray-200 bg-gray-200"></th>
                         </tr>
                         </thead>
                         <tbody class="bg-white">
-                        <tr>
+                        <tr v-for="promotion in promotions">
                             <td class="px-6 py-4 whitespace-no-wrap border-b border-gray-200 text-sm leading-5 font-medium text-gray-900">
-                                Bernard Lane
+                                <div class="text-sm leading-5 font-medium text-gray-900">{{ promotion.product }}</div>
+                                <div class="text-sm leading-5 text-gray-500">Qty: {{ promotion.product_qty }}</div>
                             </td>
                             <td class="px-6 py-4 whitespace-no-wrap border-b border-gray-200 text-sm leading-5 text-gray-500">
-                                Director, Human Resources
+                                <div class="text-sm leading-5 font-medium text-gray-900">{{ promotion.promotion_product
+                                    }}
+                                </div>
+                                <div class="text-sm leading-5 text-gray-500">Qty: {{ promotion.promotion_qty }}</div>
                             </td>
                             <td class="px-6 py-4 whitespace-no-wrap border-b border-gray-200 text-sm leading-5 text-gray-500">
-                                bernardlane@example.com
+                                <span class="badge badge-info capitalize">
+                                    {{ promotion.restrictions ? promotion.restrictions.replace('_', ' ') : 'none' }}
+                                </span>
+                                <span v-if="promotion.restrictions" class="badge badge-warning capitalize ml-1">
+                                    {{ promotion[promotion.restrictions + 's'].length }}
+                                </span>
                             </td>
                             <td class="px-6 py-4 whitespace-no-wrap border-b border-gray-200 text-sm leading-5 text-gray-500">
-                                Owner
+                                {{ promotion.max_claims > 0 ? promotion.max_claims : 'Unlimited' }}
                             </td>
                             <td class="px-6 py-4 whitespace-no-wrap border-b border-gray-200 text-sm leading-5 text-gray-500">
-                                Owner
+                                {{ promotion.start_date }}
+                            </td>
+                            <td class="px-6 py-4 whitespace-no-wrap border-b border-gray-200 text-sm leading-5 text-gray-500">
+                                {{ promotion.end_date }}
                             </td>
                             <td class="px-6 py-4 whitespace-no-wrap text-right border-b border-gray-200 text-sm leading-5 font-medium">
-                                <a href="#"
+                                <a href="#" @click="openModal(promotion)"
                                    class="text-indigo-600 hover:text-indigo-900 focus:outline-none focus:underline">Edit</a>
                             </td>
                         </tr>
@@ -221,8 +236,7 @@
 
             <div class="text-right mt-3">
                 <button @click="modal = false" class="button button-danger">Exit</button>
-                <!--                        <button v-show="editing" @click="destroy(data.id)" class="button bg-red-600 text-white">Delete-->
-                <!--                        </button>-->
+                <button v-show="data.id" @click="destroy(data.id)" class="button bg-red-600 text-white">Delete</button>
                 <button @click="submit()" class="button bg-gray-700 text-white w-32">Save</button>
             </div>
         </modal>
@@ -272,11 +286,17 @@
             }
         },
         methods: {
-            openModal: function () {
-                this.data = {
-                    restrictions: '',
-                    claim_type: 'multiple',
-                };
+            openModal: function (promotion = null) {
+                if (promotion) {
+                    this.data = promotion;
+
+                    this.data.restrictions = promotion.restrictions ? promotion.restrictions : '';
+                } else {
+                    this.data = {
+                        restrictions: '',
+                        claim_type: 'multiple',
+                    };
+                }
 
                 this.modal = true;
             },
@@ -290,14 +310,18 @@
             submit: function () {
                 this.errors = new Errors();
 
-                this.store(this.data, this);
+                if (this.data.id) {
+                    return this.update(this.data, this);
+                }
+
+                return this.store(this.data, this);
             },
             store: function (promotion, self) {
                 axios.post('/cms/promotions', self.data).then(function (response) {
                     return Vue.swal({
-                        title: "Success",
-                        text: "New promotion has been created",
-                        icon: "success"
+                        title: 'Success',
+                        text: 'New promotion has been created',
+                        icon: 'success'
                     }).then(response => {
                         if (response.value) {
                             return window.location.reload();
@@ -313,8 +337,26 @@
                     return Vue.swal('Error', 'Unable to create promotion, please try again', 'error');
                 });
             },
-            update: function () {
-                // Update a promotion
+            update: function (promotion, self) {
+                axios.patch('/cms/promotions/' + promotion.id, promotion).then(function (response) {
+                    return Vue.swal({
+                        title: 'Success',
+                        text: 'Promotion has been updated',
+                        icon: 'success'
+                    }).then(response => {
+                        if (response.value) {
+                            return window.location.reload();
+                        }
+                    });
+                }).catch(function (error) {
+                    if (error.response.data.errors) {
+                        self.errors.record(error.response.data.errors);
+
+                        return Vue.swal('Error', 'Unable to update promotion, please fix validation errors', 'error');
+                    }
+
+                    return Vue.swal('Error', 'Unable to update promotion, please try again', 'error');
+                });
             },
             destroy: function (id) {
                 axios.delete('/cms/promotions/' + id).then(function (response) {

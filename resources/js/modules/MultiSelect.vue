@@ -78,6 +78,8 @@
             document.addEventListener("click", this.handleClickOutside);
             document.addEventListener("keyup", this.handleClickOutside);
             this.searchText = this.initial;
+
+            this.selectedOptions = this.value;
         },
         destroyed() {
             document.removeEventListener("keyup", this.handleClickOutside);
