@@ -7,6 +7,7 @@
     <title>{{ ucfirst(config('app.name')) }} - @yield('title')</title>
 
     <link href="{{ mix('css/cms.css') }}" rel="stylesheet">
+    <link href="{{ asset('css/fontawesome.css') }}" rel="stylesheet">
 </head>
 
 <body class="antialiased bg-gray-200">

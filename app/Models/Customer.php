@@ -81,7 +81,7 @@ class Customer extends Model
      */
     public static function buyingGroups(): Collection
     {
-        return self::select('buying_group')->where('buying_group', '!=', '')->groupBy('buying_group')->get();
+        return self::select('buying_group')->where('buying_group', '!=', '')->groupBy('buying_group')->pluck('buying_group');
     }
 
     /**
@@ -89,7 +89,7 @@ class Customer extends Model
      */
     public static function priceLists(): Collection
     {
-        return self::select('price_list')->where('price_list', '!=', '')->groupBy('price_list')->get();
+        return self::select('price_list')->where('price_list', '!=', '')->groupBy('price_list')->pluck('price_list');
     }
 
     /**
@@ -97,6 +97,6 @@ class Customer extends Model
      */
     public static function discountCodes(): Collection
     {
-        return self::select('discount_code')->where('discount_code', '!=', '')->groupBy('discount_code')->get();
+        return self::select('discount_code')->where('discount_code', '!=', '')->groupBy('discount_code')->pluck('discount_code');
     }
 }

@@ -146,43 +146,37 @@
             <div v-if="this.data.restrictions === 'buying_group'" class="mb-3">
                 <label class="mb-0 leading-3">Buying Groups</label>
                 <span class="text-xs text-gray-400">Select multiple buying groups.</span>
-                <multi-select v-model="data.restriction_list.buying_groups"
+                <multi-select v-model="data.buying_groups"
                               :options="buying_groups"
                               :multiple="true"
-                              :placeholder="! data.restriction_list.buying_groups || ! data.restriction_list.buying_groups.length > 0 ? 'Select buying groups' : ''"
-                              track-by="buying_group"
-                              label="buying_group"
-                              option-label="buying_group"
+                              :placeholder="! data.buying_groups || ! data.buying_groups.length > 0 ? 'Select buying groups' : ''"
                               readonly>
                 </multi-select>
+                <span v-text="errors.get('buying_groups')" class="block text-sm text-red-600"/>
             </div>
 
             <div v-if="this.data.restrictions === 'price_list'" class="mb-3">
                 <label class="mb-0 leading-3">Price Lists</label>
                 <span class="text-xs text-gray-400">Select multiple price lists.</span>
-                <multi-select v-model="data.restriction_list.price_lists"
+                <multi-select v-model="data.price_lists"
                               :options="price_lists"
                               :multiple="true"
-                              :placeholder="! data.restriction_list.price_lists || ! data.restriction_list.price_lists.length > 0 ? 'Select price lists' : ''"
-                              track-by="price_list"
-                              label="price_list"
-                              option-label="price_list"
+                              :placeholder="! data.price_lists || ! data.price_lists.length > 0 ? 'Select price lists' : ''"
                               readonly>
                 </multi-select>
+                <span v-text="errors.get('price_lists')" class="block text-sm text-red-600"/>
             </div>
 
             <div v-if="this.data.restrictions === 'discount_code'" class="mb-3">
                 <label class="mb-0 leading-3">Discount Codes</label>
                 <span class="text-xs text-gray-400">Select multiple discount codes.</span>
-                <multi-select v-model="data.restriction_list.discount_codes"
+                <multi-select v-model="data.discount_codes"
                               :options="discount_codes"
                               :multiple="true"
-                              :placeholder="! data.restriction_list.discount_codes || ! data.restriction_list.discount_codes.length > 0 ? 'Select discount codes' : ''"
-                              track-by="discount_code"
-                              label="discount_code"
-                              option-label="discount_code"
+                              :placeholder="! data.discount_codes || ! data.discount_codes.length > 0 ? 'Select discount codes' : ''"
                               readonly>
                 </multi-select>
+                <span v-text="errors.get('discount_codes')" class="block text-sm text-red-600"/>
             </div>
 
             <div class="flex mb-3">
@@ -197,11 +191,12 @@
                         </flat-pickr>
                         <div v-if="data.start_date">
                             <i class="fa fa-times cursor-pointer absolute inset-y-0 right-0 flex items-center px-3 text-gray-700 pt-3"
-                               title="clear" data-clear>
+                               title="clear" data-clear @click="data.start_date = ''">
                                 <span aria-hidden="true" class="sr-only">Clear</span>
                             </i>
                         </div>
                     </div>
+                    <span v-text="errors.get('start_date')" class="block text-sm text-red-600"/>
                 </div>
 
                 <div class="ml-2">
@@ -215,11 +210,12 @@
                         </flat-pickr>
                         <div v-if="data.end_date">
                             <i class="fa fa-times cursor-pointer absolute inset-y-0 right-0 flex items-center px-3 text-gray-700 pt-3"
-                               title="clear" data-clear>
+                               title="clear" data-clear @click="data.end_date = ''">
                                 <span aria-hidden="true" class="sr-only">Clear</span>
                             </i>
                         </div>
                     </div>
+                    <span v-text="errors.get('end_date')" class="block text-sm text-red-600"/>
                 </div>
             </div>
 
@@ -227,7 +223,7 @@
                 <button @click="modal = false" class="button button-danger">Exit</button>
                 <!--                        <button v-show="editing" @click="destroy(data.id)" class="button bg-red-600 text-white">Delete-->
                 <!--                        </button>-->
-                <button class="button bg-gray-700 text-white w-32">Save</button>
+                <button @click="submit()" class="button bg-gray-700 text-white w-32">Save</button>
             </div>
         </modal>
     </div>
@@ -280,7 +276,6 @@
                 this.data = {
                     restrictions: '',
                     claim_type: 'multiple',
-                    restriction_list: {},
                 };
 
                 this.modal = true;
@@ -288,11 +283,54 @@
             restrictionUpdate: function () {
                 this.restriction = this.data.restriction;
 
-                this.data.restriction_list = {};
+                this.data.buying_groups = '';
+                this.data.price_lists = '';
+                this.data.discount_codes = '';
+            },
+            submit: function () {
+                this.errors = new Errors();
+
+                this.store(this.data, this);
+            },
+            store: function (promotion, self) {
+                axios.post('/cms/promotions', self.data).then(function (response) {
+                    return Vue.swal({
+                        title: "Success",
+                        text: "New promotion has been created",
+                        icon: "success"
+                    }).then(response => {
+                        if (response.value) {
+                            return window.location.reload();
+                        }
+                    });
+                }).catch(function (error) {
+                    if (error.response.data.errors) {
+                        self.errors.record(error.response.data.errors);
+
+                        return Vue.swal('Error', 'You have failed validation, please fix the errors and try again', 'error');
+                    }
+
+                    return Vue.swal('Error', 'Unable to create promotion, please try again', 'error');
+                });
+            },
+            update: function () {
+                // Update a promotion
+            },
+            destroy: function (id) {
+                axios.delete('/cms/promotions/' + id).then(function (response) {
+                    return Vue.swal({
+                        title: "Success",
+                        text: "Promotion has been deleted",
+                        icon: "success"
+                    }).then(response => {
+                        if (response.value) {
+                            return window.location.reload();
+                        }
+                    });
+                }).catch(function (error) {
+                    return Vue.swal('Error', 'Unable to delete promotion, please try again');
+                });
             }
-        },
-        mounted() {
-            this.data = this.promotions;
         },
         components: {
             flatPickr

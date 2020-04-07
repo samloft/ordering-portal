@@ -122,6 +122,7 @@ Route::group(['middleware' => 'auth:admin'], static function () {
 
     Route::group(['prefix' => 'promotions'], static function () {
         Route::get('/', 'Cms\PromotionController@index')->name('cms.promotions');
+        Route::post('/', 'Cms\PromotionController@store')->name('cms.promotions.store');
     });
 
     Route::group(['prefix' => 'product-images'], static function () {

@@ -15,9 +15,9 @@
             </div>
             <div class="w-3/4">
                 <promotions :promotions="[]"
-                            :buying_groups="{{ json_encode($buying_groups->toArray(), true) }}"
-                            :price_lists="{{ json_encode($price_lists->toArray(), true) }}"
-                            :discount_codes="{{ json_encode($discount_codes->toArray(), true) }}">
+                            :buying_groups="{{ json_encode($buying_groups, true) }}"
+                            :price_lists="{{ json_encode($price_lists, true) }}"
+                            :discount_codes="{{ json_encode($discount_codes, true) }}">
                 </promotions>
             </div>
         </div>

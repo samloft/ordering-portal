@@ -2,6 +2,10 @@
 
 @section('page.title', 'Order Tracking')
 
+@section('styles')
+    <link href="{{ asset('css/fontawesome.css') }}" rel="stylesheet">
+@endsection
+
 @section('content')
 
     <div class="w-full mb-5 text-center">
