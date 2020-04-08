@@ -169,6 +169,7 @@ return [
         /*
          * Package Service Providers...
          */
+        Bugsnag\BugsnagLaravel\BugsnagServiceProvider::class,
 
         /*
          * Application Service Providers...
@@ -228,6 +229,7 @@ return [
         'Validator'    => Illuminate\Support\Facades\Validator::class,
         'View'         => Illuminate\Support\Facades\View::class,
         'PDF'          => Barryvdh\DomPDF\Facade::class,
+        'Bugsnag'      => Bugsnag\BugsnagLaravel\Facades\Bugsnag::class,
     ],
 
 ];
