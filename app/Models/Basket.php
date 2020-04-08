@@ -58,17 +58,13 @@ class Basket extends Model
     {
         $lines = static::selectRaw('basket.product as product, basket.customer_code as customer_code,
                                                     basket.quantity as quantity, price, break1, price1, break2, price2,
-                                                    break3, price3, name, uom, not_sold, stock, type')
-            ->where('basket.customer_code', auth()->user()->customer->code)
-            ->where('basket.user_id', auth()->user()->id)
-            ->join('prices', 'basket.product', '=', 'prices.product')
-            ->where('prices.customer_code', auth()->user()->customer->code)
-            ->join('products', 'basket.product', '=', 'products.code')
-            ->get();
+                                                    break3, price3, name, uom, not_sold, stock, type')->where('basket.customer_code', auth()->user()->customer->code)->where('basket.user_id', auth()->user()->id)->join('prices', 'basket.product', '=', 'prices.product')->where('prices.customer_code', auth()->user()->customer->code)->join('products', 'basket.product', '=', 'products.code')->get();
 
         $goods_total = 0;
         $potential_saving_total = 0;
         $product_lines = [];
+        $promotion_lines = [];
+        $promotions = auth()->user()->customer->hasPromotions();
 
         foreach ($lines as $line) {
             // Check for any bulk discounts and adjust the prices to match if found.
@@ -125,6 +121,45 @@ class Basket extends Model
             if ($next_bulk_qty > 0) {
                 $potential_saving_total += $next_bulk_qty + $line->quantity * $next_bulk_saving;
             }
+
+            foreach ($promotions as $promotion) {
+                if ($line->product === $promotion->product && $line->quantity > $promotion->product_qty) {
+                    $claimed = OrderHeader::promotion($promotion->product, $promotion->start_date, $promotion->end_date) / $promotion->promotion_qty;
+
+                    if (Storage::disk('public')->exists('product_images/'.$line->product.'.png')) {
+                        $promotion_image = asset('product_images/'.$line->product.'.png');
+                    } else {
+                        $promotion_image = asset('images/no-image.png');
+                    }
+
+                    if (! $promotion->max_claims) {
+                        $qty = $promotion->claim_type === 'per_order' ? $promotion->promotion_qty : floor($line->quantity / $promotion->product_qty);
+                    } elseif ($promotion->max_claims > $claimed) {
+                        $claims_left = ($promotion->max_claims - $claimed);
+                        $potential_claims = floor($line->quantity / $promotion->product_qty);
+
+                        if ($claims_left < $potential_claims) {
+                            $claim_count = $claims_left;
+                        } else {
+                            $claim_count = $potential_claims;
+                        }
+
+                        $qty = $promotion->claim_type === 'per_order' ? $promotion->promotion_qty : ($promotion->promotion_qty * $claim_count);
+                    } else {
+                        $qty = 0;
+                    }
+
+                    if ($qty > 0) {
+                        $promotion_lines[] = [
+                            'product' => $promotion->promotion_product,
+                            'quantity' => $qty,
+                            'description' => 'FOC promotional item',
+                            'price' => currency(0.00, 2),
+                            'image' => $promotion_image,
+                        ];
+                    }
+                }
+            }
         }
 
         if ($shipping_code) {
@@ -158,6 +193,7 @@ class Basket extends Model
             ],
             'line_count' => count($product_lines),
             'lines' => $product_lines,
+            'promotion_lines' => $promotion_lines,
             'potential_saving' => in_array(true, array_column($product_lines, 'potential_saving'), false),
             'potential_saving_total' => currency($potential_saving_total, 2),
         ];

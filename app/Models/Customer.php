@@ -38,11 +38,23 @@ class Customer extends Model
     public $timestamps = false;
 
     /**
+     * Check to see if the customer has a discount override.
+     *
      * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
      */
     public function discount(): BelongsTo
     {
         return $this->belongsTo(CustomerDiscount::class, 'code', 'customer_code');
+    }
+
+    /**
+     * Check to see if the customer has any promotions available to them.
+     *
+     * @return array
+     */
+    public function hasPromotions(): array
+    {
+        return Promotion::customer(auth()->user()->customer);
     }
 
     /**
@@ -77,6 +89,8 @@ class Customer extends Model
     }
 
     /**
+     * Get all possible buying groups.
+     *
      * @return \Illuminate\Support\Collection
      */
     public static function buyingGroups(): Collection
@@ -85,6 +99,8 @@ class Customer extends Model
     }
 
     /**
+     * Get all possible price lists.
+     *
      * @return \Illuminate\Support\Collection
      */
     public static function priceLists(): Collection
@@ -93,6 +109,8 @@ class Customer extends Model
     }
 
     /**
+     * Get all possible discount codes.
+     *
      * @return \Illuminate\Support\Collection
      */
     public static function discountCodes(): Collection

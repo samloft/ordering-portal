@@ -79,6 +79,22 @@
                     </td>
                     <td class="text-right text-sm">{{ product.price }}</td>
                 </tr>
+                <tr v-for="promotion in promotions" class="bg-green-100">
+                    <td>
+                        <div class="flex items-center">
+                            <img class="w-15 mr-3" :src="promotion.image" :alt="promotion.product">
+                            <h2 class="leading-none">
+                                <span class="text-gray-400 font-medium">{{ promotion.product }}</span>
+                                <br>
+                                <span class="text-xs font-thin text-gray-600">{{ promotion.description }}</span>
+                            </h2>
+                        </div>
+                    </td>
+                    <td></td>
+                    <td class="text-right text-gray-500 text-sm">{{ promotion.price }}</td>
+                    <td class="text-right text-gray-500 text-sm">{{ promotion.quantity }}</td>
+                    <td class="text-right text-gray-500 text-sm">{{ promotion.price }}</td>
+                </tr>
                 </tbody>
             </table>
         </div>
@@ -107,6 +123,7 @@
         data() {
             return {
                 items: {},
+                promotions: {},
                 potential_saving: false,
                 potential_saving_total: 0,
             }
@@ -177,6 +194,7 @@
         },
         mounted() {
             this.items = this.products.lines;
+            this.promotions = this.products.promotion_lines;
             this.potential_saving = this.products.potential_saving;
             this.potential_saving_total = this.products.potential_saving_total;
 

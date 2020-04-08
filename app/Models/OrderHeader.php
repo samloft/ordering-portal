@@ -54,6 +54,44 @@ class OrderHeader extends Model
      */
     public function lines(): HasMany
     {
-        return $this->hasMany(OrderLine::class, 'order_no', 'order_no');
+        return $this->hasMany(OrderLine::class, 'order_number', 'order_number');
+    }
+
+    /**
+     * Check to see if the customer has claimed the product before
+     * if they have return the total quantity.
+     *
+     * @param $product
+     * @param $start_date
+     * @param $end_date
+     *
+     * @return int
+     */
+    public static function promotion($product, $start_date, $end_date = null): int
+    {
+        $claimed_promos = self::where('customer_code', auth()->user()->customer->code)->with('lines')->whereHas('lines', static function (
+            $query
+        ) use ($product) {
+            $query->where('stock_type', 'PROMO');
+            $query->where('product', $product);
+        })->where('created_at', '>=', $start_date)->where(static function ($query) use ($end_date) {
+            if ($end_date) {
+                $query->where('created_at', '<=', $end_date);
+            }
+        })->get();
+
+        $claim_qty = 0;
+
+        if ($claimed_promos) {
+            foreach ($claimed_promos as $claimed_promo) {
+                foreach ($claimed_promo->lines as $line) {
+                    if ($line->product = $product) {
+                        $claim_qty += $line->quantity;
+                    }
+                }
+            }
+        }
+
+        return $claim_qty;
     }
 }

@@ -59,7 +59,7 @@ class Promotion extends Model
     protected static $logFillable = true;
 
     /**
-     * Set the format that is received for the start date
+     * Set the format that is received for the start date.
      *
      * @param $value
      *
@@ -90,5 +90,34 @@ class Promotion extends Model
     public static function notExpired()
     {
         return self::where('end_date', null)->orWhere('end_date', '>=', Carbon::now()->format('Y-m-d'))->get();
+    }
+
+    /**
+     * Get all the available promotions for the given customer.
+     *
+     * @param $customer
+     *
+     * @return array
+     */
+    public static function customer($customer): array
+    {
+        $promotions = self::where('start_date', '<=', Carbon::now()->format('Y-m-d'))->where(static function ($query) {
+            $query->where('end_date', '>=', Carbon::now()->format('Y-m-d'));
+            $query->orWhere('end_date', null);
+        })->get();
+
+        if ($promotions) {
+            $customer_promotions = [];
+
+            foreach ($promotions as $promotion) {
+                if (! $promotion->restrictions || in_array($customer->{$promotion->restrictions}, $promotion->{$promotion->restrictions.'s'}, true)) {
+                    $customer_promotions[] = $promotion;
+                }
+            }
+
+            return $customer_promotions;
+        }
+
+        return [];
     }
 }
