@@ -21,7 +21,9 @@ class CheckoutController extends Controller
      */
     public function index()
     {
-        $this->canCustomerOrder();
+        if (! auth()->user()->can_order) {
+            return redirect(route('basket'))->with('error', 'You do not have permission to place orders, if you believe this is in error, please contact the sales office');
+        }
 
         $delivery_methods = DeliveryMethod::orderBy('price')->get();
         $basket = Basket::show(old('shipping') ?: 'HHHH');
@@ -46,8 +48,10 @@ class CheckoutController extends Controller
      */
     public function store()
     {
-        $this->canCustomerOrder();
-        
+        if (! auth()->user()->can_order) {
+            return redirect(route('basket'))->with('error', 'You do not have permission to place orders, if you believe this is in error, please contact the sales office');
+        }
+
         $this->validation();
 
         $delivery_address = session('address') ?: Address::getDefault();
@@ -159,17 +163,5 @@ class CheckoutController extends Controller
             'name' => 'required',
             'terms' => 'accepted',
         ]);
-    }
-
-    /**
-     * @return bool|\Illuminate\Http\RedirectResponse|\Illuminate\Routing\Redirector
-     */
-    public function canCustomerOrder()
-    {
-        if (! auth()->user()->can_order) {
-            return redirect(route('basket'))->with('error', 'You do not have permission to place orders, if you believe this is in error, please contact the sales office');
-        }
-
-        return true;
     }
 }
