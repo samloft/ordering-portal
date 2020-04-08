@@ -85,7 +85,7 @@ class OrderHeader extends Model
         if ($claimed_promos) {
             foreach ($claimed_promos as $claimed_promo) {
                 foreach ($claimed_promo->lines as $line) {
-                    if ($line->product = $product) {
+                    if ($line->stock_type === 'PROMO' && $line->product = $product) {
                         $claim_qty += $line->quantity;
                     }
                 }

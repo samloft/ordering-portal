@@ -98,8 +98,24 @@ class CheckoutController extends Controller
             ];
         }
 
-        DB::transaction(static function () use ($lines, $header) {
+        $promotions = [];
+
+        foreach ($basket['promotion_lines'] as $promotion_line) {
+            $promotions[] = [
+                'order_number' => $order_number,
+                'product' => $promotion_line['product'],
+                'description' => $promotion_line['description'],
+                'quantity' => $promotion_line['quantity'],
+                'stock_type' => 'PROMO',
+                'price' => 0,
+                'total' => 0,
+                'created_at' => date('Y-m-d H:i:s'),
+            ];
+        }
+
+        DB::transaction(static function () use ($header, $lines, $promotions) {
             OrderLine::insert($lines);
+            OrderLine::insert($promotions);
 
             OrderHeader::insert($header);
 
