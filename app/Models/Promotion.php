@@ -128,4 +128,42 @@ class Promotion extends Model
 
         return [];
     }
+
+    /**
+     * Check how many times a customer can claim the current promotion.
+     *
+     * @param $promotion
+     * @param $amount
+     *
+     * @return false|float|int
+     */
+    public static function calculateClaimAmount($promotion, $amount)
+    {
+        if ($promotion->type === 'value') {
+            $potential_claims = floor($amount / $promotion->minimum_value);
+            $amount = number_format($amount / $promotion->minimum_value, 0);
+        } else {
+            $potential_claims = floor($amount.$promotion->product_qty);
+        }
+
+        if (! $promotion->max_claims) {
+            return $promotion->claim_type === 'per_order' ? $promotion->promotion_qty : floor($amount / $promotion->product_qty);
+        }
+
+        $claimed = OrderHeader::promotion($promotion->product, $promotion->start_date, $promotion->end_date) / $promotion->promotion_qty;
+
+        if ($promotion->max_claims > $claimed) {
+            $claims_left = ($promotion->max_claims - $claimed);
+
+            if ($claims_left < $potential_claims) {
+                $claim_count = $claims_left;
+            } else {
+                $claim_count = $potential_claims;
+            }
+
+            return $promotion->claim_type === 'per_order' ? $promotion->promotion_qty : ($promotion->promotion_qty * number_format($claim_count, 0));
+        }
+
+        return 0;
+    }
 }

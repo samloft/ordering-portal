@@ -93,11 +93,7 @@ class Basket extends Model
             $goods_total += (discount($net_price) * $line->quantity);
 
             // Check for a matching product image.
-            if (Storage::disk('public')->exists('product_images/'.$line->product.'.png')) {
-                $image = asset('product_images/'.$line->product.'.png');
-            } else {
-                $image = asset('images/no-image.png');
-            }
+            $image = Product::checkImage($line->product)['image'];
 
             $product_lines[] = [
                 'product' => $line->product,
@@ -123,37 +119,16 @@ class Basket extends Model
             }
 
             foreach ($promotions as $promotion) {
-                if (($promotion->type === 'product') && $line->product === $promotion->product && $line->quantity > $promotion->product_qty) {
-                    $claimed = OrderHeader::promotion($promotion->product, $promotion->start_date, $promotion->end_date) / $promotion->promotion_qty;
-
-                    if ($line->product !== $promotion->promotion_product) {
-                        if (Storage::disk('public')->exists('product_images/'.$promotion->promotion_product.'.png')) {
-                            $promotion_image = asset('product_images/'.$promotion->promotion_product.'.png');
-                        } else {
-                            $promotion_image = asset('images/no-image.png');
-                        }
-                    } else {
-                        $promotion_image = $image;
-                    }
-
-                    if (! $promotion->max_claims) {
-                        $qty = $promotion->claim_type === 'per_order' ? $promotion->promotion_qty : floor($line->quantity / $promotion->product_qty);
-                    } elseif ($promotion->max_claims > $claimed) {
-                        $claims_left = ($promotion->max_claims - $claimed);
-                        $potential_claims = floor($line->quantity / $promotion->product_qty);
-
-                        if ($claims_left < $potential_claims) {
-                            $claim_count = $claims_left;
-                        } else {
-                            $claim_count = $potential_claims;
-                        }
-
-                        $qty = $promotion->claim_type === 'per_order' ? $promotion->promotion_qty : ($promotion->promotion_qty * $claim_count);
-                    } else {
-                        $qty = 0;
-                    }
+                if ($promotion->type === 'product' && $line->product === $promotion->product && $line->quantity >= $promotion->product_qty) {
+                    $qty = Promotion::calculateClaimAmount($promotion, $line->quantity);
 
                     if ($qty > 0) {
+                        if ($line->product !== $promotion->promotion_product) {
+                            $promotion_image = Product::checkImage($promotion->promotion_product)['image'];
+                        } else {
+                            $promotion_image = $image;
+                        }
+
                         $promotion_lines[] = [
                             'product' => $promotion->promotion_product,
                             'quantity' => $qty,
@@ -169,44 +144,25 @@ class Basket extends Model
         $order_discount = 0;
 
         foreach ($promotions as $promotion) {
-            if ($promotion->type === 'value' && $promotion->value_reward === 'percent' && $goods_total >= $promotion->minimum_value) {
-                $order_discount += ($goods_total / 100) * $promotion->value_percent;
-            }
-
-            if ($promotion->type === 'value' && $promotion->value_reward === 'product' && $goods_total >= $promotion->minimum_value) {
-                $claimed = OrderHeader::promotion($promotion->product, $promotion->start_date, $promotion->end_date) / $promotion->promotion_qty;
-
-                if (Storage::disk('public')->exists('product_images/'.$line->product.'.png')) {
-                    $promotion_image = asset('product_images/'.$line->product.'.png');
-                } else {
-                    $promotion_image = asset('images/no-image.png');
+            if ($promotion->type === 'value' && $goods_total >= $promotion->minimum_value) {
+                if ($promotion->value_reward === 'percent') {
+                    $order_discount += ($goods_total / 100) * $promotion->value_percent;
                 }
 
-                if (! $promotion->max_claims) {
-                    $qty = $promotion->claim_type === 'per_order' ? $promotion->promotion_qty : floor($line->quantity / $promotion->product_qty);
-                } elseif ($promotion->max_claims > $claimed) {
-                    $claims_left = ($promotion->max_claims - $claimed);
-                    $potential_claims = ($goods_total / $promotion->minimum_value);
+                if ($promotion->value_reward === 'product') {
+                    $qty = Promotion::calculateClaimAmount($promotion, $goods_total);
 
-                    if ($claims_left < $potential_claims) {
-                        $claim_count = $claims_left;
-                    } else {
-                        $claim_count = $potential_claims;
+                    if ($qty > 0) {
+                        $promotion_image = Product::checkImage($promotion->promotion_product)['image'];
+
+                        $promotion_lines[] = [
+                            'product' => $promotion->promotion_product,
+                            'quantity' => $qty,
+                            'description' => 'FOC promotional item',
+                            'price' => currency(0.00, 2),
+                            'image' => $promotion_image,
+                        ];
                     }
-
-                    $qty = $promotion->claim_type === 'per_order' ? $promotion->promotion_qty : ($promotion->promotion_qty * number_format($claim_count, 0));
-                } else {
-                    $qty = 0;
-                }
-
-                if ($qty > 0) {
-                    $promotion_lines[] = [
-                        'product' => $promotion->promotion_product,
-                        'quantity' => $qty,
-                        'description' => 'FOC promotional item',
-                        'price' => currency(0.00, 2),
-                        'image' => $promotion_image,
-                    ];
                 }
             }
         }

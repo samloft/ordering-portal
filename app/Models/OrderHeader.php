@@ -28,6 +28,7 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
  * @property float $delivery_cost
  * @property float $small_order_charge
  * @property float $value
+ * @property float $promotion_discount
  * @property int $imported
  * @property \Illuminate\Support\Carbon $created_at
  * @property \Illuminate\Support\Carbon $deleted_at
