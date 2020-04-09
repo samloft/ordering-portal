@@ -17,7 +17,8 @@
                 </p>
 
                 <p class="mb-3">
-                    To read over our terms and conditions, you can find them on our website by clicking <a href="#"
+                    To read over our terms and conditions, you can find them on our website by clicking <a href="{{ \App\Models\GlobalSettings::termsEnabled()['url'] }}"
+                                                                                                           target="_blank"
                                                                                                            class="underline font-medium hover:opacity-75">here</a>
                 </p>
 

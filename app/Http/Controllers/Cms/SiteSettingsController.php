@@ -23,6 +23,7 @@ class SiteSettingsController extends Controller
             'google_maps' => GlobalSettings::googleMapsUrl(),
             'v1_docid' => GlobalSettings::versionOneDocId(),
             'last_order' => GlobalSettings::where('key', 'last-order')->first()->value,
+            'terms-enabled' => GlobalSettings::termsEnabled(),
         ];
 
         return view('site-settings.index', compact('data'));

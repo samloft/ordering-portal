@@ -16,7 +16,7 @@ use App\Models\Category;
 use App\Models\Customer;
 use Illuminate\Http\Request;
 
-Route::group(['middleware' => ['auth', 'has.customer']], static function () {
+Route::group(['middleware' => ['auth', 'has.customer', 'terms']], static function () {
     /*
      *  Home Page
      */

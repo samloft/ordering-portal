@@ -40,7 +40,6 @@ class Kernel extends HttpKernel
             \Illuminate\Routing\Middleware\SubstituteBindings::class,
             SetTurboLinksHeader::class,
             BrowserMiddleware::class,
-            TermsAccepted::class,
         ],
 
         'api' => [
@@ -69,6 +68,7 @@ class Kernel extends HttpKernel
         'verified' => \Illuminate\Auth\Middleware\EnsureEmailIsVerified::class,
         'admin' => \App\Http\Middleware\SiteAdmin::class,
         'has.customer' => \App\Http\Middleware\HasCustomer::class,
+        'terms' => TermsAccepted::class,
     ];
 
     /**

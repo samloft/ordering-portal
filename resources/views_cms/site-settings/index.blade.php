@@ -55,7 +55,7 @@
                         Select the default country that will be auto-selected when users create a new delivery address.
                     </p>
                 </div>
-                <div class="w-3/4 relative mr-1">
+                <div class="w-3/4 relative">
                     <label for="default_company" class="text-sm font-medium">Country</label>
                     <select id="default_company" class="rounded border bg-gray-100 text-gray-600 appearance-none mt-1"
                             name="default_country"
@@ -117,7 +117,8 @@
                 <div class="w-1/4 mr-6">
                     <h5 class="font-medium text-lg mb-2">VersionOne</h5>
                     <p class="text-gray-600 text-sm">
-                        Set the DOCID for the versionone document that should be looked for (Sales Invoice for the company).
+                        Set the DOCID for the versionone document that should be looked for (Sales Invoice for the
+                        company).
                     </p>
                 </div>
                 <div class="w-3/4">
@@ -134,7 +135,8 @@
                 <div class="w-1/4 mr-6">
                     <h5 class="font-medium text-lg mb-2">Last Order Number</h5>
                     <p class="text-gray-600 text-sm">
-                        Sets the last used order number, this means the next order placed will be this order incremented by 1.
+                        Sets the last used order number, this means the next order placed will be this order incremented
+                        by 1.
                     </p>
                 </div>
                 <div class="w-3/4">
@@ -143,6 +145,42 @@
                            name="last_order"
                            placeholder="Last Order Number">
                     <span class="text-xs">* Only accepts 1 letter followed by 6 numbers</span>
+                </div>
+            </div>
+
+            <hr class="mt-3 mb-3">
+
+            <div class="flex">
+                <div class="w-1/4 mr-6">
+                    <h5 class="font-medium text-lg mb-2">Terms & Conditions</h5>
+                    <p class="text-gray-600 text-sm">
+                        Should acceptance of terms & conditions be required for new users logging into the site for the
+                        first time?
+                    </p>
+                </div>
+                <div class="w-3/4">
+                    <div class="relative mb-2">
+                        <label for="terms-enabled" class="text-sm font-medium">Terms Enabled?</label>
+                        <select id="terms-enabled"
+                                class="rounded border bg-gray-100 text-gray-600 appearance-none mt-1"
+                                name="terms_enabled"
+                                autocomplete="off">
+                            <option value="1" {{ $data['terms-enabled']['enabled'] ? 'selected' : '' }}>Yes</option>
+                            <option value="0" {{ ! $data['terms-enabled']['enabled'] ? 'selected' : '' }}>No</option>
+                        </select>
+                        <div
+                            class="pointer-events-none absolute inset-y-0 right-0 flex items-center px-3 pt-6 text-gray-700">
+                            <svg class="fill-current h-4 w-4" xmlns="http://www.w3.org/2000/svg"
+                                 viewBox="0 0 20 20">
+                                <path
+                                    d="M9.293 12.95l.707.707L15.657 8l-1.414-1.414L10 10.828 5.757 6.586 4.343 8z"/>
+                            </svg>
+                        </div>
+                    </div>
+
+                    <label for="terms-url">Terms URL</label>
+                    <input id="terms-url" name="terms_url" class="bg-gray-100 mt-1"
+                           placeholder="URL on main website to the terms" value="{{ $data['terms-enabled']['url'] }}">
                 </div>
             </div>
 

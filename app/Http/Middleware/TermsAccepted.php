@@ -2,6 +2,7 @@
 
 namespace App\Http\Middleware;
 
+use App\Models\GlobalSettings;
 use Closure;
 
 class TermsAccepted
@@ -18,7 +19,9 @@ class TermsAccepted
      */
     public function handle($request, Closure $next)
     {
-        if (! auth()->guest() && $request->route()->getPrefix() !== 'cms' && $request->route()->getName() !== 'site-terms.accept') {
+        $enabled = GlobalSettings::termsEnabled()['enabled'];
+
+        if ($enabled && $request->route()->getName() !== 'site-terms.accept') {
             if (auth()->user()->terms_accepted && $request->route()->getName() === 'site-terms') {
                 return redirect(route('home'));
             }

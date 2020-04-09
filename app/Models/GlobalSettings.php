@@ -38,6 +38,7 @@ class GlobalSettings extends Model
         Cache::forget('google-analytics-url');
         Cache::forget('default-country');
         Cache::forget('v1-docid');
+        Cache::forget('terms-enabled');
     }
 
     /**
@@ -184,6 +185,13 @@ class GlobalSettings extends Model
             'value' => request('last_order'),
         ]);
 
+        $settings::where('key', 'terms-enabled')->update([
+            'value' => json_encode([
+                'enabled' => request('terms_enabled'),
+                'url' => request('terms_url'),
+            ], true),
+        ]);
+
         return true;
     }
 
@@ -214,6 +222,18 @@ class GlobalSettings extends Model
     {
         return Cache::rememberForever('product-data', static function () {
             return json_decode(self::where('key', 'product-data')->first()->value, true);
+        });
+    }
+
+    /**
+     * Check to see if new users should have to accept terms before accessing the site.
+     *
+     * @return mixed
+     */
+    public static function termsEnabled()
+    {
+        return Cache::rememberForever('terms-enabled', static function () {
+            return json_decode(self::where('key', 'terms-enabled')->first()->value, true);
         });
     }
 }
