@@ -178,6 +178,18 @@ Route::group(['middleware' => ['auth', 'has.customer']], static function () {
         Route::get('/', 'ContactController@index')->name('contact');
         Route::post('/', 'ContactController@store')->name('contact.email');
     });
+
+    Route::group(['prefix' => 'terms'], static function () {
+        Route::get('/', static function () {
+            return view('support.site-terms');
+        })->name('site-terms');
+
+        Route::post('/', static function () {
+            auth()->user()->acceptTerms();
+
+            return redirect(route('home'));
+        })->name('site-terms.accept');
+    });
 });
 
 Auth::routes();

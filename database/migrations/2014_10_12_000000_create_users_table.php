@@ -23,9 +23,10 @@ class CreateUsersTable extends Migration
             $table->string('name');
             $table->string('telephone')->nullable();
             $table->string('mobile')->nullable();
-            $table->boolean('admin')->default(0);
-            $table->boolean('can_order')->default(1);
+            $table->boolean('admin')->default(false);
+            $table->boolean('can_order')->default(true);
             $table->string('api_token', 80)->nullable()->unique();
+            $table->boolean('terms_accepted')->default(false);
             $table->timestamps();
         });
     }

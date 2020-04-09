@@ -27,6 +27,7 @@ use Spatie\Activitylog\Traits\LogsActivity;
  * @property int $admin
  * @property int $can_order
  * @property stirng $api_token
+ * @property boolean $terms_accepted
  * @property \Illuminate\Support\Carbon $created_at
  * @property \Illuminate\Support\Carbon $updated_at
  */
@@ -71,6 +72,20 @@ class User extends Authenticatable
         'remember_token',
         'api_token',
     ];
+
+    /**
+     * Accept terms and condition for the current logged in user.
+     *
+     * @return bool
+     */
+    public function acceptTerms(): bool
+    {
+        $user = self::findOrFail(auth()->id());
+
+        return $user->update([
+            'terms_accepted' => true,
+        ]);
+    }
 
     /**
      * Return the delivery addresses for the current user.
