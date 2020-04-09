@@ -25,6 +25,7 @@ $factory->define(User::class, static function (Faker $faker) {
         'remember_token' => str_random(10),
         'name' => $faker->name,
         'admin' => false,
-        'can_order' => 1,
+        'can_order' => true,
+        'terms_accepted' => true,
     ];
 });
