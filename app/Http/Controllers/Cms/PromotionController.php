@@ -78,9 +78,9 @@ class PromotionController extends Controller
     {
         return request()->validate([
             'type' => 'required',
-            'minimum_value' => Rule::requiredIf(request('type') === 'value').'|numeric',
+            'minimum_value' => Rule::requiredIf(request('type') === 'value').'|numeric|nullable',
             'value_reward' => Rule::requiredIf(request('type') === 'value'),
-            'value_percent' => Rule::requiredIf(request('type') === 'value' && request('value_reward') === 'percent').'|integer',
+            'value_percent' => Rule::requiredIf(request('type') === 'value' && request('value_reward') === 'percent').'|integer|nullable',
             'product' => Rule::requiredIf(request('type') === 'product').'|exists:products,code|nullable',
             'product_qty' => Rule::requiredIf(request('type') === 'product').'|integer|nullable',
             'promotion_product' => Rule::requiredIf(request('type') === 'product' || request('value_reward') === 'product').'|exists:products,code|nullable',
