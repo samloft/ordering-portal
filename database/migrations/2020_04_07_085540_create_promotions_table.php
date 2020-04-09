@@ -15,10 +15,14 @@ class CreatePromotionsTable extends Migration
     {
         Schema::create('promotions', static function (Blueprint $table) {
             $table->id();
-            $table->string('product');
-            $table->integer('product_qty');
-            $table->string('promotion_product');
-            $table->integer('promotion_qty');
+            $table->string('type');
+            $table->string('product')->nullable();
+            $table->integer('product_qty')->nullable();
+            $table->string('value_reward')->nullable();
+            $table->string('promotion_product')->nullable();
+            $table->integer('promotion_qty')->nullable();
+            $table->float('minimum_value')->nullable();
+            $table->float('value_percent')->nullable();
             $table->string('claim_type');
             $table->integer('max_claims')->nullable();
             $table->string('restrictions')->nullable();

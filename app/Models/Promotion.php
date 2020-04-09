@@ -12,10 +12,14 @@ use Spatie\Activitylog\Traits\LogsActivity;
  *
  * @mixin \Eloquent
  *
+ * @property string $type
  * @property string $product
  * @property int $product_qty
+ * @property string $value_reward
  * @property string $promotion_product
  * @property int $promotion_qty
+ * @property float $minimum_value
+ * @property float $value_percent
  * @property string $claim_type
  * @property int $max_claims
  * @property string $restrictions
@@ -34,10 +38,14 @@ class Promotion extends Model
     use LogsActivity;
 
     protected $fillable = [
+        'type',
         'product',
         'product_qty',
+        'value_reward',
         'promotion_product',
         'promotion_qty',
+        'minimum_value',
+        'value_percent',
         'claim_type',
         'max_claims',
         'restrictions',

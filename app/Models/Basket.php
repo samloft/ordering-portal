@@ -123,41 +123,45 @@ class Basket extends Model
             }
 
             foreach ($promotions as $promotion) {
-                if ($line->product === $promotion->product && $line->quantity > $promotion->product_qty) {
-                    $claimed = OrderHeader::promotion($promotion->product, $promotion->start_date, $promotion->end_date) / $promotion->promotion_qty;
+                if ($promotion->type) {
+                    if ($line->product === $promotion->product && $line->quantity > $promotion->product_qty) {
+                        $claimed = OrderHeader::promotion($promotion->product, $promotion->start_date, $promotion->end_date) / $promotion->promotion_qty;
 
-                    if (Storage::disk('public')->exists('product_images/'.$line->product.'.png')) {
-                        $promotion_image = asset('product_images/'.$line->product.'.png');
-                    } else {
-                        $promotion_image = asset('images/no-image.png');
-                    }
-
-                    if (! $promotion->max_claims) {
-                        $qty = $promotion->claim_type === 'per_order' ? $promotion->promotion_qty : floor($line->quantity / $promotion->product_qty);
-                    } elseif ($promotion->max_claims > $claimed) {
-                        $claims_left = ($promotion->max_claims - $claimed);
-                        $potential_claims = floor($line->quantity / $promotion->product_qty);
-
-                        if ($claims_left < $potential_claims) {
-                            $claim_count = $claims_left;
+                        if (Storage::disk('public')->exists('product_images/'.$line->product.'.png')) {
+                            $promotion_image = asset('product_images/'.$line->product.'.png');
                         } else {
-                            $claim_count = $potential_claims;
+                            $promotion_image = asset('images/no-image.png');
                         }
 
-                        $qty = $promotion->claim_type === 'per_order' ? $promotion->promotion_qty : ($promotion->promotion_qty * $claim_count);
-                    } else {
-                        $qty = 0;
-                    }
+                        if (! $promotion->max_claims) {
+                            $qty = $promotion->claim_type === 'per_order' ? $promotion->promotion_qty : floor($line->quantity / $promotion->product_qty);
+                        } elseif ($promotion->max_claims > $claimed) {
+                            $claims_left = ($promotion->max_claims - $claimed);
+                            $potential_claims = floor($line->quantity / $promotion->product_qty);
 
-                    if ($qty > 0) {
-                        $promotion_lines[] = [
-                            'product' => $promotion->promotion_product,
-                            'quantity' => $qty,
-                            'description' => 'FOC promotional item',
-                            'price' => currency(0.00, 2),
-                            'image' => $promotion_image,
-                        ];
+                            if ($claims_left < $potential_claims) {
+                                $claim_count = $claims_left;
+                            } else {
+                                $claim_count = $potential_claims;
+                            }
+
+                            $qty = $promotion->claim_type === 'per_order' ? $promotion->promotion_qty : ($promotion->promotion_qty * $claim_count);
+                        } else {
+                            $qty = 0;
+                        }
+
+                        if ($qty > 0) {
+                            $promotion_lines[] = [
+                                'product' => $promotion->promotion_product,
+                                'quantity' => $qty,
+                                'description' => 'FOC promotional item',
+                                'price' => currency(0.00, 2),
+                                'image' => $promotion_image,
+                            ];
+                        }
                     }
+                } else {
+                    // Will be value
                 }
             }
         }

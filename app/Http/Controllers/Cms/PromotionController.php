@@ -77,10 +77,14 @@ class PromotionController extends Controller
     public function validation()
     {
         return request()->validate([
-            'product' => 'required|exists:products,code',
-            'product_qty' => 'required|integer',
-            'promotion_product' => 'required|exists:products,code',
-            'promotion_qty' => 'required|integer',
+            'type' => 'required',
+            'minimum_value' => Rule::requiredIf(request('type') === 'value').'|numeric',
+            'value_reward' => Rule::requiredIf(request('type') === 'value'),
+            'value_percent' => Rule::requiredIf(request('type') === 'value' && request('value_reward') === 'percent').'|integer',
+            'product' => Rule::requiredIf(request('type') === 'product').'|exists:products,code',
+            'product_qty' => Rule::requiredIf(request('type') === 'product').'|integer',
+            'promotion_product' => Rule::requiredIf(request('type') === 'product' || request('value_reward') === 'product').'|exists:products,code',
+            'promotion_qty' => Rule::requiredIf(request('type') === 'product' || request('value_reward') === 'product').'|integer',
             'max_claims' => 'integer|nullable',
             'claim_type' => 'required',
             'buying_groups' => Rule::requiredIf(request('restrictions') === 'buying_group'),
