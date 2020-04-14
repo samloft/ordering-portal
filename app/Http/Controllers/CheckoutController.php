@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Exports\ConfirmationExport;
+use App\Exports\ConfirmationPDF;
 use App\Models\Address;
 use App\Models\Basket;
 use App\Models\DeliveryMethod;
@@ -146,11 +146,8 @@ class CheckoutController extends Controller
         $order_number = $order_number ?? request('order_number');
 
         $order = OrderHeader::where('customer_code', auth()->user()->customer->code)->where('order_number', decodeUrl($order_number))->firstOrFail();
-        //$company_details = json_decode(GlobalSettings::key('company-details'), true);
 
-        return (new ConfirmationExport($order))->download(false);
-
-        //return PDF::loadView('pdf.order', compact('order', 'company_details'))->download(decodeUrl($order_number).'.pdf');
+        return (new ConfirmationPDF($order))->download(false);
     }
 
     /**

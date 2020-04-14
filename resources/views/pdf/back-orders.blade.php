@@ -23,20 +23,20 @@
         <tr>
             <th>Order No.</th>
             <th>Product Code</th>
-            <th class="description">Description</th>
+            <th>Description</th>
             <th>Ordered</th>
-            <th class="outstanding">Outstanding</th>
+            <th>Outstanding</th>
             <th>Next Expecting</th>
         </tr>
         </thead>
         <tbody>
         @foreach($back_orders as $back_order)
             <tr>
-                <td>{{ $back_order->order_no }}</td>
+                <td>{{ $back_order->order_number }}</td>
                 <td>{{ $back_order->product }}</td>
-                <td>{{ $back_order->long_description }}</td>
+                <td>{{ $back_order->description }}</td>
                 <td>{{ \Carbon\Carbon::parse($back_order->date_received)->format('d-m-Y') }}</td>
-                <td class="text-right">{{ $back_order->line_qty }}</td>
+                <td class="text-right">{{ $back_order->quantity }}</td>
                 <td>{{ $back_order->due_date ? \Carbon\Carbon::parse($back_order->due_date)->format('d-m-Y') : 'Unknown' }}</td>
             </tr>
         @endforeach

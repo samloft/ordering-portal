@@ -7,12 +7,12 @@ use App\Models\GlobalSettings;
 use Barryvdh\DomPDF\Facade as PDF;
 use Carbon\Carbon;
 
-class ConfirmationExport
+class ConfirmationPDF
 {
     protected $order;
 
     /**
-     * ConfirmationExport constructor.
+     * ConfirmationPDF constructor.
      *
      * @param $order
      */

@@ -7,12 +7,12 @@ use Illuminate\Support\Collection;
 use Maatwebsite\Excel\Concerns\FromCollection;
 use Maatwebsite\Excel\Concerns\WithHeadings;
 
-class BackOrderExport implements FromCollection, WithHeadings
+class BackOrderExcel implements FromCollection, WithHeadings
 {
     protected $back_orders;
 
     /**
-     * AccountSummaryExport constructor.
+     * AccountSummaryExcel constructor.
      *
      * @param $back_orders
      */

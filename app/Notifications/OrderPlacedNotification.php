@@ -2,10 +2,9 @@
 
 namespace App\Notifications;
 
-use App\Exports\ConfirmationExport;
+use App\Exports\ConfirmationPDF;
 use App\Models\GlobalSettings;
 use App\Models\OrderHeader;
-use Barryvdh\DomPDF\Facade as PDF;
 use Illuminate\Notifications\Messages\MailMessage;
 use Illuminate\Notifications\Notification;
 
@@ -48,14 +47,10 @@ class OrderPlacedNotification extends Notification
      */
     public function toMail($notifiable): MailMessage
     {
-        //return (new MailMessage())->line('The introduction to the notification.')->action('Notification Action', url('/'))->line('Thank you for using our application!');
-
         $order = OrderHeader::where('customer_code', auth()->user()->customer->code)->where('order_number', decodeUrl($this->order['order_number']))->firstOrFail();
         $company_details = json_decode(GlobalSettings::key('company-details'), true);
 
-        $pdf = (new ConfirmationExport($order))->download(false);
-
-        //$pdf = PDF::loadView('pdf.order', compact('order', 'company_details'))->output();
+        $pdf = (new ConfirmationPDF($order))->download(false);
 
         return (new MailMessage())
             ->subject('Ordering portal - Order Confirmation')

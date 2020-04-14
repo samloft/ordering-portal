@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Exports\ConfirmationExport;
+use App\Exports\ConfirmationPDF;
 use App\Models\Basket;
 use App\Models\GlobalSettings;
 use App\Models\OrderTrackingHeader;
@@ -130,6 +130,6 @@ class OrderTrackingController extends Controller
     {
         $order = OrderTrackingHeader::show(decodeUrl($order_number));
 
-        return (new ConfirmationExport($order))->download(true);
+        return (new ConfirmationPDF($order))->download(true);
     }
 }

@@ -5,14 +5,14 @@ namespace App\Exports;
 use Illuminate\Support\Collection;
 use Maatwebsite\Excel\Concerns\FromCollection;
 
-class AccountSummaryExport implements FromCollection
+class AccountSummaryExcel implements FromCollection
 {
     protected $summary;
 
     protected $invoice_lines;
 
     /**
-     * AccountSummaryExport constructor.
+     * AccountSummaryExcel constructor.
      *
      * @param $summary
      * @param $invoice_lines

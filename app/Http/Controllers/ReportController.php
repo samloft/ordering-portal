@@ -2,12 +2,12 @@
 
 namespace App\Http\Controllers;
 
-use App\Exports\AccountSummaryExport;
-use App\Exports\BackOrderExport;
+use App\Exports\AccountSummaryExcel;
+use App\Exports\AccountSummaryPDF;
+use App\Exports\BackOrderExcel;
+use App\Exports\BackOrderPDF;
 use App\Models\AccountSummary;
-use App\Models\GlobalSettings;
 use App\Models\OrderTrackingHeader;
-use Barryvdh\DomPDF\Facade as PDF;
 use Carbon\Carbon;
 use Illuminate\Contracts\View\Factory;
 use Illuminate\Http\RedirectResponse;
@@ -69,13 +69,11 @@ class ReportController extends Controller
 
         if (count($back_orders) > 0) {
             if ($output === 'pdf') {
-                $company_details = json_decode(GlobalSettings::key('company-details'), true);
-
-                return PDF::loadView('pdf.back-orders', compact('back_orders', 'company_details'))->download('back_orders.pdf');
+                return (new BackOrderPDF($back_orders))->download();
             }
 
             if ($output === 'csv') {
-                return Excel::download(new BackOrderExport($back_orders), 'back-orders.csv', \Maatwebsite\Excel\Excel::CSV);
+                return Excel::download(new BackOrderExcel($back_orders), 'back-orders.csv', \Maatwebsite\Excel\Excel::CSV);
             }
         }
 
@@ -130,13 +128,11 @@ class ReportController extends Controller
             }
 
             if ($output === 'pdf') {
-                $company_details = json_decode(GlobalSettings::key('company-details'), true);
-
-                return PDF::loadView('pdf.account-summary', compact('lines', 'summary_line', 'company_details'))->download('account_summary.pdf');
+                return (new AccountSummaryPDF($lines, $summary_line))->download();
             }
 
             if ($output === 'csv') {
-                return Excel::download(new AccountSummaryExport($summary_line, $lines), 'account-summary.csv', \Maatwebsite\Excel\Excel::CSV);
+                return Excel::download(new AccountSummaryExcel($summary_line, $lines), 'account-summary.csv', \Maatwebsite\Excel\Excel::CSV);
             }
         }
 
