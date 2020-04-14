@@ -27,7 +27,7 @@ use Spatie\Activitylog\Traits\LogsActivity;
  * @property int $admin
  * @property int $can_order
  * @property stirng $api_token
- * @property boolean $terms_accepted
+ * @property bool $terms_accepted
  * @property \Illuminate\Support\Carbon $created_at
  * @property \Illuminate\Support\Carbon $updated_at
  */

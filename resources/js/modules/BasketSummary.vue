@@ -4,6 +4,10 @@
             <div>Goods Total</div>
             <div>{{ goods_total }}</div>
         </div>
+        <div v-if="promotion_discount.replace(/\D/g,'') > 0" class="flex justify-between text-primary font-medium">
+            <div>Promotion Discount</div>
+            <div>- {{ promotion_discount }}</div>
+        </div>
         <div class="flex justify-between">
             <div>Shipping</div>
             <div>{{ shipping }}</div>
@@ -33,6 +37,7 @@
         data() {
             return {
                 goods_total: this.summary.goods_total,
+                promotion_discount: this.summary.order_discount,
                 shipping: this.summary.shipping.cost,
                 sub_total: this.summary.sub_total,
                 small_order_charge: this.summary.small_order_charge,
@@ -46,6 +51,7 @@
         methods: {
             updateSummary: function (data) {
                 this.goods_total = data.basket_details.summary.goods_total;
+                this.promotion_discount = data.basket_details.summary.order_discount;
                 this.shipping = data.basket_details.summary.shipping.cost;
                 this.sub_total = data.basket_details.summary.sub_total;
                 this.small_order_charge = data.basket_details.summary.small_order_charge;

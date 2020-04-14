@@ -12,10 +12,10 @@
                         <thead>
                         <tr>
                             <th class="px-6 py-3 border-b border-gray-200 bg-gray-200 text-left text-xs leading-4 font-medium text-gray-500 uppercase tracking-wider">
-                                Product
+                                Product/Value
                             </th>
                             <th class="px-6 py-3 border-b border-gray-200 bg-gray-200 text-left text-xs leading-4 font-medium text-gray-500 uppercase tracking-wider">
-                                Promo Product
+                                Promo Product/Discount
                             </th>
                             <th class="px-6 py-3 border-b border-gray-200 bg-gray-200 text-left text-xs leading-4 font-medium text-gray-500 uppercase tracking-wider">
                                 Restriction
@@ -35,14 +35,35 @@
                         <tbody class="bg-white">
                         <tr v-for="promotion in promotions">
                             <td class="px-6 py-4 whitespace-no-wrap border-b border-gray-200 text-sm leading-5 font-medium text-gray-900">
-                                <div class="text-sm leading-5 font-medium text-gray-900">{{ promotion.product }}</div>
-                                <div class="text-sm leading-5 text-gray-500">Qty: {{ promotion.product_qty }}</div>
+                                <div v-if="promotion.type === 'product'">
+                                    <div class="text-sm leading-5 font-medium text-gray-900">{{ promotion.product }}
+                                    </div>
+                                    <div class="text-sm leading-5 text-gray-500">Qty: {{ promotion.product_qty }}</div>
+                                </div>
+                                <div v-else>
+                                    <div class="text-sm leading-5 font-medium text-gray-900">{{ promotion.minimum_value
+                                        }}
+                                    </div>
+                                    <div class="text-sm leading-5 text-gray-500">Minimum Order</div>
+                                </div>
                             </td>
                             <td class="px-6 py-4 whitespace-no-wrap border-b border-gray-200 text-sm leading-5 text-gray-500">
-                                <div class="text-sm leading-5 font-medium text-gray-900">{{ promotion.promotion_product
-                                    }}
+                                <div
+                                    v-if="promotion.type === 'product' || (promotion.type === 'value' && promotion.value_reward === 'product')">
+                                    <div class="text-sm leading-5 font-medium text-gray-900">{{
+                                        promotion.promotion_product
+                                        }}
+                                    </div>
+                                    <div class="text-sm leading-5 text-gray-500">Qty: {{ promotion.promotion_qty }}
+                                    </div>
                                 </div>
-                                <div class="text-sm leading-5 text-gray-500">Qty: {{ promotion.promotion_qty }}</div>
+                                <div v-else>
+                                    <div class="text-sm leading-5 font-medium text-gray-900">
+                                        {{ promotion.value_percent }}%
+                                    </div>
+                                    <div class="text-sm leading-5 text-gray-500">Discount
+                                    </div>
+                                </div>
                             </td>
                             <td class="px-6 py-4 whitespace-no-wrap border-b border-gray-200 text-sm leading-5 text-gray-500">
                                 <span class="badge badge-info capitalize">
@@ -77,46 +98,15 @@
         </div>
 
         <modal v-if="modal" title="Product Promotion">
-            <div class="flex mb-3">
-                <div class="w-2/3 mr-2">
-                    <label for="product">Product Code</label>
-                    <input id="product" class="bg-gray-100" v-model="data.product"
-                           placeholder="Product code">
-                    <span v-text="errors.get('product')" class="block text-sm text-red-600"/>
-                </div>
-
-                <div class="w-1/3">
-                    <label for="product-qty">Product Quantity</label>
-                    <input id="product-qty" class="bg-gray-100" v-model="data.product_qty"
-                           placeholder="Minimum quantity">
-                    <span v-text="errors.get('product_qty')" class="block text-sm text-red-600"/>
-                </div>
-            </div>
-
-            <div class="flex mb-3">
-                <div class="w-2/3 mr-2">
-                    <label for="promotion-product">Promotion Product</label>
-                    <input id="promotion-product" class="bg-gray-100" v-model="data.promotion_product"
-                           placeholder="Promotion Product">
-                    <span v-text="errors.get('promotion_product')" class="block text-sm text-red-600"/>
-                </div>
-
-                <div class="w-1/3">
-                    <label for="promotion-qty">Promotion Quantity</label>
-                    <input id="promotion-qty" class="bg-gray-100" v-model="data.promotion_qty"
-                           placeholder="Promotion quantity">
-                    <span v-text="errors.get('promotion_qty')" class="block text-sm text-red-600"/>
-                </div>
-            </div>
-
-            <div class="mb-3 relative">
-                <label for="claim-type">Claim Type</label>
-                <select v-model="data.claim_type"
-                        id="claim-type"
+            <div class="relative mb-3">
+                <label for="type">Promotion Type</label>
+                <select v-model="data.type"
+                        @change="typeUpdated()"
+                        id="type"
                         class="p-2 rounded border bg-gray-100 text-gray-600 appearance-none"
                         autocomplete="off">
-                    <option value="multiple">Multiple</option>
-                    <option value="per_order">Per Order</option>
+                    <option value="product">Product</option>
+                    <option value="value">Value</option>
                 </select>
                 <div
                     class="pointer-events-none absolute inset-y-0 right-0 flex items-center px-3 pt-6 text-gray-700">
@@ -126,14 +116,113 @@
                             d="M9.293 12.95l.707.707L15.657 8l-1.414-1.414L10 10.828 5.757 6.586 4.343 8z"/>
                     </svg>
                 </div>
+                <span v-text="errors.get('type')" class="block text-xs text-red-600"/>
             </div>
 
-            <div class="mb-3">
-                <label for="max-claims" class="mb-0 leading-3">Maximum Claims</label>
-                <span class="text-xs text-gray-400">Maximum claim amount per customer, leave blank for unlimited.</span>
-                <input id="max-claims" class="bg-gray-100" v-model="data.max_claims"
-                       placeholder="Maximum claim amount">
-                <span v-text="errors.get('max_claims')" class="block text-sm text-red-600"/>
+            <div v-if="data.type === 'product'">
+                <div class="flex mb-3">
+                    <div class="w-2/3 mr-2">
+                        <label for="product">Product Code</label>
+                        <input id="product" class="bg-gray-100" v-model="data.product"
+                               placeholder="Product code">
+                        <span v-text="errors.get('product')" class="block text-xs text-red-600"/>
+                    </div>
+
+                    <div class="w-1/3">
+                        <label for="product-qty">Product Quantity</label>
+                        <input id="product-qty" class="bg-gray-100" v-model="data.product_qty"
+                               placeholder="Minimum quantity">
+                        <span v-text="errors.get('product_qty')" class="block text-xs text-red-600"/>
+                    </div>
+                </div>
+            </div>
+
+            <div v-if="data.type === 'value'">
+                <div class="flex mb-3">
+                    <div class="w-1/2 mr-1">
+                        <label for="minimum-value">Min Order Value</label>
+                        <input id="minimum-value" class="bg-gray-100" v-model="data.minimum_value"
+                               placeholder="Order value required">
+                        <span v-text="errors.get('minimum_value')" class="block text-xs text-red-600"/>
+                    </div>
+
+                    <div class="w-1/2 relative ml-1">
+                        <label for="value-type">Value Reward Type</label>
+                        <select v-model="data.value_reward"
+                                id="value-type"
+                                class="p-2 rounded border bg-gray-100 text-gray-600 appearance-none"
+                                autocomplete="off">
+                            <option value="product">Product</option>
+                            <option value="percent">Discount Percent</option>
+                        </select>
+                        <div
+                            class="pointer-events-none absolute inset-y-0 right-0 flex items-center px-3 pt-6 text-gray-700">
+                            <svg class="fill-current h-4 w-4" xmlns="http://www.w3.org/2000/svg"
+                                 viewBox="0 0 20 20">
+                                <path
+                                    d="M9.293 12.95l.707.707L15.657 8l-1.414-1.414L10 10.828 5.757 6.586 4.343 8z"/>
+                            </svg>
+                        </div>
+                        <span v-text="errors.get('value_reward')" class="block text-xs text-red-600"/>
+                    </div>
+                </div>
+
+                <div v-if="data.value_reward === 'percent'">
+                    <div class="mb-3">
+                        <label for="value-percent">Discount Value Percent</label>
+                        <input id="value-percent" class="bg-gray-100" v-model="data.value_percent"
+                               placeholder="Percent to be deducted from order">
+                        <span v-text="errors.get('value_percent')" class="block text-xs text-red-600"/>
+                    </div>
+                </div>
+            </div>
+
+            <div v-if="data.type === 'product' || (data.type === 'value' && data.value_reward === 'product')">
+                <div class="flex mb-3">
+                    <div class="w-2/3 mr-2">
+                        <label for="promotion-product">Promotion Product</label>
+                        <input id="promotion-product" class="bg-gray-100" v-model="data.promotion_product"
+                               placeholder="Promotion Product">
+                        <span v-text="errors.get('promotion_product')" class="block text-xs text-red-600"/>
+                    </div>
+
+                    <div class="w-1/3">
+                        <label for="promotion-qty">Promotion Quantity</label>
+                        <input id="promotion-qty" class="bg-gray-100" v-model="data.promotion_qty"
+                               placeholder="Promotion quantity">
+                        <span v-text="errors.get('promotion_qty')" class="block text-xs text-red-600"/>
+                    </div>
+                </div>
+            </div>
+
+            <div class="flex mb-3">
+                <div class="w-1/2 relative mr-1">
+                    <label for="claim-type" class="mb-0 leading-3">Claim Type</label>
+                    <span class="text-xs text-gray-400">How is it claimed?</span>
+                    <select v-model="data.claim_type"
+                            id="claim-type"
+                            class="p-2 rounded border bg-gray-100 text-gray-600 appearance-none"
+                            autocomplete="off">
+                        <option value="multiple">Multiple</option>
+                        <option value="per_order">Per Order</option>
+                    </select>
+                    <div
+                        class="pointer-events-none absolute inset-y-0 right-0 flex items-center px-3 pt-9 text-gray-700">
+                        <svg class="fill-current h-4 w-4" xmlns="http://www.w3.org/2000/svg"
+                             viewBox="0 0 20 20">
+                            <path
+                                d="M9.293 12.95l.707.707L15.657 8l-1.414-1.414L10 10.828 5.757 6.586 4.343 8z"/>
+                        </svg>
+                    </div>
+                </div>
+
+                <div class="w-1/2 ml-1">
+                    <label for="max-claims" class="mb-0 leading-3">Maximum Claims</label>
+                    <span class="text-xs text-gray-400">Leave blank for unlimited.</span>
+                    <input id="max-claims" class="bg-gray-100" v-model="data.max_claims"
+                           placeholder="Maximum claim amount">
+                    <span v-text="errors.get('max_claims')" class="block text-xs text-red-600"/>
+                </div>
             </div>
 
             <div class="mb-3 relative">
@@ -167,7 +256,7 @@
                               :placeholder="! data.buying_groups || ! data.buying_groups.length > 0 ? 'Select buying groups' : ''"
                               readonly>
                 </multi-select>
-                <span v-text="errors.get('buying_groups')" class="block text-sm text-red-600"/>
+                <span v-text="errors.get('buying_groups')" class="block text-xs text-red-600"/>
             </div>
 
             <div v-if="this.data.restrictions === 'price_list'" class="mb-3">
@@ -179,7 +268,7 @@
                               :placeholder="! data.price_lists || ! data.price_lists.length > 0 ? 'Select price lists' : ''"
                               readonly>
                 </multi-select>
-                <span v-text="errors.get('price_lists')" class="block text-sm text-red-600"/>
+                <span v-text="errors.get('price_lists')" class="block text-xs text-red-600"/>
             </div>
 
             <div v-if="this.data.restrictions === 'discount_code'" class="mb-3">
@@ -191,7 +280,7 @@
                               :placeholder="! data.discount_codes || ! data.discount_codes.length > 0 ? 'Select discount codes' : ''"
                               readonly>
                 </multi-select>
-                <span v-text="errors.get('discount_codes')" class="block text-sm text-red-600"/>
+                <span v-text="errors.get('discount_codes')" class="block text-xs text-red-600"/>
             </div>
 
             <div class="flex mb-3">
@@ -211,7 +300,7 @@
                             </i>
                         </div>
                     </div>
-                    <span v-text="errors.get('start_date')" class="block text-sm text-red-600"/>
+                    <span v-text="errors.get('start_date')" class="block text-xs text-red-600"/>
                 </div>
 
                 <div class="ml-2">
@@ -230,7 +319,7 @@
                             </i>
                         </div>
                     </div>
-                    <span v-text="errors.get('end_date')" class="block text-sm text-red-600"/>
+                    <span v-text="errors.get('end_date')" class="block text-xs text-red-600"/>
                 </div>
             </div>
 
@@ -293,12 +382,18 @@
                     this.data.restrictions = promotion.restrictions ? promotion.restrictions : '';
                 } else {
                     this.data = {
+                        type: 'product',
                         restrictions: '',
                         claim_type: 'multiple',
                     };
                 }
 
                 this.modal = true;
+            },
+            typeUpdated: function () {
+                // if (this.data.type === 'value' && !this.data.value_reward) {
+                //     return this.data.value_reward = 'product';
+                // }
             },
             restrictionUpdate: function () {
                 this.restriction = this.data.restriction;
