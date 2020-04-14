@@ -71,7 +71,7 @@
             }
         },
         mounted() {
-            if (this.goodsTotal < this.threshold && !this.validationErrors) {
+            if (parseFloat(this.goodsTotal) < parseFloat(this.threshold) && !this.validationErrors) {
                 this.open = true;
             }
         }

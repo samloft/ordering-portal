@@ -33,6 +33,7 @@ class CreateOrderHeaderTable extends Migration
             $table->float('small_order_charge');
             $table->float('vat');
             $table->float('value');
+            $table->float('promotion_discount');
             $table->boolean('imported')->default(0);
             $table->timestamps();
         });
