@@ -202,6 +202,7 @@
                 this.items = data.basket_details.lines;
                 this.potential_saving = data.basket_details.potential_saving;
                 this.potential_saving_total = data.basket_details.potential_saving_total;
+                this.promotions = data.basket_details.promotion_lines;
 
                 this.$forceUpdate()
             });
@@ -210,6 +211,7 @@
                 this.items = data.basket_details.lines;
                 this.potential_saving = data.basket_details.potential_saving;
                 this.potential_saving_total = data.basket_details.potential_saving_total;
+                this.promotions = data.basket_details.promotion_lines;
 
                 this.$forceUpdate()
             });
