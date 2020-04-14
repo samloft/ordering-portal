@@ -14,7 +14,7 @@ use Illuminate\Database\Eloquent\Model;
  * @property string $description
  * @property int $quantity
  * @property string $stock_type
- * @property float $price
+ * @property float $net_price
  * @property float $total
  * @property \Illuminate\Support\Carbon $created_at
  * @property \Illuminate\Support\Carbon $updated_at

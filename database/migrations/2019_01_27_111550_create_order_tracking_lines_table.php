@@ -11,19 +11,19 @@ class CreateOrderTrackingLinesTable extends Migration
      *
      * @return void
      */
-    public function up()
+    public function up(): void
     {
-        Schema::create('order_tracking_lines', function (Blueprint $table) {
-            $table->string('order_no', 10);
+        Schema::create('order_tracking_lines', static function (Blueprint $table) {
+            $table->string('order_number', 10);
             $table->integer('order_line_no');
             $table->string('product', 20);
-            $table->string('long_description', 40);
-            $table->integer('line_qty');
+            $table->string('description', 40);
+            $table->integer('quantity');
             $table->float('net_price');
-            $table->float('line_val');
+            $table->float('total');
 
-            $table->primary(['order_no', 'product']);
-            $table->index(['order_no', 'product']);
+            $table->primary(['order_number', 'product']);
+            $table->index(['order_number', 'product']);
         });
     }
 
@@ -32,7 +32,7 @@ class CreateOrderTrackingLinesTable extends Migration
      *
      * @return void
      */
-    public function down()
+    public function down(): void
     {
         Schema::dropIfExists('order_tracking_lines');
     }

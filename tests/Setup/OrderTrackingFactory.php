@@ -43,7 +43,7 @@ class OrderTrackingFactory
 
                 foreach ($products as $product) {
                     factory(OrderTrackingLine::class)->create([
-                        'order_no' => $header->order_no,
+                        'order_number' => $header->order_number,
                         'order_line_no' => $line_number,
                         'product' => $product->code,
                     ]);

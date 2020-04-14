@@ -19,7 +19,7 @@
             <button class="button button-primary w-40">Continue Shopping</button>
         </a>
 
-        <a href="{{ route('checkout.confirmation', ['order_number' => $order_number]) }}">
+        <a href="{{ route('checkout.confirmation', ['order_number' => $order_number]) }}" target="_blank">
             <button class="button button-secondary w-40">Print Order Confirmation</button>
         </a>
     </div>

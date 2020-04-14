@@ -2,6 +2,7 @@
 
 namespace App\Notifications;
 
+use App\Exports\ConfirmationExport;
 use App\Models\GlobalSettings;
 use App\Models\OrderHeader;
 use Barryvdh\DomPDF\Facade as PDF;
@@ -52,7 +53,9 @@ class OrderPlacedNotification extends Notification
         $order = OrderHeader::where('customer_code', auth()->user()->customer->code)->where('order_number', decodeUrl($this->order['order_number']))->firstOrFail();
         $company_details = json_decode(GlobalSettings::key('company-details'), true);
 
-        $pdf = PDF::loadView('pdf.order', compact('order', 'company_details'))->output();
+        $pdf = (new ConfirmationExport($order))->download(false);
+
+        //$pdf = PDF::loadView('pdf.order', compact('order', 'company_details'))->output();
 
         return (new MailMessage())
             ->subject('Ordering portal - Order Confirmation')

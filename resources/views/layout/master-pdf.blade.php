@@ -3,9 +3,21 @@
     <title>@yield('reports.title')</title>
 
     <style>
+        @import url('https://rsms.me/inter/inter.css');
+
+        html {
+            font-family: 'Inter', sans-serif;
+        }
+
+        @supports (font-variation-settings: normal) {
+            html {
+                font-family: 'Inter var', sans-serif;
+            }
+        }
+
         body {
-            font-family: serif, Arial;
-            font-size: 12px;
+            font-size: 10px;
+            color: #4a4a4d;
         }
 
         .row {
@@ -27,13 +39,6 @@
             float: left;
         }
 
-        .col-66 {
-            margin-right: 10px;
-            width: 66.66%;
-            display: inline-block;
-            float: left;
-        }
-
         .col {
             text-align: left;
             display: inline-block;
@@ -46,6 +51,10 @@
             content: "";
             clear: both;
             display: table;
+        }
+
+        b {
+            color: rgb(37, 47, 63);
         }
 
         .mt-10 {
@@ -68,31 +77,14 @@
             max-height: 55px;
         }
 
-        table {
-            width: 100%;
-            border: 1px solid #000000;
-            border-collapse: collapse;
-        }
-
-        th, td {
-            border: 1px solid #000000;
-            padding-left: 5px;
-            padding-right: 5px;
-        }
-
-        td {
-            font-size: 10px;
-        }
-
         h3.report-heading {
             font-weight: 900;
-            font-size: 18px;
+            font-size: 14px;
             text-align: center;
-        }
-
-        .table-heading {
-            text-align: center;
-            font-weight: 900;
+            color: rgb(37, 47, 63);
+            text-decoration: underline;
+            text-transform: uppercase;
+            letter-spacing: .3em;
         }
 
         .small-print {
@@ -108,18 +100,68 @@
             text-align: left !important;
         }
 
-        .clear-fix::after {
-            content: "";
-            clear: both;
-            display: table;
+        table {
+            border-collapse: separate;
+            border-spacing: 0;
+            color: #4a4a4d;
+            width: 100%;
         }
 
-        ul > div {
-            display: inline-block;
+        th, td {
+            padding: 5px;
+            vertical-align: middle;
         }
 
-        li {
-            list-style-type: none;
+        thead {
+            background: rgb(37, 47, 63);
+            color: #fff;
+            font-size: 8px;
+            text-transform: uppercase;
+            text-align: left !important;
+        }
+
+        th:first-child {
+            border-top-left-radius: 5px;
+        }
+
+        th:last-child {
+            border-top-right-radius: 5px;
+        }
+
+        tbody {
+            font-size: 8px;
+        }
+
+        tbody tr:nth-child(even) {
+            background: #f0f0f2;
+        }
+
+        td {
+            border-bottom: 1px solid #cecfd5;
+            border-right: 1px solid #cecfd5;
+        }
+
+        td:first-child {
+            border-left: 1px solid #cecfd5;
+        }
+
+        tfoot {
+            text-align: right;
+            font-size: 8px;
+        }
+
+        tfoot th {
+            border-right: 1px solid #cecfd5;
+        }
+
+        tfoot td {
+            border-left: none !important;
+        }
+
+        tfoot tr:last-child td:last-child {
+            background: #f0f0f2;
+            color: rgb(37, 47, 63);
+            font-weight: bold;
         }
     </style>
 </head>

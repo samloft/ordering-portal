@@ -19,7 +19,7 @@ class CreateOrderLinesTable extends Migration
             $table->string('description')->nullable();
             $table->integer('quantity');
             $table->string('stock_type')->default('P');
-            $table->float('price');
+            $table->float('net_price');
             $table->float('total');
             $table->timestamps();
         });

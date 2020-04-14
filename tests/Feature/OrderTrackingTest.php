@@ -25,7 +25,7 @@ class OrderTrackingTest extends TestCase
         ]);
 
         foreach ($orders as $order) {
-            $this->get(route('order-tracking'))->assertSee($order->order_no);
+            $this->get(route('order-tracking'))->assertSee($order->order_number);
         }
     }
 
@@ -46,7 +46,7 @@ class OrderTrackingTest extends TestCase
             'customer_code' => 'ABC123',
         ]);
 
-        $this->get(route('order-tracking'))->assertDontSee($order->first()->order_no);
+        $this->get(route('order-tracking'))->assertDontSee($order->first()->order_number);
     }
 
     /**
@@ -62,7 +62,7 @@ class OrderTrackingTest extends TestCase
             'customer_code' => $user->customer->code,
         ])->first();
 
-        $this->get(route('order-tracking', ['keyword' => $order->order_no]))->assertSee($order->order_no)->assertSee($order->customer_order_no)->assertSee($order->status);
+        $this->get(route('order-tracking', ['keyword' => $order->order_number]))->assertSee($order->order_number)->assertSee($order->reference)->assertSee($order->status);
     }
 
     /**
@@ -78,7 +78,7 @@ class OrderTrackingTest extends TestCase
             'customer_code' => $user->customer->code,
         ])->first();
 
-        $this->get(route('order-tracking.show', ['order' => $order->order_no]))->assertSee($order->order_no)->assertSee($order->lines->first()->product);
+        $this->get(route('order-tracking.show', ['order' => $order->order_number]))->assertSee($order->order_number)->assertSee($order->lines->first()->product);
     }
 
     /**
@@ -94,7 +94,7 @@ class OrderTrackingTest extends TestCase
             'customer_code' => 'ABC123',
         ])->first();
 
-        $this->get(route('order-tracking.show', ['order' => $order->order_no]))->assertStatus(404);
+        $this->get(route('order-tracking.show', ['order' => $order->order_number]))->assertStatus(404);
     }
 
     /**
@@ -110,14 +110,14 @@ class OrderTrackingTest extends TestCase
             'customer_code' => $user->customer->code,
         ])->first();
 
-        $this->get(route('order-tracking.copy-to-basket', ['order_number' => encodeUrl(trim($order->order_no))]));
+        $this->get(route('order-tracking.copy-to-basket', ['order_number' => encodeUrl(trim($order->order_number))]));
 
         foreach ($order->lines as $order) {
             $this->assertDatabaseHas('basket', [
                 'user_id' => $user->id,
                 'customer_code' => $user->customer->code,
                 'product' => $order->product,
-                'quantity' => $order->line_qty,
+                'quantity' => $order->quantity,
             ]);
         }
     }

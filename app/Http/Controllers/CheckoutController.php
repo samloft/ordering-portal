@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Exports\ConfirmationExport;
 use App\Models\Address;
 use App\Models\Basket;
 use App\Models\DeliveryMethod;
@@ -9,7 +10,6 @@ use App\Models\GlobalSettings;
 use App\Models\OrderHeader;
 use App\Models\OrderLine;
 use App\Notifications\OrderPlacedNotification;
-use Barryvdh\DomPDF\Facade as PDF;
 use Illuminate\Support\Facades\DB;
 
 class CheckoutController extends Controller
@@ -82,7 +82,8 @@ class CheckoutController extends Controller
             'delivery_code' => $basket['summary']['shipping']['code'],
             'delivery_cost' => removeCurrencySymbol($basket['summary']['shipping']['cost']),
             'small_order_charge' => removeCurrencySymbol($basket['summary']['small_order_charge']),
-            'value' => removeCurrencySymbol($basket['summary']['total']),
+            'vat' => removeCurrencySymbol($basket['summary']['vat']),
+            'value' => removeCurrencySymbol($basket['summary']['goods_total']) + removeCurrencySymbol($basket['summary']['shipping']['cost']) + removeCurrencySymbol($basket['summary']['small_order_charge']),
             'imported' => false,
             'created_at' => date('Y-m-d H:i:s'),
         ];
@@ -96,7 +97,7 @@ class CheckoutController extends Controller
                 'description' => $line['name'],
                 'quantity' => $line['quantity'],
                 'stock_type' => $line['type'],
-                'price' => $line['unit_price'],
+                'net_price' => $line['unit_price'],
                 'total' => ($line['unit_price'] * $line['quantity']),
                 'created_at' => date('Y-m-d H:i:s'),
             ];
@@ -136,18 +137,20 @@ class CheckoutController extends Controller
     }
 
     /**
-     * @param $order_number
+     * @param null $order_number
      *
      * @return mixed
      */
-    public static function confirmation($order_number = null)
+    public function confirmation($order_number = null)
     {
         $order_number = $order_number ?? request('order_number');
 
         $order = OrderHeader::where('customer_code', auth()->user()->customer->code)->where('order_number', decodeUrl($order_number))->firstOrFail();
-        $company_details = json_decode(GlobalSettings::key('company-details'), true);
+        //$company_details = json_decode(GlobalSettings::key('company-details'), true);
 
-        return PDF::loadView('pdf.order', compact('order', 'company_details'))->download(decodeUrl($order_number).'.pdf');
+        return (new ConfirmationExport($order))->download(false);
+
+        //return PDF::loadView('pdf.order', compact('order', 'company_details'))->download(decodeUrl($order_number).'.pdf');
     }
 
     /**

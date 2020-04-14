@@ -2,11 +2,11 @@
 
 namespace App\Http\Controllers;
 
+use App\Exports\ConfirmationExport;
 use App\Models\Basket;
 use App\Models\GlobalSettings;
 use App\Models\OrderTrackingHeader;
 use App\Models\OrderTrackingLine;
-use Barryvdh\DomPDF\Facade as PDF;
 use Illuminate\Contracts\View\Factory;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Response;
@@ -129,8 +129,7 @@ class OrderTrackingController extends Controller
     public function orderDetailsPDF($order_number): Response
     {
         $order = OrderTrackingHeader::show(decodeUrl($order_number));
-        $company_details = json_decode(GlobalSettings::key('company-details'), true);
 
-        return PDF::loadView('pdf.order', compact('order', 'company_details'))->download($order_number.'.pdf');
+        return (new ConfirmationExport($order))->download(true);
     }
 }

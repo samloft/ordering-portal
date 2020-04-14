@@ -18,17 +18,22 @@
             <div class="w-1/2">
                 <div class="flex">
                     <div class="font-semibold">Order Number</div>
-                    <div class="pl-2">{{ $order->order_no }}</div>
+                    <div class="pl-2">{{ $order->order_number }}</div>
+                </div>
+
+                <div class="flex">
+                    <div class="font-semibold">Received</div>
+                    <div class="pl-2">{{ \Carbon\Carbon::parse($order->date_received)->format('d-m-Y') }}</div>
                 </div>
 
                 <div class="flex">
                     <div class="font-semibold">Your Reference</div>
-                    <div class="pl-2">{{ $order->customer_order_no }}</div>
+                    <div class="pl-2">{{ $order->reference }}</div>
                 </div>
 
                 <div class="flex">
                     <div class="font-semibold">Delivery Service</div>
-                    <div class="pl-2">{{ $order->delivery_service }}</div>
+                    <div class="pl-2">{{ $order->delivery_method }}</div>
                 </div>
 
                 <div class="flex items-center">
@@ -45,12 +50,12 @@
 
                 <div class="flex">
                     <div class="font-semibold">VAT Value</div>
-                    <div class="pl-2">{{ currency($order->vat_value, 2) }}</div>
+                    <div class="pl-2">{{ currency($order->vat, 2) }}</div>
                 </div>
 
                 <div class="flex">
                     <div class="font-semibold">Total Value</div>
-                    <div class="pl-2">{{ currency(($order->value + $order->vat_value), 2) }}</div>
+                    <div class="pl-2">{{ currency(($order->value + $order->vat), 2) }}</div>
                 </div>
             </div>
 
@@ -79,16 +84,16 @@
         <div class="flex">
             @if(count($lines) > 0)
                 <a class="mr-2"
-                   href="{{ route('order-tracking.copy-to-basket', ['order_number' => encodeUrl(trim($order->order_no))]) }}">
+                   href="{{ route('order-tracking.copy-to-basket', ['order_number' => encodeUrl(trim($order->order_number))]) }}">
                     <submit-button before-text="Copy Order To Basket"
                                    after-text="Copying Order To Basket"></submit-button>
                 </a>
             @endif
 
-            <order-invoice order="{{ urlencode(trim($order->order_no)) }}"
+            <order-invoice order="{{ urlencode(trim($order->order_number)) }}"
                            customer_order="{{ urlencode(trim($order->customer_order_no)) }}"></order-invoice>
 
-            <a class="ml-2" href="{{ route('order-tracking.pdf', ['order' => encodeUrl($order->order_no)]) }}"
+            <a class="ml-2" href="{{ route('order-tracking.pdf', ['order' => encodeUrl($order->order_number)]) }}"
                target="_blank">
                 <button class="button button-primary">Print Order Details</button>
             </a>
@@ -117,10 +122,10 @@
                 @foreach($order->lines as $line)
                     <tr class="{{ $line->price ?: 'bg-red-200' }}">
                         <td>{{ $line->product }}</td>
-                        <td>{{ $line->long_description }}</td>
-                        <td class="text-right">{{ $line->line_qty }}</td>
+                        <td>{{ $line->description }}</td>
+                        <td class="text-right">{{ $line->quantity }}</td>
                         <td class="text-right">{{ currency($line->net_price) }}</td>
-                        <td class="text-right">{{ currency($line->line_val) }}</td>
+                        <td class="text-right">{{ currency($line->total) }}</td>
                     </tr>
                 @endforeach
                 </tbody>

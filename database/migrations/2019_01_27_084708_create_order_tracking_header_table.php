@@ -11,12 +11,12 @@ class CreateOrderTrackingHeaderTable extends Migration
      *
      * @return void
      */
-    public function up()
+    public function up(): void
     {
-        Schema::create('order_tracking_header', function (Blueprint $table) {
-            $table->string('order_no', 10);
+        Schema::create('order_tracking_header', static function (Blueprint $table) {
+            $table->string('order_number', 10);
             $table->string('base_order', 10);
-            $table->string('customer_order_no', 20);
+            $table->string('reference', 20);
             $table->string('status', 20);
             $table->string('type', 20);
             $table->string('customer_code', 10);
@@ -37,11 +37,13 @@ class CreateOrderTrackingHeaderTable extends Migration
             $table->string('invoice_address_3');
             $table->string('invoice_address_4');
             $table->string('consignment');
-            $table->float('vat_value');
-            $table->string('delivery_service');
+            $table->float('vat');
+            $table->float('small_order_charge');
+            $table->string('delivery_method');
+            $table->float('delivery_charge');
 
-            $table->primary(['order_no', 'base_order']);
-            $table->index(['order_no', 'base_order']);
+            $table->primary(['order_number', 'base_order']);
+            $table->index(['order_number', 'base_order']);
         });
     }
 
@@ -50,7 +52,7 @@ class CreateOrderTrackingHeaderTable extends Migration
      *
      * @return void
      */
-    public function down()
+    public function down(): void
     {
         Schema::dropIfExists('order_tracking_header');
     }

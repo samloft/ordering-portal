@@ -12,13 +12,13 @@ use Illuminate\Support\Collection;
  *
  * @mixin \Eloquent
  *
- * @property string $order_no
+ * @property string $order_number
  * @property int $order_line_no
  * @property string $product
- * @property string $long_description
- * @property int $line_qty
- * @property float $net_price
- * @property float $line_val
+ * @property string $description
+ * @property int $quantity
+ * @property float $price
+ * @property float $total
  */
 class OrderTrackingLine extends Model
 {
@@ -43,7 +43,7 @@ class OrderTrackingLine extends Model
      */
     public static function show($order_number)
     {
-        return self::where('order_no', $order_number)->with('price')->get();
+        return self::where('order_number', $order_number)->with('price')->get();
     }
 
     /**
@@ -55,6 +55,6 @@ class OrderTrackingLine extends Model
      */
     public static function copy($order_number): array
     {
-        return self::selectRaw('product, line_qty as quantity')->where('order_no', $order_number)->get()->toArray();
+        return self::selectRaw('product, quantity')->where('order_number', $order_number)->get()->toArray();
     }
 }

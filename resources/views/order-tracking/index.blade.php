@@ -85,9 +85,9 @@
                 <tbody>
                 @foreach($orders as $order)
                     <tr class="cursor-pointer hover:bg-gray-50"
-                        onclick="window.location = '{{ route('order-tracking.show', [encodeUrl(trim($order->order_no))]) }}';">
-                        <td>{{ $order->order_no }}</td>
-                        <td>{{ $order->customer_order_no }}</td>
+                        onclick="window.location = '{{ route('order-tracking.show', [encodeUrl(trim($order->order_number))]) }}';">
+                        <td>{{ $order->order_number }}</td>
+                        <td>{{ $order->reference }}</td>
                         <td><span
                                 class="badge badge-{{ str_replace(' ', '_', strtolower($order->status)) }}">{{ $order->status }}</span>
                         </td>

@@ -15,9 +15,9 @@ use Illuminate\Support\Collection;
  *
  * @mixin \Eloquent
  *
- * @property string $order_no
+ * @property string $order_number
  * @property string $base_order
- * @property string $customer_order_no
+ * @property string $reference
  * @property string $status
  * @property string $type
  * @property string $customer_code
@@ -38,8 +38,10 @@ use Illuminate\Support\Collection;
  * @property string $invoice_address_3
  * @property string $invoice_address_4
  * @property string $consignment
- * @property float $vat_value
- * @property string $delivery_service
+ * @property float $vat
+ * @property float $small_order_charge
+ * @property string $delivery_method
+ * @property float $delivery_charge
  */
 class OrderTrackingHeader extends Model
 {
@@ -54,7 +56,7 @@ class OrderTrackingHeader extends Model
      */
     public function lines(): HasMany
     {
-        return $this->hasMany(OrderTrackingLine::class, 'order_no', 'order_no')->orderBy('order_line_no');
+        return $this->hasMany(OrderTrackingLine::class, 'order_number', 'order_number')->orderBy('order_line_no');
     }
 
     /**
@@ -64,7 +66,7 @@ class OrderTrackingHeader extends Model
      */
     public function original(): HasOne
     {
-        return $this->hasOne(OrderHeader::class, 'order_number', 'order_no');
+        return $this->hasOne(OrderHeader::class, 'order_number', 'order_number');
     }
 
     /**
@@ -83,7 +85,7 @@ class OrderTrackingHeader extends Model
             ) use ($request) {
                 if ($request->keyword) {
                     $query->where(static function ($query) use ($request) {
-                        $query->where('order_no', 'like', '%'.$request->keyword.'%')->orWhere('customer_order_no', 'like', '%'.$request->keyword.'%');
+                        $query->where('order_number', 'like', '%'.$request->keyword.'%')->orWhere('reference', 'like', '%'.$request->keyword.'%');
                     });
                 }
 
@@ -117,7 +119,7 @@ class OrderTrackingHeader extends Model
      */
     public static function show($order)
     {
-        return self::where('customer_code', auth()->user()->customer->code)->where('order_no', $order)->with('lines')->with('original')->firstOrFail();
+        return self::where('customer_code', auth()->user()->customer->code)->where('order_number', $order)->with('lines')->with('original')->firstOrFail();
     }
 
     /**
@@ -127,9 +129,9 @@ class OrderTrackingHeader extends Model
      */
     public static function backOrders()
     {
-        return self::selectRaw('order_tracking_header.order_no, order_tracking_header.date_received, order_tracking_lines.product, order_tracking_lines.line_qty, order_tracking_lines.long_description, MIN(expected_stock.due_date) as due_date')->leftJoin('order_tracking_lines', 'order_tracking_header.order_no', '=', 'order_tracking_lines.order_no')->leftJoin('expected_stock', 'order_tracking_lines.product', '=', 'expected_stock.product')->where('customer_code', auth()->user()->customer->code)->whereNotIn('status', [
+        return self::selectRaw('order_tracking_header.order_number, order_tracking_header.date_received, order_tracking_lines.product, order_tracking_lines.line_qty, order_tracking_lines.long_description, MIN(expected_stock.due_date) as due_date')->leftJoin('order_tracking_lines', 'order_tracking_header.order_number', '=', 'order_tracking_lines.order_number')->leftJoin('expected_stock', 'order_tracking_lines.product', '=', 'expected_stock.product')->where('customer_code', auth()->user()->customer->code)->whereNotIn('status', [
             'Invoiced',
             'Cancelled',
-        ])->where('order_tracking_header.order_no', 'like', '%/%')->where('order_tracking_lines.product', 'not like', '%M19%')->groupBy('order_tracking_header.order_no', 'order_tracking_header.date_received', 'order_tracking_lines.product', 'order_tracking_lines.line_qty', 'order_tracking_lines.long_description')->get();
+        ])->where('order_tracking_header.order_number', 'like', '%/%')->where('order_tracking_lines.product', 'not like', '%M19%')->groupBy('order_tracking_header.order_number', 'order_tracking_header.date_received', 'order_tracking_lines.product', 'order_tracking_lines.line_qty', 'order_tracking_lines.long_description')->get();
     }
 }

@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 
 /**
@@ -27,6 +28,7 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
  * @property string $delivery_code
  * @property float $delivery_cost
  * @property float $small_order_charge
+ * @property float $vat
  * @property float $value
  * @property int $imported
  * @property \Illuminate\Support\Carbon $created_at
@@ -55,6 +57,14 @@ class OrderHeader extends Model
     public function lines(): HasMany
     {
         return $this->hasMany(OrderLine::class, 'order_number', 'order_number');
+    }
+
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     */
+    public function user(): BelongsTo
+    {
+        return $this->belongsTo(User::class);
     }
 
     /**

@@ -31,6 +31,7 @@ class CreateOrderHeaderTable extends Migration
             $table->string('delivery_code');
             $table->float('delivery_cost');
             $table->float('small_order_charge');
+            $table->float('vat');
             $table->float('value');
             $table->boolean('imported')->default(0);
             $table->timestamps();

@@ -5,77 +5,87 @@
 @section('content')
     <div class="row mb-20">
         <div class="col-33">
-            <b>Account Code:</b> {{ auth()->user()->customer->code }}<br>
-            <b>Customer:</b> {{ auth()->user()->customer->name }}<br>
-            <b>Placed By:</b> {{ auth()->user()->name }}<br>
-            <b>Order Number:</b> {{ $order->order_no }}<br>
-            <b>Order Date:</b> {{ \Carbon\Carbon::parse($order->date_received)->format('d/m/Y') }}<br>
-            <b>Order Reference:</b> {{ $order->customer_order_no }}<br>
-            <b>Delivery Method:</b> {{ $order->delivery_service }}<br>
+            <b>Account Code:</b> {{ $order['customer_code'] }}<br>
+
+            @if($order['placed_by'])
+                <b>Placed By:</b> {{ $order['placed_by'] }}<br>
+            @endif
+
+            <b>Order Number:</b> {{ $order['order_no'] }}<br>
+            <b>Order Date:</b> {{ $order['ordered'] }}<br>
+            <b>Order Reference:</b> {{ $order['reference'] }}<br>
+            <b>Delivery Method:</b> {{ $order['delivery'] }}<br>
         </div>
 
         <div class="col-33">
             <div>
                 <b>Invoice Address</b>
             </div>
-            <div>{{ $order->invoice_address_1 }}</div>
-            <div>{{ $order->invoice_address_2 }}</div>
-            <div>{{ $order->invoice_address_3 }}</div>
-            <div>{{ $order->invoice_address_4 }}</div>
+            <div>{{ $order['invoice_address']['line_1'] }}</div>
+            <div>{{ $order['invoice_address']['line_2'] }}</div>
+            <div>{{ $order['invoice_address']['line_3'] }}</div>
+            <div>{{ $order['invoice_address']['line_4'] }}</div>
         </div>
 
         <div class=col-33">
             <div>
                 <b>Delivery Address</b>
             </div>
-            <div>{{ $order->delivery_address1 }}</div>
-            <div>{{ $order->delivery_address2 }}</div>
-            <div>{{ $order->delivery_address3 }}</div>
-            <div>{{ $order->delivery_address4 }}</div>
-            <div>{{ $order->delivery_address5 }}</div>
+            <div>{{ $order['delivery_address']['line_1'] }}</div>
+            <div>{{ $order['delivery_address']['line_2'] }}</div>
+            <div>{{ $order['delivery_address']['line_3'] }}</div>
+            <div>{{ $order['delivery_address']['line_4'] }}</div>
+            <div>{{ $order['delivery_address']['line_5'] }}</div>
         </div>
     </div>
 
     <table>
         <thead>
         <tr>
-            <th>Product Code</th>
-            <th>Name</th>
-            <th>Quantity</th>
-            <th>Discount</th>
-            <th>Net Price</th>
-            <th>Line Total</th>
+            <th scope="col">Product</th>
+            <th scope="col">Name</th>
+            <th scope="col">Quantity</th>
+            <th scope="col">Discount</th>
+            <th scope="col">Net Price</th>
+            <th scope="col">Line Total</th>
         </tr>
         </thead>
         <tbody>
-        @foreach($order->lines as $line)
+        @foreach($order['lines'] as $line)
             <tr>
-                <td>{{ $line->product }}</td>
-                <td>{{ substr($line->long_description, 0, 35) }}</td>
-                <td class="text-right">{{ $line->line_qty }}</td>
-                <td class="text-right">{{ discountPercent() }}</td>
-                <td class="text-right">{{ currency($line->net_price) }}</td>
-                <td class="text-right">{{ currency($line->line_val) }}</td>
+                <td>{{ $line['product'] }}</td>
+                <td>{{ $line['description'] }}</td>
+                <td class="text-right">{{ $line['line_qty'] }}</td>
+                <td class="text-right">{{ $line['discount'] }}</td>
+                <td class="text-right">{{ $line['net_price'] }}</td>
+                <td class="text-right">{{ $line['line_val'] }}</td>
             </tr>
         @endforeach
-        </tbody>
+        <tfoot>
+        <tr>
+            <th colspan="5" class="text-right">Goods</th>
+            <td class="text-right">{{ $order['values']['goods'] }}</td>
+        </tr>
+        <tr>
+            <th colspan="5" class="text-right">Shipping</th>
+            <td class="text-right">{{ $order['values']['shipping'] }}</td>
+        </tr>
+        <tr>
+            <th colspan="5" class="text-right">Sub total</th>
+            <td class="text-right">{{ $order['values']['sub_total'] }}</td>
+        </tr>
+        <tr>
+            <th colspan="5" class="text-right">Small Order Charge</th>
+            <td class="text-right">{{ $order['values']['small_order_charge'] }}</td>
+        </tr>
+        <tr>
+            <th colspan="5" class="text-right">VAT</th>
+            <td class="text-right">{{ $order['values']['vat'] }}</td>
+        </tr>
+        <tr>
+            <th colspan="5" class="text-right">Total</th>
+            <td class="text-right">{{ $order['values']['total'] }}</td>
+        </tr>
+        </tfoot>
     </table>
-
-    <div class="row mt-20">
-        <div class="col-66">
-            <b class="mb-20">Order Notes</b><br>
-        </div>
-        <div class="col-33">
-            Summary
-
-            <ul>
-                <li>
-                    <div style="width: 150px;">Goods</div>
-                    <div>{{ currency($order->value, 2) }}</div>
-                </li>
-                <li>THINGS</li>
-                <li>STUFF</li>
-            </ul>
-        </div>
-    </div>
 @endsection
