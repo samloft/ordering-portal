@@ -30,7 +30,7 @@ class Contact extends Mailable
     public function build(): self
     {
         return $this->from($this->request->email, $this->request->name)
-            ->subject('Ordering web-app contact ('.$this->request->subject.')')
+            ->subject('Online ordering web-app message received')
             ->markdown('contact.email')
             ->with([
                 'message' => $this->request,

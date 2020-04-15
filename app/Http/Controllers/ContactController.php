@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Mail\Contact;
 use App\Models\Contact as ContactData;
 use App\Models\GlobalSettings;
+use App\Notifications\ContactNotification;
 use Illuminate\Contracts\View\Factory;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\View\View;
@@ -34,9 +35,9 @@ class ContactController extends Controller
     public function store(): RedirectResponse
     {
         request()->validate([
-            'to'      => 'required|exists:contacts,email',
-            'name'    => 'required',
-            'email'   => 'required',
+            'to' => 'required|exists:contacts,email',
+            'name' => 'required',
+            'email' => 'required',
             'message' => 'required|min:5',
         ]);
 
