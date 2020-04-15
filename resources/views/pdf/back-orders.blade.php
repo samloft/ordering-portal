@@ -12,7 +12,7 @@
         </div>
     </div>
 
-    <p class="table-heading">Outstanding Items</p>
+    <p><b>Outstanding Items</b></p>
 
     <div class="small-print">
         The table below lists all items you have ordered that are on back order, please note there is a delay of up to 24 hours in the accuracy of our data.
