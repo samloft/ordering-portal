@@ -99,8 +99,8 @@ class ConfirmationPDF
         $order['values'] = [
             'goods' => currency($goods_value, 2),
             'discount' => $discount ? currency($discount, 2) : false,
-            'shipping' => currency($this->order->delivery_charge, 2),
-            'sub_total' => currency($goods_value + $this->order->delivery_charge - $discount, 2),
+            'shipping' => currency($this->order->delivery_cost, 2),
+            'sub_total' => currency($goods_value + $this->order->delivery_cost - $discount, 2),
             'small_order_charge' => currency($this->order->small_order_charge, 2),
             'vat' => currency($this->order->vat, 2),
             'total' => currency(($this->order->value - $discount) + $this->order->vat, 2),

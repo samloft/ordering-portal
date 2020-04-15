@@ -40,7 +40,7 @@ use Illuminate\Support\Collection;
  * @property string $consignment
  * @property float $vat
  * @property float $small_order_charge
- * @property string $delivery_method
+ * @property string $delivery_cost
  * @property float $delivery_charge
  */
 class OrderTrackingHeader extends Model
