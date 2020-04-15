@@ -66,6 +66,12 @@
             <th colspan="5" class="text-right">Goods</th>
             <td class="text-right">{{ $order['values']['goods'] }}</td>
         </tr>
+        @if($order['values']['discount'])
+            <tr>
+                <th colspan="5" class="text-right">Discount</th>
+                <td class="text-right">- {{ $order['values']['discount'] }}</td>
+            </tr>
+        @endif
         <tr>
             <th colspan="5" class="text-right">Shipping</th>
             <td class="text-right">{{ $order['values']['shipping'] }}</td>

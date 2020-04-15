@@ -113,7 +113,7 @@ class CheckoutController extends Controller
                 'description' => $promotion_line['description'],
                 'quantity' => $promotion_line['quantity'],
                 'stock_type' => 'PROMO',
-                'price' => 0,
+                'net_price' => 0,
                 'total' => 0,
                 'created_at' => date('Y-m-d H:i:s'),
             ];
