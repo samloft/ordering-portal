@@ -45,6 +45,7 @@ class UploadController extends Controller
         $warnings = 0;
         $prices_passed = false;
         $tolerance = request('tolerance');
+        $packs = request('packs');
 
         foreach (array_map('str_getcsv', file(request()->file('csv_file'))) as $key => $value) {
             $product_code = $value[0];
@@ -59,9 +60,8 @@ class UploadController extends Controller
                 if (! $product || $product->not_sold === 'Y') {
                     $errors++;
                     $error_message = 'Product not found';
-                }
-
-                if ($product_price && $config['prices']) {
+                    $price_match = false;
+                } elseif ($product_price && $config['prices']) {
                     $prices_passed = true;
 
                     if ($tolerance) {
@@ -77,12 +77,20 @@ class UploadController extends Controller
                     $price_match = false;
                 }
 
+                if ($packs) {
+                    $pack_qty = ($product_qty / $product->packaging);
+
+                    if ($pack_qty >= 1) {
+                        $product_qty /= $product->packaging;
+                    }
+                }
+
                 $order[] = [
                     'product' => $product_code,
                     'quantity' => $product_qty,
                     'old_quantity' => $product_qty,
                     'passed_price' => $product_price,
-                    'price' => $product->prices ? discount($product->prices->price) : null,
+                    'price' => $product ? discount($product->prices->price) : null,
                     'price_match_error' => $price_match,
                     'multiples' => $product->order_multiples ?? 1,
                     'validation' => [
