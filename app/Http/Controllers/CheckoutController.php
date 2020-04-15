@@ -119,6 +119,25 @@ class CheckoutController extends Controller
             ];
         }
 
+        $collection_message = false;
+
+        if (stripos($header['delivery_method'], 'COLLECT') !== false) {
+            $collection_messages = GlobalSettings::collectionMessages();
+
+            if ($collection_messages['default']) {
+                $header['delivery_method'] = $collection_messages['default'];
+            } else {
+                foreach ($collection_messages['times'] as $message) {
+                    $time = date('H:i:s');
+
+                    if ($time >= $message['start'] && $time <= $message['end']) {
+                        $collection_message = $message['message'];
+                        $header['delivery_method'] = $message['identifier'];
+                    }
+                }
+            }
+        }
+
         DB::transaction(static function () use ($header, $lines, $promotions) {
             OrderLine::insert($lines);
             OrderLine::insert($promotions);
@@ -128,7 +147,7 @@ class CheckoutController extends Controller
             Basket::clear();
         }, 5);
 
-        auth()->user()->notify(new OrderPlacedNotification($header));
+        auth()->user()->notify(new OrderPlacedNotification($header, $collection_message));
 
         if (session('address')) {
             session()->forget('address');

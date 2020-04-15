@@ -39,6 +39,12 @@
         </div>
     </div>
 
+    @if($order['collection_message'])
+        <div class="mb-20" style="text-align: center; text-decoration: underline; font-weight: 600;">
+            {{ $order['collection_message'] }}
+        </div>
+    @endif
+
     <table>
         <thead>
         <tr>

@@ -12,16 +12,21 @@ class OrderPlacedNotification extends Notification
 {
     public $order;
 
+    public $collection_message;
+
     public $user;
 
     /**
      * Create a new notification instance.
      *
      * @param $order
+     * @param $collection_message
      */
-    public function __construct($order)
+    public function __construct($order, $collection_message)
     {
         $this->order = $order;
+
+        $this->collection_message = $collection_message;
 
         $this->user = auth()->user();
     }
@@ -50,7 +55,7 @@ class OrderPlacedNotification extends Notification
         $order = OrderHeader::where('customer_code', auth()->user()->customer->code)->where('order_number', decodeUrl($this->order['order_number']))->firstOrFail();
         $company_details = json_decode(GlobalSettings::key('company-details'), true);
 
-        $pdf = (new ConfirmationPDF($order))->download(false);
+        $pdf = (new ConfirmationPDF($order, $this->collection_message))->download(false);
 
         return (new MailMessage())
             ->subject('Ordering portal - Order Confirmation')
