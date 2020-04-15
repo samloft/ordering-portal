@@ -4,8 +4,9 @@ namespace App\Http\Controllers\Cms;
 
 use App\Http\Controllers\Controller;
 use App\Models\DeliveryMethod;
+use App\Models\GlobalSettings;
+use Cache;
 use Illuminate\Http\JsonResponse;
-use Illuminate\Http\Request;
 
 class DeliveryMethodsController extends Controller
 {
@@ -15,8 +16,9 @@ class DeliveryMethodsController extends Controller
     public function index()
     {
         $delivery_methods = DeliveryMethod::get();
+        $collection_messages = GlobalSettings::collectionMessages();
 
-        return view('delivery-methods.index', compact('delivery_methods'));
+        return view('delivery-methods.index', compact('delivery_methods', 'collection_messages'));
     }
 
     /**
@@ -49,5 +51,31 @@ class DeliveryMethodsController extends Controller
     public function destroy(DeliveryMethod $deliveryMethod): JsonResponse
     {
         return response()->json($deliveryMethod->delete());
+    }
+
+    /**
+     * @return int
+     */
+    public function storeCollectionMessage(): int
+    {
+        Cache::forget('collection-messages');
+
+        $times = [];
+
+        foreach (request('times') as $timed_message) {
+            $times[] = [
+                'start' => $timed_message['start'],
+                'end' => $timed_message['end'],
+                'message' => $timed_message['message'],
+                'identifier' => $timed_message['identifier'],
+            ];
+        }
+
+        $collection_messages = [
+            'default' => request('default'),
+            'times' => $times,
+        ];
+
+        return GlobalSettings::where('key', 'collection-messages')->update(['value' => json_encode($collection_messages, true)]);
     }
 }

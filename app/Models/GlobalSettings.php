@@ -52,7 +52,7 @@ class GlobalSettings extends Model
      */
     public static function key($key)
     {
-        return self::where('key', $key)->first()->value;
+        return self::where('key', $key)->firstOrFail()->value;
     }
 
     /**
@@ -64,7 +64,7 @@ class GlobalSettings extends Model
     public static function discount()
     {
         return Cache::rememberForever('discount', static function () {
-            return self::where('key', 'discount')->first()->value;
+            return self::where('key', 'discount')->firstOrFail()->value;
         });
     }
 
@@ -76,7 +76,7 @@ class GlobalSettings extends Model
     public static function smallOrderCharge()
     {
         return Cache::rememberForever('small-order-charge', static function () {
-            return self::where('key', 'small-order-charge')->first()->value;
+            return self::where('key', 'small-order-charge')->firstOrFail()->value;
         });
     }
 
@@ -86,7 +86,7 @@ class GlobalSettings extends Model
     public static function siteAnnouncement()
     {
         return Cache::rememberForever('site-announcement', static function () {
-            return self::where('key', 'site-announcement')->first()->value;
+            return self::where('key', 'site-announcement')->firstOrFail()->value;
         });
     }
 
@@ -96,7 +96,7 @@ class GlobalSettings extends Model
     public static function checkoutNotice()
     {
         return Cache::rememberForever('checkout-notice', static function () {
-            return self::where('key', 'checkout-notice')->first()->value;
+            return self::where('key', 'checkout-notice')->firstOrFail()->value;
         });
     }
 
@@ -106,7 +106,7 @@ class GlobalSettings extends Model
     public static function countries()
     {
         return Cache::remember('countries', 1440, static function () {
-            return self::where('key', 'countries')->first()->value;
+            return self::where('key', 'countries')->firstOrFail()->value;
         });
     }
 
@@ -116,7 +116,7 @@ class GlobalSettings extends Model
     public static function defaultCountry()
     {
         return Cache::rememberForever('default-country', static function () {
-            return self::where('key', 'default-country')->first()->value;
+            return self::where('key', 'default-country')->firstOrFail()->value;
         });
     }
 
@@ -126,7 +126,7 @@ class GlobalSettings extends Model
     public static function googleMapsUrl()
     {
         return Cache::rememberForever('google-maps-url', static function () {
-            return self::where('key', 'google-maps')->first()->value;
+            return self::where('key', 'google-maps')->firstOrFail()->value;
         });
     }
 
@@ -136,7 +136,7 @@ class GlobalSettings extends Model
     public static function googleAnalyticsUrl()
     {
         return Cache::rememberForever('google-analytics-url', static function () {
-            return self::where('key', 'google-analytics')->first()->value;
+            return self::where('key', 'google-analytics')->firstOrFail()->value;
         });
     }
 
@@ -146,7 +146,7 @@ class GlobalSettings extends Model
     public static function versionOneDocId()
     {
         return Cache::rememberForever('v1-docid', static function () {
-            return self::where('key', 'v1-docid')->first()->value;
+            return self::where('key', 'v1-docid')->firstOrFail()->value;
         });
     }
 
@@ -223,7 +223,7 @@ class GlobalSettings extends Model
     public static function productData()
     {
         return Cache::rememberForever('product-data', static function () {
-            return json_decode(self::where('key', 'product-data')->first()->value, true);
+            return json_decode(self::where('key', 'product-data')->firstOrFail()->value, true);
         });
     }
 
@@ -235,7 +235,7 @@ class GlobalSettings extends Model
     public static function termsEnabled()
     {
         return Cache::rememberForever('terms-enabled', static function () {
-            return json_decode(self::where('key', 'terms-enabled')->first()->value, true);
+            return json_decode(self::where('key', 'terms-enabled')->firstOrFail()->value, true);
         });
     }
 
@@ -245,7 +245,17 @@ class GlobalSettings extends Model
     public static function uploadConfig()
     {
         return Cache::rememberForever('upload-config', static function () {
-            return json_decode(self::where('key', 'upload-config')->first()->value, true);
+            return json_decode(self::where('key', 'upload-config')->firstOrFail()->value, true);
+        });
+    }
+
+    /**
+     * @return mixed
+     */
+    public static function collectionMessages()
+    {
+        return Cache::rememberForever('collection-messages', static function () {
+            return json_decode(self::where('key', 'collection-messages')->firstOrFail()->value, true);
         });
     }
 }
