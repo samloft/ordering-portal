@@ -23,6 +23,7 @@ Vue.component('modal', require('./modules/Modal.vue').default);
 Vue.component('log-view', require('./modules/LogModal.vue').default);
 Vue.component('date-picker', require('./modules/DatePicker.vue').default);
 Vue.component('multi-select', require('./modules/MultiSelect.vue').default);
+Vue.component('collection-messages', require('./modules/ColletionMessages.vue').default);
 
 window.Event = new Vue();
 

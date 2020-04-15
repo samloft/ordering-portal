@@ -96,7 +96,7 @@ Route::group(['middleware' => 'auth:admin'], static function () {
             $level_2 = null,
             $level_3 = null
         ) {
-            return Category::showLevels($level_1, $level_2, $level_3);
+            return Category::showLevels($level_1, $level_2);
         });
 
         Route::delete('{id}', 'Cms\HomeLinksController@destroy')->name('cms.home-links.delete');
@@ -118,6 +118,8 @@ Route::group(['middleware' => 'auth:admin'], static function () {
         Route::get('/', 'Cms\DeliveryMethodsController@index')->name('cms.delivery-methods');
         Route::post('/', 'Cms\DeliveryMethodsController@store')->name('cms.delivery-methods.store');
         Route::delete('{deliveryMethod}', 'Cms\DeliveryMethodsController@destroy')->name('cms.delivery-methods.delete');
+
+        Route::post('collection-messages', 'Cms\DeliveryMethodsController@storeCollectionMessage')->name('cms.collection-messages.store');
     });
 
     Route::group(['prefix' => 'promotions'], static function () {
