@@ -42,6 +42,6 @@ $factory->define(OrderTrackingHeader::class, static function (Faker $faker) {
             'Next day timed',
             'Standard Delivery',
         ]),
-        'delivery_charge' => $faker->randomNumber(2),
+        'delivery_cost' => $faker->randomNumber(2),
     ];
 });

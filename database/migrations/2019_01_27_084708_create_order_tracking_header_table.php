@@ -40,7 +40,7 @@ class CreateOrderTrackingHeaderTable extends Migration
             $table->float('vat');
             $table->float('small_order_charge');
             $table->string('delivery_method');
-            $table->float('delivery_charge');
+            $table->float('delivery_cost');
 
             $table->primary(['order_number', 'base_order']);
             $table->index(['order_number', 'base_order']);
