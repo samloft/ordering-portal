@@ -11,14 +11,19 @@ class ConfirmationPDF
 {
     protected $order;
 
+    protected $collection_message;
+
     /**
      * ConfirmationPDF constructor.
      *
      * @param $order
+     * @param $collection_message
      */
-    public function __construct($order)
+    public function __construct($order, $collection_message = null)
     {
         $this->order = $order;
+
+        $this->collection_message = $collection_message;
     }
 
     /**
@@ -81,6 +86,7 @@ class ConfirmationPDF
             'placed_by' => $placed_by,
             'invoice_address' => $invoice_address,
             'delivery_address' => $delivery_address,
+            'collection_message' => $this->collection_message,
         ];
 
         foreach ($this->order->lines as $line) {
