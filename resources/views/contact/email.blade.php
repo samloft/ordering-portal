@@ -5,13 +5,18 @@
         @endcomponent
     @endslot
 
-    New contact form submitted.
+New contact form submitted.
 
-    Name: {{ $message->name }}
-    Email: {{ $message->email }}
+Name: {{ $message->name }}
 
-    Subject: {{ $message->subject }}
-    Message: {{ $message->message }}
+Email: {{ $message->email }}
+
+Customer: {{ auth()->user()->customer->name }} ({{ auth()->user()->customer->code }})
+
+
+Message:
+
+    {{ $message->message }}
 
     @isset($subcopy)
         @slot('subcopy')
@@ -23,7 +28,7 @@
 
     @slot('footer')
         @component('mail::footer')
-            © {{ date('Y') }} {{ config('app.name') }}.
+            © {{ date('Y') }} {{ ucfirst(config('app.name')) }}.
         @endcomponent
     @endslot
 @endcomponent
