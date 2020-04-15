@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Basket;
+use App\Models\GlobalSettings;
 use App\Models\OrderImport;
 use App\Models\Product;
 use Illuminate\Contracts\View\Factory as FactoryAlias;
@@ -18,7 +19,9 @@ class UploadController extends Controller
      */
     public function index()
     {
-        return view('upload.index');
+        $config = GlobalSettings::uploadConfig();
+
+        return view('upload.index', compact('config'));
     }
 
     /**
@@ -35,10 +38,13 @@ class UploadController extends Controller
             'csv_file' => 'required|mimes:csv,txt',
         ]);
 
+        $config = GlobalSettings::uploadConfig();
+
         $upload = [];
         $errors = 0;
         $warnings = 0;
         $prices_passed = false;
+        $tolerance = request('tolerance');
 
         foreach (array_map('str_getcsv', file(request()->file('csv_file'))) as $key => $value) {
             $product_code = $value[0];
@@ -55,23 +61,32 @@ class UploadController extends Controller
                     $error_message = 'Product not found';
                 }
 
-                if ($product_price) {
+                if ($product_price && $config['prices']) {
                     $prices_passed = true;
-                    $price_match = ($product_price !== $product->price);
+
+                    if ($tolerance) {
+                        if ($product_price >= ($product->prices->price * 2)) {
+                            $price_match = abs(number_format($product_price, 4) - number_format(discount($product->prices->price) * $product_qty, 4)) > $tolerance;
+                        } else {
+                            $price_match = abs(number_format($product_price, 4) - number_format(discount($product->prices->price), 4)) > $tolerance;
+                        }
+                    } else {
+                        $price_match = (number_format($product_price, 4) !== number_format(discount($product->prices->price), 4));
+                    }
                 } else {
-                    $price_match = null;
+                    $price_match = false;
                 }
 
                 $order[] = [
-                    'product'           => $product_code,
-                    'quantity'          => $product_qty,
-                    'old_quantity'      => $product_qty,
-                    'passed_price'      => $product_price,
-                    'price'             => $product->prices ? $product->prices->price : null,
+                    'product' => $product_code,
+                    'quantity' => $product_qty,
+                    'old_quantity' => $product_qty,
+                    'passed_price' => $product_price,
+                    'price' => $product->prices ? discount($product->prices->price) : null,
                     'price_match_error' => $price_match,
-                    'multiples'         => $product->order_multiples ?? 1,
-                    'validation'        => [
-                        'error'   => $error_message,
+                    'multiples' => $product->order_multiples ?? 1,
+                    'validation' => [
+                        'error' => $error_message,
                         'warning' => $warning_message,
                     ],
                 ];
@@ -107,25 +122,25 @@ class UploadController extends Controller
             }
 
             $product_lines['lines'][] = [
-                'product'           => $product['product'],
-                'quantity'          => $quantity,
-                'price'             => $product['price'],
+                'product' => $product['product'],
+                'quantity' => $quantity,
+                'price' => $product['price'],
                 'price_match_error' => $product['price_match_error'],
-                'passed_price'      => $product['passed_price'],
-                'old_quantity'      => $product['old_quantity'],
-                'multiples'         => $product['multiples'],
-                'validation'        => [
-                    'error'   => $product['validation']['error'],
+                'passed_price' => $product['passed_price'],
+                'old_quantity' => $product['old_quantity'],
+                'multiples' => $product['multiples'],
+                'validation' => [
+                    'error' => $product['validation']['error'],
                     'warning' => $warning,
                 ],
             ];
 
             if (! $product['validation']['error']) {
                 $upload[] = [
-                    'user_id'       => auth()->user()->id,
+                    'user_id' => auth()->user()->id,
                     'customer_code' => auth()->user()->customer->code,
-                    'product'       => $product['product'],
-                    'quantity'      => $quantity,
+                    'product' => $product['product'],
+                    'quantity' => $quantity,
                 ];
             }
         }

@@ -51,7 +51,7 @@ class WelcomeUserNotification extends Notification
                     ->greeting('Hello, '.$this->user->name)
                     ->line('Your ordering portal account has now been activated for '.config('app.url'))
                     ->line('You will need to set a password before you can use the account, click the button below to do so.')
-                    ->action('Set your password', config('app.url') . '/password/reset/' . $this->token . '?email=' . $this->user->email)
+                    ->action('Set your password', config('app.url').'/password/reset/'.$this->token.'?email='.$this->user->email)
                     ->line('This link will only be active for 1 Hour, after you will need to perform a manual reset by clicking "Reset Password" on the login page!')
                     ->line('Thank you for joining us!')
                     ->salutation('Regards, '.ucfirst(config('app.name')));
