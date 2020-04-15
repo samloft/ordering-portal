@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Basket;
+use App\Models\GlobalSettings;
 use App\Models\OrderImport;
 use App\Models\Product;
 use Illuminate\Contracts\View\Factory as FactoryAlias;
@@ -18,7 +19,9 @@ class UploadController extends Controller
      */
     public function index()
     {
-        return view('upload.index');
+        $config = GlobalSettings::uploadConfig();
+
+        return view('upload.index', compact('config'));
     }
 
     /**
@@ -34,6 +37,8 @@ class UploadController extends Controller
         request()->validate([
             'csv_file' => 'required|mimes:csv,txt',
         ]);
+
+        $config = GlobalSettings::uploadConfig();
 
         $upload = [];
         $errors = 0;

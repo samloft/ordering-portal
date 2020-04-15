@@ -4,9 +4,8 @@ namespace App\Http\Controllers\Cms;
 
 use App\Http\Controllers\Controller;
 use App\Models\GlobalSettings;
-use Illuminate\Http\RedirectResponse;
-use Illuminate\Http\Request;
 use Cache;
+use Illuminate\Http\RedirectResponse;
 
 class OrderUploadController extends Controller
 {

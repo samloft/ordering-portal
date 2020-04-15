@@ -22,10 +22,49 @@
                 <p class="mt-1 max-w-2xl text-sm leading-5 text-gray-500">
                     Upload your order with a simple CSV file, entering product code in column A and quantity in column B
                 </p>
+
+                @if($config['prices'])
+                    <p class="mt-1 max-w-2xl text-sm leading-5 text-gray-500 mt-3">
+                        <span class="font-semibold">Optional:</span> Add your price in column C and we will validate
+                        your prices for you, you can also add price
+                        tolerance above the order upload to configure it to be less strict.
+                    </p>
+                @endif
+
+                @if($config['packs'])
+                    <p class="mt-1 max-w-2xl text-sm leading-5 text-gray-500 mt-3">
+                        <span class="font-semibold">Optional:</span> Select the packs checkbox if you prefer to buy in
+                        pack quantities.
+                    </p>
+                @endif
             </div>
 
             <div class="w-2/3">
                 <form method="post" action="{{ route('upload-validate') }}" enctype="multipart/form-data" class="mb-0">
+                    @if($config['prices'])
+                        <div class="w-full">
+                            <div class="mb-3 flex items-center justify-end">
+                                <div class="w-1/4">
+                                    <label for="price-tolerance">Price Tolerance <span
+                                            class="text-xs">(optional)</span></label>
+                                    <input id="price-tolerance" name="price_tolerance" placeholder="E.G 0.0020">
+                                </div>
+                            </div>
+                        </div>
+                    @endif
+
+                    @if($config['packs'])
+                        <div class="w-full">
+                            <div class="mb-3 flex items-center justify-end">
+                                <label class="checkbox flex items-center">
+                                    <span class="mr-2">Order in pack QTYs?</span>
+                                    <input type="checkbox" class="form-checkbox"
+                                           name="packs" {{ old('packs') ? 'checked' : '' }}>
+                                </label>
+                            </div>
+                        </div>
+                    @endif
+
                     <order-upload></order-upload>
                 </form>
             </div>

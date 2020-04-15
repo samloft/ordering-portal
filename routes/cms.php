@@ -127,7 +127,7 @@ Route::group(['middleware' => 'auth:admin'], static function () {
         Route::delete('{id}', 'Cms\PromotionController@destroy')->name('cms.promotions.update');
     });
 
-    Route::group(['prefix' => 'order-upload'], static function() {
+    Route::group(['prefix' => 'order-upload'], static function () {
         Route::get('/', 'Cms\OrderUploadController@index')->name('cms.order-upload');
         Route::post('/', 'Cms\OrderUploadController@store')->name('cms.order-upload.store');
     });
