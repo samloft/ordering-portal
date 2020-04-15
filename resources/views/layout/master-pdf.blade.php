@@ -88,7 +88,7 @@
         }
 
         .small-print {
-            font-size: 12px;
+            font-size: 9px;
             margin-bottom: 5px;
         }
 
