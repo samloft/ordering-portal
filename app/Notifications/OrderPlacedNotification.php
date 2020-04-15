@@ -55,8 +55,10 @@ class OrderPlacedNotification extends Notification
         return (new MailMessage())
             ->subject('Ordering portal - Order Confirmation')
             ->greeting('Hello, '.$this->user->name)
-            ->line('Thank you for your order.')
-            ->line('Some other stuff and things')
+            ->line('Thank you for your order. Your order number is '.$order->order_number.'.')
+            ->line('Please find attached your order confirmation.')
+            ->line('Please check the contents and report any discrepancies to our sales office on '.$company_details['telephone'].'.')
+            ->salutation('Regards, '.ucfirst(config('app.name')))
             ->attachData($pdf, $this->order['order_number'].'.pdf');
     }
 }
