@@ -6,7 +6,8 @@
     <div class="w-full mb-5 text-center">
         <h2 class="font-semibold tracking-widest">Order Validation</h2>
         <p class="font-thin">
-            Your order has been validated, please check it over and click the "Add order to basket" button below to finish.
+            Your order has been validated, please check it over and click the "Add order to basket" button below to
+            finish.
         </p>
     </div>
 
@@ -66,9 +67,13 @@
                             </td>
 
                             @if($product_lines['prices_passed'])
-                                <td class="text-right {{ $line['price_match_error'] ? 'bg-info' : '' }}">{{ $line['passed_price'] ?: '' }}</td>
+                                <td class="text-right">
+                                    <span class="badge badge-{{ $line['price_match_error'] ? 'danger' : 'success' }}">
+                                    {{ $line['passed_price'] ?: '' }}
+                                    </span>
+                                </td>
 
-                                <td class="text-right {{ $line['price_match_error'] ? 'bg-info' : '' }}">{{ $line['price'] ?: '' }}</td>
+                                <td class="text-right">{{ $line['price'] ?: '' }}</td>
                             @endif
                         </tr>
                     @endif

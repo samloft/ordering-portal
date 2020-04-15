@@ -47,7 +47,7 @@
                                 <div class="w-1/4">
                                     <label for="price-tolerance">Price Tolerance <span
                                             class="text-xs">(optional)</span></label>
-                                    <input id="price-tolerance" name="price_tolerance" placeholder="E.G 0.0020">
+                                    <input id="price-tolerance" name="tolerance" placeholder="E.G 0.0020">
                                 </div>
                             </div>
                         </div>
