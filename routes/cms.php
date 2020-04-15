@@ -127,6 +127,11 @@ Route::group(['middleware' => 'auth:admin'], static function () {
         Route::delete('{id}', 'Cms\PromotionController@destroy')->name('cms.promotions.update');
     });
 
+    Route::group(['prefix' => 'order-upload'], static function() {
+        Route::get('/', 'Cms\OrderUploadController@index')->name('cms.order-upload');
+        Route::post('/', 'Cms\OrderUploadController@store')->name('cms.order-upload.store');
+    });
+
     Route::group(['prefix' => 'product-images'], static function () {
         Route::get('/', 'Cms\ProductImageController@index')->name('cms.product-images');
         Route::get('missing', 'Cms\ProductImageController@missingImages')->name('cms.product-images.missing');

@@ -23,6 +23,8 @@ class GlobalSettings extends Model
 
     protected static $logAttributes = ['key', 'value'];
 
+    protected $fillable = ['value'];
+
     protected $table = 'globals';
 
     /**
@@ -234,6 +236,16 @@ class GlobalSettings extends Model
     {
         return Cache::rememberForever('terms-enabled', static function () {
             return json_decode(self::where('key', 'terms-enabled')->first()->value, true);
+        });
+    }
+
+    /**
+     * @return mixed
+     */
+    public static function uploadConfig()
+    {
+        return Cache::rememberForever('upload-config', static function () {
+            return json_decode(self::where('key', 'upload-config')->first()->value, true);
         });
     }
 }

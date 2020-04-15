@@ -5,7 +5,6 @@ namespace App\Http\Controllers;
 use App\Mail\Contact;
 use App\Models\Contact as ContactData;
 use App\Models\GlobalSettings;
-use App\Notifications\ContactNotification;
 use Illuminate\Contracts\View\Factory;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\View\View;
