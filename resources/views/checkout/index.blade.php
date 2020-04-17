@@ -67,6 +67,7 @@
                     <div class="flex items-center mb-3">
                         <label for="reference" class="w-1/2">Order Reference</label>
                         <input id="reference" name="reference" autocomplete="off"
+                               maxlength="20"
                                value="{{ old('reference') }}">
                     </div>
 
@@ -89,6 +90,7 @@
                         <input id="name"
                                name="name"
                                value="{{ old('name') ?: auth()->user()->name }}"
+                               maxlength="37"
                                autocomplete="off">
                     </div>
 
@@ -105,6 +107,7 @@
                         <input id="mobile"
                                name="mobile"
                                value="{{ old('mobile') ?: auth()->user()->mobile }}"
+                               maxlength="37"
                                autocomplete="off">
                     </div>
 

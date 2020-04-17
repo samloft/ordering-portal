@@ -178,9 +178,10 @@ class CheckoutController extends Controller
     public function validation()
     {
         return request()->validate([
-            'reference' => 'required',
+            'reference' => 'required|max:20',
             'shipping' => 'required|exists:delivery_methods,code',
-            'name' => 'required',
+            'name' => 'required|max:37',
+            'mobile' => 'max:37|nullable',
             'terms' => 'accepted',
         ]);
     }
