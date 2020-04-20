@@ -49,7 +49,7 @@ footer {
         }
     }
 
-    .amenity {
+    .category-amenity {
         a {
             &:before {
                 border-color: transparent transparent rgba(54, 109, 146, 1.0) transparent;
@@ -57,7 +57,7 @@ footer {
         }
     }
 
-    .commercial {
+    .category-commercial {
         a {
             &:before {
                 border-color: transparent transparent rgba(253, 191, 92, 1.0) transparent;
@@ -65,7 +65,7 @@ footer {
         }
     }
 
-    .controls {
+    .category-controls {
         a {
             &:before {
                 border-color: transparent transparent rgba(233, 77, 57, 1.0) transparent;
@@ -73,7 +73,7 @@ footer {
         }
     }
 
-    .domestic {
+    .category-domestic {
         a {
             &:before {
                 border-color: transparent transparent rgba(185, 207, 0, 1.0) transparent;
@@ -81,7 +81,7 @@ footer {
         }
     }
 
-    .floodlighting {
+    .category-floodlighting {
         a {
             &:before {
                 border-color: transparent transparent rgba(95, 92, 103, 1.0) transparent;
@@ -89,7 +89,7 @@ footer {
         }
     }
 
-    .industrial {
+    .category-industrial {
         a {
             &:before {
                 border-color: transparent transparent rgba(162, 92, 162, 1.0) transparent;
@@ -97,7 +97,7 @@ footer {
         }
     }
 
-    .utility {
+    .category-utility {
         a {
             &:before {
                 border-color: transparent transparent rgba(225, 25, 62, 1.0) transparent;
@@ -105,7 +105,7 @@ footer {
         }
     }
 
-    .emergency {
+    .category-emergency {
         a {
             &:before {
                 border-color: transparent transparent rgba(30, 167, 127, 1.0) transparent;
@@ -113,7 +113,7 @@ footer {
         }
     }
 
-    .marketing {
+    .category-marketing {
         a {
             &:before {
                 border-color: transparent transparent rgba(2, 163, 218, 1.0) transparent;
