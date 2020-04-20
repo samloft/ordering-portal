@@ -44,5 +44,5 @@ mix.sass('resources/sass/themes/scolmore.scss', 'public/css/app-scolmore.css')
             'php',
             'vue'
         ],
-        whitelistPatterns: [/badge/, /flatpickr/]
+        whitelistPatterns: [/badge/, /flatpickr/, /category/]
     });
