@@ -29,7 +29,7 @@
 
     <ul class="categories-nav">
         @foreach($category_list as $key => $category)
-            <li class="top-level {{ str_slug(strtolower($category_list[$key]['name'])) }}">
+            <li class="top-level category-{{ str_slug(strtolower($category_list[$key]['name'])) }}">
                 <a href="{{ route('products', $category_list[$key]['url']) }}">
                     {{ $category_list[$key]['name'] }}
                     @if (count($category_list[$key]['sub']) > 0)

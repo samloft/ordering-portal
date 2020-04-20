@@ -24,6 +24,8 @@ class DeliveryMethod extends Model
 {
     use LogsActivity;
 
+    protected $fillable = ['code', 'title', 'identifier', 'price_low', 'price'];
+
     protected static $logAttributes = ['id', 'code', 'title', 'identifier', 'price_low', 'price'];
 
     /**
