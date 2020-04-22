@@ -3,7 +3,7 @@
 
 /**
  * A helper file for Laravel 5, to provide autocomplete information to your IDE
- * Generated for Laravel 7.4.0 on 2020-04-08 13:24:51.
+ * Generated for Laravel 7.4.0 on 2020-04-22 13:39:53.
  *
  * This file should not be included in your code, only analyzed by your IDE!
  *
@@ -15272,6 +15272,700 @@ namespace Barryvdh\DomPDF {
  
 }
 
+namespace Bugsnag\BugsnagLaravel\Facades { 
+
+    /**
+     * 
+     *
+     */ 
+    class Bugsnag {
+        
+        /**
+         * Make a new client instance.
+         * 
+         * If you don't pass in a key, we'll try to read it from the env variables.
+         *
+         * @param string|null $apiKey your bugsnag api key
+         * @param string|null $endpoint your bugsnag endpoint
+         * @param bool $default if we should register our default callbacks
+         * @return static 
+         * @static 
+         */ 
+        public static function make($apiKey = null, $endpoint = null, $defaults = true)
+        {
+                        return \Bugsnag\Client::make($apiKey, $endpoint, $defaults);
+        }
+        
+        /**
+         * Make a new guzzle client instance.
+         *
+         * @param string|null $base
+         * @param array $options
+         * @return \GuzzleHttp\ClientInterface 
+         * @static 
+         */ 
+        public static function makeGuzzle($base = null, $options = [])
+        {
+                        return \Bugsnag\Client::makeGuzzle($base, $options);
+        }
+        
+        /**
+         * Get the config instance.
+         *
+         * @return \Bugsnag\Configuration 
+         * @static 
+         */ 
+        public static function getConfig()
+        {
+                        /** @var \Bugsnag\Client $instance */
+                        return $instance->getConfig();
+        }
+        
+        /**
+         * Get the pipeline instance.
+         *
+         * @return \Bugsnag\Pipeline 
+         * @static 
+         */ 
+        public static function getPipeline()
+        {
+                        /** @var \Bugsnag\Client $instance */
+                        return $instance->getPipeline();
+        }
+        
+        /**
+         * Regsier a new notification callback.
+         *
+         * @param callable $callback
+         * @return \Bugsnag\Client 
+         * @static 
+         */ 
+        public static function registerCallback($callback)
+        {
+                        /** @var \Bugsnag\Client $instance */
+                        return $instance->registerCallback($callback);
+        }
+        
+        /**
+         * Regsier all our default callbacks.
+         *
+         * @return \Bugsnag\Client 
+         * @static 
+         */ 
+        public static function registerDefaultCallbacks()
+        {
+                        /** @var \Bugsnag\Client $instance */
+                        return $instance->registerDefaultCallbacks();
+        }
+        
+        /**
+         * Register a middleware object to the pipeline.
+         *
+         * @param callable $middleware
+         * @return \Bugsnag\Client 
+         * @static 
+         */ 
+        public static function registerMiddleware($middleware)
+        {
+                        /** @var \Bugsnag\Client $instance */
+                        return $instance->registerMiddleware($middleware);
+        }
+        
+        /**
+         * Record the given breadcrumb.
+         *
+         * @param string $name the name of the breadcrumb
+         * @param string|null $type the type of breadcrumb
+         * @param array $metaData additional information about the breadcrumb
+         * @return void 
+         * @static 
+         */ 
+        public static function leaveBreadcrumb($name, $type = null, $metaData = [])
+        {
+                        /** @var \Bugsnag\Client $instance */
+                        $instance->leaveBreadcrumb($name, $type, $metaData);
+        }
+        
+        /**
+         * Clear all recorded breadcrumbs.
+         *
+         * @return void 
+         * @static 
+         */ 
+        public static function clearBreadcrumbs()
+        {
+                        /** @var \Bugsnag\Client $instance */
+                        $instance->clearBreadcrumbs();
+        }
+        
+        /**
+         * Notify Bugsnag of a non-fatal/handled throwable.
+         *
+         * @param \Throwable $throwable the throwable to notify Bugsnag about
+         * @param callable|null $callback the customization callback
+         * @return void 
+         * @static 
+         */ 
+        public static function notifyException($throwable, $callback = null)
+        {
+                        /** @var \Bugsnag\Client $instance */
+                        $instance->notifyException($throwable, $callback);
+        }
+        
+        /**
+         * Notify Bugsnag of a non-fatal/handled error.
+         *
+         * @param string $name the name of the error, a short (1 word) string
+         * @param string $message the error message
+         * @param callable|null $callback the customization callback
+         * @return void 
+         * @static 
+         */ 
+        public static function notifyError($name, $message, $callback = null)
+        {
+                        /** @var \Bugsnag\Client $instance */
+                        $instance->notifyError($name, $message, $callback);
+        }
+        
+        /**
+         * Notify Bugsnag of the given error report.
+         * 
+         * This may simply involve queuing it for later if we're batching.
+         *
+         * @param \Bugsnag\Report $report the error report to send
+         * @param callable|null $callback the customization callback
+         * @return void 
+         * @static 
+         */ 
+        public static function notify($report, $callback = null)
+        {
+                        /** @var \Bugsnag\Client $instance */
+                        $instance->notify($report, $callback);
+        }
+        
+        /**
+         * Notify Bugsnag of a deployment.
+         *
+         * @deprecated This function is being deprecated in favour of `build`.
+         * @param string|null $repository the repository from which you are deploying the code
+         * @param string|null $branch the source control branch from which you are deploying
+         * @param string|null $revision the source control revision you are currently deploying
+         * @return void 
+         * @static 
+         */ 
+        public static function deploy($repository = null, $branch = null, $revision = null)
+        {
+                        /** @var \Bugsnag\Client $instance */
+                        $instance->deploy($repository, $branch, $revision);
+        }
+        
+        /**
+         * Notify Bugsnag of a build.
+         *
+         * @param string|null $repository the repository from which you are deploying the code
+         * @param string|null $revision the source control revision you are currently deploying
+         * @param string|null $provider the provider of the source control for the build
+         * @param string|null $builderName the name of who or what is making the build
+         * @return void 
+         * @static 
+         */ 
+        public static function build($repository = null, $revision = null, $provider = null, $builderName = null)
+        {
+                        /** @var \Bugsnag\Client $instance */
+                        $instance->build($repository, $revision, $provider, $builderName);
+        }
+        
+        /**
+         * Flush any buffered reports.
+         *
+         * @return void 
+         * @static 
+         */ 
+        public static function flush()
+        {
+                        /** @var \Bugsnag\Client $instance */
+                        $instance->flush();
+        }
+        
+        /**
+         * Start tracking a session.
+         *
+         * @return void 
+         * @static 
+         */ 
+        public static function startSession()
+        {
+                        /** @var \Bugsnag\Client $instance */
+                        $instance->startSession();
+        }
+        
+        /**
+         * Returns the session tracker.
+         *
+         * @return \Bugsnag\SessionTracker 
+         * @static 
+         */ 
+        public static function getSessionTracker()
+        {
+                        /** @var \Bugsnag\Client $instance */
+                        return $instance->getSessionTracker();
+        }
+        
+        /**
+         * Get the Bugsnag API Key.
+         *
+         * @var string
+         * @static 
+         */ 
+        public static function getApiKey()
+        {
+                        /** @var \Bugsnag\Client $instance */
+                        return $instance->getApiKey();
+        }
+        
+        /**
+         * Sets whether errors should be batched together and send at the end of each request.
+         *
+         * @param bool $batchSending whether to batch together errors
+         * @return \Bugsnag\Client 
+         * @static 
+         */ 
+        public static function setBatchSending($batchSending)
+        {
+                        /** @var \Bugsnag\Client $instance */
+                        return $instance->setBatchSending($batchSending);
+        }
+        
+        /**
+         * Is batch sending is enabled?
+         *
+         * @return bool 
+         * @static 
+         */ 
+        public static function isBatchSending()
+        {
+                        /** @var \Bugsnag\Client $instance */
+                        return $instance->isBatchSending();
+        }
+        
+        /**
+         * Set which release stages should be allowed to notify Bugsnag.
+         * 
+         * Eg ['production', 'development'].
+         *
+         * @param string[]|null $notifyReleaseStages array of release stages to notify for
+         * @return \Bugsnag\Client 
+         * @static 
+         */ 
+        public static function setNotifyReleaseStages($notifyReleaseStages = null)
+        {
+                        /** @var \Bugsnag\Client $instance */
+                        return $instance->setNotifyReleaseStages($notifyReleaseStages);
+        }
+        
+        /**
+         * Should we notify Bugsnag based on the current release stage?
+         *
+         * @return bool 
+         * @static 
+         */ 
+        public static function shouldNotify()
+        {
+                        /** @var \Bugsnag\Client $instance */
+                        return $instance->shouldNotify();
+        }
+        
+        /**
+         * Set the strings to filter out from metaData arrays before sending then.
+         * 
+         * Eg. ['password', 'credit_card'].
+         *
+         * @param string[] $filters an array of metaData filters
+         * @return \Bugsnag\Client 
+         * @static 
+         */ 
+        public static function setFilters($filters)
+        {
+                        /** @var \Bugsnag\Client $instance */
+                        return $instance->setFilters($filters);
+        }
+        
+        /**
+         * Get the array of metaData filters.
+         *
+         * @var string
+         * @static 
+         */ 
+        public static function getFilters()
+        {
+                        /** @var \Bugsnag\Client $instance */
+                        return $instance->getFilters();
+        }
+        
+        /**
+         * Set the project root.
+         *
+         * @param string|null $projectRoot the project root path
+         * @return void 
+         * @static 
+         */ 
+        public static function setProjectRoot($projectRoot)
+        {
+                        /** @var \Bugsnag\Client $instance */
+                        $instance->setProjectRoot($projectRoot);
+        }
+        
+        /**
+         * Set the project root regex.
+         *
+         * @param string|null $projectRootRegex the project root path
+         * @return void 
+         * @static 
+         */ 
+        public static function setProjectRootRegex($projectRootRegex)
+        {
+                        /** @var \Bugsnag\Client $instance */
+                        $instance->setProjectRootRegex($projectRootRegex);
+        }
+        
+        /**
+         * Is the given file in the project?
+         *
+         * @param string $file
+         * @return string 
+         * @static 
+         */ 
+        public static function isInProject($file)
+        {
+                        /** @var \Bugsnag\Client $instance */
+                        return $instance->isInProject($file);
+        }
+        
+        /**
+         * Set the strip path.
+         *
+         * @param string|null $stripPath the absolute strip path
+         * @return void 
+         * @static 
+         */ 
+        public static function setStripPath($stripPath)
+        {
+                        /** @var \Bugsnag\Client $instance */
+                        $instance->setStripPath($stripPath);
+        }
+        
+        /**
+         * Set the regular expression used to strip paths from stacktraces.
+         *
+         * @param string|null $stripPathRegex
+         * @return void 
+         * @static 
+         */ 
+        public static function setStripPathRegex($stripPathRegex)
+        {
+                        /** @var \Bugsnag\Client $instance */
+                        $instance->setStripPathRegex($stripPathRegex);
+        }
+        
+        /**
+         * Get the stripped file path.
+         *
+         * @param string $file
+         * @return string 
+         * @static 
+         */ 
+        public static function getStrippedFilePath($file)
+        {
+                        /** @var \Bugsnag\Client $instance */
+                        return $instance->getStrippedFilePath($file);
+        }
+        
+        /**
+         * Set if we should we send a small snippet of the code that crashed.
+         * 
+         * This can help you diagnose even faster from within your dashboard.
+         *
+         * @param bool $sendCode whether to send code to Bugsnag
+         * @return \Bugsnag\Client 
+         * @static 
+         */ 
+        public static function setSendCode($sendCode)
+        {
+                        /** @var \Bugsnag\Client $instance */
+                        return $instance->setSendCode($sendCode);
+        }
+        
+        /**
+         * Should we send a small snippet of the code that crashed?
+         *
+         * @return bool 
+         * @static 
+         */ 
+        public static function shouldSendCode()
+        {
+                        /** @var \Bugsnag\Client $instance */
+                        return $instance->shouldSendCode();
+        }
+        
+        /**
+         * Sets the notifier to report as to Bugsnag.
+         * 
+         * This should only be set by other notifier libraries.
+         *
+         * @param string[] $notifier an array of name, version, url.
+         * @return \Bugsnag\Client 
+         * @static 
+         */ 
+        public static function setNotifier($notifier)
+        {
+                        /** @var \Bugsnag\Client $instance */
+                        return $instance->setNotifier($notifier);
+        }
+        
+        /**
+         * Get the notifier to report as to Bugsnag.
+         *
+         * @var string[]
+         * @static 
+         */ 
+        public static function getNotifier()
+        {
+                        /** @var \Bugsnag\Client $instance */
+                        return $instance->getNotifier();
+        }
+        
+        /**
+         * Set your app's semantic version, eg "1.2.3".
+         *
+         * @param string|null $appVersion the app's version
+         * @return \Bugsnag\Client 
+         * @static 
+         */ 
+        public static function setAppVersion($appVersion)
+        {
+                        /** @var \Bugsnag\Client $instance */
+                        return $instance->setAppVersion($appVersion);
+        }
+        
+        /**
+         * Set your release stage, eg "production" or "development".
+         *
+         * @param string|null $releaseStage the app's current release stage
+         * @return \Bugsnag\Client 
+         * @static 
+         */ 
+        public static function setReleaseStage($releaseStage)
+        {
+                        /** @var \Bugsnag\Client $instance */
+                        return $instance->setReleaseStage($releaseStage);
+        }
+        
+        /**
+         * Set the type of application executing the code.
+         * 
+         * This is usually used to represent if you are running plain PHP code
+         * "php", via a framework, eg "laravel", or executing through delayed
+         * worker code, eg "resque".
+         *
+         * @param string|null $type the current type
+         * @return \Bugsnag\Client 
+         * @static 
+         */ 
+        public static function setAppType($type)
+        {
+                        /** @var \Bugsnag\Client $instance */
+                        return $instance->setAppType($type);
+        }
+        
+        /**
+         * Set the fallback application type.
+         * 
+         * This is should be used only by libraries to set an fallback app type.
+         *
+         * @param string|null $type the fallback type
+         * @return \Bugsnag\Client 
+         * @static 
+         */ 
+        public static function setFallbackType($type)
+        {
+                        /** @var \Bugsnag\Client $instance */
+                        return $instance->setFallbackType($type);
+        }
+        
+        /**
+         * Get the application data.
+         *
+         * @return array 
+         * @static 
+         */ 
+        public static function getAppData()
+        {
+                        /** @var \Bugsnag\Client $instance */
+                        return $instance->getAppData();
+        }
+        
+        /**
+         * Set the hostname.
+         *
+         * @param string|null $hostname the hostname
+         * @return \Bugsnag\Client 
+         * @static 
+         */ 
+        public static function setHostname($hostname)
+        {
+                        /** @var \Bugsnag\Client $instance */
+                        return $instance->setHostname($hostname);
+        }
+        
+        /**
+         * Get the device data.
+         *
+         * @return array 
+         * @static 
+         */ 
+        public static function getDeviceData()
+        {
+                        /** @var \Bugsnag\Client $instance */
+                        return $instance->getDeviceData();
+        }
+        
+        /**
+         * Set custom metadata to send to Bugsnag.
+         * 
+         * You can use this to add custom tabs of data to each error on your
+         * Bugsnag dashboard.
+         *
+         * @param array[] $metaData an array of arrays of custom data
+         * @param bool $merge should we merge the meta data
+         * @return \Bugsnag\Client 
+         * @static 
+         */ 
+        public static function setMetaData($metaData, $merge = true)
+        {
+                        /** @var \Bugsnag\Client $instance */
+                        return $instance->setMetaData($metaData, $merge);
+        }
+        
+        /**
+         * Get the custom metadata to send to Bugsnag.
+         *
+         * @return array[] 
+         * @static 
+         */ 
+        public static function getMetaData()
+        {
+                        /** @var \Bugsnag\Client $instance */
+                        return $instance->getMetaData();
+        }
+        
+        /**
+         * Set Bugsnag's error reporting level.
+         * 
+         * If this is not set, we'll use your current PHP error_reporting value
+         * from your ini file or error_reporting(...) calls.
+         *
+         * @param int|null $errorReportingLevel the error reporting level integer
+         * @return \Bugsnag\Client 
+         * @static 
+         */ 
+        public static function setErrorReportingLevel($errorReportingLevel)
+        {
+                        /** @var \Bugsnag\Client $instance */
+                        return $instance->setErrorReportingLevel($errorReportingLevel);
+        }
+        
+        /**
+         * Should we ignore the given error code?
+         *
+         * @param int $code the error code
+         * @return bool 
+         * @static 
+         */ 
+        public static function shouldIgnoreErrorCode($code)
+        {
+                        /** @var \Bugsnag\Client $instance */
+                        return $instance->shouldIgnoreErrorCode($code);
+        }
+        
+        /**
+         * Set session tracking state and pass in optional guzzle.
+         *
+         * @param bool $track whether to track sessions
+         * @return \Bugsnag\Client 
+         * @static 
+         */ 
+        public static function setAutoCaptureSessions($track)
+        {
+                        /** @var \Bugsnag\Client $instance */
+                        return $instance->setAutoCaptureSessions($track);
+        }
+        
+        /**
+         * Set session delivery endpoint.
+         *
+         * @param string $endpoint the session endpoint
+         * @return \Bugsnag\Client 
+         * @static 
+         */ 
+        public static function setSessionEndpoint($endpoint)
+        {
+                        /** @var \Bugsnag\Client $instance */
+                        return $instance->setSessionEndpoint($endpoint);
+        }
+        
+        /**
+         * Get the session client.
+         *
+         * @return \Guzzle\ClientInterface 
+         * @static 
+         */ 
+        public static function getSessionClient()
+        {
+                        /** @var \Bugsnag\Client $instance */
+                        return $instance->getSessionClient();
+        }
+        
+        /**
+         * Whether should be auto-capturing sessions.
+         *
+         * @return bool 
+         * @static 
+         */ 
+        public static function shouldCaptureSessions()
+        {
+                        /** @var \Bugsnag\Client $instance */
+                        return $instance->shouldCaptureSessions();
+        }
+        
+        /**
+         * Sets the build endpoint.
+         *
+         * @param string $endpoint the build endpoint
+         * @return \Bugsnag\Client 
+         * @static 
+         */ 
+        public static function setBuildEndpoint($endpoint)
+        {
+                        /** @var \Bugsnag\Client $instance */
+                        return $instance->setBuildEndpoint($endpoint);
+        }
+        
+        /**
+         * Returns the build endpoint.
+         *
+         * @return string 
+         * @static 
+         */ 
+        public static function getBuildEndpoint()
+        {
+                        /** @var \Bugsnag\Client $instance */
+                        return $instance->getBuildEndpoint();
+        }
+         
+    }
+ 
+}
+
 namespace Barryvdh\Debugbar { 
 
     /**
@@ -16375,6 +17069,183 @@ namespace Maatwebsite\Excel\Facades {
         {
                         /** @var \Maatwebsite\Excel\Fakes\ExcelFake $instance */
                         return $instance->assertImported($filePath, $disk, $callback);
+        }
+         
+    }
+ 
+}
+
+namespace PragmaRX\Version\Package { 
+
+    /**
+     * 
+     *
+     */ 
+    class Facade {
+        
+        /**
+         * Get a version.
+         *
+         * @param $type
+         * @return string 
+         * @static 
+         */ 
+        public static function getGit()
+        {
+                        /** @var \PragmaRX\Version\Package\Version $instance */
+                        return $instance->getGit();
+        }
+        
+        /**
+         * Get the current version.
+         *
+         * @return string 
+         * @static 
+         */ 
+        public static function current()
+        {
+                        /** @var \PragmaRX\Version\Package\Version $instance */
+                        return $instance->current();
+        }
+        
+        /**
+         * Get the current object instance.
+         *
+         * @return \PragmaRX\Version\Package\Version 
+         * @static 
+         */ 
+        public static function instance()
+        {
+                        /** @var \PragmaRX\Version\Package\Version $instance */
+                        return $instance->instance();
+        }
+        
+        /**
+         * Get a properly formatted version.
+         *
+         * @param $type
+         * @return mixed|null 
+         * @static 
+         */ 
+        public static function format($type = null)
+        {
+                        /** @var \PragmaRX\Version\Package\Version $instance */
+                        return $instance->format($type);
+        }
+        
+        /**
+         * Get a properly formatted version.
+         *
+         * @param $type
+         * @return bool 
+         * @static 
+         */ 
+        public static function isInAbsorbMode()
+        {
+                        /** @var \PragmaRX\Version\Package\Version $instance */
+                        return $instance->isInAbsorbMode();
+        }
+        
+        /**
+         * Set the config file stub.
+         *
+         * @param string $configFileStub
+         * @static 
+         */ 
+        public static function setConfigFileStub($configFileStub)
+        {
+                        /** @var \PragmaRX\Version\Package\Version $instance */
+                        return $instance->setConfigFileStub($configFileStub);
+        }
+        
+        /**
+         * Load package YAML configuration.
+         *
+         * @param $path
+         * @return \Illuminate\Support\Collection 
+         * @static 
+         */ 
+        public static function loadConfig($path = null)
+        {
+                        /** @var \PragmaRX\Version\Package\Version $instance */
+                        return $instance->loadConfig($path);
+        }
+         
+    }
+ 
+}
+
+namespace PragmaRX\Yaml\Package { 
+
+    /**
+     * 
+     *
+     */ 
+    class Facade {
+        
+        /**
+         * Load yaml files from directory and add to Laravel config.
+         *
+         * @param string $path
+         * @param string $configKey
+         * @return \PragmaRX\Yaml\Package\Collection 
+         * @static 
+         */ 
+        public static function loadToConfig($path, $configKey)
+        {
+                        /** @var \PragmaRX\Yaml\Package\Yaml $instance */
+                        return $instance->loadToConfig($path, $configKey);
+        }
+        
+        /**
+         * Load all yaml files from a directory.
+         *
+         * @param $path
+         * @return \Illuminate\Support\Collection 
+         * @static 
+         */ 
+        public static function loadFromDirectory($path)
+        {
+                        /** @var \PragmaRX\Yaml\Package\Yaml $instance */
+                        return $instance->loadFromDirectory($path);
+        }
+        
+        /**
+         * Load yaml file.
+         *
+         * @param $file
+         * @return mixed|string 
+         * @static 
+         */ 
+        public static function loadFile($file)
+        {
+                        /** @var \PragmaRX\Yaml\Package\Yaml $instance */
+                        return $instance->loadFile($file);
+        }
+        
+        /**
+         * Remove extension from file name.
+         *
+         * @param $dirty
+         * @return \Illuminate\Support\Collection|mixed 
+         * @static 
+         */ 
+        public static function cleanArrayKeysRecursive($dirty)
+        {
+                        /** @var \PragmaRX\Yaml\Package\Yaml $instance */
+                        return $instance->cleanArrayKeysRecursive($dirty);
+        }
+        
+        /**
+         * Get this object instance.
+         *
+         * @return \PragmaRX\Yaml\Package\Yaml 
+         * @static 
+         */ 
+        public static function instance()
+        {
+                        /** @var \PragmaRX\Yaml\Package\Yaml $instance */
+                        return $instance->instance();
         }
          
     }
@@ -19300,11 +20171,17 @@ namespace  {
 
     class PDF extends \Barryvdh\DomPDF\Facade {}
 
+    class Bugsnag extends \Bugsnag\BugsnagLaravel\Facades\Bugsnag {}
+
     class Debugbar extends \Barryvdh\Debugbar\Facade {}
 
     class Flare extends \Facade\Ignition\Facades\Flare {}
 
     class Excel extends \Maatwebsite\Excel\Facades\Excel {}
+
+    class Version extends \PragmaRX\Version\Package\Facade {}
+
+    class Yaml extends \PragmaRX\Yaml\Package\Facade {}
  
 }
 
