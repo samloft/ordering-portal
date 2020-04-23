@@ -29,10 +29,7 @@ class Contact extends Mailable
      */
     public function build(): self
     {
-        return $this->from($this->request->email, $this->request->name)
-            ->subject('Online ordering web-app message received')
-            ->markdown('contact.email')
-            ->with([
+        return $this->subject('Online ordering web-app message received')->markdown('contact.email')->with([
                 'message' => $this->request,
             ]);
     }
