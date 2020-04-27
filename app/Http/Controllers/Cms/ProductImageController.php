@@ -53,7 +53,6 @@ class ProductImageController extends Controller
      * Upload product images.
      *
      * @return JsonResponse
-     *
      * @throws \Illuminate\Contracts\Filesystem\FileNotFoundException
      */
     public function store(): JsonResponse

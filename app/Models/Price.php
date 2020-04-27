@@ -9,7 +9,6 @@ use Illuminate\Support\Collection;
  * App\Models\Price.
  *
  * @mixin \Eloquent
- *
  * @property string $customer_code
  * @property string $product
  * @property float $price

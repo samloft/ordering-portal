@@ -42,7 +42,6 @@ class AdminController extends Controller
      *
      * @return RedirectResponse
      * @throws ValidationException
-     *
      */
     public function login(Request $request): RedirectResponse
     {

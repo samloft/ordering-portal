@@ -54,7 +54,6 @@ class ContactController extends Controller
      * @param \App\Models\Contact $contact
      *
      * @return \Illuminate\Http\JsonResponse
-     *
      * @throws \Exception
      */
     public function destroy(Contact $contact): JsonResponse

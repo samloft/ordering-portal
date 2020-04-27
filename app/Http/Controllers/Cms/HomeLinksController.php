@@ -32,7 +32,6 @@ class HomeLinksController extends Controller
      * Create a new home link.
      *
      * @return \Illuminate\Http\JsonResponse
-     *
      * @throws \Illuminate\Contracts\Filesystem\FileNotFoundException
      */
     public function store(): JsonResponse

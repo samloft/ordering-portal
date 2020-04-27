@@ -8,7 +8,6 @@ use Illuminate\Database\Eloquent\Model;
  * App\Models\OrderImport.
  *
  * @mixin \Eloquent
- *
  * @property int $user_id
  * @property string $customer_code
  * @property string $product

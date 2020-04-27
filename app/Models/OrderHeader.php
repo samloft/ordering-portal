@@ -10,7 +10,6 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
  * App\Models\OrderHeader.
  *
  * @mixin \Eloquent
- *
  * @property string $order_number
  * @property string $customer_code
  * @property int $user_id

@@ -12,7 +12,6 @@ use Illuminate\Support\Collection;
  * App\Models\Customer.
  *
  * @mixin Eloquent
- *
  * @property string $code
  * @property string $name
  * @property string $address_line_1

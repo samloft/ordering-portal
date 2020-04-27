@@ -43,7 +43,6 @@ class CheckoutController extends Controller
      * Place the customers order.
      *
      * @return \Illuminate\Contracts\View\Factory|\Illuminate\Http\RedirectResponse|\Illuminate\View\View
-     *
      * @throws \Throwable
      */
     public function store()

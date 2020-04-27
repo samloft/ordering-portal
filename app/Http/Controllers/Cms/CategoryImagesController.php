@@ -61,7 +61,6 @@ class CategoryImagesController extends Controller
      * @param $id
      *
      * @return bool|null
-     *
      * @throws \Exception
      */
     public function destroy($id): ?bool

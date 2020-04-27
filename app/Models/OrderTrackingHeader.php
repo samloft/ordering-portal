@@ -14,7 +14,6 @@ use Illuminate\Support\Collection;
  * App\Models\OrderTrackingHeader.
  *
  * @mixin \Eloquent
- *
  * @property string $order_number
  * @property string $base_order
  * @property string $reference

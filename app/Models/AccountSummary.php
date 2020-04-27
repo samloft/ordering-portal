@@ -11,7 +11,6 @@ use Illuminate\Support\Collection;
  * App\Models\AccountSummary.
  *
  * @mixin Eloquent
- *
  * @property string $customer_code
  * @property string $item_no
  * @property string $reference

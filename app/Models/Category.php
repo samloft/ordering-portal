@@ -11,7 +11,6 @@ use Illuminate\Support\Collection;
  * App\Models\Category.
  *
  * @mixin Eloquent
- *
  * @property string $product
  * @property string $level_1
  * @property string $level_2
@@ -45,6 +44,7 @@ class Category extends Model
 
     /**
      * @param $level
+     *
      * @return \Illuminate\Support\Collection
      */
     public static function show($level): Collection

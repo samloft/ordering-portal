@@ -11,7 +11,6 @@ use Storage;
  * App\Models\Product.
  *
  * @mixin \Eloquent
- *
  * @property string $code
  * @property string $type
  * @property string $name

@@ -58,8 +58,8 @@ class PromotionController extends Controller
      * Delete a promotion with the passed ID.
      *
      * @param $id
-     * @return bool|null
      *
+     * @return bool|null
      * @throws \Exception
      */
     public function destroy($id): ?bool

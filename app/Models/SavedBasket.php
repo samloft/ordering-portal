@@ -9,7 +9,6 @@ use Illuminate\Database\Eloquent\Model;
  * App\Models\SavedBasket.
  *
  * @mixin \Eloquent
- *
  * @property string $id
  * @property string $customer_code
  * @property int $user_id

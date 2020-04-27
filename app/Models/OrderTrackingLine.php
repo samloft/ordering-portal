@@ -11,7 +11,6 @@ use Illuminate\Support\Collection;
  * App\Models\OrderTrackingLine.
  *
  * @mixin \Eloquent
- *
  * @property string $order_number
  * @property int $order_line_no
  * @property string $product

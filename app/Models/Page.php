@@ -9,7 +9,6 @@ use Spatie\Activitylog\Traits\LogsActivity;
  * App\Models\Page.
  *
  * @mixin \Eloquent
- *
  * @property int $id
  * @property string $name
  * @property string $description

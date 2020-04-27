@@ -8,7 +8,6 @@ use Illuminate\Database\Eloquent\Model;
  * App\Models\OrderLine.
  *
  * @mixin \Eloquent
- *
  * @property string $order_number
  * @property string $product
  * @property string $description

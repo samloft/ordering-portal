@@ -14,7 +14,6 @@ use Illuminate\Http\Response;
  * App\Models\Basket.
  *
  * @mixin Eloquent
- *
  * @property int $user_id
  * @property string $customer_code
  * @property string $product

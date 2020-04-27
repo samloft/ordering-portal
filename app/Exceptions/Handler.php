@@ -34,7 +34,6 @@ class Handler extends ExceptionHandler
      *
      * @return void
      * @throws Throwable
-     *
      */
     public function report(Throwable $exception)
     {

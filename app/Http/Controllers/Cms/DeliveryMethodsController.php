@@ -45,7 +45,6 @@ class DeliveryMethodsController extends Controller
      * @param \App\Models\DeliveryMethod $deliveryMethod
      *
      * @return \Illuminate\Http\JsonResponse
-     *
      * @throws \Exception
      */
     public function destroy(DeliveryMethod $deliveryMethod): JsonResponse
