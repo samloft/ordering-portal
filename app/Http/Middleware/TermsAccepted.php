@@ -20,15 +20,10 @@ class TermsAccepted
     public function handle($request, Closure $next)
     {
         $enabled = GlobalSettings::termsEnabled()['enabled'];
+        $route = request()->route()->getName();
 
-        if ($enabled && $request->route()->getName() !== 'site-terms.accept') {
-            if (auth()->user()->terms_accepted && $request->route()->getName() === 'site-terms') {
-                return redirect(route('home'));
-            }
-
-            if (! auth()->user()->terms_accepted && $request->route()->getName() !== 'site-terms') {
-                return redirect(route('site-terms'));
-            }
+        if (! preg_match('/\bsite-terms\b/', $route) && $enabled && ! auth()->user()->terms_accepted) {
+            return redirect(route('site-terms'));
         }
 
         return $next($request);
