@@ -160,39 +160,39 @@ class GlobalSettings extends Model
         $settings->forgetSettingsCache();
 
         $settings::where('key', 'site-announcement')->update([
-                'value' => request('announcement') ?: '',
-            ]);
+            'value' => request('announcement') ?: '',
+        ]);
 
         $settings::where('key', 'checkout-notice')->update([
-                'value' => request('checkout_notice') ?: '',
-            ]);
+            'value' => request('checkout_notice') ?: '',
+        ]);
 
         $settings::where('key', 'default-country')->update([
-                'value' => request('default_country'),
-            ]);
+            'value' => request('default_country'),
+        ]);
 
         $settings::where('key', 'google-analytics')->update([
-                'value' => request('tracking_code') ?: '',
-            ]);
+            'value' => request('tracking_code') ?: '',
+        ]);
 
         $settings::where('key', 'google-maps')->update([
-                'value' => request('google_maps') ?: '',
-            ]);
+            'value' => request('google_maps') ?: '',
+        ]);
 
         $settings::where('key', 'v1-docid')->update([
-                'value' => request('v1_docid') ?: '',
-            ]);
+            'value' => request('v1_docid') ?: '',
+        ]);
 
         $settings::where('key', 'last-order')->update([
-                'value' => request('last_order'),
-            ]);
+            'value' => request('last_order'),
+        ]);
 
         $settings::where('key', 'terms-enabled')->update([
-                'value' => json_encode([
-                    'enabled' => request('terms_enabled'),
-                    'url' => request('terms_url'),
-                ], true),
-            ]);
+            'value' => json_encode([
+                'enabled' => request('terms_enabled'),
+                'url' => request('terms_url'),
+            ], true),
+        ]);
 
         return true;
     }

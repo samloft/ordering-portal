@@ -82,30 +82,30 @@ class OrderTrackingHeader extends Model
     {
         if ($search) {
             return self::where('customer_code', auth()->user()->customer->code)->when($request, static function ($query
-                ) use ($request) {
-                    if ($request->keyword) {
-                        $query->where(static function ($query) use ($request) {
-                            $query->where('order_number', 'like', '%'.$request->keyword.'%')
-                                ->orWhere('reference', 'like', '%'.$request->keyword.'%');
-                        });
-                    }
+            ) use ($request) {
+                if ($request->keyword) {
+                    $query->where(static function ($query) use ($request) {
+                        $query->where('order_number', 'like', '%'.$request->keyword.'%')
+                            ->orWhere('reference', 'like', '%'.$request->keyword.'%');
+                    });
+                }
 
-                    if ($request->status) {
-                        $query->where('status', $request->status);
-                    }
+                if ($request->status) {
+                    $query->where('status', $request->status);
+                }
 
-                    if ($request->start_date) {
-                        $date_from = Carbon::createFromFormat('d-m-Y', $request->start_date)->format('Y-m-d');
+                if ($request->start_date) {
+                    $date_from = Carbon::createFromFormat('d-m-Y', $request->start_date)->format('Y-m-d');
 
-                        $query->where('date_received', '>=', $date_from);
-                    }
+                    $query->where('date_received', '>=', $date_from);
+                }
 
-                    if ($request->end_date) {
-                        $date_to = Carbon::createFromFormat('d-m-Y', $request->end_date)->format('Y-m-d');
+                if ($request->end_date) {
+                    $date_to = Carbon::createFromFormat('d-m-Y', $request->end_date)->format('Y-m-d');
 
-                        $query->where('date_received', '<=', $date_to);
-                    }
-                })->orderBy('date_received', 'desc')->paginate(10);
+                    $query->where('date_received', '<=', $date_to);
+                }
+            })->orderBy('date_received', 'desc')->paginate(10);
         }
 
         return self::where('customer_code', auth()->user()->customer->code)->orderBy('date_received', 'desc')

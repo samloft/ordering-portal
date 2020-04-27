@@ -32,8 +32,8 @@ class OrderUploadController extends Controller
         ], true);
 
         $updated = GlobalSettings::where('key', 'upload-config')->update([
-                'value' => $config,
-            ]);
+            'value' => $config,
+        ]);
 
         if ($updated) {
             return back()->with('success', 'Order upload config has been updated');

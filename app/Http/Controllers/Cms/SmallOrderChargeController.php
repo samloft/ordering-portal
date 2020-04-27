@@ -30,14 +30,14 @@ class SmallOrderChargeController extends Controller
         Cache::forget('small-order-charge');
 
         GlobalSettings::where('key', 'small-order-charge')->update([
-                'value' => json_encode([
-                    'threshold' => request('threshold'),
-                    'charge' => request('charge'),
-                    'exclude_on_charge_delivery' => request('exclude_delivery_charges'),
-                    'exclude_on_collection' => request('exclude_collection'),
-                ], true),
-                'updated_at' => date('Y-m-d H:i:s'),
-            ]);
+            'value' => json_encode([
+                'threshold' => request('threshold'),
+                'charge' => request('charge'),
+                'exclude_on_charge_delivery' => request('exclude_delivery_charges'),
+                'exclude_on_collection' => request('exclude_collection'),
+            ], true),
+            'updated_at' => date('Y-m-d H:i:s'),
+        ]);
 
         return back()->with('success', 'Small order charge rules have been updated');
     }
