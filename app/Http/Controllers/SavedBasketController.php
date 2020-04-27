@@ -57,13 +57,13 @@ class SavedBasketController extends Controller
 
         foreach ($current_basket['lines'] as $item) {
             $basket_details[] = [
-                'id'            => $id,
+                'id' => $id,
                 'customer_code' => auth()->user()->customer->code,
-                'user_id'       => auth()->user()->id,
-                'reference'     => request('reference'),
-                'product'       => trim($item['product']),
-                'quantity'      => $item['quantity'],
-                'created_at'    => date('Y-m-d'),
+                'user_id' => auth()->user()->id,
+                'reference' => request('reference'),
+                'product' => trim($item['product']),
+                'quantity' => $item['quantity'],
+                'created_at' => date('Y-m-d'),
             ];
         }
 
@@ -87,11 +87,7 @@ class SavedBasketController extends Controller
             $deleted = false;
         }
 
-        return $deleted ?
-            redirect(route('saved-baskets'))
-                ->with('success', 'Saved basket has been deleted.') :
-            redirect(route('saved-baskets'))
-                ->with('error', 'Unable to delete saved basket, please try again.');
+        return $deleted ? redirect(route('saved-baskets'))->with('success', 'Saved basket has been deleted.') : redirect(route('saved-baskets'))->with('error', 'Unable to delete saved basket, please try again.');
     }
 
     /**
@@ -109,7 +105,7 @@ class SavedBasketController extends Controller
         foreach ($saved_basket as $line) {
             if ($line->price) {
                 $products[] = [
-                    'product'  => $line->product,
+                    'product' => $line->product,
                     'quantity' => $line->quantity,
                 ];
             }
@@ -117,7 +113,6 @@ class SavedBasketController extends Controller
 
         $copied = Basket::store($products);
 
-        return $copied ? redirect(route('basket'))->with('success', 'Saved basket has been copied') :
-            back()->with('error', 'Unable to copy products to basket, please try again');
+        return $copied ? redirect(route('basket'))->with('success', 'Saved basket has been copied') : back()->with('error', 'Unable to copy products to basket, please try again');
     }
 }

@@ -29,6 +29,10 @@
             <div>Order Total</div>
             <div>{{ total }}</div>
         </div>
+
+        <div v-if="bulk_rate_savings" class="mb-2 text-primary font-medium">
+            This total includes a saving of <span class="font-bold">{{ bulk_rate_savings }}</span> thanks to bulk rates.
+        </div>
     </div>
 </template>
 
@@ -42,7 +46,8 @@
                 sub_total: this.summary.sub_total,
                 small_order_charge: this.summary.small_order_charge,
                 vat: this.summary.vat,
-                total: this.summary.total
+                total: this.summary.total,
+                bulk_rate_savings: this.summary.bulk_rate_savings
             }
         },
         props: {
@@ -57,6 +62,7 @@
                 this.small_order_charge = data.basket_details.summary.small_order_charge;
                 this.vat = data.basket_details.summary.vat;
                 this.total = data.basket_details.summary.total;
+                this.bulk_rate_savings = data.basket_details.summary.bulk_rate_savings;
             }
         },
         mounted() {

@@ -10,7 +10,6 @@ use Spatie\Activitylog\Traits\LogsActivity;
  * App\Models\CustomerDiscount.
  *
  * @mixin Eloquent
- *
  * @property string $customer_code
  * @property float $percent
  * @property \Illuminate\Support\Carbon $created_at

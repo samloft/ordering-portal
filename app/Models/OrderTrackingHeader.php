@@ -14,7 +14,6 @@ use Illuminate\Support\Collection;
  * App\Models\OrderTrackingHeader.
  *
  * @mixin \Eloquent
- *
  * @property string $order_number
  * @property string $base_order
  * @property string $reference
@@ -85,7 +84,8 @@ class OrderTrackingHeader extends Model
             ) use ($request) {
                 if ($request->keyword) {
                     $query->where(static function ($query) use ($request) {
-                        $query->where('order_number', 'like', '%'.$request->keyword.'%')->orWhere('reference', 'like', '%'.$request->keyword.'%');
+                        $query->where('order_number', 'like', '%'.$request->keyword.'%')
+                            ->orWhere('reference', 'like', '%'.$request->keyword.'%');
                     });
                 }
 
@@ -107,7 +107,8 @@ class OrderTrackingHeader extends Model
             })->orderBy('date_received', 'desc')->paginate(10);
         }
 
-        return self::where('customer_code', auth()->user()->customer->code)->orderBy('date_received', 'desc')->paginate(10);
+        return self::where('customer_code', auth()->user()->customer->code)->orderBy('date_received', 'desc')
+            ->paginate(10);
     }
 
     /**
@@ -119,7 +120,8 @@ class OrderTrackingHeader extends Model
      */
     public static function show($order)
     {
-        return self::where('customer_code', auth()->user()->customer->code)->where('order_number', $order)->with('lines')->with('original')->firstOrFail();
+        return self::where('customer_code', auth()->user()->customer->code)->where('order_number', $order)
+            ->with('lines')->with('original')->firstOrFail();
     }
 
     /**
@@ -129,9 +131,15 @@ class OrderTrackingHeader extends Model
      */
     public static function backOrders()
     {
-        return self::selectRaw('order_tracking_header.order_number, order_tracking_header.date_received, order_tracking_lines.product, order_tracking_lines.quantity, order_tracking_lines.description, MIN(expected_stock.due_date) as due_date')->leftJoin('order_tracking_lines', 'order_tracking_header.order_number', '=', 'order_tracking_lines.order_number')->leftJoin('expected_stock', 'order_tracking_lines.product', '=', 'expected_stock.product')->where('customer_code', auth()->user()->customer->code)->whereNotIn('status', [
-            'Invoiced',
-            'Cancelled',
-        ])->where('order_tracking_header.order_number', 'like', '%/%')->where('order_tracking_lines.product', 'not like', '%M19%')->groupBy('order_tracking_header.order_number', 'order_tracking_header.date_received', 'order_tracking_lines.product', 'order_tracking_lines.quantity', 'order_tracking_lines.description')->get();
+        return self::selectRaw('order_tracking_header.order_number, order_tracking_header.date_received, order_tracking_lines.product, order_tracking_lines.quantity, order_tracking_lines.description, MIN(expected_stock.due_date) as due_date')
+            ->leftJoin('order_tracking_lines', 'order_tracking_header.order_number', '=', 'order_tracking_lines.order_number')
+            ->leftJoin('expected_stock', 'order_tracking_lines.product', '=', 'expected_stock.product')
+            ->where('customer_code', auth()->user()->customer->code)->whereNotIn('status', [
+                'Invoiced',
+                'Cancelled',
+            ])->where('order_tracking_header.order_number', 'like', '%/%')
+            ->where('order_tracking_lines.product', 'not like', '%M19%')
+            ->groupBy('order_tracking_header.order_number', 'order_tracking_header.date_received', 'order_tracking_lines.product', 'order_tracking_lines.quantity', 'order_tracking_lines.description')
+            ->get();
     }
 }

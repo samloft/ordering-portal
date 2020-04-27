@@ -9,7 +9,6 @@ use Illuminate\Database\Eloquent\Model;
  * App\Models\SavedBasket.
  *
  * @mixin \Eloquent
- *
  * @property string $id
  * @property string $customer_code
  * @property int $user_id
@@ -87,12 +86,13 @@ class SavedBasket extends Model
             'reference',
             'prices.price',
             'created_at',
-        ])->where('saved_baskets.customer_code', auth()->user()->customer->code)->where('id', $id)->leftJoin('products', 'products.code', 'saved_baskets.product')->leftJoin('prices', static function (
-            $join
-        ) {
-            $join->on('prices.product', 'saved_baskets.product');
-            $join->where('prices.customer_code', auth()->user()->customer->code);
-        })->get();
+        ])->where('saved_baskets.customer_code', auth()->user()->customer->code)->where('id', $id)
+            ->leftJoin('products', 'products.code', 'saved_baskets.product')->leftJoin('prices', static function (
+                $join
+            ) {
+                $join->on('prices.product', 'saved_baskets.product');
+                $join->where('prices.customer_code', auth()->user()->customer->code);
+            })->get();
     }
 
     /**

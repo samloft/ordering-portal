@@ -11,7 +11,6 @@ use Illuminate\Support\Collection;
  * App\Models\AccountSummary.
  *
  * @mixin Eloquent
- *
  * @property string $customer_code
  * @property string $item_no
  * @property string $reference
@@ -32,7 +31,8 @@ class AccountSummary extends Model
      */
     public static function show()
     {
-        return self::where('customer_code', auth()->user()->customer->code)->orderBy('due_date', 'desc')->orderBy('item_no', 'desc')->limit(320)->get();
+        return self::where('customer_code', auth()->user()->customer->code)->orderBy('due_date', 'desc')
+            ->orderBy('item_no', 'desc')->limit(320)->get();
     }
 
     /**
@@ -42,6 +42,7 @@ class AccountSummary extends Model
      */
     public static function summary()
     {
-        return self::selectRaw('SUM(unall_curr_amount) AS price, age')->where('customer_code', auth()->user()->customer->code)->groupBy('age')->get();
+        return self::selectRaw('SUM(unall_curr_amount) AS price, age')
+            ->where('customer_code', auth()->user()->customer->code)->groupBy('age')->get();
     }
 }

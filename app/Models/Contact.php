@@ -9,7 +9,6 @@ use Spatie\Activitylog\Traits\LogsActivity;
  * App\Models\Contact.
  *
  * @mixin Eloquent
- *
  * @property int $id
  * @property string $name
  * @property string $email

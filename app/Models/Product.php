@@ -11,7 +11,6 @@ use Storage;
  * App\Models\Product.
  *
  * @mixin \Eloquent
- *
  * @property string $code
  * @property string $type
  * @property string $name
@@ -96,7 +95,8 @@ class Product extends Model
      */
     public function prices(): BelongsTo
     {
-        return $this->belongsTo(Price::class, 'code', 'product')->where('customer_code', auth()->user()->customer->code);
+        return $this->belongsTo(Price::class, 'code', 'product')
+            ->where('customer_code', auth()->user()->customer->code);
     }
 
     /**
@@ -129,7 +129,8 @@ class Product extends Model
     public static function list($categories)
     {
         return self::whereHas('prices')->whereHas('categories', static function ($query) use ($categories) {
-            $query->where('level_1', $categories['level_1'])->where('level_2', $categories['level_2'])->where('level_3', $categories['level_3']);
+            $query->where('level_1', $categories['level_1'])->where('level_2', $categories['level_2'])
+                ->where('level_3', $categories['level_3']);
         })->where('not_sold', false)->with('prices')->paginate(10);
     }
 
@@ -155,7 +156,9 @@ class Product extends Model
     public static function search($search_term)
     {
         return self::where(static function ($query) use ($search_term) {
-            $query->whereRaw('upper(products.code) LIKE \'%'.strtoupper($search_term).'%\'')->orWhereRaw('upper(name) LIKE \'%'.strtoupper($search_term).'%\'')->orWhereRaw('upper(description) LIKE \'%'.strtoupper($search_term).'%\'');
+            $query->whereRaw('upper(products.code) LIKE \'%'.strtoupper($search_term).'%\'')
+                ->orWhereRaw('upper(name) LIKE \'%'.strtoupper($search_term).'%\'')
+                ->orWhereRaw('upper(description) LIKE \'%'.strtoupper($search_term).'%\'');
         })->whereHas('prices')->with('prices')->paginate(10);
     }
 
@@ -168,7 +171,8 @@ class Product extends Model
      */
     public static function autocomplete($search)
     {
-        return self::select('code')->whereHas('prices')->whereRaw('UPPER(code) like \''.strtoupper($search).'%\'')->orderBy('code', 'asc')->limit(10)->get();
+        return self::select('code')->whereHas('prices')->whereRaw('UPPER(code) like \''.strtoupper($search).'%\'')
+            ->orderBy('code', 'asc')->limit(10)->get();
     }
 
     /**

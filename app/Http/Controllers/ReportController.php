@@ -33,7 +33,6 @@ class ReportController extends Controller
      * Generate a report based on the type & output.
      *
      * @return RedirectResponse|Response|BinaryFileResponse|void
-     *
      * @throws \PhpOffice\PhpSpreadsheet\Exception
      * @throws \PhpOffice\PhpSpreadsheet\Writer\Exception
      */
@@ -59,7 +58,6 @@ class ReportController extends Controller
      * @param $output
      *
      * @return RedirectResponse|Response|BinaryFileResponse
-     *
      * @throws \PhpOffice\PhpSpreadsheet\Exception
      * @throws \PhpOffice\PhpSpreadsheet\Writer\Exception
      */
@@ -84,7 +82,6 @@ class ReportController extends Controller
      * @param $output
      *
      * @return \Illuminate\Http\RedirectResponse|\Illuminate\Http\Response|\Symfony\Component\HttpFoundation\BinaryFileResponse|\Symfony\Component\HttpFoundation\StreamedResponse
-     *
      * @throws \PhpOffice\PhpSpreadsheet\Exception
      * @throws \PhpOffice\PhpSpreadsheet\Writer\Exception
      */

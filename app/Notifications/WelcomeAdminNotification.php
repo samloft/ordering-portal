@@ -50,8 +50,7 @@ class WelcomeAdminNotification extends Notification
      */
     public function toMail($notifiable)
     {
-        return (new MailMessage())
-            ->greeting('Hello, '.$this->admin->name)
+        return (new MailMessage())->greeting('Hello, '.$this->admin->name)
             ->line('You have had an CMS admin account created for you, now you will need to set a password for your account be clicking the button below.')
             ->action('Create password', route('cms.password.reset', $this->token))
             ->line('This link will only be active for 1 Hour, after you will need to perform a manual reset by clicking "Reset Password" on the login page!');

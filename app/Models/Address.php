@@ -12,7 +12,6 @@ use Spatie\Activitylog\Traits\LogsActivity;
  * App\Models\Address.
  *
  * @mixin Eloquent
- *
  * @property int $id
  * @property string $customer_code
  * @property int $user_id

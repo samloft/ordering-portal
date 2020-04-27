@@ -10,7 +10,6 @@ use Spatie\Activitylog\Traits\LogsActivity;
  * App\Models\DeliveryMethod.
  *
  * @mixin Eloquent
- *
  * @property int $id
  * @property string $code
  * @property string $title

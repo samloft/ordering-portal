@@ -10,7 +10,6 @@ class HasCustomer
 {
     /**
      * Handle an incoming request.
-     *
      * Checks that the current logged in user has a customer account allocated to it and that the customer exists.
      * If not, the user will be logged out and an error message displayed.
      *

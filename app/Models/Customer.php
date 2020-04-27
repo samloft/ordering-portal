@@ -12,7 +12,6 @@ use Illuminate\Support\Collection;
  * App\Models\Customer.
  *
  * @mixin Eloquent
- *
  * @property string $code
  * @property string $name
  * @property string $address_line_1
@@ -95,7 +94,8 @@ class Customer extends Model
      */
     public static function buyingGroups(): Collection
     {
-        return self::select('buying_group')->where('buying_group', '!=', '')->groupBy('buying_group')->pluck('buying_group');
+        return self::select('buying_group')->where('buying_group', '!=', '')->groupBy('buying_group')
+            ->pluck('buying_group');
     }
 
     /**
@@ -115,6 +115,7 @@ class Customer extends Model
      */
     public static function discountCodes(): Collection
     {
-        return self::select('discount_code')->where('discount_code', '!=', '')->groupBy('discount_code')->pluck('discount_code');
+        return self::select('discount_code')->where('discount_code', '!=', '')->groupBy('discount_code')
+            ->pluck('discount_code');
     }
 }

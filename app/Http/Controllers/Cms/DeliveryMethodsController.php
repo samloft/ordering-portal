@@ -45,7 +45,6 @@ class DeliveryMethodsController extends Controller
      * @param \App\Models\DeliveryMethod $deliveryMethod
      *
      * @return \Illuminate\Http\JsonResponse
-     *
      * @throws \Exception
      */
     public function destroy(DeliveryMethod $deliveryMethod): JsonResponse
@@ -76,6 +75,7 @@ class DeliveryMethodsController extends Controller
             'times' => $times,
         ];
 
-        return GlobalSettings::where('key', 'collection-messages')->update(['value' => json_encode($collection_messages, true)]);
+        return GlobalSettings::where('key', 'collection-messages')
+            ->update(['value' => json_encode($collection_messages, true)]);
     }
 }

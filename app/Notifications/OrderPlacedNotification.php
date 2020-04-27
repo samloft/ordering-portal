@@ -52,13 +52,13 @@ class OrderPlacedNotification extends Notification
      */
     public function toMail($notifiable): MailMessage
     {
-        $order = OrderHeader::where('customer_code', auth()->user()->customer->code)->where('order_number', decodeUrl($this->order['order_number']))->firstOrFail();
+        $order = OrderHeader::where('customer_code', auth()->user()->customer->code)
+            ->where('order_number', decodeUrl($this->order['order_number']))->firstOrFail();
         $company_details = json_decode(GlobalSettings::key('company-details'), true);
 
         $pdf = (new ConfirmationPDF($order, $this->collection_message))->download(false);
 
-        return (new MailMessage())
-            ->subject('Ordering portal - Order Confirmation')
+        return (new MailMessage())->subject('Ordering portal - Order Confirmation')
             ->greeting('Hello, '.$this->user->name)
             ->line('Thank you for your order. Your order number is '.$order->order_number.'.')
             ->line('Please find attached your order confirmation.')

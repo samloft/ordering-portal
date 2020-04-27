@@ -13,7 +13,6 @@ use Storage;
  * App\Models\HomeLink.
  *
  * @mixin \Eloquent
- *
  * @property int $id
  * @property string $type
  * @property string $name
@@ -37,7 +36,6 @@ class HomeLink extends Model
      * Create a new home link.
      *
      * @return \App\Models\HomeLink|bool
-     *
      * @throws \Illuminate\Contracts\Filesystem\FileNotFoundException
      */
     public static function store()
@@ -80,7 +78,6 @@ class HomeLink extends Model
      * @param $name
      *
      * @return array
-     *
      * @throws \Illuminate\Contracts\Filesystem\FileNotFoundException
      */
     public static function storeLinkImage($image, $type, $name): array
@@ -96,7 +93,6 @@ class HomeLink extends Model
      * @param $file
      *
      * @return array
-     *
      * @throws \Illuminate\Contracts\Filesystem\FileNotFoundException
      */
     public static function storeDownloadFile($file): array
@@ -115,7 +111,6 @@ class HomeLink extends Model
      * @param $id
      *
      * @return bool|int|null
-     *
      * @throws \Exception
      */
     public static function destroy($id)

@@ -10,7 +10,6 @@ use Spatie\Activitylog\Traits\LogsActivity;
  * App\Models\GlobalSettings.
  *
  * @mixin \Eloquent
- *
  * @property int $id
  * @property string $key
  * @property string $value

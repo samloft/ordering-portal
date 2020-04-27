@@ -32,15 +32,16 @@ class ProductPricesExcel extends ExcelStyling implements FromCollection, WithHea
     {
         $products = [];
 
-        $results = Product::with('prices')->with('categories')->whereHas('prices')->where('obsolete', false)->whereHas('categories', function ($query) {
-            if ($this->brand) {
-                $query->where('level_1', $this->brand);
-            }
+        $results = Product::with('prices')->with('categories')->whereHas('prices')->where('obsolete', false)
+            ->whereHas('categories', function ($query) {
+                if ($this->brand) {
+                    $query->where('level_1', $this->brand);
+                }
 
-            if ($this->range) {
-                $query->where('level_2', $this->range);
-            }
-        })->get();
+                if ($this->range) {
+                    $query->where('level_2', $this->range);
+                }
+            })->get();
 
         foreach ($results as $result) {
             $products[] = [
