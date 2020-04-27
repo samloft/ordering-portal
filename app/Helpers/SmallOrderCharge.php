@@ -14,14 +14,14 @@ function smallOrderCharge($order_value, $delivery = null)
 {
     $small_order_data = json_decode(GlobalSettings::smallOrderCharge(), true);
 
-    $charge = $small_order_data['charge'];
-
-    if (!$delivery && $order_value > $small_order_data['threshold']) {
-        $charge = 0.00;
-    } elseif ($delivery && $small_order_data['exclude_on_collection'] && str_contains(strtoupper($delivery->title), 'COLLECT')) {
-        $charge = 0.00;
-    } elseif ($delivery && $small_order_data['exclude_on_charge_delivery'] && $delivery->price > 0) {
-        $charge = 0.00;
+    switch (true) {
+        case ($delivery && $small_order_data['exclude_on_collection'] && str_contains(strtoupper($delivery->title), 'COLLECT')):
+        case ($delivery && $small_order_data['exclude_on_charge_delivery'] && $delivery->price > 0):
+        case (!$delivery && ($order_value > $small_order_data['threshold'])):
+            $charge = 0.00;
+            break;
+        default:
+            $charge = $small_order_data['charge'];
     }
 
     return [
