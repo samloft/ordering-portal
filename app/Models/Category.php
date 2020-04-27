@@ -142,18 +142,23 @@ class Category extends Model
         foreach ($subs->unique($cat_level) as $sub) {
             $category = trim($sub->$cat_level);
 
-            $sub_categories[$category] = [
-                'key' => $category,
-                'slug' => encodeUrl($category),
-                'override' => CategoryImage::show($category) ?: null,
-                'product_list' => $subs->where($cat_level, $category)->pluck('product')->take(4)->toArray(),
-            ];
+            if ($category) {
+                $sub_categories[$category] = [
+                    'key' => $category,
+                    'slug' => encodeUrl($category),
+                    'override' => CategoryImage::show($category) ?: null,
+                    'product_list' => encodeArrayValues($subs->where($cat_level, $category)->pluck('product')->take(4)
+                        ->toArray()),
+                ];
+            }
         }
 
         ksort($sub_categories);
 
         return $sub_categories;
     }
+
+
 
     /**
      * @param $level_1

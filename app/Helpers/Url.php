@@ -60,7 +60,7 @@ function encodeArrayValues($array)
 {
     $array_values = [];
 
-    foreach($array as $key => $value) {
+    foreach ($array as $key => $value) {
         $array_values[] = encodeUrl($value);
     }
 
