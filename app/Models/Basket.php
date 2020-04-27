@@ -61,6 +61,7 @@ class Basket extends Model
 
         $goods_total = 0;
         $potential_saving_total = 0;
+        $bulk_savings = 0;
         $product_lines = [];
         $promotion_lines = [];
         $promotions = auth()->user()->customer->hasPromotions();
@@ -90,6 +91,7 @@ class Basket extends Model
             }
 
             $goods_total += (discount($net_price) * $line->quantity);
+            $bulk_savings += ($line->price - $net_price) * $line->quantity;
 
             // Check for a matching product image.
             $image = Product::checkImage($line->product)['image'];
@@ -108,13 +110,13 @@ class Basket extends Model
                 'unit_price' => discount($net_price),
                 'next_bulk' => [
                     'qty_away' => $next_bulk_qty,
-                    'saving' => currency($next_bulk_qty + $line->quantity * $next_bulk_saving, 2),
+                    'saving' => currency(($next_bulk_qty + $line->quantity) * $next_bulk_saving, 2),
                 ],
                 'potential_saving' => $next_bulk_qty > 0,
             ];
 
             if ($next_bulk_qty > 0) {
-                $potential_saving_total += $next_bulk_qty + $line->quantity * $next_bulk_saving;
+                $potential_saving_total += ($next_bulk_qty + $line->quantity) * $next_bulk_saving;
             }
 
             foreach ($promotions as $promotion) {
@@ -195,6 +197,7 @@ class Basket extends Model
                 'small_order_rules' => $small_order_charge,
                 'vat' => currency(vatAmount(($goods_total - $order_discount) + $small_order_charge['charge'] + $shipping_value), 2),
                 'total' => currency(vatIncluded(($goods_total - $order_discount) + $small_order_charge['charge'] + $shipping_value), 2),
+                'bulk_rate_savings' => $bulk_savings > 0 ? currency($bulk_savings, 2) : false,
             ],
             'line_count' => count($product_lines),
             'lines' => $product_lines,
