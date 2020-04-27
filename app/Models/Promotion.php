@@ -138,7 +138,7 @@ class Promotion extends Model
             $potential_claims = floor($amount / $promotion->minimum_value);
             $amount = number_format($amount / $promotion->minimum_value, 0);
         } else {
-            $potential_claims = floor($amount.$promotion->product_qty);
+            $potential_claims = floor($amount / $promotion->product_qty);
         }
 
         if (! $promotion->max_claims) {
@@ -150,11 +150,7 @@ class Promotion extends Model
         if ($promotion->max_claims > $claimed) {
             $claims_left = ($promotion->max_claims - $claimed);
 
-            if ($claims_left < $potential_claims) {
-                $claim_count = $claims_left;
-            } else {
-                $claim_count = $potential_claims;
-            }
+            $claim_count = ($claims_left < $potential_claims) ? $claims_left : $potential_claims;
 
             return $promotion->claim_type === 'per_order' ? $promotion->promotion_qty : ($promotion->promotion_qty * number_format($claim_count, 0));
         }
