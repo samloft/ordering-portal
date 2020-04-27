@@ -157,9 +157,7 @@ class Category extends Model
 
         return $sub_categories;
     }
-
-
-
+    
     /**
      * @param $level_1
      * @param null $level_2
