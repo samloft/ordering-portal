@@ -110,8 +110,8 @@ class Address extends Model
     public static function removeDefaults()
     {
         return self::where('customer_code', auth()->user()->customer->code)->update([
-            'default' => 0,
-        ]);
+                'default' => 0,
+            ]);
     }
 
     /**
@@ -124,8 +124,8 @@ class Address extends Model
         static::removeDefaults();
 
         return self::where('id', $address_id)->update([
-            'default' => 1,
-        ]);
+                'default' => 1,
+            ]);
     }
 
     /**

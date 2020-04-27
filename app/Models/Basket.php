@@ -43,7 +43,8 @@ class Basket extends Model
      */
     public function prices(): BelongsTo
     {
-        return $this->belongsTo(Price::class, 'product', 'product')->where('prices.customer_code', auth()->user()->customer->code);
+        return $this->belongsTo(Price::class, 'product', 'product')
+            ->where('prices.customer_code', auth()->user()->customer->code);
     }
 
     /**
@@ -57,7 +58,11 @@ class Basket extends Model
     {
         $lines = static::selectRaw('basket.product as product, basket.customer_code as customer_code,
                                                     basket.quantity as quantity, price, break1, price1, break2, price2,
-                                                    break3, price3, name, uom, not_sold, stock, type')->where('basket.customer_code', auth()->user()->customer->code)->where('basket.user_id', auth()->user()->id)->join('prices', 'basket.product', '=', 'prices.product')->where('prices.customer_code', auth()->user()->customer->code)->join('products', 'basket.product', '=', 'products.code')->get();
+                                                    break3, price3, name, uom, not_sold, stock, type')
+            ->where('basket.customer_code', auth()->user()->customer->code)->where('basket.user_id', auth()->user()->id)
+            ->join('prices', 'basket.product', '=', 'prices.product')
+            ->where('prices.customer_code', auth()->user()->customer->code)
+            ->join('products', 'basket.product', '=', 'products.code')->get();
 
         $goods_total = 0;
         $potential_saving_total = 0;
@@ -235,7 +240,8 @@ class Basket extends Model
                     if ($update) {
                         self::where('product', $line['product'])->update(['quantity' => $line['quantity']]);
                     } else {
-                        self::where('product', $line['product'])->update(['quantity' => $basket_quantity + $line['quantity']]);
+                        self::where('product', $line['product'])
+                            ->update(['quantity' => $basket_quantity + $line['quantity']]);
                     }
                 } else {
                     self::insert($line);
@@ -255,7 +261,8 @@ class Basket extends Model
      */
     public static function exists($product_code)
     {
-        return self::where('customer_code', auth()->user()->customer->code)->where('user_id', auth()->user()->id)->where('product', $product_code)->first();
+        return self::where('customer_code', auth()->user()->customer->code)->where('user_id', auth()->user()->id)
+            ->where('product', $product_code)->first();
     }
 
     /**
@@ -266,7 +273,8 @@ class Basket extends Model
      */
     public static function clear()
     {
-        return self::where('customer_code', auth()->user()->customer->code)->where('user_id', auth()->user()->id)->delete();
+        return self::where('customer_code', auth()->user()->customer->code)->where('user_id', auth()->user()->id)
+            ->delete();
     }
 
     /**
@@ -278,7 +286,8 @@ class Basket extends Model
      */
     public static function destroyLine($product)
     {
-        return self::where('customer_code', auth()->user()->customer->code)->where('user_id', auth()->user()->id)->where('product', $product)->delete();
+        return self::where('customer_code', auth()->user()->customer->code)->where('user_id', auth()->user()->id)
+            ->where('product', $product)->delete();
     }
 
     /**
@@ -291,6 +300,7 @@ class Basket extends Model
      */
     public static function updateLine($product, $quantity): int
     {
-        return self::where('customer_code', auth()->user()->customer->code)->where('user_id', auth()->user()->id)->where('product', $product)->update(['quantity' => $quantity]);
+        return self::where('customer_code', auth()->user()->customer->code)->where('user_id', auth()->user()->id)
+            ->where('product', $product)->update(['quantity' => $quantity]);
     }
 }

@@ -165,7 +165,8 @@ class CheckoutController extends Controller
     {
         $order_number = $order_number ?? request('order_number');
 
-        $order = OrderHeader::where('customer_code', auth()->user()->customer->code)->where('order_number', decodeUrl($order_number))->firstOrFail();
+        $order = OrderHeader::where('customer_code', auth()->user()->customer->code)
+            ->where('order_number', decodeUrl($order_number))->firstOrFail();
 
         return (new ConfirmationPDF($order))->download(false);
     }

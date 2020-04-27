@@ -31,7 +31,8 @@ class OrderTrackingLine extends Model
      */
     public function price(): BelongsTo
     {
-        return $this->belongsTo(Price::class, 'product', 'product')->where('customer_code', auth()->user()->customer->code);
+        return $this->belongsTo(Price::class, 'product', 'product')
+            ->where('customer_code', auth()->user()->customer->code);
     }
 
     /**

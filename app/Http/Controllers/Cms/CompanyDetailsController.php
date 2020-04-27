@@ -30,23 +30,23 @@ class CompanyDetailsController extends Controller
     public function store(): RedirectResponse
     {
         $company_details = json_encode([
-            'line_1'    => request('line_1'),
-            'line_2'    => request('line_2'),
-            'line_3'    => request('line_3'),
-            'line_4'    => request('line_4'),
-            'line_5'    => request('line_5'),
-            'postcode'  => request('postcode'),
+            'line_1' => request('line_1'),
+            'line_2' => request('line_2'),
+            'line_3' => request('line_3'),
+            'line_4' => request('line_4'),
+            'line_5' => request('line_5'),
+            'postcode' => request('postcode'),
             'telephone' => request('telephone'),
-            'email'     => request('email'),
-            'social'    => [
-                'facebook'  => request('facebook'),
-                'twitter'   => request('twitter'),
-                'linkedin'  => request('linkedin'),
+            'email' => request('email'),
+            'social' => [
+                'facebook' => request('facebook'),
+                'twitter' => request('twitter'),
+                'linkedin' => request('linkedin'),
                 'instagram' => request('instagram'),
-                'youtube'   => request('youtube'),
+                'youtube' => request('youtube'),
             ],
             'apps' => [
-                'apple'   => request('apple'),
+                'apple' => request('apple'),
                 'android' => request('android'),
             ],
         ], true);

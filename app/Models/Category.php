@@ -49,7 +49,8 @@ class Category extends Model
      */
     public static function show($level): Collection
     {
-        return self::select('level_'.$level)->where('level_'.$level, '!=', null)->where('level_1', '!=', '')->groupBy('level_'.$level)->get();
+        return self::select('level_'.$level)->where('level_'.$level, '!=', null)->where('level_1', '!=', '')
+            ->groupBy('level_'.$level)->get();
     }
 
     /**
@@ -66,8 +67,8 @@ class Category extends Model
             'level_4',
             'level_5',
         ])->whereHas('prices', static function ($query) {
-            $query->where('customer_code', auth()->user()->customer->code);
-        })->doesntHave('notSoldProducts')->groupBy('level_1', 'level_2', 'level_3', 'level_4', 'level_5')->get();
+                $query->where('customer_code', auth()->user()->customer->code);
+            })->doesntHave('notSoldProducts')->groupBy('level_1', 'level_2', 'level_3', 'level_4', 'level_5')->get();
 
         $array = [];
 
@@ -132,10 +133,10 @@ class Category extends Model
         $sub_categories = [];
 
         $subs = static::where('level_1', $main)->where('level_'.$level, $category)->whereHas('prices', static function (
-            $query
-        ) {
-            $query->where('customer_code', auth()->user()->customer->code);
-        })->doesntHave('notSoldProducts')->orderBy('level_'.$level)->orderBy('product')->get();
+                $query
+            ) {
+                $query->where('customer_code', auth()->user()->customer->code);
+            })->doesntHave('notSoldProducts')->orderBy('level_'.$level)->orderBy('product')->get();
 
         $products = [];
 
@@ -189,7 +190,8 @@ class Category extends Model
         }
 
         if ($level_2) {
-            return self::select('level_3')->where('level_1', $level_1)->where('level_2', $level_2)->groupBy('level_3')->get();
+            return self::select('level_3')->where('level_1', $level_1)->where('level_2', $level_2)->groupBy('level_3')
+                ->get();
         }
 
         return false;
@@ -203,8 +205,8 @@ class Category extends Model
         return self::select([
             'level_1',
         ])->whereHas('prices', static function ($query) {
-            $query->where('customer_code', auth()->user()->customer->code);
-        })->groupBy('level_1')->get();
+                $query->where('customer_code', auth()->user()->customer->code);
+            })->groupBy('level_1')->get();
     }
 
     public static function range($brand)
@@ -212,7 +214,7 @@ class Category extends Model
         return self::select([
             'level_2',
         ])->where('level_1', $brand)->whereHas('prices', static function ($query) {
-            $query->where('customer_code', auth()->user()->customer->code);
-        })->groupBy('level_2')->get();
+                $query->where('customer_code', auth()->user()->customer->code);
+            })->groupBy('level_2')->get();
     }
 }

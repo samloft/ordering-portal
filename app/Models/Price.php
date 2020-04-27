@@ -25,6 +25,7 @@ class Price extends Model
     protected $primaryKey = 'product';
 
     public $incrementing = false;
+
     public $timestamps = false;
 
     /**

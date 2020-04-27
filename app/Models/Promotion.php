@@ -110,9 +110,9 @@ class Promotion extends Model
     public static function customer($customer): array
     {
         $promotions = self::where('start_date', '<=', Carbon::now()->format('Y-m-d'))->where(static function ($query) {
-            $query->where('end_date', '>=', Carbon::now()->format('Y-m-d'));
-            $query->orWhere('end_date', null);
-        })->get();
+                $query->where('end_date', '>=', Carbon::now()->format('Y-m-d'));
+                $query->orWhere('end_date', null);
+            })->get();
 
         if ($promotions) {
             $customer_promotions = [];

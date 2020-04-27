@@ -80,16 +80,17 @@ class OrderHeader extends Model
      */
     public static function promotion($product, $start_date, $end_date = null): int
     {
-        $claimed_promos = self::where('customer_code', auth()->user()->customer->code)->with('lines')->whereHas('lines', static function (
-            $query
-        ) use ($product) {
-            $query->where('stock_type', 'PROMO');
-            $query->where('product', $product);
-        })->where('created_at', '>=', $start_date)->where(static function ($query) use ($end_date) {
-            if ($end_date) {
-                $query->where('created_at', '<=', $end_date);
-            }
-        })->get();
+        $claimed_promos = self::where('customer_code', auth()->user()->customer->code)->with('lines')
+            ->whereHas('lines', static function (
+                $query
+            ) use ($product) {
+                $query->where('stock_type', 'PROMO');
+                $query->where('product', $product);
+            })->where('created_at', '>=', $start_date)->where(static function ($query) use ($end_date) {
+                if ($end_date) {
+                    $query->where('created_at', '<=', $end_date);
+                }
+            })->get();
 
         $claim_qty = 0;
 

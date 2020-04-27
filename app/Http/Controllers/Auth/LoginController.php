@@ -57,7 +57,7 @@ class LoginController extends Controller
      * not, log the user out displaying the message.
      *
      * @param Request $request
-     * @param User    $user
+     * @param User $user
      *
      * @return RedirectResponse
      */

@@ -16,6 +16,7 @@ use Illuminate\Database\Eloquent\Model;
 class ExpectedStock extends Model
 {
     protected $table = 'expected_stock';
+
     protected $dates = ['due_date'];
 
     public $timestamps = false;
@@ -29,10 +30,7 @@ class ExpectedStock extends Model
      */
     public static function show($product)
     {
-        return self::selectRaw('SUM(quantity) as quantity, due_date')
-            ->where('product', $product)
-            ->groupBy('due_date')
-            ->orderBy('due_date', 'asc')
-            ->get();
+        return self::selectRaw('SUM(quantity) as quantity, due_date')->where('product', $product)->groupBy('due_date')
+            ->orderBy('due_date', 'asc')->get();
     }
 }

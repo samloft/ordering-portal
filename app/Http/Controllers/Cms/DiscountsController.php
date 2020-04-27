@@ -53,8 +53,8 @@ class DiscountsController extends Controller
         ]);
 
         $updated = GlobalSettings::where('key', 'discount')->update([
-            'value' => request('global_discount'),
-        ]);
+                'value' => request('global_discount'),
+            ]);
 
         Cache::forget('discount');
 

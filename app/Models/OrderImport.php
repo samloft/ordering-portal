@@ -23,7 +23,8 @@ class OrderImport extends Model
      */
     public static function clearDown()
     {
-        return static::where('user_id', auth()->user()->id)->where('customer_code', auth()->user()->customer->code)->delete();
+        return static::where('user_id', auth()->user()->id)->where('customer_code', auth()->user()->customer->code)
+            ->delete();
     }
 
     /**
@@ -33,6 +34,7 @@ class OrderImport extends Model
      */
     public static function show(): array
     {
-        return static::where('user_id', auth()->user()->id)->where('customer_code', auth()->user()->customer->code)->get()->toArray();
+        return static::where('user_id', auth()->user()->id)->where('customer_code', auth()->user()->customer->code)
+            ->get()->toArray();
     }
 }

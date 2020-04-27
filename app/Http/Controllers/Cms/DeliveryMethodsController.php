@@ -76,6 +76,7 @@ class DeliveryMethodsController extends Controller
             'times' => $times,
         ];
 
-        return GlobalSettings::where('key', 'collection-messages')->update(['value' => json_encode($collection_messages, true)]);
+        return GlobalSettings::where('key', 'collection-messages')
+            ->update(['value' => json_encode($collection_messages, true)]);
     }
 }
