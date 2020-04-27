@@ -130,49 +130,27 @@ class Category extends Model
      */
     public static function subCategories($level, $main, $category): array
     {
-        $sub_categories = [];
-
         $subs = static::where('level_1', $main)->where('level_'.$level, $category)->whereHas('prices', static function (
             $query
         ) {
             $query->where('customer_code', auth()->user()->customer->code);
         })->doesntHave('notSoldProducts')->orderBy('level_'.$level)->orderBy('product')->get();
 
-        $products = [];
+        $sub_categories = [];
+        $cat_level = 'level_'.($level + 1);
 
-        foreach ($subs as $sub) {
-            $cat_level = 'level_'.($level + 1);
+        foreach ($subs->unique($cat_level) as $sub) {
+            $category = trim($sub->$cat_level);
 
-            if (isset($sub->$cat_level) && trim($sub->$cat_level) !== '') {
-                $products[] = [
-                    'product' => encodeUrl($sub->product),
-                    'category' => trim($sub->$cat_level),
-                    'product_list' => [],
-                ];
-
-                $sub_categories[trim($sub->$cat_level)] = [
-                    'key' => trim($sub->$cat_level),
-                    'slug' => encodeUrl($sub->$cat_level),
-                ];
-            }
+            $sub_categories[$category] = [
+                'key' => $category,
+                'slug' => encodeUrl($category),
+                'override' => CategoryImage::show($category) ?: null,
+                'product_list' => $subs->where($cat_level, $category)->pluck('product')->take(4)->toArray(),
+            ];
         }
 
         ksort($sub_categories);
-
-        foreach ($sub_categories as $key => $value) {
-            $count = 0;
-
-            $override = CategoryImage::show($value['key']);
-            $sub_categories[$key]['override'] = $override ?: null;
-
-            foreach ($products as $product) {
-                if (($product['category'] === $key) && $count <= 4) {
-                    // Grab the first 4 products and add them to the array (For category images).
-                    $sub_categories[$key]['product_list'][] = encodeUrl($product['product']);
-                    $count++;
-                }
-            }
-        }
 
         return $sub_categories;
     }
