@@ -113,19 +113,15 @@ class Promotion extends Model
             $query->orWhere('end_date', null);
         })->get();
 
-        if ($promotions) {
-            $customer_promotions = [];
+        $customer_promotions = [];
 
-            foreach ($promotions as $promotion) {
-                if (! $promotion->restrictions || in_array($customer->{$promotion->restrictions}, $promotion->{$promotion->restrictions.'s'}, true)) {
-                    $customer_promotions[] = $promotion;
-                }
+        foreach ($promotions as $promotion) {
+            if (! $promotion->restrictions || in_array($customer->{$promotion->restrictions}, $promotion->{$promotion->restrictions.'s'}, true)) {
+                $customer_promotions[] = $promotion;
             }
-
-            return $customer_promotions;
         }
 
-        return [];
+        return $customer_promotions;
     }
 
     /**
