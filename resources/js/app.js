@@ -33,12 +33,6 @@ window.Event = new Vue();
 
 window.App = new Vue({
     el: '#app',
-    mounted() {
-        const viewportMeta = document.createElement('meta');
-        viewportMeta.name = 'viewport';
-        viewportMeta.content = 'width=device-width, initial-scale=1';
-        document.head.appendChild(viewportMeta);
-    },
     methods: {
         addProductToBasket: function (product, quantity, update = false) {
             return axios.post('/basket/add-product', {
