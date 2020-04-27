@@ -40,7 +40,7 @@ class AdminResetPasswordController extends Controller
      * Show the reset password form.
      *
      * @param \Illuminate\Http\Request $request
-     * @param string|null              $token
+     * @param string|null $token
      *
      * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
      */

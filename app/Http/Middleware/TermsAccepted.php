@@ -9,12 +9,12 @@ class TermsAccepted
 {
     /**
      * Handle an incoming request.
-     *
      * Check to see if a user has accepted the site terms. If not redirect
      * them to a page where they can accept it.
      *
      * @param \Illuminate\Http\Request $request
      * @param \Closure $next
+     *
      * @return mixed
      */
     public function handle($request, Closure $next)

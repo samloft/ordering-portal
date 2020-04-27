@@ -11,7 +11,6 @@ use Spatie\Activitylog\Traits\LogsActivity;
  * App\Models\UserCustomer.
  *
  * @mixin \Eloquent
- *
  * @property int $id
  * @property int $user_id
  * @property string $customer_code
@@ -42,7 +41,6 @@ class UserCustomer extends Model
      * @param array|Collection|int $id
      *
      * @return int
-     *
      * @throws \Exception
      */
     public static function destroy($id): int

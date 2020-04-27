@@ -11,7 +11,6 @@ use Spatie\Activitylog\Traits\LogsActivity;
  * App\Models\Product.
  *
  * @mixin \Eloquent
- *
  * @property string $type
  * @property string $product
  * @property int $product_qty

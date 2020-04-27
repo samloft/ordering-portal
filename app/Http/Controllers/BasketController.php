@@ -43,7 +43,6 @@ class BasketController extends Controller
     /**
      * Add a product to the basket.
      *
-     *
      * @return JsonResponse
      */
     public function addProduct(): JsonResponse

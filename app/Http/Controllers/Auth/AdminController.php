@@ -40,22 +40,25 @@ class AdminController extends Controller
     /**
      * @param Request $request
      *
-     * @throws ValidationException
-     *
      * @return RedirectResponse
+     * @throws ValidationException
      */
     public function login(Request $request): RedirectResponse
     {
         $this->validate($request, [
-            'email'    => 'required|email',
+            'email' => 'required|email',
             'password' => 'required',
         ]);
 
-        if (Auth::guard('admin')->attempt(['email' => $request->email, 'password' => $request->password], $request->remember)) {
+        if (Auth::guard('admin')->attempt([
+            'email' => $request->email,
+            'password' => $request->password,
+        ], $request->remember)) {
             return redirect()->intended(route('cms.index'));
         }
 
-        return redirect()->back()->withInput($request->only('email', 'remember'))->with('error', 'You have provided invalid credentials, please try again.');
+        return redirect()->back()->withInput($request->only('email', 'remember'))
+            ->with('error', 'You have provided invalid credentials, please try again.');
     }
 
     /**

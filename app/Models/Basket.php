@@ -14,7 +14,6 @@ use Illuminate\Http\Response;
  * App\Models\Basket.
  *
  * @mixin Eloquent
- *
  * @property int $user_id
  * @property string $customer_code
  * @property string $product
@@ -43,7 +42,8 @@ class Basket extends Model
      */
     public function prices(): BelongsTo
     {
-        return $this->belongsTo(Price::class, 'product', 'product')->where('prices.customer_code', auth()->user()->customer->code);
+        return $this->belongsTo(Price::class, 'product', 'product')
+            ->where('prices.customer_code', auth()->user()->customer->code);
     }
 
     /**
@@ -57,10 +57,15 @@ class Basket extends Model
     {
         $lines = static::selectRaw('basket.product as product, basket.customer_code as customer_code,
                                                     basket.quantity as quantity, price, break1, price1, break2, price2,
-                                                    break3, price3, name, uom, not_sold, stock, type')->where('basket.customer_code', auth()->user()->customer->code)->where('basket.user_id', auth()->user()->id)->join('prices', 'basket.product', '=', 'prices.product')->where('prices.customer_code', auth()->user()->customer->code)->join('products', 'basket.product', '=', 'products.code')->get();
+                                                    break3, price3, name, uom, not_sold, stock, type')
+            ->where('basket.customer_code', auth()->user()->customer->code)->where('basket.user_id', auth()->user()->id)
+            ->join('prices', 'basket.product', '=', 'prices.product')
+            ->where('prices.customer_code', auth()->user()->customer->code)
+            ->join('products', 'basket.product', '=', 'products.code')->get();
 
         $goods_total = 0;
         $potential_saving_total = 0;
+        $bulk_savings = 0;
         $product_lines = [];
         $promotion_lines = [];
         $promotions = auth()->user()->customer->hasPromotions();
@@ -90,6 +95,7 @@ class Basket extends Model
             }
 
             $goods_total += (discount($net_price) * $line->quantity);
+            $bulk_savings += ($line->price - $net_price) * $line->quantity;
 
             // Check for a matching product image.
             $image = Product::checkImage($line->product)['image'];
@@ -108,13 +114,13 @@ class Basket extends Model
                 'unit_price' => discount($net_price),
                 'next_bulk' => [
                     'qty_away' => $next_bulk_qty,
-                    'saving' => currency($next_bulk_qty + $line->quantity * $next_bulk_saving, 2),
+                    'saving' => currency(($next_bulk_qty + $line->quantity) * $next_bulk_saving, 2),
                 ],
                 'potential_saving' => $next_bulk_qty > 0,
             ];
 
             if ($next_bulk_qty > 0) {
-                $potential_saving_total += $next_bulk_qty + $line->quantity * $next_bulk_saving;
+                $potential_saving_total += ($next_bulk_qty + $line->quantity) * $next_bulk_saving;
             }
 
             foreach ($promotions as $promotion) {
@@ -195,6 +201,7 @@ class Basket extends Model
                 'small_order_rules' => $small_order_charge,
                 'vat' => currency(vatAmount(($goods_total - $order_discount) + $small_order_charge['charge'] + $shipping_value), 2),
                 'total' => currency(vatIncluded(($goods_total - $order_discount) + $small_order_charge['charge'] + $shipping_value), 2),
+                'bulk_rate_savings' => $bulk_savings > 0 ? currency($bulk_savings, 2) : false,
             ],
             'line_count' => count($product_lines),
             'lines' => $product_lines,
@@ -232,7 +239,8 @@ class Basket extends Model
                     if ($update) {
                         self::where('product', $line['product'])->update(['quantity' => $line['quantity']]);
                     } else {
-                        self::where('product', $line['product'])->update(['quantity' => $basket_quantity + $line['quantity']]);
+                        self::where('product', $line['product'])
+                            ->update(['quantity' => $basket_quantity + $line['quantity']]);
                     }
                 } else {
                     self::insert($line);
@@ -252,7 +260,8 @@ class Basket extends Model
      */
     public static function exists($product_code)
     {
-        return self::where('customer_code', auth()->user()->customer->code)->where('user_id', auth()->user()->id)->where('product', $product_code)->first();
+        return self::where('customer_code', auth()->user()->customer->code)->where('user_id', auth()->user()->id)
+            ->where('product', $product_code)->first();
     }
 
     /**
@@ -263,7 +272,8 @@ class Basket extends Model
      */
     public static function clear()
     {
-        return self::where('customer_code', auth()->user()->customer->code)->where('user_id', auth()->user()->id)->delete();
+        return self::where('customer_code', auth()->user()->customer->code)->where('user_id', auth()->user()->id)
+            ->delete();
     }
 
     /**
@@ -275,7 +285,8 @@ class Basket extends Model
      */
     public static function destroyLine($product)
     {
-        return self::where('customer_code', auth()->user()->customer->code)->where('user_id', auth()->user()->id)->where('product', $product)->delete();
+        return self::where('customer_code', auth()->user()->customer->code)->where('user_id', auth()->user()->id)
+            ->where('product', $product)->delete();
     }
 
     /**
@@ -288,6 +299,7 @@ class Basket extends Model
      */
     public static function updateLine($product, $quantity): int
     {
-        return self::where('customer_code', auth()->user()->customer->code)->where('user_id', auth()->user()->id)->where('product', $product)->update(['quantity' => $quantity]);
+        return self::where('customer_code', auth()->user()->customer->code)->where('user_id', auth()->user()->id)
+            ->where('product', $product)->update(['quantity' => $quantity]);
     }
 }

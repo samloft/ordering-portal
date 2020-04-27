@@ -14,16 +14,21 @@ class ProductController extends Controller
      * Product index, if categories are given, gets the sub categories.
      * If no sub categories for that level, display the products.
      *
-     * @param string $category_one   [Optional]
-     * @param string $category_two   [Optional]
+     * @param string $category_one [Optional]
+     * @param string $category_two [Optional]
      * @param string $category_three [Optional]
-     * @param string $category_four  [Optional]
-     * @param string $category_five  [Optional]
+     * @param string $category_four [Optional]
+     * @param string $category_five [Optional]
      *
      * @return Factory|View
      */
-    public function index($category_one = null, $category_two = null, $category_three = null, $category_four = null, $category_five = null)
-    {
+    public function index(
+        $category_one = null,
+        $category_two = null,
+        $category_three = null,
+        $category_four = null,
+        $category_five = null
+    ) {
         $categories = [
             'level_1' => decodeUrl($category_one),
             'level_2' => decodeUrl($category_two),
@@ -77,7 +82,7 @@ class ProductController extends Controller
         if (isset($category_array[1]) && strpos($category_array[1], 'search') === 0) {
             $categories = [
                 'level_1' => 'search',
-                'query'   => substr(decodeUrl($category_array[1]), 13),
+                'query' => substr(decodeUrl($category_array[1]), 13),
             ];
         }
 
@@ -98,7 +103,7 @@ class ProductController extends Controller
 
         $categories = [
             'level_1' => 'search',
-            'query'   => $search_term,
+            'query' => $search_term,
         ];
 
         return view('products.products', compact('products', 'categories', 'sub_category_list'));

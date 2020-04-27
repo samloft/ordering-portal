@@ -14,8 +14,7 @@ class Handler extends ExceptionHandler
      *
      * @var array
      */
-    protected $dontReport = [
-        //
+    protected $dontReport = [//
     ];
 
     /**
@@ -33,9 +32,8 @@ class Handler extends ExceptionHandler
      *
      * @param Throwable $exception
      *
-     * @throws Throwable
-     *
      * @return void
+     * @throws Throwable
      */
     public function report(Throwable $exception)
     {

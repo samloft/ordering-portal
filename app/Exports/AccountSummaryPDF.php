@@ -32,6 +32,7 @@ class AccountSummaryPDF
         $summary_line = $this->summary_line;
         $company_details = json_decode(GlobalSettings::key('company-details'), true);
 
-        return PDF::loadView('pdf.account-summary', compact('lines', 'summary_line', 'company_details'))->download('account_summary.pdf');
+        return PDF::loadView('pdf.account-summary', compact('lines', 'summary_line', 'company_details'))
+            ->download('account_summary.pdf');
     }
 }

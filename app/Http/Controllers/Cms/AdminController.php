@@ -81,7 +81,7 @@ class AdminController extends Controller
     public function validation()
     {
         return request()->validate([
-            'name'  => 'required',
+            'name' => 'required',
             'email' => 'required|unique:cms_users,email',
         ]);
     }

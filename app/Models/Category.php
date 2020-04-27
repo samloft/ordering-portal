@@ -11,7 +11,6 @@ use Illuminate\Support\Collection;
  * App\Models\Category.
  *
  * @mixin Eloquent
- *
  * @property string $product
  * @property string $level_1
  * @property string $level_2
@@ -45,11 +44,13 @@ class Category extends Model
 
     /**
      * @param $level
+     *
      * @return \Illuminate\Support\Collection
      */
     public static function show($level): Collection
     {
-        return self::select('level_'.$level)->where('level_'.$level, '!=', null)->where('level_1', '!=', '')->groupBy('level_'.$level)->get();
+        return self::select('level_'.$level)->where('level_'.$level, '!=', null)->where('level_1', '!=', '')
+            ->groupBy('level_'.$level)->get();
     }
 
     /**
@@ -189,7 +190,8 @@ class Category extends Model
         }
 
         if ($level_2) {
-            return self::select('level_3')->where('level_1', $level_1)->where('level_2', $level_2)->groupBy('level_3')->get();
+            return self::select('level_3')->where('level_1', $level_1)->where('level_2', $level_2)->groupBy('level_3')
+                ->get();
         }
 
         return false;

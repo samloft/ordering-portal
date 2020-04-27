@@ -11,7 +11,6 @@ use Illuminate\Support\Collection;
  * App\Models\OrderTrackingLine.
  *
  * @mixin \Eloquent
- *
  * @property string $order_number
  * @property int $order_line_no
  * @property string $product
@@ -31,7 +30,8 @@ class OrderTrackingLine extends Model
      */
     public function price(): BelongsTo
     {
-        return $this->belongsTo(Price::class, 'product', 'product')->where('customer_code', auth()->user()->customer->code);
+        return $this->belongsTo(Price::class, 'product', 'product')
+            ->where('customer_code', auth()->user()->customer->code);
     }
 
     /**
