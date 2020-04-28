@@ -61,7 +61,7 @@
                                 <a href="{{ route('products', [encodeUrl($key), encodeUrl($level_2_key)]) }}"
                                    class="{{ $categories['level_2'] === $level_2_key ? 'active' : '' }}">
                                     {{ $level_2_key }}
-                                    @if (count(array_filter($category_list[$key][$level_2_key])) > 0)
+                                    @if (count(array_filter(array_keys($category_list[$key][$level_2_key]))) > 0)
                                         <span class="float-right pt-1">
                                             @if($categories['level_2'] === $level_2_key)
                                                 <svg width="20" height="20" viewBox="0 0 20 20" fill="none"
