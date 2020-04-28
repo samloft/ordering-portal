@@ -32,19 +32,18 @@ class CheckForMaintenanceMode extends Middleware
         if (! App::environment('testing')) {
             $maintenance = json_decode(GlobalSettings::key('maintenance'), true);
 
-            switch (true) {
-                case ($maintenance['enabled'] && ! $this->app->isDownForMaintenance()):
-                    Artisan::call('down --message="'.$maintenance['message'].'"');
-                    break;
-                case (! $maintenance['enabled'] && $this->app->isDownForMaintenance()) :
+            if ($this->app->isDownForMaintenance()) {
+                if (! $maintenance['enabled']) {
                     Artisan::call('up');
-                    break;
-                default:
-                    break;
+
+                    return $next($request);
+                }
+
+                return $this->enableMaintenance($request, $next);
             }
 
-            if ($this->app->isDownForMaintenance()) {
-                return $this->enableMaintenance($request, $next);
+            if ($maintenance['enabled']) {
+                Artisan::call('down --message="'.$maintenance['message'].'"');
             }
         }
 
