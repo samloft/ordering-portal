@@ -38,14 +38,92 @@ class UploadController extends Controller
             'csv_file' => 'required|mimes:csv,txt',
         ]);
 
-        $config = GlobalSettings::uploadConfig();
-
         $upload = [];
-        $errors = 0;
-        $warnings = 0;
-        $prices_passed = false;
         $tolerance = request('tolerance');
         $packs = request('packs');
+
+        $order = $this->readCSV($tolerance, $packs);
+
+        if (! isset($order)) {
+            return back()->with('error', 'No products found, please check your file is formatted correctly...');
+        }
+
+        $merged = $this->mergeProductLines($order['lines']);
+
+        $product_lines['lines'] = [];
+
+        foreach ($merged as $product) {
+            if ($product['quantity'] % $product['multiples'] !== 0) {
+                $quantity = (int) ceil((int) $product['quantity'] / $product['multiples']) * $product['multiples'];
+                $warning = 'Quantity not in multiples of '.$product['multiples'].'. Increased from '.$product['quantity'].' to '.$quantity;
+                $order['stats']['warnings']++;
+            } else {
+                $quantity = $product['quantity'];
+                $warning = null;
+            }
+
+            $product_lines['lines'][] = [
+                'product' => $product['product'],
+                'quantity' => $quantity,
+                'price' => $product['price'],
+                'price_match_error' => $product['price_match_error'],
+                'passed_price' => $product['passed_price'],
+                'old_quantity' => $product['old_quantity'],
+                'multiples' => $product['multiples'],
+                'validation' => [
+                    'error' => $product['validation']['error'],
+                    'warning' => $warning,
+                ],
+            ];
+
+            if (! $product['validation']['error']) {
+                $upload[] = [
+                    'user_id' => auth()->user()->id,
+                    'customer_code' => auth()->user()->customer->code,
+                    'product' => $product['product'],
+                    'quantity' => $quantity,
+                ];
+            }
+        }
+
+        if ($upload && ! OrderImport::insert($upload)) {
+            return back()->with('error', 'An unknown error occurred, please try uploading again.');
+        }
+
+        $product_lines['prices_passed'] = $order['stats']['price_passed'];
+        $product_lines['errors'] = $order['stats']['errors'];
+        $product_lines['warnings'] = $order['stats']['warnings'];
+
+        return view('upload.validated', compact('product_lines'));
+    }
+
+    /**
+     * When the user clicks "Add to basket" after validation has finished, copy the temp lines in the upload table to the users basket.
+     *
+     * @return FactoryAlias|RedirectResponseAlias|ViewAlias
+     */
+    public function store()
+    {
+        if (Basket::store(OrderImport::show())) {
+            return view('upload.completed');
+        }
+
+        return back()->with('error', 'An error occurred when adding your order to the basket, please try again');
+    }
+
+    /**
+     * @param $tolerance
+     * @param $packs
+     *
+     * @return array
+     */
+    public function readCSV($tolerance, $packs): array
+    {
+        $errors = 0;
+        $order = [];
+        $prices_passed = false;
+
+        $config = GlobalSettings::uploadConfig();
 
         foreach (array_map('str_getcsv', file(request()->file('csv_file'))) as $key => $value) {
             $product_code = $value[0];
@@ -85,7 +163,7 @@ class UploadController extends Controller
                     }
                 }
 
-                $order[] = [
+                $order['lines'][] = [
                     'product' => $product_code,
                     'quantity' => $product_qty,
                     'old_quantity' => $product_qty,
@@ -101,13 +179,27 @@ class UploadController extends Controller
             }
         }
 
-        if (! isset($order)) {
-            return back()->with('error', 'No products found, please check your file is formatted correctly...');
-        }
+        $order['stats'] = [
+            'errors' => $errors,
+            'warnings' => 0,
+            'price_passed' => $prices_passed,
+        ];
 
+        return $order;
+    }
+
+    /**
+     * Merge all duplicate product lines and increment the quantities.
+     *
+     * @param $lines
+     *
+     * @return array
+     */
+    public function mergeProductLines($lines): array
+    {
         $merged = [];
 
-        foreach ($order as $product) {
+        foreach ($lines as $product) {
             $key = $product['product'];
             if (! array_key_exists($key, $merged)) {
                 $merged[$key] = $product;
@@ -117,64 +209,6 @@ class UploadController extends Controller
             }
         }
 
-        $product_lines['lines'] = [];
-
-        foreach ($merged as $product) {
-            if ($product['quantity'] % $product['multiples'] !== 0) {
-                $quantity = (int) ceil((int) $product['quantity'] / $product['multiples']) * $product['multiples'];
-                $warning = 'Quantity not in multiples of '.$product['multiples'].'. Increased from '.$product['quantity'].' to '.$quantity;
-                $warnings++;
-            } else {
-                $quantity = $product['quantity'];
-                $warning = null;
-            }
-
-            $product_lines['lines'][] = [
-                'product' => $product['product'],
-                'quantity' => $quantity,
-                'price' => $product['price'],
-                'price_match_error' => $product['price_match_error'],
-                'passed_price' => $product['passed_price'],
-                'old_quantity' => $product['old_quantity'],
-                'multiples' => $product['multiples'],
-                'validation' => [
-                    'error' => $product['validation']['error'],
-                    'warning' => $warning,
-                ],
-            ];
-
-            if (! $product['validation']['error']) {
-                $upload[] = [
-                    'user_id' => auth()->user()->id,
-                    'customer_code' => auth()->user()->customer->code,
-                    'product' => $product['product'],
-                    'quantity' => $quantity,
-                ];
-            }
-        }
-
-        if (! OrderImport::insert($upload)) {
-            return back()->with('error', 'An unknown error occurred, please try uploading again.');
-        }
-
-        $product_lines['prices_passed'] = $prices_passed;
-        $product_lines['errors'] = $errors;
-        $product_lines['warnings'] = $warnings;
-
-        return view('upload.validated', compact('product_lines'));
-    }
-
-    /**
-     * When the user clicks "Add to basket" after validation has finished, copy the temp lines in the upload table to the users basket.
-     *
-     * @return FactoryAlias|RedirectResponseAlias|ViewAlias
-     */
-    public function store()
-    {
-        if (Basket::store(OrderImport::show())) {
-            return view('upload.completed');
-        }
-
-        return back()->with('error', 'An error occurred when adding your order to the basket, please try again');
+        return $merged;
     }
 }

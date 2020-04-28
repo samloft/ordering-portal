@@ -29,12 +29,12 @@
 
     <ul class="categories-nav">
         @foreach($category_list as $key => $category)
-            <li class="top-level category-{{ str_slug(strtolower($category_list[$key]['name'])) }}">
-                <a href="{{ route('products', $category_list[$key]['url']) }}">
-                    {{ $category_list[$key]['name'] }}
-                    @if (count($category_list[$key]['sub']) > 0)
+            <li class="top-level category-{{ str_slug(strtolower($key)) }}">
+                <a href="{{ route('products', encodeUrl($key)) }}">
+                    {{ $key }}
+                    @if (count(array_filter($category_list[$key])) > 0)
                         <span class="float-right pt-1">
-                            @if($categories['level_1'] === $category_list[$key]['name'])
+                            @if($categories['level_1'] === $category_list[$key])
                                 <svg width="20" height="20" viewBox="0 0 20 20" fill="none"
                                      xmlns="http://www.w3.org/2000/svg">
                                                 <path fill-rule="evenodd" clip-rule="evenodd"
@@ -53,43 +53,49 @@
                     @endif
                 </a>
             </li>
-            @if ($categories['level_1'] === $category_list[$key]['name'] && count($category_list[$key]['sub']) > 0)
+            @if ($categories['level_1'] === $key && count($category_list[$key]) > 0)
                 <ul class="sub-categories">
-                    @foreach ($category_list[$key]['sub'] as $level_2)
-                        <li class="py-1 pl-2">
-                            <a href="{{ route('products', [$category_list[$key]['url'], $level_2['url']]) }}"
-                               class="{{ $categories['level_2'] === $level_2['name'] ? 'active' : '' }}">
-                                {{ $level_2['name'] }}
-                                @if (count($level_2['sub']) > 0)
-                                    <span class="float-right pt-1">
-                                        @if($categories['level_2'] === $level_2['name'])
-                                            <svg width="20" height="20" viewBox="0 0 20 20" fill="none"
-                                                 xmlns="http://www.w3.org/2000/svg">
-                                                <path fill-rule="evenodd" clip-rule="evenodd"
-                                                      d="M5.29289 7.29289C5.68342 6.90237 6.31658 6.90237 6.70711 7.29289L10 10.5858L13.2929 7.29289C13.6834 6.90237 14.3166 6.90237 14.7071 7.29289C15.0976 7.68342 15.0976 8.31658 14.7071 8.70711L10.7071 12.7071C10.3166 13.0976 9.68342 13.0976 9.29289 12.7071L5.29289 8.70711C4.90237 8.31658 4.90237 7.68342 5.29289 7.29289Z"
-                                                      fill="#4A5568"/>
-                                            </svg>
-                                        @else
-                                            <svg width="20" height="20" viewBox="0 0 20 20" fill="none"
-                                                 xmlns="http://www.w3.org/2000/svg">
-                                                <path fill-rule="evenodd" clip-rule="evenodd"
-                                                      d="M7.29289 14.7071C6.90237 14.3166 6.90237 13.6834 7.29289 13.2929L10.5858 10L7.29289 6.70711C6.90237 6.31658 6.90237 5.68342 7.29289 5.29289C7.68342 4.90237 8.31658 4.90237 8.70711 5.29289L12.7071 9.29289C13.0976 9.68342 13.0976 10.3166 12.7071 10.7071L8.70711 14.7071C8.31658 15.0976 7.68342 15.0976 7.29289 14.7071Z"
-                                                      fill="#4A5568"/>
-                                            </svg>
-                                        @endif
-                                    </span>
-                                @endif
-                            </a>
-                        </li>
-                        @if ($categories['level_2'] === $level_2['name'] && count($level_2['sub']) > 0)
+                    @foreach ($category_list[$key] as $level_2_key => $level_2)
+                        @if($level_2_key !== '')
+                            <li class="py-1 pl-2">
+                                <a href="{{ route('products', [encodeUrl($key), encodeUrl($level_2_key)]) }}"
+                                   class="{{ $categories['level_2'] === $level_2_key ? 'active' : '' }}">
+                                    {{ $level_2_key }}
+                                    @if (count(array_filter($category_list[$key][$level_2_key])) > 0)
+                                        <span class="float-right pt-1">
+                                            @if($categories['level_2'] === $level_2_key)
+                                                <svg width="20" height="20" viewBox="0 0 20 20" fill="none"
+                                                     xmlns="http://www.w3.org/2000/svg">
+                                                                                    <path fill-rule="evenodd"
+                                                                                          clip-rule="evenodd"
+                                                                                          d="M5.29289 7.29289C5.68342 6.90237 6.31658 6.90237 6.70711 7.29289L10 10.5858L13.2929 7.29289C13.6834 6.90237 14.3166 6.90237 14.7071 7.29289C15.0976 7.68342 15.0976 8.31658 14.7071 8.70711L10.7071 12.7071C10.3166 13.0976 9.68342 13.0976 9.29289 12.7071L5.29289 8.70711C4.90237 8.31658 4.90237 7.68342 5.29289 7.29289Z"
+                                                                                          fill="#4A5568"/>
+                                                                                </svg>
+                                            @else
+                                                <svg width="20" height="20" viewBox="0 0 20 20" fill="none"
+                                                     xmlns="http://www.w3.org/2000/svg">
+                                                                                    <path fill-rule="evenodd"
+                                                                                          clip-rule="evenodd"
+                                                                                          d="M7.29289 14.7071C6.90237 14.3166 6.90237 13.6834 7.29289 13.2929L10.5858 10L7.29289 6.70711C6.90237 6.31658 6.90237 5.68342 7.29289 5.29289C7.68342 4.90237 8.31658 4.90237 8.70711 5.29289L12.7071 9.29289C13.0976 9.68342 13.0976 10.3166 12.7071 10.7071L8.70711 14.7071C8.31658 15.0976 7.68342 15.0976 7.29289 14.7071Z"
+                                                                                          fill="#4A5568"/>
+                                                                                </svg>
+                                            @endif
+                                        </span>
+                                    @endif
+                                </a>
+                            </li>
+                        @endif
+                        @if ($categories['level_2'] === $level_2_key && count($category_list[$key][$level_2_key]) > 0)
                             <ul class="pl-4">
-                                @foreach ($level_2['sub'] as $level_3)
-                                    <li class="py-1">
-                                        <a href="{{ route('products', [$category_list[$key]['url'], $level_2['url'], $level_3['url']]) }}"
-                                           class="{{ $categories['level_3'] === $level_3['name'] ? 'active' : '' }}">
-                                            {{ $level_3['name'] }}
-                                        </a>
-                                    </li>
+                                @foreach ($category_list[$key][$level_2_key] as $level_3_key => $level_3_value)
+                                    @if($level_3_key !== '')
+                                        <li class="py-1">
+                                            <a href="{{ route('products', [$key, $level_2_key, $level_3_key]) }}"
+                                               class="{{ $categories['level_3'] === $level_3_key ? 'active' : '' }}">
+                                                {{ $level_3_key }}
+                                            </a>
+                                        </li>
+                                    @endif
                                 @endforeach
                             </ul>
                         @endif

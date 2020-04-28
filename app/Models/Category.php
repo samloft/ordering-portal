@@ -60,59 +60,21 @@ class Category extends Model
      */
     public static function list(): array
     {
-        $category_results = self::select([
+        $category_results = static::select([
             'level_1',
             'level_2',
             'level_3',
-            'level_4',
-            'level_5',
         ])->whereHas('prices', static function ($query) {
             $query->where('customer_code', auth()->user()->customer->code);
-        })->doesntHave('notSoldProducts')->groupBy('level_1', 'level_2', 'level_3', 'level_4', 'level_5')->get();
-
-        $array = [];
-
-        foreach ($category_results as $category) {
-            if (trim($category->level_1) !== '') {
-                $array[strtoupper(trim($category->level_1))][trim($category->level_2)][trim($category->level_3)][trim($category->level_4)][trim($category->level_5)] = [];
-            }
-        }
+        })->doesntHave('notSoldProducts')->groupBy('level_1', 'level_2', 'level_3')->get();
 
         $categories = [];
 
-        foreach ($array as $key => $value) {
-            $categories[] = [
-                'level' => 1,
-                'name' => $key,
-                'url' => encodeUrl($key),
-                'sub' => [],
-            ];
-
-            end($categories);
-            $level_1 = key($categories);
-
-            foreach ($array[$key] as $key1 => $value1) {
-                if ($key1 !== '') {
-                    $categories[$level_1]['sub'][] = [
-                        'level' => 2,
-                        'name' => $key1,
-                        'url' => encodeUrl($key1),
-                        'sub' => [],
-                    ];
-                }
-
-                end($categories[$level_1]['sub']);
-                $level_2 = key($categories[$level_1]['sub']);
-
-                foreach ($array[$key][$key1] as $key2 => $value2) {
-                    if ($key2 !== '') {
-                        $categories[$level_1]['sub'][$level_2]['sub'][] = [
-                            'level' => 3,
-                            'name' => $key2,
-                            'url' => encodeUrl($key2),
-                        ];
-                    }
-                }
+        foreach ($category_results as $category) {
+            if (trim($category->level_1) !== '') {
+                $categories[strtoupper(trim($category->level_1))]
+                [trim($category->level_2)]
+                [trim($category->level_3)] = [];
             }
         }
 
@@ -130,49 +92,30 @@ class Category extends Model
      */
     public static function subCategories($level, $main, $category): array
     {
-        $sub_categories = [];
-
         $subs = static::where('level_1', $main)->where('level_'.$level, $category)->whereHas('prices', static function (
             $query
         ) {
             $query->where('customer_code', auth()->user()->customer->code);
         })->doesntHave('notSoldProducts')->orderBy('level_'.$level)->orderBy('product')->get();
 
-        $products = [];
+        $sub_categories = [];
+        $cat_level = 'level_'.($level + 1);
 
-        foreach ($subs as $sub) {
-            $cat_level = 'level_'.($level + 1);
+        foreach ($subs->unique($cat_level) as $sub) {
+            $category = trim($sub->$cat_level);
 
-            if (isset($sub->$cat_level) && trim($sub->$cat_level) !== '') {
-                $products[] = [
-                    'product' => encodeUrl($sub->product),
-                    'category' => trim($sub->$cat_level),
-                    'product_list' => [],
-                ];
-
-                $sub_categories[trim($sub->$cat_level)] = [
-                    'key' => trim($sub->$cat_level),
-                    'slug' => encodeUrl($sub->$cat_level),
+            if ($category) {
+                $sub_categories[$category] = [
+                    'key' => $category,
+                    'slug' => encodeUrl($category),
+                    'override' => CategoryImage::show($category) ?: null,
+                    'product_list' => encodeArrayValues($subs->where($cat_level, $category)->pluck('product')->take(4)
+                        ->toArray()),
                 ];
             }
         }
 
         ksort($sub_categories);
-
-        foreach ($sub_categories as $key => $value) {
-            $count = 0;
-
-            $override = CategoryImage::show($value['key']);
-            $sub_categories[$key]['override'] = $override ?: null;
-
-            foreach ($products as $product) {
-                if (($product['category'] === $key) && $count <= 4) {
-                    // Grab the first 4 products and add them to the array (For category images).
-                    $sub_categories[$key]['product_list'][] = encodeUrl($product['product']);
-                    $count++;
-                }
-            }
-        }
 
         return $sub_categories;
     }

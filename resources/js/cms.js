@@ -51,12 +51,6 @@ window.App = new Vue({
             } while(Math.abs(bytes) >= thresh && u < units.length - 1);
             return bytes.toFixed(1)+' '+units[u];
         }
-    },
-    mounted() {
-        const viewportMeta = document.createElement('meta');
-        viewportMeta.name = 'viewport';
-        viewportMeta.content = 'width=device-width, initial-scale=1';
-        document.head.appendChild(viewportMeta);
     }
 });
 

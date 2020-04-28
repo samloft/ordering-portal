@@ -91,48 +91,44 @@ class ReportController extends Controller
 
         $invoice_lines = AccountSummary::show();
 
-        if (count($invoice_lines) > 0) {
-            $summary = AccountSummary::summary();
-            $summary_lines = [];
-            $total_outstanding = 0;
-
-            foreach ($summary as $key => $value) {
-                $summary_lines[Str::slug(strtolower($value->age))] = $value->price;
-
-                $total_outstanding += $value->price;
-            }
-
-            $summary_lines['total-outstanding'] = $total_outstanding;
-
-            $summary_line[] = [
-                'total-outstanding' => isset($summary_lines['total-outstanding']) ? number_format($summary_lines['total-outstanding'], 2) : '0.00',
-                'not-due' => isset($summary_lines['not-due']) ? number_format($summary_lines['not-due'], 2) : '0.00',
-                'overdue-up-to-30-day' => isset($summary_lines['overdue-up-to-30-day']) ? number_format($summary_lines['overdue-up-to-30-day'], 2) : '0.00',
-                'overdue-up-to-60-days' => isset($summary_lines['overdue-up-to-60-days']) ? number_format($summary_lines['overdue-up-to-60-days'], 2) : '0.00',
-                'over-60-days-overdue' => isset($summary_lines['over-60-days-overdue']) ? number_format($summary_lines['over-60-days-overdue'], 2) : '0.00',
-            ];
-
-            $lines = [];
-
-            foreach ($invoice_lines as $invoice_line) {
-                $lines[] = [
-                    'item_no' => $invoice_line->item_no,
-                    'reference' => $invoice_line->reference,
-                    'dated' => Carbon::parse($invoice_line->dated)->format('d-m-Y'),
-                    'due_date' => Carbon::parse($invoice_line->due_date)->format('d-m-Y'),
-                    'amount' => $invoice_line->unall_curr_amount,
-                ];
-            }
-
-            if ($output === 'pdf') {
-                return (new AccountSummaryPDF($lines, $summary_line))->download();
-            }
-
-            if ($output === 'csv') {
-                return Excel::download(new AccountSummaryExcel($summary_line, $lines), 'account-summary.csv', \Maatwebsite\Excel\Excel::CSV);
-            }
+        if (! $invoice_lines) {
+            return back()->with('error', 'You dont currently have an order summary to display.');
         }
 
-        return back()->with('error', 'You dont currently have an order summary to display.');
+        $summary = AccountSummary::summary();
+        $summary_lines = [];
+        $total_outstanding = 0;
+
+        foreach ($summary as $key => $value) {
+            $summary_lines[Str::slug(strtolower($value->age))] = $value->price;
+
+            $total_outstanding += $value->price;
+        }
+
+        $summary_line[] = [
+            'total-outstanding' => number_format($total_outstanding, 2),
+            'not-due' => isset($summary_lines['not-due']) ? number_format($summary_lines['not-due'], 2) : '0.00',
+            'overdue-up-to-30-day' => isset($summary_lines['overdue-up-to-30-day']) ? number_format($summary_lines['overdue-up-to-30-day'], 2) : '0.00',
+            'overdue-up-to-60-days' => isset($summary_lines['overdue-up-to-60-days']) ? number_format($summary_lines['overdue-up-to-60-days'], 2) : '0.00',
+            'over-60-days-overdue' => isset($summary_lines['over-60-days-overdue']) ? number_format($summary_lines['over-60-days-overdue'], 2) : '0.00',
+        ];
+
+        $lines = [];
+
+        foreach ($invoice_lines as $invoice_line) {
+            $lines[] = [
+                'item_no' => $invoice_line->item_no,
+                'reference' => $invoice_line->reference,
+                'dated' => Carbon::parse($invoice_line->dated)->format('d-m-Y'),
+                'due_date' => Carbon::parse($invoice_line->due_date)->format('d-m-Y'),
+                'amount' => $invoice_line->unall_curr_amount,
+            ];
+        }
+
+        if ($output === 'pdf') {
+            return (new AccountSummaryPDF($lines, $summary_line))->download();
+        }
+
+        return Excel::download(new AccountSummaryExcel($summary_line, $lines), 'account-summary.csv', \Maatwebsite\Excel\Excel::CSV);
     }
 }
