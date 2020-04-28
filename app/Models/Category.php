@@ -63,7 +63,7 @@ class Category extends Model
         $category_results = static::select([
             'level_1',
             'level_2',
-            'level_3'
+            'level_3',
         ])->whereHas('prices', static function ($query) {
             $query->where('customer_code', auth()->user()->customer->code);
         })->doesntHave('notSoldProducts')->groupBy('level_1', 'level_2', 'level_3')->get();
