@@ -16,18 +16,14 @@ class BrowserMiddleware
      */
     public function handle($request, Closure $next)
     {
-        if (env('APP_ENV') === 'testing') {
+        if (! isset($_SERVER['HTTP_BROWSER_AGENT']) || env('APP_ENV') === 'testing') {
             return $next($request);
         }
 
-        if (! isset($_SERVER['HTTP_BROWSER_AGENT'])) {
-            return $next($request);
-        }
+        $route = request()->route()->getName();
 
-        if (request()->route()->getName() !== 'not-supported') {
-            if (preg_match('~MSIE|Internet Explorer~i', $_SERVER['HTTP_USER_AGENT']) && (strpos($_SERVER['HTTP_USER_AGENT'], 'Trident/7.0; rv:11.0') !== true)) {
-                return redirect(route('not-supported'));
-            }
+        if (($route !== 'not-supported') && preg_match('~MSIE|Internet Explorer~i', $_SERVER['HTTP_USER_AGENT']) && (strpos($_SERVER['HTTP_USER_AGENT'], 'Trident/7.0; rv:11.0') !== true)) {
+            return redirect(route('not-supported'));
         }
 
         return $next($request);

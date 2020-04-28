@@ -14,30 +14,20 @@ class ProductController extends Controller
      * Product index, if categories are given, gets the sub categories.
      * If no sub categories for that level, display the products.
      *
-     * @param string $category_one [Optional]
-     * @param string $category_two [Optional]
-     * @param string $category_three [Optional]
-     * @param string $category_four [Optional]
-     * @param string $category_five [Optional]
-     *
      * @return Factory|View
      */
-    public function index(
-        $category_one = null,
-        $category_two = null,
-        $category_three = null,
-        $category_four = null,
-        $category_five = null
-    ) {
+    public function index()
+    {
         $categories = [
-            'level_1' => decodeUrl($category_one),
-            'level_2' => decodeUrl($category_two),
-            'level_3' => decodeUrl($category_three),
-            'level_4' => decodeUrl($category_four),
-            'level_5' => decodeUrl($category_five),
+            'level_1' => decodeUrl(request('cat1')),
+            'level_2' => decodeUrl(request('cat2')),
+            'level_3' => decodeUrl(request('cat3')),
+            'level_4' => null,
+            'level_5' => null,
         ];
 
         $current_level = 0;
+
         foreach ($categories as $level) {
             if ($level) {
                 $current_level++;

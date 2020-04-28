@@ -48,3 +48,21 @@ function decodeUrl($url_string)
 
     return urldecode(str_replace(array_values($characters), array_keys($characters), trim($url_string)));
 }
+
+/**
+ * Do the same as encodeUrl, but accept an array.
+ *
+ * @param $array
+ *
+ * @return array
+ */
+function encodeArrayValues($array)
+{
+    $array_values = [];
+
+    foreach ($array as $key => $value) {
+        $array_values[] = encodeUrl($value);
+    }
+
+    return $array_values;
+}
