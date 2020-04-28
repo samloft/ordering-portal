@@ -27,6 +27,7 @@ class ProductController extends Controller
         ];
 
         $current_level = 0;
+
         foreach ($categories as $level) {
             if ($level) {
                 $current_level++;

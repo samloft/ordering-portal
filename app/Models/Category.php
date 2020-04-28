@@ -60,59 +60,21 @@ class Category extends Model
      */
     public static function list(): array
     {
-        $category_results = self::select([
+        $category_results = static::select([
             'level_1',
             'level_2',
-            'level_3',
-            'level_4',
-            'level_5',
+            'level_3'
         ])->whereHas('prices', static function ($query) {
             $query->where('customer_code', auth()->user()->customer->code);
-        })->doesntHave('notSoldProducts')->groupBy('level_1', 'level_2', 'level_3', 'level_4', 'level_5')->get();
-
-        $array = [];
-
-        foreach ($category_results as $category) {
-            if (trim($category->level_1) !== '') {
-                $array[strtoupper(trim($category->level_1))][trim($category->level_2)][trim($category->level_3)][trim($category->level_4)][trim($category->level_5)] = [];
-            }
-        }
+        })->doesntHave('notSoldProducts')->groupBy('level_1', 'level_2', 'level_3')->get();
 
         $categories = [];
 
-        foreach ($array as $key => $value) {
-            $categories[] = [
-                'level' => 1,
-                'name' => $key,
-                'url' => encodeUrl($key),
-                'sub' => [],
-            ];
-
-            end($categories);
-            $level_1 = key($categories);
-
-            foreach ($array[$key] as $key1 => $value1) {
-                if ($key1 !== '') {
-                    $categories[$level_1]['sub'][] = [
-                        'level' => 2,
-                        'name' => $key1,
-                        'url' => encodeUrl($key1),
-                        'sub' => [],
-                    ];
-                }
-
-                end($categories[$level_1]['sub']);
-                $level_2 = key($categories[$level_1]['sub']);
-
-                foreach ($array[$key][$key1] as $key2 => $value2) {
-                    if ($key2 !== '') {
-                        $categories[$level_1]['sub'][$level_2]['sub'][] = [
-                            'level' => 3,
-                            'name' => $key2,
-                            'url' => encodeUrl($key2),
-                        ];
-                    }
-                }
+        foreach ($category_results as $category) {
+            if (trim($category->level_1) !== '') {
+                $categories[strtoupper(trim($category->level_1))]
+                [trim($category->level_2)]
+                [trim($category->level_3)] = [];
             }
         }
 
@@ -157,7 +119,7 @@ class Category extends Model
 
         return $sub_categories;
     }
-    
+
     /**
      * @param $level_1
      * @param null $level_2
