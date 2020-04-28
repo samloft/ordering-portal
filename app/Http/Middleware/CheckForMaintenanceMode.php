@@ -38,6 +38,8 @@ class CheckForMaintenanceMode extends Middleware
         if ($this->app->isDownForMaintenance()) {
             if (! $maintenance['enabled']) {
                 Artisan::call('up');
+
+                return $next($request);
             }
 
             return $this->enableMaintenance($request, $next);

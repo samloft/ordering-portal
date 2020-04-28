@@ -86,7 +86,7 @@ class UploadController extends Controller
             }
         }
 
-        if (! OrderImport::insert($upload)) {
+        if ($upload && ! OrderImport::insert($upload)) {
             return back()->with('error', 'An unknown error occurred, please try uploading again.');
         }
 
