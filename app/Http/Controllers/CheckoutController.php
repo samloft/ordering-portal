@@ -77,6 +77,7 @@ class CheckoutController extends Controller
             'address_line_3' => $delivery_address['address_line_3'],
             'address_line_4' => $delivery_address['address_line_4'],
             'address_line_5' => $delivery_address['post_code'],
+            'goods_total' => removeCurrencySymbol($basket['summary']['goods_total']) - removeCurrencySymbol($basket['summary']['order_discount']),
             'delivery_method' => $basket['summary']['shipping']['identifier'],
             'delivery_code' => $basket['summary']['shipping']['code'],
             'delivery_cost' => removeCurrencySymbol($basket['summary']['shipping']['cost']),
@@ -152,7 +153,7 @@ class CheckoutController extends Controller
             session()->forget('address');
         }
 
-        return view('checkout.completed', compact('order_number'));
+        return view('checkout.completed', compact('order_number', 'header', 'lines'));
     }
 
     /**

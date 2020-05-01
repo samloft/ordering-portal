@@ -10,6 +10,23 @@
     <link href="{{ mix('css/app.css') }}" rel="stylesheet">
     <link href="{{ mix('css/app-'.config('app.name').'.css') }}" rel="stylesheet">
 
+    @if($google_analytics && config('app.debug') === false)
+        <script async src="https://www.googletagmanager.com/gtag/js?id=UA-165254784-1"></script>
+
+        <script>
+            window.dataLayer = window.dataLayer || [];
+
+            function gtag() {
+                dataLayer.push(arguments);
+            }
+
+            gtag('js', new Date());
+
+            gtag('config', '{{ $google_analytics }}');
+            gtag('set', {'user_id': '{{ auth()->user()->customer->code }}'});
+        </script>
+    @endif
+
     @yield ('styles')
 
     <script src="{{ asset('js/turbo-links.js') }}"></script>
@@ -28,7 +45,8 @@
             <div class="alert alert-info" role="alert">
                 <div class="alert-body">
                     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" class="alert-icon">
-                        <path d="M16 8.38l4.55-2.27A1 1 0 0 1 22 7v10a1 1 0 0 1-1.45.9L16 15.61V17a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V7c0-1.1.9-2 2-2h10a2 2 0 0 1 2 2v1.38zm0 2.24v2.76l4 2V8.62l-4 2zM14 17V7H4v10h10z"/>
+                        <path
+                            d="M16 8.38l4.55-2.27A1 1 0 0 1 22 7v10a1 1 0 0 1-1.45.9L16 15.61V17a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V7c0-1.1.9-2 2-2h10a2 2 0 0 1 2 2v1.38zm0 2.24v2.76l4 2V8.62l-4 2zM14 17V7H4v10h10z"/>
                     </svg>
                     <div>
                         <p class="alert-title">Site Announcement</p>
@@ -50,8 +68,12 @@
                     <div>
                         <p class="alert-title">Notice!</p>
                         <p class="alert-text">
-                            You are currently assuming the customer code: <span class="font-semibold"> {{ session('temp_customer') }}</span>.
-               Your actual Customer Code is <span class="font-semibold">{{ auth()->user()->customer_code }}</span>. Please <a href="{{ route('customer.change.revert') }}" class="underline">click here</a> to revert back to your default Customer Code.
+                            You are currently assuming the customer code: <span
+                                class="font-semibold"> {{ session('temp_customer') }}</span>.
+                            Your actual Customer Code is <span
+                                class="font-semibold">{{ auth()->user()->customer_code }}</span>. Please <a
+                                href="{{ route('customer.change.revert') }}" class="underline">click here</a> to revert
+                            back to your default Customer Code.
                         </p>
                     </div>
                 </div>

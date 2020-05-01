@@ -11,7 +11,8 @@
     </div>
 
     <div class="bg-white rounded-lg shadow p-4 text-center">
-        <h3 class="text-primary text-2xl font-semibold mb-10">Your order number is <span class="font-bold underline">{{ $order_number }}</span></h3>
+        <h3 class="text-primary text-2xl font-semibold mb-10">Your order number is <span
+                class="font-bold underline">{{ $order_number }}</span></h3>
 
         <p class="mb-10">Your order confirmation has been emailed to your account email address.</p>
 
@@ -23,4 +24,27 @@
             <button class="button button-secondary w-40">Print Order Confirmation</button>
         </a>
     </div>
+@endsection
+
+@section('scripts')
+    @if($google_analytics && config('app.debug') === false)
+        <script>
+            window.dataLayer = window.dataLayer || [];
+            dataLayer.push({
+                'transactionId': '{{ $order_number }}',
+                'transactionAffiliation': '{{ $header['customer_code'] }}',
+                'transactionTotal': {{ $header['goods_total'] }},
+                'transactionTax': {{ $header['vat'] }},
+                'transactionShipping': {{ $header['delivery_cost'] }},
+                @foreach($lines as $line)
+                'transactionProducts': [{
+                    'sku': '{{ $line['product'] }}',
+                    'name': '{{ $line['description'] }}',
+                    'price': {{ $line['net_price'] }},
+                    'quantity': {{ $line['quantity'] }}
+                },
+                @endforeach
+            });
+        </script>
+    @endif
 @endsection
