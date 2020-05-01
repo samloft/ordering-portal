@@ -10,7 +10,7 @@
     <link href="{{ mix('css/app.css') }}" rel="stylesheet">
     <link href="{{ mix('css/app-'.config('app.name').'.css') }}" rel="stylesheet">
 
-    @if(config('app.debug') === false)
+    @if($google_analytics && config('app.debug') === false)
         <script async src="https://www.googletagmanager.com/gtag/js?id=UA-165254784-1"></script>
 
         <script>

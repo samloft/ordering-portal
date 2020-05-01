@@ -27,22 +27,24 @@
 @endsection
 
 @section('scripts')
-    <script>
-        window.dataLayer = window.dataLayer || [];
-        dataLayer.push({
-            'transactionId': '{{ $order_number }}',
-            'transactionAffiliation': '{{ $header['customer_code'] }}',
-            'transactionTotal': {{ $header['goods_total'] }},
-            'transactionTax': {{ $header['vat'] }},
-            'transactionShipping': {{ $header['delivery_cost'] }},
-            @foreach($lines as $line)
+    @if($google_analytics && config('app.debug') === false)
+        <script>
+            window.dataLayer = window.dataLayer || [];
+            dataLayer.push({
+                'transactionId': '{{ $order_number }}',
+                'transactionAffiliation': '{{ $header['customer_code'] }}',
+                'transactionTotal': {{ $header['goods_total'] }},
+                'transactionTax': {{ $header['vat'] }},
+                'transactionShipping': {{ $header['delivery_cost'] }},
+                @foreach($lines as $line)
                 'transactionProducts': [{
                     'sku': '{{ $line['product'] }}',
                     'name': '{{ $line['description'] }}',
                     'price': {{ $line['net_price'] }},
                     'quantity': {{ $line['quantity'] }}
                 },
-            @endforeach
-        });
-    </script>
+                @endforeach
+            });
+        </script>
+    @endif
 @endsection
