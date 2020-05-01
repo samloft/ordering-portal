@@ -104,8 +104,10 @@ class UploadController extends Controller
      */
     public function store()
     {
-        if (Basket::store(OrderImport::show())) {
-            return view('upload.completed');
+        $upload = OrderImport::show();
+
+        if (Basket::store($upload)) {
+            return view('upload.completed', compact('upload'));
         }
 
         return back()->with('error', 'An error occurred when adding your order to the basket, please try again');
