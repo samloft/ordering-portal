@@ -20,12 +20,9 @@ class AppServiceProvider extends ServiceProvider
     {
         Schema::defaultStringLength(191);
 
-        view()->composer('*', static function ($view) {
-            $view->with('google_analytics', GlobalSettings::googleAnalyticsUrl());
-        });
-
         view()->composer('layout.master', static function ($view) {
-            $view->with('announcement', GlobalSettings::siteAnnouncement());
+            $view->with('announcement', GlobalSettings::siteAnnouncement())
+                ->with('google_analytics', GlobalSettings::googleAnalyticsUrl() ?? false);
         });
 
         view()->composer('layout.navigation', static function ($view) {
