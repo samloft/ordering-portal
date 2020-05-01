@@ -142,6 +142,8 @@ class CheckoutController extends Controller
             OrderLine::insert($lines);
             OrderLine::insert($promotions);
 
+            unset($header['goods_total']);
+
             OrderHeader::insert($header);
 
             Basket::clear();
