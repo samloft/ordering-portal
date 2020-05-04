@@ -60,7 +60,7 @@
                                 @if ($line['validation']['error'])
                                     <span class="badge badge-danger"><i class="fas fa-times-circle"></i> {{ $line['validation']['error'] }}</span>
                                 @elseif ($line['validation']['warning'])
-                                    <span class="badge bade-warning"><i class="fas fa-exclamation-triangle"></i> {{ $line['validation']['warning'] }}</span>
+                                    <span class="badge badge-warning"><i class="fas fa-exclamation-triangle"></i> {{ $line['validation']['warning'] }}</span>
                                 @else
                                     <span class="badge badge-success"><i class="text-success fas fa-check-circle"></i> Valid</span>
                                 @endif
