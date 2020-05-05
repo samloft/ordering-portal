@@ -43,6 +43,7 @@ class OrderTrackingTest extends TestCase
         ]);
 
         $order = (new OrderTrackingFactory())->create([
+            'order_number' => 'DONTSEEME',
             'customer_code' => auth()->user()->customer->code.'TEST',
         ])->first();
 

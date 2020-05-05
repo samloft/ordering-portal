@@ -3,7 +3,6 @@
 namespace Tests\Feature\Http\Controllers;
 
 use App\Models\OrderHeader;
-use App\Models\User;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Tests\Setup\BasketFactory;
 use Tests\Setup\UserFactory;
@@ -60,6 +59,7 @@ class CheckoutControllerTest extends TestCase
     public function store_returns_an_ok_response(): void
     {
         $user = (new UserFactory())->withCustomer()->create();
+
         $this->signIn($user);
 
         $response = $this->post(route('checkout.order'));
