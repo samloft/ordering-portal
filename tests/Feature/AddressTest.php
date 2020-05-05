@@ -44,7 +44,10 @@ class AddressTest extends TestCase
 
         $this->signIn($user);
 
-        $address = factory(Address::class, 1)->create()->first();
+        $address = factory(Address::class, 1)->create([
+            'user_id' => auth()->id(),
+            'customer_code' => $user->customer->code,
+        ])->first();
 
         $address->company_name = 'Updated name';
 
@@ -81,6 +84,7 @@ class AddressTest extends TestCase
         $this->signIn($user);
 
         $address = factory(Address::class, 1)->create([
+            'customer_code' => $user->customer->code,
             'default' => false,
         ])->first();
 

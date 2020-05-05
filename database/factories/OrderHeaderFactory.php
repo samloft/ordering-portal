@@ -8,7 +8,7 @@ $factory->define(App\Models\OrderHeader::class, static function (Faker $faker) {
     return [
         'order_number' => $faker->word,
         'customer_code' => $faker->word,
-        'user_id' => factory(App\Models\User::class),
+        'user_id' => $faker->randomNumber(),
         'reference' => $faker->word,
         'notes' => $faker->word,
         'name' => $faker->name,

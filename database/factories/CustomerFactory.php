@@ -6,7 +6,7 @@ use Faker\Generator as Faker;
 
 $factory->define(App\Models\Customer::class, static function (Faker $faker) {
     return [
-        'code' => factory(App\Models\CustomerDiscount::class),
+        'code' => 'SCO100',
         'name' => $faker->name,
         'address_line_1' => $faker->word,
         'address_line_2' => $faker->word,

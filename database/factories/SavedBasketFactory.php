@@ -12,5 +12,6 @@ $factory->define(App\Models\SavedBasket::class, static function (Faker $faker) {
         'reference' => $faker->word,
         'product' => $faker->word,
         'quantity' => $faker->randomNumber(),
+        'created_at' => $faker->dateTime(),
     ];
 });
