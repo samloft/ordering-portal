@@ -126,7 +126,7 @@ Route::group(['middleware' => 'auth:admin'], static function () {
         Route::get('/', 'Cms\PromotionController@index')->name('cms.promotions');
         Route::post('/', 'Cms\PromotionController@store')->name('cms.promotions.store');
         Route::patch('{id}', 'Cms\PromotionController@edit')->name('cms.promotions.update');
-        Route::delete('{id}', 'Cms\PromotionController@destroy')->name('cms.promotions.update');
+        Route::delete('{id}', 'Cms\PromotionController@destroy')->name('cms.promotions.destroy');
     });
 
     Route::group(['prefix' => 'order-upload'], static function () {
