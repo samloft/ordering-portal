@@ -192,7 +192,7 @@ Route::group(['middleware' => ['auth', 'has.customer', 'terms']], static functio
     });
 });
 
-Auth::routes();
+Auth::routes(['register' => false]);
 
 Route::get('not-supported', static function () {
     return view('errors.not-supported');
