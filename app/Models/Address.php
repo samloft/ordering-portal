@@ -94,7 +94,7 @@ class Address extends Model
     {
         $address['updated_at'] = date('Y-m-d H:i:s');
 
-        $updated = self::where('id', $id)->update($address);
+        $updated = self::where('id', $id)->where('customer_code', auth()->user()->customer->code)->update($address);
 
         if ($updated && $address['default']) {
             static::setDefault($id);

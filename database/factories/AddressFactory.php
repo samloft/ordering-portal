@@ -17,5 +17,7 @@ $factory->define(Address::class, static function (Faker $faker) {
         'country' => $faker->country,
         'post_code' => $faker->postcode,
         'default' => 0,
+        'created_at' => date('Y-m-d H:i:s'),
+        'updated_at' => date('Y-m-d H:i:s'),
     ];
 });

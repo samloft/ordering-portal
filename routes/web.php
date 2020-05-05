@@ -130,7 +130,7 @@ Route::group(['middleware' => ['auth', 'has.customer', 'terms']], static functio
         Route::group(['prefix' => 'addresses'], static function () {
             Route::get('/', 'AddressController@index')->name('account.addresses');
             Route::get('create', 'AddressController@create')->name('account.address.create');
-            Route::patch('/', 'AddressController@store')->name('account.address.store');
+            Route::post('/', 'AddressController@store')->name('account.address.store');
             Route::get('{id}/edit', 'AddressController@edit')->name('account.address.edit');
             Route::patch('{id}/edit', 'AddressController@update')->name('account.address.update');
             Route::post('default', 'AddressController@default')->name('account.address.default');
