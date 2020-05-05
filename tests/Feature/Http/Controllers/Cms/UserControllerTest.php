@@ -54,8 +54,8 @@ class UserControllerTest extends TestCase
         $site_user = factory(User::class)->create();
 
         $response = $this->actingAs($user, 'admin')->post(route('cms.site-users.password-reset'), [
-                'email' => $site_user->email,
-            ]);
+            'email' => $site_user->email,
+        ]);
 
         $response->assertOk();
     }
@@ -87,8 +87,8 @@ class UserControllerTest extends TestCase
         $site_user = factory(User::class)->create();
 
         $response = $this->actingAs($user, 'admin')->patch(route('cms.site-users.update', ['id' => $site_user->id]), [
-                'name' => 'Updated Name',
-            ]);
+            'name' => 'Updated Name',
+        ]);
 
         $response->assertRedirect();
     }
