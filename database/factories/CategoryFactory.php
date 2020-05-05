@@ -1,23 +1,16 @@
 <?php
 
-/** @var \Illuminate\Database\Eloquent\Factory $factory */
+/* @var $factory \Illuminate\Database\Eloquent\Factory */
 
-use App\Models\Category;
 use Faker\Generator as Faker;
 
-$factory->define(Category::class, static function (Faker $faker) {
-    $categories = [
-        'Category 1',
-        'Category 2',
-        'Category 3',
-        'Category 4',
-        'Category 5',
-    ];
-
+$factory->define(App\Models\Category::class, static function (Faker $faker) {
     return [
-        'product' => $faker->randomNumber(8),
-        'level_1' => $faker->randomElement($array = $categories),
-        'level_2' => $faker->randomElement($array = $categories),
-        'level_3' => $faker->randomElement($array = $categories),
+        'product' => $faker->word,
+        'level_1' => $faker->word,
+        'level_2' => $faker->word,
+        'level_3' => $faker->word,
+        'level_4' => $faker->word,
+        'level_5' => $faker->word,
     ];
 });

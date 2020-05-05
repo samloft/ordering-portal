@@ -52,7 +52,7 @@ class ProductDataExcel extends ExcelStyling implements FromCollection, WithHeadi
      */
     public function headings(): array
     {
-        return array_keys($this->collection()->first());
+        return array_keys($this->collection()->first() ?? []);
     }
 
     /**

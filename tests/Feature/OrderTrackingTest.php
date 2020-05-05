@@ -43,10 +43,11 @@ class OrderTrackingTest extends TestCase
         ]);
 
         $order = (new OrderTrackingFactory())->create([
-            'customer_code' => 'ABC123',
-        ]);
+            'order_number' => 'DONTSEEME',
+            'customer_code' => auth()->user()->customer->code.'TEST',
+        ])->first();
 
-        $this->get(route('order-tracking'))->assertDontSee($order->first()->order_number);
+        $this->get(route('order-tracking.show', ['order' => $order->order_number]))->assertStatus(404);
     }
 
     /**
@@ -62,7 +63,8 @@ class OrderTrackingTest extends TestCase
             'customer_code' => $user->customer->code,
         ])->first();
 
-        $this->get(route('order-tracking', ['keyword' => $order->order_number]))->assertSee($order->order_number)->assertSee($order->reference)->assertSee($order->status);
+        $this->get(route('order-tracking', ['keyword' => $order->order_number]))->assertSee($order->order_number)
+            ->assertSee($order->reference)->assertSee($order->status);
     }
 
     /**
@@ -78,7 +80,8 @@ class OrderTrackingTest extends TestCase
             'customer_code' => $user->customer->code,
         ])->first();
 
-        $this->get(route('order-tracking.show', ['order' => $order->order_number]))->assertSee($order->order_number)->assertSee($order->lines->first()->product);
+        $this->get(route('order-tracking.show', ['order' => $order->order_number]))->assertSee($order->order_number)
+            ->assertSee($order->lines->first()->product);
     }
 
     /**

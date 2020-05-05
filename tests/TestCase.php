@@ -2,13 +2,14 @@
 
 namespace Tests;
 
+use JMac\Testing\Traits\AdditionalAssertions;
 use App\Models\Admin;
 use App\Models\User;
 use Illuminate\Foundation\Testing\TestCase as BaseTestCase;
 
 abstract class TestCase extends BaseTestCase
 {
-    use CreatesApplication;
+    use CreatesApplication, AdditionalAssertions;
 
     /**
      * Create a user & sign them in.

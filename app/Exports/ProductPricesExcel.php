@@ -70,6 +70,6 @@ class ProductPricesExcel extends ExcelStyling implements FromCollection, WithHea
      */
     public function headings(): array
     {
-        return array_keys($this->collection()->first());
+        return array_keys($this->collection()->first() ?? []);
     }
 }
