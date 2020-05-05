@@ -38,8 +38,8 @@ class PromotionControllerTest extends TestCase
         $promotion = factory(Promotion::class)->create();
 
         $response = $this->actingAs($user, 'admin')->patch(route('cms.promotions.update', ['id' => $promotion->id]), [
-                'promotion_product' => 'CMA036',
-            ]);
+            'promotion_product' => 'CMA036',
+        ]);
 
         $response->assertRedirect();
     }

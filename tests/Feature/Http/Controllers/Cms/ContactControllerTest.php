@@ -68,8 +68,8 @@ class ContactControllerTest extends TestCase
         $contact = factory(Contact::class)->create();
 
         $response = $this->actingAs($user, 'admin')->patch(route('cms.contacts.update', [$contact]), [
-                'name' => 'Updated Contact',
-            ]);
+            'name' => 'Updated Contact',
+        ]);
 
         $response->assertRedirect();
     }

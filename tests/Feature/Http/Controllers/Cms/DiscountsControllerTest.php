@@ -66,9 +66,9 @@ class DiscountsControllerTest extends TestCase
         $user = factory(Admin::class)->create();
 
         $response = $this->actingAs($user, 'admin')->post(route('cms.discounts.customer-store'), [
-                'customer' => 'ABC123',
-                'discount' => 2,
-            ]);
+            'customer' => 'ABC123',
+            'discount' => 2,
+        ]);
 
         $response->assertRedirect();
     }

@@ -73,9 +73,9 @@ class DeliveryMethodsControllerTest extends TestCase
         $response = $this->actingAs($user, 'admin')->post(route('cms.collection-messages.store'), [
             'times' => [
                 ['start' => '00:00:00',
-                'end' => '00:00:00',
-                'message' => 'Collect now',
-                'identifier' => 'Collect now',]
+                    'end' => '00:00:00',
+                    'message' => 'Collect now',
+                    'identifier' => 'Collect now', ],
             ],
         ]);
 

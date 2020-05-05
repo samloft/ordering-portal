@@ -2,7 +2,6 @@
 
 namespace Tests\Feature\Http\Controllers\Auth;
 
-use App\Models\Admin;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Tests\TestCase;
 

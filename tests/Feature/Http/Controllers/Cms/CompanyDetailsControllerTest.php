@@ -35,8 +35,8 @@ class CompanyDetailsControllerTest extends TestCase
         $user = factory(Admin::class)->create();
 
         $response = $this->actingAs($user, 'admin')->post(route('cms.company-information.store'), [
-                'company_name' => 'Example Company',
-            ]);
+            'company_name' => 'Example Company',
+        ]);
 
         $response->assertRedirect();
     }
