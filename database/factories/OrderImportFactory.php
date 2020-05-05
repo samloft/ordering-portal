@@ -4,10 +4,11 @@
 
 use Faker\Generator as Faker;
 
-$factory->define(App\Models\ExpectedStock::class, static function (Faker $faker) {
+$factory->define(App\Models\OrderImport::class, static function (Faker $faker) {
     return [
+        'user_id' => $faker->randomNumber(),
+        'customer_code' => $faker->word,
         'product' => $faker->word,
         'quantity' => $faker->randomNumber(),
-        'due_date' => $faker->dateTime(),
     ];
 });

@@ -7,8 +7,8 @@ use Faker\Generator as Faker;
 
 $factory->define(Basket::class, static function (Faker $faker) {
     return [
-        'user_id' => 1,
-        'customer_code' => 'SCO100',
+        'user_id' => $faker->randomNumber(),
+        'customer_code' => $faker->word,
         'product' => $faker->randomNumber(8),
         'quantity' => $faker->randomNumber(2),
     ];
