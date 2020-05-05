@@ -2,9 +2,9 @@
 
 namespace Tests\Feature;
 
+use App\Models\Address;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Tests\Setup\UserFactory;
-use App\Models\Address;
 use Tests\TestCase;
 
 class AddressTest extends TestCase
@@ -51,7 +51,7 @@ class AddressTest extends TestCase
         $this->patch(route('account.address.update', $address->toArray()));
 
         $this->assertDatabaseHas('addresses', [
-            'company_name' => 'Updated name'
+            'company_name' => 'Updated name',
         ]);
     }
 
