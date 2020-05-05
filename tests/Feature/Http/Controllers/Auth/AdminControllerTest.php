@@ -3,7 +3,6 @@
 namespace Tests\Feature\Http\Controllers\Auth;
 
 use App\Models\Admin;
-use App\Models\User;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Tests\TestCase;
 

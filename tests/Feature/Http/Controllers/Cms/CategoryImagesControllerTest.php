@@ -2,8 +2,8 @@
 
 namespace Tests\Feature\Http\Controllers\Cms;
 
-use App\Models\CategoryImage;
 use App\Models\Admin;
+use App\Models\CategoryImage;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Tests\TestCase;
 

@@ -2,7 +2,6 @@
 
 namespace Tests\Feature;
 
-use App\Models\Address;
 use App\Models\DeliveryMethod;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Tests\Setup\BasketFactory;

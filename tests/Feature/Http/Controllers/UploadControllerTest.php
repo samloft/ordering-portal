@@ -2,9 +2,7 @@
 
 namespace Tests\Feature\Http\Controllers;
 
-use App\Models\User;
 use Illuminate\Foundation\Testing\RefreshDatabase;
-use Tests\Setup\ProductFactory;
 use Tests\Setup\UserFactory;
 use Tests\TestCase;
 
