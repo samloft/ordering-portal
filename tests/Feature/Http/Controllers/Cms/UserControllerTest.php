@@ -6,6 +6,7 @@ use App\Models\Admin;
 use App\Models\Customer;
 use App\Models\User;
 use Illuminate\Foundation\Testing\RefreshDatabase;
+use Illuminate\Support\Facades\Mail;
 use Tests\TestCase;
 
 /**
@@ -51,6 +52,8 @@ class UserControllerTest extends TestCase
     {
         $user = factory(Admin::class)->create();
 
+        Mail::fake();
+
         $site_user = factory(User::class)->create();
 
         $response = $this->actingAs($user, 'admin')->post(route('cms.site-users.password-reset'), [
@@ -67,6 +70,8 @@ class UserControllerTest extends TestCase
     {
         $user = factory(Admin::class)->create();
         $customer = factory(Customer::class)->create();
+
+        Mail::fake();
 
         $response = $this->actingAs($user, 'admin')->post(route('cms.site-users.store'), [
             'name' => 'Test User',

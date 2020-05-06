@@ -69,8 +69,8 @@ class AdminControllerTest extends TestCase
         $admin = factory(Admin::class)->create();
 
         $response = $this->actingAs($user, 'admin')->patch(route('cms.admin-users.update', ['id' => $admin->id]), [
-                'name' => 'New name',
-            ]);
+            'name' => 'New name',
+        ]);
 
         $response->assertOk();
     }
