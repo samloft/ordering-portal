@@ -153,7 +153,6 @@ Route::group(['middleware' => ['auth', 'has.customer', 'terms']], static functio
 
         Route::post('add-product', 'BasketController@addProduct')->name('basket.add-product');
         Route::post('delete-product', 'BasketController@removeProduct')->name('basket.delete-line');
-        Route::post('update-product', 'BasketController@updateProductQuantity')->name('basket.update-line');
 
         Route::get('summary/{shipping_code?}', static function ($shipping_code = null) {
             return Basket::show($shipping_code);
