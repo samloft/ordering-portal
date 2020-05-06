@@ -4,6 +4,7 @@ namespace Tests\Feature\Http\Controllers\Cms;
 
 use App\Models\Admin;
 use Illuminate\Foundation\Testing\RefreshDatabase;
+use Illuminate\Support\Facades\Mail;
 use Tests\TestCase;
 
 /**
@@ -48,6 +49,8 @@ class AdminControllerTest extends TestCase
     {
         $user = factory(Admin::class)->create();
 
+        Mail::fake();
+
         $response = $this->actingAs($user, 'admin')->post(route('cms.admin-users.store'), [
             'name' => 'Example user',
             'email' => 'example@example.com',
@@ -65,8 +68,7 @@ class AdminControllerTest extends TestCase
 
         $admin = factory(Admin::class)->create();
 
-        $response = $this->actingAs($user, 'admin')
-            ->patch(route('cms.admin-users.update', ['id' => $admin->id]), [
+        $response = $this->actingAs($user, 'admin')->patch(route('cms.admin-users.update', ['id' => $admin->id]), [
                 'name' => 'New name',
             ]);
 
