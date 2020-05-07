@@ -1,4 +1,4 @@
-<div class="w-1/4 mr-5">
+<div class="hidden md:block w-1/4 mr-5">
     @foreach($adverts as $advert)
         <div class="mb-5">
             <a href="{{ $advert->link }}" target="_blank">
