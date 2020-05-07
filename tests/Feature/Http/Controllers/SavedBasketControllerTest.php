@@ -27,7 +27,7 @@ class SavedBasketControllerTest extends TestCase
             'customer_code' => $user->customer_code,
         ]);
 
-        $response = $this->actingAs($user)->get(route('saved-baskets.copy', ['id' => $saved_basket->id]));
+        $response = $this->actingAs($user)->get(route('saved-baskets.copy', ['reference' => $saved_basket->reference]));
 
         $response->assertRedirect(route('basket'));
     }
@@ -44,7 +44,7 @@ class SavedBasketControllerTest extends TestCase
             'customer_code' => $user->customer_code,
         ]);
 
-        $response = $this->actingAs($user)->get(route('saved-baskets.destroy', ['id' => $saved_basket->id]));
+        $response = $this->actingAs($user)->get(route('saved-baskets.destroy', ['reference' => $saved_basket->reference]));
 
         $response->assertRedirect(route('saved-baskets'));
     }
@@ -76,7 +76,7 @@ class SavedBasketControllerTest extends TestCase
             'customer_code' => $user->customer_code,
         ]);
 
-        $response = $this->actingAs($user)->get(route('saved-baskets.show', ['id' => $saved_basket->id]));
+        $response = $this->actingAs($user)->get(route('saved-baskets.show', ['reference' => $saved_basket->reference]));
 
         $response->assertOk();
         $response->assertViewIs('saved-baskets.show');

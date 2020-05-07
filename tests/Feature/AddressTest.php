@@ -44,18 +44,16 @@ class AddressTest extends TestCase
 
         $this->signIn($user);
 
-        $address = factory(Address::class, 1)->create([
+        $address = factory(Address::class)->create([
             'user_id' => auth()->id(),
-            'customer_code' => $user->customer->code,
-        ])->first();
+            'customer_code' => auth()->user()->customer->code,
+        ]);
 
         $address->company_name = 'Updated name';
 
         $this->patch(route('account.address.update', $address->toArray()));
 
-        $this->assertDatabaseHas('addresses', [
-            'company_name' => 'Updated name',
-        ]);
+        $this->assertDatabaseHas('addresses', ['company_name' => $address->company_name]);
     }
 
     /**
@@ -84,7 +82,7 @@ class AddressTest extends TestCase
         $this->signIn($user);
 
         $address = factory(Address::class, 1)->create([
-            'customer_code' => $user->customer->code,
+            'customer_code' => auth()->user()->customer->code,
             'default' => false,
         ])->first();
 

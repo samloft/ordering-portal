@@ -54,11 +54,11 @@
                 <tbody>
                 @foreach($saved_baskets as $basket)
                     <tr class="cursor-pointer hover:bg-gray-50"
-                        onclick="window.location = '{{ route('saved-baskets.show', ['id' => $basket->id]) }}';">
+                        onclick="window.location = '{{ route('saved-baskets.show', ['reference' => $basket->reference]) }}';">
                         <td class="align-middle">{{ $basket->reference }}</td>
                         <td class="align-middle">{{ date('d/m/Y', strtotime($basket->created_at)) }}</td>
                         <td class="text-right">
-                            <a href="{{ route('saved-baskets.destroy', ['id' => $basket->id]) }}">
+                            <a href="{{ route('saved-baskets.destroy', ['reference' => $basket->reference]) }}">
                                 <button id="saved_basket__delete" class="button button-sm button-danger">
                                     Delete Template
                                 </button>

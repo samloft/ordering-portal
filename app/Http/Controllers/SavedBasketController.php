@@ -4,13 +4,10 @@ namespace App\Http\Controllers;
 
 use App\Models\Basket;
 use App\Models\SavedBasket;
-use Illuminate\Contracts\Routing\ResponseFactory;
 use Illuminate\Contracts\View\Factory;
+use Illuminate\Http\JsonResponse;
 use Illuminate\Http\RedirectResponse;
-use Illuminate\Http\Request;
-use Illuminate\Http\Response;
 use Illuminate\Routing\Redirector;
-use Illuminate\Support\Str;
 use Illuminate\View\View;
 
 class SavedBasketController extends Controller
@@ -37,7 +34,7 @@ class SavedBasketController extends Controller
      */
     public function show()
     {
-        $saved_basket = SavedBasket::show(request('id'));
+        $saved_basket = SavedBasket::show(request('reference'));
 
         if (count($saved_basket) > 0) {
             return view('saved-baskets.show', compact('saved_basket'));
@@ -47,19 +44,24 @@ class SavedBasketController extends Controller
     }
 
     /**
-     * @return ResponseFactory|Response
+     * @return \Illuminate\Http\JsonResponse
      */
-    public function store()
+    public function store(): JsonResponse
     {
+        $exists = SavedBasket::where('customer_code', auth()->user()->customer->code)->where('user_id', auth()->id())
+            ->where('reference', request('reference'))->first();
+
+        if ($exists) {
+            return response()->json('A saved basket already exists for that reference, please use a unique name', 422);
+        }
+
         $current_basket = Basket::show();
         $basket_details = [];
-        $id = (string) Str::Uuid();
 
         foreach ($current_basket['lines'] as $item) {
             $basket_details[] = [
-                'id' => $id,
                 'customer_code' => auth()->user()->customer->code,
-                'user_id' => auth()->user()->id,
+                'user_id' => auth()->id(),
                 'reference' => request('reference'),
                 'product' => trim($item['product']),
                 'quantity' => $item['quantity'],
@@ -69,20 +71,18 @@ class SavedBasketController extends Controller
 
         $basket_saved = SavedBasket::store($basket_details);
 
-        return $basket_saved ? response(200) : response(500);
+        return $basket_saved ? response()->json('success') : response()->json('error', 400);
     }
 
     /**
      * Delete a given saved basket.
      *
-     * @param Request $request
-     *
      * @return RedirectResponse
      */
-    public function destroy(Request $request): RedirectResponse
+    public function destroy(): RedirectResponse
     {
-        if (request('id')) {
-            $deleted = SavedBasket::destroy(request('id'));
+        if (request('reference')) {
+            $deleted = SavedBasket::destroy(request('reference'));
         } else {
             $deleted = false;
         }
@@ -93,13 +93,11 @@ class SavedBasketController extends Controller
     /**
      * Take a saved basket, and copy it into the actual basket.
      *
-     * @param $id
-     *
      * @return RedirectResponse|Redirector
      */
-    public function copyToBasket($id)
+    public function copyToBasket()
     {
-        $saved_basket = SavedBasket::show($id);
+        $saved_basket = SavedBasket::show(request('reference'));
         $products = [];
 
         foreach ($saved_basket as $line) {
