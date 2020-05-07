@@ -7,7 +7,6 @@
 
     <title>{{ ucfirst(config('app.name')) . ' Online Portal'}} - @yield('page.title')</title>
 
-    <link href="{{ mix('css/app.css') }}" rel="stylesheet">
     <link href="{{ mix('css/app-'.config('app.name').'.css') }}" rel="stylesheet">
 
     @if($google_analytics && config('app.debug') === false)

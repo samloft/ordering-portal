@@ -130,7 +130,7 @@ Route::group(['middleware' => ['auth', 'has.customer', 'terms']], static functio
         Route::group(['prefix' => 'addresses'], static function () {
             Route::get('/', 'AddressController@index')->name('account.addresses');
             Route::get('create', 'AddressController@create')->name('account.address.create');
-            Route::patch('/', 'AddressController@store')->name('account.address.store');
+            Route::post('/', 'AddressController@store')->name('account.address.store');
             Route::get('{id}/edit', 'AddressController@edit')->name('account.address.edit');
             Route::patch('{id}/edit', 'AddressController@update')->name('account.address.update');
             Route::post('default', 'AddressController@default')->name('account.address.default');
@@ -153,7 +153,6 @@ Route::group(['middleware' => ['auth', 'has.customer', 'terms']], static functio
 
         Route::post('add-product', 'BasketController@addProduct')->name('basket.add-product');
         Route::post('delete-product', 'BasketController@removeProduct')->name('basket.delete-line');
-        Route::post('update-product', 'BasketController@updateProductQuantity')->name('basket.update-line');
 
         Route::get('summary/{shipping_code?}', static function ($shipping_code = null) {
             return Basket::show($shipping_code);
@@ -192,7 +191,7 @@ Route::group(['middleware' => ['auth', 'has.customer', 'terms']], static functio
     });
 });
 
-Auth::routes();
+Auth::routes(['register' => false]);
 
 Route::get('not-supported', static function () {
     return view('errors.not-supported');

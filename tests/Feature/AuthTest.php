@@ -21,11 +21,11 @@ class AuthTest extends TestCase
     {
         $response = $this->get('register');
 
-        $response->assertStatus(404);
+        $response->assertSee('Page not found');
 
         $response = $this->post('register');
 
-        $response->assertStatus(404);
+        $response->assertStatus(405);
     }
 
     /**

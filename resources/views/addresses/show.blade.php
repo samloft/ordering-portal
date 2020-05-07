@@ -12,7 +12,6 @@
 
     <form method="post"
           action="{{ isset($address) ? route('account.address.edit', [$address->id]) : route('account.address.store') }}">
-        @method('PATCH')
 
         <div class="bg-white rounded-lg shadow p-10 mb-5">
             @include('layout.alerts')

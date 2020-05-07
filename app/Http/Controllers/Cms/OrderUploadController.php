@@ -21,6 +21,8 @@ class OrderUploadController extends Controller
 
     /**
      * @return \Illuminate\Http\RedirectResponse
+     *
+     * @throws \JsonException
      */
     public function store(): RedirectResponse
     {
@@ -29,7 +31,7 @@ class OrderUploadController extends Controller
         $config = json_encode([
             'prices' => request('prices') ? true : false,
             'packs' => request('packs') ? true : false,
-        ], true);
+        ], JSON_THROW_ON_ERROR | true);
 
         $updated = GlobalSettings::where('key', 'upload-config')->update([
             'value' => $config,

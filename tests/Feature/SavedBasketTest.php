@@ -88,7 +88,8 @@ class SavedBasketTest extends TestCase
 
         $basket_id = SavedBasket::where('reference', 'test-basket')->first()->id;
 
-        $this->get(route('saved-baskets.show', ['id' => $basket_id]))->assertStatus(200)->assertSee('test-basket')->assertSee($products->first()->code);
+        $this->get(route('saved-baskets.show', ['id' => $basket_id]))->assertStatus(200)->assertSee('test-basket')
+            ->assertSee($products->first()->code);
     }
 
     /**
