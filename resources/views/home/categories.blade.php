@@ -13,9 +13,9 @@
 @endif
 
 @if (count($links['categories']) > 0)
-    <div class="flex flex-wrap">
+    <div class="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-5">
         @foreach($links['categories'] as $category)
-            <div class="w-1/5 px-3 mb-5">
+            <div class="px-3 mb-5 mx-auto">
                 <a href="{{ $category['link'] }}">
                     <img class="rounded shadow"
                          src="{{ \Illuminate\Support\Facades\Storage::url(config('app.name').'/category/'.$category['image']) }}"
