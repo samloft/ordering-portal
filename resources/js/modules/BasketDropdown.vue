@@ -1,6 +1,6 @@
 <template>
     <div class="flex items-center">
-        <div class="mr-2">
+        <div class="hidden lg:block mr-2">
             <div class="relative">
                 <span v-if="basketItems > 0" class="badge-basket">{{ basketItems }}</span>
                 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"
@@ -12,12 +12,12 @@
                 </svg>
             </div>
         </div>
-        <div class="md:block ml-2 text-left flex mr-5">
+        <div class="hidden lg:block ml-2 text-left flex mr-5">
             <span class="text-sm font-thin">My Cart</span>
             <div class="font-light">{{ basketValue }}</div>
         </div>
 
-        <div @mouseenter="mouseOver" @mouseleave="mouseOut">
+        <div @mouseenter="mouseOver" @mouseleave="mouseOut" class="hidden md:block">
             <slot name="basket-button"/>
 
             <div class="absolute pt-4">
@@ -53,7 +53,7 @@
             </div>
         </div>
 
-        <div v-if="basketItems">
+        <div v-if="basketItems" class="hidden md:block">
             <slot name="checkout-button"/>
         </div>
     </div>
