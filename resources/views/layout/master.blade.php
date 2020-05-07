@@ -39,7 +39,7 @@
 
     @include('layout.navigation')
 
-    <div class="flex-grow container mx-auto sm:px-4 pt-6 pb-8">
+    <div class="flex-grow container mx-auto px-4 pt-6 pb-8">
         @if($announcement)
             <div class="alert alert-info" role="alert">
                 <div class="alert-body">
