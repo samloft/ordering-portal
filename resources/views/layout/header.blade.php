@@ -1,21 +1,26 @@
 <header>
     <div class="container mx-auto px-4">
         <div class="flex items-center md:justify-between py-2">
-            <div class="w-1/4 md:hidden">
-                <svg class="fill-current text-white h-8 w-8" xmlns="http://www.w3.org/2000/svg"
-                     viewBox="0 0 20 20">
-                    <path
-                        d="M16.4 9H3.6c-.552 0-.6.447-.6 1 0 .553.048 1 .6 1h12.8c.552 0 .6-.447.6-1 0-.553-.048-1-.6-1zm0 4H3.6c-.552 0-.6.447-.6 1 0 .553.048 1 .6 1h12.8c.552 0 .6-.447.6-1 0-.553-.048-1-.6-1zM3.6 7h12.8c.552 0 .6-.447.6-1 0-.553-.048-1-.6-1H3.6c-.552 0-.6.447-.6 1 0 .553.048 1 .6 1z"></path>
-                </svg>
+            <div class="flex justify-between items-center w-full md:w-auto">
+                <div>
+                    <a href="/">
+                        <img class="logo" src="{{ asset('images/logos/logo-' . config('app.name') .'.png') }}"
+                             alt="{{ config('app.name') }}">
+                    </a>
+                </div>
+
+                <div class="md:hidden">
+                    <svg class="fill-current text-white h-8 w-8" xmlns="http://www.w3.org/2000/svg"
+                         viewBox="0 0 20 20">
+                        <path
+                            d="M16.4 9H3.6c-.552 0-.6.447-.6 1 0 .553.048 1 .6 1h12.8c.552 0 .6-.447.6-1 0-.553-.048-1-.6-1zm0 4H3.6c-.552 0-.6.447-.6 1 0 .553.048 1 .6 1h12.8c.552 0 .6-.447.6-1 0-.553-.048-1-.6-1zM3.6 7h12.8c.552 0 .6-.447.6-1 0-.553-.048-1-.6-1H3.6c-.552 0-.6.447-.6 1 0 .553.048 1 .6 1z"></path>
+                    </svg>
+                </div>
             </div>
 
-            <a href="/">
-                <img class="logo" src="{{ asset('images/logos/logo-' . config('app.name') .'.png') }}"
-                     alt="{{ config('app.name') }}">
-            </a>
-
-            <div class="header-summary w-1/4 md:w-auto md:flex text-right p-3 bg-background_invert-color rounded">
-                <div class="flex md:flex md:items-center mr-2">
+            <div
+                class="hidden md:block header-summary md:w-auto md:flex text-right p-3 bg-background_invert-color rounded">
+                <div class="sm:hidden flex md:flex md:items-center mr-2">
 
                     <basket-dropdown>
                         <template v-slot:basket-button>
@@ -36,7 +41,8 @@
                     <template v-slot:trigger>
                         <div class="dropdown md:block md:flex md:items-center rounded cursor-pointer">
                             <div class="mr-2">
-                                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" class="w-10 h-10 icon icon-user">
+                                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"
+                                     class="w-10 h-10 icon icon-user">
                                     <path class="primary" d="M12 12a5 5 0 1 1 0-10 5 5 0 0 1 0 10z"></path>
                                     <path class="secondary"
                                           d="M21 20v-1a5 5 0 0 0-5-5H8a5 5 0 0 0-5 5v1c0 1.1.9 2 2 2h14a2 2 0 0 0 2-2z"></path>
@@ -44,8 +50,10 @@
                             </div>
                             <div class="md:block ml-2 text-left">
                                 <span class="text-sm mr-1 font-thin font-medium block">{{ auth()->user()->name }}</span>
-                                <span class="text-xs mr-1 font-thin block leading-tight">{{ auth()->user()->customer->code }}</span>
-                                <span class="text-xs mr-1 font-thin block leading-tight">{{ auth()->user()->customer->name }}</span>
+                                <span
+                                    class="text-xs mr-1 font-thin block leading-tight">{{ auth()->user()->customer->code }}</span>
+                                <span
+                                    class="text-xs mr-1 font-thin block leading-tight">{{ auth()->user()->customer->name }}</span>
                             </div>
                             <div>
                                 <svg class="fill-current h-4 w-4 block opacity-50 ml-2"

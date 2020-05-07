@@ -1,4 +1,4 @@
-<nav class="menu-wrapper bg-header-secondary md:block">
+<nav class="hidden menu-wrapper bg-header-secondary md:block">
     <div class="menu container md:flex">
 
         <div class="menu-item">
