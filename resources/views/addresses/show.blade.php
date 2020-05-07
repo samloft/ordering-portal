@@ -13,6 +13,10 @@
     <form method="post"
           action="{{ isset($address) ? route('account.address.edit', [$address->id]) : route('account.address.store') }}">
 
+        @if(isset($address))
+            @method('patch')
+        @endif
+
         <div class="bg-white rounded-lg shadow p-10 mb-5">
             @include('layout.alerts')
 
@@ -59,11 +63,11 @@
                         <option
                             value="{{ $country['name'] }}"
                             @if(old('country') && $country['name'] === old('country'))
-                                selected
+                            selected
                             @elseif(isset($address) && $country['name'] === $address['country'])
-                                selected
+                            selected
                             @elseif($country['default'])
-                                selected
+                            selected
                             @endif>
                             {{ $country['name'] }}
                         </option>
