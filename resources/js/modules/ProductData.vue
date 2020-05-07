@@ -1,15 +1,15 @@
 <template>
     <div>
         <div v-if="product_data.prices" class="px-6 pt-4 pb-6 xl:px-10 xl:pt-6 xl:pb-8 bg-white rounded-lg shadow mb-4">
-            <div class="flex">
-                <div class="w-1/4 mr-6">
+            <div class="lg:flex">
+                <div class="w-full lg:w-1/4 lg:mr-6 mb-5 lg:mb-0">
                     <h5 class="font-medium text-lg mb-2">Net price list</h5>
                     <p class="text-gray-600 text-sm">
                         Pricing information showing net price and net price excluding any ordering discount.
                     </p>
                 </div>
-                <div class="w-3/4 flex">
-                    <div class="w-1/2 relative mr-1">
+                <div class="lg:w-3/4 md:flex">
+                    <div class="md:w-1/2 relative md:mr-1 mb-3 lg:mb-0">
                         <label for="product-brand" class="text-sm font-medium">Brand</label>
                         <select id="product-brand" class="rounded border bg-gray-100 text-gray-600 appearance-none mt-1"
                                 autocomplete="off"
@@ -28,7 +28,7 @@
                         </div>
                     </div>
 
-                    <div class="w-1/2 relative ml-1">
+                    <div class="md:w-1/2 relative lg:ml-1">
                         <label for="product-range" class="text-sm font-medium">Range</label>
                         <select id="product-range" class="rounded border bg-gray-100 text-gray-600 appearance-none mt-1"
                                 autocomplete="off"
@@ -54,8 +54,8 @@
         </div>
 
         <div v-if="product_data.data" class="px-6 pt-4 pb-6 xl:px-10 xl:pt-6 xl:pb-8 bg-white rounded-lg shadow">
-            <div class="flex">
-                <div class="w-1/4 mr-6">
+            <div class="lg:flex">
+                <div class="w-full lg:w-1/4 lg:mr-6 mb-5 lg:mb-0">
                     <h5 class="font-medium text-lg mb-2">Product Data</h5>
                     <p class="text-gray-600 text-sm">
                         Complete product data will provide a Excel file with the following data.
@@ -64,7 +64,7 @@
                         dimensions, weights, image URLs
                     </p>
                 </div>
-                <div class="w-3/4 text-right">
+                <div class="lg:w-3/4 text-right">
                     <button @click="downloadData()" class="button button-primary">Download product data</button>
                 </div>
             </div>
