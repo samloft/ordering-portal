@@ -93,13 +93,11 @@ class SavedBasketController extends Controller
     /**
      * Take a saved basket, and copy it into the actual basket.
      *
-     * @param $reference
-     *
      * @return RedirectResponse|Redirector
      */
-    public function copyToBasket($reference)
+    public function copyToBasket()
     {
-        $saved_basket = SavedBasket::show($reference);
+        $saved_basket = SavedBasket::show(request('reference'));
         $products = [];
 
         foreach ($saved_basket as $line) {

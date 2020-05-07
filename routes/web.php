@@ -78,7 +78,7 @@ Route::group(['middleware' => ['auth', 'has.customer', 'terms']], static functio
         Route::get('view', 'SavedBasketController@show')->name('saved-baskets.show');
         Route::post('store', 'SavedBasketController@store')->name('saved-baskets.store');
         Route::get('delete', 'SavedBasketController@destroy')->name('saved-baskets.destroy');
-        Route::get('copy/{reference}', 'SavedBasketController@copyToBasket')->name('saved-baskets.copy');
+        Route::get('copy', 'SavedBasketController@copyToBasket')->name('saved-baskets.copy');
     });
 
     /*
