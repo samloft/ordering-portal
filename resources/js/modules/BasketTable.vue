@@ -159,9 +159,13 @@
                         axios.post('/saved-baskets/store', {
                             reference: response.value
                         }).then(function (response) {
-                            Vue.swal('Success', 'Your saved basket has been created', 'success');
-                        }).catch(function () {
-                            Vue.swal('Error', 'Could not create saved basket, please try again', 'error');
+                            return Vue.swal('Success', 'Your saved basket has been created', 'success');
+                        }).catch(function (error) {
+                            if (error.response.status === 422) {
+                                return Vue.swal('Error', error.response.data, 'error');
+                            }
+
+                            return Vue.swal('Error', 'Could not create saved basket, please try again', 'error');
                         });
                     }
                 });

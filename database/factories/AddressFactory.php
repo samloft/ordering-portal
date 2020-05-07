@@ -16,5 +16,7 @@ $factory->define(App\Models\Address::class, static function (Faker $faker) {
         'country' => 'UK',
         'post_code' => $faker->word,
         'default' => $faker->randomNumber(),
+        'created_at' => date('Y-m-d H:i:s'),
+        'updated_at' => date('Y-m-d H:i:s'),
     ];
 });

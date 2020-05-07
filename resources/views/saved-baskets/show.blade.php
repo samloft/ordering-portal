@@ -26,7 +26,7 @@
                     Back
                 </button>
 
-                <a href="{{ route('saved-baskets.destroy', ['id' => $saved_basket->first()->id]) }}">
+                <a href="{{ route('saved-baskets.destroy', ['reference' => $saved_basket->first()->reference]) }}">
                     <button class="button button-danger">Delete Template</button>
                 </a>
             </div>
@@ -61,7 +61,7 @@
             <small>* Items marked in red are no longer available for purchase and will not be added.</small>
         </div>
 
-        <a href="{{ route('saved-baskets.copy', ['id' => $saved_basket->first()->id]) }}">
+        <a href="{{ route('saved-baskets.copy', ['reference' => $saved_basket->first()->reference]) }}">
             <submit-button before-text="Add to basket" after-text="Adding to basket"></submit-button>
         </a>
     </div>

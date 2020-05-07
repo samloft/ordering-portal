@@ -48,9 +48,9 @@ class SavedBasketTest extends TestCase
 
         $this->post(route('saved-baskets.store', ['reference' => 'test-basket']));
 
-        $basket_id = SavedBasket::where('reference', 'test-basket')->first()->id;
+        $reference = SavedBasket::where('reference', 'test-basket')->first()->reference;
 
-        $this->get(route('saved-baskets.destroy', ['id' => $basket_id]));
+        $this->get(route('saved-baskets.destroy', ['reference' => $reference]));
 
         $this->assertDatabaseMissing('saved_baskets', [
             'reference' => 'test-basket',
@@ -86,9 +86,9 @@ class SavedBasketTest extends TestCase
 
         $this->post(route('saved-baskets.store', ['reference' => 'test-basket']));
 
-        $basket_id = SavedBasket::where('reference', 'test-basket')->first()->id;
+        $reference = SavedBasket::where('reference', 'test-basket')->first()->reference;
 
-        $this->get(route('saved-baskets.show', ['id' => $basket_id]))->assertStatus(200)->assertSee('test-basket')
+        $this->get(route('saved-baskets.show', ['reference' => $reference]))->assertStatus(200)->assertSee('test-basket')
             ->assertSee($products->first()->code);
     }
 
@@ -108,7 +108,7 @@ class SavedBasketTest extends TestCase
         $basket = SavedBasket::where('reference', 'test-basket');
         $basket->update(['customer_code' => 'ABC123']);
 
-        $this->get(route('saved-baskets.show', ['id' => $basket->first()->id]))->assertStatus(404);
+        $this->get(route('saved-baskets.show', ['reference' => $basket->first()->reference]))->assertStatus(404);
     }
 
     /**
@@ -124,9 +124,9 @@ class SavedBasketTest extends TestCase
 
         $this->post(route('saved-baskets.store', ['reference' => 'test-basket']));
 
-        $basket_id = SavedBasket::where('reference', 'test-basket')->first()->id;
+        $reference = SavedBasket::where('reference', 'test-basket')->first()->reference;
 
-        $this->get(route('saved-baskets.store', ['id' => $basket_id]));
+        $this->get(route('saved-baskets.store', ['reference' => $reference]));
 
         foreach ($products as $product) {
             $this->assertDatabaseHas('basket', [
