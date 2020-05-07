@@ -31,9 +31,8 @@
                 </p>
             </div>
             <div class="w-3/4">
-{{--                <form method="post" action="{{ route('cms.collection-messages.store') }}">--}}
-                    <collection-messages :collection_messages="{{ json_encode($collection_messages, true) }}"></collection-messages>
-{{--                </form>--}}
+                <collection-messages
+                    :collection_messages="{{ json_encode($collection_messages, true) }}"></collection-messages>
             </div>
         </div>
     </div>

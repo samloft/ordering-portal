@@ -8,6 +8,7 @@ class BasketFactory
 {
     /**
      * @param $customer
+     *
      * @return mixed
      */
     public function create($customer = null)
@@ -16,7 +17,7 @@ class BasketFactory
 
         foreach ($products as $product) {
             factory(Basket::class)->create([
-                'user_id' => auth()->user()->id,
+                'user_id' => auth()->id(),
                 'customer_code' => $customer ?? auth()->user()->customer->code,
                 'product' => $product->code,
             ]);

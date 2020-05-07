@@ -288,18 +288,4 @@ class Basket extends Model
         return self::where('customer_code', auth()->user()->customer->code)->where('user_id', auth()->user()->id)
             ->where('product', $product)->delete();
     }
-
-    /**
-     * Update the quantity for a given product line in the basket.
-     *
-     * @param $product
-     * @param $quantity
-     *
-     * @return int
-     */
-    public static function updateLine($product, $quantity): int
-    {
-        return self::where('customer_code', auth()->user()->customer->code)->where('user_id', auth()->user()->id)
-            ->where('product', $product)->update(['quantity' => $quantity]);
-    }
 }

@@ -89,17 +89,21 @@ class ConfirmationPDF
             'collection_message' => $this->collection_message,
         ];
 
-        foreach ($this->order->lines as $line) {
-            $order['lines'][] = [
-                'product' => $line->product,
-                'description' => substr($line->description, 0, 35),
-                'line_qty' => $line->quantity,
-                'discount' => discountPercent(),
-                'net_price' => currency($line->net_price),
-                'line_val' => currency($line->total),
-            ];
+        $order['lines'] = [];
 
-            $goods_value += $line->total;
+        if ($this->order->lines) {
+            foreach ($this->order->lines as $line) {
+                $order['lines'][] = [
+                    'product' => $line->product,
+                    'description' => substr($line->description, 0, 35),
+                    'line_qty' => $line->quantity,
+                    'discount' => discountPercent(),
+                    'net_price' => currency($line->net_price),
+                    'line_val' => currency($line->total),
+                ];
+
+                $goods_value += $line->total;
+            }
         }
 
         $order['values'] = [
