@@ -4,15 +4,21 @@
     }
 
     h2 {
-        @apply .mb-5 .font-semibold .tracking-widest .underline;
+        @apply .mb-5 .mt-5 .font-semibold .tracking-widest .underline;
     }
 
     ul {
-        @apply .ml-5;
+        @apply .ml-5 .text-xs;
     }
 
     li {
+        @apply .text-xs;
+
         list-style-type: circle;
+
+        P {
+            margin: 0 !important;
+        }
     }
 
     p {
@@ -25,5 +31,9 @@
 
     pre > code {
         @apply .text-xs;
+    }
+
+    hr {
+        @apply mt-10 mb-10;
     }
 }
