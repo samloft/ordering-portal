@@ -30,7 +30,7 @@
             </div>
         @endif
 
-        <div class="table-container">
+        <div class="table-container overflow-scroll">
             <table>
                 <thead>
                 <tr>
