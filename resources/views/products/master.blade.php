@@ -1,10 +1,10 @@
 @extends('layout.master')
 
 @section('content')
-    <div class="flex">
+    <div class="xl:flex">
         @include('products.sidebar')
 
-        <div class="w-3/4">
+        <div class="xl:w-3/4">
             @if ($categories['level_1'])
                 <div class="font-thin text-gray-700 mb-3 flex">
                     @if ($categories['level_1'] === 'search')
