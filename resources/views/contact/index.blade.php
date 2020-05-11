@@ -15,8 +15,8 @@
 
     @include('layout.alerts')
 
-    <div class="flex mt-4">
-        <div class="w-1/3 mr-4">
+    <div class="lg:flex mt-4">
+        <div class="lg:w-1/3 lg:mr-4 mb-3 lg:mb-0">
             <div class="bg-white rounded shadow p-5">
                 <div class="address">
                     <div class="font-semibold">{{ $company_details['line_1'] }}</div>
@@ -32,7 +32,7 @@
                 </div>
             </div>
         </div>
-        <div class="w-2/3">
+        <div class="lg:w-2/3">
             <div class="bg-white rounded shadow p-5">
                 <form action="{{ route('contact.email') }}" method="post" class="mb-0">
                     <div class="relative mb-2">
