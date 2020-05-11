@@ -30,7 +30,7 @@
                 </div>
             </div>
 
-            <div class="justify-end mt-6 flex w-full">
+            <div class="justify-end sm:justify-center mt-6 flex w-full">
                 <a href="{{ route('saved-baskets') }}">
                     <button type="button" class="button button-danger w-auto sm:w-40 mr-1">Reset</button>
                 </a>
