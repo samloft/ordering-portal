@@ -13,8 +13,8 @@
     <div class="bg-white rounded shadow-md p-3 mb-5 mr-2">
         @include('layout.alerts')
 
-        <div class="flex">
-            <div class="w-1/3 mr-5">
+        <div class="md:flex">
+            <div class="md:w-1/3 md:mr-5">
                 <h4 class="text-primary">Your Details</h4>
                 <p class="text-gray-500 font-thin">
                     Update your account details for your online ordering account
@@ -34,12 +34,12 @@
                     </div>
                 </div>
 
-                <div class="flex align-items">
+                <div class="flex align-items mb-3 md:mb-0">
                     <span class="mr-3 text-gray-500 font-thin">Current Email</span>
                     <span class="badge badge-success">{{ auth()->user()->email }}</span>
                 </div>
             </div>
-            <div class="w-2/3">
+            <div class="md:w-2/3">
                 <form method="post" action="{{ route('account.store') }}" class="m-0">
                     <div class="border border-gray-300 rounded p-3 text-center leading-tight mb-5">
                         <span class="font-medium block">{{ auth()->user()->customer->code }}</span>
@@ -88,8 +88,8 @@
     </div>
 
     <div class="bg-white rounded shadow-md p-3 mb-5 mr-2">
-        <div class="flex">
-            <div class="w-1/2">
+        <div class="md:flex">
+            <div class="md:w-1/2 mb-3 md:mb-0">
                 <h4 class="text-primary">Invoice Address</h4>
 
                 <div>{{ auth()->user()->customer->invoice_name }}</div>
@@ -99,7 +99,7 @@
                 <div>{{ auth()->user()->customer->invoice_address_line_4 }}</div>
                 <div>{{ auth()->user()->customer->invoice_address_line_5 }}</div>
             </div>
-            <div class="w-1/2">
+            <div class="md:w-1/2 mb-3 md:mb-0">
                 <h4 class="text-primary">Default Delivery Address</h4>
 
                 @if ($default_address)
