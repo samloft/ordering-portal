@@ -12,13 +12,18 @@
 
     @include('layout.alerts')
 
-    <div class="flex items-start justify-end mb-5">
-        <div class="w-8/12">
+    <div class="md:flex items-start justify-end mb-5">
+        <div class="md:hidden bg-white rounded shadow-md p-2 text-center mb-3">
+            <label class="font-medium">Quick Buy</label>
+            <quick-buy></quick-buy>
+        </div>
+
+        <div class="md:w-8/12">
             <basket-table :products="{{ json_encode($basket, true) }}"></basket-table>
         </div>
 
-        <div class="w-4/12 ml-5">
-            <div class="bg-white rounded shadow-md p-6 text-center mb-5">
+        <div class="md:w-4/12 md:ml-5">
+            <div class="hidden md:block bg-white rounded shadow-md p-6 text-center mb-5">
                 <label class="font-medium">Quick Buy</label>
                 <quick-buy></quick-buy>
             </div>
