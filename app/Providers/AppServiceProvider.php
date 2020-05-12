@@ -5,6 +5,8 @@ namespace App\Providers;
 use App\Models\Category;
 use App\Models\GlobalSettings;
 use App\Models\HomeLink;
+use App\Models\User;
+use App\Observers\UserObserver;
 use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\Schema;
 use Illuminate\Support\ServiceProvider;
@@ -18,6 +20,8 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot(): void
     {
+        User::observe(UserObserver::class);
+
         Schema::defaultStringLength(191);
 
         view()->composer('*', static function ($view) {
