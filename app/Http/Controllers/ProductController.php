@@ -57,16 +57,21 @@ class ProductController extends Controller
     public function show($product_code)
     {
         $previous_categories = str_replace(url('/'), '', url()->previous());
-        $category_array = array_values(array_filter(explode('/', $previous_categories)));
+
+        if ($previous_categories[0] === 'products') {
+            $category_array = array_values(array_filter(explode('/', $previous_categories)));
+        } else {
+            $category_array = [];
+        }
 
         $product = Product::show(decodeUrl($product_code));
 
         $categories = [
-            'level_1' => isset($category_array[1]) ? decodeUrl($category_array[1]) : '',
-            'level_2' => isset($category_array[2]) ? decodeUrl($category_array[2]) : '',
-            'level_3' => isset($category_array[3]) ? decodeUrl($category_array[3]) : '',
-            'level_4' => isset($category_array[4]) ? decodeUrl($category_array[4]) : '',
-            'level_5' => isset($category_array[5]) ? decodeUrl($category_array[5]) : '',
+            'level_1' => isset($category_array[1]) ? decodeUrl($category_array[1]) : decodeUrl($product->categories->level_1),
+            'level_2' => isset($category_array[2]) ? decodeUrl($category_array[2]) : decodeUrl($product->categories->level_2),
+            'level_3' => isset($category_array[3]) ? decodeUrl($category_array[3]) : decodeUrl($product->categories->level_3),
+            'level_4' => isset($category_array[4]) ? decodeUrl($category_array[4]) : decodeUrl($product->categories->level_4),
+            'level_5' => isset($category_array[5]) ? decodeUrl($category_array[5]) : decodeUrl($product->categories->level_5),
         ];
 
         if (isset($category_array[1]) && strpos($category_array[1], 'search') === 0) {
