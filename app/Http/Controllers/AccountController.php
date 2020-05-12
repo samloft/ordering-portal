@@ -8,6 +8,7 @@ use App\Models\User;
 use App\Models\UserCustomer;
 use Illuminate\Contracts\View\Factory;
 use Illuminate\Http\RedirectResponse;
+use Illuminate\Support\Facades\Cache;
 use Illuminate\View\View;
 use Session;
 
@@ -75,6 +76,8 @@ class AccountController extends Controller
             return back()->with('error', 'Customer code '.request('customer').' does not exist');
         }
 
+        Cache::forget('customer-'.$customer->code);
+
         Session::put('temp_customer', $customer->code);
 
         return back();
@@ -87,6 +90,8 @@ class AccountController extends Controller
      */
     public function revertChangeCustomer(): RedirectResponse
     {
+        Cache::forget('customer-'.auth()->user()->customer->code);
+
         Session::put('temp_customer');
 
         return back();

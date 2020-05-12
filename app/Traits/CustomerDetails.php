@@ -3,6 +3,7 @@
 namespace App\Traits;
 
 use App\Models\Customer;
+use Illuminate\Support\Facades\Cache;
 use Session;
 
 trait CustomerDetails
@@ -19,7 +20,8 @@ trait CustomerDetails
             return $this->current_customer;
         }
 
-        return $this->current_customer = Customer::where('code', Session::get('temp_customer') ?: auth()->user()->customer_code)
-            ->with('discount')->first();
+        return $this->current_customer = Cache::remember('customer-'.Session::get('temp_customer'), 60, static function () {
+            return Customer::where('code', Session::get('temp_customer') ?: auth()->user()->customer_code)->first();
+        });
     }
 }
