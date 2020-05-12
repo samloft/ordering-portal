@@ -2,6 +2,7 @@ module.exports = {
     plugins: [
         require('@tailwindcss/ui'),
     ],
+    purge: false,
     // prefix: '',
     // important: false,
     // separator: ':',
