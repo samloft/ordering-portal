@@ -35,6 +35,8 @@
 
 <div id="app" class="flex flex-col min-h-screen w-full">
 
+    <mobile-alerts></mobile-alerts>
+
     @include('layout.header')
 
     @include('layout.navigation')

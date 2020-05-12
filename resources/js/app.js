@@ -29,6 +29,7 @@ Vue.component('small-order-notice', require('./modules/SmallOrderNotice.vue').de
 Vue.component('fade-transition', require('./modules/FadeTransition.vue').default);
 Vue.component('modal', require('./modules/Modal.vue').default);
 Vue.component('mobile-menu', require('./modules/MobileMenu.vue').default);
+Vue.component('mobile-alerts', require('./modules/MobileAlerts.vue').default);
 
 window.Event = new Vue();
 
