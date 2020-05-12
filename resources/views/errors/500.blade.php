@@ -5,7 +5,7 @@
 @section('content')
     <div class="flex h-screen w-full">
         <div class="text-center text-gray-800 m-auto w-full">
-            <h1 style="font-size: 14rem;" class="font-extrabold leading-tight">
+            <h1 class="text-6xl font-extrabold leading-tight">
                 <span class="text-gray-800">ERROR</span>
             </h1>
 
