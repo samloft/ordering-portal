@@ -14,7 +14,7 @@
 
                     <template slot="content" slot-scope="props">
                         <div v-if="props.isOpen"
-                             class="md:hidden absolute w-full h-full left-0 top-0 bg-background_invert-color text-background_invert-text z-40 p-8 pt-20">
+                             class="md:hidden absolute w-full h-full left-0 top-0 bg-background_invert-color text-background_invert-text z-40 p-8 pt-10">
 
                             <div class="mb-3 flex justify-center">
                                 <a href="{{ route('basket') }}">
@@ -61,8 +61,7 @@
                             <hr>
 
                             <div class="text-center text-lg mt-3">
-                                <div class="text-gray-300 text-base font-thin">{{ auth()->user()->name }}</div>
-                                <div class="mb-2 text-gray-300 text-base font-thin">{{ auth()->user()->customer->code }}</div>
+                                <div class="mb-2 text-gray-300 text-base font-thin">{{ auth()->user()->name }} ({{ auth()->user()->customer->code }})</div>
 
                                 <a href="{{ route('account') }}" class="block">My account</a>
                                 <a href="#" class="block"
