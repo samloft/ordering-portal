@@ -5,7 +5,7 @@
 @section('content')
     <div class="flex h-screen w-full">
         <div class="text-center text-gray-800 m-auto w-full">
-            <h1 style="font-size: 14rem;" class="font-extrabold">
+            <h1 class="font-extrabold text-6xl">
                 <span class="text-gray-800">4</span>
                 <span class="text-gray-500">0</span>
                 <span class="text-gray-800">4</span>
