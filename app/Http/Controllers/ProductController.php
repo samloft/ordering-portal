@@ -57,7 +57,12 @@ class ProductController extends Controller
     public function show($product_code)
     {
         $previous_categories = str_replace(url('/'), '', url()->previous());
-        $category_array = array_values(array_filter(explode('/', $previous_categories)));
+
+        if (isset($previous_categories[0]) === 'products') {
+            $category_array = array_values(array_filter(explode('/', $previous_categories)));
+        } else {
+            $category_array = [];
+        }
 
         $product = Product::show(decodeUrl($product_code));
 
@@ -69,10 +74,10 @@ class ProductController extends Controller
             'level_5' => isset($category_array[5]) ? decodeUrl($category_array[5]) : '',
         ];
 
-        if (isset($category_array[1]) && strpos($category_array[1], 'search') === 0) {
+        if (isset($categories['level_1']) && strpos($categories['level_1'], 'search') === 0) {
             $categories = [
                 'level_1' => 'search',
-                'query' => substr(decodeUrl($category_array[1]), 13),
+                'query' => substr(decodeUrl($categories['level_1']), 13),
             ];
         }
 

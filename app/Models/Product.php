@@ -143,7 +143,8 @@ class Product extends Model
      */
     public static function show($product_code)
     {
-        return self::where('code', $product_code)->whereHas('prices')->with('prices')->with('expectedStock')->first();
+        return self::where('code', $product_code)->whereHas('prices')->with('prices')->with('expectedStock')
+            ->with('categories')->first();
     }
 
     /**

@@ -39,7 +39,8 @@
                                       stroke-linejoin="round"/>
                             </svg>
 
-                            {{ $categories['level_3'] }}
+                                <a class="hover:underline"
+                                   href="/products/{{ $categories['level_1'] }}/{{ $categories['level_2'] }}/{{ $categories['level_3'] }}">{{ $categories['level_3'] }}</a>
                         @endif
                     @endif
                 </div>
