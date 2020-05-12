@@ -10,8 +10,6 @@ use Illuminate\Support\Facades\Cache;
 
 /**
  * Class CacheUserProvider
- *
- * @package App\Auth
  */
 class CacheUserProvider extends EloquentUserProvider
 {

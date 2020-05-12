@@ -6,7 +6,7 @@ use Illuminate\Foundation\Auth\User;
 use Illuminate\Support\Facades\Cache;
 
 /**
- * User observer
+ * User observer.
  */
 class UserObserver
 {
