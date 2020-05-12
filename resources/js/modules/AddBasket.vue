@@ -1,8 +1,8 @@
 <template>
-    <div class="flex justify-between items-center mt-3">
-        <span>Qty:</span>
+    <div class="flex sm:justify-end md:justify-between items-center md:w-full">
+        <span class="mr-1 md:mr-0">Qty:</span>
 
-        <input class="w-12" name="quantity"
+        <input class="mr-1 md:mr-0 w-12" name="quantity"
                v-model="quantity">
         <button class="button button-primary"
                 @click="submit()" v-text="buttonText" :disabled="addingProduct">

@@ -10,13 +10,13 @@
     </div>
 
     <form method="post" action="{{ route('checkout.order') }}">
-        <div class="flex">
-            <div class="w-1/2">
-                <div class="bg-white rounded shadow-md p-6 text-center mb-5 mr-2">
+        <div class="md:flex">
+            <div class="md:w-1/2">
+                <div class="bg-white rounded shadow-md p-3 xl:p-6 text-center mb-5 lg:mr-2">
                     <h4 class="text-primary">Delivery Address</h4>
 
                     @if (session('address'))
-                        <div class="w-3/4 text-center bg-gray-200 p-4 rounded mx-auto">
+                        <div class="xl:w-3/4 text-center bg-gray-200 lg:p-4 rounded mx-auto">
                             <div>{{ session('address.company_name') }}</div>
                             <div>{{ session('address.address_line_2') }}</div>
                             <div>{{ session('address.address_line_3') }}</div>
@@ -25,7 +25,7 @@
                             <div>{{ session('address.post_code') }}</div>
                         </div>
                     @elseif ($default_address)
-                        <div class="w-3/4 text-center bg-gray-200 p-4 rounded mx-auto">
+                        <div class="xl:w-3/4 text-center bg-gray-200 lg:p-4 rounded mx-auto">
                             <div>{{ $default_address->company_name }}</div>
                             <div>{{ $default_address->address_line_2 }}</div>
                             <div>{{ $default_address->address_line_3 }}</div>
@@ -48,7 +48,7 @@
 
                     <h4 class="text-primary mt-5">Invoice Address</h4>
 
-                    <div class="w-3/4 text-center bg-gray-200 p-4 rounded mx-auto">
+                    <div class="xl:w-3/4 text-center bg-gray-200 lg:p-4 rounded mx-auto">
                         <div>{{ auth()->user()->customer->invoice_name }}</div>
                         <div>{{ auth()->user()->customer->invoice_address_line_1 }}</div>
                         <div>{{ auth()->user()->customer->invoice_address_line_2 }}</div>
@@ -58,20 +58,20 @@
                     </div>
                 </div>
             </div>
-            <div class="w-1/2">
-                <div class="bg-white rounded shadow-md p-6 mb-5 ml-2">
+            <div class="md:w-1/2">
+                <div class="bg-white rounded shadow-md p-3 xl:p-6 mb-5 lg:ml-2">
                     @include('layout.alerts')
 
                     <h4 class="text-primary">Order Details</h4>
 
-                    <div class="flex items-center mb-3">
+                    <div class="xl:flex items-center mb-3">
                         <label for="reference" class="w-1/2">Order Reference</label>
                         <input id="reference" name="reference" autocomplete="off"
                                maxlength="20"
                                value="{{ old('reference') }}">
                     </div>
 
-                    <div class="flex items-center mb-3">
+                    <div class="xl:flex items-center mb-3">
                         <label for="notes" class="w-1/2">Order Notes</label>
                         <input id="notes" name="notes" autocomplete="off"
                                value="{{ old('notes') }}">
@@ -85,7 +85,7 @@
 
                     <h4 class="text-primary mt-3">Contact Details</h4>
 
-                    <div class="flex items-center mb-3">
+                    <div class="xl:flex items-center mb-3">
                         <label for="name" class="w-1/2">Name</label>
                         <input id="name"
                                name="name"
@@ -94,7 +94,7 @@
                                autocomplete="off">
                     </div>
 
-                    <div class="flex items-center mb-3">
+                    <div class="xl:flex items-center mb-3">
                         <label for="telephone" class="w-1/2">Telephone</label>
                         <input id="telephone"
                                name="telephone"
@@ -102,7 +102,7 @@
                                autocomplete="off">
                     </div>
 
-                    <div class="flex items-center mb-3">
+                    <div class="xl:flex items-center mb-3">
                         <label for="mobile" class="w-1/2">Mobile</label>
                         <input id="mobile"
                                name="mobile"
@@ -115,7 +115,7 @@
                         <label class="checkbox flex items-center">
                             <input type="checkbox" name="terms" class="form-checkbox"
                                    {{ old('terms') ? 'checked' : '' }} autocomplete="off">
-                            <span class="ml-2">I have read and agree to the <a href="{{ route('support.terms') }}"
+                            <span class="ml-2 text-xs xl:text-sm">I have read and agree to the <a href="{{ route('support.terms') }}"
                                                                                class="underline" target="_blank">terms & conditions</a>
                             </span>
                         </label>
@@ -164,9 +164,9 @@
         </div>
 
         <div class="flex justify-between">
-            <div>
+            <div class="flex">
                 <a href="{{ route('products') }}">
-                    <button class="button button-secondary">Continue Shopping</button>
+                    <button class="hidden md:block mr-2 button button-secondary">Continue Shopping</button>
                 </a>
                 <a href="{{ route('basket') }}">
                     <button class="button button-secondary">Return To basket</button>

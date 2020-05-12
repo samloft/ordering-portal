@@ -17,47 +17,47 @@
             @method('patch')
         @endif
 
-        <div class="bg-white rounded-lg shadow p-10 mb-5">
+        <div class="bg-white rounded-lg shadow p-3 md:p-10 mb-5">
             @include('layout.alerts')
 
-            <div class="flex items-center mb-3">
-                <label for="company_name" class="w-2/6">Company Name <span
+            <div class="md:flex items-center mb-3">
+                <label for="company_name" class="md:w-2/6">Company Name <span
                         class="text-red-600">*</span></label>
                 <input id="company_name" class="bg-gray-100" placeholder="Company Name"
                        value="{{ $address->company_name ?? old('company_name') ?: auth()->user()->customer->customer_name }}"
                        name="company_name">
             </div>
 
-            <div class="flex items-center mb-3">
-                <label for="address_line_2" class="w-2/6">Address Line 2 <span class="text-red-600">*</span></label>
+            <div class="md:flex items-center mb-3">
+                <label for="address_line_2" class="md:w-2/6">Address Line 2 <span class="text-red-600">*</span></label>
                 <input id="address_line_2" class="bg-gray-100" placeholder="Address Line 2"
                        name="address_line_2"
                        value="{{ old('address_line_2') ?: $address->address_line_2 ?? null }}">
             </div>
 
-            <div class="flex items-center mb-3">
-                <label for="address_line_3" class="w-2/6">Address Line 3 <span class="text-red-600">*</span></label>
+            <div class="md:flex items-center mb-3">
+                <label for="address_line_3" class="md:w-2/6">Address Line 3 <span class="text-red-600">*</span></label>
                 <input id="address_line_3" class="bg-gray-100" placeholder="Address Line 3"
                        name="address_line_3"
                        value="{{ old('address_line_3') ?: $address->address_line_3 ?? null }}">
             </div>
 
-            <div class="flex items-center mb-3">
-                <label for="address_line_4" class="w-2/6">Address Line 4</label>
+            <div class="md:flex items-center mb-3">
+                <label for="address_line_4" class="md:w-2/6">Address Line 4</label>
                 <input id="address_line_4" class="bg-gray-100" placeholder="Address Line 4"
                        name="address_line_4"
                        value="{{ old('address_line_4') ?: $address->address_line_4 ?? null }}">
             </div>
 
-            <div class="flex items-center mb-3">
-                <label for="address_line_5" class="w-2/6">Address Line 5</label>
+            <div class="md:flex items-center mb-3">
+                <label for="address_line_5" class="md:w-2/6">Address Line 5</label>
                 <input id="address_line_5" class="bg-gray-100" placeholder="Address Line 5"
                        name="address_line_5"
                        value="{{ old('address_line_5') ?: $address->address_line_5 ?? null }}">
             </div>
 
-            <div class="flex items-center mb-3 relative">
-                <label for="country_id" class="w-2/6">Country <span class="text-red-600">*</span></label>
+            <div class="md:flex items-center mb-3 relative">
+                <label for="country_id" class="md:w-2/6">Country <span class="text-red-600">*</span></label>
                 <select id="country_id" class="bg-gray-100" name="country" autocomplete="off">
                     @foreach ($countries as $country)
                         <option
@@ -81,8 +81,8 @@
                 </div>
             </div>
 
-            <div class="flex items-center mb-3">
-                <label for="post_code" class="w-2/6">Postcode <span class="text-red-600">*</span></label>
+            <div class="md:flex items-center mb-3">
+                <label for="post_code" class="md:w-2/6">Postcode <span class="text-red-600">*</span></label>
                 <input id="post_code" class="bg-gray-100" placeholder="Postcode" name="post_code"
                        value="{{ old('post_code') ?: $address->post_code ?? null }}">
             </div>
