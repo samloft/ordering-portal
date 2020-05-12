@@ -9,7 +9,7 @@ use Illuminate\Contracts\Hashing\Hasher as HasherContract;
 use Illuminate\Support\Facades\Cache;
 
 /**
- * Class CacheUserProvider
+ * Class CacheUserProvider.
  */
 class CacheUserProvider extends EloquentUserProvider
 {
