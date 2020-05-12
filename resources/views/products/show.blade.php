@@ -6,20 +6,20 @@
     @if ($product)
 
         <div class="w-full rounded bg-white p-5 shadow mb-5 text-sm">
-            <div class="flex mb-2">
-                <div class="w-3/4">
-                    <h2 class="font-semibold text-2xl text-primary mb-2">
+            <div class="md:flex mb-2">
+                <div class="md:w-3/4">
+                    <h2 class="font-semibold text-lg md:text-2xl text-primary mb-2">
                         {{ $product->name }} @if($product->not_sold) <span
                             class="badge badge-danger ml-3">Not Sold</span> @endif
                     </h2>
 
-                    <div class="flex">
-                        <expandable-image class="w-64"
+                    <div class="md:flex">
+                        <expandable-image class="w-full md:w-64"
                                           alt="{{ $product->code }}"
                                           src="{{ $product->image() }}">
                         </expandable-image>
 
-                        <div class="pl-3 pr-10 flex-0 text-lg">
+                        <div class="md:pl-3 md:pr-10 flex-0 text-lg">
                             <h5 class="mb-3">
                                 Product Code:
                                 <div id="product-code"
@@ -35,7 +35,7 @@
                     </div>
                 </div>
 
-                <div class="w-1/4">
+                <div class="md:w-1/4 mt-3 md:mt-0">
                     @if(!$product->not_sold)
                         @if ($product->prices->break1 > 0 || $product->prices->break2 > 0 || $product->prices->break3 > 0)
                             <h5 class="text-gray-600 text-center uppercase tracking-widest">Bulk Rates</h5>
@@ -103,12 +103,12 @@
                                 <strong>{{ currency(discount($product->prices->price), 4) }}</strong>
                             </div>
                         </div>
-                        <hr>
+                        <hr class="mb-3">
                         <add-basket :product="{{ json_encode($product, true) }}"></add-basket>
                     @endif
                 </div>
             </div>
-            <div class="flex justify-end">
+            <div class="hidden md:flex justify-end">
                 <div class="block">
                     <div class="text-xxs bg-gray-600 text-white pl-1 pr-1 rounded-t">
                         Stock Level
@@ -133,11 +133,20 @@
             @endif
 
             @if ($product->luckins_code)
-                <div class="flex items-center">
+                <div class="flex items-center justify-between md:justify-start">
                     <img class="w-24 mt-1 mr-3" src="{{ asset('images/luckins.png') }}"
                          alt="Luckins">
                     <div class="rounded border border-primary pl-1 pr-1">
                         {{ $product->luckins_code }}
+                    </div>
+
+                    <div class="block md:hidden">
+                        <div class="text-xxs bg-gray-600 text-white pl-1 pr-1 rounded-t">
+                            Stock Level
+                        </div>
+                        <div class="text-center bg-gray-200 p-1 text-xs rounded-b">
+                            {{ $product->stock }}
+                        </div>
                     </div>
                 </div>
             @endif
