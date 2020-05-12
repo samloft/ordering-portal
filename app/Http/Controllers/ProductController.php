@@ -58,7 +58,7 @@ class ProductController extends Controller
     {
         $previous_categories = str_replace(url('/'), '', url()->previous());
 
-        if ($previous_categories[0] === 'products') {
+        if (isset($previous_categories[0]) === 'products') {
             $category_array = array_values(array_filter(explode('/', $previous_categories)));
         } else {
             $category_array = [];
@@ -67,17 +67,17 @@ class ProductController extends Controller
         $product = Product::show(decodeUrl($product_code));
 
         $categories = [
-            'level_1' => isset($category_array[1]) ? decodeUrl($category_array[1]) : decodeUrl($product->categories->level_1),
-            'level_2' => isset($category_array[2]) ? decodeUrl($category_array[2]) : decodeUrl($product->categories->level_2),
-            'level_3' => isset($category_array[3]) ? decodeUrl($category_array[3]) : decodeUrl($product->categories->level_3),
-            'level_4' => isset($category_array[4]) ? decodeUrl($category_array[4]) : decodeUrl($product->categories->level_4),
-            'level_5' => isset($category_array[5]) ? decodeUrl($category_array[5]) : decodeUrl($product->categories->level_5),
+            'level_1' => isset($category_array[1]) ? decodeUrl($category_array[1]) : '',
+            'level_2' => isset($category_array[2]) ? decodeUrl($category_array[2]) : '',
+            'level_3' => isset($category_array[3]) ? decodeUrl($category_array[3]) : '',
+            'level_4' => isset($category_array[4]) ? decodeUrl($category_array[4]) : '',
+            'level_5' => isset($category_array[5]) ? decodeUrl($category_array[5]) : '',
         ];
 
-        if (isset($category_array[1]) && strpos($category_array[1], 'search') === 0) {
+        if (isset($categories['level_1']) && strpos($categories['level_1'], 'search') === 0) {
             $categories = [
                 'level_1' => 'search',
-                'query' => substr(decodeUrl($category_array[1]), 13),
+                'query' => substr(decodeUrl($categories['level_1']), 13),
             ];
         }
 
