@@ -10,7 +10,11 @@ nav.menu-wrapper {
             a {
                 @apply .leading-tight .uppercase .text-sm .font-thin .m-3 .rounded-lg .no-underline .flex .items-center .text-center;
 
-                padding: 10px 20px;
+                padding: 5px 10px;
+
+                @screen xl {
+                    padding: 10px 20px;
+                }
 
                 &.active {
                     @apply .bg-background_primary-color;

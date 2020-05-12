@@ -32,6 +32,10 @@ class AppServiceProvider extends ServiceProvider
             $view->with('product_data', GlobalSettings::productData());
         });
 
+        view()->composer('layout.header', static function ($view) {
+            $view->with('product_data', GlobalSettings::productData());
+        });
+
         view()->composer('products.sidebar', static function ($view) {
             $view->with('category_list', Category::list());
         });
