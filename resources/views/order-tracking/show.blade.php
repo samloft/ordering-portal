@@ -14,8 +14,8 @@
 
         @include('layout.alerts')
 
-        <div class="flex text-left mt-4 items-center">
-            <div class="w-1/2">
+        <div class="md:flex text-left mt-4 items-center">
+            <div class="md:w-1/2">
                 <div class="flex">
                     <div class="font-semibold">Order Number</div>
                     <div class="pl-2">{{ $order->order_number }}</div>
@@ -59,7 +59,7 @@
                 </div>
             </div>
 
-            <div class="w-1/2">
+            <div class="md:w-1/2 mt-3 md:mt-0">
                 <div class="text-center bg-gray-200 p-4 rounded">
                     <div>{{ $order->delivery_address1 }}</div>
                     <div>{{ $order->delivery_address2 }}</div>
@@ -78,8 +78,10 @@
         </div>
     </div>
 
-    <div class="flex justify-between mb-3 mt-3">
-        <button class="button button-inverse" onclick="window.history.back();">Back</button>
+    <div class="md:flex justify-between mb-3 mt-3">
+        <div class="flex justify-end md:flex-none mb-3 md:mb-0">
+            <button class="button button-inverse" onclick="window.history.back();">Back</button>
+        </div>
 
         <div class="flex">
             @if(count($lines) > 0)
@@ -111,10 +113,13 @@
             <table>
                 <thead>
                 <tr>
-                    <th>Product Code</th>
-                    <th>Name</th>
+                    <th>
+                        <span class="hidden md:block">Product Code</span>
+                        <span class="md:hidden">Product</span>
+                    </th>
+                    <th class="hidden md:block">Name</th>
                     <th class="text-right">Quantity</th>
-                    <th class="text-right">Net Price</th>
+                    <th class="hidden md:block text-right">Net Price</th>
                     <th class="text-right">Total Price</th>
                 </tr>
                 </thead>
@@ -122,9 +127,9 @@
                 @foreach($order->lines as $line)
                     <tr class="{{ $line->price ?: 'bg-red-200' }}">
                         <td>{{ $line->product }}</td>
-                        <td>{{ $line->description }}</td>
+                        <td class="hidden md:block">{{ $line->description }}</td>
                         <td class="text-right">{{ $line->quantity }}</td>
-                        <td class="text-right">{{ currency($line->net_price) }}</td>
+                        <td class="hidden md:block text-right">{{ currency($line->net_price) }}</td>
                         <td class="text-right">{{ currency($line->total) }}</td>
                     </tr>
                 @endforeach
@@ -132,8 +137,8 @@
             </table>
         </div>
 
-        <div class="text-right mt-1">
-            <small class="text-red-600">* Products marked in red are no longer available for purchase.</small>
+        <div class="text-red-600 my-3 text-xs leading-none">
+            * Items marked in red are no longer available for purchase and will not be added.
         </div>
     @endif
 @endsection

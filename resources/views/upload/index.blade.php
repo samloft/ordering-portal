@@ -13,8 +13,8 @@
     <div class="bg-white rounded shadow-md p-6">
         @include('layout.alerts')
 
-        <div class="flex">
-            <div class="w-1/3 pr-10">
+        <div class="flex-none md:flex">
+            <div class="sm:w-full md:w-1/3 md:pr-10 mb-3 md:mb-0">
                 <h3 class="text-lg leading-6 font-medium text-gray-900">
                     Order Upload
                 </h3>
@@ -39,12 +39,12 @@
                 @endif
             </div>
 
-            <div class="w-2/3">
+            <div class="sm:w-full md:w-2/3">
                 <form method="post" action="{{ route('upload-validate') }}" enctype="multipart/form-data" class="mb-0">
                     @if($config['prices'])
                         <div class="w-full">
                             <div class="mb-3 flex items-center justify-end">
-                                <div class="w-1/4">
+                                <div class="ld:w-1/4 md:w-2/2">
                                     <label for="price-tolerance">Price Tolerance <span
                                             class="text-xs">(optional)</span></label>
                                     <input id="price-tolerance" name="tolerance" placeholder="E.G 0.0020">

@@ -30,11 +30,11 @@
                 </div>
             </div>
 
-            <div class="text-center mt-6">
+            <div class="justify-end sm:justify-center mt-6 flex w-full">
                 <a href="{{ route('saved-baskets') }}">
-                    <button type="button" class="button button-danger w-40">Reset</button>
+                    <button type="button" class="button button-danger w-auto sm:w-40 mr-1">Reset</button>
                 </a>
-                <button class="button button-primary w-40">Search</button>
+                <button class="button button-primary w-auto sm:w-40 ml-1">Search</button>
             </div>
         </form>
     </div>
@@ -46,9 +46,17 @@
             <table class="table">
                 <thead>
                 <tr>
-                    <th>Template Reference</th>
-                    <th>Saved Date</th>
-                    <th class="text-right">Delete Template</th>
+                    <th>
+                        <span class="hidden md:block">Template Reference</span>
+                        <span class="md:hidden">Reference</span>
+                    </th>
+                    <th>
+                        <span class="hidden md:block">Saved Date</span>
+                        <span class="md:hidden">Saved</span>
+                    </th>
+                    <th class="text-right">
+                        <span class="hidden md:block">Delete Template</span>
+                    </th>
                 </tr>
                 </thead>
                 <tbody>
@@ -58,10 +66,15 @@
                         <td class="align-middle">{{ $basket->reference }}</td>
                         <td class="align-middle">{{ date('d/m/Y', strtotime($basket->created_at)) }}</td>
                         <td class="text-right">
-                            <a href="{{ route('saved-baskets.destroy', ['reference' => $basket->reference]) }}">
+                            <a class="hidden md:block"
+                               href="{{ route('saved-baskets.destroy', ['reference' => $basket->reference]) }}">
                                 <button id="saved_basket__delete" class="button button-sm button-danger">
                                     Delete Template
                                 </button>
+                            </a>
+                            <a class="md:hidden text-red-600"
+                               href="{{ route('saved-baskets.destroy', ['reference' => $basket->reference]) }}">
+                                Delete
                             </a>
                         </td>
                     </tr>

@@ -11,8 +11,8 @@
     </div>
 
     <div class="bg-white rounded-lg shadow p-4">
-        <div class="flex">
-            <div class="w-1/2">
+        <div class="md:flex">
+            <div class="md:w-1/2">
                 <h4 class="font-semibold">Template Reference <span
                         class="badge badge-info">{{ $saved_basket->first()->reference }}</span></h4>
 
@@ -21,7 +21,7 @@
                 </h4>
             </div>
 
-            <div class="w-1/2 text-right">
+            <div class="md:w-1/2 text-right">
                 <button class="button button-inverse" onclick="window.history.back();">
                     Back
                 </button>
@@ -40,7 +40,7 @@
             <thead>
             <tr>
                 <th>Product Code</th>
-                <th>Name</th>
+                <th class="hidden md:block">Name</th>
                 <th class="text-right">Quantity</th>
             </tr>
             </thead>
@@ -48,7 +48,7 @@
             @foreach($saved_basket as $item)
                 <tr class="{{ !$item->price ? 'bg-red-200' : '' }}">
                     <td>{{ $item->product }}</td>
-                    <td>{{ $item->name ?: 'Not Available' }}</td>
+                    <td class="hidden md:block">{{ $item->name ?: 'Not Available' }}</td>
                     <td class="text-right">{{ $item->quantity }}</td>
                 </tr>
             @endforeach
@@ -56,12 +56,12 @@
         </table>
     </div>
 
-    <div class="text-right">
-        <div class="text-red-600 mb-3">
-            <small>* Items marked in red are no longer available for purchase and will not be added.</small>
+    <div class="sm:text-left md:text-right">
+        <div class="text-red-600 my-3 text-xs leading-none">
+            * Items marked in red are no longer available for purchase and will not be added.
         </div>
 
-        <a href="{{ route('saved-baskets.copy', ['reference' => $saved_basket->first()->reference]) }}">
+        <a href="{{ route('saved-baskets.copy', ['reference' => $saved_basket->first()->reference]) }}" class="text-right">
             <submit-button before-text="Add to basket" after-text="Adding to basket"></submit-button>
         </a>
     </div>

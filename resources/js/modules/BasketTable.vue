@@ -35,35 +35,42 @@
             </div>
         </div>
 
-        <div class="mb-5 table-container" v-if="(items.length > 0)">
+        <div class="mb-3 md:mb-5 table-container" v-if="(items.length > 0)">
             <table>
                 <thead>
                 <tr>
                     <th>Product</th>
-                    <th>Unit</th>
-                    <th class="text-right">Net Price</th>
+                    <th class="hidden lg:table-cell">Unit</th>
+                    <th class="hidden md:table-cell text-right">Net Price</th>
                     <th class="text-center">Quantity</th>
-                    <th class="text-right">Total Price</th>
+                    <th class="text-right">
+                        <span class="hidden md:table-cell">Total Price</span>
+                        <span class="md:hidden">Price</span>
+                    </th>
                 </tr>
                 </thead>
                 <tbody class="">
 
                 <tr v-for="product in items" :class="(product.quantity > product.stock) ? 'bg-red-200' : ''">
                     <td>
-                        <div class="flex items-center">
-                            <img class="w-15 mr-3" :src="product.image" :alt="product.name">
+                        <div class="md:flex items-center">
+                            <img class="hidden md:block w-15 mr-3" :src="product.image" :alt="product.name">
                             <h2 class="leading-none">
                                 <a :href="'/products/view/' + product.product">
                                     <span class="text-primary font-medium">{{ product.product }}</span>
                                     <br>
-                                    <span class="text-xs font-thin text-gray-600">{{ product.name }}</span>
+                                    <span
+                                        class="hidden xl:block text-xs font-thin text-gray-600">{{ product.name }}</span>
+                                    <span
+                                        class="md:hidden text-xs font-thin text-gray-600">{{ product.net_price }}</span>
                                 </a>
                             </h2>
                         </div>
                     </td>
-                    <td><span class="badge badge-info">{{ product.uom.charAt(0).toUpperCase() + product.uom.substring(1).toLowerCase() }}</span>
+                    <td class="hidden lg:table-cell">
+                        <span class="badge badge-info">{{ product.uom.charAt(0).toUpperCase() + product.uom.substring(1).toLowerCase() }}</span>
                     </td>
-                    <td class="text-right text-gray-500 text-sm">{{ product.net_price }}</td>
+                    <td class="hidden md:table-cell text-right text-gray-500 text-sm">{{ product.net_price }}</td>
                     <td class="text-center">
                         <div class="flex flex-grow flex-col">
                             <input name="line_qty" class="w-24 h-6 text-right bg-gray-100" v-model="product.quantity"
@@ -79,19 +86,20 @@
                     </td>
                     <td class="text-right text-sm">{{ product.price }}</td>
                 </tr>
+
                 <tr v-for="promotion in promotions" class="bg-green-100">
                     <td>
-                        <div class="flex items-center">
-                            <img class="w-15 mr-3" :src="promotion.image" :alt="promotion.product">
+                        <div class="md:flex items-center">
+                            <img class="hidden md:block w-15 mr-3" :src="promotion.image" :alt="promotion.product">
                             <h2 class="leading-none">
                                 <span class="text-gray-400 font-medium">{{ promotion.product }}</span>
                                 <br>
-                                <span class="text-xs font-thin text-gray-600">{{ promotion.description }}</span>
+                                <span class="block w-10 md:w-full text-xs font-thin text-gray-600">{{ promotion.description }}</span>
                             </h2>
                         </div>
                     </td>
-                    <td></td>
-                    <td class="text-right text-gray-500 text-sm">{{ promotion.price }}</td>
+                    <td class="hidden lg:table-cell"></td>
+                    <td class="hidden md:table-cell text-right text-gray-500 text-sm">{{ promotion.price }}</td>
                     <td class="text-right text-gray-500 text-sm">{{ promotion.quantity }}</td>
                     <td class="text-right text-gray-500 text-sm">{{ promotion.price }}</td>
                 </tr>
@@ -103,16 +111,18 @@
             Your basket is currently empty.
         </div>
 
-        <div class="flex justify-between">
-            <div>
+        <div class="md:flex justify-between mb-3 md:mb-0">
+            <div class="flex md:flex-row justify-between">
                 <a href="/products">
-                    <button class="button button-inverse">Continue Shopping</button>
+                    <button class="button button-inverse md:mr-3">Continue Shopping</button>
                 </a>
                 <button class="button button-inverse" v-show="(items.length > 0)" @click="emptyBasket">Empty basket
                 </button>
             </div>
 
-            <button class="button button-primary" v-show="(items.length > 0)" @click="saveBasket">Save Basket</button>
+            <button class="hidden md:block button button-primary" v-show="(items.length > 0)" @click="saveBasket">Save
+                Basket
+            </button>
         </div>
     </div>
 

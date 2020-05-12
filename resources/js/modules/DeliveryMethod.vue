@@ -1,5 +1,5 @@
 <template>
-    <div class="flex items-center relative mb-3">
+    <div class="xl:flex items-center relative mb-3">
         <label for="shipping" class="w-1/2">Shipping</label>
 
         <select id="shipping" name="shipping" autocomplete="off" v-model="delivery_code"
@@ -9,7 +9,7 @@
             </option>
         </select>
         <div
-            class="pointer-events-none absolute inset-y-0 right-0 flex items-center px-3 text-gray-700">
+            class="pointer-events-none absolute inset-y-0 right-0 flex items-center px-3 pt-6 xl:pt-0 text-gray-700">
             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"
                  class="fill-current h-4 w-4">
                 <path

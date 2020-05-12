@@ -1,12 +1,12 @@
 @extends('layout.master')
 
 @section('content')
-    <div class="flex">
+    <div class="xl:flex">
         @include('products.sidebar')
 
-        <div class="w-3/4">
+        <div class="xl:w-3/4">
             @if ($categories['level_1'])
-                <div class="font-thin text-gray-700 mb-3 flex">
+                <div class="font-thin text-gray-700 mb-3 flex items-center text-xs md:text-sm lg:text-base">
                     @if ($categories['level_1'] === 'search')
                         <strong>Search</strong>
                         <svg class="mx-2 fill-current" width="14" height="24" viewBox="0 0 24 24" fill="none"

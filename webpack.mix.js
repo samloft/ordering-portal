@@ -38,6 +38,7 @@ mix.sass('resources/sass/themes/scolmore.scss', 'public/css/app-scolmore.css')
         folders: [
             'src',
             'templates',
+            'modules',
         ],
         extensions: [
             'html',

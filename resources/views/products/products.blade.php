@@ -12,7 +12,7 @@
         </div>
     @else
         @if ($sub_category_list)
-            <div class="flex flex-wrap -mx-3">
+            <div class="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-5">
                 @foreach($sub_category_list['list'] as $category)
                     <product-categories :category="{{ json_encode($category, true) }}"
                                         :current="{{ json_encode($sub_category_list['current'], true) }}"
@@ -24,24 +24,30 @@
 
         @if ($products)
             @foreach($products as $product)
-                <div class="w-full rounded bg-white p-5 shadow mb-5 text-sm">
-                    <div class="flex mb-2">
-                        <div class="w-3/4">
-                            <h2 class="font-semibold text-lg text-primary mb-2">
+                <div class="w-full rounded bg-white p-5 shadow mb-5 text-xs md:text-sm">
+                    <h2 class="md:hidden font-semibold text-primary mb-2">
+                        <a class="flex items-center" href="{{ $product->path() }}"
+                           class="hover:underline">{{ $product->name }} @if($product->not_sold) <span
+                                class="badge badge-danger ml-3">Not Sold</span> @endif</a>
+                    </h2>
+
+                    <div class="md:flex md:mb-2">
+                        <div class="md:w-3/4">
+                            <h2 class="hidden md:block font-semibold text-lg text-primary mb-2">
                                 <a class="flex items-center" href="{{ $product->path() }}"
                                    class="hover:underline">{{ $product->name }} @if($product->not_sold) <span
                                         class="badge badge-danger ml-3">Not Sold</span> @endif</a>
                             </h2>
 
                             <div class="flex items-center">
-                                <expandable-image class="w-32"
+                                <expandable-image class="w-16 md:w-32"
                                                   alt="{{ $product->code }}"
                                                   src="{{ $product->image() }}">
                                 </expandable-image>
 
-                                <div class="pl-3 pr-10">
+                                <div class="pl-3 text-xs md:text-sm md:pr-10">
                                     <h5>
-                                        Product Code:
+                                        <span class="hidden md:inline-block">Product</span> Code:
                                         <span id="product-code"
                                               class="font-semibold text-primary">{{ $product->code }}</span>
                                     </h5>
@@ -51,39 +57,50 @@
                                     </h5>
 
                                     <h5 class="mt-1">{{ $product->description }}</h5>
+
+                                    <div class="md:hidden flex justify-end items-center mt-2">
+                                        <div class="text-xs bg-gray-600 text-white pl-1 pr-1 rounded-l">
+                                            Stock Level
+                                        </div>
+                                        <div class="text-center bg-gray-200 px-1 rounded-r">
+                                            {{ $product->stock }}
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
                         </div>
 
-                        <div class="w-1/4">
+                        <div class="md:w-1/4 mb-3 md:mb-0">
                             @if(!$product->not_sold)
                                 @if ($product->prices->break1 > 0 || $product->prices->break2 > 0 || $product->prices->break3 > 0)
-                                    <h5 class="text-gray-600 text-center uppercase tracking-widest">Bulk Rates</h5>
+                                    <div class="hidden md:block">
+                                        <h5 class="text-gray-600 text-center uppercase tracking-widest">Bulk Rates</h5>
 
-                                    <table class="bulk-rates">
-                                        <thead>
-                                        <tr>
-                                            <th>Qty</th>
-                                            <th>Discount %</th>
-                                            <th class="text-right">Net Price</th>
-                                        </tr>
-                                        </thead>
-                                        <tbody>
-                                        @for ($i = 0; $i < 4; $i++)
-                                            @php
-                                                $break = 'break' . $i; $price = 'price' . $i;
-                                            @endphp
+                                        <table class="bulk-rates">
+                                            <thead>
+                                            <tr>
+                                                <th>Qty</th>
+                                                <th>Discount %</th>
+                                                <th class="text-right">Net Price</th>
+                                            </tr>
+                                            </thead>
+                                            <tbody>
+                                            @for ($i = 0; $i < 4; $i++)
+                                                @php
+                                                    $break = 'break' . $i; $price = 'price' . $i;
+                                                @endphp
 
-                                            @if ($product->prices->$break > 0)
-                                                <tr>
-                                                    <td>{{ $product->prices->$break }}</td>
-                                                    <td>{{ bulkDiscount($product->prices->price, $product->prices->$price) }}</td>
-                                                    <td class="text-right">{{ currency(discount($product->prices->$price), 4) }}</td>
-                                                </tr>
-                                            @endif
-                                        @endfor
-                                        </tbody>
-                                    </table>
+                                                @if ($product->prices->$break > 0)
+                                                    <tr>
+                                                        <td>{{ $product->prices->$break }}</td>
+                                                        <td>{{ bulkDiscount($product->prices->price, $product->prices->$price) }}</td>
+                                                        <td class="text-right">{{ currency(discount($product->prices->$price), 4) }}</td>
+                                                    </tr>
+                                                @endif
+                                            @endfor
+                                            </tbody>
+                                        </table>
+                                    </div>
                                 @endif
 
                                 <div class="flex justify-between">
@@ -121,12 +138,20 @@
                                         <strong>{{ currency(discount($product->prices->price), 4) }}</strong>
                                     </div>
                                 </div>
-                                <hr>
-                                <add-basket :product="{{ json_encode($product, true) }}"></add-basket>
+
+                                <div class="flex justify-between items-center mt-3 md:mt-0">
+                                    <a href="{{ route('products.show', $product->code) }}" class="md:hidden">
+                                        <button class="button button-inverse">
+                                            View
+                                        </button>
+                                    </a>
+
+                                    <add-basket :product="{{ json_encode($product, true) }}"></add-basket>
+                                </div>
                             @endif
                         </div>
                     </div>
-                    <div class="flex justify-between items-center">
+                    <div class="hidden md:flex justify-between items-center">
                         <a href="{{ route('products.show', $product->code) }}">
                             <button class="button button-inverse">
                                 View Details & Availability

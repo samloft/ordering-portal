@@ -9,13 +9,68 @@
                     </a>
                 </div>
 
-                <div class="md:hidden">
-                    <svg class="fill-current text-white h-8 w-8" xmlns="http://www.w3.org/2000/svg"
-                         viewBox="0 0 20 20">
-                        <path
-                            d="M16.4 9H3.6c-.552 0-.6.447-.6 1 0 .553.048 1 .6 1h12.8c.552 0 .6-.447.6-1 0-.553-.048-1-.6-1zm0 4H3.6c-.552 0-.6.447-.6 1 0 .553.048 1 .6 1h12.8c.552 0 .6-.447.6-1 0-.553-.048-1-.6-1zM3.6 7h12.8c.552 0 .6-.447.6-1 0-.553-.048-1-.6-1H3.6c-.552 0-.6.447-.6 1 0 .553.048 1 .6 1z"></path>
-                    </svg>
-                </div>
+                <mobile-menu>
+                    <template slot="trigger"></template>
+
+                    <template slot="content" slot-scope="props">
+                        <div v-if="props.isOpen"
+                             class="md:hidden absolute w-full h-full left-0 top-0 bg-background_invert-color text-background_invert-text z-40 p-8 pt-20">
+
+                            <div class="mb-3 flex justify-center">
+                                <a href="{{ route('basket') }}">
+                                    <button class="button button-secondary">Basket</button>
+                                </a>
+                            </div>
+
+                            <div class="text-center text-2xl">
+                                <div class="mb-6">
+                                    <a href="{{ route('home') }}" class="{{ activeMenu('home', 'underline') }}">Home</a>
+                                </div>
+
+                                <div class="mb-6">
+                                    <a href="{{ route('products') }}" class="{{ activeMenu('products', 'underline') }}">Products</a>
+                                </div>
+
+                                <div class="mb-6">
+                                    <a href="{{ route('order-tracking') }}"
+                                       class="{{ activeMenu('order-tracking', 'underline') }}">Orders</a>
+                                </div>
+
+                                <div class="mb-6">
+                                    <a href="{{ route('upload') }}" class="{{ activeMenu('upload', 'underline') }}">Order
+                                        Upload</a>
+                                </div>
+
+                                <div class="mb-6">
+                                    <a href="{{ route('saved-baskets') }}"
+                                       class="{{ activeMenu('saved-baskets', 'underline') }}">Saved Baskets</a>
+                                </div>
+
+                                <div class="mb-6">
+                                    <a href="{{ route('reports') }}" class="{{ activeMenu('reports', 'underline') }}">Reports</a>
+                                </div>
+
+                                @if ($product_data['data'] || $product_data['prices'])
+                                    <div class="mb-6">
+                                        <a href="{{ route('product-data') }}"
+                                           class="{{ activeMenu('product-data', 'underline') }}">Product Data</a>
+                                    </div>
+                                @endif
+                            </div>
+
+                            <hr>
+
+                            <div class="text-center text-lg mt-3">
+                                <div class="text-gray-300 text-base font-thin">{{ auth()->user()->name }}</div>
+                                <div class="mb-2 text-gray-300 text-base font-thin">{{ auth()->user()->customer->code }}</div>
+
+                                <a href="{{ route('account') }}" class="block">My account</a>
+                                <a href="#" class="block"
+                                   onclick="document.querySelector('#logout').submit()">Logout</a>
+                            </div>
+                        </div>
+                    </template>
+                </mobile-menu>
             </div>
 
             <div
