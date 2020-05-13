@@ -42,7 +42,10 @@
     }
 
     img {
-        @apply .w-20 .mr-2 .pl-2;
+        max-height: 5rem;
+        max-width: 5rem;
+
+        @apply mx-auto my-auto;
     }
 
     .basket-dropdown-message {
