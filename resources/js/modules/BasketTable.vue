@@ -36,7 +36,7 @@
         </div>
 
         <div class="mb-3 md:mb-5 table-container" v-if="(items.length > 0)">
-            <table>
+            <table class="basket-table">
                 <thead>
                 <tr>
                     <th>Product</th>
@@ -53,8 +53,10 @@
 
                 <tr v-for="product in items" :class="(product.quantity > product.stock) ? 'bg-red-200' : ''">
                     <td>
-                        <div class="md:flex items-center">
-                            <img class="hidden md:block w-15 mr-3" :src="product.image" :alt="product.name">
+                        <div class="md:flex items-center h-10">
+                            <div class="w-15 mr-3">
+                                <img class="hidden md:block" :src="product.image" :alt="product.name">
+                            </div>
                             <h2 class="leading-none">
                                 <a :href="'/products/view/' + product.product">
                                     <span class="text-primary font-medium">{{ product.product }}</span>
@@ -76,7 +78,7 @@
                             <input name="line_qty" class="w-24 h-6 text-right bg-gray-100" v-model="product.quantity"
                                    @keyup.enter="updateProduct(product.product, product.quantity)"
                                    autocomplete="off">
-                            <div class="leading-none text-primary">
+                            <div class="text-left leading-none text-primary">
                                 <small class="cursor-pointer hover:underline"
                                        @click="updateProduct(product.product, product.quantity)">Update</small>
                                 <small class="cursor-pointer hover:underline"
