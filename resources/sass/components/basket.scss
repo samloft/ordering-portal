@@ -52,3 +52,12 @@
         @apply .bg-primary .text-gray-800 .text-center .rounded-b-lg .pt-1 .pb-1;
     }
 }
+
+.basket-table {
+    img {
+        max-width: 3.75rem;
+        max-height: 3.75rem;
+
+        @apply mx-auto my-auto;
+    }
+}
