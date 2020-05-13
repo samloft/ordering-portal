@@ -25,11 +25,17 @@
                     <div class="basket-dropdown-summary">
                         <div v-for="line in products" class="basket-dropdown-content">
                             <div class="flex items-center">
-                                <img :src="line.image" :alt="line.product">
+                                <div class="w-20 mr-4 pl-2">
+                                    <img :src="line.image" :alt="line.product">
+                                </div>
 
                                 <div class="mb-1">
-                                    <h4 class="text-primary mb-2 mt-1">{{ line.product }}</h4>
-                                    <p class="text-sm">{{ line.name }}</p>
+                                    <h4 class="text-primary text-sm m-0">{{ line.product }}</h4>
+                                    <p class="text-xs m-0">{{ line.name }}</p>
+                                    <p class="text-xs m-0">
+                                        <span class="text-gray-400">Qty:</span> <span class="font-semibold">{{ line.quantity }}</span>
+                                        <span class="text-gray-400">Price:</span> <span class="font-semibold">{{ line.price }}</span>
+                                    </p>
                                 </div>
                             </div>
                         </div>
