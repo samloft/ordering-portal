@@ -1,6 +1,6 @@
 <template>
     <div>
-        <div class="flex justify-center px-6 pt-5 pb-6 border-2 border-gray-300 border-dashed rounded-md mb-5 relative">
+        <div class="flex justify-center px-6 pt-5 pb-6 border-2 border-gray-300 border-dashed rounded-md mb-5 relative hover:bg-gray-50">
             <div class="text-center">
                 <svg class="mx-auto h-12 w-12 text-gray-400" stroke="currentColor" fill="none" viewBox="0 0 48 48">
                     <path
@@ -18,7 +18,7 @@
                     {{ fileName }}
                 </p>
 
-                <input type="file" id="order-file" name="csv_file" class="absolute h-48 left-0 top-0 opacity-0" @change="updateFileName">
+                <input type="file" id="order-file" name="csv_file" class="absolute h-full left-0 top-0 opacity-0 cursor-pointer" @change="updateFileName">
             </div>
         </div>
 
