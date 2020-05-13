@@ -28,8 +28,12 @@
                                 <img :src="line.image" :alt="line.product">
 
                                 <div class="mb-1">
-                                    <h4 class="text-primary mb-2 mt-1">{{ line.product }}</h4>
-                                    <p class="text-sm">{{ line.name }}</p>
+                                    <h4 class="text-primary m-0">{{ line.product }}</h4>
+                                    <p class="text-sm m-0">{{ line.name }}</p>
+                                    <p class="text-sm m-0">
+                                        <span class="text-gray-400">Qty:</span> <span class="font-semibold">{{ line.quantity }}</span>
+                                        <span class="text-gray-400">Price:</span> <span class="font-semibold">{{ line.price }}</span>
+                                    </p>
                                 </div>
                             </div>
                         </div>

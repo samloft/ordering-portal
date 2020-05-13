@@ -23,7 +23,7 @@
     }
 
     .basket-dropdown-summary {
-        @apply .pt-1;
+        @apply .pt-1 rounded-lg;
 
         max-height: 200px;
         overflow: scroll;
@@ -31,6 +31,14 @@
 
     .basket-dropdown-content {
         @apply .pt-1;
+    }
+
+    .basket-dropdown-content:nth-child(odd) {
+        @apply bg-white;
+    }
+
+    .basket-dropdown-content:nth-child(even) {
+        @apply bg-gray-50;
     }
 
     img {
