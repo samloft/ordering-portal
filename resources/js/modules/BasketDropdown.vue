@@ -43,13 +43,19 @@
                 </div>
 
                 <div v-show="alert" class="basket-dropdown">
-                    <div class="basket-dropdown-content">
+                    <div class="basket-dropdown-content rounded-lg">
                         <div class="flex items-center">
-                            <img :src="product.image" :alt="product.code">
+                            <div class="w-20 mr-4 pl-2">
+                                <img :src="product.image" :alt="product.code">
+                            </div>
 
                             <div class="mb-1">
-                                <h4 class="text-primary mb-2">{{ product.code }}</h4>
-                                <p class="text-sm">{{ product.name }}</p>
+                                <h4 class="text-primary text-sm m-0">{{ product.code }}</h4>
+                                <p class="text-xs m-0">{{ product.name }}</p>
+                                <p class="text-xs m-0">
+                                    <span class="text-gray-400">Qty:</span> <span class="font-semibold">{{ product.quantity }}</span>
+                                    <span class="text-gray-400">Price:</span> <span class="font-semibold">{{ product.price }}</span>
+                                </p>
                             </div>
                         </div>
                     </div>

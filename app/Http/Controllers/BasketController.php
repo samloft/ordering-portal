@@ -83,11 +83,7 @@ class BasketController extends Controller
         $store_basket = Basket::store($details, $update);
 
         if ($store_basket) {
-            if (Storage::disk('public')->exists('product_images/'.$product_details->code.'.png')) {
-                $image = asset('product_images/'.$product_details->code.'.png');
-            } else {
-                $image = asset('images/no-image.png');
-            }
+            $image = Product::checkImage($product_details->code)['image'];
 
             return response()->json([
                 'error' => false,
@@ -96,9 +92,9 @@ class BasketController extends Controller
                 'product' => [
                     'image' => $image,
                     'code' => $product_details->code,
-                    'net_price' => currency(discount($product_details->price)),
+                    'net_price' => currency(discount($product_details->prices->price)),
                     'quantity' => $quantity,
-                    'price' => currency(discount($product_details->price) * $quantity, 2),
+                    'price' => currency(discount($product_details->prices->price) * $quantity, 2),
                     'name' => $product_details->name,
                     'unit' => $product_details->uom,
                     'stock' => $product_details->stock,
