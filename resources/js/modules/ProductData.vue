@@ -128,7 +128,6 @@
                 }).then(function (response) {
                     vm.forceFileDownload(response, 'product-net-prices.xlsx');
                 }).catch(function (error) {
-                    console.log(error);
                     Vue.swal('Error', 'Unable to generate downloadable file, please try again');
                 });
 
