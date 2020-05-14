@@ -139,7 +139,7 @@ class Basket extends Model
                 $promotion_lines[] = $value_promotions;
 
                 foreach ($value_promotions as $value_promotion) {
-                    if ($value_promotion['reached'] && $value_promotion['type'] === 'percent') {
+                    if ($value_promotion && $value_promotion['reached'] && $value_promotion['type'] === 'percent') {
                         $order_discount += $value_promotion['value'];
                     }
                 }
