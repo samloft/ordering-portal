@@ -1,5 +1,22 @@
 <template>
     <div>
+        <div v-for="promotion in promotions" v-if="!promotion.reached">
+            <div class="alert alert-warning" role="alert">
+                <div class="alert-body">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" class="alert-icon">
+                        <path class="primary" d="M12 2a10 10 0 1 1 0 20 10 10 0 0 1 0-20z"></path>
+                        <path class="secondary"
+                              d="M11 12a1 1 0 0 1 0-2h2a1 1 0 0 1 .96 1.27L12.33 17H13a1 1 0 0 1 0 2h-2a1 1 0 0 1-.96-1.27L11.67 12H11zm2-4a1.5 1.5 0 1 1 0-3 1.5 1.5 0 0 1 0 3z"></path>
+                    </svg>
+                    <div class="w-full">
+                        You are close to reaching a promotion!
+
+                        <p class="font-thin text-sm">{{ promotion.message }}</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
         <div v-if="potential_saving">
             <div class="alert alert-warning" role="alert">
                 <div class="alert-body">
@@ -89,10 +106,12 @@
                     <td class="text-right text-sm">{{ product.price }}</td>
                 </tr>
 
-                <tr v-for="promotion in promotions" class="bg-green-100">
+                <tr v-for="promotion in promotions" v-if="promotion.reached && promotion.type === 'product'" class="bg-green-100">
                     <td>
                         <div class="md:flex items-center">
-                            <img class="hidden md:block w-15 mr-3" :src="promotion.image" :alt="promotion.product">
+                            <div class="w-15 mr-3">
+                                <img class="hidden md:block" :src="promotion.image" :alt="promotion.name">
+                            </div>
                             <h2 class="leading-none">
                                 <span class="text-gray-400 font-medium">{{ promotion.product }}</span>
                                 <br>

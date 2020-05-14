@@ -12,6 +12,9 @@
                         <thead>
                         <tr>
                             <th class="px-6 py-3 border-b border-gray-200 bg-gray-200 text-left text-xs leading-4 font-medium text-gray-500 uppercase tracking-wider">
+                                Name
+                            </th>
+                            <th class="px-6 py-3 border-b border-gray-200 bg-gray-200 text-left text-xs leading-4 font-medium text-gray-500 uppercase tracking-wider">
                                 Product/Value
                             </th>
                             <th class="px-6 py-3 border-b border-gray-200 bg-gray-200 text-left text-xs leading-4 font-medium text-gray-500 uppercase tracking-wider">
@@ -34,6 +37,9 @@
                         </thead>
                         <tbody class="bg-white">
                         <tr v-for="promotion in promotions">
+                            <td class="px-6 py-4 whitespace-no-wrap border-b border-gray-200 text-sm leading-5 text-gray-500">
+                                {{ promotion.name }}
+                            </td>
                             <td class="px-6 py-4 whitespace-no-wrap border-b border-gray-200 text-sm leading-5 font-medium text-gray-900">
                                 <div v-if="promotion.type === 'product'">
                                     <div class="text-sm leading-5 font-medium text-gray-900">{{ promotion.product }}
@@ -98,6 +104,12 @@
         </div>
 
         <modal v-if="modal" title="Product Promotion">
+            <div class="mb-3">
+                <label for="promotion-name">Promotion Name</label>
+                <input id="promotion-name" class="bg-gray-100" v-model="data.name"
+                       placeholder="Promotion Name" maxlength="40">
+                <span v-text="errors.get('name')" class="block text-xs text-red-600"/>
+            </div>
             <div class="relative mb-3">
                 <label for="type">Promotion Type</label>
                 <select v-model="data.type"

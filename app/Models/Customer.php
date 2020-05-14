@@ -46,15 +46,15 @@ class Customer extends Model
         return $this->belongsTo(CustomerDiscount::class, 'code', 'customer_code');
     }
 
-    /**
-     * Check to see if the customer has any promotions available to them.
-     *
-     * @return array
-     */
-    public function hasPromotions(): array
-    {
-        return Promotion::customer(auth()->user()->customer);
-    }
+    ///**
+    // * Check to see if the customer has any promotions available to them.
+    // *
+    // * @return array
+    // */
+    //public function hasPromotions(): array
+    //{
+    //    return Promotion::customer(auth()->user()->customer);
+    //}
 
     /**
      * Get customer details for the given customer code.
