@@ -219,7 +219,7 @@ class Promotion extends Model
     {
         $qty = self::calculateClaimAmount($promotion, $promotion->product_qty);
 
-        if($line->product === $promotion->product) {
+        if ($line->product === $promotion->product) {
             if ($line->quantity >= ($promotion->product_qty * 0.75) && $line->quantity < $promotion->product_qty && $qty > 0) {
                 return [
                     'reached' => false,
