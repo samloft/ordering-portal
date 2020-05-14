@@ -129,7 +129,6 @@ class Promotion extends Model
 
         foreach ($promotions as $promotion) {
             if (! $promotion->restrictions || in_array(auth()->user()->customer->{$promotion->restrictions}, $promotion->{$promotion->restrictions.'s'}, true)) {
-
                 if ($type === 'value' && $promotion->type === 'value') {
                     $customer_promotions[] = self::checkValue($promotion, $data);
                 } elseif ($type === 'product' && $promotion->type === 'product') {
