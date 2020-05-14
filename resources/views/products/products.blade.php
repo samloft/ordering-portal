@@ -12,7 +12,7 @@
         </div>
     @else
         @if ($sub_category_list)
-            <div class="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-5">
+            <div class="flex flex-wrap">
                 @foreach($sub_category_list['list'] as $category)
                     <product-categories :category="{{ json_encode($category, true) }}"
                                         :current="{{ json_encode($sub_category_list['current'], true) }}"
