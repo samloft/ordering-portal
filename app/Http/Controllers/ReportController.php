@@ -63,6 +63,8 @@ class ReportController extends Controller
      */
     public function backOrderReport($output)
     {
+        ini_set('memory_limit', '256M');
+
         $back_orders = OrderTrackingHeader::backOrders();
 
         if (count($back_orders) > 0) {
