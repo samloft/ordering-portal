@@ -57,7 +57,7 @@ class Basket extends Model
     {
         $lines = static::selectRaw('basket.product as product, basket.customer_code as customer_code,
                                                     basket.quantity as quantity, price, break1, price1, break2, price2,
-                                                    break3, price3, name, uom, not_sold, stock, type')
+                                                    break3, price3, name, description, uom, not_sold, stock, type')
             ->where('basket.customer_code', auth()->user()->customer->code)->where('basket.user_id', auth()->user()->id)
             ->join('prices', 'basket.product', '=', 'prices.product')
             ->where('prices.customer_code', auth()->user()->customer->code)
@@ -67,8 +67,9 @@ class Basket extends Model
         $potential_saving_total = 0;
         $bulk_savings = 0;
         $product_lines = [];
+
+        $promotions = Promotion::active();
         $promotion_lines = [];
-        $promotions = auth()->user()->customer->hasPromotions();
 
         foreach ($lines as $line) {
             // Check for any bulk discounts and adjust the prices to match if found.
@@ -104,6 +105,7 @@ class Basket extends Model
                 'product' => $line->product,
                 'type' => $line->type,
                 'name' => $line->name,
+                'description' => $line->description,
                 'uom' => $line->uom,
                 'stock' => $line->stock,
                 'image' => $image,
@@ -123,54 +125,28 @@ class Basket extends Model
                 $potential_saving_total += ($next_bulk_qty + $line->quantity) * $next_bulk_saving;
             }
 
-            foreach ($promotions as $promotion) {
-                if ($promotion->type === 'product' && $line->product === $promotion->product && $line->quantity >= $promotion->product_qty) {
-                    $qty = Promotion::calculateClaimAmount($promotion, $line->quantity);
-
-                    if ($qty > 0) {
-                        if ($line->product !== $promotion->promotion_product) {
-                            $promotion_image = Product::checkImage($promotion->promotion_product)['image'];
-                        } else {
-                            $promotion_image = $image;
-                        }
-
-                        $promotion_lines[] = [
-                            'product' => $promotion->promotion_product,
-                            'quantity' => $qty,
-                            'description' => 'FOC promotional item',
-                            'price' => currency(0.00, 2),
-                            'image' => $promotion_image,
-                        ];
-                    }
-                }
+            if ($promotions) {
+                $promotion_lines[] = Promotion::calculate($promotions, 'product', $line);
             }
         }
 
         $order_discount = 0;
 
-        foreach ($promotions as $promotion) {
-            if ($promotion->type === 'value' && $goods_total >= $promotion->minimum_value) {
-                if ($promotion->value_reward === 'percent') {
-                    $order_discount += ($goods_total / 100) * $promotion->value_percent;
-                }
+        if ($promotions) {
+            $value_promotions = Promotion::calculate($promotions, 'value', $goods_total);
 
-                if ($promotion->value_reward === 'product') {
-                    $qty = Promotion::calculateClaimAmount($promotion, $goods_total);
+            if ($value_promotions) {
+                $promotion_lines[] = $value_promotions;
 
-                    if ($qty > 0) {
-                        $promotion_image = Product::checkImage($promotion->promotion_product)['image'];
-
-                        $promotion_lines[] = [
-                            'product' => $promotion->promotion_product,
-                            'quantity' => $qty,
-                            'description' => 'FOC promotional item',
-                            'price' => currency(0.00, 2),
-                            'image' => $promotion_image,
-                        ];
+                foreach ($value_promotions as $value_promotion) {
+                    if ($value_promotion['reached'] && $value_promotion['type'] === 'percent') {
+                        $order_discount += $value_promotion['value'];
                     }
                 }
             }
         }
+
+        $promotion_lines = array_filter(array_merge(...$promotion_lines));
 
         if ($shipping_code) {
             $delivery_method = DeliveryMethod::details($shipping_code);

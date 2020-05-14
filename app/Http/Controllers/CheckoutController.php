@@ -96,6 +96,7 @@ class CheckoutController extends Controller
                 'order_number' => $order_number,
                 'product' => $line['product'],
                 'description' => $line['name'],
+                'long_description' => $line['description'],
                 'quantity' => $line['quantity'],
                 'stock_type' => $line['type'],
                 'net_price' => $line['unit_price'],
@@ -110,7 +111,8 @@ class CheckoutController extends Controller
             $promotions[] = [
                 'order_number' => $order_number,
                 'product' => $promotion_line['product'],
-                'description' => $promotion_line['description'],
+                'description' => $promotion_line['name'],
+                'long_description' => $promotion_line['description'],
                 'quantity' => $promotion_line['quantity'],
                 'stock_type' => 'PROMO',
                 'net_price' => 0,

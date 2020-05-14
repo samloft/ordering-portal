@@ -77,6 +77,7 @@ class PromotionController extends Controller
     public function validation()
     {
         return request()->validate([
+            'name' => 'required|max:40',
             'type' => 'required',
             'minimum_value' => Rule::requiredIf(request('type') === 'value').'|numeric|nullable',
             'value_reward' => Rule::requiredIf(request('type') === 'value'),
