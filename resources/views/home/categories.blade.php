@@ -1,9 +1,9 @@
 @if (count($links['banners']) > 0)
     <div class="flex flex-wrap">
         @foreach($links['banners'] as $banner)
-            <div class="{{ $banner['style'] }} mb-3 {{ $banner['style'] === 'w-1/2' ? 'px-3' : '' }}">
+            <div class="{{ $banner['style'] }} mb-3 {{ $banner['style'] === 'w-1/2' ? 'px-3' : '' }} flex justify-center">
                 <a href="{{ $banner['file'] ? \Illuminate\Support\Facades\Storage::url(config('app.name').'/files/'.$banner['file']) : $banner['link'] }}">
-                    <img class="shadow mx-auto"
+                    <img class="shadow"
                          src="{{ \Illuminate\Support\Facades\Storage::url(config('app.name').'/banner/'.$banner['image']) }}"
                          alt="{{ $banner['name'] }}">
                 </a>
