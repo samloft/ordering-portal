@@ -1,5 +1,5 @@
 <template>
-    <div class="px-3">
+    <div class="px-3 w-1/2 md:w-1/4 lg:w-1/5">
         <a :href="buildUrl()">
             <div class="bg-white relative text-center rounded-lg mb-6 shadow-md hover:shadow-lg">
                 <div class="h-40">
