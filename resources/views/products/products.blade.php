@@ -40,7 +40,7 @@
                             </h2>
 
                             <div class="flex items-center">
-                                <expandable-image class="w-16 h-16 md:h-32 md:w-32"
+                                <expandable-image class="flex items-center w-16 h-16 md:h-32 md:w-32"
                                                   alt="{{ $product->code }}"
                                                   src="{{ $product->image() }}">
                                 </expandable-image>
