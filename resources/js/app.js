@@ -30,6 +30,7 @@ Vue.component('fade-transition', require('./modules/FadeTransition.vue').default
 Vue.component('modal', require('./modules/Modal.vue').default);
 Vue.component('mobile-menu', require('./modules/MobileMenu.vue').default);
 Vue.component('mobile-alerts', require('./modules/MobileAlerts.vue').default);
+Vue.component('reports', require('./modules/Reports.vue').default);
 
 window.Event = new Vue();
 
