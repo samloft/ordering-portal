@@ -14,7 +14,7 @@
                     </h2>
 
                     <div class="md:flex">
-                        <expandable-image class="w-full md:w-64"
+                        <expandable-image class="flex justify-center items-center w-full md:w-64"
                                           alt="{{ $product->code }}"
                                           src="{{ $product->image() }}">
                         </expandable-image>

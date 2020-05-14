@@ -26,6 +26,10 @@ a > img {
     }
 }
 
+img {
+    display: inline-block !important;
+}
+
 hr {
     @apply .border-t-2 .border-brand-primary;
 }

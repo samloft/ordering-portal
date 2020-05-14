@@ -13,7 +13,7 @@
 
         </i>
 
-        <div :class="expanded ? 'img-expanded' : ''" class="md:mx-auto">
+        <div :class="expanded ? 'img-expanded' : ''" class="md:flex md:justfiy-center">
             <img v-bind="$attrs" :class="expanded ? 'img-expanded' : ''" class="max-w-16 max-h-16 md:max-w-32 md:max-h-32 mx-auto"/>
         </div>
     </div>

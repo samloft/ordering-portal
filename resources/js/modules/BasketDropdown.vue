@@ -25,7 +25,7 @@
                     <div class="basket-dropdown-summary">
                         <div v-for="line in products" class="basket-dropdown-content">
                             <div class="flex items-center">
-                                <div class="w-20 mr-4 pl-2">
+                                <div class="w-20 mr-4 pl-2 flex">
                                     <img :src="line.image" :alt="line.product">
                                 </div>
 
@@ -45,7 +45,7 @@
                 <div v-show="alert" class="basket-dropdown">
                     <div class="basket-dropdown-content rounded-lg">
                         <div class="flex items-center">
-                            <div class="w-20 mr-4 pl-2">
+                            <div class="w-20 mr-4 pl-2 flex">
                                 <img :src="product.image" :alt="product.code">
                             </div>
 

@@ -71,8 +71,8 @@
                 <tr v-for="product in items" :class="(product.quantity > product.stock) ? 'bg-red-200' : ''">
                     <td>
                         <div class="md:flex items-center h-10">
-                            <div class="w-15 mr-3">
-                                <img class="hidden md:block" :src="product.image" :alt="product.name">
+                            <div class="w-15 mr-3 flex">
+                                <img class="hidden md:block mx-auto" :src="product.image" :alt="product.name">
                             </div>
                             <h2 class="leading-none">
                                 <a :href="'/products/view/' + product.product">
@@ -109,7 +109,7 @@
                 <tr v-for="promotion in promotions" v-if="promotion.reached && promotion.type === 'product'" class="bg-green-100">
                     <td>
                         <div class="md:flex items-center">
-                            <div class="w-15 mr-3">
+                            <div class="w-15 mr-3 flex">
                                 <img class="hidden md:block" :src="promotion.image" :alt="promotion.name">
                             </div>
                             <h2 class="leading-none">
