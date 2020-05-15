@@ -167,7 +167,7 @@
                 Vue.swal({
                     title: "Empty Basket?",
                     text: "Are you sure? This cannot be un-done.",
-                    type: "warning",
+                    icon: "warning",
                     showCancelButton: true,
                 }).then((response) => {
                     if (response.value) {
