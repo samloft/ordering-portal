@@ -1,6 +1,6 @@
 <template>
     <div>
-        <button @click="submit()" class="button button-primary":disabled="submitted">
+        <button @click="submit()" class="button button-primary" :disabled="submitted">
             {{ buttonText }} <slot></slot>
         </button>
     </div>

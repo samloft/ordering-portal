@@ -26,26 +26,6 @@
         </div>
 
         <button class="button button-primary mt-5" @click="downloadReport()">Run Report</button>
-
-        <modal v-if="downloading">
-            <div class="mx-auto flex items-center justify-center h-12 w-12 rounded-full bg-green-100">
-                <svg width="32" height="32" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                    <path
-                        d="M8 16C5.23858 16 3 13.7614 3 11C3 8.55154 4.75992 6.51413 7.08376 6.08376C7.51412 3.75992 9.55154 2 12 2C14.4485 2 16.4859 3.75992 16.9162 6.08376C19.2401 6.51413 21 8.55154 21 11C21 13.7614 18.7614 16 16 16M9 19L12 22M12 22L15 19M12 22V10"
-                        stroke="#4A5568" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-                </svg>
-            </div>
-            <div class="mt-3 text-center sm:mt-5">
-                <h3 class="text-lg leading-6 font-medium text-gray-900">
-                    Preparing report.....
-                </h3>
-                <div class="mt-2">
-                    <p class="text-sm leading-5 text-gray-500">
-                        Please wait while we crunch the data and prepare your download.
-                    </p>
-                </div>
-            </div>
-        </modal>
     </div>
 </template>
 
@@ -53,7 +33,6 @@
     export default {
         data() {
             return {
-                downloading: false,
                 report_type: '',
                 output_type: 'pdf',
             }
@@ -61,15 +40,33 @@
         methods: {
             async downloadReport() {
                 if (!this.report_type) {
-                    return Vue.swal('Error', 'You must select a report to download', 'error');
+                    Vue.swal({
+                        title: 'Error',
+                        text: 'You must select a report to download',
+                        icon: 'error',
+                        confirmButtonColor: '#E02424',
+                    });
                 }
 
                 if(!this.output_type) {
-                    return Vue.swal('Error', 'You must select n output type', 'error');
+                    Vue.swal({
+                        title: 'Error',
+                        text: 'You must select an output type',
+                        icon: 'error',
+                        confirmButtonColor: '#E02424',
+                    });
                 }
 
-                this.downloading = true;
                 var vm = this;
+
+                Vue.swal({
+                    title: 'Preparing report.....',
+                    text: 'Please wait while we crunch the data and prepare your download.',
+                    showCancelButton: false,
+                    showConfirmButton: false,
+                    allowOutsideClick: false,
+                    icon: 'info',
+                });
 
                 await axios({
                     method: 'post',
@@ -84,10 +81,15 @@
 
                     return vm.forceFileDownload(response, filename);
                 }).catch(function (error) {
-                    return Vue.swal('Error', 'Unable to generate report, please try again', 'error');
+                    Vue.swal({
+                        title: 'Error',
+                        text: 'Unable to generate report, please try again',
+                        icon: 'error',
+                        confirmButtonColor: '#E02424',
+                    });
                 });
 
-                this.downloading = false;
+                Vue.swal.close();
             },
             forceFileDownload(response, filename) {
                 const url = window.URL.createObjectURL(new Blob([response.data]));
