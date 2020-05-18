@@ -31,6 +31,7 @@ Vue.component('modal', require('./modules/Modal.vue').default);
 Vue.component('mobile-menu', require('./modules/MobileMenu.vue').default);
 Vue.component('mobile-alerts', require('./modules/MobileAlerts.vue').default);
 Vue.component('reports', require('./modules/Reports.vue').default);
+Vue.component('address-form', require('./modules/AddressForm.vue').default);
 
 window.Event = new Vue();
 
