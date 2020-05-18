@@ -4,8 +4,11 @@ namespace App\Http\Controllers;
 
 use App\Models\Address;
 use App\Models\GlobalSettings;
+use Illuminate\Http\JsonResponse;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Routing\Redirector;
+use Illuminate\Support\Facades\Cache;
+use Illuminate\Support\Facades\Http;
 
 class AddressController extends Controller
 {
@@ -192,6 +195,35 @@ class AddressController extends Controller
                 'post_code' => $address->post_code,
             ],
         ]);
+    }
+
+    /**
+     * Lookup a postcode to get address details.
+     *
+     * @return \Illuminate\Http\JsonResponse
+     */
+    public function lookup(): JsonResponse
+    {
+        request()->validate([
+            'postcode' => 'required|min:3',
+        ]);
+
+        $postcode = strtoupper(str_replace(' ', '', request('postcode')));
+
+        $addresses = Cache::get('addresses-'.$postcode);
+
+        if (! $addresses) {
+            $addresses = Http::get('https://api.getAddress.io/find/'.$postcode, [
+                'api-key' => env('POSTCODE_API_KEY'),
+                'expanded' => true,
+            ]);
+
+            Cache::put('addresses-'.$postcode, $addresses->json(), 60 * 24);
+
+            return response()->json($addresses->json(), $addresses->status());
+        }
+
+        return response()->json($addresses, $addresses ? 200 : 404);
     }
 
     /**

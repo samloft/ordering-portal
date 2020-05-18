@@ -4,6 +4,7 @@ namespace Tests\Feature\Http\Controllers;
 
 use App\Models\Contact;
 use Illuminate\Foundation\Testing\RefreshDatabase;
+use Illuminate\Support\Facades\Mail;
 use Tests\Setup\UserFactory;
 use Tests\TestCase;
 
@@ -36,6 +37,8 @@ class ContactControllerTest extends TestCase
      */
     public function store_returns_an_ok_response(): void
     {
+        Mail::fake();
+
         $user = (new UserFactory())->withCustomer()->create();
 
         $contact = factory(Contact::class)->create();
