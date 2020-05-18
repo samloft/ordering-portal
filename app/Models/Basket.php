@@ -146,7 +146,9 @@ class Basket extends Model
             }
         }
 
-        $promotion_lines = array_filter(array_merge(...$promotion_lines));
+        if ($promotion_lines) {
+            $promotion_lines = array_filter(array_merge(...$promotion_lines));
+        }
 
         if ($shipping_code) {
             $delivery_method = DeliveryMethod::details($shipping_code);

@@ -75,8 +75,9 @@
                 Vue.swal({
                     title: "Delete Address?",
                     text: "Are you sure? This cannot be un-done.",
-                    type: "warning",
+                    icon: "warning",
                     showCancelButton: true,
+                    confirmButtonColor: '#EAB532',
                 }).then((response) => {
                     if (response.value) {
                         location.href = '/account/addresses/' + id + '/delete';

@@ -28,7 +28,6 @@ mix.sass('resources/sass/themes/scolmore.scss', 'public/css/app-scolmore.css')
     .sass('resources/sass/themes/esp.scss', 'public/css/app-esp.css')
     .sass('resources/sass/themes/litehouse.scss', 'public/css/app-litehouse.css')
     .sass('resources/sass/themes/espi.scss', 'public/css/app-espi.css')
-    .sass('resources/sass/app.scss', 'public/css/app.css')
     .sass('resources/sass/cms.scss', 'public/css/cms.css')
     .js('resources/js/app.js', 'public/js')
     .js('resources/js/cms.js', 'public/js')
@@ -46,5 +45,5 @@ mix.sass('resources/sass/themes/scolmore.scss', 'public/css/app-scolmore.css')
             'php',
             'vue'
         ],
-        whitelistPatterns: [/badge/, /flatpickr/, /category/]
+        whitelistPatterns: [/badge/, /flatpickr/, /category/, /swal2/]
     });

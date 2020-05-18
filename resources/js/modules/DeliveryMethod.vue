@@ -38,7 +38,12 @@
                 axios.get('/basket/summary/' + this.delivery_code).then(response => {
                     Event.$emit('delivery-updated', response.data);
                 }).catch(error => {
-                    Vue.swal('Error', 'Unable to update order summary', 'error');
+                    Vue.swal({
+                        title: 'Error',
+                        text: 'Unable to update order summary',
+                        icon: 'error',
+                        confirmButtonColor: '#E02424',
+                    });
                 });
             }
         },
