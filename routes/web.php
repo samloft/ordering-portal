@@ -11,6 +11,7 @@
 |
 */
 
+use App\Http\Controllers\AddressController;
 use App\Models\Basket;
 use App\Models\Category;
 use App\Models\Customer;
@@ -136,6 +137,8 @@ Route::group(['middleware' => ['auth', 'has.customer', 'terms']], static functio
             Route::post('default', 'AddressController@default')->name('account.address.default');
             Route::get('{id}/delete', 'AddressController@destroy')->name('account.address.destroy');
             Route::get('select/{id}', 'AddressController@select')->name('account.address.select');
+
+            Route::get('lookup', [AddressController::class, 'lookup'])->name('account.address.lookup');
         });
 
         Route::group(['prefix' => 'customer'], static function () {
