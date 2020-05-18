@@ -122,6 +122,16 @@
     }
 }
 
+.swal2-success {
+    content: url("/svg/success.svg") !important;
+
+    @apply bg-green-100;
+
+    span {
+        content: "" !important;
+    }
+}
+
 .swal2-error {
     content: url("/svg/error.svg") !important;
 
@@ -231,14 +241,14 @@
 }
 
 .swal2-confirm {
-    @apply border-transparent bg-button-primary_color text-button-primary_text text-white;
+    @apply border-transparent text-white;
 
     &:hover {
         @apply opacity-75;
     }
 
     &:focus {
-        @apply outline-none border-red-300 shadow-outline-blue;
+        @apply outline-none shadow-outline-blue;
     }
 
     @screen md {
@@ -248,5 +258,9 @@
     @screen sm {
         @apply text-sm leading-5;
     }
+}
+
+.swal2-image {
+    margin: 0 !important;
 }
 

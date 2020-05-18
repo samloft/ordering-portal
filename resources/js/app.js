@@ -45,7 +45,12 @@ window.App = new Vue({
             })
                 .then(function (response) {
                     if (response.data.message) {
-                        Vue.swal('Warning', response.data.message, 'warning');
+                        Vue.swal({
+                            title: 'Warning',
+                            text: response.data.message,
+                            icon: 'warning',
+                            confirmButtonColor: '#EAB532',
+                        });
                     }
 
                     if (update) {
@@ -58,7 +63,12 @@ window.App = new Vue({
                 })
                 .catch(function (error) {
                     if (error.response) {
-                        Vue.swal('Error', error.response.data.message, 'error');
+                        Vue.swal({
+                            title: 'Error',
+                            text: error.response.data.message,
+                            icon: 'error',
+                            confirmButtonColor: '#E02424',
+                        });
                     }
 
                     return false;

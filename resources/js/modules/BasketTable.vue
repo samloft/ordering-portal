@@ -169,6 +169,7 @@
                     text: "Are you sure? This cannot be un-done.",
                     icon: "warning",
                     showCancelButton: true,
+                    confirmButtonColor: '#EAB532',
                 }).then((response) => {
                     if (response.value) {
                         location.href = '/basket/empty';
@@ -180,6 +181,10 @@
                     title: 'Add a reference for your saved basket',
                     input: 'text',
                     showCancelButton: true,
+                    confirmButtonText: 'Save',
+                    customClass: {
+                        confirmButton: 'bg-button-primary_color',
+                    },
                     inputValidator: (value) => {
                         if (!value) {
                             return 'You need to enter a reference.'
@@ -190,13 +195,30 @@
                         axios.post('/saved-baskets/store', {
                             reference: response.value
                         }).then(function (response) {
-                            return Vue.swal('Success', 'Your saved basket has been created', 'success');
+                            return Vue.swal({
+                                title: 'Success',
+                                text: 'Your saved basket has been created',
+                                icon: 'success',
+                                customClass: {
+                                    confirmButton: 'bg-button-primary_color'
+                                }
+                            });
                         }).catch(function (error) {
                             if (error.response.status === 422) {
-                                return Vue.swal('Error', error.response.data, 'error');
+                                return Vue.swal({
+                                    title: 'Error',
+                                    text: error.response.data,
+                                    icon: 'error',
+                                    confirmButtonColor: '#E02424',
+                                });
                             }
 
-                            return Vue.swal('Error', 'Could not create saved basket, please try again', 'error');
+                            return Vue.swal({
+                                title: 'Error',
+                                text: 'Could not create saved basket, please try again',
+                                icon: 'error',
+                                confirmButtonColor: '#E02424',
+                            });
                         });
                     }
                 });
@@ -214,7 +236,12 @@
                 }).then(function () {
                     window.location.reload();
                 }).catch(function () {
-                    Vue.swal('Error', 'Could not remove that product, please try again', 'error');
+                    Vue.swal({
+                        title: 'Error',
+                        text: 'Could not remove that product, please try again',
+                        icon: 'error',
+                        confirmButtonColor: '#E02424',
+                    });
                 })
             },
             allSavings: function () {

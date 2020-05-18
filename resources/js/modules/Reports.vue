@@ -40,11 +40,21 @@
         methods: {
             async downloadReport() {
                 if (!this.report_type) {
-                    return Vue.swal('Error', 'You must select a report to download', 'error');
+                    Vue.swal({
+                        title: 'Error',
+                        text: 'You must select a report to download',
+                        icon: 'error',
+                        confirmButtonColor: '#E02424',
+                    });
                 }
 
                 if(!this.output_type) {
-                    return Vue.swal('Error', 'You must select n output type', 'error');
+                    Vue.swal({
+                        title: 'Error',
+                        text: 'You must select an output type',
+                        icon: 'error',
+                        confirmButtonColor: '#E02424',
+                    });
                 }
 
                 var vm = this;
@@ -71,7 +81,12 @@
 
                     return vm.forceFileDownload(response, filename);
                 }).catch(function (error) {
-                    return Vue.swal('Error', 'Unable to generate report, please try again', 'error');
+                    Vue.swal({
+                        title: 'Error',
+                        text: 'Unable to generate report, please try again',
+                        icon: 'error',
+                        confirmButtonColor: '#E02424',
+                    });
                 });
 
                 Vue.swal.close();
