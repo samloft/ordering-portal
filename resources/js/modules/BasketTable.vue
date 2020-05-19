@@ -96,9 +96,9 @@
                                    @keyup.enter="updateProduct(product.product, product.quantity)"
                                    autocomplete="off">
                             <div class="text-left leading-none text-primary">
-                                <small class="cursor-pointer hover:underline"
+                                <small class="cursor-pointer hover:underline font-semibold"
                                        @click="updateProduct(product.product, product.quantity)">Update</small>
-                                <small class="cursor-pointer hover:underline"
+                                <small class="cursor-pointer hover:underline font-semibold"
                                        @click="removeProduct(product.product)">Remove</small>
                             </div>
                         </div>
