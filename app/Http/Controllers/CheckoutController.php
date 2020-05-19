@@ -113,17 +113,19 @@ class CheckoutController extends Controller
         $promotions = [];
 
         foreach ($basket['promotion_lines'] as $promotion_line) {
-            $promotions[] = [
-                'order_number' => $order_number,
-                'product' => $promotion_line['product'],
-                'description' => $promotion_line['name'],
-                'long_description' => $promotion_line['description'],
-                'quantity' => $promotion_line['quantity'],
-                'stock_type' => 'PROMO',
-                'net_price' => 0,
-                'total' => 0,
-                'created_at' => date('Y-m-d H:i:s'),
-            ];
+            if (isset($promotion_line['product'])) {
+                $promotions[] = [
+                    'order_number' => $order_number,
+                    'product' => $promotion_line['product'],
+                    'description' => $promotion_line['name'],
+                    'long_description' => $promotion_line['description'],
+                    'quantity' => $promotion_line['quantity'],
+                    'stock_type' => 'PROMO',
+                    'net_price' => 0,
+                    'total' => 0,
+                    'created_at' => date('Y-m-d H:i:s'),
+                ];
+            }
         }
 
         $collection_message = false;
