@@ -2,7 +2,7 @@
     <div>
         <div class="relative">
             <input type="text" ref="product" :placeholder="placeHolderText" v-model="keywordSearch" class="mb-1"
-                   @keyup="onKeyUp(keywordSearch)" v-on:blur="resultItems = []" @keyup.enter="submit()"/>
+                   @keyup="onKeyUp(keywordSearch)" @keyup.enter="submit()"/>
 
             <div class="absolute -mt-2 w-full">
                 <ul class="bg-gray-100 rounded-b-lg w-full border-l border-r border-b" v-show="resultItems.length > 0">
