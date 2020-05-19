@@ -1,10 +1,14 @@
 <template>
     <div>
-        <div v-show="alert" class="md:hidden fixed left-0 top-0 w-full bg-white shadow-xl z-50">
-            <div class="flex items-center p-3">
-                <div class="mb-1">
-                    <h4 class="text-primary mb-0">{{ product.code }}</h4>
-                    <p class="text-xs font-light">{{ product.name }}</p>
+        <div v-show="alert" class="fixed left-0 top-0 w-full bg-white shadow-xl z-50">
+            <div class="flex items-center justify-center p-3">
+                <div class="w-20 mr-4 flex">
+                    <img :src="product.image" :alt="product.code">
+                </div>
+                <div class="mb-1 text-left">
+                    <h4 class="text-primary mb-0 leading-none">{{ product.code }}</h4>
+                    <p class="text-xs text-gray-500 leading-none">{{ product.name }}</p>
+                    <p class="text-xs"><span class="font-semibold">Qty: </span>{{ product.quantity }} <span class="font-semibold">Price: </span>{{ product.price }}</p>
                 </div>
             </div>
 

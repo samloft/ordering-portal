@@ -35,7 +35,7 @@
 
 <div id="app" class="flex flex-col min-h-screen w-full">
 
-    <mobile-alerts></mobile-alerts>
+    <product-alert></product-alert>
 
     @include('layout.header')
 
