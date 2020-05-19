@@ -41,27 +41,6 @@
                         </div>
                     </div>
                 </div>
-
-                <div v-show="alert" class="basket-dropdown">
-                    <div class="basket-dropdown-content rounded-lg">
-                        <div class="flex items-center">
-                            <div class="w-20 mr-4 pl-2 flex">
-                                <img :src="product.image" :alt="product.code">
-                            </div>
-
-                            <div class="mb-1">
-                                <h4 class="text-primary text-sm m-0">{{ product.code }}</h4>
-                                <p class="text-xs m-0">{{ product.name }}</p>
-                                <p class="text-xs m-0">
-                                    <span class="text-gray-400">Qty:</span> <span class="font-semibold">{{ product.quantity }}</span>
-                                    <span class="text-gray-400">Price:</span> <span class="font-semibold">{{ product.price }}</span>
-                                </p>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="basket-dropdown-message" v-text="dropdown_message"></div>
-                </div>
             </div>
         </div>
 
@@ -76,18 +55,14 @@
         data() {
             return {
                 dropdown: false,
-                alert: false,
-                product: {},
                 products: {},
                 basketValue: 'Checking...',
                 basketItems: 0,
-                dropdown_message: '',
             }
         },
         methods: {
             mouseOver: function () {
                 var self = this;
-                this.alert = false;
 
                 axios.get('/basket/dropdown')
                     .then(function (response) {
@@ -107,15 +82,6 @@
                     this.dropdown = false;
                     document.removeEventListener('click', this.closeIfClickedOutside);
                 }
-            },
-            dropdownBasket: function (data) {
-                this.dropdown = false;
-                this.alert = true;
-                this.product = data.product;
-
-                setTimeout(() => {
-                    this.alert = false;
-                }, 2000)
             },
             basketSummary: function () {
                 var self = this;
@@ -140,17 +106,10 @@
             var self = this;
 
             Event.$on('product-added', function (data) {
-                self.dropdown_message = 'Has been added to your basket';
-                self.dropdownBasket(data);
                 self.basketSummary();
             });
 
             Event.$on('product-updated', function (data) {
-                if (data.product) {
-                    self.dropdown_message = 'Has been updated';
-                    self.dropdownBasket(data);
-                }
-
                 self.basketSummary();
             });
 

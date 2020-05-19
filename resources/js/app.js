@@ -29,7 +29,7 @@ Vue.component('small-order-notice', require('./modules/SmallOrderNotice.vue').de
 Vue.component('fade-transition', require('./modules/FadeTransition.vue').default);
 Vue.component('modal', require('./modules/Modal.vue').default);
 Vue.component('mobile-menu', require('./modules/MobileMenu.vue').default);
-Vue.component('mobile-alerts', require('./modules/MobileAlerts.vue').default);
+Vue.component('product-alert', require('./modules/ProductAlert.vue').default);
 Vue.component('reports', require('./modules/Reports.vue').default);
 Vue.component('address-form', require('./modules/AddressForm.vue').default);
 
