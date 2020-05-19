@@ -10,6 +10,7 @@ use Illuminate\Contracts\View\Factory;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Response;
+use Illuminate\Support\Facades\Cache;
 use Illuminate\View\View;
 
 class BasketController extends Controller
@@ -21,6 +22,8 @@ class BasketController extends Controller
      */
     public function index()
     {
+        Cache::forget('basket-'.auth()->user()->customer->code.'-'.auth()->id());
+
         $basket = Basket::show();
 
         return view('basket.index', compact('basket'));
