@@ -3,7 +3,6 @@
 namespace App\Traits;
 
 use App\Models\Customer;
-use Illuminate\Support\Facades\Cache;
 use Session;
 
 trait CustomerDetails
