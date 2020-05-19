@@ -10,6 +10,7 @@ use App\Models\GlobalSettings;
 use App\Models\OrderHeader;
 use App\Models\OrderLine;
 use App\Notifications\OrderPlacedNotification;
+use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\DB;
 
 class CheckoutController extends Controller
@@ -21,6 +22,8 @@ class CheckoutController extends Controller
      */
     public function index()
     {
+        Cache::forget('basket-'.auth()->user()->customer->code.'-'.auth()->id());
+
         if (! auth()->user()->can_order) {
             return redirect(route('basket'))->with('error', 'You do not have permission to place orders, if you believe this is in error, please contact the sales office');
         }
@@ -47,6 +50,8 @@ class CheckoutController extends Controller
      */
     public function store()
     {
+        Cache::forget('basket-'.auth()->user()->customer->code.'-'.auth()->id());
+
         if (! auth()->user()->can_order) {
             return redirect(route('basket'))->with('error', 'You do not have permission to place orders, if you believe this is in error, please contact the sales office');
         }
