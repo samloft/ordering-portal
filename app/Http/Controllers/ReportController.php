@@ -63,7 +63,7 @@ class ReportController extends Controller
      */
     public function backOrderReport($output)
     {
-        ini_set('memory_limit', '256M');
+        ini_set('memory_limit', '512M');
 
         $back_orders = OrderTrackingHeader::backOrders();
 
@@ -89,7 +89,7 @@ class ReportController extends Controller
      */
     public function accountSummaryReport($output)
     {
-        ini_set('memory_limit', '256M');
+        ini_set('memory_limit', '512M');
 
         $invoice_lines = AccountSummary::show();
 
