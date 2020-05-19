@@ -234,7 +234,7 @@ class Promotion extends Model
                     'reached' => true,
                     'product' => $promotion->promotion_product,
                     'type' => 'product',
-                    'quantity' => $qty,
+                    'quantity' => $promotion->promotion_qty * $qty,
                     'name' => 'FOC promotional item',
                     'description' => $promotion->name,
                     'price' => currency(0.00, 2),
