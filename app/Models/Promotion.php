@@ -258,13 +258,17 @@ class Promotion extends Model
     {
         if ($promotion->type === 'value') {
             $potential_claims = floor($amount / $promotion->minimum_value);
-            $amount = number_format($amount / $promotion->minimum_value, 0);
+            $amount = floor($amount / $promotion->minimum_value);
         } else {
             $potential_claims = floor($amount / $promotion->product_qty);
         }
 
         if (! $promotion->max_claims) {
-            return $promotion->claim_type === 'per_order' ? $promotion->promotion_qty : floor($amount / $promotion->product_qty);
+            if ($amount > 0) {
+                return $promotion->claim_type === 'per_order' ? $promotion->promotion_qty : floor($amount / $promotion->product_qty);
+            }
+
+            return 0;
         }
 
         $claimed = OrderHeader::promotion($promotion->product, $promotion->start_date, $promotion->end_date) / $promotion->promotion_qty;
