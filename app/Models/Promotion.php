@@ -265,7 +265,7 @@ class Promotion extends Model
 
         if (! $promotion->max_claims) {
             if ($amount > 0) {
-                return $promotion->claim_type === 'per_order' ? $promotion->promotion_qty : floor($amount / $promotion->product_qty);
+                return $promotion->claim_type === 'per_order' ? $promotion->promotion_qty : floor($amount / $promotion->promotion_qty);
             }
 
             return 0;
