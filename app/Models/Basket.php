@@ -56,6 +56,10 @@ class Basket extends Model
      */
     public static function show($shipping_code = null): array
     {
+        if ($shipping_code) {
+            Cache::forget('basket-'.auth()->user()->customer->code.'-'.auth()->id());
+        }
+
         return Cache::rememberForever('basket-'.auth()->user()->customer->code.'-'.auth()->id(), static function () use (
             $shipping_code
         ) {
