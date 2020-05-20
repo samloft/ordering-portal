@@ -1,36 +1,36 @@
 <template>
     <div>
         <div class="flex justify-between">
-            <div>Goods Total</div>
-            <div>{{ goods_total }}</div>
+            <div :class="basket_updating ? 'box-placeholder' : ''">Goods Total</div>
+            <div :class="basket_updating ? 'box-placeholder' : ''">{{ goods_total }}</div>
         </div>
         <div v-if="promotion_discount.replace(/\D/g,'') > 0" class="flex justify-between text-primary font-medium">
-            <div>Promotion Discount</div>
-            <div>- {{ promotion_discount }}</div>
+            <div :class="basket_updating ? 'box-placeholder' : ''">Promotion Discount</div>
+            <div :class="basket_updating ? 'box-placeholder' : ''">- {{ promotion_discount }}</div>
         </div>
         <div class="flex justify-between">
-            <div>Shipping</div>
-            <div>{{ shipping }}</div>
+            <div :class="basket_updating ? 'box-placeholder' : ''">Shipping</div>
+            <div :class="basket_updating ? 'box-placeholder' : ''">{{ shipping }}</div>
         </div>
         <div class="flex justify-between">
-            <div>Sub Total</div>
-            <div>{{ sub_total }}</div>
+            <div :class="basket_updating ? 'box-placeholder' : ''">Sub Total</div>
+            <div :class="basket_updating ? 'box-placeholder' : ''">{{ sub_total }}</div>
         </div>
         <div class="flex justify-between">
-            <div>Small Order Charge*</div>
-            <div>{{ small_order_charge }}</div>
+            <div :class="basket_updating ? 'box-placeholder' : ''">Small Order Charge*</div>
+            <div :class="basket_updating ? 'box-placeholder' : ''">{{ small_order_charge }}</div>
         </div>
         <div class="flex justify-between">
-            <div>VAT</div>
-            <div>{{ vat }}</div>
+            <div :class="basket_updating ? 'box-placeholder' : ''">VAT</div>
+            <div :class="basket_updating ? 'box-placeholder' : ''">{{ vat }}</div>
         </div>
         <hr class="mt-2 mb-2">
         <div class="flex justify-between text-lg mb-2 font-semibold">
-            <div>Order Total</div>
-            <div>{{ total }}</div>
+            <div :class="basket_updating ? 'box-placeholder' : ''">Order Total</div>
+            <div :class="basket_updating ? 'box-placeholder' : ''">{{ total }}</div>
         </div>
 
-        <div v-if="bulk_rate_savings" class="mb-2 text-primary font-medium">
+        <div v-if="bulk_rate_savings" class="mb-2 text-primary font-medium" :class="basket_updating ? 'box-placeholder' : ''">
             This total includes a saving of <span class="font-bold">{{ bulk_rate_savings }}</span> thanks to bulk rates.
         </div>
     </div>
@@ -47,7 +47,8 @@
                 small_order_charge: this.summary.small_order_charge,
                 vat: this.summary.vat,
                 total: this.summary.total,
-                bulk_rate_savings: this.summary.bulk_rate_savings
+                bulk_rate_savings: this.summary.bulk_rate_savings,
+                basket_updating: false,
             }
         },
         props: {
@@ -76,6 +77,10 @@
 
             Event.$on('delivery-updated', data => {
                 this.updateSummary({basket_details: data});
+            });
+
+            Event.$on('basket-updating', data => {
+                this.basket_updating = data;
             });
         }
     }

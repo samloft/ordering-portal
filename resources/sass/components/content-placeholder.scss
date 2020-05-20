@@ -1,0 +1,31 @@
+.box-placeholder {
+    font-size: 0;
+    line-height: 0;
+    display: inline-block;
+    background-color: #444;
+    height: 12px;
+    border-radius: 100px;
+    margin: 5px 0;
+    min-width: 80px;
+    opacity: .1;
+    -webkit-animation: placeholderAnimation 1s infinite alternate;
+    -moz-animation: placeholderAnimation 1s infinite alternate;
+    -o-animation: placeholderAnimation 1s infinite alternate;
+    animation: placeholderAnimation 1s infinite alternate;
+}
+
+@keyframes placeholderAnimation {
+    from { opacity: 0.5; }
+}
+
+@-o-keyframes placeholderAnimation {
+    from { opacity: 0.5; }
+}
+
+@-moz-keyframes placeholderAnimation {
+    from { opacity: 0.5; }
+}
+
+@-webkit-keyframes placeholderAnimation {
+    from { opacity: 0.5; }
+}
