@@ -348,6 +348,7 @@
     import flatPickr from 'vue-flatpickr-component';
     import 'flatpickr/dist/flatpickr.css';
     import 'flatpickr/dist/themes/airbnb.css';
+    // import VueMultiSelect from "vue-simple-multi-select";
 
     class Errors {
         constructor() {
