@@ -263,7 +263,7 @@ class Promotion extends Model
         }
 
         if (! $promotion->max_claims) {
-            return $promotion->claim_type === 'per_order' ? $promotion->promotion_qty : floor($potential_claims / $promotion->promotion_qty);
+            return $promotion->claim_type === 'per_order' ? 1 : $potential_claims;
         }
 
         $claimed = OrderHeader::promotion($promotion->product, $promotion->start_date, $promotion->end_date) / $promotion->promotion_qty;
@@ -273,7 +273,7 @@ class Promotion extends Model
 
             $claim_count = ($claims_left < $potential_claims) ? $claims_left : $potential_claims;
 
-            return $promotion->claim_type === 'per_order' ? $promotion->promotion_qty : ($promotion->promotion_qty * number_format($claim_count, 0));
+            return $promotion->claim_type === 'per_order' ? 1 : $claim_count;
         }
 
         return 0;
