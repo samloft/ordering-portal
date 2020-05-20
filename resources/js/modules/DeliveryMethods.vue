@@ -127,10 +127,12 @@
 
                 return axios.post('/cms/delivery-methods', this.data).then(function (response) {
                     return Vue.swal({
-                        title: 'Success',
-                        text: 'New delivery method has been created',
-                        type: 'success',
-                        showCancelButton: false,
+                        title: "Success",
+                        text: 'New delivery nethod has been created',
+                        icon: 'success',
+                        customClass: {
+                            confirmButton: 'bg-grey-800 text-white'
+                        }
                     }).then(response => {
                         return window.location.reload();
                     });
@@ -144,15 +146,19 @@
                 Vue.swal({
                     title: 'Delete Delivery Method?',
                     text: 'Are you sure? This cannot be un-done.',
-                    type: 'warning',
+                    icon: 'warning',
                     showCancelButton: true,
+                    confirmButtonColor: '#EAB532',
                 }).then(response => {
                     if (response.value) {
                         return axios.delete('/cms/delivery-methods/' + id).then(function (response) {
                             return Vue.swal({
-                                title: "Deleted",
-                                text: "Delivery method has been successfully deleted",
-                                type: "success"
+                                title: "Success",
+                                text: 'Delivery method has been successfully deleted',
+                                icon: 'success',
+                                customClass: {
+                                    confirmButton: 'bg-grey-800 text-white'
+                                }
                             }).then(response => {
                                 if (response.value) {
                                     return window.location.reload();
@@ -161,7 +167,12 @@
                         });
                     }
                 }).catch(error => {
-                    Vue.swal('Error', 'Unable to delete delivery method', 'error');
+                    return Vue.swal({
+                        title: 'Error',
+                        text: 'Unable to delete delivery method',
+                        icon: 'error',
+                        confirmButtonColor: '#E02424',
+                    });
                 });
             },
         }

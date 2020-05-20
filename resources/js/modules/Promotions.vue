@@ -426,9 +426,12 @@
             store: function (promotion, self) {
                 axios.post('/cms/promotions', self.data).then(function (response) {
                     return Vue.swal({
-                        title: 'Success',
+                        title: "Success",
                         text: 'New promotion has been created',
-                        icon: 'success'
+                        icon: 'success',
+                        customClass: {
+                            confirmButton: 'bg-grey-800 text-white'
+                        }
                     }).then(response => {
                         if (response.value) {
                             return window.location.reload();
@@ -438,18 +441,31 @@
                     if (error.response.data.errors) {
                         self.errors.record(error.response.data.errors);
 
-                        return Vue.swal('Error', 'You have failed validation, please fix the errors and try again', 'error');
+                        return Vue.swal({
+                            title: 'Error',
+                            text: 'You have failed validation, please fix the errors and try again',
+                            icon: 'error',
+                            confirmButtonColor: '#E02424',
+                        });
                     }
 
-                    return Vue.swal('Error', 'Unable to create promotion, please try again', 'error');
+                    return Vue.swal({
+                        title: 'Error',
+                        text: 'Unable to create promotion, please try again',
+                        icon: 'error',
+                        confirmButtonColor: '#E02424',
+                    });
                 });
             },
             update: function (promotion, self) {
                 axios.patch('/cms/promotions/' + promotion.id, promotion).then(function (response) {
                     return Vue.swal({
-                        title: 'Success',
+                        title: "Success",
                         text: 'Promotion has been updated',
-                        icon: 'success'
+                        icon: 'success',
+                        customClass: {
+                            confirmButton: 'bg-grey-800 text-white'
+                        }
                     }).then(response => {
                         if (response.value) {
                             return window.location.reload();
@@ -459,10 +475,20 @@
                     if (error.response.data.errors) {
                         self.errors.record(error.response.data.errors);
 
-                        return Vue.swal('Error', 'Unable to update promotion, please fix validation errors', 'error');
+                        return Vue.swal({
+                            title: 'Error',
+                            text: 'Unable to update promotion, please fix validation errors',
+                            icon: 'error',
+                            confirmButtonColor: '#E02424',
+                        });
                     }
 
-                    return Vue.swal('Error', 'Unable to update promotion, please try again', 'error');
+                    return Vue.swal({
+                        title: 'Error',
+                        text: 'Unable to update promotion, please try again',
+                        icon: 'error',
+                        confirmButtonColor: '#E02424',
+                    });
                 });
             },
             destroy: function (id) {
@@ -471,24 +497,38 @@
                     text: 'Are you sure? This cannot be un-done.',
                     icon: 'warning',
                     showCancelButton: true,
+                    confirmButtonColor: '#EAB532',
                 }).then(response => {
                     if (response.value) {
                         return axios.delete('/cms/promotions/' + id).then(function (response) {
                             return Vue.swal({
                                 title: "Success",
-                                text: "Promotion has been deleted",
-                                icon: "success"
+                                text: 'Promotion has been deleted',
+                                icon: 'success',
+                                customClass: {
+                                    confirmButton: 'bg-grey-800 text-white'
+                                }
                             }).then(response => {
                                 if (response.value) {
                                     return window.location.reload();
                                 }
                             });
                         }).catch(function (error) {
-                            return Vue.swal('Error', 'Unable to delete promotion, please try again');
+                            return Vue.swal({
+                                title: 'Error',
+                                text: 'Unable to delete promotion, please try again',
+                                icon: 'error',
+                                confirmButtonColor: '#E02424',
+                            });
                         });
                     }
                 }).catch(error => {
-                    return Vue.swal('Error', 'Unable to delete promotion', 'error');
+                    return Vue.swal({
+                        title: 'Error',
+                        text: 'Unable to delete promotion',
+                        icon: 'error',
+                        confirmButtonColor: '#E02424',
+                    });
                 });
             }
         },

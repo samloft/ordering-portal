@@ -186,35 +186,71 @@
 
                 if (id) {
                     return axios.patch('/cms/site-users/' + id, this.userData).then(response => {
-                        return Vue.swal('Success', 'User has been updated', 'success');
+                        return Vue.swal({
+                            title: "Success",
+                            text: "User has been updated",
+                            icon: 'success',
+                            customClass: {
+                                confirmButton: 'bg-grey-800 text-white'
+                            }
+                        });
                     }).catch(error => {
                         if (error.response.data.errors) {
                             this.errors.record(error.response.data.errors);
                         }
 
-                        return Vue.swal('Error', 'Unable to update user, please try again', 'error');
+                        return Vue.swal({
+                            title: 'Error',
+                            text: 'Unable to update user, please try again',
+                            icon: 'error',
+                            confirmButtonColor: '#E02424',
+                        });
                     });
                 }
 
                 return axios.post('/cms/site-users', this.userData).then(response => {
                     this.userData = response.data;
 
-                    return Vue.swal('Success', 'New user has been created', 'success');
+                    return Vue.swal({
+                        title: "Success",
+                        text: "New user has been created",
+                        icon: 'success',
+                        customClass: {
+                            confirmButton: 'bg-grey-800 text-white'
+                        }
+                    });
                 }).catch(error => {
                     if (error.response.data.errors) {
                         this.errors.record(error.response.data.errors);
                     }
 
-                    return Vue.swal('Error', error.response.data.errors[Object.keys(error.response.data.errors)[0]][0], 'error');
+                    return Vue.swal({
+                        title: 'Error',
+                        text: error.response.data.errors[Object.keys(error.response.data.errors)[0]][0],
+                        icon: 'error',
+                        confirmButtonColor: '#E02424',
+                    });
                 });
             },
             passwordReset: function (email) {
                 axios.post('/cms/site-users/password-reset', {
                     email: email
                 }).then(response => {
-                    Vue.swal('Success', 'Password reset has been sent to ' + email, 'success');
+                    return Vue.swal({
+                        title: "Success",
+                        text: "Password reset has been sent to " + email,
+                        icon: 'success',
+                        customClass: {
+                            confirmButton: 'bg-grey-800 text-white'
+                        }
+                    });
                 }).catch(error => {
-                    Vue.swal('Error', 'Unable to send password reset, please try again', 'error');
+                    return Vue.swal({
+                        title: 'Error',
+                        text: 'Unable to send password reset, please try again',
+                        icon: 'error',
+                        confirmButtonColor: '#E02424',
+                    });
                 })
             },
             listAdditionalCustomers: function () {
@@ -222,9 +258,13 @@
             },
             addAdditionalCustomer: function () {
                 Vue.swal({
-                    title: 'Type in a customer code to add',
+                    title: 'Add an addition customer',
                     input: 'text',
                     showCancelButton: true,
+                    confirmButtonText: 'Save',
+                    customClass: {
+                        confirmButton: 'bg-gray-800 text-white',
+                    },
                     inputValidator: (value) => {
                         if (!value) {
                             return 'You need to enter a customer code.'
@@ -264,8 +304,9 @@
                 Vue.swal({
                     title: 'Delete additional customer ' + code + ' ?',
                     text: 'Are you sure? This cannot be un-done.',
-                    type: 'warning',
+                    icon: 'warning',
                     showCancelButton: true,
+                    confirmButtonColor: '#EAB532',
                 }).then((response) => {
                     if (response.value) {
                         return axios.delete('/cms/site-users/extra-customers', {
@@ -274,7 +315,12 @@
                             if (response.data) {
                                 self.customers.splice(self.customers.indexOf(index), 1);
                             } else {
-                                Vue.swal('Error', 'Unable to delete user customer', 'error');
+                                return Vue.swal({
+                                    title: 'Error',
+                                    text: 'Unable to delete user customer',
+                                    icon: 'error',
+                                    confirmButtonColor: '#E02424',
+                                });
                             }
                         });
                     }
@@ -284,28 +330,42 @@
                 Vue.swal({
                     title: 'Delete User?',
                     text: 'Are you sure? This cannot be un-done.',
-                    type: 'warning',
+                    icon: 'warning',
                     showCancelButton: true,
+                    confirmButtonColor: '#EAB532',
                 }).then(response => {
                     if (response.value) {
                         return axios.delete('/cms/site-users/' + id).then(function (response) {
                             if (response.data.deleted) {
                                 return Vue.swal({
-                                    title: "Deleted",
+                                    title: "Success",
                                     text: "Site user has been successfully deleted",
-                                    type: "success"
+                                    icon: 'success',
+                                    customClass: {
+                                        confirmButton: 'bg-grey-800 text-white'
+                                    }
                                 }).then(response => {
                                     if (response.value) {
                                         return window.location.reload();
                                     }
                                 });
                             } else {
-                                Vue.swal('Error', 'Unable to delete user', 'error');
+                                return Vue.swal({
+                                    title: 'Error',
+                                    text: 'Unable to delete user',
+                                    icon: 'error',
+                                    confirmButtonColor: '#E02424',
+                                });
                             }
                         });
                     }
                 }).catch(error => {
-                    Vue.swal('Error', 'Unable to delete user', 'error');
+                    return Vue.swal({
+                        title: 'Error',
+                        text: 'Unable to delete user',
+                        icon: 'error',
+                        confirmButtonColor: '#E02424',
+                    });
                 });
             },
             reload: function () {

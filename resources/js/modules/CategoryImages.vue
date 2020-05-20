@@ -164,7 +164,12 @@
                 axios.post('/cms/home-links/categories/' + category).then(response => {
                     this.secondLevel = response.data;
                 }).catch(error => {
-                    Vue.swal('Error', 'Unable to get categories', 'error');
+                    return Vue.swal({
+                        title: 'Error',
+                        text: 'Unable to get categories',
+                        icon: 'error',
+                        confirmButtonColor: '#E02424',
+                    });
                 });
             },
             secondSelected(category1, category2) {
@@ -173,7 +178,12 @@
                 axios.post('/cms/home-links/categories/' + category1 + '/' + category2).then(response => {
                     this.thirdLevel = response.data;
                 }).catch(error => {
-                    Vue.swal('Error', 'Unable to get categories', 'error');
+                    return Vue.swal({
+                        title: 'Error',
+                        text: 'Unable to get categories',
+                        icon: 'error',
+                        confirmButtonColor: '#E02424',
+                    });
                 });
             },
             showModal() {
@@ -198,13 +208,25 @@
                 this.form.append('level_3', this.imageData.level_3);
 
                 axios.post('/cms/category-images/store', this.form).then(response => {
-                    Vue.swal('Success', 'New category override image has been created', 'success');
+                    return Vue.swal({
+                        title: "Success",
+                        text: 'New category override image has been created',
+                        icon: 'success',
+                        customClass: {
+                            confirmButton: 'bg-grey-800 text-white'
+                        }
+                    });
                 }).catch(error => {
                     if (error.response.data.errors) {
                         return this.errors.record(error.response.data.errors);
                     }
 
-                    return Vue.swal('Error', 'An unknown error occurred', 'error');
+                    return Vue.swal({
+                        title: 'Error',
+                        text: 'An unknown error occurred',
+                        icon: 'error',
+                        confirmButtonColor: '#E02424',
+                    });
                 });
             },
             destroy(id) {
@@ -215,15 +237,28 @@
                     text: 'Are you sure? This cannot be un-done.',
                     icon: 'warning',
                     showCancelButton: true,
+                    confirmButtonColor: '#EAB532',
                 }).then(response => {
                     if (response.value) {
                         axios.delete('/cms/category-images/' + id).then(response => {
                             let i = vm.images.map(item => item.id).indexOf(id);
                             vm.images.splice(i, 1);
 
-                            return Vue.swal('Success', 'Category override has been deleted', 'success');
+                            return Vue.swal({
+                                title: "Success",
+                                text: 'Category override has been deleted',
+                                icon: 'success',
+                                customClass: {
+                                    confirmButton: 'bg-grey-800 text-white'
+                                }
+                            });
                         }).catch(error => {
-                            return Vue.swal('Error', 'Unable to delete category override, please try again', 'error');
+                            return Vue.swal({
+                                title: 'Error',
+                                text: 'Unable to delete category override, please try again',
+                                icon: 'error',
+                                confirmButtonColor: '#E02424',
+                            });
                         })
                     }
                 });
