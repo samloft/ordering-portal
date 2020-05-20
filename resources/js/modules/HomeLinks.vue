@@ -226,7 +226,12 @@
 
                 axios.patch('/cms/home-links/update-positions', this.categories)
                     .catch(error => {
-                        Vue.swal('Error', 'Unable to update positions, please try again', 'error');
+                        return Vue.swal({
+                            title: 'Error',
+                            text: 'Unable to update positions, please try again',
+                            icon: 'error',
+                            confirmButtonColor: '#E02424',
+                        });
                     });
             },
             getImage(type, image) {
@@ -275,7 +280,14 @@
                 axios.post('/cms/home-links', this.form).then(response => {
                     this.newLink = false;
 
-                    Vue.swal('success', 'New category home link has been created', 'success');
+                    Vue.swal({
+                        title: "Success",
+                        text: 'New category home link has been created',
+                        icon: 'success',
+                        customClass: {
+                            confirmButton: 'bg-grey-800 text-white'
+                        }
+                    });
 
                     this.categories.push(response.data.data);
                 }).catch(error => this.errors.record(error.response.data.errors));
@@ -286,8 +298,9 @@
                 Vue.swal({
                     title: 'Delete ' + this.type + '?',
                     text: 'Are you sure? This cannot be un-done.',
-                    type: 'warning',
+                    icon: 'warning',
                     showCancelButton: true,
+                    confirmButtonColor: '#EAB532',
                 }).then(response => {
                     if (response.value) {
                         axios.delete('/cms/home-links/' + id, {
@@ -296,9 +309,21 @@
                             let i = vm.categories.map(item => item.id).indexOf(id);
                             vm.categories.splice(i, 1);
 
-                            return Vue.swal('Success', this.type + ' has been deleted', 'success');
+                            return Vue.swal({
+                                title: "Success",
+                                text: this.type + ' has been deleted',
+                                icon: 'success',
+                                customClass: {
+                                    confirmButton: 'bg-grey-800 text-white'
+                                }
+                            });
                         }).catch(error => {
-                            return Vue.swal('Error', 'Unable to delete ' + this.type + ', please try again', 'error');
+                            return Vue.swal({
+                                title: 'Error',
+                                text: 'Unable to delete ' + this.type + ', please try again',
+                                icon: 'error',
+                                confirmButtonColor: '#E02424',
+                            });
                         })
                     }
                 });
@@ -312,7 +337,12 @@
                 axios.post('/cms/home-links/categories/' + category).then(response => {
                     this.secondLevelValues = response.data;
                 }).catch(error => {
-                    Vue.swal('Error', 'Unable to get categories', 'error');
+                    return Vue.swal({
+                        title: 'Error',
+                        text: 'Unable to get categories',
+                        icon: 'error',
+                        confirmButtonColor: '#E02424',
+                    });
                 })
             },
             secondSelected(category1, category2) {
@@ -322,7 +352,12 @@
                 axios.post('/cms/home-links/categories/' + category1 + '/' + category2).then(response => {
                     this.thirdLevelValues = response.data;
                 }).catch(error => {
-                    Vue.swal('Error', 'Unable to get categories', 'error');
+                    return Vue.swal({
+                        title: 'Error',
+                        text: 'Unable to get categories',
+                        icon: 'error',
+                        confirmButtonColor: '#E02424',
+                    });
                 })
             }
         }

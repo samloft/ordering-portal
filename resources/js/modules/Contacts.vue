@@ -99,8 +99,10 @@
                         return Vue.swal({
                             title: 'Success',
                             text: 'Contact has been updated',
-                            type: 'success',
-                            showCancelButton: false,
+                            icon: 'success',
+                            customClass: {
+                                confirmButton: 'bg-grey-800 text-white'
+                            }
                         }).then(response => {
                             return window.location.reload();
                         });
@@ -115,8 +117,10 @@
                     return Vue.swal({
                         title: 'Success',
                         text: 'New contact has been created',
-                        type: 'success',
-                        showCancelButton: false,
+                        icon: 'success',
+                        customClass: {
+                            confirmButton: 'bg-grey-800 text-white'
+                        }
                     }).then(response => {
                         return window.location.reload();
                     });
@@ -130,15 +134,19 @@
                 Vue.swal({
                     title: 'Delete Contact?',
                     text: 'Are you sure? This cannot be un-done.',
-                    type: 'warning',
+                    icon: 'warning',
                     showCancelButton: true,
+                    confirmButtonColor: '#EAB532',
                 }).then(response => {
                     if (response.value) {
                         return axios.delete('/cms/contacts/' + id).then(function (response) {
                             return Vue.swal({
                                 title: "Deleted",
                                 text: "Contact has been successfully deleted",
-                                type: "success"
+                                icon: 'success',
+                                customClass: {
+                                    confirmButton: 'bg-grey-800 text-white'
+                                }
                             }).then(response => {
                                 if (response.value) {
                                     return window.location.reload();
@@ -147,7 +155,12 @@
                         });
                     }
                 }).catch(error => {
-                    Vue.swal('Error', 'Unable to delete contact', 'error');
+                    return Vue.swal({
+                        title: 'Error',
+                        text: 'Unable to delete contact',
+                        icon: 'error',
+                        confirmButtonColor: '#E02424',
+                    });
                 });
             }
         },
