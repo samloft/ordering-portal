@@ -24,7 +24,12 @@
                     }).then(function() {
                         return window.location.reload();
                     }).catch(function () {
-                        return Vue.swal('Error', 'Unable to disable maintenance mode', 'error');
+                        return Vue.swal({
+                            title: 'Error',
+                            text: 'Unable to disable maintenance mode',
+                            icon: 'error',
+                            confirmButtonColor: '#E02424',
+                        });
                     });
                 }
 
@@ -34,8 +39,11 @@
                 const { value: message } = await Vue.swal({
                     title: 'Enter a custom message (optional)',
                     input: 'text',
-                    inputValue: '',
                     showCancelButton: true,
+                    confirmButtonText: 'Save',
+                    customClass: {
+                        confirmButton: 'bg-gray-800 text-white',
+                    },
                     inputValidator: (message) => {
                         submitted = true;
                         maintenanceMessage = message;
@@ -49,7 +57,12 @@
                     }).then(function() {
                         return window.location.reload();
                     }).catch(function () {
-                        return Vue.swal('Error', 'Unable to enable maintenance mode', 'error');
+                        return Vue.swal({
+                            title: 'Error',
+                            text: 'Unable to enable maintenance mode',
+                            icon: 'error',
+                            confirmButtonColor: '#E02424',
+                        });
                     });
                 }
             }

@@ -97,6 +97,8 @@
 .swal2-container {
     @apply fixed inset-0 px-4 pb-4;
 
+    z-index: 99999;
+
     @screen sm {
         @apply flex items-center justify-center;
     }

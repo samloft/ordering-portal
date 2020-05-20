@@ -166,10 +166,20 @@
                     this.checkComplete = true;
 
                     if(error.response.status === 504) {
-                        return Vue.swal('error', 'The request timed out', 'error');
+                        return Vue.swal({
+                            title: 'Error',
+                            text: 'The request timed out',
+                            icon: 'error',
+                            confirmButtonColor: '#E02424',
+                        });
                     }
 
-                    return Vue.swal('error', 'An error occurred, unable to check missing images');
+                    return Vue.swal({
+                        title: 'Error',
+                        text: 'An error occurred, unable to check missing images',
+                        icon: 'error',
+                        confirmButtonColor: '#E02424',
+                    });
                 });
             },
             prepareUploads: function (files) {
