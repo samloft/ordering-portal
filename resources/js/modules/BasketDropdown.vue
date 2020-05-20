@@ -63,7 +63,7 @@
                     </div>
 
                     <div v-else class="basket-dropdown-summary">
-                        <div v-for="line in products" class="basket-dropdown-content">
+                        <div v-if="basketItems > 0" v-for="line in products" class="basket-dropdown-content">
                             <div class="flex items-center">
                                 <div class="w-20 mr-4 pl-2 flex">
                                     <img :src="line.image" :alt="line.product">
@@ -78,6 +78,10 @@
                                     </p>
                                 </div>
                             </div>
+                        </div>
+
+                        <div v-if="basketItems === 0" class="p-3 text-center text-gray-800 font-semibold">
+                            Your basket is empty
                         </div>
                     </div>
                 </div>
