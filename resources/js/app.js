@@ -37,8 +37,10 @@ window.Event = new Vue();
 window.App = new Vue({
     el: '#app',
     methods: {
-        addProductToBasket: function (product, quantity, update = false) {
-            return axios.post('/basket/add-product', {
+        addProductToBasket: async function (product, quantity, update = false) {
+            Event.$emit('basket-updating', true);
+
+            await axios.post('/basket/add-product', {
                 product: product,
                 quantity: quantity,
                 update: update,
@@ -72,7 +74,9 @@ window.App = new Vue({
                     }
 
                     return false;
-                })
+                });
+
+            Event.$emit('basket-updating', false);
         },
         copyToClipboard: function (id) {
             var range = document.createRange();

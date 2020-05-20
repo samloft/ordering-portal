@@ -35,11 +35,11 @@
         },
         methods: {
             deliveryUpdated() {
-                Event.$emit('delivery-updating', true);
+                Event.$emit('basket-updating', true);
 
                 axios.get('/basket/summary/' + this.delivery_id).then(response => {
                     Event.$emit('delivery-updated', response.data);
-                    Event.$emit('delivery-updating', false);
+                    Event.$emit('basket-updating', false);
                 }).catch(error => {
                     Vue.swal({
                         title: 'Error',
