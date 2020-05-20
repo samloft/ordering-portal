@@ -2,9 +2,9 @@
     <div class="xl:flex items-center relative mb-3">
         <label for="shipping" class="w-1/2">Shipping</label>
 
-        <select id="shipping" name="shipping" autocomplete="off" v-model="delivery_code"
+        <select id="shipping" name="shipping" autocomplete="off" v-model="delivery_id"
                 @change="deliveryUpdated()">
-            <option v-for="delivery in deliveries" :value="delivery.code">
+            <option v-for="delivery in deliveries" :value="delivery.id">
                 {{ delivery.title }} - {{ delivery.price === 0 ? 'FREE' : delivery.price.toFixed(2) }}
             </option>
         </select>
@@ -29,13 +29,13 @@
         },
         data() {
             return {
-                delivery_code: '',
+                delivery_id: null,
                 deliveries: [],
             }
         },
         methods: {
             deliveryUpdated() {
-                axios.get('/basket/summary/' + this.delivery_code).then(response => {
+                axios.get('/basket/summary/' + this.delivery_id).then(response => {
                     Event.$emit('delivery-updated', response.data);
                 }).catch(error => {
                     Vue.swal({
@@ -48,12 +48,13 @@
             }
         },
         mounted() {
-            this.delivery_code = this.old_delivery_method;
+            this.delivery_id = this.old_delivery_method;
 
             this.delivery_methods.forEach(delivery => {
                 let cost = parseFloat(this.goods_total) > this.small_order.threshold ? delivery.price_low : delivery.price;
 
                 this.deliveries.push({
+                    id: delivery.id,
                     code: delivery.code,
                     title: delivery.title,
                     price: cost,

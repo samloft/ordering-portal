@@ -29,7 +29,7 @@ class CheckoutController extends Controller
         }
 
         $delivery_methods = DeliveryMethod::orderBy('price')->get();
-        $basket = Basket::show(old('shipping') ?: 'HHHH');
+        $basket = Basket::show(old('shipping') ?: 1);
         $checkout_notice = GlobalSettings::checkoutNotice();
         $account = request('account');
 

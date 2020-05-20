@@ -78,7 +78,7 @@
                     </div>
 
                     <delivery-method :delivery_methods="{{ json_encode($delivery_methods, true) }}"
-                                     old_delivery_method="{{ old('shipping') ?? 'HHHH' }}"
+                                     old_delivery_method="{{ old('shipping') ?? 1 }}"
                                      goods_total="{{ $basket['summary']['goods_total'] }}"
                                      small_order="{{ json_encode($basket['summary']['small_order_rules'], true) }}">
                     </delivery-method>
