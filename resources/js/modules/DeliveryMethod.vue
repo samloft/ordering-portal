@@ -24,7 +24,7 @@
         props: {
             delivery_methods: {},
             old_delivery_method: null,
-            small_order: {},
+            small_order_threshold: {},
             goods_total: {},
         },
         data() {
@@ -51,7 +51,7 @@
             this.delivery_id = this.old_delivery_method;
 
             this.delivery_methods.forEach(delivery => {
-                let cost = parseFloat(this.goods_total) > this.small_order.threshold ? delivery.price_low : delivery.price;
+                let cost = parseFloat(this.goods_total) > this.small_order_threshold ? delivery.price_low : delivery.price;
 
                 this.deliveries.push({
                     id: delivery.id,
