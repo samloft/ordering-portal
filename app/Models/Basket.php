@@ -50,18 +50,18 @@ class Basket extends Model
     /**
      * Return all basket lines based on customer code.
      *
-     * @param null $shipping_code
+     * @param null $shipping_id
      *
      * @return Basket[]|Collection
      */
-    public static function show($shipping_code = null): array
+    public static function show($shipping_id = null): array
     {
-        if ($shipping_code) {
+        if ($shipping_id) {
             Cache::forget('basket-'.auth()->user()->customer->code.'-'.auth()->id());
         }
 
         return Cache::rememberForever('basket-'.auth()->user()->customer->code.'-'.auth()->id(), static function () use (
-            $shipping_code
+            $shipping_id
         ) {
             $lines = static::selectRaw('basket.product as product, basket.customer_code as customer_code,
                                                     basket.quantity as quantity, price, break1, price1, break2, price2,
@@ -158,8 +158,8 @@ class Basket extends Model
                 $promotion_lines = array_filter(array_merge(...$promotion_lines));
             }
 
-            if ($shipping_code) {
-                $delivery_method = DeliveryMethod::details($shipping_code);
+            if ($shipping_id) {
+                $delivery_method = DeliveryMethod::details($shipping_id);
             } else {
                 $delivery_method = null;
             }
