@@ -167,7 +167,7 @@ class Basket extends Model
             $small_order_charge = smallOrderCharge($goods_total, $delivery_method);
 
             if ($delivery_method) {
-                $shipping_value = $small_order_charge['charge'] > 0 ? $delivery_method->price_low : $delivery_method->price;
+                $shipping_value = ($goods_total > $small_order_charge['threshold']) ? $delivery_method->price_low : $delivery_method->price;
             } else {
                 $shipping_value = 0;
             }
