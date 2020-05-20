@@ -28,15 +28,15 @@ class DeliveryMethod extends Model
     protected static $logAttributes = ['id', 'code', 'title', 'identifier', 'price_low', 'price'];
 
     /**
-     * Get delivery details for the given code.
+     * Get delivery details for the given id.
      *
-     * @param $code
+     * @param $id
      *
      * @return \Illuminate\Database\Eloquent\Builder|\Illuminate\Database\Eloquent\Model
      */
-    public static function details($code)
+    public static function details($id)
     {
-        return self::where('code', $code)->first();
+        return self::where('id', $id)->first();
     }
 
     /**
