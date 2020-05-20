@@ -257,18 +257,13 @@ class Promotion extends Model
     public static function calculateClaimAmount($promotion, $amount)
     {
         if ($promotion->type === 'value') {
-            $potential_claims = floor($amount / $promotion->minimum_value);
-            $amount = floor($amount / $promotion->minimum_value);
+            $potential_claims = number_format(floor($amount / $promotion->minimum_value), 0);
         } else {
-            $potential_claims = floor($amount / $promotion->product_qty);
+            $potential_claims = number_format(floor($amount / $promotion->product_qty), 0);
         }
 
         if (! $promotion->max_claims) {
-            if ($amount > 0) {
-                return $promotion->claim_type === 'per_order' ? $promotion->promotion_qty : floor($amount / $promotion->promotion_qty);
-            }
-
-            return 0;
+            return $promotion->claim_type === 'per_order' ? 1 : $potential_claims;
         }
 
         $claimed = OrderHeader::promotion($promotion->product, $promotion->start_date, $promotion->end_date) / $promotion->promotion_qty;
@@ -278,7 +273,7 @@ class Promotion extends Model
 
             $claim_count = ($claims_left < $potential_claims) ? $claims_left : $potential_claims;
 
-            return $promotion->claim_type === 'per_order' ? $promotion->promotion_qty : ($promotion->promotion_qty * number_format($claim_count, 0));
+            return $promotion->claim_type === 'per_order' ? 1 : $claim_count;
         }
 
         return 0;
