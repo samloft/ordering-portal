@@ -73,6 +73,10 @@ class BasketController extends Controller
             $old_quantity = $quantity;
             $quantity = (int) ceil((int) $quantity / $product_details->order_multiples) * $product_details->order_multiples;
             $warning = 'Quantity not in multiples of '.$product_details->order_multiples.'. Increased from '.$old_quantity.' to '.$quantity.'.';
+        } elseif ($product_details->obsolete && $quantity > $product_details->stock) {
+            $old_quantity = $quantity;
+            $quantity = $product_details->stock;
+            $warning = 'This product is obsolete, will not be reordered and we only have '.$product_details->stock.' left. Your quantity has been reduced from '.$old_quantity.' to '.$quantity;
         }
 
         $details[] = [
