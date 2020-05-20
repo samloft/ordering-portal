@@ -1,6 +1,6 @@
 <template>
     <div>
-        <button @click="checkout()" type="submit" class="button button-primary">Place Order</button>
+        <button @click="checkout()" type="submit" class="button button-primary" :disabled="delivery_updating">Place Order</button>
 
         <modal v-show="modal">
             <div class="mx-auto flex items-center justify-center h-24 w-24 rounded-full bg-green-100">
@@ -31,12 +31,18 @@
         data() {
             return {
                 modal: false,
+                delivery_updating: false,
             }
         },
         methods: {
             checkout: function () {
                 this.modal = true;
             }
+        },
+        mounted() {
+            Event.$on('delivery-updating', data => {
+                this.delivery_updating = data;
+            });
         }
     }
 </script>
