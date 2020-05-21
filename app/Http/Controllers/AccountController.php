@@ -94,6 +94,6 @@ class AccountController extends Controller
 
         Session::put('temp_customer');
 
-        return back();
+        return redirect(route('home'));
     }
 }
