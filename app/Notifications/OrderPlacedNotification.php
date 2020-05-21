@@ -5,11 +5,15 @@ namespace App\Notifications;
 use App\Exports\ConfirmationPDF;
 use App\Models\GlobalSettings;
 use App\Models\OrderHeader;
+use Illuminate\Bus\Queueable;
+use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Notifications\Messages\MailMessage;
 use Illuminate\Notifications\Notification;
 
-class OrderPlacedNotification extends Notification
+class OrderPlacedNotification extends Notification implements ShouldQueue
 {
+    use Queueable;
+
     public $order;
 
     public $collection_message;
@@ -52,11 +56,12 @@ class OrderPlacedNotification extends Notification
      */
     public function toMail($notifiable): MailMessage
     {
-        $order = OrderHeader::where('customer_code', auth()->user()->customer->code)
+        $order = OrderHeader::where('customer_code', $this->order['customer_code'])
             ->where('order_number', decodeUrl($this->order['order_number']))->firstOrFail();
+
         $company_details = json_decode(GlobalSettings::key('company-details'), true);
 
-        $pdf = (new ConfirmationPDF($order, $this->collection_message))->download(false);
+        $pdf = (new ConfirmationPDF($order, $this->collection_message, $this->user->id))->download(false);
 
         return (new MailMessage())->subject('Ordering portal - Order Confirmation')
             ->greeting('Hello, '.$this->user->name)

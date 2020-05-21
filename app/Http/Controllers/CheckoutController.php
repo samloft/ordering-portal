@@ -90,7 +90,7 @@ class CheckoutController extends Controller
             'vat' => removeCurrencySymbol($basket['summary']['vat']),
             'value' => removeCurrencySymbol($basket['summary']['goods_total']) + removeCurrencySymbol($basket['summary']['shipping']['cost']) + removeCurrencySymbol($basket['summary']['small_order_charge']),
             'promotion_discount' => removeCurrencySymbol($basket['summary']['order_discount']),
-            'imported' => false,
+            'imported' => config('app.env') === 'local',
             'created_at' => date('Y-m-d H:i:s'),
         ];
 
