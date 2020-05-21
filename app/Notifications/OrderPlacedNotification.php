@@ -5,9 +5,9 @@ namespace App\Notifications;
 use App\Exports\ConfirmationPDF;
 use App\Models\GlobalSettings;
 use App\Models\OrderHeader;
-use Illuminate\Notifications\Messages\MailMessage;
 use Illuminate\Bus\Queueable;
 use Illuminate\Contracts\Queue\ShouldQueue;
+use Illuminate\Notifications\Messages\MailMessage;
 use Illuminate\Notifications\Notification;
 
 class OrderPlacedNotification extends Notification implements ShouldQueue
