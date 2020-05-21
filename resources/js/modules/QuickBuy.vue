@@ -1,5 +1,5 @@
 <template>
-    <div>
+    <div class="quickbuy">
         <div class="relative">
             <input type="text" ref="product" :placeholder="placeHolderText" v-model="keywordSearch" class="mb-1"
                    @keyup="onKeyUp(keywordSearch)" @keyup.enter="submit()"/>
@@ -17,7 +17,7 @@
         <div class="flex">
             <div class="flex items-center">
                 <span class="mr-2 text-gray-600">Qty:</span>
-                <input class="w-24 mr-2" value="1" v-model="quantity" @keyup.enter="submit()" autocomplete="off">
+                <input class="w-24 mr-2" value="1" v-model="quantity" @keyup.enter="submit()" autocomplete="off" @focus="resultItems = []">
             </div>
             <button class="button button-primary flex-grow flex justify-center" @click="submit()" type="submit" :disabled="addingProduct">
                 {{ buttonText }} <svg v-if="addingProduct" xmlns="http://www.w3.org/2000/svg"
@@ -55,20 +55,30 @@
                 addingProduct: false,
             }
         },
+        watch: {
+            resultItems(resultItems) {
+                if (resultItems.length > 0) {
+                    document.addEventListener('click', this.closeIfClickedOutside);
+                }
+            }
+        },
         methods: {
             submit: function () {
+                let self = this;
+
                 this.buttonText = 'Adding...';
                 this.addingProduct = true;
 
                 App.addProductToBasket(this.keywordSearch, this.quantity).then(result => {
                     if (result) {
-                        this.keywordSearch = '';
-                        this.quantity = 1;
-                        this.$refs.product.focus();
+                        self.keywordSearch = '';
+                        self.quantity = 1;
+                        self.$refs.product.focus();
                     }
 
-                    this.buttonText = 'Add to basket';
-                    this.addingProduct = false;
+                    self.buttonText = 'Add to basket';
+                    self.addingProduct = false;
+                    self.resultItems = [];
                 });
             },
             onSelected(name) {
@@ -98,6 +108,12 @@
                     this.resultItems = [];
                 }
             },
+            closeIfClickedOutside(event) {
+                if (!event.target.closest('.quickbuy')) {
+                    this.resultItems = [];
+                    document.removeEventListener('click', this.closeIfClickedOutside);
+                }
+            }
         }
     }
 </script>
