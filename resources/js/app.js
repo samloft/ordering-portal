@@ -38,6 +38,8 @@ window.App = new Vue({
     el: '#app',
     methods: {
         addProductToBasket: async function (product, quantity, update = false) {
+            let productAdded = false;
+
             Event.$emit('basket-updating', true);
 
             await axios.post('/basket/add-product', {
@@ -61,7 +63,7 @@ window.App = new Vue({
                         Event.$emit('product-added', response.data);
                     }
 
-                    return true;
+                    productAdded = true;
                 })
                 .catch(function (error) {
                     if (error.response) {
@@ -73,10 +75,12 @@ window.App = new Vue({
                         });
                     }
 
-                    return false;
+                    productAdded = false;
                 });
 
             Event.$emit('basket-updating', false);
+
+            return productAdded;
         },
         copyToClipboard: function (id) {
             var range = document.createRange();
