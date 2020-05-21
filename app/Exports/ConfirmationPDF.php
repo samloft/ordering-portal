@@ -13,17 +13,22 @@ class ConfirmationPDF
 
     protected $collection_message;
 
+    protected $user_id;
+
     /**
      * ConfirmationPDF constructor.
      *
      * @param $order
      * @param $collection_message
+     * @param $user_id
      */
-    public function __construct($order, $collection_message = null)
+    public function __construct($order, $collection_message = null, $user_id = null)
     {
         $this->order = $order;
 
         $this->collection_message = $collection_message;
+
+        $this->user_id = $user_id;
     }
 
     /**
@@ -33,6 +38,10 @@ class ConfirmationPDF
      */
     public function orderDetails($tracking): array
     {
+        if ($this->user_id) {
+            auth()->loginUsingId($this->user_id);
+        }
+
         if ($tracking) {
             $placed_by = $this->order->original ? $this->order->original->user->name : '';
 
