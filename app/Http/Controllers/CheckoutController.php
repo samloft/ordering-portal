@@ -191,7 +191,7 @@ class CheckoutController extends Controller
     {
         return request()->validate([
             'reference' => 'required|max:20',
-            'shipping' => 'required|exists:delivery_methods,code',
+            'shipping' => 'required|exists:delivery_methods,id',
             'name' => 'required|max:37',
             'mobile' => 'max:37|nullable',
             'terms' => 'accepted',
