@@ -46,7 +46,7 @@
                 <tbody>
                 @foreach ($product_lines['lines'] as $line)
                     @if ($line['product'])
-                        <tr>
+                        <tr class="{{ $line['validation']['error'] ? 'bg-red-100' : '' }}">
 
                             <td class="{{ $line['validation']['error'] ? 'bg-danger' : ($line['validation']['warning'] ?? 'bg-warning') }}">
                                 {{ $line['product'] }}
