@@ -57,7 +57,7 @@ class ReportController extends Controller
      *
      * @param $output
      *
-     * @return RedirectResponse|Response|BinaryFileResponse
+     * @return \Illuminate\Http\JsonResponse|\Symfony\Component\HttpFoundation\BinaryFileResponse
      * @throws \PhpOffice\PhpSpreadsheet\Exception
      * @throws \PhpOffice\PhpSpreadsheet\Writer\Exception
      */
@@ -77,13 +77,13 @@ class ReportController extends Controller
             }
         }
 
-        return back()->with('error', 'You dont currently have any back orders to display');
+        return response()->json(['message' => 'You have no back orders to display'], 404);
     }
 
     /**
      * @param $output
      *
-     * @return \Illuminate\Http\RedirectResponse|\Illuminate\Http\Response|\Symfony\Component\HttpFoundation\BinaryFileResponse|\Symfony\Component\HttpFoundation\StreamedResponse
+     * @return \Illuminate\Http\JsonResponse|\Maatwebsite\Excel\BinaryFileResponse|\Symfony\Component\HttpFoundation\BinaryFileResponse
      * @throws \PhpOffice\PhpSpreadsheet\Exception
      * @throws \PhpOffice\PhpSpreadsheet\Writer\Exception
      */
@@ -94,7 +94,7 @@ class ReportController extends Controller
         $invoice_lines = AccountSummary::show();
 
         if (! $invoice_lines) {
-            return back()->with('error', 'You dont currently have an order summary to display.');
+            return response()->json(['message' => 'You dont currently have an order summary to display.'], 404);
         }
 
         $summary = AccountSummary::summary();
