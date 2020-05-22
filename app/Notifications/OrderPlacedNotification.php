@@ -16,11 +16,11 @@ class OrderPlacedNotification extends Notification implements ShouldQueue
 {
     use Queueable;
 
-    protected $order;
+    public $order;
 
-    protected $collection_message;
+    public $collection_message;
 
-    protected $user;
+    public $user;
 
     /**
      * Create a new notification instance.
