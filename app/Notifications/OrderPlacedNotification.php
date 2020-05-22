@@ -97,15 +97,15 @@ class OrderPlacedNotification extends Notification implements ShouldQueue
     {
         $customer = Customer::where('code', $order->customer_code)->first();
 
-        $file = env('FTP_TAG') ? env('FTP_TAG')."_" : ""."SALESORDER\r\n";
-        $file .= "ARCH_DATE:".date('d/m/Y')."\r\n";
+        $file = env('FTP_TAG') ? env('FTP_TAG').'_' : ''."SALESORDER\r\n";
+        $file .= 'ARCH_DATE:'.date('d/m/Y')."\r\n";
         $file .= "ARCH_USER:Devloft\r\n";
-        $file .= "SALES_ORDER_NUMBER:".$order->order_number."\r\n";
-        $file .= "CUSTOMER_ORDER_NUMBER:".$order->reference."\r\n";
-        $file .= "CUSTOMER_CODE:".$order->customer_code."\r\n";
-        $file .= "CUSTOMER_NAME:".($customer->name ?? 'Unknown')."\r\n";
-        $file .= "AMOUNT:".$order->value."\r\n";
-        $file .= "USER_NAME:IS";
+        $file .= 'SALES_ORDER_NUMBER:'.$order->order_number."\r\n";
+        $file .= 'CUSTOMER_ORDER_NUMBER:'.$order->reference."\r\n";
+        $file .= 'CUSTOMER_CODE:'.$order->customer_code."\r\n";
+        $file .= 'CUSTOMER_NAME:'.($customer->name ?? 'Unknown')."\r\n";
+        $file .= 'AMOUNT:'.$order->value."\r\n";
+        $file .= 'USER_NAME:IS';
 
         return $file;
     }
