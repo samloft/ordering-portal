@@ -81,9 +81,9 @@
 
                     return vm.forceFileDownload(response, filename);
                 }).catch(function (error) {
-                    Vue.swal({
-                        title: 'Error',
-                        text: 'Unable to generate report, please try again',
+                    return Vue.swal({
+                        title: error.response.status === 404 ? 'Empty' : 'Error',
+                        text: error.response.status === 404 ? 'No data to display for this report' : 'Unable to generate report, please try again',
                         icon: 'error',
                         confirmButtonColor: '#E02424',
                     });
