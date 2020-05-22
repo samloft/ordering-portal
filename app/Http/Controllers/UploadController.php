@@ -166,7 +166,7 @@ class UploadController extends Controller
                 }
 
                 $order['lines'][] = [
-                    'product' => $product->code,
+                    'product' => $product->code ?? $product_code,
                     'quantity' => $product_qty,
                     'old_quantity' => $product_qty,
                     'passed_price' => $product_price,
