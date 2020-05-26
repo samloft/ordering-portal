@@ -136,7 +136,7 @@ Route::group(['middleware' => ['auth', 'has.customer', 'terms']], static functio
             Route::patch('{id}/edit', 'AddressController@update')->name('account.address.update');
             Route::post('default', 'AddressController@default')->name('account.address.default');
             Route::get('{id}/delete', 'AddressController@destroy')->name('account.address.destroy');
-            Route::get('select/{id}', 'AddressController@select')->name('account.address.select');
+            Route::get('select/{id?}', 'AddressController@select')->name('account.address.select');
 
             Route::get('lookup', [AddressController::class, 'lookup'])->name('account.address.lookup');
         });
