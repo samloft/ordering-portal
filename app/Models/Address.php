@@ -22,7 +22,6 @@ use Spatie\Activitylog\Traits\LogsActivity;
  * @property string $address_line_5
  * @property string $country
  * @property stirng $post_code
- * @property int $default
  * @property \Illuminate\Support\Carbon $created_at
  * @property \Illuminate\Support\Carbon $updated_at
  */
@@ -41,7 +40,6 @@ class Address extends Model
         'address_line_5',
         'country',
         'post_code',
-        'default',
     ];
 
     protected $guarded = [];
@@ -51,7 +49,7 @@ class Address extends Model
      */
     public static function show()
     {
-        return self::where('customer_code', auth()->user()->customer->code)->orderBy('default', 'desc')->paginate(5);
+        return self::where('customer_code', auth()->user()->customer->code)->orderBy('created_at', 'desc')->paginate(5);
     }
 
     /**
@@ -75,13 +73,7 @@ class Address extends Model
         $address['user_id'] = auth()->user()->id;
         $address['created_at'] = date('Y-m-d H:i:s');
 
-        $create_address = self::insertGetId($address);
-
-        if ($create_address && $address['default']) {
-            static::setDefault($create_address);
-        }
-
-        return $create_address;
+        return self::insertGetId($address);
     }
 
     /**
@@ -94,45 +86,7 @@ class Address extends Model
     {
         $address['updated_at'] = date('Y-m-d H:i:s');
 
-        $updated = self::where('id', $id)->where('customer_code', auth()->user()->customer->code)->update($address);
-
-        if ($updated && $address['default']) {
-            static::setDefault($id);
-        }
-
-        return $updated;
-    }
-
-    /**
-     * @return mixed
-     */
-    public static function removeDefaults()
-    {
-        return self::where('customer_code', auth()->user()->customer->code)->update([
-            'default' => 0,
-        ]);
-    }
-
-    /**
-     * @param $address_id
-     *
-     * @return mixed
-     */
-    public static function setDefault($address_id)
-    {
-        static::removeDefaults();
-
-        return self::where('id', $address_id)->update([
-            'default' => 1,
-        ]);
-    }
-
-    /**
-     * @return mixed
-     */
-    public static function getDefault()
-    {
-        return self::where('customer_code', auth()->user()->customer->code)->where('default', 1)->first();
+        return self::where('id', $id)->where('customer_code', auth()->user()->customer->code)->update($address);
     }
 
     /**

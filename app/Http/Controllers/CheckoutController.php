@@ -3,7 +3,6 @@
 namespace App\Http\Controllers;
 
 use App\Exports\ConfirmationPDF;
-use App\Models\Address;
 use App\Models\Basket;
 use App\Models\DeliveryMethod;
 use App\Models\GlobalSettings;
@@ -37,9 +36,7 @@ class CheckoutController extends Controller
             return redirect(route('basket'))->with('error', 'You have no items in your basket to checkout with.');
         }
 
-        $default_address = Address::getDefault();
-
-        return view('checkout.index', compact('default_address', 'basket', 'delivery_methods', 'checkout_notice', 'account'));
+        return view('checkout.index', compact('basket', 'delivery_methods', 'checkout_notice', 'account'));
     }
 
     /**
@@ -56,13 +53,19 @@ class CheckoutController extends Controller
             return redirect(route('basket'))->with('error', 'You do not have permission to place orders, if you believe this is in error, please contact the sales office');
         }
 
+        if (session('address') && ! request('mobile')) {
+            return back()->with('error', 'You must enter a mobile number when having a shipment delivered to an address that is not you default address.')->withInput();
+        }
+
         $this->validation();
 
-        $delivery_address = session('address') ?: Address::getDefault();
-
-        if (! $delivery_address) {
-            return back()->with('error', 'You must select a delivery address')->withInput(request()->all());
-        }
+        $delivery_address = session('address') ?: [
+            'company_name' => auth()->user()->customer->name,
+            'address_line_2' => auth()->user()->customer->address_line_1,
+            'address_line_3' => auth()->user()->customer->address_line_2,
+            'address_line_4' => auth()->user()->customer->city,
+            'post_code' => auth()->user()->customer->post_code,
+        ];
 
         $basket = Basket::show(request('shipping'));
 
