@@ -3,7 +3,6 @@
 namespace App\Http\Controllers\Cms;
 
 use App\Http\Controllers\Controller;
-use App\Mail\Welcome;
 use App\Models\User;
 use App\Notifications\WelcomeUserNotification;
 use Illuminate\Contracts\View\Factory;

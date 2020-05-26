@@ -3,7 +3,6 @@
 namespace App\Http\Controllers;
 
 use App\Exports\ConfirmationPDF;
-use App\Models\Address;
 use App\Models\Basket;
 use App\Models\DeliveryMethod;
 use App\Models\GlobalSettings;
@@ -61,7 +60,7 @@ class CheckoutController extends Controller
             'address_line_2' => auth()->user()->customer->address_line_1,
             'address_line_3' => auth()->user()->customer->address_line_2,
             'address_line_4' => auth()->user()->customer->city,
-            'post_code' => auth()->user()->customer->post_code
+            'post_code' => auth()->user()->customer->post_code,
         ];
 
         if (! $delivery_address) {
