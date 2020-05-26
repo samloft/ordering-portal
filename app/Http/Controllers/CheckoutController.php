@@ -53,6 +53,10 @@ class CheckoutController extends Controller
             return redirect(route('basket'))->with('error', 'You do not have permission to place orders, if you believe this is in error, please contact the sales office');
         }
 
+        if (session('address') && ! request('mobile')) {
+            return back()->with('error', 'You must enter a mobile number when having a shipment delivered to an address that is not you default address.')->withInput();
+        }
+
         $this->validation();
 
         $delivery_address = session('address') ?: [
@@ -62,10 +66,6 @@ class CheckoutController extends Controller
             'address_line_4' => auth()->user()->customer->city,
             'post_code' => auth()->user()->customer->post_code,
         ];
-
-        if (! $delivery_address) {
-            return back()->with('error', 'You must select a delivery address')->withInput(request()->all());
-        }
 
         $basket = Basket::show(request('shipping'));
 
