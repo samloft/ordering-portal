@@ -61,7 +61,6 @@ class AddressController extends Controller
         $address = $this->validation();
 
         $address['customer_code'] = auth()->user()->customer->code;
-        $address['default'] = request('default') ? 1 : 0;
 
         $create = Address::store($address);
 
@@ -112,8 +111,6 @@ class AddressController extends Controller
     {
         $address = $this->validation();
 
-        $address['default'] = request('default') ? 1 : 0;
-
         $create = Address::edit($id, $address);
 
         return $create ? back()->with('success', 'Address has been updated') : back()->with('error', 'Unable to update address, please try again');
@@ -138,22 +135,6 @@ class AddressController extends Controller
         $deleted = Address::destroy($id);
 
         return $deleted ? redirect(route('account.addresses'))->with('success', 'Address has been deleted') : back()->with('error', 'Unable to delete address, please try again later');
-    }
-
-    /**
-     * Set the address as the default for the customer.
-     *
-     * @return RedirectResponse
-     */
-    public function default(): RedirectResponse
-    {
-        $permission = Address::canEdit(request('id'));
-
-        if (! $permission) {
-            return back()->with('error', 'You do not have permission to edit this address');
-        }
-
-        return Address::setDefault(request('id')) ? redirect(route('account.addresses'))->with('success', 'New address set as default') : back()->with('error', 'Unable to set new address to default, please try again');
     }
 
     /**

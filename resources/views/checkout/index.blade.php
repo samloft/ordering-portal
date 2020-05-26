@@ -24,18 +24,15 @@
                             <div>{{ session('address.address_line_5') }}</div>
                             <div>{{ session('address.post_code') }}</div>
                         </div>
-                    @elseif ($default_address)
-                        <div class="xl:w-3/4 text-center bg-gray-200 lg:p-4 rounded mx-auto">
-                            <div>{{ $default_address->company_name }}</div>
-                            <div>{{ $default_address->address_line_2 }}</div>
-                            <div>{{ $default_address->address_line_3 }}</div>
-                            <div>{{ $default_address->address_line_4 }}</div>
-                            <div>{{ $default_address->address_line_5 }}</div>
-                            <div>{{ $default_address->post_code }}</div>
-                        </div>
                     @else
-                        <span
-                            class="text-red-400">No default delivery address set, click below to add one.</span>
+                        <div class="xl:w-3/4 text-center bg-gray-200 lg:p-4 rounded mx-auto">
+                            <div>{{ auth()->user()->customer->name }}</div>
+                            <div>{{ auth()->user()->customer->address_line_1 }}</div>
+                            <div>{{ auth()->user()->customer->address_line_2 }}</div>
+                            <div>{{ auth()->user()->customer->city }}</div>
+                            <div>{{ auth()->user()->customer->country }}</div>
+                            <div>{{ auth()->user()->customer->post_code }}</div>
+                        </div>
                     @endif
 
                     <div class="text-center mt-2 mb-2">
@@ -115,8 +112,9 @@
                         <label class="checkbox flex items-center">
                             <input type="checkbox" name="terms" class="form-checkbox"
                                    {{ old('terms') ? 'checked' : '' }} autocomplete="off">
-                            <span class="ml-2 text-xs xl:text-sm">I have read and agree to the <a href="{{ route('support.terms') }}"
-                                                                               class="underline" target="_blank">terms & conditions</a>
+                            <span class="ml-2 text-xs xl:text-sm">I have read and agree to the <a
+                                    href="{{ route('support.terms') }}"
+                                    class="underline" target="_blank">terms & conditions</a>
                             </span>
                         </label>
                     </div>

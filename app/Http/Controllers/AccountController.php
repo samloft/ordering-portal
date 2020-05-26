@@ -21,9 +21,7 @@ class AccountController extends Controller
      */
     public function index()
     {
-        $default_address = Address::getDefault();
-
-        return view('account.index', compact('default_address'));
+        return view('account.index');
     }
 
     /**

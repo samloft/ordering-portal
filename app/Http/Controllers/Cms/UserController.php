@@ -8,7 +8,6 @@ use App\Models\User;
 use App\Notifications\WelcomeUserNotification;
 use Illuminate\Contracts\View\Factory;
 use Illuminate\Http\JsonResponse;
-use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Password;
 use Illuminate\Support\Str;
 use Illuminate\View\View;
@@ -46,7 +45,6 @@ class UserController extends Controller
 
         if ($user) {
             $user->notify(new WelcomeUserNotification($user));
-            //Mail::send(new Welcome($user));
         }
 
         return $user;

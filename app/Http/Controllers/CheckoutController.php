@@ -37,9 +37,7 @@ class CheckoutController extends Controller
             return redirect(route('basket'))->with('error', 'You have no items in your basket to checkout with.');
         }
 
-        $default_address = Address::getDefault();
-
-        return view('checkout.index', compact('default_address', 'basket', 'delivery_methods', 'checkout_notice', 'account'));
+        return view('checkout.index', compact('basket', 'delivery_methods', 'checkout_notice', 'account'));
     }
 
     /**
@@ -58,7 +56,13 @@ class CheckoutController extends Controller
 
         $this->validation();
 
-        $delivery_address = session('address') ?: Address::getDefault();
+        $delivery_address = session('address') ?: [
+            'company_name' => auth()->user()->customer->name,
+            'address_line_2' => auth()->user()->customer->address_line_1,
+            'address_line_3' => auth()->user()->customer->address_line_2,
+            'address_line_4' => auth()->user()->customer->city,
+            'post_code' => auth()->user()->customer->post_code
+        ];
 
         if (! $delivery_address) {
             return back()->with('error', 'You must select a delivery address')->withInput(request()->all());
