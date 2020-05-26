@@ -120,16 +120,18 @@
             </div>
 
             @if(trim($product->note) !== '')
-                @if($product->note === 'Superseeded')
-                    <h3 class="text-red-600 tracking-wide font-semibold text-lg">
-                        Superseeded {!! $product->link1 ? 'by <a class="hover:underline" href="'.route('products.show', ['product' => trim($product->link1)]).'">'.trim($product->link1).'</a>' : '' !!}</h3>
-                @else
-                    <div class="bg-gray-200 mt-3 rounded p-6">
-                        <h5 class="font-semibold mb-3">Notes:</h5>
+                <div class="mb-3">
+                    @if($product->note === 'Superseeded')
+                        <h3 class="text-red-600 tracking-wide font-semibold text-lg">
+                            Superseeded {!! $product->link1 ? 'by <a class="hover:underline" href="'.route('products.show', ['product' => trim($product->link1)]).'">'.trim($product->link1).'</a>' : '' !!}</h3>
+                    @else
+                        <div class="bg-gray-200 mt-3 rounded p-6">
+                            <h5 class="font-semibold mb-3">Notes:</h5>
 
-                        <p>{{ $product->note }}</p>
-                    </div>
-                @endif
+                            <p>{{ $product->note }}</p>
+                        </div>
+                    @endif
+                </div>
             @endif
 
             @if ($product->luckins_code)
