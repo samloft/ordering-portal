@@ -24,6 +24,14 @@
                 <div>{{ auth()->user()->customer->country }}</div>
                 <div>{{ auth()->user()->customer->post_code }}</div>
             </div>
+            <div class="text-right md:w-1/4">
+                @if($checkout)
+                    <a href="{{ route('account.address.select') }}"
+                       class="btn-link">
+                        <button class="button button-primary button-block mb-1">Select Address</button>
+                    </a>
+                @endif
+            </div>
         </div>
     </div>
 

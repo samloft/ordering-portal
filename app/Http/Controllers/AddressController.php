@@ -144,15 +144,19 @@ class AddressController extends Controller
      *
      * @return RedirectResponse|Redirector
      */
-    public function select($address_id)
+    public function select($address_id = null)
     {
-        $address = Address::details($address_id);
+        if ($address_id) {
+            $address = Address::details($address_id);
 
-        if (! $address) {
-            return redirect(route('account.addresses'))->with('error', 'Address not found, please try again');
+            if (! $address) {
+                return redirect(route('account.addresses'))->with('error', 'Address not found, please try again');
+            }
+
+            $this->tempAddress($address);
+        } else {
+            session()->forget('address');
         }
-
-        $this->tempAddress($address);
 
         return redirect(route('checkout', ['account' => true]));
     }
