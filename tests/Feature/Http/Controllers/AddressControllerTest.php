@@ -31,27 +31,6 @@ class AddressControllerTest extends TestCase
     /**
      * @test
      */
-    public function default_returns_an_ok_response(): void
-    {
-        $user = (new UserFactory())->withCustomer()->create();
-
-        $address = factory(Address::class)->create([
-            'id' => $user->id,
-            'customer_code' => $user->customer_code,
-            'default' => false,
-        ]);
-
-        $response = $this->actingAs($user)->post(route('account.address.default'), [
-            'id' => $address->id,
-            'default' => true,
-        ]);
-
-        $response->assertStatus(302);
-    }
-
-    /**
-     * @test
-     */
     public function index_returns_an_ok_response(): void
     {
         $user = (new UserFactory())->withCustomer()->create();

@@ -24,7 +24,6 @@ class AccountControllerTest extends TestCase
 
         $response->assertOk();
         $response->assertViewIs('account.index');
-        $response->assertViewHas('default_address');
     }
 
     /**

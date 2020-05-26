@@ -12,6 +12,21 @@
 
     @include('layout.alerts')
 
+    <div class="rounded-lg shadow p-4 mb-3 bg-primary text-white">
+        <div class="md:flex justify-between items-center">
+            <div class="mb-2 md:mb-0">
+                <h4 class="md:hidden mb-2 text-white text-center text-1xl">Default Address</h4>
+
+                <div class="font-medium">{{ auth()->user()->customer->name }}</div>
+                <div>{{ auth()->user()->customer->address_line_1 }}</div>
+                <div>{{ auth()->user()->customer->address_line_2 }}</div>
+                <div>{{ auth()->user()->customer->city }}</div>
+                <div>{{ auth()->user()->customer->country }}</div>
+                <div>{{ auth()->user()->customer->post_code }}</div>
+            </div>
+        </div>
+    </div>
+
     @if (count($addresses) > 0)
         <account-address :addresses="{{ json_encode($addresses, true) }}" checkout="{{ $checkout }}"></account-address>
 

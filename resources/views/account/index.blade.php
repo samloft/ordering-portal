@@ -29,7 +29,8 @@
                                 class="secondary"></path>
                         </svg>
                         <div>
-                            <p class="alert-text">Should you require to change your email address, you will need to contact customer services</p>
+                            <p class="alert-text">Should you require to change your email address, you will need to
+                                contact customer services</p>
                         </div>
                     </div>
                 </div>
@@ -102,18 +103,12 @@
             <div class="md:w-1/2 mb-3 md:mb-0">
                 <h4 class="text-primary">Default Delivery Address</h4>
 
-                @if ($default_address)
-                    <div>{{ $default_address->address_line_1 }}</div>
-                    <div>{{ $default_address->address_line_2 }}</div>
-                    <div>{{ $default_address->address_line_3 }}</div>
-                    <div>{{ $default_address->address_line_4 }}</div>
-                    <div>{{ $default_address->address_line_5 }}</div>
-                    <div>{{ $default_address->post_code }}</div>
-                @else
-                    <span class="text-muted">
-                        No default delivery address set, click below to add one
-                    </span>
-                @endif
+                <div>{{ auth()->user()->customer->name }}</div>
+                <div>{{ auth()->user()->customer->address_line_1 }}</div>
+                <div>{{ auth()->user()->customer->address_line_2 }}</div>
+                <div>{{ auth()->user()->customer->city }}</div>
+                <div>{{ auth()->user()->customer->country }}</div>
+                <div>{{ auth()->user()->customer->post_code }}</div>
 
                 <div class="text-right mt-2">
                     <a href="{{ route('account.addresses') }}">

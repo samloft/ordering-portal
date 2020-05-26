@@ -27,7 +27,6 @@ class AddressTest extends TestCase
             'address_line_5' => 'Address Line 5',
             'country' => 'UK',
             'post_code' => 'ABC 123',
-            'default' => true,
         ];
 
         $this->post(route('account.address.store', $address));
@@ -70,25 +69,6 @@ class AddressTest extends TestCase
         $this->delete(route('account.address.destroy', ['id' => $address->id]));
 
         $this->assertDatabaseMissing('addresses', $address->toArray());
-    }
-
-    /**
-     * @test
-     */
-    public function a_user_can_set_address_as_default(): void
-    {
-        $user = (new UserFactory())->withCustomer()->create();
-
-        $this->signIn($user);
-
-        $address = factory(Address::class, 1)->create([
-            'customer_code' => auth()->user()->customer->code,
-            'default' => false,
-        ])->first();
-
-        $this->post(route('account.address.default', ['id' => $address->id]));
-
-        $this->assertDatabaseHas('addresses', ['default' => true]);
     }
 
     /**
