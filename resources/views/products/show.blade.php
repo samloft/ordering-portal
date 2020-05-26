@@ -8,7 +8,7 @@
         <div class="w-full rounded bg-white p-5 shadow mb-5 text-sm">
             <div class="md:flex mb-2">
                 <div class="md:w-3/4">
-                    <h2 class="font-semibold text-lg md:text-2xl text-primary mb-2">
+                    <h2 class="flex items-center font-semibold text-lg md:text-2xl text-primary mb-2">
                         {{ $product->name }} @if($product->not_sold) <span
                             class="badge badge-danger ml-3">Not Sold</span> @endif
                     </h2>
