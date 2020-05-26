@@ -91,15 +91,6 @@
                         <input id="post_code" class="bg-gray-100" placeholder="Postcode" name="post_code"
                                :value="data.selected_address.line_1 ? data.postcode : '{{ old('post_code') ?: $address->post_code ?? null }}'">
                     </div>
-
-                    <div class="flex justify-end">
-                        <label class="checkbox flex items-center">
-                            <span class="mr-2">Default Address?</span>
-                            <input type="checkbox" class="form-checkbox"
-                                   name="default"
-                                   {{ old('postcode') ? 'checked' : (isset($address) ? ($address->default === 1 ? 'checked' : '') : '') }} autocomplete="off">
-                        </label>
-                    </div>
                 </template>
             </address-form>
         </div>
