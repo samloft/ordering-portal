@@ -2,8 +2,8 @@
     <div>
         <div v-show="alert" class="fixed left-0 top-0 w-full bg-white shadow-xl z-50">
             <div class="flex items-center justify-center p-3">
-                <div class="w-20 mr-4 flex">
-                    <img :src="product.image" :alt="product.code">
+                <div class="w-20 mr-4">
+                    <img :src="product.image" :alt="product.code" class="max-w-20">
                 </div>
                 <div class="mb-1 text-left">
                     <h4 class="text-primary mb-0 leading-none">{{ product.code }}</h4>
