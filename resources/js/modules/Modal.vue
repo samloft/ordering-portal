@@ -7,7 +7,7 @@
             </div>
 
             <div
-                class="flex-grow bg-white rounded-lg px-4 pt-5 pb-4 shadow-xl transform transition-all sm:max-w-lg sm:w-full sm:p-6">
+                class="flex-grow bg-white rounded-lg px-4 pt-5 pb-4 shadow-xl z-50 transform transition-all sm:max-w-lg sm:w-full sm:p-6">
                 <h3 v-if="title" class="text-lg leading-6 font-medium text-gray-900 mb-3" v-text="title"/>
 
                 <slot></slot>
