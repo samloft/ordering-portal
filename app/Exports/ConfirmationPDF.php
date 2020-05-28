@@ -96,6 +96,7 @@ class ConfirmationPDF
             'invoice_address' => $invoice_address,
             'delivery_address' => $delivery_address,
             'collection_message' => $this->collection_message,
+            'notes' => $this->order->notes ?? 'N/A',
         ];
 
         $order['lines'] = [];
