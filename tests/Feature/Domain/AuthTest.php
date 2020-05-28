@@ -1,9 +1,6 @@
 <?php
 
-use Illuminate\Foundation\Testing\RefreshDatabase;
 use Tests\Setup\UserFactory;
-
-uses(RefreshDatabase::class);
 
 test('returns an ok response', function () {
     $this->get('login')->assertStatus(200);

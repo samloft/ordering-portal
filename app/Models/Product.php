@@ -41,6 +41,10 @@ class Product extends Model
 {
     protected $table = 'products';
 
+    protected $fillable = [
+        'order_multiples',
+    ];
+
     public $timestamps = false;
 
     /**

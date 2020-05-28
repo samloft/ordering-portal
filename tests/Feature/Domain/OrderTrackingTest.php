@@ -1,12 +1,9 @@
 <?php
 
 use App\Models\Price;
-use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Support\Str;
 use Tests\Setup\OrderTrackingFactory;
 use Tests\Setup\UserFactory;
-
-uses(RefreshDatabase::class);
 
 beforeEach(function () {
     $this->user = (new UserFactory())->withCustomer()->create();

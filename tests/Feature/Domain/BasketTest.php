@@ -3,12 +3,9 @@
 use App\Models\Basket;
 use App\Models\Price;
 use App\Models\Product;
-use Illuminate\Foundation\Testing\RefreshDatabase;
 use Tests\Setup\BasketFactory;
 use Tests\Setup\ProductFactory;
 use Tests\Setup\UserFactory;
-
-uses(RefreshDatabase::class);
 
 beforeEach(function () {
     $this->user = (new UserFactory())->withCustomer()->create();

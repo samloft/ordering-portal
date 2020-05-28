@@ -2,10 +2,7 @@
 
 use App\Models\Price;
 use App\Models\Product;
-use Illuminate\Foundation\Testing\RefreshDatabase;
 use Tests\Setup\UserFactory;
-
-uses(RefreshDatabase::class);
 
 beforeEach(function () {
     $this->user = (new UserFactory())->withCustomer()->create();

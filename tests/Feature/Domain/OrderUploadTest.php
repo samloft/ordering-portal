@@ -1,12 +1,10 @@
 <?php
 
 use App\Models\GlobalSettings;
-use Illuminate\Foundation\Testing\RefreshDatabase;
+use App\Models\Product;
 use Illuminate\Http\UploadedFile;
 use Tests\Setup\ProductFactory;
 use Tests\Setup\UserFactory;
-
-uses(RefreshDatabase::class);
 
 beforeEach(function () {
     $this->user = (new UserFactory())->withCustomer()->create();
@@ -77,15 +75,14 @@ test('blank csv returns error', function () {
 test('duplicate product codes get merged', function () {
     $order = [];
 
-    foreach($this->products as $product) {
+    foreach ($this->products as $product) {
         $order[] = $product->code.', 100';
     }
 
     $order[] = $this->products->first()->code.',200';
 
     $this->followingRedirects()->post(route('upload-validate'), [
-        'csv_file' => UploadedFile::fake()->createwithContent('test.csv', implode("\n", $order))
-            ->mimeType('text/csv'),
+        'csv_file' => UploadedFile::fake()->createwithContent('test.csv', implode("\n", $order))->mimeType('text/csv'),
     ]);
 
     $this->assertDatabaseHas('order_imports', [
@@ -97,29 +94,56 @@ test('duplicate product codes get merged', function () {
 test('upload with prices gets matched', function () {
     $order = [];
 
-    foreach($this->products as $product) {
+    foreach ($this->products as $product) {
         $order[] = $product->code.',100,'.$product->prices->price;
     }
 
     $this->followingRedirects()->post(route('upload-validate'), [
-        'csv_file' => UploadedFile::fake()->createwithContent('test.csv', implode("\n", $order))
-            ->mimeType('text/csv'),
+        'csv_file' => UploadedFile::fake()->createwithContent('test.csv', implode("\n", $order))->mimeType('text/csv'),
     ])->assertSee('Passed Price')->assertSee('Actual Price');
+});
+
+test('quantities get converted to packs if selected', function () {
+    GlobalSettings::where('key', 'upload-config')->update([
+        'value' => json_encode([
+            'prices' => false,
+            'packs' => true,
+        ], JSON_THROW_ON_ERROR | true),
+    ]);
+
+    $product = $this->products->first();
+
+    Product::where('code', $product->code)->update([
+        'order_multiples' => 1,
+        'packaging' => 100,
+    ]);
+
+    $product = Product::where('code', $product->code)->firstOrFail();
+
+    $this->followingRedirects()->post(route('upload-validate'), [
+        'packs' => 'on',
+        'csv_file' => UploadedFile::fake()->createwithContent('test.csv', $product->code.',100')->mimeType('text/csv'),
+    ]);
+
+    $this->assertDatabaseHas('order_imports', [
+        'product' => $product->code,
+        'quantity' => 1,
+    ]);
 });
 
 test('upload can be added to the basket', function () {
     $order = [];
 
-    foreach($this->products as $product) {
+    foreach ($this->products as $product) {
         $order[] = $product->code.',100,'.$product->prices->price;
     }
 
     $this->followingRedirects()->post(route('upload-validate'), [
-        'csv_file' => UploadedFile::fake()->createwithContent('test.csv', implode("\n", $order))
-            ->mimeType('text/csv'),
+        'csv_file' => UploadedFile::fake()->createwithContent('test.csv', implode("\n", $order))->mimeType('text/csv'),
     ]);
 
-    $this->followingRedirects()->get(route('upload-completed'))->assertViewIs('upload.completed')->assertSee('Completed');
+    $this->followingRedirects()->get(route('upload-completed'))->assertViewIs('upload.completed')
+        ->assertSee('Completed');
 
     $this->assertDatabaseHas('basket', [
         'user_id' => $this->user->id,
@@ -132,11 +156,12 @@ test('upload can be added to the basket', function () {
 test('quantities get incremented based on order multiples', function () {
     $product = $this->products->first();
 
-    $product->update(['order_multiples' => 10]);
+    Product::where('code', $product->code)->update(['order_multiples' => 10]);
+
+    $product = Product::where('code', $product->code)->firstOrFail();
 
     $this->followingRedirects()->post(route('upload-validate'), [
-        'csv_file' => UploadedFile::fake()->createwithContent('test.csv', $product->code.',12')
-            ->mimeType('text/csv'),
+        'csv_file' => UploadedFile::fake()->createwithContent('test.csv', $product->code.',12')->mimeType('text/csv'),
     ])->assertSee('Quantity not in multiples')->assertSee('10')->assertSee('20');
 
     $this->assertDatabaseHas('order_imports', [

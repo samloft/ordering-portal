@@ -1,10 +1,7 @@
 <?php
 
-use Illuminate\Foundation\Testing\RefreshDatabase;
 use Tests\Setup\CustomerFactory;
 use Tests\Setup\UserFactory;
-
-uses(RefreshDatabase::class);
 
 test('no additional customers cannot see change customer dropdown', function () {
     $user = (new UserFactory())->withCustomer()->create();
