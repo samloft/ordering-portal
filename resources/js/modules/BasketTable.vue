@@ -70,7 +70,7 @@
                 <tr v-for="product in items" :class="(product.quantity > product.stock) ? 'bg-red-200' : ''">
                     <td>
                         <div class="md:flex items-center md:h-10">
-                            <div class="hidden md:block w-15 mr-3 flex">
+                            <div class="hidden md:flex w-15 mr-3 justify-center">
                                 <img class="mx-auto" :src="product.image" :alt="product.name">
                             </div>
                             <h2 class="leading-none">
