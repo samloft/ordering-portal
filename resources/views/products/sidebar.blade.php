@@ -16,7 +16,7 @@
                 <h4>Change Customer</h4>
 
                 <customer-switch
-                    :user="{{ json_encode(auth()->user()->load('customers'), true) }}"></customer-switch>
+                    :user="{{ json_encode(auth()->user()->load('customers.details'), true) }}"></customer-switch>
 
             @endif
 

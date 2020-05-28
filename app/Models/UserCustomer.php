@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Support\Collection;
 use Spatie\Activitylog\Traits\LogsActivity;
@@ -22,6 +23,16 @@ class UserCustomer extends Model
     use LogsActivity;
 
     protected static $logAttributes = ['id', 'user_id', 'customer_code'];
+
+    /**
+     * Get the customer details from the customer model.
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     */
+    public function details(): BelongsTo
+    {
+        return $this->belongsTo(Customer::class, 'customer_code', 'code');
+    }
 
     /**
      * Check that a user has access to a customer.

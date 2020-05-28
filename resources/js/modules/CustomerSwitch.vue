@@ -30,11 +30,11 @@
                     <select name="customer" class="w-full p-2 rounded border text-gray-600 appearance-none"
                             autocomplete="off">
                         <option :value="user.customer_code">
-                            {{ user.customer_code }}
+                            {{ user.customer_code }} - Default
                         </option>
 
                         <option v-for="customer in user.customers" :value="customer.customer_code">
-                            {{ customer.customer_code }}
+                            {{ customer.customer_code }} - {{ customer.details.post_code.toUpperCase() }}
                         </option>
                     </select>
                     <div class="pointer-events-none absolute inset-y-0 right-0 flex items-center px-3 text-gray-700">
