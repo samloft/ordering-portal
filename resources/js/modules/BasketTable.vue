@@ -88,6 +88,8 @@
                     </td>
                     <td class="hidden lg:table-cell">
                         <span class="badge badge-info">{{ product.uom.charAt(0).toUpperCase() + product.uom.substring(1).toLowerCase() }}</span>
+
+                        <div v-if="product.packaging" class="pl-1 pt-1 text-gray-400 text-xs">Inner Box Quantity: {{ product.packaging }}</div>
                     </td>
                     <td class="hidden md:table-cell text-right text-gray-500 text-sm">{{ product.net_price }}</td>
                     <td class="text-center">
