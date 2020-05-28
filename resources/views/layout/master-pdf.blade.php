@@ -163,6 +163,14 @@
             color: rgb(37, 47, 63);
             font-weight: bold;
         }
+
+        .border-0 {
+            border: none !important;
+        }
+
+        .font-thin {
+            font-weight: 200 !important;
+        }
     </style>
 </head>
 
