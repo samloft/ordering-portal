@@ -57,7 +57,6 @@
                 <thead>
                 <tr>
                     <th>Product</th>
-                    <th class="hidden lg:table-cell">Unit</th>
                     <th class="hidden md:table-cell text-right">Net Price</th>
                     <th class="text-center">Quantity</th>
                     <th class="text-right">
@@ -70,9 +69,9 @@
 
                 <tr v-for="product in items" :class="(product.quantity > product.stock) ? 'bg-red-200' : ''">
                     <td>
-                        <div class="md:flex items-center h-10">
-                            <div class="w-15 mr-3 flex">
-                                <img class="hidden md:block mx-auto" :src="product.image" :alt="product.name">
+                        <div class="md:flex items-center md:h-10">
+                            <div class="hidden md:block w-15 mr-3 flex">
+                                <img class="mx-auto" :src="product.image" :alt="product.name">
                             </div>
                             <h2 class="leading-none">
                                 <a :href="'/products/view/' + product.product">
@@ -80,18 +79,22 @@
                                     <br>
                                     <span
                                         class="hidden xl:block text-xs font-thin text-gray-600">{{ product.name }}</span>
+                                    <div v-if="product.packaging" class="text-gray-400 text-xs">Inner Box <br class="md:hidden"/> Quantity: {{
+                                        product.packaging }}
+                                    </div>
                                     <span
-                                        class="md:hidden text-xs font-thin text-gray-600">{{ product.net_price }}</span>
+                                        class="md:hidden text-xs font-thin text-gray-600">{{ product.net_price }} {{ product.uom }}</span>
                                 </a>
                             </h2>
                         </div>
                     </td>
-                    <td class="hidden lg:table-cell">
-                        <span class="badge badge-info">{{ product.uom.charAt(0).toUpperCase() + product.uom.substring(1).toLowerCase() }}</span>
+                    <td class="hidden md:table-cell text-right text-gray-500 text-sm">
+                        <div class="flex items-center justify-between">
+                            <span class="badge badge-info text-center">{{ product.uom.charAt(0).toUpperCase() + product.uom.substring(1).toLowerCase() }}</span>
 
-                        <div v-if="product.packaging" class="pl-1 pt-1 text-gray-400 text-xs">Inner Box Quantity: {{ product.packaging }}</div>
+                            <span class="text-right">{{ product.net_price }}</span>
+                        </div>
                     </td>
-                    <td class="hidden md:table-cell text-right text-gray-500 text-sm">{{ product.net_price }}</td>
                     <td class="text-center">
                         <div class="flex flex-grow flex-col">
                             <input name="line_qty" class="w-24 h-6 text-right bg-gray-100" v-model="product.quantity"
@@ -108,11 +111,12 @@
                     <td class="text-right text-sm">{{ product.price }}</td>
                 </tr>
 
-                <tr v-for="promotion in promotions" v-if="promotion.reached && promotion.type === 'product'" class="bg-green-100">
+                <tr v-for="promotion in promotions" v-if="promotion.reached && promotion.type === 'product'"
+                    class="bg-green-100">
                     <td>
                         <div class="md:flex items-center">
-                            <div class="w-15 mr-3 flex">
-                                <img class="hidden md:block" :src="promotion.image" :alt="promotion.name">
+                            <div class="hidden md:block w-15 mr-3 flex">
+                                <img :src="promotion.image" :alt="promotion.name">
                             </div>
                             <h2 class="leading-none">
                                 <span class="text-gray-400 font-medium">{{ promotion.product }}</span>
@@ -121,7 +125,6 @@
                             </h2>
                         </div>
                     </td>
-                    <td class="hidden lg:table-cell"></td>
                     <td class="hidden md:table-cell text-right text-gray-500 text-sm">{{ promotion.price }}</td>
                     <td class="text-right text-gray-500 text-sm">{{ promotion.quantity }}</td>
                     <td class="text-right text-gray-500 text-sm">{{ promotion.price }}</td>
@@ -134,7 +137,7 @@
             Your basket is currently empty.
         </div>
 
-        <div class="md:flex justify-between mb-3 md:mb-0">
+        <div class="md:flex justify-between mb-3 lg:mb-0">
             <div class="flex md:flex-row justify-between">
                 <a href="/products">
                     <button class="button button-inverse md:mr-3">Continue Shopping</button>
