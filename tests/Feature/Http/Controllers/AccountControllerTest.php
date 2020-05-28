@@ -13,18 +13,18 @@ class AccountControllerTest extends TestCase
 {
     use RefreshDatabase;
 
-    /**
-     * @test
-     */
-    public function index_returns_an_ok_response(): void
-    {
-        $user = (new UserFactory())->withCustomer()->create();
-
-        $response = $this->actingAs($user)->get(route('account'));
-
-        $response->assertOk();
-        $response->assertViewIs('account.index');
-    }
+    ///**
+    // * @test
+    // */
+    //public function index_returns_an_ok_response(): void
+    //{
+    //    $user = (new UserFactory())->withCustomer()->create();
+    //
+    //    $response = $this->actingAs($user)->get(route('account'));
+    //
+    //    $response->assertOk();
+    //    $response->assertViewIs('account.index');
+    //}
 
     /**
      * @test
