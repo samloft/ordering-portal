@@ -65,7 +65,7 @@ class Basket extends Model
         ) {
             $lines = static::selectRaw('basket.product as product, basket.customer_code as customer_code,
                                                     basket.quantity as quantity, price, break1, price1, break2, price2,
-                                                    break3, price3, name, description, uom, not_sold, stock, type')
+                                                    break3, price3, name, description, uom, not_sold, stock, type, packaging')
                 ->where('basket.customer_code', auth()->user()->customer->code)
                 ->where('basket.user_id', auth()->user()->id)->join('prices', 'basket.product', '=', 'prices.product')
                 ->where('prices.customer_code', auth()->user()->customer->code)
@@ -116,6 +116,7 @@ class Basket extends Model
                     'description' => $line->description,
                     'uom' => $line->uom,
                     'stock' => $line->stock,
+                    'packaging' => $line->packaging,
                     'image' => $image,
                     'quantity' => $line->quantity,
                     'discount' => discountPercent(),
