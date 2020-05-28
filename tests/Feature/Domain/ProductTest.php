@@ -10,5 +10,5 @@ test('returns an ok response', function () {
 
     actingAs($user);
 
-    $this->get('/')->assertStatus(200);
+    $this->get('products')->assertStatus(200);
 });

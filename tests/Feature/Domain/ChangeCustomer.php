@@ -6,7 +6,7 @@ use Tests\Setup\UserFactory;
 
 uses(RefreshDatabase::class);
 
-test('user with no additional customers cannot see change customer dropdown', function () {
+test('no additional customers cannot see change customer dropdown', function () {
     $user = (new UserFactory())->withCustomer()->create();
 
     actingAs($user);
@@ -14,7 +14,7 @@ test('user with no additional customers cannot see change customer dropdown', fu
     $this->get('products')->assertDontSee('Change Customer');
 });
 
-test('user with additional customers can see change customer dropdown', function () {
+test('additional customers can see change customer dropdown', function () {
     $user = (new UserFactory())->withCustomer()->withUserCustomers(2)->create();
 
     actingAs($user);
@@ -28,7 +28,7 @@ test('user with additional customers can see change customer dropdown', function
     $this->get('products')->assertSee('Change Customer')->assertSee($customers);
 });
 
-test('user with additional customers can switch to another customer', function () {
+test('additional customers can switch to another customer', function () {
     $user = (new UserFactory())->withCustomer()->withUserCustomers(2)->create();
 
     actingAs($user);
@@ -62,7 +62,7 @@ test('admin can switch to any customer', function () {
         ->assertSame($admin->customer->code, $customer->code);
 });
 
-test('customer can be reverted to the default customer', function() {
+test('can be reverted back to the default customer', function() {
     $user = (new UserFactory())->withCustomer()->withUserCustomers(2)->create();
 
     actingAs($user);

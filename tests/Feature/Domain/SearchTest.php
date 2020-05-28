@@ -15,7 +15,7 @@ beforeEach(function () {
     $this->product = factory(Product::class)->create();
 });
 
-test('a product a customer can buy can be searched', function () {
+test('product a customer can buy can be searched', function () {
     factory(Price::class)->create([
         'customer_code' => $this->user->customer->code,
         'product' => $this->product->code,
@@ -26,7 +26,7 @@ test('a product a customer can buy can be searched', function () {
     ])->assertStatus(200)->assertSee($this->product->description);
 });
 
-test('a product a customer cannot buy cannot be searched', function () {
+test('product a customer cannot buy cannot be searched', function () {
     factory(Price::class)->create([
         'customer_code' => 'ABC123',
         'product' => $this->product->code,
@@ -37,7 +37,7 @@ test('a product a customer cannot buy cannot be searched', function () {
     ])->assertStatus(200)->assertDontSee($this->product->description)->assertSee('No products found');
 });
 
-test('a product that does not exist cannot be searched', function () {
+test('product that does not exist cannot be searched', function () {
     $this->followingRedirects()->get('/products/search', [
         'query' => $this->product->code,
     ])->assertStatus(200)->assertSee('No products found');
