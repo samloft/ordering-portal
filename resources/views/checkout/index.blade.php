@@ -42,17 +42,6 @@
                             </button>
                         </a>
                     </div>
-
-                    <h4 class="text-primary mt-5">Invoice Address</h4>
-
-                    <div class="xl:w-3/4 text-center bg-gray-200 lg:p-4 rounded mx-auto">
-                        <div>{{ auth()->user()->customer->invoice_name }}</div>
-                        <div>{{ auth()->user()->customer->invoice_address_line_1 }}</div>
-                        <div>{{ auth()->user()->customer->invoice_address_line_2 }}</div>
-                        <div>{{ auth()->user()->customer->invoice_address_line_3 }}</div>
-                        <div>{{ auth()->user()->customer->invoice_address_line_4 }}</div>
-                        <div>{{ auth()->user()->customer->invoice_address_line_5 }}</div>
-                    </div>
                 </div>
             </div>
             <div class="md:w-1/2">
