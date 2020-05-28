@@ -104,6 +104,7 @@ class BasketController extends Controller
                     'name' => $product_details->name,
                     'unit' => $product_details->uom,
                     'stock' => $product_details->stock,
+                    'packaging' => $product_details->packaging,
                     'link' => '/products/view/'.decodeUrl($product_details->product),
                 ],
                 'basket_details' => Basket::show(),
