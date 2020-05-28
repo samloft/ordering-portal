@@ -1,5 +1,6 @@
 <?php
 
+use App\Models\Address;
 use Tests\Setup\UserFactory;
 
 beforeEach(function () {
@@ -22,8 +23,7 @@ test('can be created', function () {
         'post_code' => 'ABC 123',
     ];
 
-    $this->post(route('account.address.store', $address))
-    ->assertSessionHas('success')->assertStatus(302);
+    $this->post(route('account.address.store', $address))->assertSessionHas('success')->assertStatus(302);
 
     $this->assertDataBaseHas('addresses', [
         'user_id' => $this->user->id,
@@ -31,15 +31,57 @@ test('can be created', function () {
     ]);
 });
 
-test('can be updated');
+test('can be updated', function () {
+    $address = factory(Address::class, 1)->create([
+        'customer_code' => $this->user->customer->code,
+    ])->first();
 
-test('can be deleted');
+    $this->patch(route('account.address.update', ['id' => $address->id]), [
+        'company_name' => 'Updated!',
+        'address_line_2' => $address->address_line_2,
+        'address_line_3' => $address->address_line_3,
+        'address_line_5' => $address->address_line_5,
+        'country' => $address->country,
+        'post_code' => $address->post_code,
+    ])->assertSessionHas('success')->assertStatus(302);
 
-test('cannot see another users address');
+    $this->assertDatabaseHas('addresses', [
+        'company_name' => 'Updated!',
+    ]);
+});
 
-test('cannot update another users address');
+test('cannot update another users address', function () {
+    $address = factory(Address::class, 1)->create([
+        'customer_code' => 'TEST123',
+    ])->first();
+
+    $this->patch(route('account.address.update', ['id' => $address->id]), [
+        'company_name' => 'Updated!',
+        'address_line_2' => $address->address_line_2,
+        'address_line_3' => $address->address_line_3,
+        'address_line_5' => $address->address_line_5,
+        'country' => $address->country,
+        'post_code' => $address->post_code,
+    ])->assertStatus(302);
+
+    $this->assertDatabaseMissing('addresses', [
+        'company_name' => 'Updated!',
+    ]);
+});
+
+test('can be deleted', function () {
+    $address = factory(Address::class, 1)->create([
+        'customer_code' => $this->user->customer->code,
+    ])->first();
+
+    $this->get(route('account.address.destroy', ['id' => $address->id]))->assertSessionHas('success');
+
+    $this->assertDeleted('addresses', ['id' => $address->id]);
+});
 
 test('cannot delete another users address');
+
+test('cannot see another users address');
 
 test('selecting address from basket goes back to basket and sets address session');
 
