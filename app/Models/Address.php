@@ -60,7 +60,8 @@ class Address extends Model
      */
     public static function details($address_id)
     {
-        return self::where('customer_code', auth()->user()->customer->code)->where('id', $address_id)->first();
+        return self::where('customer_code', auth()->user()->customer->code)->where('user_id', auth()->id())
+            ->where('id', $address_id)->first();
     }
 
     /**
@@ -71,7 +72,7 @@ class Address extends Model
     public static function store($address)
     {
         $address['customer_code'] = auth()->user()->customer->code;
-        $address['user_id'] = auth()->user()->id;
+        $address['user_id'] = auth()->id();
         $address['created_at'] = date('Y-m-d H:i:s');
 
         return self::insertGetId($address);
@@ -87,7 +88,8 @@ class Address extends Model
     {
         $address['updated_at'] = date('Y-m-d H:i:s');
 
-        return self::where('id', $id)->where('customer_code', auth()->user()->customer->code)->update($address);
+        return self::where('id', $id)->where('customer_code', auth()->user()->customer->code)
+            ->where('user_id', auth()->id())->update($address);
     }
 
     /**
@@ -97,7 +99,8 @@ class Address extends Model
      */
     public static function canEdit($address_id)
     {
-        return self::where('customer_code', auth()->user()->customer->code)->where('id', $address_id)->first();
+        return self::where('customer_code', auth()->user()->customer->code)->where('user_id', auth()->id())
+            ->where('id', $address_id)->first();
     }
 
     /**
@@ -108,6 +111,7 @@ class Address extends Model
      */
     public static function destroy($address_id): int
     {
-        return self::where('id', $address_id)->delete();
+        return self::where('id', $address_id)->where('customer_code', auth()->user()->customer->code)
+            ->where('user_id', auth()->id())->delete();
     }
 }
