@@ -54,17 +54,19 @@ class CheckoutController extends Controller
         }
 
         if (session('address') && ! request('mobile')) {
-            return back()->with('error', 'You must enter a mobile number when having a shipment delivered to an address that is not you default address.')->withInput();
+            return back()
+                ->with('error', 'You must enter a mobile number when having a shipment delivered to an address that is not you default address.')
+                ->withInput();
         }
 
         $this->validation();
 
-        $delivery_address = session('address') ?: [
-            'company_name' => auth()->user()->customer->name,
-            'address_line_2' => auth()->user()->customer->address_line_1,
-            'address_line_3' => auth()->user()->customer->address_line_2,
-            'address_line_4' => auth()->user()->customer->city,
-            'post_code' => auth()->user()->customer->post_code,
+        $delivery_address = [
+            'company_name' => session('address')->company_name ?? trim(auth()->user()->customer->name),
+            'address_line_2' => session('address')->address_line_2 ?? trim(auth()->user()->customer->address_line_1),
+            'address_line_3' => session('address')->address_line_3 ?? trim(auth()->user()->customer->address_line_2),
+            'address_line_4' => session('address')->address_line_4 ?? trim(auth()->user()->customer->city),
+            'post_code' => session('address')->post_code ?? trim(auth()->user()->customer->post_code),
         ];
 
         $basket = Basket::show(request('shipping'));
@@ -82,7 +84,7 @@ class CheckoutController extends Controller
             'mobile' => request('mobile'),
             'address_line_1' => $delivery_address['company_name'],
             'address_line_2' => $delivery_address['address_line_2'],
-            'address_line_3' => $delivery_address['address_line_3'],
+            'address_line_3' => $delivery_address['address_line_3'] ?: null,
             'address_line_4' => $delivery_address['address_line_4'],
             'address_line_5' => $delivery_address['post_code'],
             'goods_total' => removeCurrencySymbol($basket['summary']['goods_total']) - removeCurrencySymbol($basket['summary']['order_discount']),
