@@ -49,7 +49,8 @@ class Address extends Model
      */
     public static function show()
     {
-        return self::where('customer_code', auth()->user()->customer->code)->orderBy('created_at', 'desc')->paginate(5);
+        return self::where('customer_code', auth()->user()->customer->code)->where('user_id', auth()->id())
+            ->orderBy('created_at', 'desc')->paginate(5);
     }
 
     /**
