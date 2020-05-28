@@ -69,17 +69,24 @@
         @endforeach
         <tfoot>
         <tr>
-            <th colspan="5" class="text-right">Goods</th>
+            <th colspan="4" class="text-left border-0">Notes</th>
+            <th colspan="1" class="text-right">Goods</th>
             <td class="text-right">{{ $order['values']['goods'] }}</td>
         </tr>
         @if($order['values']['discount'])
             <tr>
-                <th colspan="5" class="text-right">Discount</th>
+                <td colspan="4" class="text-left border-0 font-thin">{{ $order['notes'] }}</td>
+                <th colspan="1" class="text-right">Discount</th>
                 <td class="text-right">- {{ $order['values']['discount'] }}</td>
             </tr>
         @endif
         <tr>
-            <th colspan="5" class="text-right">Shipping</th>
+            @if(!$order['values']['discount'])
+                <td colspan="4" class="text-left border-0 font-thin">{{ $order['notes'] }}</td>
+                <th colspan="1" class="text-right">Shipping</th>
+            @else
+                <th colspan="5" class="text-right">Shipping</th>
+            @endif
             <td class="text-right">{{ $order['values']['shipping'] }}</td>
         </tr>
         <tr>
