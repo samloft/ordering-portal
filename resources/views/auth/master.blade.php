@@ -41,7 +41,7 @@
 
             <h1>Welcome to our ordering portal.</h1>
 
-            <p>The updated site now incorporates a number of improved features that allow users to access new information directly and more easily.</p>
+            <p>The updated site now incorporates a number of improved features that allow users to access new information directly and more easily...</p>
         </div>
     </main>
 </div>
