@@ -224,3 +224,7 @@ test('bulk rate savings are displayed if within 75%', function () {
 
     $this->get(route('basket'))->assertSee('"potential_saving":true');
 });
+
+test('default customer record address is used if no address session', function () {
+    $this->get(route('basket'))->assertSee($this->user->customer->name);
+});

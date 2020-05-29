@@ -50,7 +50,7 @@ test('can view a past order', function () {
 
 test('cannot view another customers order', function () {
     $order = (new OrderTrackingFactory())->withLines()->create([
-        'customer_code' => $customer = Str::random(8),
+        'customer_code' => 'DIFFCUSTOMER',
     ])->first();
 
     $this->get(route('order-tracking.show', ['order' => $order->order_number]))->assertStatus(404);
