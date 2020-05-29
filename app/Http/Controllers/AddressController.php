@@ -31,11 +31,12 @@ class AddressController extends Controller
      * Show the form for creating a new addresses.
      *
      * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     * @throws \JsonException
      */
     public function create()
     {
         $checkout = request('checkout');
-        $country_list = json_decode(GlobalSettings::countries(), true);
+        $country_list = json_decode(GlobalSettings::countries(), true, 512, JSON_THROW_ON_ERROR);
         $default_country = GlobalSettings::key('default-country');
 
         $countries = [];

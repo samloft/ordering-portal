@@ -15,6 +15,23 @@ test('returns an ok response', function () {
     $this->get(route('account.addresses'))->assertStatus(200);
 });
 
+test('session is forgot', function () {
+    session([
+        'address' => [
+            'address_id' => 1,
+            'company_name' => 'Name',
+            'address_line_2' => 'Line 2',
+            'address_line_3' => 'Line 3',
+            'address_line_4' => 'Line 4',
+            'address_line_5' => 'Line 5',
+            'post_code' => 'POST CODE',
+        ],
+    ]);
+
+    $this->get(route('account.addresses'))
+        ->assertSessionMissing('address');
+});
+
 test('can be created', function () {
     $address = [
         'company name' => 'Test name',
