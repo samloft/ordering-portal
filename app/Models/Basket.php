@@ -121,7 +121,7 @@ class Basket extends Model
                     'quantity' => $line->quantity,
                     'discount' => discountPercent(),
                     'net_price' => currency(number_format(discount($net_price), 4)),
-                    'price' => currency(discount($net_price) * $line->quantity, 4),
+                    'price' => currency(discount($net_price) * $line->quantity, 2),
                     'unit_price' => discount($net_price),
                     'next_bulk' => [
                         'qty_away' => $next_bulk_qty,
