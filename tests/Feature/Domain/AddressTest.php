@@ -84,6 +84,8 @@ test('can be updated', function () {
         'post_code' => 'ABC123',
     ])->assertStatus(302);
 
+    $address->refresh();
+
     $this->assertDatabaseHas('addresses', [
         'company_name' => 'Updated!',
     ]);
