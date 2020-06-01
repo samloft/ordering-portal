@@ -18,7 +18,7 @@ test('returns 404 if no data is enabled', function () {
         'value' => json_encode([
             'data' => false,
             'prices' => false,
-        ], JSON_THROW_ON_ERROR | true)
+        ], JSON_THROW_ON_ERROR | true),
     ]);
 
     $this->get(route('product-data'))->assertStatus(404);

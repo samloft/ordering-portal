@@ -16,7 +16,6 @@ test('returns ok response', function () {
 });
 
 test('email can be sent', function () {
-
     \Illuminate\Support\Facades\Mail::fake();
 
     $contact = factory(Contact::class)->create();
