@@ -191,7 +191,7 @@
                             text: "User has been updated",
                             icon: 'success',
                             customClass: {
-                                confirmButton: 'bg-grey-800 text-white'
+                                confirmButton: 'bg-gray-800 text-white'
                             }
                         });
                     }).catch(error => {
@@ -216,7 +216,7 @@
                         text: "New user has been created",
                         icon: 'success',
                         customClass: {
-                            confirmButton: 'bg-grey-800 text-white'
+                            confirmButton: 'bg-gray-800 text-white'
                         }
                     });
                 }).catch(error => {
@@ -241,7 +241,7 @@
                         text: "Password reset has been sent to " + email,
                         icon: 'success',
                         customClass: {
-                            confirmButton: 'bg-grey-800 text-white'
+                            confirmButton: 'bg-gray-800 text-white'
                         }
                     });
                 }).catch(error => {
@@ -342,7 +342,7 @@
                                     text: "Site user has been successfully deleted",
                                     icon: 'success',
                                     customClass: {
-                                        confirmButton: 'bg-grey-800 text-white'
+                                        confirmButton: 'bg-gray-800 text-white'
                                     }
                                 }).then(response => {
                                     if (response.value) {

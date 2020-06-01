@@ -131,7 +131,7 @@
                         text: 'New delivery nethod has been created',
                         icon: 'success',
                         customClass: {
-                            confirmButton: 'bg-grey-800 text-white'
+                            confirmButton: 'bg-gray-800 text-white'
                         }
                     }).then(response => {
                         return window.location.reload();
@@ -157,7 +157,7 @@
                                 text: 'Delivery method has been successfully deleted',
                                 icon: 'success',
                                 customClass: {
-                                    confirmButton: 'bg-grey-800 text-white'
+                                    confirmButton: 'bg-gray-800 text-white'
                                 }
                             }).then(response => {
                                 if (response.value) {

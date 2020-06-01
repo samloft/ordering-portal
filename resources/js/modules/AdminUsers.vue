@@ -68,7 +68,7 @@
                                     text: "Admin user has been successfully deleted",
                                     icon: 'success',
                                     customClass: {
-                                        confirmButton: 'bg-grey-800 text-white'
+                                        confirmButton: 'bg-gray-800 text-white'
                                     }
                                 }).then(response => {
                                     if (response.value) {
@@ -102,7 +102,7 @@
                             text: "User has been updated",
                             icon: 'success',
                             customClass: {
-                                confirmButton: 'bg-grey-800 text-white'
+                                confirmButton: 'bg-gray-800 text-white'
                             }
                         });
                     }).catch(error => {
@@ -123,7 +123,7 @@
                         text: "New CMS admin has been created",
                         icon: 'success',
                         customClass: {
-                            confirmButton: 'bg-grey-800 text-white'
+                            confirmButton: 'bg-gray-800 text-white'
                         }
                     });
                 }).catch(error => {
