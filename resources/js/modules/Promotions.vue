@@ -430,7 +430,7 @@
                         text: 'New promotion has been created',
                         icon: 'success',
                         customClass: {
-                            confirmButton: 'bg-grey-800 text-white'
+                            confirmButton: 'bg-gray-800 text-white'
                         }
                     }).then(response => {
                         if (response.value) {
@@ -464,7 +464,7 @@
                         text: 'Promotion has been updated',
                         icon: 'success',
                         customClass: {
-                            confirmButton: 'bg-grey-800 text-white'
+                            confirmButton: 'bg-gray-800 text-white'
                         }
                     }).then(response => {
                         if (response.value) {
@@ -506,7 +506,7 @@
                                 text: 'Promotion has been deleted',
                                 icon: 'success',
                                 customClass: {
-                                    confirmButton: 'bg-grey-800 text-white'
+                                    confirmButton: 'bg-gray-800 text-white'
                                 }
                             }).then(response => {
                                 if (response.value) {

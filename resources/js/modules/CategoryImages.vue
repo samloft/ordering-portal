@@ -213,7 +213,7 @@
                         text: 'New category override image has been created',
                         icon: 'success',
                         customClass: {
-                            confirmButton: 'bg-grey-800 text-white'
+                            confirmButton: 'bg-gray-800 text-white'
                         }
                     });
                 }).catch(error => {
@@ -249,7 +249,7 @@
                                 text: 'Category override has been deleted',
                                 icon: 'success',
                                 customClass: {
-                                    confirmButton: 'bg-grey-800 text-white'
+                                    confirmButton: 'bg-gray-800 text-white'
                                 }
                             });
                         }).catch(error => {
