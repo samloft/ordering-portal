@@ -30,7 +30,7 @@ test('selecting default address clears the session', function () {
     session([
         'address' => [
             'address_id' => 999,
-        ]
+        ],
     ]);
 
     $this->get(route('account.address.select'))->assertSessionMissing('address')->assertStatus(302);
@@ -179,7 +179,7 @@ test('creating address from checkout goes back to checkout and sets address sess
 });
 
 test('lookup requires a postcode', function () {
-   $this->get(route('account.address.lookup'))->assertSessionHasErrors();
+    $this->get(route('account.address.lookup'))->assertSessionHasErrors();
 });
 
 test('lookup returns ok json response if exists', function () {

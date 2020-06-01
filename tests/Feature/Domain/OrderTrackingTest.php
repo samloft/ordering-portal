@@ -1,7 +1,6 @@
 <?php
 
 use App\Models\Price;
-use Illuminate\Support\Str;
 use Tests\Setup\OrderTrackingFactory;
 use Tests\Setup\UserFactory;
 
