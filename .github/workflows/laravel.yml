@@ -27,6 +27,4 @@ jobs:
         run: chmod -R 777 storage bootstrap/cache
 
       - name: Execute tests (Unit and Feature tests) via PEST
-        env:
-          DB_CONNECTION: sqlite
         run: vendor/bin/pest
