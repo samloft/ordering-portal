@@ -39,3 +39,14 @@ test('product that does not exist cannot be searched', function () {
         'query' => $this->product->code,
     ])->assertStatus(200)->assertSee('No products found');
 });
+
+test('breadcrumbs display search when searching', function () {
+    factory(Price::class)->create([
+        'customer_code' => $this->user->customer->code,
+        'product' => $this->product->code,
+    ]);
+
+    $this->followingRedirects()->get('/products/search', [
+        'query' => $this->product->code,
+    ])->assertStatus(200)->assertSee($this->product->code)->assertSee('search');
+});

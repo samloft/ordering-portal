@@ -26,15 +26,9 @@ class ProductController extends Controller
             'level_5' => null,
         ];
 
-        $current_level = 0;
-
-        foreach ($categories as $level) {
-            if ($level) {
-                $current_level++;
-            }
-        }
-
         if ($categories['level_1'] !== null) {
+            $current_level = count(array_filter($categories));
+
             $products = Product::list($categories);
             $sub_category_list['list'] = Category::subCategories($current_level, $categories['level_1'], $categories['level_'.$current_level]);
             $sub_category_list['current'] = $categories;
@@ -73,13 +67,6 @@ class ProductController extends Controller
             'level_4' => isset($category_array[4]) ? decodeUrl($category_array[4]) : '',
             'level_5' => isset($category_array[5]) ? decodeUrl($category_array[5]) : '',
         ];
-
-        if (isset($categories['level_1']) && strpos($categories['level_1'], 'search') === 0) {
-            $categories = [
-                'level_1' => 'search',
-                'query' => substr(decodeUrl($categories['level_1']), 13),
-            ];
-        }
 
         return view('products.show', compact('categories', 'product'));
     }

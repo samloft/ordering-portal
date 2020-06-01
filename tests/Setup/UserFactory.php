@@ -11,16 +11,22 @@ class UserFactory
 {
     protected $customer = 0;
 
+    protected $customer_attributes;
+
     protected $user_customers;
 
     protected $discount = false;
 
     /**
+     * @param array $attributes
+     *
      * @return $this
      */
-    public function withCustomer(): self
+    public function withCustomer($attributes = []): self
     {
         $this->customer = 1;
+
+        $this->customer_attributes = $attributes;
 
         return $this;
     }
@@ -58,7 +64,7 @@ class UserFactory
     {
         $user = factory(User::class)->create($attributes);
 
-        factory(Customer::class, $this->customer)->create([
+        factory(Customer::class, $this->customer)->create($this->customer_attributes ?: [
             'code' => $user->customer_code,
         ]);
 

@@ -2,6 +2,7 @@
 
 use App\Models\Address;
 use App\Models\Basket;
+use Illuminate\Support\Facades\Http;
 use Tests\Setup\ProductFactory;
 use Tests\Setup\UserFactory;
 
@@ -13,6 +14,26 @@ beforeEach(function () {
 
 test('returns an ok response', function () {
     $this->get(route('account.addresses'))->assertStatus(200);
+});
+
+test('create returns an ok response', function () {
+    $this->get(route('account.address.create'))->assertStatus(200);
+
+    $this->get(route('account.address.create', ['checkout' => true]))->assertStatus(200);
+});
+
+test('selecting one that does not exists returns error', function () {
+    $this->get(route('account.address.select', ['id' => 999]))->assertSessionHas('error')->assertStatus(302);
+});
+
+test('selecting default address clears the session', function () {
+    session([
+        'address' => [
+            'address_id' => 999,
+        ]
+    ]);
+
+    $this->get(route('account.address.select'))->assertSessionMissing('address')->assertStatus(302);
 });
 
 test('session is forgot', function () {
@@ -28,8 +49,7 @@ test('session is forgot', function () {
         ],
     ]);
 
-    $this->get(route('account.addresses'))
-        ->assertSessionMissing('address');
+    $this->get(route('account.addresses'))->assertSessionMissing('address');
 });
 
 test('can be created', function () {
@@ -156,4 +176,26 @@ test('creating address from checkout goes back to checkout and sets address sess
 
     $this->followingRedirects()->post(route('account.address.store', $address))->assertSee('Complete your order')
         ->assertSee('Test name');
+});
+
+test('lookup requires a postcode', function () {
+   $this->get(route('account.address.lookup'))->assertSessionHasErrors();
+});
+
+test('lookup returns ok json response if exists', function () {
+    Http::fake([
+        '*' => Http::response(['address' => ''], 200),
+    ]);
+
+    $this->get(route('account.address.lookup', ['postcode' => 'ABC123']))->assertStatus(200)->assertJson([
+        'address' => '',
+    ]);
+});
+
+test('lookup returns not found if none exist', function () {
+    Http::fake([
+        '*' => Http::response([], 404),
+    ]);
+
+    $this->get(route('account.address.lookup', ['postcode' => 'ABC123']))->assertStatus(404)->assertJson([]);
 });
