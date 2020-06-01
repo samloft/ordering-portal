@@ -42,10 +42,6 @@ class ContactController extends Controller
 
         Mail::to(request('to'))->send(new Contact(request()));
 
-        if (Mail::failures()) {
-            return back()->with('error', 'Unable to your message, please try again');
-        }
-
         return back()->with('success', 'Thank you for your message, we will get back to you shortly');
     }
 }
