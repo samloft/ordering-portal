@@ -285,7 +285,7 @@
                         text: 'New category home link has been created',
                         icon: 'success',
                         customClass: {
-                            confirmButton: 'bg-grey-800 text-white'
+                            confirmButton: 'bg-gray-800 text-white'
                         }
                     });
 
@@ -314,7 +314,7 @@
                                 text: this.type + ' has been deleted',
                                 icon: 'success',
                                 customClass: {
-                                    confirmButton: 'bg-grey-800 text-white'
+                                    confirmButton: 'bg-gray-800 text-white'
                                 }
                             });
                         }).catch(error => {
