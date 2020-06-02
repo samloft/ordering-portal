@@ -73,6 +73,7 @@ test('can be created', function () {
 test('can be updated', function () {
     $address = factory(Address::class, 1)->create([
         'customer_code' => $this->user->customer->code,
+        'user_id' => $this->user->id,
     ])->first();
 
     $this->patch(route('account.address.update', ['id' => $address->id]), [
@@ -113,6 +114,7 @@ test('cannot update another users address', function () {
 test('can be deleted', function () {
     $address = factory(Address::class, 1)->create([
         'customer_code' => $this->user->customer->code,
+        'user_id' => $this->user->id,
     ])->first();
 
     $this->get(route('account.address.destroy', ['id' => $address->id]))->assertSessionHas('success');
@@ -151,6 +153,7 @@ test('selecting address from checkout goes back to checkout and sets address ses
 
     $address = factory(Address::class, 1)->create([
         'customer_code' => $this->user->customer->code,
+        'user_id' => $this->user->id,
     ])->first();
 
     $this->followingRedirects()->get(route('account.address.select', ['id' => $address->id]))
