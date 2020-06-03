@@ -41,7 +41,7 @@ function encodeUrl($url_string)
 function decodeUrl($url_string)
 {
     if (! $url_string) {
-        return null;
+        return;
     }
 
     $characters = urlCharacters();
