@@ -48,10 +48,14 @@
                 <div class="bg-white rounded shadow-md p-3 xl:p-6 mb-5 lg:ml-2">
                     @include('layout.alerts')
 
+                    <div class="text-right mb-2 text-xs">
+                        <span class="text-red-600">*</span> indicates a required field
+                    </div>
+
                     <h4 class="text-primary">Order Details</h4>
 
                     <div class="xl:flex items-center mb-3">
-                        <label for="reference" class="w-1/2">Order Reference</label>
+                        <label for="reference" class="w-1/2">Order Reference <span class="text-red-600">*</span></label>
                         <input id="reference" name="reference" autocomplete="off"
                                maxlength="20"
                                value="{{ old('reference') }}">
@@ -72,7 +76,7 @@
                     <h4 class="text-primary mt-3">Contact Details</h4>
 
                     <div class="xl:flex items-center mb-3">
-                        <label for="name" class="w-1/2">Name</label>
+                        <label for="name" class="w-1/2">Name <span class="text-red-600">*</span></label>
                         <input id="name"
                                name="name"
                                value="{{ old('name') ?: auth()->user()->name }}"
@@ -89,7 +93,7 @@
                     </div>
 
                     <div class="xl:flex items-center mb-3">
-                        <label for="mobile" class="w-1/2">Mobile</label>
+                        <label for="mobile" class="w-1/2">Mobile {!! session('address') ? '<span class="text-red-600">*</span>' : '' !!}</label>
                         <input id="mobile"
                                name="mobile"
                                value="{{ old('mobile') ?: auth()->user()->mobile }}"
@@ -103,7 +107,7 @@
                                    {{ old('terms') ? 'checked' : '' }} autocomplete="off">
                             <span class="ml-2 text-xs xl:text-sm">I have read and agree to the <a
                                     href="{{ route('support.terms') }}"
-                                    class="underline" target="_blank">terms & conditions</a>
+                                    class="underline" target="_blank">terms & conditions</a> <span class="text-red-600">*</span>
                             </span>
                         </label>
                     </div>
