@@ -20,6 +20,18 @@ test('can login', function () {
     ])->assertOk()->assertSee('Dashboard');
 });
 
+test('incorrect login shows error and keeps email and remember inputs', function () {
+    $this->followingRedirects()->from(route('cms.login'))->post(route('cms.login.submit'), [
+        'email' => 'no@exists.com',
+        'password' => 'password',
+        'remember' => true,
+    ])->assertSee('Error!')->assertSee('no@exists.com')->assertSee('checked');
+});
+
+test('forgot password displays an ok response', function () {
+    $this->get(route('cms.forgot-password'))->assertOk();
+});
+
 test('can request forgot password', function () {
     Mail::fake();
 

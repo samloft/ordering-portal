@@ -2,6 +2,7 @@
 
 use App\Models\Address;
 use App\Models\Basket;
+use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\Http;
 use Tests\Setup\ProductFactory;
 use Tests\Setup\UserFactory;
@@ -203,4 +204,14 @@ test('lookup returns not found if none exist', function () {
     ]);
 
     $this->get(route('account.address.lookup', ['postcode' => 'ABC123']))->assertStatus(404)->assertJson([]);
+});
+
+test('lookup is returned from the cache if it exists', function () {
+    Cache::put('addresses-ABC123', [
+        'name' => 'address',
+    ]);
+
+    $this->get(route('account.address.lookup', ['postcode' => 'ABC123']))->assertStatus(200)->assertJson([
+        'name' => 'address',
+    ]);
 });

@@ -43,15 +43,4 @@ class AdminForgotPasswordController extends Controller
     {
         return Password::broker('cms_users');
     }
-
-    /**
-     * Get the guard to be used during authentication
-     * after password reset.
-     *
-     * @return \Illuminate\Contracts\Auth\StatefulGuard
-     */
-    public function guard(): StatefulGuard
-    {
-        return Auth::guard('admin');
-    }
 }
