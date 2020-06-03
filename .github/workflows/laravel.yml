@@ -26,7 +26,5 @@ jobs:
       - name: Directory Permissions
         run: chmod -R 777 storage bootstrap/cache
 
-      - name: Execute tests (Unit and Feature tests) via PHPUnit
-        env:
-          DB_CONNECTION: sqlite
-        run: vendor/bin/phpunit
+      - name: Execute tests (Unit and Feature tests) via PEST
+        run: vendor/bin/pest

@@ -33,7 +33,7 @@ function removeCurrencySymbol($value)
 
 function currencySymbol()
 {
-    $currency = auth()->user()->currency;
+    $currency = auth()->user()->customer->currency;
 
     switch ($currency) {
         case 'GBP':
@@ -46,7 +46,7 @@ function currencySymbol()
             $currency_code = '$';
             break;
         case 'AED':
-            $currency_code = 'د.إ';
+            $currency_code = 'DH ';
             break;
         default:
             $currency_code = '£';

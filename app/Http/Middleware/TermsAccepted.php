@@ -19,13 +19,11 @@ class TermsAccepted
      */
     public function handle($request, Closure $next)
     {
-        if (! env('APP_ENV') === 'testing') {
-            $enabled = GlobalSettings::termsEnabled()['enabled'];
-            $route = request()->route()->getName();
+        $enabled = GlobalSettings::termsEnabled()['enabled'];
+        $route = request()->route()->getName();
 
-            if (! preg_match('/\bsite-terms\b/', $route) && $enabled && ! auth()->user()->terms_accepted) {
-                return redirect(route('site-terms'));
-            }
+        if (! preg_match('/\bsite-terms\b/', $route) && $enabled && ! auth()->user()->terms_accepted) {
+            return redirect(route('site-terms'));
         }
 
         return $next($request);

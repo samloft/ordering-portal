@@ -32,6 +32,8 @@ use Illuminate\Support\Collection;
  */
 class Customer extends Model
 {
+    protected $fillable = ['*'];
+
     public $incrementing = false;
 
     public $timestamps = false;
