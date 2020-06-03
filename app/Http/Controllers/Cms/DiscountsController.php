@@ -52,17 +52,13 @@ class DiscountsController extends Controller
             'global_discount' => 'required|numeric|gt:-1|lt:10',
         ]);
 
-        $updated = GlobalSettings::where('key', 'discount')->update([
+        GlobalSettings::where('key', 'discount')->update([
             'value' => request('global_discount'),
         ]);
 
         Cache::forget('discount');
 
-        if ($updated) {
-            return back()->with('success', 'Global discount percentage has been updated');
-        }
-
-        return back()->with('error', 'Unable to update the global discount, please try again');
+        return back()->with('success', 'Global discount percentage has been updated');
     }
 
     /**

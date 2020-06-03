@@ -44,16 +44,10 @@ class HomeLinksController extends Controller
 
         $home_link = HomeLink::store();
 
-        if ($home_link) {
-            return response()->json([
-                'created' => true,
-                'data' => $home_link,
-            ]);
-        }
-
         return response()->json([
-            'created' => false,
-        ], 400);
+            'created' => true,
+            'data' => $home_link,
+        ]);
     }
 
     /**
@@ -63,17 +57,11 @@ class HomeLinksController extends Controller
      */
     public function updatePositions(): JsonResponse
     {
-        $positions_updated = HomeLink::updatePositions(request()->all());
-
-        if ($positions_updated) {
-            return response()->json([
-                'updated' => true,
-            ]);
-        }
+        HomeLink::updatePositions(request()->all());
 
         return response()->json([
-            'updated' => false,
-        ], 400);
+            'updated' => true,
+        ]);
     }
 
     /**
@@ -88,16 +76,12 @@ class HomeLinksController extends Controller
     {
         $link = HomeLink::findOrFail($id);
 
-        if ($link->delete()) {
-            Storage::disk('public')->delete('images/'.$link->type.'/'.$link->image);
+        $link->delete();
 
-            return response()->json([
-                'deleted' => true,
-            ]);
-        }
+        Storage::disk('public')->delete('images/'.$link->type.'/'.$link->image);
 
         return response()->json([
-            'deleted' => false,
-        ], 400);
+            'deleted' => true,
+        ]);
     }
 }

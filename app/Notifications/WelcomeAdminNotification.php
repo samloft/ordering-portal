@@ -55,17 +55,4 @@ class WelcomeAdminNotification extends Notification
             ->action('Create password', route('cms.password.reset', $this->token))
             ->line('This link will only be active for 1 Hour, after you will need to perform a manual reset by clicking "Reset Password" on the login page!');
     }
-
-    /**
-     * Get the array representation of the notification.
-     *
-     * @param mixed $notifiable
-     *
-     * @return array
-     */
-    public function toArray($notifiable)
-    {
-        return [//
-        ];
-    }
 }

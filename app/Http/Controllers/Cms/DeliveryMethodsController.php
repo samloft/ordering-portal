@@ -61,13 +61,15 @@ class DeliveryMethodsController extends Controller
 
         $times = [];
 
-        foreach (request('times') as $timed_message) {
-            $times[] = [
-                'start' => $timed_message['start'],
-                'end' => $timed_message['end'],
-                'message' => $timed_message['message'],
-                'identifier' => $timed_message['identifier'],
-            ];
+        if (request('times')) {
+            foreach (request('times') as $timed_message) {
+                $times[] = [
+                    'start' => $timed_message['start'],
+                    'end' => $timed_message['end'],
+                    'message' => $timed_message['message'],
+                    'identifier' => $timed_message['identifier'],
+                ];
+            }
         }
 
         $collection_messages = [

@@ -21,7 +21,6 @@ class OrderUploadController extends Controller
 
     /**
      * @return \Illuminate\Http\RedirectResponse
-     *
      * @throws \JsonException
      */
     public function store(): RedirectResponse
@@ -33,14 +32,10 @@ class OrderUploadController extends Controller
             'packs' => request('packs') ? true : false,
         ], JSON_THROW_ON_ERROR | true);
 
-        $updated = GlobalSettings::where('key', 'upload-config')->update([
+        GlobalSettings::where('key', 'upload-config')->update([
             'value' => $config,
         ]);
 
-        if ($updated) {
-            return back()->with('success', 'Order upload config has been updated');
-        }
-
-        return back()->with('error', 'Unable to update order config, please try again');
+        return back()->with('success', 'Order upload config has been updated');
     }
 }

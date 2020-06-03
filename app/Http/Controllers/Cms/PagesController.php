@@ -5,7 +5,6 @@ namespace App\Http\Controllers\Cms;
 use App\Http\Controllers\Controller;
 use App\Models\Page;
 use Illuminate\Http\RedirectResponse;
-use Illuminate\Http\Request;
 
 class PagesController extends Controller
 {
@@ -62,11 +61,8 @@ class PagesController extends Controller
         $page = Page::where('name', request('name'))->firstOrFail();
 
         $page->description = request('description');
+        $page->save();
 
-        if ($page->save()) {
-            return back()->with('success', 'Page has been updated');
-        }
-
-        return back()->with('error', 'Unable to update this page, please try again');
+        return back()->with('success', 'Page has been updated');
     }
 }

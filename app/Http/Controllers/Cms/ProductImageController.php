@@ -53,7 +53,6 @@ class ProductImageController extends Controller
      * Upload product images.
      *
      * @return JsonResponse
-     * @throws \Illuminate\Contracts\Filesystem\FileNotFoundException
      */
     public function store(): JsonResponse
     {
@@ -61,12 +60,8 @@ class ProductImageController extends Controller
 
         $name = $image->getClientOriginalName();
 
-        $upload = Storage::put($name, File::get($image));
+        Storage::put($name, File::get($image));
 
-        if ($upload) {
-            return response()->json('success');
-        }
-
-        return response()->json('Failed to upload '.$name, 400);
+        return response()->json('success');
     }
 }
