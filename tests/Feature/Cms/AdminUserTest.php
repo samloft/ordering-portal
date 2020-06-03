@@ -21,7 +21,7 @@ test('can be deleted', function () {
     $this->assertDeleted($admin);
 });
 
-test('can be created', function() {
+test('can be created', function () {
     Mail::fake();
 
     $this->post(route('cms.admin-users.store'), [

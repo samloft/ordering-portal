@@ -26,7 +26,7 @@ test('can be created', function () {
 
 test('can be updated', function () {
     $contact = factory(Contact::class)->create([
-        'name' => 'Original name'
+        'name' => 'Original name',
     ]);
 
     $this->patch(route('cms.contacts.update', [

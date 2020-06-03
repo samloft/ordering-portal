@@ -18,7 +18,7 @@ test('settings can be updated', function () {
         'value' => json_encode([
             'data' => false,
             'prices' => false,
-        ], JSON_THROW_ON_ERROR)
+        ], JSON_THROW_ON_ERROR),
     ]);
 
     $this->patch(route('cms.product-data.update'), [

@@ -10,8 +10,8 @@ function urlCharacters()
 {
     return [
         '/' => '_',
-        ' ' => '+',
-        '+' => '%2B',
+        //' ' => '%20',
+        //'+' => '%2B',
     ];
 }
 
@@ -41,7 +41,7 @@ function encodeUrl($url_string)
 function decodeUrl($url_string)
 {
     if (! $url_string) {
-        return;
+        return null;
     }
 
     $characters = urlCharacters();

@@ -14,9 +14,7 @@ test('returns an ok response', function () {
 });
 
 test('can be marked to be re-imported', function () {
-    $order = factory(OrderHeader::class)->create(
-        ['imported' => true]
-    );
+    $order = factory(OrderHeader::class)->create(['imported' => true]);
 
     $this->get(route('cms.orders.import', ['order_number' => $order->order_number]))->assertRedirect();
 

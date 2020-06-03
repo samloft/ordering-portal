@@ -30,7 +30,7 @@ test('products with missing images are returned', function () {
 
 test('image can be uploaded', function () {
     $this->post(route('cms.product-images.store'), [
-        'file' => UploadedFile::fake()->image('product.png')
+        'file' => UploadedFile::fake()->image('product.png'),
     ])->assertOk();
 
     Storage::assertExists('product.png');
