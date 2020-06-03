@@ -55,7 +55,7 @@ class BasketController extends Controller
 
         $product_details = Product::show($product);
 
-        if (! $product_details || $product_details->not_sold) {
+        if (! $product_details || $product_details->not_sold || ($product_details->obsolete && ! $product_details->stock)) {
             return response()->json([
                 'error' => true,
                 'message' => 'The product you have entered does not exist.',

@@ -44,7 +44,7 @@ class UploadController extends Controller
 
         $order = $this->readCSV($tolerance, $packs);
 
-        if (! isset($order)) {
+        if (! isset($order['lines'])) {
             return back()->with('error', 'No products found, please check your file is formatted correctly...');
         }
 
@@ -129,7 +129,7 @@ class UploadController extends Controller
 
         foreach (array_map('str_getcsv', file(request()->file('csv_file'))) as $key => $value) {
             $product_code = $value[0];
-            $product_qty = (int) str_replace([',', '.'], '', $value[1]);
+            $product_qty = (int) str_replace([',', '.'], '', $value[1] ?? 0);
             $product_price = $value[2] ?? null;
             $error_message = null;
             $warning_message = null;
