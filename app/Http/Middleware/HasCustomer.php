@@ -24,7 +24,7 @@ class HasCustomer
             Session::remove('temp_customer');
             auth()->logout();
 
-            return redirect(route('login'))->with('errors', ['no_customer' => 'This account does not have a customer assigned, please contact the sales office reporting this error.']);
+            return redirect(route('login'))->with('error', 'This account does not have a customer assigned, please contact the sales office reporting this error.');
         }
 
         return $next($request);

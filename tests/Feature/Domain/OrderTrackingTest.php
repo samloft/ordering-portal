@@ -80,6 +80,25 @@ test('invoice pdf button does not display if not in archive', function () {
     $this->get(route('order-tracking.show', ['order' => $order->order_number]))->assertDontSee('Download Copy Invoice');
 });
 
+test('invoice pdf can be download if exists in archive', function () {
+    \Illuminate\Support\Facades\Http::fake([
+        '*' => \Illuminate\Support\Facades\Http::response(\Illuminate\Http\UploadedFile::fake()->create('order.pdf'), 200),
+    ]);
+
+    $response = $this->get(route('order-tracking.invoice-pdf', [
+        'order' => $this->orders->first()->order_number,
+        'customer_order' => $this->orders->first()->reference,
+        'download' => true,
+    ]));
+    //->assertOk();
+
+    dd($response);
+
+    $this->assertEquals($response->headers->get('content-type'), 'application/pdf');
+
+    //Route::get('invoice/{order}/{customer_order}/{download?}', 'OrderTrackingController@invoicePdf')->name('order-tracking.invoice-pdf');
+});
+
 test('print order details returns pdf', function () {
     $order = $this->orders->first();
 

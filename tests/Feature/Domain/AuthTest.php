@@ -1,5 +1,6 @@
 <?php
 
+use App\Models\User;
 use Tests\Setup\UserFactory;
 
 test('returns an ok response', function () {
@@ -61,4 +62,49 @@ test('register cannot be posted too', function () {
     ]);
 
     $response->assertStatus(405);
+});
+
+test('forgot password displays an ok response', function () {
+    $this->get('/password/reset')->assertOk();
+});
+
+test('can request forgot password', function () {
+    Mail::fake();
+
+    $user = factory(User::class)->create();
+
+    $this->post('password/email', [
+        'email' => $user->email,
+    ])->assertRedirect()->assertSessionHas('status');
+
+    $this->assertDatabaseHas('password_resets', [
+        'email' => $user->email,
+    ]);
+});
+
+test('password reset returns ok response', function () {
+    $user = factory(User::class)->create();
+
+    $token = Password::broker()->createToken($user);
+
+    $this->get('/password/reset/'.$token)->assertSuccessful()->assertSee('Reset Password')->assertSee($token);
+});
+
+test('password can be reset', function () {
+    $user = (new UserFactory())->withCustomer()->create([
+        'terms_accepted' => true,
+    ]);
+
+    $token = Password::broker()->createToken($user);
+
+    $this->followingRedirects()->from('/password/reset')->post('/password/reset', [
+            'token' => $token,
+            'email' => $user->email,
+            'password' => 'newpassword',
+            'password_confirmation' => 'newpassword',
+        ])->assertSuccessful();
+
+    $user->refresh();
+
+    $this->assertTrue(Hash::check('newpassword', $user->password));
 });

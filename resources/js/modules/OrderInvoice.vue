@@ -21,11 +21,11 @@
         mounted() {
             var self = this;
 
-            axios.get('/order-tracking/invoice/' + this.order + '/' + this.customer_order)
+            axios.get('/order-tracking/invoice/' + encodeURI(this.order) + '/' + encodeURI(this.customer_order))
             .then( function(response) {
                 if (response.data.pdf_exists) {
                     self.pdfFound = true;
-                    self.pdfUrl = '/order-tracking/invoice/' + self.order + '/' + self.customer_order + '/true'
+                    self.pdfUrl = '/order-tracking/invoice/' + encodeURI(self.order) + '/' + encodeURI(self.customer_order) + '/true'
                 }
             });
         }

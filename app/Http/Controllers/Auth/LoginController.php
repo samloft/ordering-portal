@@ -51,26 +51,4 @@ class LoginController extends Controller
     {
         return view('auth.login');
     }
-
-    /**
-     * Checked that the logged in user has a customer allocated (And exists), if
-     * not, log the user out displaying the message.
-     *
-     * @param Request $request
-     * @param User $user
-     *
-     * @return RedirectResponse
-     */
-    protected function authenticated(Request $request, User $user): RedirectResponse
-    {
-        if (! $user->customer) {
-            Session::remove('temp_customer');
-
-            auth()->logout();
-
-            return back()->with('error', 'This account does not have a customer assigned, please contact the sales office reporting this error.');
-        }
-
-        return redirect()->intended($this->redirectPath());
-    }
 }

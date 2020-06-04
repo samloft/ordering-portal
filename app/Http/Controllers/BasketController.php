@@ -88,33 +88,26 @@ class BasketController extends Controller
 
         $store_basket = Basket::store($details, $update);
 
-        if ($store_basket) {
-            $image = Product::checkImage($product_details->code)['image'];
-
-            return response()->json([
-                'error' => false,
-                'message' => $warning ?? null,
-                'basket' => $store_basket['basket_updated'],
-                'product' => [
-                    'image' => $image,
-                    'code' => $product_details->code,
-                    'net_price' => currency(discount($product_details->prices->price)),
-                    'quantity' => $quantity,
-                    'price' => currency(discount($product_details->prices->price) * $quantity, 2),
-                    'name' => $product_details->name,
-                    'unit' => $product_details->uom,
-                    'stock' => $product_details->stock,
-                    'packaging' => $product_details->packaging,
-                    'link' => '/products/view/'.decodeUrl($product_details->product),
-                ],
-                'basket_details' => Basket::show(),
-            ]);
-        }
+        $image = Product::checkImage($product_details->code)['image'];
 
         return response()->json([
-            'error' => true,
-            'message' => 'An error occurred while adding the product to your basket, please try again',
-        ], 500);
+            'error' => false,
+            'message' => $warning ?? null,
+            'basket' => $store_basket['basket_updated'],
+            'product' => [
+                'image' => $image,
+                'code' => $product_details->code,
+                'net_price' => currency(discount($product_details->prices->price)),
+                'quantity' => $quantity,
+                'price' => currency(discount($product_details->prices->price) * $quantity, 2),
+                'name' => $product_details->name,
+                'unit' => $product_details->uom,
+                'stock' => $product_details->stock,
+                'packaging' => $product_details->packaging,
+                'link' => '/products/view/'.decodeUrl($product_details->product),
+            ],
+            'basket_details' => Basket::show(),
+        ]);
     }
 
     /**
