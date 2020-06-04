@@ -3,9 +3,7 @@
 namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
-use Auth;
 use Illuminate\Contracts\Auth\PasswordBroker;
-use Illuminate\Contracts\Auth\StatefulGuard;
 use Illuminate\Foundation\Auth\SendsPasswordResetEmails;
 use Password;
 
@@ -42,16 +40,5 @@ class AdminForgotPasswordController extends Controller
     public function broker(): PasswordBroker
     {
         return Password::broker('cms_users');
-    }
-
-    /**
-     * Get the guard to be used during authentication
-     * after password reset.
-     *
-     * @return \Illuminate\Contracts\Auth\StatefulGuard
-     */
-    public function guard(): StatefulGuard
-    {
-        return Auth::guard('admin');
     }
 }
