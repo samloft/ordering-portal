@@ -39,6 +39,7 @@ class AccountSummaryExcel implements FromCollection
         $invoice_headings = [
             'Invoice No.',
             'Order No.',
+            'Customer Reference',
             'Invoice Date',
             'Due Date',
             'Amount',

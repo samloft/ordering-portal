@@ -25,6 +25,7 @@
         <tr>
             <th>Invoice No.</th>
             <th>Order No.</th>
+            <th>Customer Reference</th>
             <th>Invoice Date</th>
             <th>Due Date</th>
             <th>Amount</th>
@@ -35,6 +36,7 @@
             <tr>
                 <td>{{ $line['item_no'] }}</td>
                 <td>{{ $line['reference'] }}</td>
+                <td>{{ $line['customer_reference'] }}</td>
                 <td>{{ $line['dated'] }}</td>
                 <td>{{ $line['due_date'] }}</td>
                 <td class="text-right">{{ $line['amount'] }}</td>
