@@ -86,22 +86,15 @@ class OrderTrackingController extends Controller
      */
     public function invoicePdf($order_number, $customer_order_number, $download = false): array
     {
-        $authorized = OrderTrackingHeader::show(urldecode($order_number));
-
-        if (! $authorized) {
-            return [
-                'pdf_exists' => false,
-                'error' => 'You do not have permission to view this invoice',
-            ];
-        }
+        OrderTrackingHeader::show(urldecode($order_number));
 
         $customer_code = urlencode(trim(auth()->user()->customer->code));
 
-        $document_url = 'http://versionone/v1/dbwebq.exe?DbQCMD=LOGIN&DbQCMDNext=SEARCH&SID=36d4afe300&DbQuser=administrator&DbQPass=administrator&DOCID='.GlobalSettings::versionOneDocId().'&S0F=ARCH_USER&S0O=EQ&S0V=&S1F=ARCH_DATE&S1O=EQ&S1V=&S2F=DELIVERY_NOTE_NUMBER&S2O=EQ&S2V='.$order_number.'&S3F=CUSTOMER_CODE&S3O=EQ&S3V='.$customer_code.'&S4F=CUSTOMER_ORDER_NO&S4O=EQ&S4V='.$customer_order_number;
+        $document_url = config('app.archive_url').'DOCID='.GlobalSettings::versionOneDocId().'&S0F=ARCH_USER&S0O=EQ&S0V=&S1F=ARCH_DATE&S1O=EQ&S1V=&S2F=DELIVERY_NOTE_NUMBER&S2O=EQ&S2V='.$order_number.'&S3F=CUSTOMER_CODE&S3O=EQ&S3V='.$customer_code.'&S4F=CUSTOMER_ORDER_NO&S4O=EQ&S4V='.$customer_order_number;
 
         $document = Http::get($document_url);
 
-        if (preg_match('/^%PDF-1.4/', $document)) {
+        if ($document->status() === 200 && $document->headers()['Content-Type'][0] === 'application/pdf') {
             if ($download) {
                 header('Content-type: application/pdf');
                 header('Content-disposition: attachment;filename='.str_replace('/', '_', urldecode($order_number).'.pdf'));
