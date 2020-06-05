@@ -75,14 +75,14 @@
         </tr>
         @if($order['values']['discount'])
             <tr>
-                <td colspan="4" class="text-left border-0 font-thin">{{ $order['notes'] }}</td>
+                <td colspan="4" class="text-left border-0 font-thin">{{ $order['notes'] ?? '' }}</td>
                 <th colspan="1" class="text-right">Discount</th>
                 <td class="text-right">- {{ $order['values']['discount'] }}</td>
             </tr>
         @endif
         <tr>
             @if(!$order['values']['discount'])
-                <td colspan="4" class="text-left border-0 font-thin">{{ $order['notes'] }}</td>
+                <td colspan="4" class="text-left border-0 font-thin">{{ $order['notes'] ?? '' }}</td>
                 <th colspan="1" class="text-right">Shipping</th>
             @else
                 <th colspan="5" class="text-right">Shipping</th>
