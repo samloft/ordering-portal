@@ -54,7 +54,7 @@
 
                     <h4 class="text-primary">Order Details</h4>
 
-                    @if ($past_pending_orders)
+                    @if (count($past_pending_orders) > 0)
                         <div class="xl:flex items-center mb-3 relative">
                             <label for="group_order" class="w-1/2">Send With Past Order</label>
                             <select id="group_order" name="group_order" autocomplete="off">
