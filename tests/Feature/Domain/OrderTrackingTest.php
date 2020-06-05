@@ -84,8 +84,7 @@ test('invoice pdf button does not display if not in archive', function () {
 
 test('invoice pdf can be downloaded if exists in archive', function () {
     Http::fake([
-        '*' => Http::response(UploadedFile::fake()
-            ->create('order.pdf'), 200, [
+        '*' => Http::response(UploadedFile::fake()->create('order.pdf'), 200, [
             'Content-Type' => 'application/pdf',
         ]),
     ]);
@@ -106,6 +105,10 @@ test('cannot download an invoice not placed by customer', function () {
 });
 
 test('invoice pdf that does not exists wont display', function () {
+    Http::fake([
+        '*' => Http::response(null, 200),
+    ]);
+
     $this->get(route('order-tracking.invoice-pdf', [
         'order' => $this->orders->first()->order_number,
         'customer_order' => $this->orders->first()->reference,

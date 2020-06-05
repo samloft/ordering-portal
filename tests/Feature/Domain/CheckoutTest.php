@@ -2,10 +2,10 @@
 
 use App\Models\Basket;
 use App\Models\DeliveryMethod;
-use Tests\Setup\BasketFactory;
-use Tests\Setup\UserFactory;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Storage;
+use Tests\Setup\BasketFactory;
+use Tests\Setup\UserFactory;
 
 beforeEach(function () {
     $this->user = (new UserFactory())->withCustomer()->create();

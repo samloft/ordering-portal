@@ -98,11 +98,11 @@ test('password can be reset', function () {
     $token = Password::broker()->createToken($user);
 
     $this->followingRedirects()->from('/password/reset')->post('/password/reset', [
-            'token' => $token,
-            'email' => $user->email,
-            'password' => 'newpassword',
-            'password_confirmation' => 'newpassword',
-        ])->assertSuccessful();
+        'token' => $token,
+        'email' => $user->email,
+        'password' => 'newpassword',
+        'password_confirmation' => 'newpassword',
+    ])->assertSuccessful();
 
     $user->refresh();
 

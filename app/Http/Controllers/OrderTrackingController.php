@@ -94,7 +94,7 @@ class OrderTrackingController extends Controller
 
         $document = Http::get($document_url);
 
-        if ($document->status() === 200 && $document->headers()['Content-Type'][0] === 'application/pdf') {
+        if ($document->status() === 200 && isset($document->headers()['Content-Type']) && $document->headers()['Content-Type'][0] === 'application/pdf') {
             if ($download) {
                 header('Content-type: application/pdf');
                 header('Content-disposition: attachment;filename='.str_replace('/', '_', urldecode($order_number).'.pdf'));
