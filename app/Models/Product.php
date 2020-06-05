@@ -64,13 +64,7 @@ class Product extends Model
      */
     public function remoteImagePath(): ?string
     {
-        $image = $this->image(true);
-
-        if ($image) {
-            return config('app.url').'/product_images/'.encodeUrl($this->code).'.png';
-        }
-
-        return null;
+        return config('app.url').'/product_images/'.encodeUrl($this->code).'.png';
     }
 
     /**
