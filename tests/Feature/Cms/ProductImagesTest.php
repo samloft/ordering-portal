@@ -4,6 +4,7 @@ use App\Models\Admin;
 use App\Models\Price;
 use App\Models\Product;
 use Illuminate\Http\UploadedFile;
+use Illuminate\Support\Facades\Http;
 use Illuminate\Support\Facades\Storage;
 
 beforeEach(function () {
@@ -25,7 +26,33 @@ test('products with missing images are returned', function () {
         'product' => $product->code,
     ]);
 
-    $this->get(route('cms.product-images.missing'))->assertOk()->assertSee($product->code);
+    Http::fake([
+        '*' => Http::response([
+            'found' => false,
+        ], 200),
+    ]);
+
+    $this->get(route('cms.product-images.missing', [
+        'product' => $product->code,
+    ]))->assertOk()->assertSee($product->code);
+});
+
+test('products with images are returned as ok', function () {
+    $product = factory(Product::class)->create();
+
+    factory(Price::class)->create([
+        'product' => $product->code,
+    ]);
+
+    Http::fake([
+        '*' => Http::response([
+            'found' => true,
+        ], 200),
+    ]);
+
+    $this->get(route('cms.product-images.missing', [
+        'product' => $product->code,
+    ]))->assertOk()->assertSee('image')->assertSee(true);
 });
 
 test('image can be uploaded', function () {
