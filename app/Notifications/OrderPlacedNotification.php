@@ -97,7 +97,9 @@ class OrderPlacedNotification extends Notification implements ShouldQueue
     {
         $customer = Customer::where('code', $order->customer_code)->first();
 
-        $file = env('FTP_TAG') ? env('FTP_TAG').'_' : ''."SALESORDER\r\n";
+        $ftp_tag = env('FTP_TAG') ? env('FTP_TAG').'_' : '';
+
+        $file = "{$ftp_tag}SALESORDER\r\n";
         $file .= 'ARCH_DATE:'.date('d/m/Y')."\r\n";
         $file .= "ARCH_USER:Devloft\r\n";
         $file .= 'SALES_ORDER_NUMBER:'.$order->order_number."\r\n";
