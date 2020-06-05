@@ -5,6 +5,7 @@ namespace App\Exports;
 use Maatwebsite\Excel\Concerns\ShouldAutoSize;
 use Maatwebsite\Excel\Concerns\WithEvents;
 use Maatwebsite\Excel\Events\AfterSheet;
+use PhpOffice\PhpSpreadsheet\Cell\Hyperlink;
 use PhpOffice\PhpSpreadsheet\Style\Border;
 use PhpOffice\PhpSpreadsheet\Style\Fill;
 
@@ -49,6 +50,23 @@ class ExcelStyling implements ShouldAutoSize, WithEvents
                 ];
 
                 $event->sheet->getDelegate()->getStyle('A2:'.$endColumn.$endRow)->applyFromArray($rowStyle);
+
+                $hyperlinks = [
+                    'font' => [
+                        'color' => ['rgb' => '0000FF'],
+                        'underline' => 'single',
+                    ],
+                ];
+
+                foreach ($event->sheet->getColumnIterator($endColumn) as $row) {
+                    foreach ($row->getCellIterator() as $cell) {
+                        if (str_contains($cell->getValue(), '://')) {
+                            $cell->setHyperlink(new Hyperlink($cell->getValue(), 'Read'));
+
+                            $event->sheet->getStyle($cell->getCoordinate())->applyFromArray($hyperlinks);
+                        }
+                    }
+                }
 
                 $event->sheet->getDelegate()->getStyle('A2');
             },
