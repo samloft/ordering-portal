@@ -47,30 +47,6 @@ class ProductImageController extends Controller
         ]);
     }
 
-    ///**
-    // * Return all products that appear on a price list with missing images.
-    // *
-    // * @return array
-    // */
-    //public function missingImages(): array
-    //{
-    //    $product_list = Price::products();
-    //    $missing_images = [];
-    //
-    //    foreach ($product_list as $product) {
-    //        $image = Product::checkImage(encodeUrl($product->product));
-    //
-    //        if (! $image['found']) {
-    //            $missing_images[] = [
-    //                'product' => $product->product,
-    //                'file_name' => str_replace('%2B', ' ', encodeUrl($product->product)).'.png',
-    //            ];
-    //        }
-    //    }
-    //
-    //    return $missing_images;
-    //}
-
     /**
      * Upload product images.
      *
