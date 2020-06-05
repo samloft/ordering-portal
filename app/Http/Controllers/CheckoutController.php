@@ -31,12 +31,13 @@ class CheckoutController extends Controller
         $basket = Basket::show(old('shipping') ?: 1);
         $checkout_notice = GlobalSettings::checkoutNotice();
         $account = request('account');
+        $past_pending_orders = OrderHeader::where('customer_code', auth()->user()->customer_code)->limit(3)->get();
 
         if ($basket['line_count'] === 0) {
             return redirect(route('basket'))->with('error', 'You have no items in your basket to checkout with.');
         }
 
-        return view('checkout.index', compact('basket', 'delivery_methods', 'checkout_notice', 'account'));
+        return view('checkout.index', compact('basket', 'delivery_methods', 'checkout_notice', 'account', 'past_pending_orders'));
     }
 
     /**
@@ -79,6 +80,7 @@ class CheckoutController extends Controller
             'user_id' => auth()->id(),
             'reference' => request('reference'),
             'notes' => request('notes'),
+            'group_order' => request('group_order'),
             'name' => request('name'),
             'telephone' => request('telephone'),
             'mobile' => request('mobile'),
