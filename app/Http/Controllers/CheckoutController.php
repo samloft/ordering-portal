@@ -62,11 +62,11 @@ class CheckoutController extends Controller
         $this->validation();
 
         $delivery_address = [
-            'company_name' => session('address')->company_name ?? trim(auth()->user()->customer->name),
-            'address_line_2' => session('address')->address_line_2 ?? trim(auth()->user()->customer->address_line_1),
-            'address_line_3' => session('address')->address_line_3 ?? trim(auth()->user()->customer->address_line_2),
-            'address_line_4' => session('address')->address_line_4 ?? trim(auth()->user()->customer->city),
-            'post_code' => session('address')->post_code ?? trim(auth()->user()->customer->post_code),
+            'company_name' => session('address') ? session('address')['company_name'] : trim(auth()->user()->customer->name),
+            'address_line_2' => session('address') ? session('address')['address_line_2'] : trim(auth()->user()->customer->address_line_1),
+            'address_line_3' => session('address') ? session('address')['address_line_3'] : trim(auth()->user()->customer->address_line_2),
+            'address_line_4' => session('address') ? session('address')['address_line_4'] : trim(auth()->user()->customer->city),
+            'post_code' => session('address') ? session('address')['post_code'] : trim(auth()->user()->customer->post_code),
         ];
 
         $basket = Basket::show(request('shipping'));
