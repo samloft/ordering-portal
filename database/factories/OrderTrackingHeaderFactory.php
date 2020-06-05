@@ -6,7 +6,7 @@ use Faker\Generator as Faker;
 
 $factory->define(App\Models\OrderTrackingHeader::class, static function (Faker $faker) {
     return [
-        'order_number' => $faker->word,
+        'order_number' => $faker->randomNumber(8),
         'base_order' => $faker->word,
         'reference' => $faker->word,
         'status' => $faker->word,

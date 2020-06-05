@@ -1,6 +1,8 @@
 <?php
 
 use App\Models\Price;
+use Illuminate\Http\UploadedFile;
+use Illuminate\Support\Facades\Http;
 use Tests\Setup\OrderTrackingFactory;
 use Tests\Setup\UserFactory;
 
@@ -78,6 +80,40 @@ test('invoice pdf button does not display if not in archive', function () {
     $order = $this->orders->first();
 
     $this->get(route('order-tracking.show', ['order' => $order->order_number]))->assertDontSee('Download Copy Invoice');
+});
+
+test('invoice pdf can be downloaded if exists in archive', function () {
+    Http::fake([
+        '*' => Http::response(UploadedFile::fake()->create('order.pdf'), 200, [
+            'Content-Type' => 'application/pdf',
+        ]),
+    ]);
+
+    $this->get(route('order-tracking.invoice-pdf', [
+        'order' => $this->orders->first()->order_number,
+        'customer_order' => $this->orders->first()->reference,
+        'download' => true,
+    ]))->assertOk();
+});
+
+test('cannot download an invoice not placed by customer', function () {
+    $this->get(route('order-tracking.invoice-pdf', [
+        'order' => 'ABC123',
+        'customer_order' => 'IDONTEXIST',
+        'download' => false,
+    ]))->assertStatus(404);
+});
+
+test('invoice pdf that does not exists wont display', function () {
+    Http::fake([
+        '*' => Http::response(null, 200),
+    ]);
+
+    $this->get(route('order-tracking.invoice-pdf', [
+        'order' => $this->orders->first()->order_number,
+        'customer_order' => $this->orders->first()->reference,
+        'download' => false,
+    ]))->assertOk()->assertSee(false);
 });
 
 test('print order details returns pdf', function () {

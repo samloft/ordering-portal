@@ -60,6 +60,8 @@ return [
 
     's3_url' => env('AWS_URL'),
 
+    'archive_url' => env('ARCHIVE_URL'),
+
     /*
     |--------------------------------------------------------------------------
     | Application Timezone

@@ -93,7 +93,7 @@
             @endif
 
             <order-invoice order="{{ urlencode(trim($order->order_number)) }}"
-                           customer_order="{{ urlencode(trim($order->customer_order_no)) }}"></order-invoice>
+                           customer_order="{{ urlencode(trim($order->reference)) }}"></order-invoice>
 
             <a class="ml-2" href="{{ route('order-tracking.pdf', ['order' => encodeUrl($order->order_number)]) }}"
                target="_blank">

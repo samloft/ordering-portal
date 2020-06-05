@@ -78,6 +78,31 @@ test('quantity gets auto incremented to selling order multiples', function () {
     ]);
 });
 
+test('quantity needs to be a valid number', function () {
+    factory(Price::class)->create([
+        'customer_code' => $this->user->customer->code,
+        'product' => $this->product->code,
+    ]);
+
+    $this->post('basket/add-product', [
+        'product' => $this->product->code,
+        'quantity' => 'a',
+        'update' => false,
+    ])->assertStatus(422)->assertSee('not a valid quantity');
+
+    $this->post('basket/add-product', [
+        'product' => $this->product->code,
+        'quantity' => '',
+        'update' => false,
+    ])->assertStatus(422)->assertSee('not a valid quantity');
+
+    $this->post('basket/add-product', [
+        'product' => $this->product->code,
+        'quantity' => 0,
+        'update' => false,
+    ])->assertStatus(422)->assertSee('not a valid quantity');
+});
+
 test('can buy a product that is obsolete with stock', function () {
     $product = (new ProductFactory())->withPrices($this->user->customer->code)->create([
         'obsolete' => true,
