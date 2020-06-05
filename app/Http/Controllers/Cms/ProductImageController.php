@@ -20,34 +20,56 @@ class ProductImageController extends Controller
      */
     public function index()
     {
-        return view('product-images.index');
+        $products = Price::products();
+
+        return view('product-images.index', compact('products'));
     }
 
     /**
-     * Return all products that appear on a price list with missing images.
-     *
-     * @return array
+     * @return \Illuminate\Http\JsonResponse
      */
-    public function missingImages(): array
+    public function checkImage(): JsonResponse
     {
-        ini_set('max_execution_time', 0);
+        $product = encodeUrl(request('product'));
 
-        $product_list = Price::products();
-        $missing_images = [];
+        $image = Product::checkImage($product);
 
-        foreach ($product_list as $product) {
-            $image = Product::checkImage(encodeUrl($product->product));
-
-            if (! $image['found']) {
-                $missing_images[] = [
-                    'product' => $product->product,
-                    'file_name' => str_replace('%2B', ' ', encodeUrl($product->product)).'.png',
-                ];
-            }
+        if (! $image['found']) {
+            return response()->json([
+                'image' => false,
+                'product' => request('product'),
+                'file_name' => str_replace('%2B', ' ', $product).'.png',
+            ]);
         }
 
-        return $missing_images;
+        return response()->json([
+            'image' => true,
+        ]);
     }
+
+    ///**
+    // * Return all products that appear on a price list with missing images.
+    // *
+    // * @return array
+    // */
+    //public function missingImages(): array
+    //{
+    //    $product_list = Price::products();
+    //    $missing_images = [];
+    //
+    //    foreach ($product_list as $product) {
+    //        $image = Product::checkImage(encodeUrl($product->product));
+    //
+    //        if (! $image['found']) {
+    //            $missing_images[] = [
+    //                'product' => $product->product,
+    //                'file_name' => str_replace('%2B', ' ', encodeUrl($product->product)).'.png',
+    //            ];
+    //        }
+    //    }
+    //
+    //    return $missing_images;
+    //}
 
     /**
      * Upload product images.

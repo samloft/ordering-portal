@@ -17,7 +17,8 @@
                                 class="secondary"/>
                         </svg>
                         <div>
-                            <p class="alert-text">Currently <span class="font-medium">{{ missingImagesCount }}</span> images are missing...</p>
+                            <p class="alert-text">Currently <span class="font-medium">{{ missingImagesCount }}</span>
+                                images are missing...</p>
                         </div>
                     </div>
                 </div>
@@ -58,26 +59,28 @@
         </div>
         <div class="w-2/3">
             <div class="px-6 pt-4 pb-6 xl:px-10 xl:pt-8 xl:pb-8 bg-white rounded-lg shadow">
-                    <h1 class="uppercase tracking-widest mb-3 text-xl font-medium">
-                        Upload product images
-                    </h1>
+                <h1 class="uppercase tracking-widest mb-3 text-xl font-medium">
+                    Upload product images
+                </h1>
 
-                    <label id="dropzone"
-                        class="flex flex-col items-center px-4 py-6 border-dashed border-4 border-gray-800 bg-gray-200 text-gray-800 rounded-lg shadow tracking-widest uppercase border border-blue cursor-pointer hover:opacity-75">
-                        <svg class="w-20 h-20" fill="currentColor" xmlns="http://www.w3.org/2000/svg"
-                             viewBox="0 0 20 20">
-                            <path
-                                d="M16.88 9.1A4 4 0 0 1 16 17H5a5 5 0 0 1-1-9.9V7a3 3 0 0 1 4.52-2.59A4.98 4.98 0 0 1 17 8c0 .38-.04.74-.12 1.1zM11 11h3l-4-4-4 4h3v3h2v-3z"/>
-                        </svg>
-                        <span class="mt-5 text-base leading-normal">Drag your file(s) here or click to browse</span>
-                        <input type='file' class="hidden" multiple
-                               @change="prepareUploads($event.target.files)"
-                        />
-                    </label>
+                <label id="dropzone"
+                       class="flex flex-col items-center px-4 py-6 border-dashed border-4 border-gray-800 bg-gray-200 text-gray-800 rounded-lg shadow tracking-widest uppercase border border-blue cursor-pointer hover:opacity-75">
+                    <svg class="w-20 h-20" fill="currentColor" xmlns="http://www.w3.org/2000/svg"
+                         viewBox="0 0 20 20">
+                        <path
+                            d="M16.88 9.1A4 4 0 0 1 16 17H5a5 5 0 0 1-1-9.9V7a3 3 0 0 1 4.52-2.59A4.98 4.98 0 0 1 17 8c0 .38-.04.74-.12 1.1zM11 11h3l-4-4-4 4h3v3h2v-3z"/>
+                    </svg>
+                    <span class="mt-5 text-base leading-normal">Drag your file(s) here or click to browse</span>
+                    <input type='file' class="hidden" multiple
+                           @change="prepareUploads($event.target.files)"
+                    />
+                </label>
 
                 <div v-if="uploadsCompleted" class="bg-gray-800 text-white rounded mt-5 p-5 flex text-center">
-                    <div class="font-semibold tracking-widest w-1/2">Uploaded: <span class="font-normal tracking-normal">{{ imagesUploaded }} / {{ totalImages }}</span></div>
-                    <div class="font-semibold tracking-widest w-1/2">Failed: <span class="font-normal tracking-normal">{{ imagesFailed }}</span></div>
+                    <div class="font-semibold tracking-widest w-1/2">Uploaded: <span
+                        class="font-normal tracking-normal">{{ imagesUploaded }} / {{ totalImages }}</span></div>
+                    <div class="font-semibold tracking-widest w-1/2">Failed: <span class="font-normal tracking-normal">{{ imagesFailed }}</span>
+                    </div>
                 </div>
 
                 <div v-if="uploading" class="image-table-container">
@@ -133,6 +136,9 @@
 
 <script>
     export default {
+        props: {
+            products: {},
+        },
         data() {
             return {
                 checkingImages: false,
@@ -149,38 +155,31 @@
             }
         },
         methods: {
-            checkMissingImages: function () {
+            async checkMissingImages() {
                 this.missingImagesCount = 0;
                 this.checkingImages = true;
                 this.checkComplete = false;
                 this.missingImages = [];
 
-                axios.get('/cms/product-images/missing').then(response => {
-                    this.missingImages = response.data;
-                    this.missingImagesCount = response.data.length;
+                var self = this;
 
-                    this.checkComplete = true;
-                    this.checkingImages = false;
-                }).catch(error => {
-                    this.checkingImages = false;
-                    this.checkComplete = true;
-
-                    if(error.response.status === 504) {
-                        return Vue.swal({
-                            title: 'Error',
-                            text: 'The request timed out',
-                            icon: 'error',
-                            confirmButtonColor: '#E02424',
+                for (const key in this.products) {
+                    if (this.products.hasOwnProperty(key)) {
+                        await axios.get('/cms/product-images/missing', {
+                            params: {
+                                product: this.products[key].product,
+                            }
+                        }).then(response => {
+                            if (!response.data.image) {
+                                this.checkComplete = true;
+                                self.missingImages.push(response.data);
+                                self.missingImagesCount++;
+                            }
                         });
                     }
+                }
 
-                    return Vue.swal({
-                        title: 'Error',
-                        text: 'An error occurred, unable to check missing images',
-                        icon: 'error',
-                        confirmButtonColor: '#E02424',
-                    });
-                });
+                this.checkingImages = false;
             },
             prepareUploads: function (files) {
                 this.uploadsCompleted = false;
@@ -216,7 +215,7 @@
 
                 this.uploadImages();
             },
-            uploadImages: function() {
+            uploadImages: function () {
                 this.files.forEach(file => {
                     if (file.status === 'pending') {
                         file.status = 'uploading';
