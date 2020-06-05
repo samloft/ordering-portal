@@ -4,7 +4,6 @@ use App\Models\Admin;
 use App\Models\Price;
 use App\Models\Product;
 use Illuminate\Http\UploadedFile;
-use Illuminate\Support\Facades\Http;
 use Illuminate\Support\Facades\Storage;
 
 beforeEach(function () {
@@ -26,11 +25,7 @@ test('products with missing images are returned', function () {
         'product' => $product->code,
     ]);
 
-    Http::fake([
-        '*' => Http::response([
-            'found' => false,
-        ], 200),
-    ]);
+    Storage::fake();
 
     $this->get(route('cms.product-images.missing', [
         'product' => $product->code,
@@ -44,11 +39,8 @@ test('products with images are returned as ok', function () {
         'product' => $product->code,
     ]);
 
-    Http::fake([
-        '*' => Http::response([
-            'found' => true,
-        ], 200),
-    ]);
+    Storage::fake();
+    Storage::put($product->code.'.png', 'image');
 
     $this->get(route('cms.product-images.missing', [
         'product' => $product->code,
