@@ -55,7 +55,7 @@ class ExcelStyling implements ShouldAutoSize, WithEvents
                     'font' => [
                         'color' => ['rgb' => '0000FF'],
                         'underline' => 'single',
-                    ]
+                    ],
                 ];
 
                 foreach ($event->sheet->getColumnIterator($endColumn) as $row) {
