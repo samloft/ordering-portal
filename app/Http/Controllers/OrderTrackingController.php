@@ -11,6 +11,7 @@ use Illuminate\Contracts\View\Factory;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Response;
 use Illuminate\Routing\Redirector;
+use Illuminate\Support\Facades\Http;
 use Illuminate\View\View;
 
 class OrderTrackingController extends Controller
@@ -67,13 +68,10 @@ class OrderTrackingController extends Controller
         $order_number = request('order_number');
 
         $order_lines = OrderTrackingLine::copy(urldecode($order_number));
-        $added_to_basket = Basket::store($order_lines);
 
-        if ($added_to_basket['basket_updated']) {
-            return redirect(route('basket'))->with('success', 'Order lines from order '.decodeUrl($order_number).' have been added to your basket');
-        }
+        Basket::store($order_lines);
 
-        return back()->with('error', 'An error occurred when copying this order to the basket, please try again');
+        return redirect(route('basket'))->with('success', 'Order lines from order '.decodeUrl($order_number).' have been added to your basket');
     }
 
     /**
@@ -88,27 +86,20 @@ class OrderTrackingController extends Controller
      */
     public function invoicePdf($order_number, $customer_order_number, $download = false): array
     {
-        $authorized = OrderTrackingHeader::show(urldecode($order_number));
+        OrderTrackingHeader::show(urldecode($order_number));
 
-        if (! $authorized) {
-            return [
-                'pdf_exists' => false,
-                'error' => 'You do not have permission to view this invoice',
-            ];
-        }
+        $customer_code = urlencode(trim(auth()->user()->customer->code));
 
-        $customer_code = urlencode(trim(auth()->user()->customer->customer_code));
+        $document_url = config('app.archive_url').'DOCID='.GlobalSettings::versionOneDocId().'&S0F=ARCH_USER&S0O=EQ&S0V=&S1F=ARCH_DATE&S1O=EQ&S1V=&S2F=DELIVERY_NOTE_NUMBER&S2O=EQ&S2V='.$order_number.'&S3F=CUSTOMER_CODE&S3O=EQ&S3V='.$customer_code.'&S4F=CUSTOMER_ORDER_NO&S4O=EQ&S4V='.$customer_order_number;
 
-        $document_url = 'http://documents.scolmore.com/v1/dbwebq.exe?DbQCMD=LOGIN&DbQCMDNext=SEARCH&SID=36d4afe300&DbQuser=administrator&DbQPass=administrator&DOCID='.GlobalSettings::versionOneDocId().'&S0F=ARCH_USER&S0O=EQ&S0V=&S1F=ARCH_DATE&S1O=EQ&S1V=&S2F=DELIVERY_NOTE_NUMBER&S2O=EQ&S2V='.$order_number.'&S3F=CUSTOMER_CODE&S3O=EQ&S3V='.$customer_code.'&S4F=CUSTOMER_ORDER_NO&S4O=EQ&S4V='.$customer_order_number;
+        $document = Http::get($document_url);
 
-        $pdf_file = file_get_contents($document_url);
-
-        if (preg_match('/^%PDF-1.4/', $pdf_file)) {
+        if ($document->status() === 200 && isset($document->headers()['Content-Type']) && $document->headers()['Content-Type'][0] === 'application/pdf') {
             if ($download) {
                 header('Content-type: application/pdf');
                 header('Content-disposition: attachment;filename='.str_replace('/', '_', urldecode($order_number).'.pdf'));
 
-                echo $pdf_file;
+                echo $document;
             }
 
             return [
