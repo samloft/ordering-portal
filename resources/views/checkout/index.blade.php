@@ -54,6 +54,26 @@
 
                     <h4 class="text-primary">Order Details</h4>
 
+                    @if (count($past_pending_orders) > 0)
+                        <div class="xl:flex items-center mb-3 relative">
+                            <label for="group_order" class="w-1/2">Send With Past Order</label>
+                            <select id="group_order" name="group_order" autocomplete="off">
+                                <option value="">Not Set</option>
+                                @foreach($past_pending_orders as $order)
+                                    <option value="{{ $order->order_number }}">{{ $order->order_number }}</option>
+                                @endforeach
+                            </select>
+                            <div
+                                class="pointer-events-none absolute inset-y-0 right-0 flex items-center px-3 pt-6 xl:pt-0 text-gray-700">
+                                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"
+                                     class="fill-current h-4 w-4">
+                                    <path
+                                        d="M9.293 12.95l.707.707L15.657 8l-1.414-1.414L10 10.828 5.757 6.586 4.343 8z"></path>
+                                </svg>
+                            </div>
+                        </div>
+                    @endif
+
                     <div class="xl:flex items-center mb-3">
                         <label for="reference" class="w-1/2">Order Reference <span class="text-red-600">*</span></label>
                         <input id="reference" name="reference" autocomplete="off"
@@ -93,7 +113,8 @@
                     </div>
 
                     <div class="xl:flex items-center mb-3">
-                        <label for="mobile" class="w-1/2">Mobile {!! session('address') ? '<span class="text-red-600">*</span>' : '' !!}</label>
+                        <label for="mobile"
+                               class="w-1/2">Mobile {!! session('address') ? '<span class="text-red-600">*</span>' : '' !!}</label>
                         <input id="mobile"
                                name="mobile"
                                value="{{ old('mobile') ?: auth()->user()->mobile }}"
