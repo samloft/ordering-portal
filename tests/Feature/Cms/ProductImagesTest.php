@@ -52,7 +52,7 @@ test('products with images are returned as ok', function () {
 
     $this->get(route('cms.product-images.missing', [
         'product' => $product->code,
-    ]))->assertOk()->assertSee('image')->assertSee(true);
+    ]))->assertOk()->assertDontSee($product->code);
 });
 
 test('image can be uploaded', function () {
