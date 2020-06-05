@@ -5,8 +5,8 @@
                    @keyup="onKeyUp(keywordSearch)" @keyup.enter="submit()"/>
 
             <div class="absolute -mt-2 w-full">
-                <ul class="bg-gray-100 rounded-b-lg w-full border-l border-r border-b" v-show="resultItems.length > 0">
-                    <li class="cursor-pointer hover:bg-gray-200 p-2" v-for="item in resultItems"
+                <ul class="rounded-b-lg w-full border-l border-r border-b" v-show="resultItems.length > 0">
+                    <li class="cursor-pointer odd:bg-gray-100 even:bg-white hover:bg-gray-200 p-2" v-for="item in resultItems"
                         @click="onSelected(item.code)">
                         {{ item.code }}
                     </li>
