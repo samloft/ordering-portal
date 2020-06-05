@@ -25,7 +25,26 @@ test('products with missing images are returned', function () {
         'product' => $product->code,
     ]);
 
-    $this->get(route('cms.product-images.missing'))->assertOk()->assertSee($product->code);
+    Storage::fake();
+
+    $this->get(route('cms.product-images.missing', [
+        'product' => $product->code,
+    ]))->assertOk()->assertSee($product->code);
+});
+
+test('products with images are returned as ok', function () {
+    $product = factory(Product::class)->create();
+
+    factory(Price::class)->create([
+        'product' => $product->code,
+    ]);
+
+    Storage::fake();
+    Storage::put($product->code.'.png', 'image');
+
+    $this->get(route('cms.product-images.missing', [
+        'product' => $product->code,
+    ]))->assertOk()->assertDontSee($product->code);
 });
 
 test('image can be uploaded', function () {
