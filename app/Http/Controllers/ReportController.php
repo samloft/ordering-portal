@@ -121,6 +121,7 @@ class ReportController extends Controller
             $lines[] = [
                 'item_no' => $invoice_line->item_no,
                 'reference' => $invoice_line->reference,
+                'customer_reference' => $invoice_line->customer_reference,
                 'dated' => Carbon::parse($invoice_line->dated)->format('d-m-Y'),
                 'due_date' => Carbon::parse($invoice_line->due_date)->format('d-m-Y'),
                 'amount' => $invoice_line->unall_curr_amount,
