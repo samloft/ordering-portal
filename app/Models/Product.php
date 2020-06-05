@@ -60,11 +60,17 @@ class Product extends Model
     /**
      * Get the local product image route.
      *
-     * @return string
+     * @return string|null
      */
-    public function remoteImagePath(): string
+    public function remoteImagePath(): ?string
     {
-        return config('app.url').'/product_images/'.encodeUrl($this->code).'.png';
+        $image = $this->image(true);
+
+        if ($image) {
+            return config('app.url').'/product_images/'.encodeUrl($this->code).'.png';
+        }
+
+        return null;
     }
 
     /**

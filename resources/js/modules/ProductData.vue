@@ -114,7 +114,12 @@
                 axios.get('/product-data/range/' + this.brand).then(response => {
                     this.ranges = response.data;
                 }).catch(error => {
-                    Vue.swal('Error', 'Unable to get ranges, please try again', 'error');
+                    Vue.swal({
+                        title: 'Error',
+                        text: 'Unable to get ranges, please try again',
+                        icon: 'error',
+                        confirmButtonColor: '#E02424',
+                    });
                 });
             },
             async downloadPrices() {
@@ -128,7 +133,12 @@
                 }).then(function (response) {
                     vm.forceFileDownload(response, 'product-net-prices.xlsx');
                 }).catch(function (error) {
-                    Vue.swal('Error', 'Unable to generate downloadable file, please try again');
+                    Vue.swal({
+                        title: 'Error',
+                        text: 'Unable to generate downloadable file, please try again',
+                        icon: 'error',
+                        confirmButtonColor: '#E02424',
+                    });
                 });
 
                 this.downloading = false;
@@ -144,8 +154,12 @@
                 }).then(function (response) {
                     vm.forceFileDownload(response, 'product-data.xlsx');
                 }).catch(function (error) {
-                    console.log(error);
-                    Vue.swal('Error', 'Unable to generate downloadable file, please try again');
+                    Vue.swal({
+                        title: 'Error',
+                        text: 'Unable to get generate downloadable file, please try again',
+                        icon: 'error',
+                        confirmButtonColor: '#E02424',
+                    });
                 });
 
                 this.downloading = false;
