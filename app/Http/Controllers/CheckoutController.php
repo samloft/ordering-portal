@@ -8,7 +8,6 @@ use App\Models\DeliveryMethod;
 use App\Models\GlobalSettings;
 use App\Models\OrderHeader;
 use App\Models\OrderLine;
-use App\Models\OrderTrackingHeader;
 use App\Notifications\OrderPlacedNotification;
 use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\DB;
