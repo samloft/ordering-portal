@@ -8,7 +8,6 @@ use App\Models\DeliveryMethod;
 use App\Models\GlobalSettings;
 use App\Models\OrderHeader;
 use App\Models\OrderLine;
-use App\Models\OrderTrackingHeader;
 use App\Notifications\OrderPlacedNotification;
 use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\DB;
@@ -32,7 +31,7 @@ class CheckoutController extends Controller
         $basket = Basket::show(old('shipping') ?: 1);
         $checkout_notice = GlobalSettings::checkoutNotice();
         $account = request('account');
-        $past_pending_orders = OrderTrackingHeader::where('customer_code', auth()->user()->customer_code)->where('status', 'Pending')->limit(3)->get();
+        $past_pending_orders = OrderHeader::notProcessed();
 
         if ($basket['line_count'] === 0) {
             return redirect(route('basket'))->with('error', 'You have no items in your basket to checkout with.');
