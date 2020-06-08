@@ -60,7 +60,7 @@
                             <select id="group_order" name="group_order" autocomplete="off">
                                 <option value="">Not Set</option>
                                 @foreach($past_pending_orders as $order)
-                                    <option value="{{ $order->order_number }}">{{ $order->order_number }}</option>
+                                    <option value="{{ $order->order_number }}">{{ $order->order_number }} / {{ $order->reference }}</option>
                                 @endforeach
                             </select>
                             <div
