@@ -5,6 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Support\Carbon;
 
 /**
  * App\Models\OrderHeader.
@@ -68,6 +69,14 @@ class OrderHeader extends Model
     }
 
     /**
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     */
+    public function tracking(): BelongsTo
+    {
+        return $this->belongsTo(OrderTrackingHeader::class, 'order_number', 'order_number');
+    }
+
+    /**
      * Check to see if the customer has claimed the product before
      * if they have return the total quantity.
      *
@@ -104,5 +113,23 @@ class OrderHeader extends Model
         }
 
         return $claim_qty;
+    }
+
+    /**
+     * Get orders that have not been processed yet.
+     *
+     * @return \Illuminate\Database\Eloquent\Builder[]|\Illuminate\Database\Eloquent\Collection
+     */
+    public static function notProcessed()
+    {
+        return self::where('customer_code', auth()->user()->customer->code)->where(static function ($query) {
+            $query->whereBetween('created_at', [Carbon::now()->subDays(1)->toDateTime(), Carbon::now()->toDateTime()]);
+            $query->doesntHave('tracking');
+            $query->orWhere(static function ($tracking) {
+                $tracking->whereHas('tracking', static function ($pending) {
+                    $pending->where('status', 'Pending');
+                });
+            });
+        })->limit(5)->get();
     }
 }
