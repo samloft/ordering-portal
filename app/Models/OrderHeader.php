@@ -16,6 +16,7 @@ use Illuminate\Support\Carbon;
  * @property int $user_id
  * @property string $reference
  * @property string $notes
+ * @property string $group_order
  * @property string $name
  * @property string $telephone
  * @property string $mobile

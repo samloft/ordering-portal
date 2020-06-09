@@ -93,7 +93,7 @@ class ReportController extends Controller
 
         $invoice_lines = AccountSummary::show();
 
-        if (! $invoice_lines) {
+        if ((! $invoice_lines->count()) > 0) {
             return response()->json(['message' => 'You dont currently have an order summary to display.'], 404);
         }
 

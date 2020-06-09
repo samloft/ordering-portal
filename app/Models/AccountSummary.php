@@ -23,6 +23,8 @@ class AccountSummary extends Model
 {
     protected $table = 'account_summary';
 
+    public $timestamps = false;
+
     /**
      * Get all the outstanding orders for a customers account.
      * Limited to 320 due to slowness in DomPDF.
