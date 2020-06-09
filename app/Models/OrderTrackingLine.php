@@ -35,18 +35,6 @@ class OrderTrackingLine extends Model
     }
 
     /**
-     * Get all the product lines for a order tracking header, with current price if available.
-     *
-     * @param $order_number
-     *
-     * @return \Illuminate\Database\Eloquent\Builder[]|\Illuminate\Database\Eloquent\Collection|Builder[]|Collection
-     */
-    public static function show($order_number)
-    {
-        return self::where('order_number', $order_number)->with('price')->get();
-    }
-
-    /**
      * Get all the current order lines (For copy to basket).
      *
      * @param $order_number

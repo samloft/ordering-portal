@@ -121,7 +121,7 @@ class OrderTrackingHeader extends Model
     public static function show($order)
     {
         return self::where('customer_code', auth()->user()->customer->code)->where('order_number', $order)
-            ->with('lines')->with('original')->firstOrFail();
+            ->with('lines')->with('lines.price')->with('original')->firstOrFail();
     }
 
     /**
