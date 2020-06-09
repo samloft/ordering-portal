@@ -40,6 +40,12 @@ test('can be deleted', function () {
     ]);
 });
 
+test('cannot be deleted with no reference', function () {
+    $this->post(route('saved-baskets.store', ['reference' => 'test-basket']));
+
+    $this->get(route('saved-baskets.destroy', ['reference' => '']))->assertRedirect()->assertSessionHas('error');
+});
+
 test('cannot be deleted by someone else', function () {
     $this->post(route('saved-baskets.store', [
         'reference' => 'test-basket',
@@ -107,4 +113,14 @@ test('cannot be added to the basket by someone else', function () {
     $this->assertDatabaseMissing('basket', [
         'product' => $this->products->first()->code,
     ]);
+});
+
+test('two baskets cannot have the same reference', function () {
+    $this->post(route('saved-baskets.store', [
+        'reference' => 'test-basket',
+    ]));
+
+    $this->post(route('saved-baskets.store', [
+        'reference' => 'test-basket',
+    ]))->assertStatus(422)->assertSee('A saved basket already exists for that reference');
 });

@@ -86,9 +86,7 @@ class UploadController extends Controller
             }
         }
 
-        if ($upload && ! OrderImport::insert($upload)) {
-            return back()->with('error', 'An unknown error occurred, please try uploading again.');
-        }
+        OrderImport::insert($upload);
 
         $product_lines['prices_passed'] = $order['stats']['price_passed'];
         $product_lines['errors'] = $order['stats']['errors'];
@@ -106,11 +104,9 @@ class UploadController extends Controller
     {
         $upload = OrderImport::show();
 
-        if (Basket::store($upload)) {
-            return view('upload.completed', compact('upload'));
-        }
+        Basket::store($upload);
 
-        return back()->with('error', 'An error occurred when adding your order to the basket, please try again');
+        return view('upload.completed', compact('upload'));
     }
 
     /**
