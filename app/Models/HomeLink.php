@@ -42,10 +42,6 @@ class HomeLink extends Model
     {
         $stored = static::storeLinkImage(request()->file('file'), request('type'), request('name'));
 
-        if (! $stored['status']) {
-            return false;
-        }
-
         $category_link = new self;
 
         if (request()->file('download-file')) {
