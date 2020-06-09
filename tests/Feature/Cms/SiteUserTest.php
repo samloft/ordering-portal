@@ -73,3 +73,52 @@ test('can force password reset', function () {
         'email' => $user->email,
     ]);
 });
+
+test('extra customer can be added', function () {
+    $customer = factory(Customer::class)->create();
+
+    $user = factory(User::class)->create([
+        'name' => 'Test User',
+        'customer_code' => $customer->code,
+    ]);
+
+    $extra_customer = factory(Customer::class)->create([
+        'code' => 'ABC123',
+    ]);
+
+    $this->post(route('cms.extra-customers.store'), [
+        'id' => $user->id,
+        'code' => $extra_customer->code,
+    ])->assertOk();
+
+    $this->assertDatabaseHas('user_customers', [
+        'user_id' => $user->id,
+        'customer_code' => $extra_customer->code,
+    ]);
+});
+
+test('extra customer can be deleted', function () {
+    $customer = factory(Customer::class)->create();
+
+    $user = factory(User::class)->create([
+        'name' => 'Test User',
+        'customer_code' => $customer->code,
+    ]);
+
+    $extra_customer = factory(Customer::class)->create([
+        'code' => 'ABC123',
+    ]);
+
+    $this->post(route('cms.extra-customers.store'), [
+        'id' => $user->id,
+        'code' => $extra_customer->code,
+    ])->assertOk();
+
+    $this->delete(route('cms.extra-customers.destroy'), [
+        'id' => 1,
+    ]);
+
+    $this->assertDatabaseMissing('user_customers', [
+        'id' => 1,
+    ]);
+});
