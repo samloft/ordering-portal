@@ -1,6 +1,7 @@
 <?php
 
 use App\Models\Price;
+use Carbon\Carbon;
 use Illuminate\Http\UploadedFile;
 use Illuminate\Support\Facades\Http;
 use Tests\Setup\OrderTrackingFactory;
@@ -35,11 +36,33 @@ test('cannot see an order not placed by them', function () {
     $this->get(route('order-tracking.show', ['order' => $order->order_number]))->assertStatus(404);
 });
 
-test('can search for an order', function () {
+test('no search params returns all results', function () {
+    $this->get('order-tracking')->assertOk()->assertSee($this->orders->first()->order_number);
+});
+
+test('can search on keyword', function () {
     $order = $this->orders->first();
 
     $this->get(route('order-tracking', ['keyword' => $order->order_number]))->assertSee($order->order_number)
         ->assertSee($order->reference)->assertSee($order->status);
+});
+
+test('can search on status', function () {
+    $order = $this->orders->first();
+
+    $this->get(route('order-tracking', ['status' => $order->status]))->assertOk()->assertSee($order->order_number);
+});
+
+test('can search on from date', function () {
+    $order = $this->orders->first();
+
+    $this->get(route('order-tracking', ['start_date' => Carbon::parse($order->date_received)->format('d-m-Y')]))->assertOk()->assertSee($order->order_number);
+});
+
+test('can search on to date', function () {
+    $order = $this->orders->first();
+
+    $this->get(route('order-tracking', ['end_date' => Carbon::parse($order->date_received)->format('d-m-Y')]))->assertOk()->assertSee($order->order_number);
 });
 
 test('can view a past order', function () {
