@@ -1,6 +1,7 @@
 <?php
 
 use App\Models\GlobalSettings;
+use Tests\Setup\ProductFactory;
 use Tests\Setup\UserFactory;
 
 beforeEach(function () {
@@ -22,4 +23,22 @@ test('returns 404 if no data is enabled', function () {
     ]);
 
     $this->get(route('product-data'))->assertStatus(404);
+});
+
+test('data returns excel', function () {
+    (new ProductFactory())->withPrices($this->user->customer->code)->create();
+
+    $response = $this->get(route('product-data.data'));
+
+    $response->assertStatus(200);
+    $this->assertEquals($response->headers->get('content-type'), 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet');
+});
+
+test('prices returns excel', function () {
+    (new ProductFactory())->withPrices($this->user->customer->code)->create();
+
+    $response = $this->get(route('product-data.prices'));
+
+    $response->assertStatus(200);
+    $this->assertEquals($response->headers->get('content-type'), 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet');
 });
