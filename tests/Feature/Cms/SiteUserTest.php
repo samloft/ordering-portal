@@ -122,3 +122,17 @@ test('extra customer can be deleted', function () {
         'id' => 1,
     ]);
 });
+
+test('users can be searched', function () {
+    factory(User::class)->create([
+        'name' => 'Test User',
+    ]);
+
+    $this->get(route('cms.site-users', [
+        'search' => 'Bob Smith',
+    ]))->assertOk()->assertDontSee('Test User');
+
+    $this->get(route('cms.site-users', [
+        'search' => 'Test User',
+    ]))->assertOk()->assertSee('Test User');
+});
