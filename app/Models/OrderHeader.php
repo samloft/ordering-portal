@@ -16,6 +16,7 @@ use Illuminate\Support\Carbon;
  * @property int $user_id
  * @property string $reference
  * @property string $notes
+ * @property string $group_order
  * @property string $name
  * @property string $telephone
  * @property string $mobile
@@ -122,14 +123,21 @@ class OrderHeader extends Model
      */
     public static function notProcessed()
     {
-        return self::where('customer_code', auth()->user()->customer->code)->where(static function ($query) {
-            $query->whereBetween('created_at', [Carbon::now()->subDays(1)->toDateTime(), Carbon::now()->toDateTime()]);
-            $query->doesntHave('tracking');
-            $query->orWhere(static function ($tracking) {
-                $tracking->whereHas('tracking', static function ($pending) {
-                    $pending->where('status', 'Pending');
+        $current_postcode = session('address') ? session('address')['post_code'] : trim(auth()->user()->customer->post_code);
+
+        return self::where('customer_code', auth()->user()->customer->code)
+            ->whereRaw("UPPER(REPLACE(address_line_5, ' ', '')) = '".strtoupper(str_replace(' ', '', $current_postcode."'")))
+            ->where(static function ($query) {
+                $query->whereBetween('created_at', [
+                    Carbon::now()->subDays(1)->toDateTime(),
+                    Carbon::now()->toDateTime(),
+                ]);
+                $query->doesntHave('tracking');
+                $query->orWhere(static function ($tracking) {
+                    $tracking->whereHas('tracking', static function ($pending) {
+                        $pending->where('status', 'Pending');
+                    });
                 });
-            });
-        })->limit(5)->get();
+            })->limit(5)->get();
     }
 }

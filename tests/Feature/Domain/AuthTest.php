@@ -7,6 +7,10 @@ test('returns an ok response', function () {
     $this->get('login')->assertStatus(200);
 });
 
+test('redirected to login if not logged in', function () {
+    $this->followingRedirects()->get(route('products'))->assertSee('login');
+});
+
 test('can login with a valid customer account', function () {
     $user = (new UserFactory())->withCustomer()->create();
 

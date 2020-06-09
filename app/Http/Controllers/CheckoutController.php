@@ -80,7 +80,7 @@ class CheckoutController extends Controller
             'user_id' => auth()->id(),
             'reference' => request('reference'),
             'notes' => request('notes'),
-            'group_order' => request('group_order'),
+            'group_order' => request('group_order') ? implode(', ', request('group_order')) : null,
             'name' => request('name'),
             'telephone' => request('telephone'),
             'mobile' => request('mobile'),
