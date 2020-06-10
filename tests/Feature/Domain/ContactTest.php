@@ -27,8 +27,10 @@ test('email can be sent', function () {
         'message' => 'Testing',
     ])->assertSessionHas('success');
 
-    \Illuminate\Support\Facades\Mail::assertSent(\App\Mail\Contact::class, static function ($mail) {
-        return $mail->subject = 'Online ordering web-app message received';
+    \Illuminate\Support\Facades\Mail::assertSent(\App\Mail\Contact::class, static function ($mail) use ($contact) {
+        $mail->build();
+
+        return $mail->subject = ('Online ordering web-app message received' && $mail->hasTo($contact->email));
     });
 });
 

@@ -7,8 +7,6 @@ use Artisan;
 use Closure;
 use Illuminate\Foundation\Http\Exceptions\MaintenanceModeException;
 use Illuminate\Foundation\Http\Middleware\CheckForMaintenanceMode as Middleware;
-use Illuminate\Support\Facades\App;
-use Symfony\Component\HttpFoundation\IpUtils;
 
 class CheckForMaintenanceMode extends Middleware
 {
