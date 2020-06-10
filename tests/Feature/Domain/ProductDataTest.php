@@ -66,3 +66,20 @@ test('prices can be filtered by categories', function () {
     $response->assertStatus(200);
     $this->assertEquals($response->headers->get('content-type'), 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet');
 });
+
+test('brand returns the matching range', function () {
+    $product = factory(Product::class)->create();
+
+    factory(Price::class)->create([
+        'product' => $product->code,
+        'customer_code' => $this->user->customer->code,
+    ]);
+
+    $category = factory(Category::class)->create([
+        'product' => $product->code,
+    ]);
+
+    $this->get(route('product-data.search-range', [
+        'brand' => $category->level_1,
+    ]))->assertOk()->assertSee($category->level_2);
+});
