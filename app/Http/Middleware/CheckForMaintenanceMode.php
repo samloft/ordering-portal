@@ -29,10 +29,6 @@ class CheckForMaintenanceMode extends Middleware
      */
     public function handle($request, Closure $next)
     {
-        if (App::environment('testing')) {
-            return $next($request);
-        }
-
         $maintenance = json_decode(GlobalSettings::key('maintenance'), true);
 
         if ($this->app->isDownForMaintenance()) {
@@ -61,10 +57,6 @@ class CheckForMaintenanceMode extends Middleware
     public function enableMaintenance($request, $next)
     {
         $data = json_decode(file_get_contents($this->app->storagePath().'/framework/down'), true);
-
-        if (isset($data['allowed']) && IpUtils::checkIp($request->ip(), (array) $data['allowed'])) {
-            return $next($request);
-        }
 
         if ($this->inExceptArray($request)) {
             return $next($request);
