@@ -1,6 +1,7 @@
 <?php
 
 use App\Models\Category;
+use App\Models\CategoryImage;
 use App\Models\CustomerDiscount;
 use App\Models\ExpectedStock;
 use App\Models\Price;
@@ -195,4 +196,35 @@ test('can be auto completed', function () {
     $this->get(route('products.autocomplete', [
         'search' => substr($this->product->code, 0, 3),
     ]))->assertOk()->assertSee($this->product->code);
+});
+
+test('override category image is displayed instead of a product image', function () {
+    Storage::fake();
+
+    Storage::put('/category_images/override.png', 'image');
+
+    factory(Price::class)->create([
+        'customer_code' => $this->user->customer->code,
+        'product' => $this->product->code,
+    ]);
+
+    $category = factory(Category::class)->create([
+        'product' => $this->product->code,
+        'level_1' => 'Test 1',
+        'level_2' => 'Test 2',
+        'level_3' => null,
+        'level_4' => null,
+        'level_5' => null,
+    ]);
+
+    $override = factory(CategoryImage::class)->create([
+        'image' => 'override.png',
+        'level_1' => $category->level_1,
+        'level_2' => $category->level_2,
+        'level_3' => $category->level_3,
+    ]);
+
+    $this->get(route('products', [
+        'cat1' => $category->level_1,
+    ]))->assertOk()->assertsee($override->image);
 });

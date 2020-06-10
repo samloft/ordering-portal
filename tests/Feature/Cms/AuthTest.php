@@ -14,10 +14,10 @@ test('can login', function () {
         'password' => bcrypt('password'),
     ]);
 
-    $this->followingRedirects()->post(route('cms.login.submit'), [
+    $this->post(route('cms.login.submit'), [
         'email' => $admin->email,
         'password' => 'password',
-    ])->assertOk()->assertSee('Dashboard');
+    ])->assertRedirect('/cms');
 });
 
 test('incorrect login shows error and keeps email and remember inputs', function () {
@@ -77,4 +77,12 @@ test('can logout', function () {
     $admin = factory(Admin::class)->create();
 
     $this->actingAs($admin, 'admin')->followingRedirects()->post(route('cms.logout'))->assertOk()->assertSee('Login');
+});
+
+test('redirected to cms if trying to access login when logged in', function () {
+    $admin = factory(Admin::class)->create();
+
+    actingAs($admin, 'admin');
+
+    $this->get('/cms/login')->assertRedirect('/cms');
 });
