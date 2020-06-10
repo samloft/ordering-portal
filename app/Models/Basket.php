@@ -7,7 +7,6 @@ use Exception;
 use Illuminate\Contracts\Routing\ResponseFactory;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Http\Response;
 use Illuminate\Support\Facades\Cache;
 
@@ -27,27 +26,6 @@ class Basket extends Model
     public $timestamps = false;
 
     /**
-     * Return product relationship on product code from basket.
-     *
-     * @return BelongsTo
-     */
-    public function productDetails(): BelongsTo
-    {
-        return $this->belongsTo(Product::class, 'product', 'product');
-    }
-
-    /**
-     * Return relationship for prices.
-     *
-     * @return BelongsTo
-     */
-    public function prices(): BelongsTo
-    {
-        return $this->belongsTo(Price::class, 'product', 'product')
-            ->where('prices.customer_code', auth()->user()->customer->code);
-    }
-
-    /**
      * Return all basket lines based on customer code.
      *
      * @param null $shipping_id
@@ -60,7 +38,8 @@ class Basket extends Model
             Cache::forget('basket-'.auth()->user()->customer->code.'-'.auth()->id());
         }
 
-        return Cache::rememberForever('basket-'.auth()->user()->customer->code.'-'.auth()->id(), static function () use (
+        return Cache::rememberForever('basket-'.auth()->user()->customer->code.'-'.auth()->id(), static function () use
+        (
             $shipping_id
         ) {
             $lines = static::selectRaw('basket.product as product, basket.customer_code as customer_code,

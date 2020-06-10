@@ -250,6 +250,109 @@ test('bulk rate savings are displayed if within 75%', function () {
     $this->get(route('basket'))->assertSee('"potential_saving":true');
 });
 
+test('prices get adjusted when a bulk rate is met', function () {
+    $product = (new BasketFactory())->create()->first();
+
+    Price::where('customer_code', $this->user->customer->code)->where('product', $product->code)->update([
+        'price' => 10.00,
+        'price1' => 5.00,
+        'break1' => 500,
+        'price2' => 4.00,
+        'break2' => 600,
+        'price3' => 3.00,
+        'break3' => 700,
+    ]);
+
+    Basket::where('user_id', $this->user->id)->where('product', $product->code)->update([
+        'quantity' => 500,
+    ]);
+
+    $this->get(route('basket'))->assertSee(discount('5.00'));
+
+    Basket::where('user_id', $this->user->id)->where('product', $product->code)->update([
+        'quantity' => 600,
+    ]);
+
+    $this->get(route('basket'))->assertSee(discount('4.00'));
+
+    Basket::where('user_id', $this->user->id)->where('product', $product->code)->update([
+        'quantity' => 700,
+    ]);
+
+    $this->get(route('basket'))->assertSee(discount('3.00'));
+});
+
 test('default customer record address is used if no address session', function () {
     $this->get(route('basket'))->assertSee($this->user->customer->name);
+});
+
+test('promotional product is added to basket', function () {
+    $product = (new BasketFactory())->create()->first();
+
+    Basket::where('user_id', $this->user->id)->where('product', $product->code)->update([
+        'quantity' => 10,
+    ]);
+
+    factory(\App\Models\Promotion::class)->create([
+        'name' => 'Promotion',
+        'type' => 'product',
+        'product' => $product->code,
+        'product_qty' => 10,
+        'promotion_product' => 'FOC',
+        'promotion_qty' => 5,
+        'claim_type' => 'multiple',
+        'max_claims' => 5,
+        'start_date' => date('d-m-Y'),
+        'end_date' => null,
+        'restrictions' => null,
+    ]);
+
+    $this->get(route('basket'))->assertOk()->assertSee('FOC');
+});
+
+test('value promotion with product is added', function () {
+    $product = (new BasketFactory())->create()->first();
+
+    Basket::where('user_id', $this->user->id)->where('product', $product->code)->update([
+        'quantity' => 100000,
+    ]);
+
+    factory(\App\Models\Promotion::class)->create([
+        'name' => 'Promotion',
+        'type' => 'value',
+        'minimum_value' => 1,
+        'value_reward' => 'product',
+        'promotion_product' => 'FOC',
+        'promotion_qty' => 5,
+        'claim_type' => 'multiple',
+        'max_claims' => 5,
+        'start_date' => date('d-m-Y'),
+        'end_date' => null,
+        'restrictions' => null,
+    ]);
+
+    $this->get(route('basket'))->assertOk()->assertSee('FOC');
+});
+
+test('value promotion with discount is added', function () {
+    $product = (new BasketFactory())->create()->first();
+
+    Basket::where('user_id', $this->user->id)->where('product', $product->code)->update([
+        'quantity' => 100000,
+    ]);
+
+    factory(\App\Models\Promotion::class)->create([
+        'name' => 'Promotion',
+        'type' => 'value',
+        'minimum_value' => 1,
+        'value_reward' => 'discount',
+        'value_percent' => 10,
+        'claim_type' => 'multiple',
+        'max_claims' => 5,
+        'start_date' => date('d-m-Y'),
+        'end_date' => null,
+        'restrictions' => null,
+    ]);
+
+    $this->get(route('basket'))->assertOk()->assertSee('order_discount');
 });
