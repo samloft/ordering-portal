@@ -42,7 +42,7 @@ class OrderTrackingFactory
                 $line_number = 1;
 
                 foreach ($products as $product) {
-                    $test = factory(OrderTrackingLine::class)->create([
+                    factory(OrderTrackingLine::class)->create([
                         'order_number' => $header->order_number,
                         'order_line_no' => $line_number,
                         'product' => $product->code,
