@@ -3,6 +3,7 @@
 use App\Models\Basket;
 use App\Models\Price;
 use App\Models\Product;
+use App\Models\Promotion;
 use Tests\Setup\BasketFactory;
 use Tests\Setup\ProductFactory;
 use Tests\Setup\UserFactory;
@@ -293,7 +294,7 @@ test('promotional product is added to basket', function () {
         'quantity' => 10,
     ]);
 
-    factory(\App\Models\Promotion::class)->create([
+    factory(Promotion::class)->create([
         'name' => 'Promotion',
         'type' => 'product',
         'product' => $product->code,
@@ -317,7 +318,7 @@ test('value promotion with product is added', function () {
         'quantity' => 100000,
     ]);
 
-    factory(\App\Models\Promotion::class)->create([
+    factory(Promotion::class)->create([
         'name' => 'Promotion',
         'type' => 'value',
         'minimum_value' => 1,
@@ -341,11 +342,11 @@ test('value promotion with discount is added', function () {
         'quantity' => 100000,
     ]);
 
-    factory(\App\Models\Promotion::class)->create([
+    factory(Promotion::class)->create([
         'name' => 'Promotion',
         'type' => 'value',
         'minimum_value' => 1,
-        'value_reward' => 'discount',
+        'value_reward' => 'percent',
         'value_percent' => 10,
         'claim_type' => 'multiple',
         'max_claims' => 5,
@@ -355,4 +356,65 @@ test('value promotion with discount is added', function () {
     ]);
 
     $this->get(route('basket'))->assertOk()->assertSee('order_discount');
+});
+
+test('product promotion prompt is displayed if 75% towards reaching it', function () {
+    $product = (new BasketFactory())->create()->first();
+
+    Basket::where('user_id', $this->user->id)->where('product', $product->code)->update([
+        'quantity' => 9,
+    ]);
+
+    factory(Promotion::class)->create([
+        'name' => 'Promotion',
+        'type' => 'product',
+        'product' => $product->code,
+        'product_qty' => 10,
+        'promotion_product' => 'FOC',
+        'promotion_qty' => 5,
+        'claim_type' => 'multiple',
+        'max_claims' => 5,
+        'start_date' => date('d-m-Y'),
+        'end_date' => null,
+        'restrictions' => null,
+    ]);
+
+    $this->get(route('basket'))->assertOk()->assertSee('1 '.$product->code)->assertSee('1 FOC');
+});
+
+test('value promotion prompt is displayed if 75% towards it', function () {
+    $product = factory(Product::class)->create()->first();
+
+    factory(Price::class)->create([
+        'customer_code' => $this->user->customer->code,
+        'product' => $product->code,
+        'price' => 11.00,
+        'price1' => null,
+        'break1' => null,
+        'price2' => null,
+        'break2' => null,
+        'price3' => null,
+        'break3' => null,
+    ]);
+
+    Promotion::create([
+        'name' => 'Promotion',
+        'type' => 'value',
+        'minimum_value' => 100,
+        'value_reward' => 'percent',
+        'value_percent' => 10,
+        'claim_type' => 'multiple',
+        'max_claims' => 5,
+        'start_date' => date('d-m-Y'),
+        'end_date' => null,
+        'restrictions' => null,
+    ]);
+
+    factory(Basket::class)->create([
+        'customer_code' => $this->user->customer->code,
+        'product' => $product->code,
+        'quantity' => 9,
+    ]);
+
+    $this->get(route('basket'))->assertOk()->assertSee('away from getting 10');
 });
