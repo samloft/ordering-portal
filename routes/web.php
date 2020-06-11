@@ -32,7 +32,7 @@ Route::group(['middleware' => ['auth', 'has.customer', 'terms']], static functio
 
         Route::get('autocomplete/{search}', static function ($search) {
             return App\Models\Product::autocomplete($search);
-        });
+        })->name('products.autocomplete');
 
         Route::get('{cat1?}/{cat2?}/{cat3?}', 'ProductController@index')->name('products');
     });
@@ -115,7 +115,7 @@ Route::group(['middleware' => ['auth', 'has.customer', 'terms']], static functio
         Route::get('/', 'ProductDataController@index')->name('product-data');
         Route::get('/range/{brand}', static function ($brand) {
             return Category::range($brand);
-        });
+        })->name('product-data.search-range');
 
         Route::get('prices', 'ProductDataController@prices')->name('product-data.prices');
         Route::get('data', 'ProductDataController@data')->name('product-data.data');

@@ -7,8 +7,6 @@ use Artisan;
 use Closure;
 use Illuminate\Foundation\Http\Exceptions\MaintenanceModeException;
 use Illuminate\Foundation\Http\Middleware\CheckForMaintenanceMode as Middleware;
-use Illuminate\Support\Facades\App;
-use Symfony\Component\HttpFoundation\IpUtils;
 
 class CheckForMaintenanceMode extends Middleware
 {
@@ -29,10 +27,6 @@ class CheckForMaintenanceMode extends Middleware
      */
     public function handle($request, Closure $next)
     {
-        if (App::environment('testing')) {
-            return $next($request);
-        }
-
         $maintenance = json_decode(GlobalSettings::key('maintenance'), true);
 
         if ($this->app->isDownForMaintenance()) {
@@ -61,10 +55,6 @@ class CheckForMaintenanceMode extends Middleware
     public function enableMaintenance($request, $next)
     {
         $data = json_decode(file_get_contents($this->app->storagePath().'/framework/down'), true);
-
-        if (isset($data['allowed']) && IpUtils::checkIp($request->ip(), (array) $data['allowed'])) {
-            return $next($request);
-        }
 
         if ($this->inExceptArray($request)) {
             return $next($request);

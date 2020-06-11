@@ -16,14 +16,10 @@ class Authenticate extends Middleware
      */
     protected function redirectTo($request): string
     {
-        if (! $request->expectsJson()) {
-            if (Route::is('cms.*')) {
-                return route('cms.login');
-            }
-
-            return route('login');
+        if (Route::is('cms.*')) {
+            return route('cms.login');
         }
 
-        return response()->json('Not authenticated', 401);
+        return route('login');
     }
 }

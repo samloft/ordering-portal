@@ -13,6 +13,14 @@ test('returns an ok response', function () {
     $this->get(route('cms.admin-users'))->assertOk();
 });
 
+test('can be searched', function () {
+    $admin = factory(Admin::class)->create();
+
+    $this->get(route('cms.admin-users', [
+        'search' => $admin->name,
+    ]))->assertOk()->assertSee($admin->name);
+});
+
 test('can be deleted', function () {
     $admin = factory(Admin::class)->create();
 

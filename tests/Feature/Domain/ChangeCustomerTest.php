@@ -79,3 +79,23 @@ test('admins cannot switch to a customer that no longer exist', function () {
 
     $this->post('/account/customer/change', ['customer', 'ABC123'])->assertStatus(302)->assertSessionHas('error');
 });
+
+test('is auto completed', function () {
+    $user = (new UserFactory())->withCustomer()->withUserCustomers(2)->create([
+        'admin' => 1,
+    ]);
+
+    actingAs($user);
+
+    $this->post(route('customer.autocomplete', ['customer' => substr($user->customers->first()->code, 0, 3)]))
+        ->assertOk()->assertSee($user->customers->first()->code);
+});
+
+test('none admins cannot access autocomplete', function () {
+    $user = (new UserFactory())->withCustomer()->withUserCustomers(2)->create();
+
+    actingAs($user);
+
+    $this->post(route('customer.autocomplete', ['customer' => substr($user->customers->first()->code, 0, 3)]))
+        ->assertStatus(401);
+});

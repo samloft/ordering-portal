@@ -45,17 +45,4 @@ class AdminResetPasswordNotification extends Notification
             ->action('Reset Password', route('cms.password.reset', $this->token))
             ->line('If you did not request a password reset, no further action is required.');
     }
-
-    /**
-     * Get the array representation of the notification.
-     *
-     * @param mixed $notifiable
-     *
-     * @return array
-     */
-    public function toArray($notifiable)
-    {
-        return [//
-        ];
-    }
 }
