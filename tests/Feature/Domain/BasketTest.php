@@ -1,8 +1,6 @@
 <?php
 
 use App\Models\Basket;
-use App\Models\OrderHeader;
-use App\Models\OrderLine;
 use App\Models\Price;
 use App\Models\Product;
 use App\Models\Promotion;

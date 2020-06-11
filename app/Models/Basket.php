@@ -38,10 +38,7 @@ class Basket extends Model
             Cache::forget('basket-'.auth()->user()->customer->code.'-'.auth()->id());
         }
 
-        return Cache::rememberForever('basket-'.auth()->user()->customer->code.'-'.auth()->id(), static function () use
-        (
-            $shipping_id
-        ) {
+        return Cache::rememberForever('basket-'.auth()->user()->customer->code.'-'.auth()->id(), static function () use ($shipping_id) {
             $lines = static::selectRaw('basket.product as product, basket.customer_code as customer_code,
                                                     basket.quantity as quantity, price, break1, price1, break2, price2,
                                                     break3, price3, name, description, uom, not_sold, stock, type, packaging')
