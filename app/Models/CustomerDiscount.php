@@ -55,11 +55,9 @@ class CustomerDiscount extends Model
         $discount->customer_code = $customer;
         $discount->percent = $percent;
 
-        if ($discount->save()) {
-            return self::with('customer')->find($discount->id);
-        }
+        $discount->save();
 
-        return false;
+        return self::with('customer')->find($discount->id);
     }
 
     /**
@@ -74,10 +72,8 @@ class CustomerDiscount extends Model
 
         $discount->percent = $percent;
 
-        if ($discount->save()) {
-            return self::with('customer')->find($discount->id);
-        }
+        $discount->save();
 
-        return false;
+        return self::with('customer')->find($discount->id);
     }
 }

@@ -78,7 +78,7 @@ class HomeLinksController extends Controller
 
         $link->delete();
 
-        Storage::disk('public')->delete('images/'.$link->type.'/'.$link->image);
+        Storage::disk('public')->delete('/'.config('app.name').'/'.$link->type.'/'.$link->image);
 
         return response()->json([
             'deleted' => true,

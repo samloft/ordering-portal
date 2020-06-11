@@ -87,16 +87,6 @@ class User extends Authenticatable
     }
 
     /**
-     * Return the delivery addresses for the current user.
-     *
-     * @return HasMany
-     */
-    public function addresses(): HasMany
-    {
-        return $this->hasMany(Address::class, 'customer_code', 'customer_code');
-    }
-
-    /**
      * Return all the customers as user has access too.
      *
      * @return HasMany
@@ -122,17 +112,5 @@ class User extends Authenticatable
                 $query->orWhere('customer_code', 'like', '%'.$search.'%');
             }
         })->orderBy('name')->with('customers')->paginate(10);
-    }
-
-    /**
-     * Return user details with any extra customers.
-     *
-     * @param $id
-     *
-     * @return \Illuminate\Database\Eloquent\Builder|\Illuminate\Database\Eloquent\Model|object
-     */
-    public static function show($id)
-    {
-        return self::where('id', $id)->with('customers')->first();
     }
 }

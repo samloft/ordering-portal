@@ -1,6 +1,7 @@
 <?php
 
 use App\Models\GlobalSettings;
+use App\Models\Price;
 use App\Models\Product;
 use Illuminate\Http\UploadedFile;
 use Tests\Setup\ProductFactory;
@@ -168,4 +169,52 @@ test('quantities get incremented based on order multiples', function () {
         'product' => $product->code,
         'quantity' => 20,
     ]);
+});
+
+test('not sold products are treated as not existing', function () {
+    $product = $this->products->first();
+
+    Product::where('code', $product->code)->update(['not_sold' => 'Y']);
+
+    $product = Product::where('code', $product->code)->firstOrFail();
+
+    $this->followingRedirects()->post(route('upload-validate'), [
+        'csv_file' => UploadedFile::fake()->createwithContent('test.csv', $product->code.',12')->mimeType('text/csv'),
+    ])->assertSee('Product not found')->assertSee('10')->assertSee('20');
+
+    $this->assertDatabaseMissing('order_imports', [
+        'product' => $product->code,
+    ]);
+});
+
+test('price shows correct if within tolerance', function () {
+    $product = $this->products->first();
+
+    Price::where('customer_code', $this->user->customer->code)->where('product', $product->code)->update([
+        'price' => 10.00,
+        'break1' => null,
+        'break2' => null,
+        'break3' => null,
+    ]);
+
+    $this->followingRedirects()->post(route('upload-validate'), [
+        'tolerance' => 0.10,
+        'csv_file' => UploadedFile::fake()->createwithContent('test.csv', $product->code.',12,10.05')->mimeType('text/csv'),
+    ])->assertSee('10.05')->assertDontSee('badge-danger');
+});
+
+test('price shows correct with tolerance if total price is passed', function () {
+    $product = $this->products->first();
+
+    Price::where('customer_code', $this->user->customer->code)->where('product', $product->code)->update([
+        'price' => 10.00,
+        'break1' => null,
+        'break2' => null,
+        'break3' => null,
+    ]);
+
+    $this->followingRedirects()->post(route('upload-validate'), [
+        'tolerance' => 0.10,
+        'csv_file' => UploadedFile::fake()->createwithContent('test.csv', $product->code.',10,100.05')->mimeType('text/csv'),
+    ])->assertSee('100.05')->assertDontSee('badge-danger');
 });

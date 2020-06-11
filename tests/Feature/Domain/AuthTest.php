@@ -1,10 +1,26 @@
 <?php
 
+use App\Models\Customer;
 use App\Models\User;
 use Tests\Setup\UserFactory;
 
 test('returns an ok response', function () {
     $this->get('login')->assertStatus(200);
+});
+
+test('logging in redirects to root', function () {
+    $user = factory(User::class)->create([
+        'password' => bcrypt('password'),
+    ]);
+
+    factory(Customer::class)->create([
+        'code' => $user->customer_code,
+    ]);
+
+    $this->post('/login', [
+        'email' => $user->email,
+        'password' => 'password',
+    ])->assertRedirect('/');
 });
 
 test('redirected to login if not logged in', function () {
@@ -111,4 +127,12 @@ test('password can be reset', function () {
     $user->refresh();
 
     $this->assertTrue(Hash::check('newpassword', $user->password));
+});
+
+test('redirected to root if trying to access login when logged in', function () {
+    $user = (new UserFactory())->withCustomer()->create();
+
+    actingAs($user);
+
+    $this->get('/login')->assertRedirect('/');
 });

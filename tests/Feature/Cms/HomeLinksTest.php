@@ -35,8 +35,29 @@ test('can be created', function () {
     Storage::disk('public')->assertExists('/'.config('app.name').'/category/category-link.png');
 });
 
+test('banner can be created', function () {
+    $home_link = [
+        'type' => 'advert',
+        'name' => 'Link',
+        'url' => 'file',
+        'position' => 1,
+        'file' => UploadedFile::fake()->image('link.png'),
+        'download-file' => UploadedFile::fake()->createwithContent('banner.csv', 'Foo, Bar'),
+    ];
+
+    $this->post(route('cms.home-links.store'), $home_link)->assertOk();
+
+    $this->assertDatabaseHas('home_links', [
+        'name' => $home_link['type'].'-'.$home_link['name'],
+    ]);
+
+    Storage::disk('public')->assertExists('/'.config('app.name').'/files/banner.csv');
+});
+
 test('can be deleted', function () {
     $home_link = factory(HomeLink::class)->create();
+
+    Storage::put('/'.config('app.name').'/'.$home_link->type.'/'.$home_link->image, '');
 
     $this->delete(route('cms.home-links.delete', ['id' => $home_link->id]))->assertOk();
 
@@ -44,7 +65,7 @@ test('can be deleted', function () {
         'name' => $home_link->name,
     ]);
 
-    Storage::disk('public')->assertMissing('/'.config('app.name').'/'.$home_link->category.'/'.$home_link->image);
+    Storage::disk('public')->assertMissing('/'.config('app.name').'/'.$home_link->type.'/'.$home_link->image);
 });
 
 test('position can be updated', function () {

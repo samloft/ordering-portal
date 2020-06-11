@@ -42,18 +42,10 @@ class HomeLink extends Model
     {
         $stored = static::storeLinkImage(request()->file('file'), request('type'), request('name'));
 
-        if (! $stored['status']) {
-            return false;
-        }
-
         $category_link = new self;
 
         if (request()->file('download-file')) {
             $file_stored = static::storeDownloadFile(request()->file('download-file'));
-
-            if (! $file_stored['status']) {
-                return false;
-            }
 
             $category_link->file = $file_stored['name'];
         }
@@ -103,23 +95,6 @@ class HomeLink extends Model
             'status' => Storage::put('/'.config('app.name').'/files/'.$name, File::get($file)),
             'name' => $name,
         ];
-    }
-
-    /**
-     * Deletes the record with matching image for the given ID.
-     *
-     * @param $id
-     *
-     * @return bool|int|null
-     * @throws \Exception
-     */
-    public static function destroy($id)
-    {
-        $link = self::findOrFail($id);
-
-        Storage::delete('/'.config('app.name').'/images/'.request('type').'/'.$link->image);
-
-        return $link->delete();
     }
 
     /**

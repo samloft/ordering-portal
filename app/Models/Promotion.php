@@ -266,7 +266,7 @@ class Promotion extends Model
             return $promotion->claim_type === 'per_order' ? 1 : $potential_claims;
         }
 
-        $claimed = OrderHeader::promotion($promotion->product, $promotion->start_date, $promotion->end_date) / $promotion->promotion_qty;
+        $claimed = OrderHeader::promotion($promotion->promotion_product, $promotion->start_date, $promotion->end_date) / $promotion->promotion_qty;
 
         if ($promotion->max_claims > $claimed) {
             $claims_left = ($promotion->max_claims - $claimed);

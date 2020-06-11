@@ -24,7 +24,7 @@ class OrderTrackingController extends Controller
      */
     public function index()
     {
-        $search = request() ? true : false;
+        $search = request()->all() ? true : false;
 
         $orders = OrderTrackingHeader::list($search, request());
 

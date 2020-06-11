@@ -1,10 +1,12 @@
 <?php
 
 use App\Models\Category;
+use App\Models\CategoryImage;
 use App\Models\CustomerDiscount;
 use App\Models\ExpectedStock;
 use App\Models\Price;
 use App\Models\Product;
+use Illuminate\Support\Facades\Storage;
 use Tests\Setup\UserFactory;
 
 beforeEach(function () {
@@ -141,6 +143,19 @@ test('quantity is auto populated with order multiples value', function () {
     $this->get($product->path())->assertSee(123456);
 });
 
+test('image is returned if it exists', function () {
+    Storage::fake();
+
+    Storage::put($this->product->code.'.png', 'image');
+
+    factory(Price::class)->create([
+        'customer_code' => $this->user->customer->code,
+        'product' => $this->product->code,
+    ]);
+
+    $this->get($this->product->path())->assertSee($this->product->code.'.png');
+});
+
 test('image placeholder if no image found', function () {
     factory(Price::class)->create([
         'customer_code' => $this->user->customer->code,
@@ -166,4 +181,50 @@ test('product list returns products for that category', function () {
     ]);
 
     $this->get('products/'.$categories->level_1)->assertStatus(200)->assertSee($this->product->name);
+});
+
+test('passing false to product image returns blank', function () {
+    $this->assertEquals($this->product->image(true), '');
+});
+
+test('can be auto completed', function () {
+    factory(Price::class)->create([
+        'customer_code' => $this->user->customer->code,
+        'product' => $this->product->code,
+    ]);
+
+    $this->get(route('products.autocomplete', [
+        'search' => substr($this->product->code, 0, 3),
+    ]))->assertOk()->assertSee($this->product->code);
+});
+
+test('override category image is displayed instead of a product image', function () {
+    Storage::fake();
+
+    Storage::put('/category_images/override.png', 'image');
+
+    factory(Price::class)->create([
+        'customer_code' => $this->user->customer->code,
+        'product' => $this->product->code,
+    ]);
+
+    $category = factory(Category::class)->create([
+        'product' => $this->product->code,
+        'level_1' => 'Test 1',
+        'level_2' => 'Test 2',
+        'level_3' => null,
+        'level_4' => null,
+        'level_5' => null,
+    ]);
+
+    $override = factory(CategoryImage::class)->create([
+        'image' => 'override.png',
+        'level_1' => $category->level_1,
+        'level_2' => $category->level_2,
+        'level_3' => $category->level_3,
+    ]);
+
+    $this->get(route('products', [
+        'cat1' => $category->level_1,
+    ]))->assertOk()->assertsee($override->image);
 });

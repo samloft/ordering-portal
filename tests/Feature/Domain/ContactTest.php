@@ -26,6 +26,12 @@ test('email can be sent', function () {
         'email' => $this->user->email,
         'message' => 'Testing',
     ])->assertSessionHas('success');
+
+    \Illuminate\Support\Facades\Mail::assertSent(\App\Mail\Contact::class, static function ($mail) use ($contact) {
+        $mail->build();
+
+        return $mail->subject = ('Online ordering web-app message received' && $mail->hasTo($contact->email));
+    });
 });
 
 test('email cannot be sent to someone not on the list', function () {

@@ -120,25 +120,25 @@ class Category extends Model
         return $sub_categories;
     }
 
-    /**
-     * @param $level_1
-     * @param null $level_2
-     *
-     * @return bool|\Illuminate\Support\Collection
-     */
-    public static function showLevels($level_1, $level_2 = null)
-    {
-        if ($level_1 && ! $level_2) {
-            return self::select('level_2')->where('level_1', $level_1)->groupBy('level_2')->get();
-        }
-
-        if ($level_2) {
-            return self::select('level_3')->where('level_1', $level_1)->where('level_2', $level_2)->groupBy('level_3')
-                ->get();
-        }
-
-        return false;
-    }
+    ///**
+    // * @param $level_1
+    // * @param null $level_2
+    // *
+    // * @return bool|\Illuminate\Support\Collection
+    // */
+    //public static function showLevels($level_1, $level_2 = null)
+    //{
+    //    if ($level_1 && ! $level_2) {
+    //        return self::select('level_2')->where('level_1', $level_1)->groupBy('level_2')->get();
+    //    }
+    //
+    //    if ($level_2) {
+    //        return self::select('level_3')->where('level_1', $level_1)->where('level_2', $level_2)->groupBy('level_3')
+    //            ->get();
+    //    }
+    //
+    //    return false;
+    //}
 
     /**
      * @return mixed
