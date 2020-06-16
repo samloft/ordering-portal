@@ -14,8 +14,8 @@
         @if ($sub_category_list)
             <div class="flex flex-wrap">
                 @foreach($sub_category_list['list'] as $category)
-                    <product-categories :category="{{ json_encode($category, true) }}"
-                                        :current="{{ json_encode($sub_category_list['current'], true) }}"
+                    <product-categories :category="{{ json_encode($category, JSON_THROW_ON_ERROR | true) }}"
+                                        :current="{{ json_encode($sub_category_list['current'], JSON_THROW_ON_ERROR | true) }}"
                                         company="{{ config('app.name') }}"
                                         s3="{{ config('app.s3_url') }}"></product-categories>
                 @endforeach
@@ -58,14 +58,26 @@
 
                                     <h5 class="mt-1">{{ $product->description }}</h5>
 
-                                    <div class="md:hidden flex justify-end items-center mt-2">
-                                        <div class="text-xs bg-gray-600 text-white pl-1 pr-1 rounded-l">
-                                            Stock Level
+                                    @if($product->stock === 0 && count($product->expectedStock) > 0)
+                                        <div class="md:hidden flex justify-end items-center mt-2">
+                                            <div class="text-xs bg-gray-600 text-white pl-1 pr-1 rounded-l">
+                                                Out of stock
+                                            </div>
+                                            <div class="text-center bg-gray-200 px-1 rounded-r">
+                                                Next
+                                                Due {{ \Carbon\Carbon::parse($product->expectedStock->first()->due_date)->format('d-m-Y') }}
+                                            </div>
                                         </div>
-                                        <div class="text-center bg-gray-200 px-1 rounded-r">
-                                            {{ $product->stock }}
+                                    @else
+                                        <div class="md:hidden flex justify-end items-center mt-2">
+                                            <div class="text-xs bg-gray-600 text-white pl-1 pr-1 rounded-l">
+                                                Stock Level
+                                            </div>
+                                            <div class="text-center bg-gray-200 px-1 rounded-r">
+                                                {{ $product->stock }}
+                                            </div>
                                         </div>
-                                    </div>
+                                    @endif
                                 </div>
                             </div>
                         </div>
@@ -157,14 +169,27 @@
                                 View Details & Availability
                             </button>
                         </a>
-                        <div class="block">
-                            <div class="text-xxs bg-gray-600 text-white pl-1 pr-1 rounded-t">
-                                Stock Level
+
+                        @if($product->stock === 0 && count($product->expectedStock) > 0)
+                            <div class="block">
+                                <div class="text-center text-xs bg-gray-600 text-white pl-1 pr-1 rounded-t">
+                                    Out of stock
+                                </div>
+                                <div class="text-center bg-gray-200 p-1 text-xs rounded-b">
+                                    Next
+                                    Due {{ \Carbon\Carbon::parse($product->expectedStock->first()->due_date)->format('d-m-Y') }}
+                                </div>
                             </div>
-                            <div class="text-center bg-gray-200 p-1 text-xs rounded-b">
-                                {{ $product->stock }}
+                        @else
+                            <div class="block">
+                                <div class="text-xs bg-gray-600 text-white pl-1 pr-1 rounded-t">
+                                    Stock Level
+                                </div>
+                                <div class="text-center bg-gray-200 p-1 text-xs rounded-b">
+                                    {{ $product->stock }}
+                                </div>
                             </div>
-                        </div>
+                        @endif
                     </div>
                 </div>
             @endforeach
