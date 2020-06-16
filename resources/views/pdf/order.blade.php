@@ -1,6 +1,6 @@
 @extends('layout.master-pdf')
 
-@section('report.title', 'Order Confirmation')
+@section('report.title', 'Order Acknowledgement')
 
 @section('content')
     <div class="row mb-20">
@@ -107,4 +107,9 @@
         </tr>
         </tfoot>
     </table>
+
+    <div class="small-print mt-10">
+        Note: All sales business is conducted in accordance with our terms and conditions of sales, a copy of which can
+        be viewed at https://{{ config('app.name') }}.com/terms
+    </div>
 @endsection
